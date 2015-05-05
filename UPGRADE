@@ -1,0 +1,62 @@
+﻿BBii 1.0.9
+==========
+
+Copyright (c) 2013-2015, BBii - Ronald van Belzen. All rights reserved.  
+ - See accompanying LICENSE for license information.
+ 
+ 
+## Upgrade from v0.1 or v0.2 to v0.3
+
+All files in bbii-0.3.zip should be copied to replace the existing files.
+Update database with SQL statements found in bbii/data/upgrade-to-version-0-3.mysql.sql 
+
+## Upgrade from v0.3 to v0.4
+
+All files in bbii-0.4.zip should be copied to replace the existing files.
+Update database with SQL statements found in bbii/data/upgrade-to-version-0-4.mysql.sql 
+
+## Upgrade from v0.4 to v0.5
+
+All files in bbii-0.5.zip should be copied to replace the existing files.
+Update database with SQL statements found in bbii/data/upgrade-to-version-0-5.mysql.sql
+ 
+## Upgrade from v0.5 to v0.6
+ 
+All files in bbii-0.6.zip should be copied to replace the existing files.
+Update database with SQL statements found in bbii/data/upgrade-to-version-0-6.mysql.sql
+
+## Upgrade from v0.6 to v0.7
+
+All files in bbii-0.7.zip should be copied to replace the existing files.
+Update database with SQL statements found in bbii/data/upgrade-to-version-0-7.mysql.sql
+
+## Upgrade from v0.7 to v0.8-v0.82
+
+All files in bbii-0.8x.zip should be copied to replace the existing files.
+
+## Upgrade from v0.82 to v0.9
+All files in bbii-0.9.zip should be copied to replace the existing files.
+Update database with SQL statements found in bbii/data/upgrade-to-version-0-9.mysql.sql
+
+## Upgrade from v0.9 to v0.91-v0.95
+All files in bbii-0.9x.zip should be copied to replace the existing files.
+Only when you did a clean install of version 0.9 update database table according 
+to bbii/data/upgrade-to-version-0-9.mysql.sql
+For upgrade to v0.93 the root /assets folder of the application to which BBii 
+is added needs to be cleared.
+For upgrade to version 0.95 be aware that the module parameter cssFile no longer 
+exists.
+
+## Upgrade from v0.95 through v1.0.0 to v1.0.1
+All files in bbii-1.0.1.zip should be copied to replace the existing files.
+
+## Upgrade from v1.0.1 to v1.0.2
+All files in bbii-1.0.2.zip should be copied to replace the existing files.
+Update database with SQL statements found in bbii/data/upgrade-to-version-1-0-2.mysql.sql
+
+## Upgrade from v1.0.2 through v1.0.5 to v1.0.6
+All files in bbii-1.0.6.zip should be copied to replace the existing files.
+Update database with SQL statements found in bbii/data/upgrade-to-version-1-0-6.mysql.sql
+
+## Upgrade from v1.0.6 through 1.0.8 to 1.0.9
+All files in bbii-1.0.9.zip should be copied to replace the existing files.

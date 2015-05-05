@@ -1,0 +1,80 @@
+BBii Bugfixes
+=============
+
+Copyright (c) 2013-2015, BBii - Ronald van Belzen. All rights reserved.  
+ - See accompanying LICENSE for license information.
+
+BBii is an extension to the Yii Framework (http://www.yiiframework.com/license/) 
+in the form of a module. BBii adds and integrates a lightweight webforum (a.k.a. 
+bulletin board) to an existing Yii application.
+
+BBii version 0.81
+=================
+#0001  /bbii/views/member/update.php displayed wrong breadcrumb links for Members and Member profile.
+#0002  when a post is deleted all reports for that post in BbiiMessage were not deleted.
+#0003  when a first post of a topic is deleted the first post id of a topic was not updated.
+#0004  unauthenticated users could view topics in private forums.
+#0005  unauthenticated users could read topics belonging to private forums.
+#0006  authenticated users could update posts by others or posts in locked topics when manipulating the request.
+#0007  authenticated users could update polls started by others by manipulating the request.
+
+BBii version 0.82
+=================
+#0008  the merging and moving of topics included unapproved posts in the count of the number of posts involved.
+#0009  in the forum layout the sorting of categories did not work.
+#0010  when a first post of a topic was deleted the author of the new first post of a topic was not updated.
+#0011  the uploaded avatar of the type "jpeg" was deleted due to source and target files having the same name.
+#0012  the pm outbox breadcrumbs showed inbox instead of outbox.
+
+BBii version 0.9
+================
+#0013  navigation from topic display back to forum display always end up on the first page instead of the current page.
+
+BBii version 0.91
+=================
+#0014  missing field membergroup_id in table creation of bbii_forum.
+#0015  issue with translation message files location being overwritten by module.
+
+BBii version 0.92
+=================
+#0016  model BbiiMessage function mailBoxFull() used a wrong criteria.
+#0017  the count of messages in the inbox included 'deleted' messages.
+#0018  the count of messages in the outbox included 'deleted' messages.
+#0019  the progress bar on the inbox could exceed 100%.
+#0020  the assignment of a member to a fixed member group is overwritten by assignment to a dynamic member group.
+#0021  post confirmation is not shown upon a reply to a post in a moderated forum.
+
+BBii version 0.94
+=================
+#0022  missing sprite images for sticky locked topics and global sticky locked topics.
+#0023  when a moderator moves a topic containing the last post of a forum the forum last post is not updated.
+
+BBii version 1.0.0
+==================
+#0024  when a moderator approves a post the last post of a forum is updated to that post.
+#0025  the last post of a forum or topic included unapproved posts upon resetting the last post.
+
+BBii version 1.0.1
+==================
+#0026  the validation on whether a poll must be created forces the creation of a poll instead of leaving the choice.
+
+BBii version 1.0.2
+==================
+#0027  the members online showed members that selected to hide their presence.
+
+BBii version 1.0.3
+==================
+#0028  in the member info view unapproved posts by the member are being shown.
+
+BBii version 1.0.4
+==================
+#0029  an authenticated user can update the user profile of other members.
+
+BBii version 1.0.7
+==================
+#0030  bbii/views/member/view.php typing error in Yii::t('BbiiModule.bbii', 'Forum naam').
+#0031  bbii/views/member/view.php target attributes assigned to images instead of links.
+
+BBii version 1.0.8
+==================
+#0032  controllers/ModeratorController.php error in model name BBiiPoll.
