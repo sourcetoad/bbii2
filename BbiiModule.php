@@ -121,17 +121,17 @@ class BbiiModule extends \yii\base\Module
 					$model->last_visit 	= date('Y-m-d H:i:s');
 					$model->save();
 				} else {
-					$criteria = new CDbCriteria;
+					$criteria            = new CDbCriteria;
 					$criteria->condition = $this->userIdColumn . '=:id';
-					$criteria->params = array(':id'=>Yii::$app->user->id);
-					$class = new $this->userClass;
-					$user = $class::model()->find($criteria);
-					$username = $user->getAttribute($this->userNameColumn);
-					$model = new BbiiMember;
-					$model->id 			= Yii::$app->user->id;
-					$model->member_name = $username;
-					$model->first_visit = date('Y-m-d H:i:s');
-					$model->last_visit 	= date('Y-m-d H:i:s');
+					$criteria->params    = array(':id'=>Yii::$app->user->id);
+					$class               = new $this->userClass;
+					$user                = $class::model()->find($criteria);
+					$username            = $user->getAttribute($this->userNameColumn);
+					$model               = new BbiiMember;
+					$model->id           = Yii::$app->user->id;
+					$model->member_name  = $username;
+					$model->first_visit  = date('Y-m-d H:i:s');
+					$model->last_visit   = date('Y-m-d H:i:s');
 					$model->save();
 				}
 			}
@@ -150,7 +150,7 @@ class BbiiModule extends \yii\base\Module
 				// register visit by guest (when not a webspider)
 				$model = BbiiSession::model()->findByPk(Yii::$app->session->sessionID);
 				if($model === null) {
-					$model = new BbiiSession;
+					$model     = new BbiiSession;
 					$model->id = Yii::$app->session->sessionID;
 				}
 				$model->save();
