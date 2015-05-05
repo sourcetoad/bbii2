@@ -11,7 +11,7 @@
 			<div>
 				<?php $members = BbiiMember::model()->present()->findAll(); 
 					foreach($members as $member) {
-						echo CHtml::link($member->member_name, array('member/view', 'id'=>$member->id));
+						echo Html::a($member->member_name, array('member/view', 'id'=>$member->id));
 					}
 				?>
 				<?php echo Yii::t('bbii','(and {hidden} anonymous member(s))', array('{hidden}'=>BbiiMember::model()->hidden()->present()->count())); ?>
@@ -31,7 +31,7 @@
 				<span class="header"><?php echo Yii::t('bbii','Total members'); ?></span> <?php echo BbiiMember::model()->count(); ?>
 			</div>
 			<div class="row">
-				<span class="header"><?php echo Yii::t('bbii','Newest member'); ?></span> <?php $member = BbiiMember::model()->newest()->find(); echo CHtml::link($member->member_name, array('member/view', 'id'=>$member->id)); ?>
+				<span class="header"><?php echo Yii::t('bbii','Newest member'); ?></span> <?php $member = BbiiMember::model()->newest()->find(); echo Html::a($member->member_name, array('member/view', 'id'=>$member->id)); ?>
 			</div>
 		</div>
 	</div>

@@ -829,9 +829,9 @@ class ForumController extends BbiiController {
 		$criteria->condition = "member_id = :userid and post_id = $post_id";
 		$criteria->params = array(':userid' => Yii::$app->user->id);
 		if(BbiiUpvoted::model()->exists($criteria)) {
-			$html = CHtml::image($this->module->getRegisteredImage('down.gif'), 'upvote', array('title'=>Yii::t('BbiiModule.bbii', 'Remove your vote'), 'id'=>'upvote_'.$post_id, 'style'=>'cursor:pointer;', 'onclick'=>'upvotePost(' . $post_id . ',"' . $url . '")'));
+			$html = Html::img($this->module->getRegisteredImage('down.gif'), 'upvote', array('title'=>Yii::t('BbiiModule.bbii', 'Remove your vote'), 'id'=>'upvote_'.$post_id, 'style'=>'cursor:pointer;', 'onclick'=>'upvotePost(' . $post_id . ',"' . $url . '")'));
 		} else {
-			$html = CHtml::image($this->module->getRegisteredImage('up.gif'), 'upvote', array('title'=>Yii::t('BbiiModule.bbii', 'Vote this post up'), 'id'=>'upvote_'.$post_id, 'style'=>'cursor:pointer;', 'onclick'=>'upvotePost(' . $post_id . ',"' . $url . '")'));
+			$html = Html::img($this->module->getRegisteredImage('up.gif'), 'upvote', array('title'=>Yii::t('BbiiModule.bbii', 'Vote this post up'), 'id'=>'upvote_'.$post_id, 'style'=>'cursor:pointer;', 'onclick'=>'upvotePost(' . $post_id . ',"' . $url . '")'));
 		}
 		return $html;
 	}

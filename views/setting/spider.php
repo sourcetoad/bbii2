@@ -32,7 +32,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 			array(
 				'name'=>'name',
 				'type'=>'raw',
-				'value'=>'CHtml::link($data->name, $data->url, array("target"=>"_new")) . "<span style=\"display:none;\">{$data->id}</span>"',
+				'value'=>'Html::a($data->name, $data->url, array("target"=>"_new")) . "<span style=\"display:none;\">{$data->id}</span>"',
 			),
 			'user_agent',
 			array(

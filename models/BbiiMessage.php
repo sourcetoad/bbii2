@@ -1,5 +1,9 @@
 <?php
 
+namespace frontend\modules\bbii\models;
+
+use Yii;
+use yii\rest\ActiveController;
 /**
  * This is the model class for table "bbii_message".
  *
@@ -17,7 +21,7 @@
  * @property string $ip
  * @property string $post_id
  */
-class BbiiMessage extends BbiiAR
+class BbiiMessage extends \yii\db\ActiveRecord
 {
 	public $search;
 	/**
@@ -33,7 +37,7 @@ class BbiiMessage extends BbiiAR
 	/**
 	 * @return string the associated database table name
 	 */
-	public function tableName()
+	public static function tableName()
 	{
 		return 'bbii_message';
 	}

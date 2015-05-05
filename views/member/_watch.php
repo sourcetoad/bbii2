@@ -24,12 +24,12 @@
 			),
 			array(
 				'header'=>Yii::t('BbiiModule.bbii', 'Topic'),
-				'value'=>'CHtml::link($data->title, array("forum/topic", "id"=>$data->id, "nav"=>"last"))',
+				'value'=>'Html::a($data->title, array("forum/topic", "id"=>$data->id, "nav"=>"last"))',
 				'type'=>'raw',
 			),
 			array(
 				'header'=>Yii::t('BbiiModule.bbii', 'Forum'),
-				'value'=>'CHtml::link($data->forum->name, array("forum/forum", "id"=>$data->forum_id))',
+				'value'=>'Html::a($data->forum->name, array("forum/forum", "id"=>$data->forum_id))',
 				'type'=>'raw',
 			),
 			array(

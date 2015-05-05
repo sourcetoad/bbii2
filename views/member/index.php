@@ -35,7 +35,7 @@ $item = array(
 		array(
 			'name' => 'member_name',
 			'type' => 'raw',
-			'value' => 'CHtml::link(CHtml::encode($data->member_name), array("member/view", "id"=>$data->id))',
+			'value' => 'Html::a(CHtml::encode($data->member_name), array("member/view", "id"=>$data->id))',
 		),
 		array(
 			'header' => Yii::t('BbiiModule.bbii', 'Joined'),

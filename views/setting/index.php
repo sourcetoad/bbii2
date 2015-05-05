@@ -31,19 +31,19 @@ $item = array(
 
 		<div class="row odd">
 			<?php echo CHtml::label(Yii::t('BbiiModule.bbii', 'Forum name'), false); ?>
-			<?php echo CHtml::image($this->module->getRegisteredImage('info.png'), 'Information', array('style'=>'vertical-align:middle;margin-left:10px','title'=>Yii::t('BbiiModule.bbii', 'The forum name is set by the module parameter "forumTitle".'))); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('info.png'), 'Information', array('style'=>'vertical-align:middle;margin-left:10px','title'=>Yii::t('BbiiModule.bbii', 'The forum name is set by the module parameter "forumTitle".'))); ?>
 			<?php echo $this->module->forumTitle; ?>
 		</div>
 
 		<div class="row even">
 			<?php echo CHtml::label(Yii::t('BbiiModule.bbii', 'Forum language'), false); ?>
-			<?php echo CHtml::image($this->module->getRegisteredImage('info.png'), 'Information', array('style'=>'vertical-align:middle;margin-left:10px','title'=>Yii::t('BbiiModule.bbii', 'The forum language is set by the application parameter "language".'))); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('info.png'), 'Information', array('style'=>'vertical-align:middle;margin-left:10px','title'=>Yii::t('BbiiModule.bbii', 'The forum language is set by the application parameter "language".'))); ?>
 			<?php echo Yii::$app->language; ?>
 		</div>
 
 		<div class="row">
 			<?php echo CHtml::label(Yii::t('BbiiModule.bbii', 'Forum timezone'), false); ?>
-			<?php echo CHtml::image($this->module->getRegisteredImage('info.png'), 'Information', array('style'=>'vertical-align:middle;margin-left:10px','title'=>Yii::t('BbiiModule.bbii', 'The forum timezone is set by the PHP.ini parameter "date.timezone".'))); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('info.png'), 'Information', array('style'=>'vertical-align:middle;margin-left:10px','title'=>Yii::t('BbiiModule.bbii', 'The forum timezone is set by the PHP.ini parameter "date.timezone".'))); ?>
 			<?php echo date_default_timezone_get(); ?>
 		</div>
 

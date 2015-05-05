@@ -1,5 +1,10 @@
 <?php
 
+namespace frontend\modules\bbii\models;
+
+use Yii;
+use yii\rest\ActiveController;
+
 /**
  * This is the model class for table "bbii_post".
  *
@@ -18,7 +23,7 @@
  * @property string $change_reason
  * @property integer $upvoted
  */
-class BbiiPost extends BbiiAR
+class BbiiPost extends \yii\db\ActiveRecord
 {
 	public $search;
 	/**
@@ -34,7 +39,7 @@ class BbiiPost extends BbiiAR
 	/**
 	 * @return string the associated database table name
 	 */
-	public function tableName()
+	public static function tableName()
 	{
 		return 'bbii_post';
 	}
