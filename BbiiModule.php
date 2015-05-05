@@ -42,23 +42,32 @@ class BbiiModule extends \yii\base\Module
 
 	private $_assetsUrl;
 	
+	/**
+	 * [init description]
+	 * 
+	 * @return [type] [description]
+	 */
 	public function init()
 	{
-		$this->registerAssets();
+		// @deprecated deprecated since version 2.0
+		//$this->registerAssets();
 		
-		Yii::$app->setComponents(
+	 	// @deprecated deprecated since version 2.0
+		/*Yii::$app->setComponents(
 			array(
 				'errorHandler'=>array(
 					'errorAction'=>'forum/forum/error',
 				),
 			)
-		);
-		
+		);*/
+
 		// import the module-level models and components
-		$this->setImport(array(
+		$this->setAliases([
 			$this->id.'.models.*',
 			$this->id.'.components.*',
-		));
+		]);
+
+        parent::init();
 	}
 	
     /**
@@ -77,9 +86,11 @@ class BbiiModule extends \yii\base\Module
 	
 	/**
 	 * Register the CSS and JS files for the module
+	 * @deprecated deprecated since version 2.0
 	 */
 	public function registerAssets()
 	{
+		// no longer valid for Yii2
 		Yii::$app->clientScript->registerCssFile($this->getAssetsUrl() . '/css/' . $this->bbiiTheme . '/forum.css');
 		Yii::$app->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/bbii.js', CClientScript::POS_HEAD);
 		Yii::$app->getClientScript()->registerCoreScript('jquery.ui');
