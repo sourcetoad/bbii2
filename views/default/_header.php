@@ -7,7 +7,6 @@ use yii\helpers\Html;
 ?>
 <div id="bbii-header">
 	<?php if(!Yii::$app->user->isGuest) { ?>
-		<?php //$messages = BbiiMessage::model()->inbox()->unread()->count('sendto = '.Yii::$app->user->id); ?>
 		<div class="bbii-profile-box">
 		<?php 
 			if ($messages) {
@@ -22,7 +21,7 @@ use yii\helpers\Html;
 			} else {
 				echo Html::a(
 					Html::img(
-						$this->module->getRegisteredImage('mail.png'),
+						'http://frontend.moffitt.dev/modules/bbii/assets/images/mail.png',
 						Yii::t('BbiiModule.bbii', 'no new messages'),
 						array('title'=>Yii::t('BbiiModule.bbii', 'no new messages'),'style'=>'vertical-align:bottom;')
 					),

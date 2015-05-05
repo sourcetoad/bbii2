@@ -12,12 +12,12 @@ use yii\helpers\Html;
 ?>
 <div id="bbii-wrapper">
 	<?php
-	/*echo $this->render(
+	echo $this->render(
 		'_header', array(
 			'item'     => $item,
 			'messages' => $messages,
 		)
-	);*/ 
+	);
 
 	/*$this->widget('zii.widgets.CListView', array(
 		'dataProvider' => $dataProvider,
