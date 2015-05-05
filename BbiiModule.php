@@ -6,24 +6,15 @@ use Yii;
 
 class BbiiModule extends \yii\base\Module
  {
+	public $adminId           = false;		// must be overridden to assign admin rights to user id
+	public $allowTopicSub     = false;
+	public $avatarStorage     = '/avatar'; 	// directory in the webroot must exist and allow read/write access
+	public $bbiiTheme         = 'base';
+	public $dbName            = false;
 	public $defaultController = 'forum';
-	public $version 		= '1.0.9';
-	public $adminId 		= false;			// must be overridden to assign admin rights to user id
-	public $avatarStorage 	= '/avatar'; 		// directory in the webroot must exist and allow read/write access
-	public $forumTitle 		= 'BBii Forum';
-	public $userClass 		= 'User';
-	public $userIdColumn 	= 'id';
-	public $userNameColumn 	= 'username';
-	public $userMailColumn 	= false;
-	public $dbName 			= false;
-	public $allowTopicSub 	= false;
-	public $topicsPerPage 	= 20;
-	public $postsPerPage 	= 20;
-	public $purifierOptions = array(
-		'HTML.SafeIframe'=>true,
-		'URI.SafeIframeRegexp'=>'%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',
-	);
-	public $editorToolbar 	= array(
+	public $editorContentsCss = array();
+	public $editorSkin        = 'moono';
+	public $editorToolbar 	  = array(
 		array('Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo'),
 		array('Find','Replace','-','SelectAll'),
 		array('Bold', 'Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat'),
@@ -34,17 +25,25 @@ class BbiiModule extends \yii\base\Module
 		array('Styles','Format','Font','FontSize'),
 		array('TextColor','BGColor'),
 		array('HorizontalRule','Smiley','SpecialChar','-','ShowBlocks'),
-		array('Link', 'Unlink','Image','Iframe')
-	);
-	public $editorSkin 		= 'moono';
-	public $editorUIColor 	= '';
-	public $editorContentsCss = array();
-	public $juiTheme 		= 'base';
-	public $bbiiTheme 		= 'base';
-	
+		array('Link', 'Unlink','Image','Iframe'));
+	public $editorUIColor     = '';
+	public $forumTitle        = 'Forums';
+	public $juiTheme          = 'base';
+	public $purifierOptions   = array(
+		'HTML.SafeIframe'=>true,
+		'URI.SafeIframeRegexp'=>'%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',);
+	public $postsPerPage      = 20;
+	public $topicsPerPage     = 20;
+	public $userClass         = 'frontend\modules\user\Module'; // change this to your user module
+	public $userIdColumn      = 'id';
+	public $userMailColumn    = false;
+	public $userNameColumn    = 'username';
+	public $version           = '2.0.1';
+
 	private $_assetsUrl;
 	
-	public function init() {
+	public function init()
+	{
 		$this->registerAssets();
 		
 		Yii::$app->setComponents(
@@ -65,7 +64,8 @@ class BbiiModule extends \yii\base\Module
     /**
      * @return string base URL that contains all published asset files of this module.
      */
-    public function getAssetsUrl() {
+    public function getAssetsUrl()
+    {
 		if($this->_assetsUrl == null) {
             $this->_assetsUrl = Yii::$app->assetManager->publish(Yii::getPathOfAlias($this->id.'.assets')
 				// Comment the line below out in production.
@@ -78,10 +78,12 @@ class BbiiModule extends \yii\base\Module
 	/**
 	 * Register the CSS and JS files for the module
 	 */
-	public function registerAssets() {
+	public function registerAssets()
+	{
 		Yii::$app->clientScript->registerCssFile($this->getAssetsUrl() . '/css/' . $this->bbiiTheme . '/forum.css');
-		Yii::$app->getClientScript()->registerCoreScript('jquery.ui');
 		Yii::$app->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/bbii.js', CClientScript::POS_HEAD);
+		Yii::$app->getClientScript()->registerCoreScript('jquery.ui');
+
 	}
 	
 	/**
@@ -89,7 +91,8 @@ class BbiiModule extends \yii\base\Module
 	 * @param string filename of the image
 	 * @return string source URL of image
 	 */
-	public function getRegisteredImage($filename) {
+	public function getRegisteredImage($filename)
+	{
 		return $this->getAssetsUrl() .'/images/'. $filename;
     }
 

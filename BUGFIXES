@@ -78,3 +78,7 @@ BBii version 1.0.7
 BBii version 1.0.8
 ==================
 #0032  controllers/ModeratorController.php error in model name BBiiPoll.
+
+BBii version 2.0.1
+==================
+na  Updated minimal amount needed to work with Yii2 - me@davidjeddy.com
