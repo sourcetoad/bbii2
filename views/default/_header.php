@@ -1,9 +1,15 @@
 <?php
 
 use yii\helpers\Html;
+use frontend\modules\bbii\AppAsset;
+
+AppAsset::register($this);
 
 /* @var $this ForumController */
 /* @var $item array */
+
+echo Html::img('@weebroot/modules/bbii/assets/images/newmail.png');
+exit;
 ?>
 <div id="bbii-header">
 	<?php if(!Yii::$app->user->isGuest) { ?>
@@ -11,11 +17,11 @@ use yii\helpers\Html;
 		<?php 
 			if ($messages) {
 				echo Html::a(
-					Html::img(
+					/*Html::img(
 						$this->module->getRegisteredImage('newmail.png'),
 						Yii::t('BbiiModule.bbii', 'new messages'),
 						array('title'=>$messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'), 'style'=>'vertical-align:bottom;')
-					),
+					),*/
 					array('message/inbox')
 				); 
 			} else {

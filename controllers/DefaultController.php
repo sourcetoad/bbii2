@@ -42,7 +42,7 @@ class DefaultController extends Controller
 			'BbiiPost'       => new BbiiPost,
 			//'dataProvider' => $dataProvider,
 			'messages'       => $messages,
-			'item'			=> $item,
+			'item'			 => $item,
         ]);
 	}
 }

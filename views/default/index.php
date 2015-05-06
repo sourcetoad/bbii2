@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this ForumController */
 /* @var $dataProvider CArrayDataProvider */
 
-/*$this->bbii_breadcrumbs=array(
-	Yii::t('BbiiModule.bbii', 'Forum'),
-);*/
+$this->title = Yii::t('BbiiModule.bbii', 'Forum');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div id="bbii-wrapper">

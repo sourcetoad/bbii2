@@ -40,8 +40,10 @@ class BbiiModule extends \yii\base\Module
 	public $userNameColumn    = 'username';
 	public $version           = '2.0.1';
 
-	private $_assetsUrl;
-	
+    private $_assetsUrl;
+
+
+
 	/**
 	 * [init description]
 	 * 
@@ -59,52 +61,59 @@ class BbiiModule extends \yii\base\Module
 					'errorAction'=>'forum/forum/error',
 				),
 			)
-		);*/
+		);
 
 		// import the module-level models and components
 		$this->setAliases([
 			$this->id.'.models.*',
 			$this->id.'.components.*',
-		]);
+		]);*/
 
         parent::init();
 	}
 	
     /**
+     *
+	 * @deprecated deprecated since version 2.0
      * @return string base URL that contains all published asset files of this module.
      */
     public function getAssetsUrl()
     {
-		if($this->_assetsUrl == null) {
-            $this->_assetsUrl = Yii::$app->assetManager->publish(Yii::getPathOfAlias($this->id.'.assets')
-				// Comment the line below out in production.
-				,false,-1,true
-			);
+    	return false;
+
+		/*if ($this->_assetsUrl == null) {
+			$this->_assetsUrl = Yii::$app->assetManager->publish( '@app/modules/bbii/assets' );
 		}
-        return $this->_assetsUrl;
+        return $this->_assetsUrl;*/
     }
 	
 	/**
 	 * Register the CSS and JS files for the module
+	 * 
 	 * @deprecated deprecated since version 2.0
 	 */
 	public function registerAssets()
 	{
-		// no longer valid for Yii2
-		Yii::$app->clientScript->registerCssFile($this->getAssetsUrl() . '/css/' . $this->bbiiTheme . '/forum.css');
-		Yii::$app->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/bbii.js', CClientScript::POS_HEAD);
-		Yii::$app->getClientScript()->registerCoreScript('jquery.ui');
+		return false;
 
+		// no longer valid for Yii2
+		/*Yii::$app->clientScript->registerCssFile($this->getAssetsUrl() . '/css/' . $this->bbiiTheme . '/forum.css');
+		Yii::$app->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/bbii.js', CClientScript::POS_HEAD);
+		Yii::$app->getClientScript()->registerCoreScript('jquery.ui');*/
 	}
 	
 	/**
 	 * Retrieve url of image in the assets
+	 * 
+	 * @deprecated deprecated since version 2.0
 	 * @param string filename of the image
 	 * @return string source URL of image
 	 */
 	public function getRegisteredImage($filename)
 	{
-		return $this->getAssetsUrl() .'/images/'. $filename;
+		return false;
+
+		//return $this->getAssetsUrl() .'/images/'. $filename;
     }
 
 	
