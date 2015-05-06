@@ -8,8 +8,7 @@ AppAsset::register($this);
 /* @var $this ForumController */
 /* @var $item array */
 
-echo Html::img('@weebroot/modules/bbii/assets/images/newmail.png');
-exit;
+return true;
 ?>
 <div id="bbii-header">
 	<?php if(!Yii::$app->user->isGuest) { ?>
