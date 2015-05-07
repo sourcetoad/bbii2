@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	echo $this->render(
 		'_header', array(
 			'approvals' => $approvals,
+			'is_admin'  => $is_admin,
+			'is_mod'    => $is_mod,
 			'messages'  => $messages,
 			'reports'   => $reports,
 		)

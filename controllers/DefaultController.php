@@ -20,18 +20,17 @@ class DefaultController extends BbiiController
 	 */
 	public function actionIndex()
 	{
-		$approvals = BbiiPost::find()->All();   //->model()->unapproved()->count();
-		$reports   = BbiiMessage::find()->All();//->model()->report()->count();
-
 		// get user messages
 		$messages = BbiiMessage::find()
 			->where(['read_indicator' => 0, 'sendto'=> Yii::$app->user->id,])
 			->count();
 
         return $this->render('index', [
-			'approvals' => $approvals,
+			'approvals' => BbiiPost::find()->all(),
+			'is_admin'  => $this->isModerator(),
+			'is_mod'    => $this->isAdmin(),
 			'messages'  => $messages,
-			'reports'   => $reports,
+			'reports'   => BbiiMessage::find()->all(),
         ]);
 	}
 }

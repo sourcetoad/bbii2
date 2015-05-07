@@ -9,6 +9,8 @@ use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+use frontend\modules\bbii\components\HelloWidget;
+
 $assets = AppAsset::register($this);
 
 /* @var $this ForumController */
@@ -46,8 +48,7 @@ $assets = AppAsset::register($this);
 					array('member/view', 'id' =>Yii::$app->user->id)
 				); 
 
-				/*
-				if ($this->isModerator()) {
+				if ($is_mod) {
 					echo ' | ';
 					echo Html::a(
 						Html::img(
@@ -57,7 +58,7 @@ $assets = AppAsset::register($this);
 					);
 				}
 
-				if ($this->isAdmin()) {
+				if ($is_admin) {
 					echo ' | ';
 					echo Html::a(
 						Html::img(
@@ -66,7 +67,6 @@ $assets = AppAsset::register($this);
 						array('setting/index')
 					);
 				}
-				*/
 			?>
 		</div>
 	<?php }; ?>
@@ -75,12 +75,11 @@ $assets = AppAsset::register($this);
 		<?php echo $this->context->module->forumTitle; ?>
 	</div>
 
-	<table style="margin:0;">
+	<table>
 		<tr>
-			<td style="padding:0;">
+			<td>
 				<div id="bbii-menu">
 					<?php
-						// get items
 						$menuItems = array(
 							array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 									'url' => array('forum/index')),
 							array('label' => Yii::t('BbiiModule.bbii', 'Members'), 									'url' => array('member/index')),
@@ -89,15 +88,14 @@ $assets = AppAsset::register($this);
 						);
 
 				        NavBar::begin();
-				        // if the user has no devices then show the init 'purchase' VW option.
-				        echo Nav::widget([ 'items' => $menuItems ]);
+				        echo Nav::widget(['items' => $menuItems]);
 				        NavBar::end();
 					?>
 				</div>
 			</td>
-			<td style="padding:0;text-align:right;vertical-align:top;">
+			<td>
 				<div class="search">
-					<?php SimpleSearchForm::widget(); ?>
+					<?= SimpleSearchForm::widget(); ?>
 				</div>
 			</td>
 		</tr>

@@ -2,6 +2,7 @@
 
 namespace frontend\modules\bbii\components;
 
+use yii;
 use yii\base\Controller;
 
 /**
