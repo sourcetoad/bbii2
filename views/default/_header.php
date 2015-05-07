@@ -75,20 +75,24 @@ $assets = AppAsset::register($this);
 		<?php echo $this->context->module->forumTitle; ?>
 	</div>
 
-	<table width="100%">
+	<table>
 		<tr>
 			<td>
 				<div id="bbii-menu">
 					<?php
-						$menuItems = array(
-							array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 									'url' => array('forum/index')),
-							array('label' => Yii::t('BbiiModule.bbii', 'Members'), 									'url' => array('member/index')),
-							array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . count($approvals) . ')', 'url' => array('moderator/approval')),
-							array('label' => Yii::t('BbiiModule.bbii', 'Reports').  ' (' . count($reports) . ')', 	'url' => array('moderator/report'),		'visible' => (Yii::$app->session->get('user.status') > 60 ? true : false)),
-						);
-
-				        NavBar::begin();
-				        echo Nav::widget(['items' => $menuItems]);
+				        NavBar::begin([
+				            'options' => [
+					            	'class' => 'nav nav-pills'
+				            ],
+				        ]);
+				        echo Nav::widget([
+				        	'items' => [
+								array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 									'url' => array('forum/index')),
+								array('label' => Yii::t('BbiiModule.bbii', 'Members'), 									'url' => array('member/index')),
+								array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . count($approvals) . ')', 'url' => array('moderator/approval')),
+								array('label' => Yii::t('BbiiModule.bbii', 'Reports').  ' (' . count($reports) . ')', 	'url' => array('moderator/report'),		'visible' => (Yii::$app->session->get('user.status') > 60 ? true : false)),
+							]
+				        ]);
 				        NavBar::end();
 					?>
 				</div>
