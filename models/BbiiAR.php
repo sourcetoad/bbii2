@@ -1,5 +1,9 @@
 <?php 
-class BbiiAR extends CActiveRecord {
+namespace frontend\modules\bbii\models;
+
+use yii\db\ActiveRecord;
+
+class BbiiAR extends ActiveRecord {
 	public function getDbConnection() {
 		if(Yii::$app->getController()->module->dbName) {
 			if(Yii::$app->hasComponent(Yii::$app->getController()->module->dbName)) {

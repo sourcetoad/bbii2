@@ -1,5 +1,8 @@
 <?php
 
+namespace frontend\modules\bbii\models;
+
+use frontend\modules\bbii\models\BbiiAR;
 /**
  * This is the model class for table "bbii_forum".
  *
@@ -34,7 +37,7 @@ class BbiiForum extends BbiiAR
 	/**
 	 * @return string the associated database table name
 	 */
-	public function tableName()
+	public static function tableName()
 	{
 		return 'bbii_forum';
 	}
@@ -161,28 +164,33 @@ class BbiiForum extends BbiiAR
 		return $this;
 	}
 	
+	/**
+	 * @author  David J Eddy
+	 * @version  2.0.0
+	 * @return  array
+	 */
 	public static function getForumOptions() {
 		$return = array();
-		$criteria = new CDbCriteria;
-		$criteria->condition = 'type = 0';
-		$criteria->order = 'sort';
-		$category = BbiiForum::model()->findAll($criteria);
+
+		$category = BbiiForum::find()->where(['type' => 0])->orderBy('sort')->all();
+
 		foreach($category as $group) {
-			$criteria->condition = 'type = 1 and cat_id = ' . $group->id;
-			$forum = BbiiForum::model()->findAll($criteria);
+			$forum = BbiiForum::find()->where([ 'type' => 1, 'cat_id' => $group->id])->all();
 			foreach($forum as $option) {
 				if($option->public || !Yii::$app->user->isGuest) {
 					if($option->membergroup_id == 0) {
 						$return[] = array('id'=>$option->id,'name'=>$option->name,'group'=>$group->name);
 					} elseif(!Yii::$app->user->isGuest) {
-						$groupId = BbiiMember::model()->findByPk(Yii::$app->user->id)->group_id;
-						if($option->membergroup_id == $groupId) {
+						$groupId = BbiiMember::find()->where(['id = '.Yii::$app->user->id])->getAttributes('group_id');
+						
+						if ($option->membergroup_id == $groupId) {
 							$return[] = array('id'=>$option->id,'name'=>$option->name,'group'=>$group->name);
 						}
 					}
 				}
 			}
 		}
+
 		return $return;
 	}
 	

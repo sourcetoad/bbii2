@@ -1,7 +1,20 @@
 <?php
-Yii::import('zii.widgets.CPortlet');
- 
-class SimpleSearchForm extends CPortlet {
+
+namespace frontend\modules\bbii\components;
+
+use yii\base\Widget;
+use yii\helpers\Html;
+
+class SimpleSearchForm extends Widget {
+
+	public function init() {
+		parent::init();
+	}
+
+	public function run() {
+		$this->renderContent();
+	}
+
     protected function renderContent() {
 		$form=$this->beginWidget('CActiveForm', array(
 			'id'=>'simple-search-form',

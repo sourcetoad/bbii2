@@ -14,8 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php
 	echo $this->render(
 		'_header', array(
-			'item'     => $item,
-			'messages' => $messages,
+			'approvals' => $approvals,
+			'messages'  => $messages,
+			'reports'   => $reports,
 		)
 	);
 
@@ -36,8 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	?>
 	<div id="bbii-copyright">
-		<a href="http://www.yiiframework.com/extension/bbii/" target="_blank">
-			&copy; 2013-<?php echo date('Y'); ?><?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?> by BBii forum software
-		</a>
+
 	</div>
 </div>
