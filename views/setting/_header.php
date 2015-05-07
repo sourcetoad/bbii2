@@ -1,4 +1,7 @@
 <?php
+
+use yii\helpers\Html;
+
 /* @var $this ForumController */
 /* @var $item array */
 ?>

@@ -1,11 +1,14 @@
 <?php
+
+use yii\helpers\Html;
+
 /* @var $this ForumController */
 /* @var $model BbiiSetting */
 
-$this->bbii_breadcrumbs=array(
+/*$this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum')=>array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Settings'),
-);
+);*/
 
 $item = array(
 	array('label'=>Yii::t('BbiiModule.bbii', 'Settings'), 'url'=>array('setting/index')),
@@ -16,7 +19,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
 	<div class="form">
 
