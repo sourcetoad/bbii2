@@ -75,7 +75,7 @@ $assets = AppAsset::register($this);
 		<?php echo $this->context->module->forumTitle; ?>
 	</div>
 
-	<table>
+	<table width="100%">
 		<tr>
 			<td>
 				<div id="bbii-menu">
@@ -94,7 +94,7 @@ $assets = AppAsset::register($this);
 				</div>
 			</td>
 			<td>
-				<div class="search">
+				<div class="pull-right">
 					<?= SimpleSearchForm::widget(); ?>
 				</div>
 			</td>
