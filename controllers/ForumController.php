@@ -1,5 +1,16 @@
 <?php
 
+namespace frontend\modules\bbii\controllers;
+
+use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\models\BbiiForum;
+use frontend\modules\bbii\models\BbiiMember;
+
+
+use Yii;
+use yii\data\ArrayDataProvider;
+use yii\web\User;
+
 class ForumController extends BbiiController {
 	public $poll;
 	public $choiceProvider;
@@ -8,8 +19,7 @@ class ForumController extends BbiiController {
 	/**
 	 * @return array action filters
 	 */
-	public function filters()
-	{
+	public function filters() {
 		return array(
 			'accessControl',
 		);
@@ -20,8 +30,7 @@ class ForumController extends BbiiController {
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
-	{
+	public function accessRules() {
 		return array(
 			array('allow',
 				'actions'=>array('createTopic', 'quote', 'reply', 'vote', 'displayVote', 'editPoll', 'updatePoll', 'update', 'upvote', 'markAllRead', 'watch', 'unwatch'),
@@ -38,13 +47,19 @@ class ForumController extends BbiiController {
 	}
 	
 	public function actionIndex() {
-		unset(Yii::$app->user->BbiiTopic_page);
+		if (isset(Yii::$app->user->BbiiTopic_page)) {
+			unset(Yii::$app->user->BbiiTopic_page);	
+		}
+
 		$model = array();
-		$categories = BbiiForum::model()->category()->sorted()->findAll();
+		$categories = BbiiForum::find()->all();
+
 		foreach($categories as $category) {
 			if(Yii::$app->user->isGuest) {
+
 				$forums = BbiiForum::model()->forum()->public()->membergroup()->sorted()->findAll("cat_id = $category->id");
 			} elseif($this->isModerator()) {
+
 				$forums = BbiiForum::model()->forum()->sorted()->findAll("cat_id = $category->id");
 			} else {
 				$groupId = BbiiMember::model()->findByPk(Yii::$app->user->id)->group_id;
@@ -57,11 +72,15 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		$dataProvider=new CArrayDataProvider($model, array(
-			'id'=>'forum',
-			'pagination'=>false,
+
+		$dataProvider = new ArrayDataProvider($model, array(
+			'id'         => 'forum',
+			'pagination' => false,
 		));
-		$this->render('index', array('dataProvider'=>$dataProvider));
+
+		$this->render('index', array(
+			'dataProvider' => $dataProvider)
+		);
 	}
 	
 	public function actionMarkAllRead() {
@@ -724,8 +743,7 @@ class ForumController extends BbiiController {
 	/**
 	 * This is the action to handle external exceptions.
 	 */
-	public function actionError()
-	{
+	public function actionError() {
 		if($error=Yii::$app->errorHandler->error)
 		{
 			if(Yii::$app->request->isAjaxRequest)
