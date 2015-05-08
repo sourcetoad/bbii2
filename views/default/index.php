@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ListView;
 
 /* @var $this ForumController */
 /* @var $dataProvider CArrayDataProvider */
@@ -22,31 +23,29 @@ $this->params['breadcrumbs'][] = $this->title;
 		)
 	);
 
-	/*$this->widget('zii.widgets.CListView', array(
+	echo ListView::widget([
 		'dataProvider' => $dataProvider,
 		'id'           => 'bbiiForum',
 		'itemView'     => '_forum',
 		'summaryText'  => false,
 		'viewData'     => array('lastIndex'=>($dataProvider->totalItemCount - 1)),
-	));*/ //echo $this->renderPartial('_footer'); 
+	]);
 
 	if (!Yii::$app->user->isGuest) {
 		echo Html::a(
-			Yii::t('BbiiModule.bbii','Mark all read'),
+			Yii::t('BbiiModule.bbii', 'Mark all read'),
 			array('forum/markAllRead')
 		);
 	}
 
+	echo $this->render('_footer');
+
+	if(!Yii::$app->user->isGuest) {
+		echo Html::a(
+			Yii::t('BbiiModule.bbii','Mark all read'), array('forum/markAllRead')
+		);
+	};
 	?>
-
-	<?php echo $this->render('_footer'); ?>
-
-	<?php 
-		if(!Yii::$app->user->isGuest) {
-			echo Html::a(
-				Yii::t('BbiiModule.bbii','Mark all read'), array('forum/markAllRead')
-			);
-		}; ?>
 	<div id="bbii-copyright">
 		<a href="http://www.yiiframework.com/extension/bbii/" target="_blank" title="&copy; 2013-<?php echo date('Y'); ?>
 			<?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software
