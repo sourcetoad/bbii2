@@ -1,26 +1,59 @@
 <?php
+/**
+ * 
+ */
 class DateTimeCalculation {
-	static public function shortDate($timestamp) {
+	/**
+	 * [shortDate description]
+	 * @param  [type] $timestamp [description]
+	 * @return [type]            [description]
+	 */
+	static public function shortDate($timestamp)
+	{
 		$df = Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'short', '');
 	}
 	
-	static public function longDate($timestamp) {
+	/**
+	 * [longDate description]
+	 * @param  [type] $timestamp [description]
+	 * @return [type]            [description]
+	 */
+	static public function longDate($timestamp)
+	{
 		$df = Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'long', '');
 	}
 	
-	static public function medium($timestamp) {
+	/**
+	 * [medium description]
+	 * @param  [type] $timestamp [description]
+	 * @return [type]            [description]
+	 */
+	static public function medium($timestamp)
+	{
 		$df = Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'medium', 'short');
 	}
 	
-	static public function long($timestamp) {
+	/**
+	 * [long description]
+	 * @param  [type] $timestamp [description]
+	 * @return [type]            [description]
+	 */
+	static public function long($timestamp)
+	{
 		$df = Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'long', 'short');
 	}
 	
-	static public function full($timestamp) {
+	/**
+	 * [full description]
+	 * @param  [type] $timestamp [description]
+	 * @return [type]            [description]
+	 */
+	static public function full($timestamp)
+	{
 		$df = Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'long', 'medium') . ' ' . self::userTimezoneNotation();
 	}
@@ -30,7 +63,8 @@ class DateTimeCalculation {
 	 * @param string $timestamp timestamp format 'yyyy-MM-dd hh:mm:ss'
 	 * @return string timestamp format 'yyyy-MM-dd hh:mm:ss'
 	 */
-	static public function userTimestamp($timestamp) {
+	static public function userTimestamp($timestamp)
+	{
 		if(Yii::$app->user->isGuest) {
 			return $timestamp;
 		}
@@ -48,7 +82,8 @@ class DateTimeCalculation {
 	 * @param string $timezone e.g. 'Europe/Paris'
 	 * @return string timestamp format 'yyyy-MM-dd hh:mm:ss'
 	 */
-	static public function convertTimestamp($timestamp, $timezone) {
+	static public function convertTimestamp($timestamp, $timezone)
+	{
 		$serverTimeZone = date_default_timezone_get();
 		$time = CDateTimeParser::parse($timestamp,'yyyy-MM-dd hh:mm:ss');
 		$dateTimeZone1 = new DateTimeZone($serverTimeZone);
@@ -64,7 +99,8 @@ class DateTimeCalculation {
 	 * Return the timezone notation for the user
 	 * @return string
 	 */
-	static public function userTimezoneNotation() {
+	static public function userTimezoneNotation()
+	{
 		if(Yii::$app->user->isGuest) {
 			$timezone = date_default_timezone_get();
 		} else {
@@ -78,4 +114,3 @@ class DateTimeCalculation {
 		return $dateTime->format('T'); 
 	}
 }
-?>
