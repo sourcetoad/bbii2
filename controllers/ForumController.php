@@ -5,7 +5,8 @@ namespace frontend\modules\bbii\controllers;
 use frontend\modules\bbii\components\BbiiController;
 use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiMember;
-
+use frontend\modules\bbii\models\BbiiMessage;
+use frontend\modules\bbii\models\BbiiPost;
 
 use Yii;
 use yii\data\ArrayDataProvider;
@@ -65,6 +66,7 @@ class ForumController extends BbiiController {
 				$groupId = BbiiMember::model()->findByPk(Yii::$app->user->id)->group_id;
 				$forums = BbiiForum::model()->forum()->membergroup($groupId)->sorted()->findAll("cat_id = $category->id");
 			}
+
 			if(count($forums)) {
 				$model[] = $category;
 				foreach($forums as $forum) {
@@ -73,14 +75,19 @@ class ForumController extends BbiiController {
 			}
 		}
 
-		$dataProvider = new ArrayDataProvider($model, array(
-			'id'         => 'forum',
-			'pagination' => false,
-		));
+		// get user messages
+		$messages = BbiiMessage::find()
+			->where(['read_indicator' => 0, 'sendto'=> Yii::$app->user->id,])
+			->count();
 
-		$this->render('index', array(
-			'dataProvider' => $dataProvider)
-		);
+		return $this->render('index', array(
+			'approvals'    => BbiiPost::find()->all(),
+			'dataProvider' => new ArrayDataProvider($model, array('id' => 'forum', 'pagination' => false)),
+			'is_admin'     => $this->isModerator(),
+			'is_mod'       => $this->isAdmin(),
+			'messages'     => BbiiMessage::find()->where(['read_indicator' => 0, 'sendto'=> Yii::$app->user->id])->count(),
+			'reports'      => BbiiMessage::find()->all(),
+		));
 	}
 	
 	public function actionMarkAllRead() {
@@ -224,7 +231,7 @@ class ForumController extends BbiiController {
 				$page = ceil($count/$cPage->pageSize);
 				$post = $nav;
 			} else {
-				$page = ceil($dataProvider->totalItemCount/$cPage->pageSize);
+				$page = ceil($dataProvider->getTotalCount() / $cPage->pageSize);
 				$post = $topic->last_post_id;
 			}
 			if(Yii::$app->user->hasFlash('moderation')) {

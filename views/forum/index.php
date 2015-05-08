@@ -23,13 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
 		)
 	);
 
-	/*echo ListView::widget([
+	echo ListView::widget([
 		'dataProvider' => $dataProvider,
 		'id'           => 'bbiiForum',
 		'itemView'     => '_forum',
-		'summaryText'  => false,
-		'viewData'     => array('lastIndex' => ($dataProvider->totalItemCount - 1) ),
-	]);*/
+		//'viewData'     => array('lastIndex' => ($dataProvider->getTotalCount() - 1) ),
+	]);
 
 	if (!Yii::$app->user->isGuest) {
 		echo Html::a(

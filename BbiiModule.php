@@ -11,7 +11,7 @@ class BbiiModule extends \yii\base\Module
 	public $avatarStorage     = '/avatar'; 	// directory in the webroot must exist and allow read/write access
 	public $bbiiTheme         = 'base';
 	public $dbName            = false;
-	public $defaultController = 'forum';
+	public $defaultRoute = 'forum/index';
 	public $editorContentsCss = array();
 	public $editorSkin        = 'moono';
 	public $editorToolbar 	  = array(
