@@ -1,4 +1,10 @@
 <?php
+
+use frontend\modules\bbii\components\DateTimeCalculation;
+
+use yii\helpers\Html;
+use yii\widgets\ListView;
+
 /* @var $this ForumController */
 /* @var $data BbiiForum */
 
@@ -19,7 +25,7 @@
 	}
 ?>
 
-<?php if($data->type): ?>
+<?php if($data->type) { ?>
 <div class="forum">
 	<div class="forum-cell <?php echo $image; ?>"></div>
 	<div class="forum-cell main">
@@ -51,7 +57,7 @@
 	</div>
 </div>
 
-<?php else: ?>
+<?php } else { ?>
 	<?php if($index > 0) { echo '</div>'; } ?>
 	<div class="forum-category" onclick="BBii.toggleForumGroup(<?php echo $data->id; ?>,'<?php echo Yii::$app->createAbsoluteUrl($this->module->id.'/forum/setCollapsed'); ?>');">
 		<div class="header2">
@@ -62,6 +68,6 @@
 		</div>
 	</div>
 	<div class="forum-group" id="category_<?php echo $data->id; ?>" <?php if($this->collapsed($data->id)) { echo 'style="display:none;"';}?>>
-<?php endif; ?>
+<?php }; ?>
 
 <?php if($index == $lastIndex) { echo '</div>'; } ?>
