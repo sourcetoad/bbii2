@@ -10,7 +10,7 @@ if($count) {
 	foreach($models as $model) {
 		$member = BbiiMember::model()->findByPk($model->member_id);
 		if($member !== null) {
-			$users[] = Html::a(CHtml::encode($member->member_name), array("member/view", "id"=>$member->id));
+			$users[] = Html::a(Html::encode($member->member_name), array("member/view", "id"=>$member->id));
 		}
 	}
 	echo implode(', ', $users);

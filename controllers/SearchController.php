@@ -36,7 +36,7 @@ class SearchController extends BbiiController {
 		$choice = 0;
 		$type = 0;
 		if(isset($_POST['search'])) {
-//			$search = trim(CHtml::encode($_POST['search']));
+//			$search = trim(Html::encode($_POST['search']));
 			$search = trim(filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING));
 			Yii::$app->session['search'] = $search;
 		} elseif(isset(Yii::$app->session['search'])) {

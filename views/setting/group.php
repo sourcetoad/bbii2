@@ -23,7 +23,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 <div id="bbii-wrapper">
 	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
 	
-	<?php echo CHtml::button(Yii::t('BbiiModule.bbii', 'New group'), array('onclick'=>'editMembergroup()', 'class'=>'down35')); ?>
+	<?php echo Html::button(Yii::t('BbiiModule.bbii', 'New group'), array('onclick'=>'editMembergroup()', 'class'=>'down35')); ?>
 	
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'membergroup-grid',

@@ -310,7 +310,7 @@ class SettingController extends BbiiController {
 		if(isset($_POST['id']) && isset($_POST['moderator'])) {
 			$model = BbiiMember::model()->findByPk($_POST['id']);
 			if($model !== null) {
-				$model->moderator = CHtml::encode($_POST['moderator']);
+				$model->moderator = Html::encode($_POST['moderator']);
 				$model->save();
 				$json['success'] = true;
 			}

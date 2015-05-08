@@ -46,28 +46,28 @@ if(empty($poll->question) && !$poll->hasErrors()) {
 		
 		<?php if($forum->poll == 2 || ($forum->poll == 1 && $this->isModerator())): ?>
 			<div class="row button" id="poll-button" style="<?php echo ($show?'display:none;':''); ?>">
-				<?php echo CHtml::button(Yii::t('BbiiModule.bbii','Add poll'), array('class'=>'bbii-poll-button','onclick'=>'showPoll()')); ?>
+				<?php echo Html::button(Yii::t('BbiiModule.bbii','Add poll'), array('class'=>'bbii-poll-button','onclick'=>'showPoll()')); ?>
 			</div>
 			<div id="poll-form" style="<?php echo ($show?'':'display:none;'); ?>" class="bbii-poll-form">
 				<div class="row">
-					<?php echo CHtml::activeLabel($poll,'question'); ?>
-					<?php echo CHtml::activeTextField($poll,'question',array('size'=>100,'maxlength'=>255,'style'=>'width:99%;')); ?>
-					<?php echo CHtml::error($poll,'question'); ?>
+					<?php echo Html::activeLabel($poll,'question'); ?>
+					<?php echo Html::activeTextField($poll,'question',array('size'=>100,'maxlength'=>255,'style'=>'width:99%;')); ?>
+					<?php echo Html::error($poll,'question'); ?>
 				</div>
 				
-				<?php echo CHtml::errorSummary($poll); ?>
+				<?php echo Html::errorSummary($poll); ?>
 
 				<div class="row" id="poll-choices">
-					<?php echo CHtml::label(Yii::t('BbiiModule.bbii','Choices'),false); ?>
+					<?php echo Html::label(Yii::t('BbiiModule.bbii','Choices'),false); ?>
 					<?php foreach($choices as $key => $value): ?>
-					<?php echo CHtml::textField('choice['.$key.']',$value,array('maxlength'=>80,'style'=>'width:99%;','onchange'=>'pollChange(this)')); ?>
+					<?php echo Html::textField('choice['.$key.']',$value,array('maxlength'=>80,'style'=>'width:99%;','onchange'=>'pollChange(this)')); ?>
 					<?php endforeach; ?>
 				</div>
 				<div class="row">
 					<strong><?php echo Yii::t('BbiiModule.bbii','Allow revote'); ?>:</strong>
-					<?php echo CHtml::activeCheckbox($poll,'allow_revote'); ?> &nbsp;
+					<?php echo Html::activeCheckbox($poll,'allow_revote'); ?> &nbsp;
 					<strong><?php echo Yii::t('BbiiModule.bbii','Allow multiple choices'); ?>:</strong>
-					<?php echo CHtml::activeCheckbox($poll,'allow_multiple'); ?> &nbsp;
+					<?php echo Html::activeCheckbox($poll,'allow_multiple'); ?> &nbsp;
 					<strong><?php echo Yii::t('BbiiModule.bbii','Poll expires'); ?>:</strong>
 					<?php echo $form->hiddenField($poll,'expire_date'); ?>
 					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -88,8 +88,8 @@ if(empty($poll->question) && !$poll->hasErrors()) {
 					)); ?>
 				</div>
 				<div class="row button">
-					<?php echo CHtml::hiddenField('addPoll','no'); ?>
-					<?php echo CHtml::button(Yii::t('BbiiModule.bbii','Remove poll'), array('class'=>'bbii-poll-button','onclick'=>'hidePoll()')); ?>
+					<?php echo Html::hiddenField('addPoll','no'); ?>
+					<?php echo Html::button(Yii::t('BbiiModule.bbii','Remove poll'), array('class'=>'bbii-poll-button','onclick'=>'hidePoll()')); ?>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -112,18 +112,18 @@ if(empty($poll->question) && !$poll->hasErrors()) {
 		
 			<div class="row">
 				<strong><?php echo Yii::t('BbiiModule.bbii','Sticky'); ?>:</strong>
-				<?php echo CHtml::checkbox('sticky'); ?> &nbsp; 
+				<?php echo Html::checkbox('sticky'); ?> &nbsp; 
 				<strong><?php echo Yii::t('BbiiModule.bbii','Global'); ?>:</strong>
-				<?php echo CHtml::checkbox('global'); ?> &nbsp; 
+				<?php echo Html::checkbox('global'); ?> &nbsp; 
 				<strong><?php echo Yii::t('BbiiModule.bbii','Locked'); ?>:</strong>
-				<?php echo CHtml::checkbox('locked'); ?> &nbsp; 
+				<?php echo Html::checkbox('locked'); ?> &nbsp; 
 			</div>
 		
 		<?php endif; ?>
 		
 		<div class="row button">
 			<?php echo $form->hiddenField($post, 'forum_id'); ?>
-			<?php echo CHtml::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class'=>'bbii-topic-button')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class'=>'bbii-topic-button')); ?>
 		</div>
 		<?php $this->endWidget(); ?>
 	</div><!-- form -->	

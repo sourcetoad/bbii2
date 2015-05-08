@@ -36,7 +36,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'color'); ?>
 		<?php echo $form->textField($model, 'color', array('id'=>'colorpickerField', 'style'=>'width:70px;', 'onchange'=>'BBiiSetting.ChangeColor(this)')); ?>
-		<?php echo CHtml::textField('colorpickerColor', '', array('style'=>'width:40px;', 'readonly'=>true)); ?>
+		<?php echo Html::textField('colorpickerColor', '', array('style'=>'width:40px;', 'readonly'=>true)); ?>
 		<?php echo $form->error($model,'color'); ?>
 	</div>
 

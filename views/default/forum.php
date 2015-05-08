@@ -42,7 +42,7 @@ $item = array(
 			'enableAjaxValidation'=>false,
 		)); ?>
 			<?php echo $form->hiddenField($forum, 'id'); ?>
-			<?php echo CHtml::submitButton(Yii::t('BbiiModule.bbii','Create new topic'), array('class'=>'bbii-topic-button')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Create new topic'), array('class'=>'bbii-topic-button')); ?>
 		<?php $this->endWidget(); ?>
 	</div><!-- form -->	
 	<?php endif; ?>

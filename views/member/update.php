@@ -51,7 +51,7 @@ $('.presence').hide();
 		<?php if($this->isModerator()): ?>
 		<div class="row">
 			<?php echo $form->labelEx($model,'group_id'); ?>
-			<?php echo $form->dropDownList($model, 'group_id', CHtml::listData(BbiiMembergroup::model()->findAll(), 'id', 'name')); ?>
+			<?php echo $form->dropDownList($model, 'group_id', Html::listData(BbiiMembergroup::model()->findAll(), 'id', 'name')); ?>
 			<?php echo $form->error($model,'group_id'); ?>
 		</div>
 		<?php endif; ?>
@@ -249,7 +249,7 @@ $('.presence').hide();
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton(Yii::t('BbiiModule.bbii', 'Save')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save')); ?>
 		</div>
 
 	<?php $this->endWidget(); ?>

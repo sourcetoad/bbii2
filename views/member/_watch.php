@@ -19,7 +19,7 @@
 		'columns'=>array(
 			array(
 				'header'=>'',
-				'value'=>'CHtml::checkbox("unwatch[$data->id]")',
+				'value'=>'Html::checkbox("unwatch[$data->id]")',
 				'type'=>'raw',
 			),
 			array(
@@ -49,7 +49,7 @@
 	)); ?>	
 	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton(Yii::t('BbiiModule.bbii', 'Delete')); ?>
+		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Delete')); ?>
 	</div>
 	
 	<?php $this->endWidget(); ?>

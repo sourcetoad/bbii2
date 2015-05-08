@@ -29,11 +29,11 @@ $item = array(
 			array(
 				'name'=>'group_id',
 				'value'=>'$data->group->name',
-				'filter'=>CHtml::listData(BbiiMembergroup::model()->findAll(), 'id', 'name'),
+				'filter'=>Html::listData(BbiiMembergroup::model()->findAll(), 'id', 'name'),
 			),
 			array(
 				'name'=>'moderator',
-				'value'=>'CHtml::checkBox("moderator", $data->moderator, array("onclick"=>"changeModeration(this,$data->id,\'' . $this->createAbsoluteUrl('setting/changeModerator') . '\')"))',
+				'value'=>'Html::checkBox("moderator", $data->moderator, array("onclick"=>"changeModeration(this,$data->id,\'' . $this->createAbsoluteUrl('setting/changeModerator') . '\')"))',
 				'type'=>'raw',
 				'filter'=>array('0'=>Yii::t('BbiiModule.bbii', 'No'), '1'=>Yii::t('BbiiModule.bbii', 'Yes')),
 				'htmlOptions'=>array("style"=>"text-align:center"),

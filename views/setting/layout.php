@@ -59,12 +59,12 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 		
 		<div class="row">
 			<?php echo $form->labelEx($model,'cat_id'); ?>
-			<?php echo $form->dropDownList($model,'cat_id',CHtml::listData(BbiiForum::model()->categories()->findAll(), 'id', 'name'), array('empty'=>'', 'id'=>'cat_id')); ?>
+			<?php echo $form->dropDownList($model,'cat_id',Html::listData(BbiiForum::model()->categories()->findAll(), 'id', 'name'), array('empty'=>'', 'id'=>'cat_id')); ?>
 			<?php echo $form->error($model,'cat_id'); ?>
 		</div>
 		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton(Yii::t('BbiiModule.bbii', 'Add')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Add')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>

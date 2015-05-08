@@ -63,7 +63,7 @@ $item = array(
 		<div class="row buttons">
 			<?php echo $form->hiddenField($model,'member_id'); ?>
 			<?php echo $form->hiddenField($model,'member_name'); ?>
-			<?php echo CHtml::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
 		</div>
 
 	<?php $this->endWidget(); ?>

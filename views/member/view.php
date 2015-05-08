@@ -30,10 +30,10 @@ $df = Yii::$app->dateFormatter;
 	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
 	
 	<?php if($this->isModerator() || $model->id == Yii::$app->user->id): ?>
-	<?php echo CHtml::htmlButton(Yii::t('BbiiModule.bbii', 'Edit profile'), array('class'=>'bbii-button-right', 'onclick'=>'js:document.location.href="' . $this->createAbsoluteUrl('member/update', array('id'=>$model->id)) .'"')); ?>
+	<?php echo Html::htmlButton(Yii::t('BbiiModule.bbii', 'Edit profile'), array('class'=>'bbii-button-right', 'onclick'=>'js:document.location.href="' . $this->createAbsoluteUrl('member/update', array('id'=>$model->id)) .'"')); ?>
 	<?php endif; ?>
 	
-	<div class="bbii-box-top"><?php echo CHtml::encode($model->member_name) . Yii::t('BbiiModule.bbii', '\'s profile'); ?></div>
+	<div class="bbii-box-top"><?php echo Html::encode($model->member_name) . Yii::t('BbiiModule.bbii', '\'s profile'); ?></div>
 	<table class="profile"><tr><td>
 		<table><tr>
 			<td style="width:90px" rowspan="4"><?php echo Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$this->module->getRegisteredImage('empty.jpeg'), 'avatar'); ?></td>
@@ -46,21 +46,21 @@ $df = Yii::$app->dateFormatter;
 		</tr>
 		<tr>
 			<td><strong><?php echo Yii::t('BbiiModule.bbii', 'Number of posts'); ?></strong></td>
-			<td><?php echo CHtml::encode($model->posts); ?></td>
+			<td><?php echo Html::encode($model->posts); ?></td>
 		</tr>
 		<tr>
 			<td><strong><?php echo Yii::t('BbiiModule.bbii', 'Reputation'); ?></strong></td>
-			<td><?php echo CHtml::encode($model->upvoted); ?></td>
+			<td><?php echo Html::encode($model->upvoted); ?></td>
 		</tr>
 		<tr>
-			<th style="text-align:center;"><?php echo CHtml::encode($model->member_name); ?></th>
+			<th style="text-align:center;"><?php echo Html::encode($model->member_name); ?></th>
 			<td><strong><?php echo Yii::t('BbiiModule.bbii', 'Group'); ?></strong></td>
-			<td><?php if(isset($model->group)) echo CHtml::encode($model->group->name); ?></td>
+			<td><?php if(isset($model->group)) echo Html::encode($model->group->name); ?></td>
 		</tr>
 		<tr>
 			<td></td>
 			<th><?php echo Yii::t('BbiiModule.bbii', 'Location'); ?></th>
-			<td><?php echo (isset($model->location))?CHtml::encode($model->location):Yii::t('BbiiModule.bbii', 'Unknown'); ?></td>
+			<td><?php echo (isset($model->location))?Html::encode($model->location):Yii::t('BbiiModule.bbii', 'Unknown'); ?></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -96,7 +96,7 @@ $df = Yii::$app->dateFormatter;
 		<tr>
 			<td></td>
 			<th><?php echo Yii::t('BbiiModule.bbii', 'Personal text'); ?></th>
-			<td><?php echo CHtml::encode($model->personal_text); ?></td>
+			<td><?php echo Html::encode($model->personal_text); ?></td>
 		</tr>
 		</table>
 	</td><td>

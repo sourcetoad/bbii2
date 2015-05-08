@@ -53,7 +53,7 @@ function setAutocomplete(id, data) {
 			array(
 				'name' => 'forum_id',
 				'value' => '$data->forum->name',
-				'filter' => CHtml::listData(BbiiForum::getAllForumOptions(), 'id', 'name', 'group'),
+				'filter' => Html::listData(BbiiForum::getAllForumOptions(), 'id', 'name', 'group'),
 			),
 			'subject',
 			array(

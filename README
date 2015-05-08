@@ -78,7 +78,7 @@ allowTopicSub:		Allow subscription to topics (watch) by members of forum
 					(default: false).
 topicsPerPage:		The number of topics to display on a single page (default value: 20).
 postsPerPage:		The number of posts to display on a single page (default value: 20).
-purifierOptions:	The CHtmlPurifier options.
+purifierOptions:	The HtmlPurifier options.
 editorToolbar:		The toolbar options for the CKEditor.
 editorSkin:			The CKEditor skinName configuration setting (default value: 'moono').
 editorUIColor:		The CKEditor uiColor configuration setting (default value: '').
