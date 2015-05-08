@@ -2,8 +2,7 @@
 
 namespace frontend\modules\bbii\models;
 
-use Yii;
-use yii\rest\ActiveController;
+use frontend\modules\bbii\models\BbiiAR;
 
 /**
  * This is the model class for table "bbii_post".
@@ -23,7 +22,7 @@ use yii\rest\ActiveController;
  * @property string $change_reason
  * @property integer $upvoted
  */
-class BbiiPost extends \yii\db\ActiveRecord
+class BbiiPost extends BbiiAR
 {
 	public $search;
 	/**
