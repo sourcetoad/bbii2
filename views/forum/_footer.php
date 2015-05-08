@@ -9,9 +9,10 @@ use frontend\modules\bbii\models\BbiiPost;
 use yii\helpers\Html;
 
 /* @var $this ForumController */
-$member_count = BbiiMember::find()->count();
-$members      = BbiiMember::find()->present()->show()->findAll();
-$present      = BbiiSession::find()->count();
+$member_count  = BbiiMember::find()->count();
+$member_newest = BbiiMember::find()->newest()->find();
+$members       = BbiiMember::find()->present()->show()->findAll();
+$present       = BbiiSession::find()->count();
 ?>
 <div id="bbii-footer">
 	<table><tr>
@@ -26,7 +27,7 @@ $present      = BbiiSession::find()->count();
 						);
 					?>
 				</span>
-				<?php echo Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?>
+				<?= Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?>
 			</div>
 			<div>
 				<?php if ($member_count) {
@@ -51,28 +52,23 @@ $present      = BbiiSession::find()->count();
 		<td class="statistics">
 			<table>
 			<caption class="header2">
-				<?php echo Yii::t('BbiiModule.bbii','Board Statistics'); ?>
+				<?= Yii::t('BbiiModule.bbii','Board Statistics'); ?>
 			</caption>
 			<tr>
-				<th><?php echo Yii::t('BbiiModule.bbii','Total topics'); ?></th>
-				<td><?php echo BbiiTopic::find()->count(); ?></td>
+				<th><?= Yii::t('BbiiModule.bbii','Total topics'); ?></th>
+				<td><?= BbiiTopic::find()->count(); ?></td>
 			</tr><tr>
-				<th><?php echo Yii::t('BbiiModule.bbii','Total posts'); ?></th>
-				<td><?php echo BbiiPost::find()->count(); ?></td>
+				<th><?= Yii::t('BbiiModule.bbii','Total posts'); ?></th>
+				<td><?= BbiiPost::find()->count(); ?></td>
 			</tr><tr>
-				<th><?php echo Yii::t('BbiiModule.bbii','Total members'); ?></th>
-				<td><?php echo BbiiMember::find()->count(); ?></td>
+				<th><?= Yii::t('BbiiModule.bbii','Total members'); ?></th>
+				<td><?= BbiiMember::find()->count(); ?></td>
 			</tr><tr>
-				<th><?php echo Yii::t('BbiiModule.bbii','Newest member'); ?></th>
-				<td>
-					<?php
-						//$member = BbiiMember::find()->newest()->find();
-						//echo Html::a($member->member_name, array('member/view', 'id'=>$member->id));
-					?>
-				</td>
+				<th><?php //echo Yii::t('BbiiModule.bbii','Newest member'); ?></th>
+				<td><?php //echo Html::a($member_newest->member_name, array('member/view', 'id'=>$member_newest->id)); ?></td>
 			</tr><tr>
-				<th><?php echo Yii::t('BbiiModule.bbii','Visitors today'); ?></th>
-				<td><?php echo BbiiSession::find()->count(); ?></td>
+				<th><?= Yii::t('BbiiModule.bbii','Visitors today'); ?></th>
+				<td><?= BbiiSession::find()->count(); ?></td>
 			</tr>
 			</table>
 		</td>

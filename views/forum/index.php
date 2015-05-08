@@ -6,10 +6,6 @@ use yii\widgets\ListView;
 /* @var $this ForumController */
 /* @var $dataProvider CArrayDataProvider */
 
-$this->title = Yii::t('BbiiModule.bbii', 'Forum');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-
 ?>
 <div id="bbii-wrapper">
 	<?php 
