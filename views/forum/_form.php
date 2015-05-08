@@ -5,7 +5,7 @@
 ?>
 <noscript>
 <div class="flash-notice">
-<?php echo Yii::t('BbiiModule.bbii','Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
+<?= Yii::t('BbiiModule.bbii','Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
 </div>
 </noscript>
 <div class="form">
@@ -13,12 +13,12 @@
 		'id'=>'create-topic-form',
 		'enableAjaxValidation'=>false,
 	)); ?>
-		<?php echo $form->errorSummary($post); ?>
+		<?= $form->errorSummary($post); ?>
 		
 		<div class="row">
-			<?php echo $form->labelEx($post,'subject'); ?>
-			<?php echo $form->textField($post,'subject',array('size'=>100,'maxlength'=>255,'style'=>'width:99%;')); ?>
-			<?php echo $form->error($post,'subject'); ?>
+			<?= $form->labelEx($post,'subject'); ?>
+			<?= $form->textField($post,'subject',array('size'=>100,'maxlength'=>255,'style'=>'width:99%;')); ?>
+			<?= $form->error($post,'subject'); ?>
 		</div>
 		
 		<div class="row">
@@ -32,21 +32,21 @@
 			'uiColor'=>$this->module->editorUIColor,
 			'contentsCss'=>$this->module->editorContentsCss,
 		)); ?>
-		<?php echo $form->error($post,'content'); ?>
+		<?= $form->error($post,'content'); ?>
 	</div>
 	
 	<?php if(!$post->isNewRecord): ?>
 		<div class="row">
-			<?php echo $form->labelEx($post,'change_reason'); ?>
-			<?php echo $form->textField($post,'change_reason',array('size'=>100,'maxlength'=>255,'style'=>'width:99%;')); ?>
-			<?php echo $form->error($post,'change_reason'); ?>
+			<?= $form->labelEx($post,'change_reason'); ?>
+			<?= $form->textField($post,'change_reason',array('size'=>100,'maxlength'=>255,'style'=>'width:99%;')); ?>
+			<?= $form->error($post,'change_reason'); ?>
 		</div>
 	<?php endif; ?>
 		
 	<div class="row button">
-		<?php echo $form->hiddenField($post, 'forum_id'); ?>
-		<?php echo $form->hiddenField($post, 'topic_id'); ?>
-		<?php echo Html::submitButton(($post->isNewRecord)?Yii::t('BbiiModule.bbii','Create'):Yii::t('BbiiModule.bbii','Save'), array('class'=>'bbii-topic-button')); ?>
+		<?= $form->hiddenField($post, 'forum_id'); ?>
+		<?= $form->hiddenField($post, 'topic_id'); ?>
+		<?= Html::submitButton(($post->isNewRecord)?Yii::t('BbiiModule.bbii','Create'):Yii::t('BbiiModule.bbii','Save'), array('class'=>'bbii-topic-button')); ?>
 	</div>
 	
 	<?php $this->endWidget(); ?>

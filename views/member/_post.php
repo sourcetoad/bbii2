@@ -1,4 +1,4 @@
-﻿<?php echo Html::a($data->subject, array(
+﻿<?= Html::a($data->subject, array(
 		'forum/topic', 
 		'id'=>$data->topic_id, 
 		'nav'=>$data->id

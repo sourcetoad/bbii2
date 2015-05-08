@@ -5,7 +5,7 @@
 ?>
 <noscript>
 <div class="flash-notice">
-<?php echo Yii::t('BbiiModule.bbii','Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
+<?= Yii::t('BbiiModule.bbii','Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
 </div>
 </noscript>
 
@@ -16,11 +16,11 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?= $form->errorSummary($model); ?>
 
 	<div class="row">
 	<?php if($this->action->id == 'create'): ?>
-		<?php echo $form->labelEx($model,'sendto'); ?>
+		<?= $form->labelEx($model,'sendto'); ?>
 		<?php $this->widget('zii.widgets.jui.CJuiAutoComplete',array(
 				'attribute'=>'search',
 				'model'=>$model,
@@ -41,17 +41,17 @@
 			)); 
 		?>
 	<?php else: ?>
-		<?php echo $form->label($model,'sendto'); ?>
-		<strong><?php echo Html::encode($model->search); ?></strong>
+		<?= $form->label($model,'sendto'); ?>
+		<strong><?= Html::encode($model->search); ?></strong>
 	<?php endif; ?>
-		<?php echo $form->hiddenField($model,'sendto'); ?>
-		<?php echo $form->error($model,'sendto'); ?>
+		<?= $form->hiddenField($model,'sendto'); ?>
+		<?= $form->error($model,'sendto'); ?>
 	</div>
 	
 	<div class="row">
-		<?php echo $form->labelEx($model,'subject'); ?>
-		<?php echo $form->textField($model,'subject',array('size'=>100,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'subject'); ?>
+		<?= $form->labelEx($model,'subject'); ?>
+		<?= $form->textField($model,'subject',array('size'=>100,'maxlength'=>255)); ?>
+		<?= $form->error($model,'subject'); ?>
 	</div>
 	
 	<div class="row">
@@ -76,12 +76,12 @@
 			'uiColor'=>$this->module->editorUIColor,
 			'contentsCss'=>$this->module->editorContentsCss,
 		)); ?>
-		<?php echo $form->error($model,'content'); ?>
+		<?= $form->error($model,'content'); ?>
 	</div>
 	
 	<div class="row buttons">
-		<?php echo $form->hiddenField($model,'type'); ?>
-		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
+		<?= $form->hiddenField($model,'type'); ?>
+		<?= Html::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -14,11 +14,11 @@ $item = array(
 ?>
 
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?= $this->renderPartial('_header', array('item'=>$item)); ?>
 
-	<h2><?php echo Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>
+	<h2><?= Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>
 
 	<div class="error">
-		<h4><?php echo Html::encode($message); ?></h4>
+		<h4><?= Html::encode($message); ?></h4>
 	</div>
 </div>

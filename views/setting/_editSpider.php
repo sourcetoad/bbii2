@@ -11,24 +11,24 @@
 	'enableAjaxValidation'=>true,
 )); ?>
 
-	<p class="note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
+	<p class="note"><?= Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?= $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>25)); ?>
-		<?php echo $form->error($model,'name'); ?>
+		<?= $form->labelEx($model,'name'); ?>
+		<?= $form->textField($model,'name',array('size'=>25)); ?>
+		<?= $form->error($model,'name'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'user_agent'); ?>
-		<?php echo $form->textField($model,'user_agent',array('size'=>70)); ?>
-		<?php echo $form->error($model,'user_agent'); ?>
+		<?= $form->labelEx($model,'user_agent'); ?>
+		<?= $form->textField($model,'user_agent',array('size'=>70)); ?>
+		<?= $form->error($model,'user_agent'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->hiddenField($model,'id'); ?>
+		<?= $form->hiddenField($model,'id'); ?>
 	</div>
 	
 <?php $this->endWidget(); ?>

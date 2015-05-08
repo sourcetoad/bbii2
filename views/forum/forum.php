@@ -21,16 +21,16 @@ $item = array(
 
 <?php if(Yii::$app->user->hasFlash('moderation')): ?>
 <div class="flash-notice">
-	<?php echo Yii::$app->user->getFlash('moderation'); ?>
+	<?= Yii::$app->user->getFlash('moderation'); ?>
 </div>
 <?php endif; ?>
 
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?= $this->renderPartial('_header', array('item'=>$item)); ?>
 	
 	<div class="forum-category center">
 		<div class="header2">
-			<?php echo $forum->name; ?>
+			<?= $forum->name; ?>
 		</div>
 	</div>
 	
@@ -41,8 +41,8 @@ $item = array(
 			'action'=>array('forum/createTopic'),
 			'enableAjaxValidation'=>false,
 		)); ?>
-			<?php echo $form->hiddenField($forum, 'id'); ?>
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Create new topic'), array('class'=>'bbii-topic-button')); ?>
+			<?= $form->hiddenField($forum, 'id'); ?>
+			<?= Html::submitButton(Yii::t('BbiiModule.bbii','Create new topic'), array('class'=>'bbii-topic-button')); ?>
 		<?php $this->endWidget(); ?>
 	</div><!-- form -->	
 	<?php endif; ?>
@@ -55,8 +55,8 @@ $item = array(
 		'pager'=>array('firstPageCssClass'=>'previous', 'lastPageCssClass'=>'next', 'firstPageLabel'=>'<<', 'lastPageLabel'=>'>>'),
 	)); ?>
 	
-	<?php echo $this->renderPartial('_forumfooter'); ?>
-	<div id="bbii-copyright"><a href="http://www.yiiframework.com/extension/bbii/" target="_blank" title="&copy; 2013-2014 <?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->module->version; ?>">BBii forum software</a></div>
+	<?= $this->renderPartial('_forumfooter'); ?>
+	<div id="bbii-copyright"><a href="http://www.yiiframework.com/extension/bbii/" target="_blank" title="&copy; 2013-2014 <?= Yii::t('BbiiModule.bbii','version') . ' ' . $this->module->version; ?>">BBii forum software</a></div>
 </div>
 <div style="display:none;">
 <?php 

@@ -27,22 +27,22 @@ use yii\widgets\ListView;
 
 <?php if($data->type) { ?>
 <div class="forum">
-	<div class="forum-cell <?php echo $image; ?>"></div>
+	<div class="forum-cell <?= $image; ?>"></div>
 	<div class="forum-cell main">
 		<div class="header2">
-			<?php echo Html::a(Html::encode($data->name), array('forum', 'id'=>$data->id)); ?>
+			<?= Html::a(Html::encode($data->name), array('forum', 'id'=>$data->id)); ?>
 		</div>
 		<div class="header4">
-			<?php echo Html::encode($data->subtitle); ?>
+			<?= Html::encode($data->subtitle); ?>
 		</div>
 	</div>
 	<div class="forum-cell center">
-		<?php echo Html::encode($data->num_posts); ?><br>
-		<?php echo Html::encode($data->getAttributeLabel('num_posts')); ?>
+		<?= Html::encode($data->num_posts); ?><br>
+		<?= Html::encode($data->getAttributeLabel('num_posts')); ?>
 	</div>
 	<div class="forum-cell center">
-		<?php echo Html::encode($data->num_topics); ?><br>
-		<?php echo Html::encode($data->getAttributeLabel('num_topics')); ?>
+		<?= Html::encode($data->num_topics); ?><br>
+		<?= Html::encode($data->getAttributeLabel('num_topics')); ?>
 	</div>
 	<div class="forum-cell last-cell">
 		<?php if($data->last_post_id && $data->lastPost) {
@@ -59,15 +59,15 @@ use yii\widgets\ListView;
 
 <?php } else { ?>
 	<?php if($index > 0) { echo '</div>'; } ?>
-	<div class="forum-category" onclick="BBii.toggleForumGroup(<?php echo $data->id; ?>,'<?php echo Yii::$app->createAbsoluteUrl($this->module->id.'/forum/setCollapsed'); ?>');">
+	<div class="forum-category" onclick="BBii.toggleForumGroup(<?= $data->id; ?>,'<?= Yii::$app->createAbsoluteUrl($this->module->id.'/forum/setCollapsed'); ?>');">
 		<div class="header2">
-			<?php echo Html::encode($data->name); ?>
+			<?= Html::encode($data->name); ?>
 		</div>
 		<div class="header4">
-			<?php echo Html::encode($data->subtitle); ?>
+			<?= Html::encode($data->subtitle); ?>
 		</div>
 	</div>
-	<div class="forum-group" id="category_<?php echo $data->id; ?>" <?php if($this->collapsed($data->id)) { echo 'style="display:none;"';}?>>
+	<div class="forum-group" id="category_<?= $data->id; ?>" <?php if($this->collapsed($data->id)) { echo 'style="display:none;"';}?>>
 <?php }; ?>
 
 <?php if($index == $lastIndex) { echo '</div>'; } ?>

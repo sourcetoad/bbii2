@@ -38,7 +38,7 @@ function setAutocomplete(id, data) {
 ?>
 
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?= $this->renderPartial('_header', array('item'=>$item)); ?>
 
 	<?php 
 	$dataProvider = $model->search();

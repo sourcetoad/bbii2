@@ -7,10 +7,10 @@
 <tbody class="forum">
 	<tr>
 		<td class="name">
-			<?php echo Html::encode($forumdata->name); ?>
+			<?= Html::encode($forumdata->name); ?>
 		</td>
 		<td rowspan="2" style="width:140px;">
-			<?php echo Html::button(Yii::t('BbiiModule.bbii','Edit'), array('onclick'=>'editForum(' . $forumdata->id . ',"' . Yii::t('BbiiModule.bbii','Edit forum') . '", "' . $this->createAbsoluteUrl('setting/getForum') .'")')); ?>
+			<?= Html::button(Yii::t('BbiiModule.bbii','Edit'), array('onclick'=>'editForum(' . $forumdata->id . ',"' . Yii::t('BbiiModule.bbii','Edit forum') . '", "' . $this->createAbsoluteUrl('setting/getForum') .'")')); ?>
 			<?php if(!$forumdata->public) echo Html::img($this->module->getRegisteredImage('private.png'), 'private', array('style'=>'vertical-align:middle;', 'title'=>'Private')); ?>
 			<?php if($forumdata->locked) echo Html::img($this->module->getRegisteredImage('locked.png'), 'locked', array('style'=>'vertical-align:middle;', 'title'=>'Locked')); ?>
 			<?php if($forumdata->moderated) echo Html::img($this->module->getRegisteredImage('moderated.png'), 'moderated', array('style'=>'vertical-align:middle;', 'title'=>'Moderated')); ?>
@@ -18,7 +18,7 @@
 	</tr>
 	<tr>
 		<td class="header4">
-			<?php echo Html::encode($forumdata->subtitle); ?>
+			<?= Html::encode($forumdata->subtitle); ?>
 		</td>
 	</tr>
 </tbody>

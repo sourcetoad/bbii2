@@ -13,15 +13,15 @@ foreach($forum as $forumdata) {
 <tbody class="category">
 	<tr>
 		<td class="name">
-			<?php echo Html::encode($data->name); ?>
+			<?= Html::encode($data->name); ?>
 		</td>
 		<td rowspan="2" style="width:140px;">
-			<?php echo Html::button(Yii::t('BbiiModule.bbii','Edit'), array('onclick'=>'editCategory(' . $data->id . ',"' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . $this->createAbsoluteUrl('setting/getForum') .'")')); ?>
+			<?= Html::button(Yii::t('BbiiModule.bbii','Edit'), array('onclick'=>'editCategory(' . $data->id . ',"' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . $this->createAbsoluteUrl('setting/getForum') .'")')); ?>
 		</td>
 	</tr>
 	<tr>
 		<td class="header4">
-			<?php echo Html::encode($data->subtitle); ?>
+			<?= Html::encode($data->subtitle); ?>
 		</td>
 	</tr>
 </tbody>

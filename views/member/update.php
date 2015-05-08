@@ -26,9 +26,9 @@ $('.presence').hide();
 
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?= $this->renderPartial('_header', array('item'=>$item)); ?>
 	
-	<div class="bbii-box-top"><?php echo $model->member_name . Yii::t('BbiiModule.bbii', '\'s profile'); ?></div>
+	<div class="bbii-box-top"><?= $model->member_name . Yii::t('BbiiModule.bbii', '\'s profile'); ?></div>
 
 	<div class="form">
 
@@ -38,33 +38,33 @@ $('.presence').hide();
 		'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 	)); ?>
 
-		<p class="note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
+		<p class="note"><?= Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
 
-		<?php echo $form->errorSummary($model); ?>
+		<?= $form->errorSummary($model); ?>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'member_name'); ?>
-			<?php echo $form->textField($model,'member_name',array('size'=>45,'maxlength'=>45)); ?>
-			<?php echo $form->error($model,'member_name'); ?>
+			<?= $form->labelEx($model,'member_name'); ?>
+			<?= $form->textField($model,'member_name',array('size'=>45,'maxlength'=>45)); ?>
+			<?= $form->error($model,'member_name'); ?>
 		</div>
 		
 		<?php if($this->isModerator()): ?>
 		<div class="row">
-			<?php echo $form->labelEx($model,'group_id'); ?>
-			<?php echo $form->dropDownList($model, 'group_id', Html::listData(BbiiMembergroup::model()->findAll(), 'id', 'name')); ?>
-			<?php echo $form->error($model,'group_id'); ?>
+			<?= $form->labelEx($model,'group_id'); ?>
+			<?= $form->dropDownList($model, 'group_id', Html::listData(BbiiMembergroup::model()->findAll(), 'id', 'name')); ?>
+			<?= $form->error($model,'group_id'); ?>
 		</div>
 		<?php endif; ?>
 		
 		<div class="row" style="clear:both;">
-			<?php echo $form->labelEx($model,'gender'); ?>
-			<?php echo $form->dropDownList($model,'gender',array(''=>'','0'=>Yii::t('BbiiModule.bbii', 'Male'),'1'=>Yii::t('BbiiModule.bbii', 'Female'))); ?>
-			<?php echo $form->error($model,'gender'); ?>
+			<?= $form->labelEx($model,'gender'); ?>
+			<?= $form->dropDownList($model,'gender',array(''=>'','0'=>Yii::t('BbiiModule.bbii', 'Male'),'1'=>Yii::t('BbiiModule.bbii', 'Female'))); ?>
+			<?= $form->error($model,'gender'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'birthdate'); ?>
-			<?php echo $form->hiddenField($model,'birthdate'); ?>
+			<?= $form->labelEx($model,'birthdate'); ?>
+			<?= $form->hiddenField($model,'birthdate'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 				'name'=>'birthdate',
 				'value'=>Yii::$app->dateFormatter->formatDateTime($model->birthdate, 'short', null),
@@ -79,58 +79,58 @@ $('.presence').hide();
 					'style'=>'height:20px;'
 				),
 			)); ?>
-			<?php echo $form->error($model,'birthdate'); ?>
+			<?= $form->error($model,'birthdate'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'location'); ?>
-			<?php echo $form->textField($model,'location',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'location'); ?>
+			<?= $form->labelEx($model,'location'); ?>
+			<?= $form->textField($model,'location',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'location'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'personal_text'); ?>
-			<?php echo $form->textField($model,'personal_text',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'personal_text'); ?>
+			<?= $form->labelEx($model,'personal_text'); ?>
+			<?= $form->textField($model,'personal_text',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'personal_text'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'show_online'); ?>
-			<?php echo $form->dropDownList($model,'show_online',array('0'=>Yii::t('BbiiModule.bbii', 'No'),'1'=>Yii::t('BbiiModule.bbii', 'Yes'))); ?>
-			<?php echo $form->error($model,'show_online'); ?>
+			<?= $form->labelEx($model,'show_online'); ?>
+			<?= $form->dropDownList($model,'show_online',array('0'=>Yii::t('BbiiModule.bbii', 'No'),'1'=>Yii::t('BbiiModule.bbii', 'Yes'))); ?>
+			<?= $form->error($model,'show_online'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'contact_email'); ?>
-			<?php echo $form->dropDownList($model,'contact_email',array('0'=>Yii::t('BbiiModule.bbii', 'No'),'1'=>Yii::t('BbiiModule.bbii', 'Yes'))); ?>
-			<?php echo $form->error($model,'contact_email'); ?>
+			<?= $form->labelEx($model,'contact_email'); ?>
+			<?= $form->dropDownList($model,'contact_email',array('0'=>Yii::t('BbiiModule.bbii', 'No'),'1'=>Yii::t('BbiiModule.bbii', 'Yes'))); ?>
+			<?= $form->error($model,'contact_email'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'contact_pm'); ?>
-			<?php echo $form->dropDownList($model,'contact_pm',array('0'=>Yii::t('BbiiModule.bbii', 'No'),'1'=>Yii::t('BbiiModule.bbii', 'Yes'))); ?>
-			<?php echo $form->error($model,'contact_pm'); ?>
+			<?= $form->labelEx($model,'contact_pm'); ?>
+			<?= $form->dropDownList($model,'contact_pm',array('0'=>Yii::t('BbiiModule.bbii', 'No'),'1'=>Yii::t('BbiiModule.bbii', 'Yes'))); ?>
+			<?= $form->error($model,'contact_pm'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'timezone'); ?>
-			<?php echo $form->dropDownList($model, 'timezone', array_combine(DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers())); ?>
-			<?php echo $form->error($model,'timezone'); ?>
+			<?= $form->labelEx($model,'timezone'); ?>
+			<?= $form->dropDownList($model, 'timezone', array_combine(DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers())); ?>
+			<?= $form->error($model,'timezone'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'avatar'); ?>
-			<?php echo Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$this->module->getRegisteredImage('empty.jpeg'), 'avatar', array('align'=>'left','style'=>'margin:0 10px 10px 0;')); ?>
-			<?php echo $form->labelEx($model,'remove_avatar'); ?>
-			<?php echo $form->checkBox($model, 'remove_avatar'); ?>
-			<?php echo $form->labelEx($model, 'image'); ?>
-			<?php echo $form->fileField($model, 'image', array('size'=>90)); ?><br>
-			<?php echo Yii::t('BbiiModule.bbii', 'Large images will be resized to fit a size of 90 pixels by 90 pixels.'); ?>
-			<?php echo $form->error($model, 'image'); ?>
+			<?= $form->labelEx($model,'avatar'); ?>
+			<?= Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$this->module->getRegisteredImage('empty.jpeg'), 'avatar', array('align'=>'left','style'=>'margin:0 10px 10px 0;')); ?>
+			<?= $form->labelEx($model,'remove_avatar'); ?>
+			<?= $form->checkBox($model, 'remove_avatar'); ?>
+			<?= $form->labelEx($model, 'image'); ?>
+			<?= $form->fileField($model, 'image', array('size'=>90)); ?><br>
+			<?= Yii::t('BbiiModule.bbii', 'Large images will be resized to fit a size of 90 pixels by 90 pixels.'); ?>
+			<?= $form->error($model, 'image'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'signature'); ?>
+			<?= $form->labelEx($model,'signature'); ?>
 			<?php $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
 				'model'=>$model,
 				'attribute'=>'signature',
@@ -152,104 +152,104 @@ $('.presence').hide();
 				'uiColor'=>$this->module->editorUIColor,
 				'contentsCss'=>$this->module->editorContentsCss,
 			)); ?>
-			<?php echo $form->error($model,'signature'); ?>
+			<?= $form->error($model,'signature'); ?>
 		</div>
 		
-		<?php echo Html::a(Yii::t('BbiiModule.bbii', 'My presence on the internet'),'#',array('class'=>'presence-button')); ?>
+		<?= Html::a(Yii::t('BbiiModule.bbii', 'My presence on the internet'),'#',array('class'=>'presence-button')); ?>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'website'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Globe.png'), 'Website', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'website',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'website'); ?>
+			<?= $form->labelEx($model,'website'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Globe.png'), 'Website', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'website',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'website'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'blogger'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Blogger.png'), 'Blogger', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'blogger',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'blogger'); ?>
+			<?= $form->labelEx($model,'blogger'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Blogger.png'), 'Blogger', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'blogger',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'blogger'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'facebook'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Facebook.png'), 'Facebook', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'facebook',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'facebook'); ?>
+			<?= $form->labelEx($model,'facebook'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Facebook.png'), 'Facebook', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'facebook',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'facebook'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'flickr'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Flickr.png'), 'Flickr', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'flickr',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'flickr'); ?>
+			<?= $form->labelEx($model,'flickr'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Flickr.png'), 'Flickr', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'flickr',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'flickr'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'google'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Google.png'), 'Google', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'google',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'google'); ?>
+			<?= $form->labelEx($model,'google'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Google.png'), 'Google', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'google',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'google'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'linkedin'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Linkedin.png'), 'Linkedin', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'linkedin',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'linkedin'); ?>
+			<?= $form->labelEx($model,'linkedin'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Linkedin.png'), 'Linkedin', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'linkedin',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'linkedin'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'metacafe'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Metacafe.png'), 'Metacafe', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'metacafe',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'metacafe'); ?>
+			<?= $form->labelEx($model,'metacafe'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Metacafe.png'), 'Metacafe', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'metacafe',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'metacafe'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'myspace'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Myspace.png'), 'Myspace', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'myspace',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'myspace'); ?>
+			<?= $form->labelEx($model,'myspace'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Myspace.png'), 'Myspace', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'myspace',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'myspace'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'orkut'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Orkut.png'), 'Orkut', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'orkut',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'orkut'); ?>
+			<?= $form->labelEx($model,'orkut'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Orkut.png'), 'Orkut', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'orkut',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'orkut'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'tumblr'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Tumblr.png'), 'Tumblr', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'tumblr',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'tumblr'); ?>
+			<?= $form->labelEx($model,'tumblr'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Tumblr.png'), 'Tumblr', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'tumblr',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'tumblr'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'twitter'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Twitter.png'), 'Twitter', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'twitter',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'twitter'); ?>
+			<?= $form->labelEx($model,'twitter'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Twitter.png'), 'Twitter', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'twitter',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'twitter'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'wordpress'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Wordpress.png'), 'Wordpress', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'wordpress',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'wordpress'); ?>
+			<?= $form->labelEx($model,'wordpress'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Wordpress.png'), 'Wordpress', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'wordpress',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'wordpress'); ?>
 		</div>
 
 		<div class="row presence">
-			<?php echo $form->labelEx($model,'youtube'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('Youtube.png'), 'Youtube', array('style'=>'vertical-align:middle')); ?>
-			<?php echo $form->textField($model,'youtube',array('size'=>100,'maxlength'=>255)); ?>
-			<?php echo $form->error($model,'youtube'); ?>
+			<?= $form->labelEx($model,'youtube'); ?>
+			<?= Html::img($this->module->getRegisteredImage('Youtube.png'), 'Youtube', array('style'=>'vertical-align:middle')); ?>
+			<?= $form->textField($model,'youtube',array('size'=>100,'maxlength'=>255)); ?>
+			<?= $form->error($model,'youtube'); ?>
 		</div>
 
 		<div class="row buttons">
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save')); ?>
+			<?= Html::submitButton(Yii::t('BbiiModule.bbii', 'Save')); ?>
 		</div>
 
 	<?php $this->endWidget(); ?>

@@ -17,7 +17,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?= $this->renderPartial('_header', array('item'=>$item)); ?>
 	
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'bbii-member-grid',

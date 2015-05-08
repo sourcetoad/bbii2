@@ -52,7 +52,7 @@ $assets = AppAsset::register($this);
 		</div>
 	<?php }; ?>
 
-	<div class="bbii-title"><?php echo $this->context->module->forumTitle; ?></div>
+	<div class="bbii-title"><?= $this->context->module->forumTitle; ?></div>
 
 	<table>
 		<tr>

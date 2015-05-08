@@ -18,7 +18,7 @@
 		?>
 		</div>
 	<?php endif; ?>
-	<div class="bbii-title"><?php echo $this->module->forumTitle; ?></div>
+	<div class="bbii-title"><?= $this->module->forumTitle; ?></div>
 	<table style="margin:0;"><tr><td style="padding:0;">
 		<div id="bbii-menu">
 		<?php $this->widget('zii.widgets.CMenu',array(

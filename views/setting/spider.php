@@ -20,9 +20,9 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 ", CClientScript::POS_BEGIN);
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?= $this->renderPartial('_header', array('item'=>$item)); ?>
 	
-	<?php echo Html::button(Yii::t('BbiiModule.bbii', 'New webspider'), array('onclick'=>'BBiiSetting.EditSpider()', 'class'=>'down35')); ?>
+	<?= Html::button(Yii::t('BbiiModule.bbii', 'New webspider'), array('onclick'=>'BBiiSetting.EditSpider()', 'class'=>'down35')); ?>
 	
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'spider-grid',

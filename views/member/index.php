@@ -25,7 +25,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->render('_header', array(
+	<?= $this->render('_header', array(
 		'item'     => $item,
 		'messages' => $messages,
 	)); ?>
@@ -62,10 +62,10 @@ $item = array(
 	),
 ));*/ ?>
 
-<?php echo $this->render('_footer'); ?>
+<?= $this->render('_footer'); ?>
 
 <div id="bbii-copyright">
-	<a href="http://www.yiiframework.com/extension/bbii/" target="_blank" title="&copy; 2013-<?php echo date('Y'); ?>
-		<?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software
+	<a href="http://www.yiiframework.com/extension/bbii/" target="_blank" title="&copy; 2013-<?= date('Y'); ?>
+		<?= Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software
 	</a>
 </div>

@@ -36,26 +36,26 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 
 <?php if(Yii::$app->user->hasFlash('moderation')): ?>
 <div class="flash-notice">
-	<?php echo Yii::$app->user->getFlash('moderation'); ?>
+	<?= Yii::$app->user->getFlash('moderation'); ?>
 </div>
 <?php endif; ?>
 
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?= $this->renderPartial('_header', array('item'=>$item)); ?>
 	
 	<div class="forum-category center">
 		<div class="header2">
-			<?php echo $topic->title; ?>
+			<?= $topic->title; ?>
 		</div>
 	</div>
 	
 	<?php if(!Yii::$app->user->isGuest && $this->module->userMailColumn && $this->module->allowTopicSub): ?>
 		<?php if($this->isWatching($topic->id)): ?>
-			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('class'=>'bbii-watch-button','id'=>'unwatch','onclick'=>'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . $this->createAbsoluteUrl('forum/unwatch') . '")')); ?>
-			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('style'=>'display:none','class'=>'bbii-watch-button','id'=>'watch','onclick'=>'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . $this->createAbsoluteUrl('forum/watch') . '")')); ?>
+			<?= Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('class'=>'bbii-watch-button','id'=>'unwatch','onclick'=>'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . $this->createAbsoluteUrl('forum/unwatch') . '")')); ?>
+			<?= Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('style'=>'display:none','class'=>'bbii-watch-button','id'=>'watch','onclick'=>'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . $this->createAbsoluteUrl('forum/watch') . '")')); ?>
 		<?php else: ?>
-			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('style'=>'display:none','class'=>'bbii-watch-button','id'=>'unwatch','onclick'=>'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . $this->createAbsoluteUrl('forum/unwatch') . '")')); ?>
-			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('class'=>'bbii-watch-button','id'=>'watch','onclick'=>'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . $this->createAbsoluteUrl('forum/watch') . '")')); ?>
+			<?= Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('style'=>'display:none','class'=>'bbii-watch-button','id'=>'unwatch','onclick'=>'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . $this->createAbsoluteUrl('forum/unwatch') . '")')); ?>
+			<?= Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('class'=>'bbii-watch-button','id'=>'watch','onclick'=>'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . $this->createAbsoluteUrl('forum/watch') . '")')); ?>
 		<?php endif; ?>
 	<?php endif; ?>
 
@@ -66,7 +66,7 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 			'action'=>array('forum/reply', 'id'=>$topic->id),
 			'enableAjaxValidation'=>false,
 		)); ?>
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Reply'), array('class'=>'bbii-topic-button')); ?>
+			<?= Html::submitButton(Yii::t('BbiiModule.bbii','Reply'), array('class'=>'bbii-topic-button')); ?>
 		<?php $this->endWidget(); ?>
 	</div><!-- form -->	
 	<?php endif; ?>

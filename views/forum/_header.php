@@ -70,7 +70,7 @@ $assets = AppAsset::register($this);
 	<?php }; ?>
 
 	<div class="bbii-title">
-		<?php echo $this->context->module->forumTitle; ?>
+		<?= $this->context->module->forumTitle; ?>
 	</div>
 
 	<table>

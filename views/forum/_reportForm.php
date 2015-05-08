@@ -12,7 +12,7 @@
 )); ?>
 
 	<div class="row">
-		<?php echo Html::label(Yii::t('BbiiModule.bbii','Short explanation'), 'Bbii_content'); ?>
+		<?= Html::label(Yii::t('BbiiModule.bbii','Short explanation'), 'Bbii_content'); ?>
 		<?php $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
 			'model'=>$model,
 			'attribute'=>'content',
@@ -27,9 +27,9 @@
 			'uiColor'=>$this->module->editorUIColor,
 			'contentsCss'=>$this->module->editorContentsCss,
 		)); ?>
-		<?php echo $form->error($model,'content'); ?>
-		<?php echo $form->hiddenField($model, 'post_id'); ?>
-		<?php echo Html::hiddenField('url', $this->createAbsoluteUrl('message/sendReport')); ?>
+		<?= $form->error($model,'content'); ?>
+		<?= $form->hiddenField($model, 'post_id'); ?>
+		<?= Html::hiddenField('url', $this->createAbsoluteUrl('message/sendReport')); ?>
 	</div>
 	
 <?php $this->endWidget(); ?>
