@@ -2,8 +2,11 @@
 
 namespace frontend\modules\bbii\models;
 
+use frontend\modules\bbii\models\BbiiAR;
+
 use Yii;
 use yii\rest\ActiveController;
+
 /**
  * This is the model class for table "bbii_message".
  *
@@ -21,18 +24,9 @@ use yii\rest\ActiveController;
  * @property string $ip
  * @property string $post_id
  */
-class BbiiMessage extends \yii\db\ActiveRecord
+class BbiiMessage extends BbiiAR
 {
 	public $search;
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return BbiiMessage the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
 
 	/**
 	 * @return string the associated database table name
@@ -100,48 +94,48 @@ class BbiiMessage extends \yii\db\ActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'sendfrom' => Yii::t('BbiiModule.bbii', 'From'),
-			'sendto' => Yii::t('BbiiModule.bbii', 'To'),
-			'subject' => Yii::t('BbiiModule.bbii', 'Subject'),
-			'content' => Yii::t('BbiiModule.bbii', 'Content'),
-			'create_time' => Yii::t('BbiiModule.bbii', 'Posted'),
+			'content'        => Yii::t('BbiiModule.bbii', 'Content'),
+			'create_time'    => Yii::t('BbiiModule.bbii', 'Posted'),
+			'id'             => 'ID',
+			'inbox'          => Yii::t('BbiiModule.bbii', 'Inbox'),
+			'ip'             => 'Ip',
+			'outbox'         => Yii::t('BbiiModule.bbii', 'Outbox'),
 			'read_indicator' => Yii::t('BbiiModule.bbii', 'Read'),
-			'type' => Yii::t('BbiiModule.bbii', 'Type'),
-			'inbox' => Yii::t('BbiiModule.bbii', 'Inbox'),
-			'outbox' => Yii::t('BbiiModule.bbii', 'Outbox'),
-			'ip' => 'Ip',
+			'sendfrom'       => Yii::t('BbiiModule.bbii', 'From'),
+			'sendto'         => Yii::t('BbiiModule.bbii', 'To'),
+			'subject'        => Yii::t('BbiiModule.bbii', 'Subject'),
+			'type'           => Yii::t('BbiiModule.bbii', 'Type'),
 		);
 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
+	 * @deprecated 2.0.0
 	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// Warning: Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('sendfrom',$this->sendfrom,true);
-		$criteria->compare('sendto',$this->sendto,true);
-		$criteria->compare('subject',$this->subject,true);
-		$criteria->compare('content',$this->content,true);
-		$criteria->compare('read_indicator',$this->read_indicator);
-		$criteria->compare('type',$this->type);
-		$criteria->compare('inbox',$this->inbox);
-		$criteria->compare('outbox',$this->outbox);
-		$criteria->compare('ip',$this->ip,true);
-		$criteria->compare('post_id',$this->post_id,true);
+		$criteria->compare('content',		$this->content,		true);
+		$criteria->compare('id',			$this->id,			true);
+		$criteria->compare('inbox',			$this->inbox 			);
+		$criteria->compare('ip',			$this->ip,			true);
+		$criteria->compare('outbox',		$this->outbox 			);
+		$criteria->compare('post_id',		$this->post_id,		true);
+		$criteria->compare('read_indicator',$this->read_indicator 	);
+		$criteria->compare('sendfrom',		$this->sendfrom,	true);
+		$criteria->compare('sendto',		$this->sendto,		true);
+		$criteria->compare('subject',		$this->subject,		true);
+		$criteria->compare('type',			$this->type 			);
 		$criteria->limit = 100;
 
 		return new ActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria'   => $criteria,
 			'pagination' => false,
-			'sort'=>array('defaultOrder'=>'id DESC'),
+			'sort'       => array('defaultOrder'=>'id DESC'),
 		));
 	}
 	

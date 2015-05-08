@@ -97,19 +97,19 @@ class BbiiPost extends BbiiAR
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'subject' => Yii::t('BbiiModule.bbii','Subject'),
-			'content' => Yii::t('BbiiModule.bbii','Content'),
-			'user_id' => Yii::t('BbiiModule.bbii','User'),
-			'search' => Yii::t('BbiiModule.bbii','User'),
-			'topic_id' => 'Topic',
-			'forum_id' => 'Forum',
-			'ip' => Yii::t('BbiiModule.bbii','IP address'),
-			'create_time' => Yii::t('BbiiModule.bbii','Posted'),
-			'approved' => 'Approved',
-			'change_id' => 'Change',
-			'change_time' => 'Change Time',
+			'approved'      => 'Approved',
+			'change_id'     => 'Change',
 			'change_reason' => 'Change Reason',
+			'change_time'   => 'Change Time',
+			'content'       => Yii::t('BbiiModule.bbii','Content'),
+			'create_time'   => Yii::t('BbiiModule.bbii','Posted'),
+			'forum_id'      => 'Forum',
+			'id'            => 'ID',
+			'ip'            => Yii::t('BbiiModule.bbii','IP address'),
+			'search'        => Yii::t('BbiiModule.bbii','User'),
+			'subject'       => Yii::t('BbiiModule.bbii','Subject'),
+			'topic_id'      => 'Topic',
+			'user_id'       => Yii::t('BbiiModule.bbii','User'),
 		);
 	}
 

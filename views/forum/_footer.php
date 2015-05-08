@@ -9,8 +9,9 @@ use frontend\modules\bbii\models\BbiiPost;
 use yii\helpers\Html;
 
 /* @var $this ForumController */
-$present = BbiiSession::find()->count();
-$members = BbiiMember::find()->count();
+$member_count = BbiiMember::find()->count();
+$members      = BbiiMember::find()->present()->show()->findAll();
+$present      = BbiiSession::find()->count();
 ?>
 <div id="bbii-footer">
 	<table><tr>
@@ -21,15 +22,14 @@ $members = BbiiMember::find()->count();
 						echo Yii::t(
 							'BbiiModule.bbii',
 							'{0} guest(s) and {1} active member(s)',
-							array( ($present - $members), $members )
+							array( ($present - $member_count), $member_count )
 						);
 					?>
 				</span>
 				<?php echo Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?>
 			</div>
 			<div>
-				<?php //$members = BbiiMember::model()->present()->show()->findAll(); 
-					if ($members) {
+				<?php if ($member_count) {
 						foreach($members as $member) {
 							echo Html::a(
 								$member->member_name,
@@ -41,9 +41,8 @@ $members = BbiiMember::find()->count();
 					$spiders = BbiiSpider::find()->all();
 					foreach($spiders as $spider) {
 						echo Html::a($spider->name, $spider->url, array('class'=>'spider','target'=>'_new')) . '&nbsp;';
-					}
-				?>
-				<?php echo Yii::t(
+				};
+				echo Yii::t(
 					'BbiiModule.bbii','({0} anonymous member(s))',
 					array(BbiiMember::find()->count())
 				); ?>

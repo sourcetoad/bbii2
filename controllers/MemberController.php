@@ -1,5 +1,15 @@
 <?php
 
+namespace frontend\modules\bbii\controllers;
+
+use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiMessage;
+
+
+use Yii;
+use yii\web\User;
+
 class MemberController extends BbiiController {
 	/**
 	 * @return array action filters
@@ -34,12 +44,19 @@ class MemberController extends BbiiController {
 	}
 	
 	public function actionIndex() {
-		$model=new BbiiMember('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['BbiiMember']))
-			$model->attributes=$_GET['BbiiMember'];
+		$model = new BbiiMember;
 
-		$this->render('index', array('model'=>$model));
+		if(isset($_GET['BbiiMember'])) {
+			$model->attributes=$_GET['BbiiMember'];
+		}
+
+
+		return $this->render('index', array(
+			'is_admin' => $this->isModerator(),
+			'is_mod'   => $this->isAdmin(),
+			'messages' => BbiiMessage::find()->count('sendto = '.Yii::$app->user->id),
+			'model'    => $model,
+		));
 	}
 	
 	public function actionUpdate($id) {

@@ -1,27 +1,36 @@
 <?php
-/* @var $this ForumController */
 
-$this->bbii_breadcrumbs=array(
+use yii\helpers\Html;
+use yii\widgets\ListView;
+
+
+use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiMessage;
+
+/*$this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum')=>array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Members'),
-);
+);*/
 
-$approvals = BbiiPost::model()->unapproved()->count();
-$reports = BbiiMessage::model()->report()->count();
+$approvals = BbiiPost::find()->where('approved IS NOT NULL')->count();
+$reports   = BbiiMessage::find()->count();
 
 $item = array(
-	array('label'=>Yii::t('BbiiModule.bbii', 'Forum'), 'url'=>array('forum/index')),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Members'), 'url'=>array('member/index')),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')', 'url'=>array('moderator/approval'), 'visible'=>$this->isModerator()),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Reports'). ' (' . $reports . ')', 'url'=>array('moderator/report'), 'visible'=>$this->isModerator()),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Posts'), 'url'=>array('moderator/admin'), 'visible'=>$this->isModerator()),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Blocked IP'), 'url'=>array('moderator/ipadmin'), 'visible'=>$this->isModerator()),
+	array('label'=>Yii::t('BbiiModule.bbii', 'Forum'), 		'url'=>array('forum/index')),
+	array('label'=>Yii::t('BbiiModule.bbii', 'Members'), 	'url'=>array('member/index')),
+	array('label'=>Yii::t('BbiiModule.bbii', 'Approval'). 	' (' . $approvals . ')', 			'url'=>array('moderator/approval'), 'visible'=>$is_mod),
+	array('label'=>Yii::t('BbiiModule.bbii', 'Reports'). 	' (' . $reports . ')', 				'url'=>array('moderator/report'), 	'visible'=>$is_mod),
+	array('label'=>Yii::t('BbiiModule.bbii', 'Posts'), 		'url'=>array('moderator/admin'), 	'visible'=>$is_mod),
+	array('label'=>Yii::t('BbiiModule.bbii', 'Blocked IP'), 'url'=>array('moderator/ipadmin'), 	'visible'=>$is_mod),
 );
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('_header', array(
+		'item'     => $item,
+		'messages' => $messages,
+	)); ?>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php /*$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'member-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
@@ -51,9 +60,12 @@ $item = array(
 			'value' => '(isset($data->group))?$data->group->name:""',
 		),
 	),
-)); ?>
+));*/ ?>
 
-	
-	<?php echo $this->renderPartial('_footer'); ?>
-	<div id="bbii-copyright"><a href="http://www.yiiframework.com/extension/bbii/" target="_blank" title="&copy; 2013-2014 <?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->module->version; ?>">BBii forum software</a></div>
+<?php echo $this->render('_footer'); ?>
+
+<div id="bbii-copyright">
+	<a href="http://www.yiiframework.com/extension/bbii/" target="_blank" title="&copy; 2013-<?php echo date('Y'); ?>
+		<?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software
+	</a>
 </div>

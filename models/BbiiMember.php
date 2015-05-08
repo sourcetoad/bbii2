@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
+use frontend\modules\bbii\models\query\BbiiMemberQuery;
 
 /**
  * This is the model class for table "bbii_member".
@@ -45,6 +46,11 @@ use frontend\modules\bbii\models\BbiiAR;
 class BbiiMember extends BbiiAR {
 	public $image;
 	public $remove_avatar;
+
+    public static function find()
+    {
+        return new BbiiMemberQuery(get_called_class());
+    }
 
 	/**
 	 * @return string the associated database table name
@@ -188,6 +194,11 @@ class BbiiMember extends BbiiAR {
 		));
 	}
 	
+	/**
+	 * [scopes description]
+	 * @deprecated 2.0.0 Replaced with query
+	 * @return [type] [description]
+	 */
 	public function scopes() {
 		$recent = date('Y-m-d H:i:s', time() - 900);
 		return array(

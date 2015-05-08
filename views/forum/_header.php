@@ -9,8 +9,6 @@ use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-use frontend\modules\bbii\components\HelloWidget;
-
 $assets = AppAsset::register($this);
 
 /* @var $this ForumController */
