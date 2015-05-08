@@ -111,7 +111,7 @@ class BbiiForum extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
@@ -131,7 +131,7 @@ class BbiiForum extends BbiiAR
 		$criteria->compare('last_post_id',$this->last_post_id,true);
 		$criteria->compare('poll',$this->poll,true);
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}

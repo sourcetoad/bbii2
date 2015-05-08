@@ -1,8 +1,8 @@
 <?php
 /* @var $this MemberController */
 /* @var $model BbiiMember */
-/* @var $dataProvider CActiveDataProvider BbiiPost */
-/* @var $topicProvider CActiveDataProvider BbiiTopic*/
+/* @var $dataProvider ActiveDataProvider BbiiPost */
+/* @var $topicProvider ActiveDataProvider BbiiTopic*/
 
 $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum')=>array('forum/index'),

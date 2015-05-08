@@ -67,7 +67,7 @@ class BbiiUpvoted extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
@@ -79,7 +79,7 @@ class BbiiUpvoted extends BbiiAR
 		$criteria->compare('member_id',$this->member_id,true);
 		$criteria->compare('post_id',$this->post_id,true);
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}

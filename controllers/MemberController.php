@@ -110,7 +110,7 @@ class MemberController extends BbiiController {
 			}
 		}
 		$model=$this->loadModel($id);
-		$dataProvider = new CActiveDataProvider('BbiiPost', array(
+		$dataProvider = new ActiveDataProvider('BbiiPost', array(
 			'criteria'=>array(
 				'condition'=>"approved = 1 and user_id = $id",
 				'order'=>'create_time DESC',
@@ -134,7 +134,7 @@ class MemberController extends BbiiController {
 		$criteria = new CDbCriteria;
 		$criteria->addInCondition('id', $in);
 		$criteria->order = 'id';
-		$topicProvider = new CActiveDataProvider('BbiiTopic', array(
+		$topicProvider = new ActiveDataProvider('BbiiTopic', array(
 			'criteria'=>$criteria,
 			'pagination'=>false,
 		));
