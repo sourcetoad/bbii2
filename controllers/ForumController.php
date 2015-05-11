@@ -136,12 +136,12 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		if(isset($_GET['BbiiTopic_page']) && isset($_GET['ajax'])) {
-            $topicPage = (int) $_GET['BbiiTopic_page'] - 1;
+		if(isset(Yii::$app->request->get()['BbiiTopic_page']) && isset(Yii::$app->request->get()['ajax'])) {
+            $topicPage = (int) Yii::$app->request->get()['BbiiTopic_page'] - 1;
             Yii::$app->user->setState('BbiiTopic_page', $topicPage);
 			Yii::$app->user->setState('BbiiForum_id', $id);
-            unset($_GET['BbiiTopic_page']);
-        } elseif(isset($_GET['ajax'])) {
+            unset(Yii::$app->request->get()['BbiiTopic_page']);
+        } elseif(isset(Yii::$app->request->get()['ajax'])) {
             Yii::$app->user->setState('BbiiTopic_page', 0);
 		} elseif(Yii::$app->user->hasState('BbiiForum_id') && Yii::$app->user->BbiiForum_id != $id) {
 			unset(Yii::$app->user->BbiiForum_id);

@@ -73,8 +73,8 @@ class SettingController extends BbiiController {
 	public function actionGroup() {
 		$model=new BbiiMembergroup('search');
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
-		if(isset($_GET['BbiiMembergroup']))
-			$model->attributes=$_GET['BbiiMembergroup'];
+		if(isset(Yii::$app->request->get()['BbiiMembergroup']))
+			$model->attributes=Yii::$app->request->get()['BbiiMembergroup'];
 
 		$this->render('group', array('model'=>$model));
 	}
@@ -82,8 +82,8 @@ class SettingController extends BbiiController {
 	public function actionModerator() {
 		$model=new BbiiMember('search');
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
-		if(isset($_GET['BbiiMember']))
-			$model->attributes=$_GET['BbiiMember'];
+		if(isset(Yii::$app->request->get()['BbiiMember']))
+			$model->attributes=Yii::$app->request->get()['BbiiMember'];
 
 		$this->render('moderator',array(
 			'model'=>$model,
@@ -93,8 +93,8 @@ class SettingController extends BbiiController {
 	public function actionSpider() {
 		$model=new BbiiSpider('search');
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
-		if(isset($_GET['BbiiSpider']))
-			$model->attributes=$_GET['BbiiSpider'];
+		if(isset(Yii::$app->request->get()['BbiiSpider']))
+			$model->attributes=Yii::$app->request->get()['BbiiSpider'];
 
 		$this->render('spider', array('model'=>$model));
 	}
@@ -131,8 +131,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetForum() {
 		$json = array();
-		if(isset($_GET['id'])) {
-			$model = BbiiForum::model()->findByPk($_GET['id']);
+		if(isset(Yii::$app->request->get()['id'])) {
+			$model = BbiiForum::model()->findByPk(Yii::$app->request->get()['id']);
 			if($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -195,8 +195,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetMembergroup() {
 		$json = array();
-		if(isset($_GET['id'])) {
-			$model = BbiiMembergroup::model()->findByPk($_GET['id']);
+		if(isset(Yii::$app->request->get()['id'])) {
+			$model = BbiiMembergroup::model()->findByPk(Yii::$app->request->get()['id']);
 			if($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -215,8 +215,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetSpider() {
 		$json = array();
-		if(isset($_GET['id'])) {
-			$model = BbiiSpider::model()->findByPk($_GET['id']);
+		if(isset(Yii::$app->request->get()['id'])) {
+			$model = BbiiSpider::model()->findByPk(Yii::$app->request->get()['id']);
 			if($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;

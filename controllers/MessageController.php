@@ -37,8 +37,8 @@ class MessageController extends BbiiController {
 		$count['outbox'] = BbiiMessage::model()->outbox()->count('outbox = 1 and sendfrom = '.$id);
 		$model=new BbiiMessage('search');
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
-		if(isset($_GET['BbiiMessage'])) {
-			$model->attributes=$_GET['BbiiMessage'];
+		if(isset(Yii::$app->request->get()['BbiiMessage'])) {
+			$model->attributes=Yii::$app->request->get()['BbiiMessage'];
 		}
 		// restrict filtering to own inbox
 		$model->sendto = $id;
@@ -58,8 +58,8 @@ class MessageController extends BbiiController {
 		$count['outbox'] = BbiiMessage::model()->outbox()->count('outbox = 1 and sendfrom = '.$id);
 		$model=new BbiiMessage('search');
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
-		if(isset($_GET['BbiiMessage'])) {
-			$model->attributes=$_GET['BbiiMessage'];
+		if(isset(Yii::$app->request->get()['BbiiMessage'])) {
+			$model->attributes=Yii::$app->request->get()['BbiiMessage'];
 		}
 		// restrict filtering to own outbox
 		$model->sendfrom = $id;
@@ -164,7 +164,7 @@ class MessageController extends BbiiController {
 		}
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
+		if(!isset(Yii::$app->request->get()['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('inbox'));
 	}
 	

@@ -46,8 +46,8 @@ class MemberController extends BbiiController {
 	public function actionIndex() {
 		$model = new BbiiMember;
 
-		if(isset($_GET['BbiiMember'])) {
-			$model->attributes=$_GET['BbiiMember'];
+		if(isset(Yii::$app->request->get()['BbiiMember'])) {
+			$model->attributes=Yii::$app->request->get()['BbiiMember'];
 		}
 
 
@@ -114,12 +114,12 @@ class MemberController extends BbiiController {
 	}
 	
 	public function actionView($id) {
-		if(isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+		if(isset(Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 			$object = new BbiiTopicsRead;
 			$read = BbiiTopicRead::model()->findByPk($id);
 			if($read !== null) {
 				$object->unserialize($read->data);
-				foreach($_GET['unwatch'] as $topicId => $val) {
+				foreach(Yii::$app->request->get()['unwatch'] as $topicId => $val) {
 					$object->unsetFollow($topicId);
 				}
 				$read->data = $object->serialize();
@@ -207,9 +207,9 @@ class MemberController extends BbiiController {
 	 */
 	public function actionMembers() {
 		$json = array();
-		if(isset($_GET['term'])) {
+		if(isset(Yii::$app->request->get()['term'])) {
 			$criteria = new CDbCriteria;
-			$criteria->compare('member_name',$_GET['term'],true);
+			$criteria->compare('member_name',Yii::$app->request->get()['term'],true);
 			$criteria->limit = 15;
 			$models = BbiiMember::model()->findAll($criteria);
 			foreach($models as $model) {
