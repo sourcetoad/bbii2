@@ -8,8 +8,8 @@ $this->bbii_breadcrumbs=array(
 	$forum->name,
 );
 
-$approvals = BbiiPost::model()->unapproved()->count();
-$reports = BbiiMessage::model()->report()->count();
+$approvals = BbiiPost::find()->unapproved()->count();
+$reports = BbiiMessage::find()->report()->count();
 
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),

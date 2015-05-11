@@ -26,7 +26,7 @@
 		
 	<div class="row">
 		<?= Html::label(Yii::t('BbiiModule.bbii','Member groups'), 'member_id'); ?>
-		<?= $form->dropDownList($model, 'member_id', Html::listData(BbiiMembergroup::model()->findAll(), 'id', 'name'), array('empty' => Yii::t('BbiiModule.bbii','All members')));  ?>
+		<?= $form->dropDownList($model, 'member_id', Html::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'), array('empty' => Yii::t('BbiiModule.bbii','All members')));  ?>
 		<?= $form->error($model,'member_id'); ?>
 	</div>
 

@@ -59,7 +59,7 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 		
 		<div class="row">
 			<?= $form->labelEx($model,'cat_id'); ?>
-			<?= $form->dropDownList($model,'cat_id',Html::listData(BbiiForum::model()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
+			<?= $form->dropDownList($model,'cat_id',Html::listData(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
 			<?= $form->error($model,'cat_id'); ?>
 		</div>
 		
@@ -77,7 +77,7 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 	<?php
 		$items = array();
 		foreach($category as $data) {
-			$forum = BbiiForum::model()->sorted()->forum()->findAll("cat_id = $data->id");
+			$forum = BbiiForum::find()->sorted()->forum()->findAll("cat_id = $data->id");
 			$items['cat_'.$data->id] = $this->renderPartial('_category', array('data' => $data, 'forum' => $forum), true);
 		}
 		$this->widget('zii.widgets.jui.CJuiSortable', array(

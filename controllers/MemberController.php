@@ -115,7 +115,7 @@ class MemberController extends BbiiController {
 	public function actionView($id) {
 		if(isset(Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 			$object = new BbiiTopicsRead;
-			$read = BbiiTopicRead::model()->findByPk($id);
+			$read = BbiiTopicRead::find()->findByPk($id);
 			if($read !== null) {
 				$object->unserialize($read->data);
 				foreach(Yii::$app->request->get()['unwatch'] as $topicId => $val) {
@@ -137,7 +137,7 @@ class MemberController extends BbiiController {
 		));
 		if($this->isModerator() || $id == Yii::$app->user->id) {
 			$object = new BbiiTopicsRead;
-			$read = BbiiTopicRead::model()->findByPk($id);
+			$read = BbiiTopicRead::find()->findByPk($id);
 			if($read === null) {
 				$in = array(0);
 			} else {
@@ -171,13 +171,13 @@ class MemberController extends BbiiController {
 				$criteria = new CDbCriteria;
 				$criteria->condition = $this->module->userIdColumn . '=:id';
 				$criteria->params = array(':id' => Yii::$app->user->id);
-				$user 	= $class::model()->find($criteria);
+				$user 	= $class::find()->find($criteria);
 				$from 	= $user->getAttribute($this->module->userMailColumn);
 				$criteria->params = array(':id' => $model->member_id);
-				$user 	= $class::model()->find($criteria);
+				$user 	= $class::find()->find($criteria);
 				$to 	= $user->getAttribute($this->module->userMailColumn);
 				
-				$name = BbiiMember::model()->findByPk(Yii::$app->user->id)->member_name;
+				$name = BbiiMember::find()->findByPk(Yii::$app->user->id)->member_name;
 				$name='=?UTF-8?B?'.base64_encode($name).'?=';
 				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
 				$sendto = $model->member_name . " <$to>";
@@ -196,7 +196,7 @@ class MemberController extends BbiiController {
 			}
 		} else {
 			$model->member_id = $id;
-			$model->member_name = BbiiMember::model()->findByPk($id)->member_name;
+			$model->member_name = BbiiMember::find()->findByPk($id)->member_name;
 		}
 		$this->render('mail',array('model' => $model));
 	}
@@ -210,7 +210,7 @@ class MemberController extends BbiiController {
 			$criteria = new CDbCriteria;
 			$criteria->compare('member_name',Yii::$app->request->get()['term'],true);
 			$criteria->limit = 15;
-			$models = BbiiMember::model()->findAll($criteria);
+			$models = BbiiMember::find()->findAll($criteria);
 			foreach($models as $model) {
 				$json[] = array('value' => $model->id,'label' => $model->member_name);
 			}
@@ -226,7 +226,7 @@ class MemberController extends BbiiController {
 			$db = $this->module->dbName;
 		}
 		$class = new $this->module->userClass;
-		$table = $class::model()->tableName();
+		$table = $class::find()->tableName();
 		$obj = new BbiiWatcherMail(
 			$this->module->forumTitle,
 			$db,
@@ -242,7 +242,7 @@ class MemberController extends BbiiController {
 	}
 	
 	public function loadModel($id) {
-		$model=BbiiMember::model()->findByPk($id);
+		$model=BbiiMember::find()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
