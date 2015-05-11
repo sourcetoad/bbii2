@@ -1,4 +1,8 @@
 <?php
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this ForumController */
 /* @var $data BbiiPost */
 /* @var $postId integer */
@@ -11,7 +15,7 @@
 			<?= Html::a(Html::encode($data->poster->member_name), array('member/view', 'id' => $data->poster->id)); ?>
 		</div>
 		<div class="avatar">
-			<?= Html::img((isset($data->poster->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $data->poster->avatar):$this->module->getRegisteredImage('empty.jpeg'), 'avatar'); ?>
+			<?= Html::img((isset($data->poster->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $data->poster->avatar):$assets->baseUrl.'/images/empty.jpeg', 'avatar'); ?>
 		</div>
 		<div class="group">
 			<?php if(isset($data->poster->group)) {
@@ -27,8 +31,8 @@
 		</div>
 		<div style="text-align:center;margin-top:10px;">
 		<?php if(!Yii::$app->user->isGuest): ?>
-			<?= Html::img($this->module->getRegisteredImage('warn.png'), 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Report post'), 'style' => 'cursor:pointer;', 'onclick' => 'reportPost(' . $data->id . ')')); ?>
-			<?= Html::a( Html::img($this->module->getRegisteredImage('pm.png'), 'pm', array('title' => Yii::t('BbiiModule.bbii', 'Send private message'))), array('message/create', 'id' => $data->user_id) ); ?>
+			<?= Html::img($assets->baseUrl.'/images/warn.png', 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Report post'), 'style' => 'cursor:pointer;', 'onclick' => 'reportPost(' . $data->id . ')')); ?>
+			<?= Html::a( Html::img($assets->baseUrl.'/images/pm.png', 'pm', array('title' => Yii::t('BbiiModule.bbii', 'Send private message'))), array('message/create', 'id' => $data->user_id) ); ?>
 			<?= $this->showUpvote($data->id); ?>
 		<?php endif; ?>
 		</div>
@@ -111,9 +115,9 @@
 		<?= $this->renderPartial('_upvotedBy', array('post_id' => $data->id)); ?>
 		<div class="toolbar">
 		<?php if($this->isModerator()): ?>
-			<?= Html::a( Html::img($this->module->getRegisteredImage('warn.png'), 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $data->user_id, 'type' => 1) ); ?>
-			<?= Html::img($this->module->getRegisteredImage('delete.png'), 'delete', array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if(confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . $this->createAbsoluteUrl('moderator/delete', array('id' => $data->id)) . '") }')); ?>
-			<?= Html::img($this->module->getRegisteredImage('ban.png'), 'ban', array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if(confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/banIp') . '") }')); ?>
+			<?= Html::a( Html::img($assets->baseUrl.'/images/warn.png', 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $data->user_id, 'type' => 1) ); ?>
+			<?= Html::img($assets->baseUrl.'/images/delete.png', 'delete', array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if(confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . $this->createAbsoluteUrl('moderator/delete', array('id' => $data->id)) . '") }')); ?>
+			<?= Html::img($assets->baseUrl.'/images/ban.png', 'ban', array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if(confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/banIp') . '") }')); ?>
 		<?php endif; ?>
 		</div>
 	</div>

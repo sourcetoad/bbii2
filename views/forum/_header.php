@@ -1,6 +1,5 @@
 <?php
 
-use frontend\modules\bbii\AppAsset;
 use frontend\modules\bbii\components\SimpleSearchForm;
 use frontend\modules\bbii\models\BbiiForum;
 
@@ -9,6 +8,7 @@ use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
 
 /* @var $this ForumController */

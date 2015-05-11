@@ -3,9 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
-
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiMessage;
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
 
 /*$this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
@@ -38,7 +40,7 @@ $item = array(
 		array(
 			'header' => 'Avatar',
 			'type' => 'image',
-			'value' => '(isset($data->avatar))?"'.Yii::$app->request->baseUrl . $this->module->avatarStorage . '/$data->avatar":"'.$this->module->getRegisteredImage('empty.jpeg').'"',
+			'value' => '(isset($data->avatar))?"'.Yii::$app->request->baseUrl . $this->module->avatarStorage . '/$data->avatar":"'.$assets->baseUrl.'/images/empty.jpeg'.'"',
 			'htmlOptions' => array('class' => 'img30'),
 		),
 		array(

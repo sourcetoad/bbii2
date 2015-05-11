@@ -1,4 +1,8 @@
 <?php
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this ForumController */
 /* @var $model BbiiMember */
 
@@ -120,7 +124,7 @@ $('.presence').hide();
 
 		<div class="row">
 			<?= $form->labelEx($model,'avatar'); ?>
-			<?= Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$this->module->getRegisteredImage('empty.jpeg'), 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
+			<?= Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$assets->baseUrl.'/images/empty.jpeg', 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
 			<?= $form->labelEx($model,'remove_avatar'); ?>
 			<?= $form->checkBox($model, 'remove_avatar'); ?>
 			<?= $form->labelEx($model, 'image'); ?>
@@ -159,91 +163,91 @@ $('.presence').hide();
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'website'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Globe.png'), 'Website', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Globe.png', 'Website', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'website',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'website'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'blogger'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Blogger.png'), 'Blogger', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Blogger.png', 'Blogger', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'blogger',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'blogger'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'facebook'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Facebook.png'), 'Facebook', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Facebook.png', 'Facebook', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'facebook',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'facebook'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'flickr'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Flickr.png'), 'Flickr', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Flickr.png', 'Flickr', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'flickr',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'flickr'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'google'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Google.png'), 'Google', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Google.png', 'Google', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'google',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'google'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'linkedin'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Linkedin.png'), 'Linkedin', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Linkedin.png', 'Linkedin', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'linkedin',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'linkedin'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'metacafe'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Metacafe.png'), 'Metacafe', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Metacafe.png', 'Metacafe', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'metacafe',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'metacafe'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'myspace'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Myspace.png'), 'Myspace', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Myspace.png', 'Myspace', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'myspace',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'myspace'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'orkut'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Orkut.png'), 'Orkut', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Orkut.png', 'Orkut', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'orkut',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'orkut'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'tumblr'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Tumblr.png'), 'Tumblr', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Tumblr.png', 'Tumblr', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'tumblr',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'tumblr'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'twitter'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Twitter.png'), 'Twitter', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Twitter.png', 'Twitter', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'twitter',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'twitter'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'wordpress'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Wordpress.png'), 'Wordpress', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Wordpress.png', 'Wordpress', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'wordpress',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'wordpress'); ?>
 		</div>
 
 		<div class="row presence">
 			<?= $form->labelEx($model,'youtube'); ?>
-			<?= Html::img($this->module->getRegisteredImage('Youtube.png'), 'Youtube', array('style' => 'vertical-align:middle')); ?>
+			<?= Html::img($assets->baseUrl.'/images/Youtube.png', 'Youtube', array('style' => 'vertical-align:middle')); ?>
 			<?= $form->textField($model,'youtube',array('size' => 100,'maxlength' => 255)); ?>
 			<?= $form->error($model,'youtube'); ?>
 		</div>

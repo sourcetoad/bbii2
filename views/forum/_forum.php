@@ -5,6 +5,9 @@ use frontend\modules\bbii\components\DateTimeCalculation;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this ForumController */
 /* @var $data BbiiForum */
 
@@ -47,7 +50,7 @@ use yii\widgets\ListView;
 	<div class="forum-cell last-cell">
 		<?php if($data->last_post_id && $data->lastPost) {
 			echo Html::encode($data->lastPost->poster->member_name);
-			echo Html::a(Html::img($this->module->getRegisteredImage('next.png'), 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->lastPost->topic_id, 'nav' => 'last'));
+			echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->lastPost->topic_id, 'nav' => 'last'));
 			echo '<br>';
 			echo DateTimeCalculation::long($data->lastPost->create_time);
 		} else {

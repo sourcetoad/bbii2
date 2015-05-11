@@ -1,6 +1,5 @@
 <?php
 
-use frontend\modules\bbii\AppAsset;
 use frontend\modules\bbii\models\BbiiMessage;
 
 use yii\bootstrap\Nav;
@@ -8,6 +7,7 @@ use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
 
 /* @var $this ModeratorController */
@@ -45,8 +45,8 @@ $assets = AppAsset::register($this);
 				array('member/view', 'id'  => Yii::$app->user->id)
 			); 
 
-			//if($this->isModerator()) echo ' | ' . Html::a(Html::img($assets->baseUrl.'/images/moderator.png'), Yii::t('BbiiModule.bbii', 'Moderate'), array('title' => Yii::t('BbiiModule.bbii', 'Moderate'),'style' => 'vertical-align:bottom;')), array('moderator/approval'));
-			//if($this->isAdmin()) echo ' | ' . Html::a(Html::img($assets->baseUrl.'/images/config.png'), Yii::t('BbiiModule.bbii', 'Forum settings'), array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'),'style' => 'vertical-align:bottom;')), array('setting/index'));
+			//if($this->isModerator()) echo ' | ' . Html::a(Html::img($assets->baseUrl.'/images/moderator.png', Yii::t('BbiiModule.bbii', 'Moderate'), array('title' => Yii::t('BbiiModule.bbii', 'Moderate'),'style' => 'vertical-align:bottom;')), array('moderator/approval'));
+			//if($this->isAdmin()) echo ' | ' . Html::a(Html::img($assets->baseUrl.'/images/config.png', Yii::t('BbiiModule.bbii', 'Forum settings'), array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'),'style' => 'vertical-align:bottom;')), array('setting/index'));
 		?>
 		</div>
 	<?php }; ?>

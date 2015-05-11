@@ -1,4 +1,8 @@
 <?php
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this SearchController */
 /* @var $item array */
 ?>
@@ -8,12 +12,12 @@
 		<div class="bbii-profile-box">
 		<?php 
 			if($messages) {
-				echo Html::a(Html::img($this->module->getRegisteredImage('newmail.png'), Yii::t('BbiiModule.bbii', 'new messages'), array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
+				echo Html::a(Html::img($assets->baseUrl.'/images/newmail.png', Yii::t('BbiiModule.bbii', 'new messages'), array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
 			} else {
-				echo Html::a(Html::img($this->module->getRegisteredImage('mail.png'), Yii::t('BbiiModule.bbii', 'no new messages'), array('title' => Yii::t('BbiiModule.bbii', 'no new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
+				echo Html::a(Html::img($assets->baseUrl.'/images/mail.png', Yii::t('BbiiModule.bbii', 'no new messages'), array('title' => Yii::t('BbiiModule.bbii', 'no new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
 			}
-			echo ' | ' . Html::a(Html::img($this->module->getRegisteredImage('settings.png'), Yii::t('BbiiModule.bbii', 'My settings'), array('title' => Yii::t('BbiiModule.bbii', 'My settings'),'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id)); 
-			if($this->isAdmin()) echo ' | ' . Html::a(Html::img($this->module->getRegisteredImage('config.png'), Yii::t('BbiiModule.bbii', 'Forum settings'), array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'),'style' => 'vertical-align:bottom;')), array('setting/index'));
+			echo ' | ' . Html::a(Html::img($assets->baseUrl.'/images/settings.png', Yii::t('BbiiModule.bbii', 'My settings'), array('title' => Yii::t('BbiiModule.bbii', 'My settings'),'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id)); 
+			if($this->isAdmin()) echo ' | ' . Html::a(Html::img($assets->baseUrl.'/images/config.png', Yii::t('BbiiModule.bbii', 'Forum settings'), array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'),'style' => 'vertical-align:bottom;')), array('setting/index'));
 		?>
 		</div>
 	<?php endif; ?>

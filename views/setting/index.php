@@ -1,4 +1,8 @@
 <?php
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this ForumController */
 /* @var $model BbiiSetting */
 
@@ -31,19 +35,19 @@ $item = array(
 
 		<div class="row odd">
 			<?= Html::label(Yii::t('BbiiModule.bbii', 'Forum name'), false); ?>
-			<?= Html::img($this->module->getRegisteredImage('info.png'), 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum name is set by the module parameter "forumTitle".'))); ?>
+			<?= Html::img($assets->baseUrl.'/images/info.png', 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum name is set by the module parameter "forumTitle".'))); ?>
 			<?= $this->module->forumTitle; ?>
 		</div>
 
 		<div class="row even">
 			<?= Html::label(Yii::t('BbiiModule.bbii', 'Forum language'), false); ?>
-			<?= Html::img($this->module->getRegisteredImage('info.png'), 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum language is set by the application parameter "language".'))); ?>
+			<?= Html::img($assets->baseUrl.'/images/info.png', 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum language is set by the application parameter "language".'))); ?>
 			<?= Yii::$app->language; ?>
 		</div>
 
 		<div class="row">
 			<?= Html::label(Yii::t('BbiiModule.bbii', 'Forum timezone'), false); ?>
-			<?= Html::img($this->module->getRegisteredImage('info.png'), 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum timezone is set by the PHP.ini parameter "date.timezone".'))); ?>
+			<?= Html::img($assets->baseUrl.'/images/info.png', 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum timezone is set by the PHP.ini parameter "date.timezone".'))); ?>
 			<?= date_default_timezone_get(); ?>
 		</div>
 

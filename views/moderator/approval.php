@@ -1,6 +1,5 @@
 <?php
 
-use frontend\modules\bbii\AppAsset;
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiMessage;
 
@@ -9,6 +8,9 @@ use yii\bootstrap\NavBar;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\grid\ActionColumn;
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
 
 /* @var $this ModeratorController */
 /* @var $model BbiiPost */
@@ -21,7 +23,6 @@ $this->bbii_breadcrumbs=array(
 */
 
 $approvals = BbiiPost::find()->unapproved()->count();
-$assets    = AppAsset::register($this);
 $moderator = ($this->context->id === 'moderator' ? true :  false);
 $reports   = BbiiMessage::find()->report()->count();
 

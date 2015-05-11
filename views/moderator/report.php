@@ -1,4 +1,8 @@
 ﻿<?php
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this ModeratorController */
 /* @var $model BbiiMessage */
 
@@ -48,17 +52,17 @@ $item = array(
 					'view' => array(
 						'url' => 'array("forum/topic", "id" => $data->forumPost->topic_id, "nav" => $data->post_id)',
 						'label' => Yii::t('BbiiModule.bbii','Go to post'),
-						'imageUrl' => $this->module->getRegisteredImage('goto.png'),
+						'imageUrl' => $assets->baseUrl.'/images/goto.png',
 					),
 					'reply' => array(
 						'url' => 'array("message/reply", "id" => $data->id)',
 						'label' => Yii::t('BbiiModule.bbii','Reply'),
-						'imageUrl' => $this->module->getRegisteredImage('reply.png'),
+						'imageUrl' => $assets->baseUrl.'/images/reply.png',
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 					'delete' => array(
 						'url' => 'array("message/delete", "id" => $data->id)',
-						'imageUrl' => $this->module->getRegisteredImage('delete.png'),
+						'imageUrl' => $assets->baseUrl.'/images/delete.png',
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)
