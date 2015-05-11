@@ -11,27 +11,29 @@ class BbiiModule extends \yii\base\Module
 	public $avatarStorage     = '/avatar'; 	// directory in the webroot must exist and allow read/write access
 	public $bbiiTheme         = 'base';
 	public $dbName            = false;
-	public $defaultRoute = 'forum/index';
+	public $defaultRoute      = 'forum/index';
 	public $editorContentsCss = array();
 	public $editorSkin        = 'moono';
-	public $editorToolbar 	  = array(
+	public $editorToolbar     = array(
 		array('Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo'),
 		array('Find','Replace','-','SelectAll'),
 		array('Bold', 'Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat'),
 		'-',
 		array('NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
-			'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'),
+		'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'),
 		'/',
 		array('Styles','Format','Font','FontSize'),
 		array('TextColor','BGColor'),
 		array('HorizontalRule','Smiley','SpecialChar','-','ShowBlocks'),
-		array('Link', 'Unlink','Image','Iframe'));
+		array('Link', 'Unlink','Image','Iframe')
+	);
 	public $editorUIColor     = '';
 	public $forumTitle        = 'Forums';
 	public $juiTheme          = 'base';
 	public $purifierOptions   = array(
-		'HTML.SafeIframe'=>true,
-		'URI.SafeIframeRegexp'=>'%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',);
+		'HTML.SafeIframe'         =>true,
+		'URI.SafeIframeRegexp'    =>'%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',
+	);
 	public $postsPerPage      = 20;
 	public $topicsPerPage     = 20;
 	public $userClass         = 'frontend\modules\user\Module'; // change this to your user module

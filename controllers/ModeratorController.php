@@ -1,11 +1,23 @@
 <?php
 
+namespace frontend\modules\bbii\controllers;
+
+use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\models\BbiiForum;
+use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiMessage;
+use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiTopic;
+
+use Yii;
+use yii\data\ArrayDataProvider;
+use yii\web\User;
+
 class ModeratorController extends BbiiController {
 	/**
 	 * @return array action filters
 	 */
-	public function filters()
-	{
+	public function filters() {
 		return array(
 			'accessControl',
 		);
@@ -16,23 +28,22 @@ class ModeratorController extends BbiiController {
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
-	{
+	public function accessRules() {
 		return array(
 			array('allow',
-				'actions'=>array('admin','approval','approve','banIp','changeTopic','delete','ipAdmin','ipDelete','view','refreshTopics','report','topic','sendmail'),
-				'users'=>array('@'),
-				'expression'=>($this->isModerator())?'true':'false',
+				'actions'    => array('admin','approval','approve','banIp','changeTopic','delete','ipAdmin','ipDelete','view','refreshTopics','report','topic','sendmail'),
+				'users'      => array('@'),
+				'expression' => ($this->isModerator())?'true':'false',
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
 	
 	public function actionApproval() {
-		$model=new BbiiPost('search');
-		$model->unsetAttributes();  // clear any default values
+		$model = new BbiiPost();
+		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset($_GET['BbiiMessage'])) {
 			$model->attributes=$_GET['BbiiPost'];
 		}
@@ -71,7 +82,7 @@ class ModeratorController extends BbiiController {
 	
 	public function actionAdmin() {
 		$model=new BbiiPost('search');
-		$model->unsetAttributes();  // clear any default values
+		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset($_GET['BbiiPost']))
 			$model->attributes=$_GET['BbiiPost'];
 		// limit posts to approved posts
@@ -82,10 +93,9 @@ class ModeratorController extends BbiiController {
 		));
 	}
 	
-	public function actionIpAdmin()
-	{
+	public function actionIpAdmin() {
 		$model=new BbiiIpaddress('search');
-		$model->unsetAttributes();  // clear any default values
+		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset($_GET['BbiiIpaddress']))
 			$model->attributes=$_GET['BbiiIpaddress'];
 
@@ -215,7 +225,7 @@ class ModeratorController extends BbiiController {
 	
 	public function actionReport() {
 		$model=new BbiiMessage('search');
-		$model->unsetAttributes();  // clear any default values
+		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset($_GET['BbiiMessage']))
 			$model->attributes=$_GET['BbiiMessage'];
 		// limit posts to moderator inbox
@@ -392,7 +402,7 @@ class ModeratorController extends BbiiController {
 	
 	public function actionSendmail() {
 		$model = new MailForm;
-		$model->unsetAttributes();
+		// @depricated 2.0.0 $model->unsetAttributes(); 
 		if(isset($_POST['MailForm'])) {
 			$model->attributes=$_POST['MailForm'];
 			if(empty($model->member_id)) {
@@ -427,7 +437,7 @@ class ModeratorController extends BbiiController {
 						mail($sendto,$subject,$model->body,$headers);
 						$users[] = $member->member_name;
 					}
-					$model->unsetAttributes();
+					// @depricated 2.0.0 $model->unsetAttributes(); 
 					Yii::$app->user->setFlash('success',Yii::t('BbiiModule.bbii','You have sent an e-mail to the following users: ') . implode(', ', $users));
 				} else {						// private messages
 					$users = array();
@@ -442,7 +452,7 @@ class ModeratorController extends BbiiController {
 							$users[] = $member->member_name;
 						}
 					}
-					$model->unsetAttributes();
+					// @depricated 2.0.0 $model->unsetAttributes(); 
 					Yii::$app->user->setFlash('success',Yii::t('BbiiModule.bbii','You have sent a private message to the following users: ') . implode(', ', $users));
 				}
 			}
