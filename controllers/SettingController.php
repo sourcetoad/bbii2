@@ -71,7 +71,7 @@ class SettingController extends BbiiController {
 	}
 	
 	public function actionGroup() {
-		$model=new BbiiMembergroup('search');
+		$model=new BbiiMembergroup(['id' => 'search']);
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset(Yii::$app->request->get()['BbiiMembergroup']))
 			$model->attributes=Yii::$app->request->get()['BbiiMembergroup'];
@@ -80,7 +80,7 @@ class SettingController extends BbiiController {
 	}
 	
 	public function actionModerator() {
-		$model=new BbiiMember('search');
+		$model=new BbiiMember(['id' => 'search']);
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset(Yii::$app->request->get()['BbiiMember']))
 			$model->attributes=Yii::$app->request->get()['BbiiMember'];
@@ -91,7 +91,7 @@ class SettingController extends BbiiController {
 	}
 	
 	public function actionSpider() {
-		$model=new BbiiSpider('search');
+		$model=new BbiiSpider(['id' => 'search']);
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset(Yii::$app->request->get()['BbiiSpider']))
 			$model->attributes=Yii::$app->request->get()['BbiiSpider'];

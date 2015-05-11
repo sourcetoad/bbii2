@@ -83,7 +83,7 @@ class ModeratorController extends BbiiController {
 	}
 	
 	public function actionAdmin() {
-		$model=new BbiiPost('search');
+		$model=new BbiiPost(['id' => 'search']);
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset(Yii::$app->request->get()['BbiiPost']))
 			$model->attributes=Yii::$app->request->get()['BbiiPost'];
@@ -96,7 +96,7 @@ class ModeratorController extends BbiiController {
 	}
 	
 	public function actionIpAdmin() {
-		$model=new BbiiIpaddress('search');
+		$model=new BbiiIpaddress(['id' => 'search']);
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset(Yii::$app->request->get()['BbiiIpaddress']))
 			$model->attributes=Yii::$app->request->get()['BbiiIpaddress'];
@@ -226,7 +226,7 @@ class ModeratorController extends BbiiController {
 	}
 	
 	public function actionReport() {
-		$model=new BbiiMessage('search');
+		$model=new BbiiMessage(['id' => 'search']);
 		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
 		if(isset(Yii::$app->request->get()['BbiiMessage']))
 			$model->attributes=Yii::$app->request->get()['BbiiMessage'];
