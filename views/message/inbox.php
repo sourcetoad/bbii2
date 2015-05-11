@@ -23,8 +23,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?php
-	echo return $this->render('_header', array(
+	<?= $this->render('_header', array(
 		'item' => $item
 	)); ?>
 	
