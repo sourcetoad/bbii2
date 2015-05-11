@@ -13,11 +13,13 @@ class BbiiPostQuery extends ActiveQuery
 {
 	public function find()
 	{
+
 		return $this;
 	}
 
 	public function findAll()
 	{
+
 		return $this;
 	}
 
@@ -29,6 +31,7 @@ class BbiiPostQuery extends ActiveQuery
 
     public function unapproved()
     {
+
         return $this->andWhere(['approved' => 0]);
     }
 }

@@ -11,6 +11,7 @@ use frontend\modules\bbii\models\BbiiTopic;
 
 use Yii;
 use yii\data\ArrayDataProvider;
+use yii\data\ActiveDataProvider;
 use yii\web\User;
 
 class ModeratorController extends BbiiController {
@@ -41,17 +42,18 @@ class ModeratorController extends BbiiController {
 		);
 	}
 	
+	/**
+	 * Return unapproved posts
+	 * 
+	 * @return object
+	 */
 	public function actionApproval() {
-		$model = new BbiiPost();
-		// @depricated 2.0.0 $model->unsetAttributes();   // clear any default values
-		if(isset(Yii::$app->request->get()['BbiiMessage'])) {
-			$model->attributes=Yii::$app->request->get()['BbiiPost'];
-		}
-		// restrict filtering to unapproved posts
-		$model->approved = 0;
+        $dataProvider = new ActiveDataProvider([
+          'query' => BbiiPost::find()->unapproved()->all(),
+        ]);
 
-		$this->render('approval', array(
-			'model' => $model, 
+		return $this->render('approval', array(
+			'dataProvider' => $dataProvider, 
 		));
 	}
 	

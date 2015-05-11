@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
+use frontend\modules\bbii\models\query\BbiiMessageQuery;
 
 use Yii;
 use yii\rest\ActiveController;
@@ -27,6 +28,11 @@ use yii\rest\ActiveController;
 class BbiiMessage extends BbiiAR
 {
 	public $search;
+
+    public static function find()
+    {
+        return new BbiiMessageQuery(get_called_class());
+    }
 
 	/**
 	 * @return string the associated database table name
@@ -137,22 +143,5 @@ class BbiiMessage extends BbiiAR
 			'pagination' => false,
 			'sort'       => array('defaultOrder' => 'id DESC'),
 		));
-	}
-	
-	public function scopes() {
-		return array(
-			'inbox' => array(
-				'condition' => 'inbox = 1',
-			),
-			'outbox' => array(
-				'condition' => 'outbox = 1',
-			),
-			'unread' => array(
-				'condition' => 'read_indicator = 0',
-			),
-			'report' => array(
-				'condition' => 'sendto = 0',
-			),
-		);
 	}
 }
