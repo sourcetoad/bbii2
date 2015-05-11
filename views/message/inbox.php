@@ -7,10 +7,12 @@ $assets = AppAsset::register($this);
 /* @var $model BbiiMessage */
 /* @var $count Array */
 
+/*
 $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Inbox'),
 );
+*/
 
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') .' ('. $count['inbox'] .')', 'url' => array('message/inbox')),
@@ -19,7 +21,10 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item' => $item)); ?>
+	<?php
+	echo $this->render('_header', array(
+		'item' => $item
+	)); ?>
 	
 	<div class="progress"><div class="progressbar" style="width:<?= ($count['inbox'] < 100)?$count['inbox']:100; ?>%"> </div></div>
 
