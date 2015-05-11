@@ -111,7 +111,7 @@ class ModeratorController extends BbiiController {
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset(Yii::$app->request->get()['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('ipadmin'));
+			$this->redirect(isset(Yii::$app->request->post()['returnUrl']) ? Yii::$app->request->post()['returnUrl'] : array('ipadmin'));
 	}
 
 	/**
@@ -149,7 +149,7 @@ class ModeratorController extends BbiiController {
 		
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset(Yii::$app->request->get()['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('approval'));
+			$this->redirect(isset(Yii::$app->request->post()['returnUrl']) ? Yii::$app->request->post()['returnUrl'] : array('approval'));
 		return;
 	}
 	
@@ -240,8 +240,8 @@ class ModeratorController extends BbiiController {
 	
 	public function actionView() {
 		$json = array();
-		if(isset($_POST['id'])) {
-			$model = BbiiPost::find()->findByPk($_POST['id']);
+		if(isset(Yii::$app->request->post()['id'])) {
+			$model = BbiiPost::find()->findByPk(Yii::$app->request->post()['id']);
 			if($model !== null) {
 				$poll = BBiiPoll::find()->findByAttributes(array('post_id' => $model->id));
 				$choices = array();
@@ -267,8 +267,8 @@ class ModeratorController extends BbiiController {
 	
 	public function actionTopic() {
 		$json = array();
-		if(isset($_POST['id'])) {
-			$model = BbiiTopic::find()->findByPk($_POST['id']);
+		if(isset(Yii::$app->request->post()['id'])) {
+			$model = BbiiTopic::find()->findByPk(Yii::$app->request->post()['id']);
 			if($model === null) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'Topic not found.');
@@ -298,10 +298,10 @@ class ModeratorController extends BbiiController {
 	 */
 	public function actionRefreshTopics() {
 		$json = array();
-		if(isset($_POST['id'])) {
+		if(isset(Yii::$app->request->post()['id'])) {
 			$json['success'] = 'yes';
 			$json['option'] = '<option value=""></option>';
-			foreach(BbiiTopic::find()->findAll('forum_id = ' . $_POST['id']) as $topic) {
+			foreach(BbiiTopic::find()->findAll('forum_id = ' . Yii::$app->request->post()['id']) as $topic) {
 				$json['option'] .= '<option value="' . $topic->id. '">' . $topic->title . '</option>';
 			}
 		} else {
@@ -318,21 +318,21 @@ class ModeratorController extends BbiiController {
 	 */
 	public function actionChangeTopic() {
 		$json = array();
-		if(isset($_POST['BbiiTopic'])) {
-			$model = BbiiTopic::find()->findByPk($_POST['BbiiTopic']['id']);
+		if(isset(Yii::$app->request->post()['BbiiTopic'])) {
+			$model = BbiiTopic::find()->findByPk(Yii::$app->request->post()['BbiiTopic']['id']);
 			$move = false;
 			$merge = false;
-			$sourceTopicId = $_POST['BbiiTopic']['id'];
+			$sourceTopicId = Yii::$app->request->post()['BbiiTopic']['id'];
 			$sourceForumId = $model->forum_id;
-			if($model->forum_id != $_POST['BbiiTopic']['forum_id']) {
+			if($model->forum_id != Yii::$app->request->post()['BbiiTopic']['forum_id']) {
 				$move = true;
-				$targetForumId = $_POST['BbiiTopic']['forum_id'];
+				$targetForumId = Yii::$app->request->post()['BbiiTopic']['forum_id'];
 			}
-			if(!empty($_POST['BbiiTopic']['merge']) && $_POST['BbiiTopic']['id'] != $_POST['BbiiTopic']['merge']) {
+			if(!empty(Yii::$app->request->post()['BbiiTopic']['merge']) && Yii::$app->request->post()['BbiiTopic']['id'] != Yii::$app->request->post()['BbiiTopic']['merge']) {
 				$merge = true;
-				$targetTopicId = $_POST['BbiiTopic']['merge'];
+				$targetTopicId = Yii::$app->request->post()['BbiiTopic']['merge'];
 			}
-			$model->attributes=$_POST['BbiiTopic'];
+			$model->attributes=Yii::$app->request->post()['BbiiTopic'];
 			if($model->validate()) {
 				$json['success'] = 'yes';
 				if($merge || $move) {
@@ -405,8 +405,8 @@ class ModeratorController extends BbiiController {
 	public function actionSendmail() {
 		$model = new MailForm;
 		// @depricated 2.0.0 $model->unsetAttributes(); 
-		if(isset($_POST['MailForm'])) {
-			$model->attributes=$_POST['MailForm'];
+		if(isset(Yii::$app->request->post()['MailForm'])) {
+			$model->attributes=Yii::$app->request->post()['MailForm'];
 			if(empty($model->member_id)) {
 				$model->member_id = -1;	// All members
 			}
@@ -417,7 +417,7 @@ class ModeratorController extends BbiiController {
 					$criteria->params = array(':group' => $model->member_id);
 				}
 				$members = BbiiMember::find()->findAll($criteria);
-				if(isset($_POST['email'])) {	// e-mails
+				if(isset(Yii::$app->request->post()['email'])) {	// e-mails
 					$name = $this->module->forumTitle;
 					$name = '=?UTF-8?B?'.base64_encode($name).'?=';
 					$from = BbiiSetting::find()->find()->contact_email;
