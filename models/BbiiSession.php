@@ -14,6 +14,15 @@ use frontend\modules\bbii\models\BbiiAR;
 class BbiiSession extends BbiiAR
 {
 	/**
+	 * Custom query class
+	 * @return [type] [description]
+	 */
+    public static function find()
+    {
+        return new BbiiMemberQuery(get_called_class());
+    }
+
+	/**
 	 * @return string the associated database table name
 	 */
 	public static function tableName()

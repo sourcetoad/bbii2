@@ -47,6 +47,10 @@ class BbiiMember extends BbiiAR {
 	public $image;
 	public $remove_avatar;
 
+	/**
+	 * Custom query class
+	 * @return [type] [description]
+	 */
     public static function find()
     {
         return new BbiiMemberQuery(get_called_class());

@@ -25,6 +25,16 @@ use frontend\modules\bbii\models\BbiiAR;
 class BbiiPost extends BbiiAR
 {
 	public $search;
+
+	/**
+	 * Custom query class
+	 * @return [type] [description]
+	 */
+    public static function find()
+    {
+        return new BbiiMemberQuery(get_called_class());
+    }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
