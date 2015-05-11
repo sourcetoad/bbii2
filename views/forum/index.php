@@ -32,9 +32,11 @@ use yii\widgets\ListView;
 			array('forum/markAllRead')
 		);
 	}
+	?>
 
-	echo $this->render('_footer');
+	<?= $this->render('_footer'); ?>
 
+	<?php
 	if(!Yii::$app->user->isGuest) {
 		echo Html::a(
 			Yii::t('BbiiModule.bbii','Mark all read'), array('forum/markAllRead')

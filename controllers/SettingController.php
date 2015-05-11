@@ -46,7 +46,7 @@ class SettingController extends BbiiController {
 				$this->redirect(array('index'));
 		}
 
-		$this->render('index', array('model' => $model));
+		return $this->render('index', array('model' => $model));
 	}
 		
 	public function actionLayout() {
@@ -64,7 +64,7 @@ class SettingController extends BbiiController {
 			}
 		}
 		
-		$this->render('layout', array(
+		return $this->render('layout', array(
 			'model' => $model,
 			'category' => $category,
 		));
@@ -76,7 +76,7 @@ class SettingController extends BbiiController {
 		if(isset(Yii::$app->request->get()['BbiiMembergroup']))
 			$model->attributes=Yii::$app->request->get()['BbiiMembergroup'];
 
-		$this->render('group', array('model' => $model));
+		return $this->render('group', array('model' => $model));
 	}
 	
 	public function actionModerator() {
@@ -85,7 +85,7 @@ class SettingController extends BbiiController {
 		if(isset(Yii::$app->request->get()['BbiiMember']))
 			$model->attributes=Yii::$app->request->get()['BbiiMember'];
 
-		$this->render('moderator',array(
+		return $this->render('moderator',array(
 			'model' => $model,
 		));
 	}
@@ -96,7 +96,7 @@ class SettingController extends BbiiController {
 		if(isset(Yii::$app->request->get()['BbiiSpider']))
 			$model->attributes=Yii::$app->request->get()['BbiiSpider'];
 
-		$this->render('spider', array('model' => $model));
+		return $this->render('spider', array('model' => $model));
 	}
 	
 	/**

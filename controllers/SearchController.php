@@ -125,7 +125,7 @@ class SearchController extends BbiiController {
 			),
 		));
 
-		$this->render('index', array(
+		return $this->render('index', array(
 			'dataProvider' => $dataProvider,
 			'search' => $search,
 			'choice' => $choice,

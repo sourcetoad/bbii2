@@ -109,7 +109,7 @@ class MemberController extends BbiiController {
 					$this->redirect(array('view','id' => $model->id));
 			}
 		}
-		$this->render('update', array('model' => $model));
+		return $this->render('update', array('model' => $model));
 	}
 	
 	public function actionView($id) {
@@ -155,7 +155,7 @@ class MemberController extends BbiiController {
 			'pagination' => false,
 		));
 		
-		$this->render('view', array(
+		return $this->render('view', array(
 			'model' => $model, 
 			'dataProvider' => $dataProvider,
 			'topicProvider' => $topicProvider,
@@ -198,7 +198,7 @@ class MemberController extends BbiiController {
 			$model->member_id = $id;
 			$model->member_name = BbiiMember::find()->findByPk($id)->member_name;
 		}
-		$this->render('mail',array('model' => $model));
+		return $this->render('mail',array('model' => $model));
 	}
 	
 	/**

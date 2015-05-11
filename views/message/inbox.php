@@ -1,5 +1,6 @@
 <?php
 
+use yii\web\UrlManager;
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
 
@@ -14,6 +15,7 @@ $this->bbii_breadcrumbs=array(
 );
 */
 
+$urlManager = new UrlManager;
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') .' ('. $count['inbox'] .')', 'url' => array('message/inbox')),
 	array('label' => Yii::t('BbiiModule.bbii', 'Outbox') .' ('. $count['outbox'] .')', 'url' => array('message/outbox')),
@@ -22,13 +24,13 @@ $item = array(
 ?>
 <div id="bbii-wrapper">
 	<?php
-	echo $this->render('_header', array(
+	echo return $this->render('_header', array(
 		'item' => $item
 	)); ?>
 	
 	<div class="progress"><div class="progressbar" style="width:<?= ($count['inbox'] < 100)?$count['inbox']:100; ?>%"> </div></div>
 
-	<?php $this->widget('zii.widgets.grid.CGridView', array(
+	<?php /*$this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'inbox-grid',
 		'dataProvider' => $model->search(),
 		'rowCssClassExpression' => '($data->read_indicator)?"":"unread"',
@@ -53,7 +55,7 @@ $item = array(
 					'view' => array(
 						'url' => '$data->id',
 						'imageUrl' => $assets->baseUrl.'/images/view.png',
-						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . $this->createAbsoluteUrl('message/view') .'");return false; }',
+						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . $urlManager->createAbsoluteUrl('message/view') .'");return false; }',
 					),
 					'reply' => array(
 						'url' => 'array("reply", "id" => $data->id)',
@@ -68,7 +70,7 @@ $item = array(
 				)
 			),
 		),
-	)); ?>
+	));*/ ?>
 	
 	<div id="bbii-message"></div>
 

@@ -54,7 +54,7 @@ class MessageController extends BbiiController {
 		$model->sendto = $id;
 		$model->inbox = 1;
 		
-		$this->render('inbox', array(
+		return $this->render('inbox', array(
 			'model' => $model, 
 			'count' => $count
 		));
@@ -75,7 +75,7 @@ class MessageController extends BbiiController {
 		$model->sendfrom = $id;
 		$model->outbox = 1;
 		
-		$this->render('outbox', array(
+		return $this->render('outbox', array(
 			'model' => $model,
 			'count' => $count,
 		));
@@ -127,7 +127,7 @@ class MessageController extends BbiiController {
 			}
 		}
 
-		$this->render('create',array(
+		return $this->render('create',array(
 			'model' => $model,
 			'count' => $count,
 		));
@@ -153,7 +153,7 @@ class MessageController extends BbiiController {
 			$model->content = '<blockquote cite="'. $quote .'"><p class="blockquote-header"><strong>'. $quote .'</strong></p>' . $model->content . '</blockquote><p></p>';
 		}
 
-		$this->render('create', array(
+		return $this->render('create', array(
 			'model' => $model,
 			'count' => $count,
 		));

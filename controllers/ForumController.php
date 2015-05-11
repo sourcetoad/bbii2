@@ -158,7 +158,7 @@ class ForumController extends BbiiController {
 				'currentPage' => Yii::$app->user->getState('BbiiTopic_page', 0),
 			),
 		));
-		$this->render('forum', array(
+		return $this->render('forum', array(
 			'forum' => $forum,
 			'dataProvider' => $dataProvider
 		));
@@ -259,7 +259,7 @@ class ForumController extends BbiiController {
 			$model->save();
 		}
 
-		$this->render('topic', array(
+		return $this->render('topic', array(
 			'forum' => $forum,
 			'topic' => $topic,
 			'dataProvider' => $dataProvider,
@@ -308,7 +308,7 @@ class ForumController extends BbiiController {
 			$post->forum_id = $quoted->forum_id;
 			$post->topic_id = $quoted->topic_id;
 		}
-		$this->render('reply', array(
+		return $this->render('reply', array(
 			'forum' => $forum,
 			'topic' => $topic,
 			'post' => $post
@@ -352,7 +352,7 @@ class ForumController extends BbiiController {
 			$post->forum_id = $forum->id;
 			$post->topic_id = $topic->id;
 		}
-		$this->render('reply', array(
+		return $this->render('reply', array(
 			'forum' => $forum,
 			'topic' => $topic,
 			'post' => $post
@@ -450,7 +450,7 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		$this->render('create', array(
+		return $this->render('create', array(
 			'forum' => $forum,
 			'post' => $post,
 			'poll' => $poll,
@@ -491,7 +491,7 @@ class ForumController extends BbiiController {
 				$this->redirect(array('topic', 'id' => $post->topic_id));
 			}
 		}
-		$this->render('update', array(
+		return $this->render('update', array(
 			'forum' => $forum,
 			'topic' => $topic,
 			'post' => $post
@@ -756,7 +756,7 @@ class ForumController extends BbiiController {
 			if(Yii::$app->request->isAjaxRequest)
 				echo $error['message'];
 			else
-				$this->render('error', $error);
+				return $this->render('error', $error);
 		}
 	}
 	
