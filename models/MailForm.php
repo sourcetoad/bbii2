@@ -18,7 +18,7 @@ class MailForm extends CFormModel
 		return array(
 			// name, email, subject and body are required
 			array('member_id, subject, body', 'required'),
-			array('body','filter','filter'=>array($obj=new HtmlPurifier(), 'purify')),
+			array('body','filter','filter' => array($obj=new HtmlPurifier(), 'purify')),
 			array('member_name', 'safe'),
 		);
 	}
@@ -31,7 +31,7 @@ class MailForm extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-			'subject'=>Yii::t('BbiiModule.bbii','Subject'),
+			'subject' => Yii::t('BbiiModule.bbii','Subject'),
 		);
 	}
 }

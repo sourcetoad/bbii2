@@ -45,18 +45,18 @@ class BbiiMessage extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('sendfrom, sendto, subject, content', 'required'),
-			array('sendfrom, sendto, read_indicator, type, inbox, outbox, post_id', 'numerical', 'integerOnly'=>true),
-			array('sendto', 'mailboxFull', 'on'=>'insert'),
-			array('subject', 'length', 'max'=>255),
-			array('content','filter','filter'=>array($obj=new HtmlPurifier(), 'purify')),
-			array('ip', 'length', 'max'=>39),
+			array('sendfrom, sendto, read_indicator, type, inbox, outbox, post_id', 'numerical', 'integerOnly' => true),
+			array('sendto', 'mailboxFull', 'on' => 'insert'),
+			array('subject', 'length', 'max' => 255),
+			array('content','filter','filter' => array($obj=new HtmlPurifier(), 'purify')),
+			array('ip', 'length', 'max' => 39),
 			array('ip', 'blocked'),
-			array('ip', 'default', 'value'=>Yii::$app->request->userHostAddress, 'on'=>'insert'),
-			array('create_time', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'insert'),
+			array('ip', 'default', 'value' => Yii::$app->request->userHostAddress, 'on' => 'insert'),
+			array('create_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'insert'),
 			array('create_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, sendfrom, sendto, subject, content, read_indicator, type, inbox, outbox, ip, post_id', 'safe', 'on'=>'search'),
+			array('id, sendfrom, sendto, subject, content, read_indicator, type, inbox, outbox, ip, post_id', 'safe', 'on' => 'search'),
 		);
 	}
 	
@@ -89,7 +89,7 @@ class BbiiMessage extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -135,7 +135,7 @@ class BbiiMessage extends BbiiAR
 		return new ActiveDataProvider($this, array(
 			'criteria'   => $criteria,
 			'pagination' => false,
-			'sort'       => array('defaultOrder'=>'id DESC'),
+			'sort'       => array('defaultOrder' => 'id DESC'),
 		));
 	}
 	

@@ -3,26 +3,26 @@
 /* @var $model MailForm */
 
 $this->bbii_breadcrumbs=array(
-	Yii::t('BbiiModule.bbii', 'Forum')=>array('forum/index'),
-	Yii::t('BbiiModule.bbii', 'Members')=>array('member/index'),
+	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
+	Yii::t('BbiiModule.bbii', 'Members') => array('member/index'),
 	Yii::t('BbiiModule.bbii', 'Send e-mail')
 );
 
 $item = array(
-	array('label'=>Yii::t('BbiiModule.bbii', 'Forum'), 'url'=>array('forum/index')),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Members'), 'url'=>array('member/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index')),
 );
 ?>
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?= $this->renderPartial('_header', array('item' => $item)); ?>
 	
 	<div class="bbii-box-top"><?= Yii::t('BbiiModule.bbii', 'Send e-mail to') . ' ' . $model->member_name; ?></div>
 
 	<div class="form">
 
 	<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'bbii-mail-form',
-		'enableAjaxValidation'=>false,
+		'id' => 'bbii-mail-form',
+		'enableAjaxValidation' => false,
 	)); ?>
 
 		<p class="note"><?= Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
@@ -31,17 +31,17 @@ $item = array(
 
 		<div class="row">
 			<?= $form->labelEx($model,'subject'); ?>
-			<?= $form->textField($model,'subject',array('size'=>80,'maxlength'=>255)); ?>
+			<?= $form->textField($model,'subject',array('size' => 80,'maxlength' => 255)); ?>
 			<?= $form->error($model,'subject'); ?>
 		</div>
 		
 		<div class="row">
 			<?php $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
-				'model'=>$model,
-				'attribute'=>'body',
-				'autoLanguage'=>false,
-				'height'=>'300px',
-				'toolbar'=>array(
+				'model' => $model,
+				'attribute' => 'body',
+				'autoLanguage' => false,
+				'height' => '300px',
+				'toolbar' => array(
 					array(
 						'Bold', 'Italic', 'Underline', 'RemoveFormat'
 					),
@@ -53,9 +53,9 @@ $item = array(
 					'-',
 					array('Blockquote'),
 				),
-				'skin'=>$this->module->editorSkin,
-				'uiColor'=>$this->module->editorUIColor,
-				'contentsCss'=>$this->module->editorContentsCss,
+				'skin' => $this->module->editorSkin,
+				'uiColor' => $this->module->editorUIColor,
+				'contentsCss' => $this->module->editorContentsCss,
 			)); ?>
 			<?= $form->error($model,'body'); ?>
 		</div>

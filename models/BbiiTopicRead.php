@@ -36,10 +36,10 @@ class BbiiTopicRead extends BbiiAR
         // will receive user inputs.
         return array(
             array('user_id, data', 'required'),
-            array('user_id', 'length', 'max'=>10),
+            array('user_id', 'length', 'max' => 10),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('user_id, data', 'safe', 'on'=>'search'),
+            array('user_id, data', 'safe', 'on' => 'search'),
         );
     }
 
@@ -55,7 +55,7 @@ class BbiiTopicRead extends BbiiAR
     }
 
     /**
-     * @return array customized attribute labels (name=>label)
+     * @return array customized attribute labels (name => label)
      */
     public function attributeLabels()
     {
@@ -80,7 +80,7 @@ class BbiiTopicRead extends BbiiAR
         $criteria->compare('data',$this->data,true);
 
         return new ActiveDataProvider($this, array(
-            'criteria'=>$criteria,
+            'criteria' => $criteria,
         ));
     }
 } 

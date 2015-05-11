@@ -30,8 +30,8 @@ $present       = BbiiSession::find()->count();
 					<?php foreach($members as $member) {
 							echo Html::a(
 								$member->member_name, array(
-									'member/view', 'id'=>$member->id),
-								array('style'=>'color:#'.$member->group->color
+									'member/view', 'id' => $member->id),
+								array('style' => 'color:#'.$member->group->color
 							)) . '&nbsp;';
 					}; ?>
 					<?= Yii::t(
@@ -56,7 +56,7 @@ $present       = BbiiSession::find()->count();
 						<td><?= BbiiMember::find()->count(); ?></td>
 					</tr><tr>
 						<th><?php //echo Yii::t('BbiiModule.bbii','Newest member'); ?></th>
-						<td><?php //echo Html::a($member_newest, array('member/view', 'id'=>$member_newest->id)); ?></td>
+						<td><?php //echo Html::a($member_newest, array('member/view', 'id' => $member_newest->id)); ?></td>
 					</tr><tr>
 						<th><?= Yii::t('BbiiModule.bbii','Visitors today'); ?></th>
 						<td><?= BbiiSession::find()->count(); ?></td>

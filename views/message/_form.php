@@ -12,8 +12,8 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'message-form',
-	'enableAjaxValidation'=>false,
+	'id' => 'message-form',
+	'enableAjaxValidation' => false,
 )); ?>
 
 	<?= $form->errorSummary($model); ?>
@@ -22,21 +22,21 @@
 	<?php if($this->action->id == 'create'): ?>
 		<?= $form->labelEx($model,'sendto'); ?>
 		<?php $this->widget('zii.widgets.jui.CJuiAutoComplete',array(
-				'attribute'=>'search',
-				'model'=>$model,
-				'sourceUrl'=>array('member/members'),
-				'theme'=>$this->module->juiTheme,
-				'options'=>array(
-					'minLength'=>2,
-					'delay'=>200,
-					'select'=>'js:function(event, ui) { 
+				'attribute' => 'search',
+				'model' => $model,
+				'sourceUrl' => array('member/members'),
+				'theme' => $this->module->juiTheme,
+				'options' => array(
+					'minLength' => 2,
+					'delay' => 200,
+					'select' => 'js:function(event, ui) { 
 						$("#BbiiMessage_search").val(ui.item.label);
 						$("#BbiiMessage_sendto").val(ui.item.value);
 						return false;
 					}',
 				),
-				'htmlOptions'=>array(
-					'style'=>'height:20px;',
+				'htmlOptions' => array(
+					'style' => 'height:20px;',
 				),
 			)); 
 		?>
@@ -50,17 +50,17 @@
 	
 	<div class="row">
 		<?= $form->labelEx($model,'subject'); ?>
-		<?= $form->textField($model,'subject',array('size'=>100,'maxlength'=>255)); ?>
+		<?= $form->textField($model,'subject',array('size' => 100,'maxlength' => 255)); ?>
 		<?= $form->error($model,'subject'); ?>
 	</div>
 	
 	<div class="row">
 		<?php $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
-			'model'=>$model,
-			'attribute'=>'content',
-			'autoLanguage'=>false,
-			'height'=>'300px',
-			'toolbar'=>array(
+			'model' => $model,
+			'attribute' => 'content',
+			'autoLanguage' => false,
+			'height' => '300px',
+			'toolbar' => array(
 				array(
 					'Bold', 'Italic', 'Underline', 'RemoveFormat'
 				),
@@ -72,9 +72,9 @@
 				'-',
 				array('Blockquote'),
 			),
-			'skin'=>$this->module->editorSkin,
-			'uiColor'=>$this->module->editorUIColor,
-			'contentsCss'=>$this->module->editorContentsCss,
+			'skin' => $this->module->editorSkin,
+			'uiColor' => $this->module->editorUIColor,
+			'contentsCss' => $this->module->editorContentsCss,
 		)); ?>
 		<?= $form->error($model,'content'); ?>
 	</div>

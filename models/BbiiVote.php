@@ -41,10 +41,10 @@ class BbiiVote extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('poll_id, choice_id, user_id', 'required'),
-			array('poll_id, choice_id, user_id', 'length', 'max'=>10),
+			array('poll_id, choice_id, user_id', 'length', 'max' => 10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('poll_id, choice_id, user_id', 'safe', 'on'=>'search'),
+			array('poll_id, choice_id, user_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -60,7 +60,7 @@ class BbiiVote extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -87,7 +87,7 @@ class BbiiVote extends BbiiAR
 		$criteria->compare('user_id',$this->user_id,true);
 
 		return new ActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 }

@@ -5,7 +5,7 @@
 
 $forumitems = array();
 foreach($forum as $forumdata) {
-	$forumitems['frm_'.$forumdata->id] = $this->renderPartial('_forum', array('forumdata'=>$forumdata), true);
+	$forumitems['frm_'.$forumdata->id] = $this->renderPartial('_forum', array('forumdata' => $forumdata), true);
 }
 ?>
 
@@ -16,7 +16,7 @@ foreach($forum as $forumdata) {
 			<?= Html::encode($data->name); ?>
 		</td>
 		<td rowspan="2" style="width:140px;">
-			<?= Html::button(Yii::t('BbiiModule.bbii','Edit'), array('onclick'=>'editCategory(' . $data->id . ',"' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . $this->createAbsoluteUrl('setting/getForum') .'")')); ?>
+			<?= Html::button(Yii::t('BbiiModule.bbii','Edit'), array('onclick' => 'editCategory(' . $data->id . ',"' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . $this->createAbsoluteUrl('setting/getForum') .'")')); ?>
 		</td>
 	</tr>
 	<tr>
@@ -31,11 +31,11 @@ foreach($forum as $forumdata) {
 		$this->widget('zii.widgets.jui.CJuiSortable', array(
 			'id' => 'sortfrm' . $data->id,
 			'items' => $forumitems,
-			'htmlOptions'=>array('style'=>'list-style:none;margin-top:1px;padding-right:0;'),
-			'theme'=>$this->module->juiTheme,
-			'options'=>array(
-				'delay'=>'100',
-				'update'=>'js:function(){Sort(this,"' . $this->createAbsoluteUrl('setting/ajaxSort') . '");}',
+			'htmlOptions' => array('style' => 'list-style:none;margin-top:1px;padding-right:0;'),
+			'theme' => $this->module->juiTheme,
+			'options' => array(
+				'delay' => '100',
+				'update' => 'js:function(){Sort(this,"' . $this->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		));
 	?>

@@ -23,7 +23,7 @@ $assets = AppAsset::register($this);
 					echo Html::a(
 						Html::img(
 							$assets->baseUrl.'/images/newmail.png',
-							array('title'=>$messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'))
+							array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'))
 						),
 						array('message/inbox')
 					); 
@@ -31,7 +31,7 @@ $assets = AppAsset::register($this);
 					echo Html::a(
 						Html::img(
 							$assets->baseUrl.'/images/mail.png',
-							array('title'=>Yii::t('BbiiModule.bbii', 'no new messages'))
+							array('title' => Yii::t('BbiiModule.bbii', 'no new messages'))
 						),
 						array('message/inbox')
 					); 
@@ -41,9 +41,9 @@ $assets = AppAsset::register($this);
 				echo Html::a(
 					Html::img(
 						$assets->baseUrl.'/images/settings.png',
-						array('title'=>Yii::t('BbiiModule.bbii', 'My settings'))
+						array('title' => Yii::t('BbiiModule.bbii', 'My settings'))
 						),
-					array('member/view', 'id' =>Yii::$app->user->id)
+					array('member/view', 'id'  => Yii::$app->user->id)
 				); 
 
 				if ($is_mod) {
@@ -51,7 +51,7 @@ $assets = AppAsset::register($this);
 					echo Html::a(
 						Html::img(
 							$assets->baseUrl.'/images/moderator.png',
-							array('title'=>Yii::t('BbiiModule.bbii', 'Moderate'))),
+							array('title' => Yii::t('BbiiModule.bbii', 'Moderate'))),
 						array('moderator/approval')
 					);
 				}
@@ -61,7 +61,7 @@ $assets = AppAsset::register($this);
 					echo Html::a(
 						Html::img(
 							$assets->baseUrl.'/images/config.png',
-							array('title'=>Yii::t('BbiiModule.bbii', 'Forum settings'))),
+							array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'))),
 						array('setting/index')
 					);
 				}
@@ -110,8 +110,8 @@ $assets = AppAsset::register($this);
 		'',
 		BbiiForum::getForumOptions(), 
 		array(
-			'empty'		=> Yii::t('BbiiModule.bbii','Select forum'),
-			'onchange'	=> "window.location.href='" . Url::toRoute(array('forum')) . "/id/'+$(this).val()",
+			'empty'		 =>  Yii::t('BbiiModule.bbii','Select forum'),
+			'onchange'	 =>  "window.location.href='" . Url::toRoute(array('forum')) . "/id/'+$(this).val()",
 		)
 	);
 ?>

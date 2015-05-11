@@ -62,7 +62,7 @@
 			</tr><tr>
 				<th><?= Yii::t('BbiiModule.bbii','Total members'); ?></th><td><?= BbiiMember::model()->count(); ?></td>
 			</tr><tr>
-				<th><?= Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::model()->newest()->find(); echo Html::a($member->member_name, array('member/view', 'id'=>$member->id)); ?></td>
+				<th><?= Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::model()->newest()->find(); echo Html::a($member->member_name, array('member/view', 'id' => $member->id)); ?></td>
 			</tr><tr>
 				<th><?= Yii::t('BbiiModule.bbii','Visitors today'); ?></th><td><?= BbiiSession::model()->count(); ?></td>
 			</tr>

@@ -44,12 +44,12 @@ class BbiiTopic extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('forum_id, title, first_post_id, last_post_id', 'required'),
-			array('forum_id, user_id, first_post_id, last_post_id, num_replies, num_views, moved, approved, locked, sticky, global, upvoted', 'numerical', 'integerOnly'=>true),
-			array('title', 'length', 'max'=>255),
-			array('user_id', 'default', 'value'=>Yii::$app->user->id, 'on'=>'insert'),
+			array('forum_id, user_id, first_post_id, last_post_id, num_replies, num_views, moved, approved, locked, sticky, global, upvoted', 'numerical', 'integerOnly' => true),
+			array('title', 'length', 'max' => 255),
+			array('user_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'insert'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, forum_id, user_id, title, first_post_id, last_post_id, num_replies, num_views, approved, locked, sticky, global, moved', 'safe', 'on'=>'search'),
+			array('id, forum_id, user_id, title, first_post_id, last_post_id, num_replies, num_views, approved, locked, sticky, global, moved', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -69,7 +69,7 @@ class BbiiTopic extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -117,7 +117,7 @@ class BbiiTopic extends BbiiAR
 		$criteria->compare('moved',$this->moved,true);
 
 		return new ActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 	

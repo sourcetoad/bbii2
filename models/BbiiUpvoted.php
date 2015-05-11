@@ -36,10 +36,10 @@ class BbiiUpvoted extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('member_id, post_id', 'required'),
-			array('member_id, post_id', 'length', 'max'=>10),
+			array('member_id, post_id', 'length', 'max' => 10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('member_id, post_id', 'safe', 'on'=>'search'),
+			array('member_id, post_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -55,7 +55,7 @@ class BbiiUpvoted extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -80,7 +80,7 @@ class BbiiUpvoted extends BbiiAR
 		$criteria->compare('post_id',$this->post_id,true);
 
 		return new ActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 }

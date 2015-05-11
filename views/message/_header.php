@@ -12,14 +12,14 @@
 		<table style="margin:0;"><tr><td style="padding:0;">
 			<div id="bbii-menu">
 			<?php $this->widget('zii.widgets.CMenu',array(
-				'items'=>$item
+				'items' => $item
 			)); ?>
 			</div>
 		</td></tr></table>
 	</div>
 	<?php if(isset($this->bbii_breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'homeLink'=>false,
-			'links'=>$this->bbii_breadcrumbs,
+			'homeLink' => false,
+			'links' => $this->bbii_breadcrumbs,
 		)); ?><!-- breadcrumbs -->
 	<?php endif?>

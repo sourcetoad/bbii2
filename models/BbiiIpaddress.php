@@ -40,16 +40,16 @@ class BbiiIpaddress extends BbiiAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('source, count', 'numerical', 'integerOnly'=>true),
-			array('ip', 'length', 'max'=>39),
+			array('source, count', 'numerical', 'integerOnly' => true),
+			array('ip', 'length', 'max' => 39),
 			array('ip', 'unique'),
-			array('address', 'length', 'max'=>255),
-			array('source, count','default','value'=>0, 'on'=>'insert'),
-			array('create_time', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'insert'),
-			array('update_time', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'update'),
+			array('address', 'length', 'max' => 255),
+			array('source, count','default','value' => 0, 'on' => 'insert'),
+			array('create_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'insert'),
+			array('update_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'update'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, ip, address, source, count, create_time, update_time', 'safe', 'on'=>'search'),
+			array('id, ip, address, source, count, create_time, update_time', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -72,7 +72,7 @@ class BbiiIpaddress extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -107,7 +107,7 @@ class BbiiIpaddress extends BbiiAR
 		$criteria->compare('update_time',$this->update_time,true);
 
 		return new ActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 	
@@ -116,7 +116,7 @@ class BbiiIpaddress extends BbiiAR
 		if($model === null) {
 			return false;
 		} else {
-			$model->saveCounters(array('count'=>1));					// method since Yii 1.1.8
+			$model->saveCounters(array('count' => 1));					// method since Yii 1.1.8
 			return true;
 		}
 	}

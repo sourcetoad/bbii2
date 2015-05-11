@@ -51,7 +51,7 @@ class ModeratorController extends BbiiController {
 		$model->approved = 0;
 
 		$this->render('approval', array(
-			'model'=>$model, 
+			'model' => $model, 
 		));
 	}
 	
@@ -65,16 +65,16 @@ class ModeratorController extends BbiiController {
 		if($topic->approved == 0) {
 			$topic->approved = 1;
 			$topic->update();
-			$forum->saveCounters(array('num_topics'=>1));	// method since Yii 1.1.8
+			$forum->saveCounters(array('num_topics' => 1));	// method since Yii 1.1.8
 		} else {
-			$topic->saveCounters(array('num_replies'=>1));				// method since Yii 1.1.8
+			$topic->saveCounters(array('num_replies' => 1));				// method since Yii 1.1.8
 		}
-		$topic->saveAttributes(array('last_post_id'=>$post->id));
+		$topic->saveAttributes(array('last_post_id' => $post->id));
 		$post->approved = 1;
 		$post->update();
 		$this->resetLastForumPost($forum->id);
-		$forum->saveCounters(array('num_posts'=>1));		// method since Yii 1.1.8
-		$post->poster->saveCounters(array('posts'=>1));		// method since Yii 1.1.8
+		$forum->saveCounters(array('num_posts' => 1));		// method since Yii 1.1.8
+		$post->poster->saveCounters(array('posts' => 1));		// method since Yii 1.1.8
 		$this->assignMembergroup($post->user_id);
 		
 		$this->redirect(array('approval'));
@@ -89,7 +89,7 @@ class ModeratorController extends BbiiController {
 		$model->approved = 1;
 		
 		$this->render('admin',array(
-			'model'=>$model,
+			'model' => $model,
 		));
 	}
 	
@@ -100,7 +100,7 @@ class ModeratorController extends BbiiController {
 			$model->attributes=Yii::$app->request->get()['BbiiIpaddress'];
 
 		$this->render('ipadmin',array(
-			'model'=>$model,
+			'model' => $model,
 		));
 	}
 	
@@ -124,17 +124,17 @@ class ModeratorController extends BbiiController {
 		}
 		$forum = BbiiForum::model()->findByPk($post->forum_id);
 		$topic = BbiiTopic::model()->findByPk($post->topic_id);
-		$post->poster->saveCounters(array('posts'=>-1));
+		$post->poster->saveCounters(array('posts' => -1));
 		$post->delete();
 		if($topic->approved == 0) {
 			$topic->delete();
 		} else {
-			$forum->saveCounters(array('num_posts'=>-1));					// method since Yii 1.1.8
+			$forum->saveCounters(array('num_posts' => -1));					// method since Yii 1.1.8
 			if($topic->num_replies > 0) {
-				$topic->saveCounters(array('num_replies'=>-1));				// method since Yii 1.1.8
+				$topic->saveCounters(array('num_replies' => -1));				// method since Yii 1.1.8
 			} else {
 				$topic->delete();
-				$forum->saveCounters(array('num_topics'=>-1));				// method since Yii 1.1.8
+				$forum->saveCounters(array('num_topics' => -1));				// method since Yii 1.1.8
 			}
 		}
 		$this->resetFirstTopicPost($id);
@@ -142,7 +142,7 @@ class ModeratorController extends BbiiController {
 		// Delete reports on the delete post
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'post_id=:post_id';
-		$criteria->params = array(':post_id'=>$id);
+		$criteria->params = array(':post_id' => $id);
 		$model = BbiiMessage::model()->deleteAll($criteria);
 		
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -157,11 +157,11 @@ class ModeratorController extends BbiiController {
 	private function resetFirstTopicPost($id) {
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'first_post_id=:first_post_id';
-		$criteria->params = array(':first_post_id'=>$id);
+		$criteria->params = array(':first_post_id' => $id);
 		$model = BbiiTopic::model()->find($criteria);
 		if($model !== null) {
 			$criteria->condition = 'topic_id=:topic_id';
-			$criteria->params = array(':topic_id'=>$model->id);
+			$criteria->params = array(':topic_id' => $model->id);
 			$criteria->order = 'id DESC';
 			$post = BbiiPost::model()->find($criteria);
 			if($post !== null) {
@@ -232,7 +232,7 @@ class ModeratorController extends BbiiController {
 		$model->sendto = 0;
 		
 		$this->render('report',array(
-			'model'=>$model,
+			'model' => $model,
 		));
 	}
 	
@@ -241,10 +241,10 @@ class ModeratorController extends BbiiController {
 		if(isset($_POST['id'])) {
 			$model = BbiiPost::model()->findByPk($_POST['id']);
 			if($model !== null) {
-				$poll = BBiiPoll::model()->findByAttributes(array('post_id'=>$model->id));
+				$poll = BBiiPoll::model()->findByAttributes(array('post_id' => $model->id));
 				$choices = array();
 				if($poll !== null) {
-					$chs = BbiiChoice::model()->findAllByAttributes(array('poll_id'=>$poll->id));
+					$chs = BbiiChoice::model()->findAllByAttributes(array('poll_id' => $poll->id));
 					foreach($chs as $choice) {
 						$choices[] = $choice->choice;
 					}
@@ -338,26 +338,26 @@ class ModeratorController extends BbiiController {
 					$criteria->condition = "topic_id = $sourceTopicId";
 					$numberOfPosts = BbiiPost::model()->approved()->count($criteria);
 					if($move) {
-						BbiiPost::model()->updateAll(array('forum_id'=>$targetForumId), $criteria);
+						BbiiPost::model()->updateAll(array('forum_id' => $targetForumId), $criteria);
 						$forum = BbiiForum::model()->findByPk($sourceForumId);
-						$forum->saveCounters(array('num_topics'=>-1));
-						$forum->saveCounters(array('num_posts'=>-$numberOfPosts));
+						$forum->saveCounters(array('num_topics' => -1));
+						$forum->saveCounters(array('num_posts' => -$numberOfPosts));
 						$forum = BbiiForum::model()->findByPk($targetForumId);
-						$forum->saveCounters(array('num_topics'=>1));
-						$forum->saveCounters(array('num_posts'=>$numberOfPosts));
+						$forum->saveCounters(array('num_topics' => 1));
+						$forum->saveCounters(array('num_posts' => $numberOfPosts));
 						$this->resetLastForumPost($sourceForumId);
 						$this->resetLastForumPost($targetForumId);
 					}
 					if($merge) {
-						BbiiPost::model()->updateAll(array('topic_id'=>$targetTopicId), $criteria);
+						BbiiPost::model()->updateAll(array('topic_id' => $targetTopicId), $criteria);
 						if($move) {
 							$forum = BbiiForum::model()->findByPk($targetForumId);
 						} else {
 							$forum = BbiiForum::model()->findByPk($sourceForumId);
 						}
-						$forum->saveCounters(array('num_topics'=>-1));
+						$forum->saveCounters(array('num_topics' => -1));
 						$topic = BbiiTopic::model()->findByPk($targetTopicId);
-						$topic->saveCounters(array('num_replies'=>$numberOfPosts));
+						$topic->saveCounters(array('num_replies' => $numberOfPosts));
 						$model->delete();
 					} else {
 						$model->save();
@@ -412,7 +412,7 @@ class ModeratorController extends BbiiController {
 				$criteria = new CDbCriteria;
 				if($model->member_id >= 0) {
 					$criteria->condition = 'group_id = :group';
-					$criteria->params = array(':group'=>$model->member_id);
+					$criteria->params = array(':group' => $model->member_id);
 				}
 				$members = BbiiMember::model()->findAll($criteria);
 				if(isset($_POST['email'])) {	// e-mails
@@ -430,7 +430,7 @@ class ModeratorController extends BbiiController {
 					$criteria = new CDbCriteria;
 					$criteria->condition = $this->module->userIdColumn . '=:id';
 					foreach($members as $member) {
-						$criteria->params = array(':id'=>$member->id);
+						$criteria->params = array(':id' => $member->id);
 						$user 	= $class::model()->find($criteria);
 						$to 	= $user->getAttribute($this->module->userMailColumn);
 						$sendto = $member->member_name . " <$to>";
@@ -458,7 +458,7 @@ class ModeratorController extends BbiiController {
 			}
 		}
 		$this->render('sendmail', array(
-			'model'=>$model, 
+			'model' => $model, 
 		));
 	}
 }

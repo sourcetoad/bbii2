@@ -27,13 +27,13 @@ The application to which BBii is added needs to have a user table.
   need to be adjusted):
 ~~~
 [php]
-'modules'=>array(
-	'forum'=>array(
-		'class'=>'application.modules.bbii.BbiiModule',
-		'adminId'=>1,
-		'userClass'=>'User',
-		'userIdColumn'=>'id',
-		'userNameColumn'=>'username',
+'modules' => array(
+	'forum' => array(
+		'class' => 'application.modules.bbii.BbiiModule',
+		'adminId' => 1,
+		'userClass' => 'User',
+		'userIdColumn' => 'id',
+		'userNameColumn' => 'username',
 	),
 ),
 ~~~

@@ -20,11 +20,11 @@ class MessageController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'=>array('create', 'delete', 'inbox', 'outbox', 'reply', 'view', 'update', 'sendReport'),
-				'users'=>array('@'),
+				'actions' => array('create', 'delete', 'inbox', 'outbox', 'reply', 'view', 'update', 'sendReport'),
+				'users' => array('@'),
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
@@ -45,8 +45,8 @@ class MessageController extends BbiiController {
 		$model->inbox = 1;
 		
 		$this->render('inbox', array(
-			'model'=>$model, 
-			'count'=>$count
+			'model' => $model, 
+			'count' => $count
 		));
 	}
 	
@@ -66,8 +66,8 @@ class MessageController extends BbiiController {
 		$model->outbox = 1;
 		
 		$this->render('outbox', array(
-			'model'=>$model,
-			'count'=>$count,
+			'model' => $model,
+			'count' => $count,
 		));
 	}
 	
@@ -118,8 +118,8 @@ class MessageController extends BbiiController {
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
-			'count'=>$count,
+			'model' => $model,
+			'count' => $count,
 		));
 	}
 	
@@ -144,8 +144,8 @@ class MessageController extends BbiiController {
 		}
 
 		$this->render('create', array(
-			'model'=>$model,
-			'count'=>$count,
+			'model' => $model,
+			'count' => $count,
 		));
 	}
 	

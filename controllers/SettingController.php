@@ -24,12 +24,12 @@ class SettingController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'=>array('ajaxSort','deleteForum','deleteMembergroup','getForum','getMembergroup','saveForum','saveMembergroup','group','index','layout','spider','getSpider','deleteSpider','saveSpider','moderator','changeModerator'),
-				'users'=>array('@'),
-				'expression'=>($this->isAdmin())?'true':'false',
+				'actions' => array('ajaxSort','deleteForum','deleteMembergroup','getForum','getMembergroup','saveForum','saveMembergroup','group','index','layout','spider','getSpider','deleteSpider','saveSpider','moderator','changeModerator'),
+				'users' => array('@'),
+				'expression' => ($this->isAdmin())?'true':'false',
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
@@ -46,7 +46,7 @@ class SettingController extends BbiiController {
 				$this->redirect(array('index'));
 		}
 
-		$this->render('index', array('model'=>$model));
+		$this->render('index', array('model' => $model));
 	}
 		
 	public function actionLayout() {
@@ -65,8 +65,8 @@ class SettingController extends BbiiController {
 		}
 		
 		$this->render('layout', array(
-			'model'=>$model,
-			'category'=>$category,
+			'model' => $model,
+			'category' => $category,
 		));
 	}
 	
@@ -76,7 +76,7 @@ class SettingController extends BbiiController {
 		if(isset(Yii::$app->request->get()['BbiiMembergroup']))
 			$model->attributes=Yii::$app->request->get()['BbiiMembergroup'];
 
-		$this->render('group', array('model'=>$model));
+		$this->render('group', array('model' => $model));
 	}
 	
 	public function actionModerator() {
@@ -86,7 +86,7 @@ class SettingController extends BbiiController {
 			$model->attributes=Yii::$app->request->get()['BbiiMember'];
 
 		$this->render('moderator',array(
-			'model'=>$model,
+			'model' => $model,
 		));
 	}
 	
@@ -96,7 +96,7 @@ class SettingController extends BbiiController {
 		if(isset(Yii::$app->request->get()['BbiiSpider']))
 			$model->attributes=Yii::$app->request->get()['BbiiSpider'];
 
-		$this->render('spider', array('model'=>$model));
+		$this->render('spider', array('model' => $model));
 	}
 	
 	/**
@@ -110,7 +110,7 @@ class SettingController extends BbiiController {
 				$model->sort = $number++;
 				$model->save();
 			}
-			$json = array('succes'=>'yes');
+			$json = array('succes' => 'yes');
 		} elseif(isset($_POST['frm'])) {
 			$number = 1;
 			foreach($_POST['frm'] as $id) {
@@ -118,9 +118,9 @@ class SettingController extends BbiiController {
 				$model->sort = $number++;
 				$model->save();
 			}
-			$json = array('succes'=>'yes');
+			$json = array('succes' => 'yes');
 		} else { 
-			$json = array('succes'=>'no');
+			$json = array('succes' => 'no');
 		}
 		echo json_encode($json);
 		Yii::$app->end();

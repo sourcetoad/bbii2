@@ -93,9 +93,9 @@ class BbiiWatcherMail {
 				}
 				if($send) {
 					$precontent = $row_member['member_name'] . ',<br><br>';
-					$precontent .= Yii::t('BbiiModule.bbii', 'This is the digest of posts in the topic(s) "{topics}" for today.', array('{topics}'=>implode('", "', $topics)));
+					$precontent .= Yii::t('BbiiModule.bbii', 'This is the digest of posts in the topic(s) "{topics}" for today.', array('{topics}' => implode('", "', $topics)));
 					$precontent .= '<br>';
-					$postcontent =  '<hr><br>' . Yii::t('BbiiModule.bbii', 'You can unsubscribe at any time by logging into the {forum site} and visit your forum profile page.', array('{forum site}'=>Html::a(Yii::t('BbiiModule.bbii', 'website'), $url)));
+					$postcontent =  '<hr><br>' . Yii::t('BbiiModule.bbii', 'You can unsubscribe at any time by logging into the {forum site} and visit your forum profile page.', array('{forum site}' => Html::a(Yii::t('BbiiModule.bbii', 'website'), $url)));
 					$content = '<html><body>' . $precontent . $content . $postcontent . '</body></html>';
 					
 					//$name='=?UTF-8?B?'.base64_encode($this->forum).'?=';

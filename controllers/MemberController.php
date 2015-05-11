@@ -30,15 +30,15 @@ class MemberController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index','mail','members','view','update'),
-				'users'=>array('@'),
+				'actions' => array('index','mail','members','view','update'),
+				'users' => array('@'),
 			),
 			array('allow',
-				'actions'=>array('watch'),
-				'users'=>array('*'),
+				'actions' => array('watch'),
+				'users' => array('*'),
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
@@ -107,10 +107,10 @@ class MemberController extends BbiiController {
 					}
 				}
 				if($valid)
-					$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array('view','id' => $model->id));
 			}
 		}
-		$this->render('update', array('model'=>$model));
+		$this->render('update', array('model' => $model));
 	}
 	
 	public function actionView($id) {
@@ -128,13 +128,13 @@ class MemberController extends BbiiController {
 		}
 		$model=$this->loadModel($id);
 		$dataProvider = new ActiveDataProvider('BbiiPost', array(
-			'criteria'=>array(
-				'condition'=>"approved = 1 and user_id = $id",
-				'order'=>'create_time DESC',
-				'with'=>'forum',
-				'limit'=>10,
+			'criteria' => array(
+				'condition' => "approved = 1 and user_id = $id",
+				'order' => 'create_time DESC',
+				'with' => 'forum',
+				'limit' => 10,
 			),
-			'pagination'=>false,
+			'pagination' => false,
 		));
 		if($this->isModerator() || $id == Yii::$app->user->id) {
 			$object = new BbiiTopicsRead;
@@ -152,14 +152,14 @@ class MemberController extends BbiiController {
 		$criteria->addInCondition('id', $in);
 		$criteria->order = 'id';
 		$topicProvider = new ActiveDataProvider('BbiiTopic', array(
-			'criteria'=>$criteria,
-			'pagination'=>false,
+			'criteria' => $criteria,
+			'pagination' => false,
 		));
 		
 		$this->render('view', array(
-			'model'=>$model, 
-			'dataProvider'=>$dataProvider,
-			'topicProvider'=>$topicProvider,
+			'model' => $model, 
+			'dataProvider' => $dataProvider,
+			'topicProvider' => $topicProvider,
 		));
 	}
 	
@@ -171,10 +171,10 @@ class MemberController extends BbiiController {
 				$class = new $this->module->userClass;
 				$criteria = new CDbCriteria;
 				$criteria->condition = $this->module->userIdColumn . '=:id';
-				$criteria->params = array(':id'=>Yii::$app->user->id);
+				$criteria->params = array(':id' => Yii::$app->user->id);
 				$user 	= $class::model()->find($criteria);
 				$from 	= $user->getAttribute($this->module->userMailColumn);
-				$criteria->params = array(':id'=>$model->member_id);
+				$criteria->params = array(':id' => $model->member_id);
 				$user 	= $class::model()->find($criteria);
 				$to 	= $user->getAttribute($this->module->userMailColumn);
 				
@@ -191,15 +191,15 @@ class MemberController extends BbiiController {
 					"Content-type: text/html; charset=UTF-8";
 
 				mail($sendto,$subject,$model->body,$headers);
-				Yii::$app->user->setFlash('notice',Yii::t('BbiiModule.bbii','You have sent an e-mail to {member_name}.', array('{member_name}'=>$model->member_name)));
+				Yii::$app->user->setFlash('notice',Yii::t('BbiiModule.bbii','You have sent an e-mail to {member_name}.', array('{member_name}' => $model->member_name)));
 				
-				$this->redirect(array('view','id'=>$model->member_id));
+				$this->redirect(array('view','id' => $model->member_id));
 			}
 		} else {
 			$model->member_id = $id;
 			$model->member_name = BbiiMember::model()->findByPk($id)->member_name;
 		}
-		$this->render('mail',array('model'=>$model));
+		$this->render('mail',array('model' => $model));
 	}
 	
 	/**
@@ -213,7 +213,7 @@ class MemberController extends BbiiController {
 			$criteria->limit = 15;
 			$models = BbiiMember::model()->findAll($criteria);
 			foreach($models as $model) {
-				$json[] = array('value'=>$model->id,'label'=>$model->member_name);
+				$json[] = array('value' => $model->id,'label' => $model->member_name);
 			}
 		}
 		echo json_encode($json);

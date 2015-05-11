@@ -24,7 +24,7 @@ $assets = AppAsset::register($this);
 						Html::img(
 							$assets->baseUrl.'/images/newmail.png',
 							array(
-								'title'=>$messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages')
+								'title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages')
 							)
 						),
 						array('message/inbox')
@@ -34,7 +34,7 @@ $assets = AppAsset::register($this);
 						Html::img(
 							$assets->baseUrl.'/images/mail.png',
 							array(
-								'title'=>$messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages')
+								'title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages')
 							)
 						),
 						array('message/inbox')
@@ -44,9 +44,9 @@ $assets = AppAsset::register($this);
 				echo Html::a(
 					Html::img(
 						$assets->baseUrl.'/images/settings.png',
-						array('title'=>Yii::t('BbiiModule.bbii', 'My settings'))
+						array('title' => Yii::t('BbiiModule.bbii', 'My settings'))
 					),
-					array('member/view', 'id' =>Yii::$app->user->id)
+					array('member/view', 'id'  => Yii::$app->user->id)
 				); 
 			?>
 		</div>
@@ -81,7 +81,7 @@ $assets = AppAsset::register($this);
 
 <?php /*if(isset($this->bbii_breadcrumbs)):?>
 	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-		'homeLink'=>false,
-		'links'=>$this->bbii_breadcrumbs,
+		'homeLink' => false,
+		'links' => $this->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
 <?php endif;*/ ?>

@@ -16,8 +16,8 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'bbii-mail-form',
-	'enableAjaxValidation'=>false,
+	'id' => 'bbii-mail-form',
+	'enableAjaxValidation' => false,
 )); ?>
 
 	<p class="note"><?= Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
@@ -26,23 +26,23 @@
 		
 	<div class="row">
 		<?= Html::label(Yii::t('BbiiModule.bbii','Member groups'), 'member_id'); ?>
-		<?= $form->dropDownList($model, 'member_id', Html::listData(BbiiMembergroup::model()->findAll(), 'id', 'name'), array('empty'=>Yii::t('BbiiModule.bbii','All members')));  ?>
+		<?= $form->dropDownList($model, 'member_id', Html::listData(BbiiMembergroup::model()->findAll(), 'id', 'name'), array('empty' => Yii::t('BbiiModule.bbii','All members')));  ?>
 		<?= $form->error($model,'member_id'); ?>
 	</div>
 
 	<div class="row">
 		<?= $form->labelEx($model,'subject'); ?>
-		<?= $form->textField($model,'subject',array('size'=>80,'maxlength'=>255)); ?>
+		<?= $form->textField($model,'subject',array('size' => 80,'maxlength' => 255)); ?>
 		<?= $form->error($model,'subject'); ?>
 	</div>
 		
 	<div class="row">
 		<?php $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
-			'model'=>$model,
-			'attribute'=>'body',
-			'autoLanguage'=>false,
-			'height'=>'300px',
-			'toolbar'=>array(
+			'model' => $model,
+			'attribute' => 'body',
+			'autoLanguage' => false,
+			'height' => '300px',
+			'toolbar' => array(
 				array(
 					'Bold', 'Italic', 'Underline', 'RemoveFormat'
 				),
@@ -54,16 +54,16 @@
 				'-',
 				array('Blockquote'),
 			),
-			'skin'=>$this->module->editorSkin,
-			'uiColor'=>$this->module->editorUIColor,
-			'contentsCss'=>$this->module->editorContentsCss,
+			'skin' => $this->module->editorSkin,
+			'uiColor' => $this->module->editorUIColor,
+			'contentsCss' => $this->module->editorContentsCss,
 		)); ?>
 		<?= $form->error($model,'body'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php if($this->module->userMailColumn) { echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send e-mail'), array('name'=>'email')); } ?>
-		<?= Html::submitButton(Yii::t('BbiiModule.bbii', 'Send private message'), array('name'=>'pm')); ?>
+		<?php if($this->module->userMailColumn) { echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send e-mail'), array('name' => 'email')); } ?>
+		<?= Html::submitButton(Yii::t('BbiiModule.bbii', 'Send private message'), array('name' => 'pm')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

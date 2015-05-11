@@ -7,16 +7,16 @@ $members = BbiiMember::model()->present()->count();
 	<table><tr>
 		<td class="online">
 			<div>
-				<span class="header2"><?= Yii::t('BbiiModule.bbii','{guests} guest(s) and {members} active member(s)', array('{guests}'=>($present - $members), '{members}'=>$members));?></span>
+				<span class="header2"><?= Yii::t('BbiiModule.bbii','{guests} guest(s) and {members} active member(s)', array('{guests}' => ($present - $members), '{members}' => $members));?></span>
 				<?= Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?>
 			</div>
 			<div>
 				<?php $members = BbiiMember::model()->present()->findAll(); 
 					foreach($members as $member) {
-						echo Html::a($member->member_name, array('member/view', 'id'=>$member->id), array('style'=>'color:#'.$member->group->color)) . '&nbsp;';
+						echo Html::a($member->member_name, array('member/view', 'id' => $member->id), array('style' => 'color:#'.$member->group->color)) . '&nbsp;';
 					}
 				?>
-				<?= Yii::t('BbiiModule.bbii','({hidden} anonymous member(s))', array('{hidden}'=>BbiiMember::model()->hidden()->present()->count())); ?>
+				<?= Yii::t('BbiiModule.bbii','({hidden} anonymous member(s))', array('{hidden}' => BbiiMember::model()->hidden()->present()->count())); ?>
 			</div>
 		</td>
 		<td class="statistics">
@@ -31,7 +31,7 @@ $members = BbiiMember::model()->present()->count();
 			</tr><tr>
 				<th><?= Yii::t('BbiiModule.bbii','Total members'); ?></th><td><?= BbiiMember::model()->count(); ?></td>
 			</tr><tr>
-				<th><?= Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::model()->newest()->find(); echo Html::a($member->member_name, array('member/view', 'id'=>$member->id)); ?></td>
+				<th><?= Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::model()->newest()->find(); echo Html::a($member->member_name, array('member/view', 'id' => $member->id)); ?></td>
 			</tr><tr>
 				<th><?= Yii::t('BbiiModule.bbii','Visitors today'); ?></th><td><?= BbiiSession::model()->count(); ?></td>
 			</tr>

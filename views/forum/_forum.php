@@ -30,7 +30,7 @@ use yii\widgets\ListView;
 	<div class="forum-cell <?= $image; ?>"></div>
 	<div class="forum-cell main">
 		<div class="header2">
-			<?= Html::a(Html::encode($data->name), array('forum', 'id'=>$data->id)); ?>
+			<?= Html::a(Html::encode($data->name), array('forum', 'id' => $data->id)); ?>
 		</div>
 		<div class="header4">
 			<?= Html::encode($data->subtitle); ?>
@@ -47,7 +47,7 @@ use yii\widgets\ListView;
 	<div class="forum-cell last-cell">
 		<?php if($data->last_post_id && $data->lastPost) {
 			echo Html::encode($data->lastPost->poster->member_name);
-			echo Html::a(Html::img($this->module->getRegisteredImage('next.png'), 'next', array('style'=>'margin-left:5px;')), array('topic', 'id'=>$data->lastPost->topic_id, 'nav'=>'last'));
+			echo Html::a(Html::img($this->module->getRegisteredImage('next.png'), 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->lastPost->topic_id, 'nav' => 'last'));
 			echo '<br>';
 			echo DateTimeCalculation::long($data->lastPost->create_time);
 		} else {

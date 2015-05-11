@@ -8,13 +8,13 @@ $this->bbii_breadcrumbs=array(
 );
 
 $item = array(
-	array('label'=>Yii::t('BbiiModule.bbii', 'Forum'), 'url'=>array('forum/index')),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Members'), 'url'=>array('member/index'))
+	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'))
 );
 ?>
 
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?= $this->renderPartial('_header', array('item' => $item)); ?>
 
 	<h2><?= Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>
 

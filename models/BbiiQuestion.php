@@ -39,12 +39,12 @@ class BbiiQuestion extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('question, poll_id', 'required'),
-			array('sort, votes', 'numerical', 'integerOnly'=>true),
-			array('question', 'length', 'max'=>200),
-			array('poll_id', 'length', 'max'=>10),
+			array('sort, votes', 'numerical', 'integerOnly' => true),
+			array('question', 'length', 'max' => 200),
+			array('poll_id', 'length', 'max' => 10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, question, poll_id, sort, votes', 'safe', 'on'=>'search'),
+			array('id, question, poll_id, sort, votes', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -60,7 +60,7 @@ class BbiiQuestion extends CActiveRecord
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -91,7 +91,7 @@ class BbiiQuestion extends CActiveRecord
 		$criteria->compare('votes',$this->votes);
 
 		return new ActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 }

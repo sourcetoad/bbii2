@@ -34,14 +34,14 @@ $present       = BbiiSession::find()->count();
 						foreach($members as $member) {
 							echo Html::a(
 								$member->member_name,
-								array('member/view', 'id'=>$member->id),
-								array('style'=>'color:#'.$member->group->color)
+								array('member/view', 'id' => $member->id),
+								array('style' => 'color:#'.$member->group->color)
 							) . '&nbsp;';
 						}
 					}
 					$spiders = BbiiSpider::find()->all();
 					foreach($spiders as $spider) {
-						echo Html::a($spider->name, $spider->url, array('class'=>'spider','target'=>'_new')) . '&nbsp;';
+						echo Html::a($spider->name, $spider->url, array('class' => 'spider','target' => '_new')) . '&nbsp;';
 				};
 				echo Yii::t(
 					'BbiiModule.bbii','({0} anonymous member(s))',
@@ -65,7 +65,7 @@ $present       = BbiiSession::find()->count();
 				<td><?= BbiiMember::find()->count(); ?></td>
 			</tr><tr>
 				<th><?php //echo Yii::t('BbiiModule.bbii','Newest member'); ?></th>
-				<td><?php //echo Html::a($member_newest->member_name, array('member/view', 'id'=>$member_newest->id)); ?></td>
+				<td><?php //echo Html::a($member_newest->member_name, array('member/view', 'id' => $member_newest->id)); ?></td>
 			</tr><tr>
 				<th><?= Yii::t('BbiiModule.bbii','Visitors today'); ?></th>
 				<td><?= BbiiSession::find()->count(); ?></td>

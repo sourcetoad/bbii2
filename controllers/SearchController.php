@@ -22,11 +22,11 @@ class SearchController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index'),
-				'users'=>array('*'),
+				'actions' => array('index'),
+				'users' => array('*'),
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
@@ -115,21 +115,21 @@ class SearchController extends BbiiController {
 			}
 		}
 		$dataProvider = new ActiveDataProvider('BbiiPost', array(
-			'criteria'=>array(
-				'condition'=>$condition,
-				'order'=>'create_time DESC',
-				'with'=>'topic',
+			'criteria' => array(
+				'condition' => $condition,
+				'order' => 'create_time DESC',
+				'with' => 'topic',
 			),
-			'pagination'=>array(
-				'pageSize'=>10,
+			'pagination' => array(
+				'pageSize' => 10,
 			),
 		));
 
 		$this->render('index', array(
-			'dataProvider'=>$dataProvider,
-			'search'=>$search,
-			'choice'=>$choice,
-			'type'=>$type,
+			'dataProvider' => $dataProvider,
+			'search' => $search,
+			'choice' => $choice,
+			'type' => $type,
 		));
 	}
 	

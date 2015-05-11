@@ -31,8 +31,8 @@ class BbiiModule extends \yii\base\Module
 	public $forumTitle        = 'Forums';
 	public $juiTheme          = 'base';
 	public $purifierOptions   = array(
-		'HTML.SafeIframe'         =>true,
-		'URI.SafeIframeRegexp'    =>'%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',
+		'HTML.SafeIframe'          => true,
+		'URI.SafeIframeRegexp'     => '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',
 	);
 	public $postsPerPage      = 20;
 	public $topicsPerPage     = 20;
@@ -59,8 +59,8 @@ class BbiiModule extends \yii\base\Module
 	 	// @deprecated deprecated since version 2.0
 		/*Yii::$app->setComponents(
 			array(
-				'errorHandler'=>array(
-					'errorAction'=>'forum/forum/error',
+				'errorHandler' => array(
+					'errorAction' => 'forum/forum/error',
 				),
 			)
 		);
@@ -134,7 +134,7 @@ class BbiiModule extends \yii\base\Module
 				} else {
 					$criteria            = new CDbCriteria;
 					$criteria->condition = $this->userIdColumn . '=:id';
-					$criteria->params    = array(':id'=>Yii::$app->user->id);
+					$criteria->params    = array(':id' => Yii::$app->user->id);
 					$class               = new $this->userClass;
 					$user                = $class::model()->find($criteria);
 					$username            = $user->getAttribute($this->userNameColumn);
@@ -148,7 +148,7 @@ class BbiiModule extends \yii\base\Module
 			}
 			// register visit by webspider
 			if(isset($_SERVER['HTTP_USER_AGENT'])) {
-				$spider = BbiiSpider::model()->findByAttributes(array('user_agent'=>$_SERVER['HTTP_USER_AGENT']));
+				$spider = BbiiSpider::model()->findByAttributes(array('user_agent' => $_SERVER['HTTP_USER_AGENT']));
 			} else {
 				$spider = null;
 			}

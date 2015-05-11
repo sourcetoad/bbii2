@@ -33,14 +33,14 @@ class BbiiSpider extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('name, user_agent', 'required'),
-			array('name', 'length', 'max'=>45),
-			array('user_agent', 'length', 'max'=>255),
-			array('hits', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max' => 45),
+			array('user_agent', 'length', 'max' => 255),
+			array('hits', 'numerical', 'integerOnly' => true),
 			array('hits', 'default',  'value' => 0),
-			array('last_visit', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'visit'),
+			array('last_visit', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'visit'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, user_agent, last_visit', 'safe', 'on'=>'search'),
+			array('id, name, user_agent, last_visit', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -56,7 +56,7 @@ class BbiiSpider extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -85,12 +85,12 @@ class BbiiSpider extends BbiiAR
 		$criteria->compare('last_visit',$this->last_visit,true);
 
 		return new ActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-			'sort'=>array(
-				'defaultOrder'=>'last_visit DESC',
+			'criteria' => $criteria,
+			'sort' => array(
+				'defaultOrder' => 'last_visit DESC',
 			),
-			'pagination'=>array(
-				'pageSize'=>50,
+			'pagination' => array(
+				'pageSize' => 50,
 			),
 		));
 	}

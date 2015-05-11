@@ -8,7 +8,7 @@ use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiMessage;
 
 /*$this->bbii_breadcrumbs=array(
-	Yii::t('BbiiModule.bbii', 'Forum')=>array('forum/index'),
+	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Members'),
 );*/
 
@@ -16,12 +16,12 @@ $approvals = BbiiPost::find()->where('approved IS NOT NULL')->count();
 $reports   = BbiiMessage::find()->count();
 
 $item = array(
-	array('label'=>Yii::t('BbiiModule.bbii', 'Forum'), 		'url'=>array('forum/index')),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Members'), 	'url'=>array('member/index')),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Approval'). 	' (' . $approvals . ')', 			'url'=>array('moderator/approval'), 'visible'=>$is_mod),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Reports'). 	' (' . $reports . ')', 				'url'=>array('moderator/report'), 	'visible'=>$is_mod),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Posts'), 		'url'=>array('moderator/admin'), 	'visible'=>$is_mod),
-	array('label'=>Yii::t('BbiiModule.bbii', 'Blocked IP'), 'url'=>array('moderator/ipadmin'), 	'visible'=>$is_mod),
+	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 		'url' => array('forum/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 	'url' => array('member/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). 	' (' . $approvals . ')', 			'url' => array('moderator/approval'), 'visible' => $is_mod),
+	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). 	' (' . $reports . ')', 				'url' => array('moderator/report'), 	'visible' => $is_mod),
+	array('label' => Yii::t('BbiiModule.bbii', 'Posts'), 		'url' => array('moderator/admin'), 	'visible' => $is_mod),
+	array('label' => Yii::t('BbiiModule.bbii', 'Blocked IP'), 'url' => array('moderator/ipadmin'), 	'visible' => $is_mod),
 );
 ?>
 <div id="bbii-wrapper">
@@ -31,20 +31,20 @@ $item = array(
 	)); ?>
 
 <?php /*$this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'member-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
+	'id' => 'member-grid',
+	'dataProvider' => $model->search(),
+	'filter' => $model,
+	'columns' => array(
 		array(
-			'header'=>'Avatar',
-			'type'=>'image',
-			'value'=>'(isset($data->avatar))?"'.Yii::$app->request->baseUrl . $this->module->avatarStorage . '/$data->avatar":"'.$this->module->getRegisteredImage('empty.jpeg').'"',
-			'htmlOptions'=>array('class'=>'img30'),
+			'header' => 'Avatar',
+			'type' => 'image',
+			'value' => '(isset($data->avatar))?"'.Yii::$app->request->baseUrl . $this->module->avatarStorage . '/$data->avatar":"'.$this->module->getRegisteredImage('empty.jpeg').'"',
+			'htmlOptions' => array('class' => 'img30'),
 		),
 		array(
 			'name' => 'member_name',
 			'type' => 'raw',
-			'value' => 'Html::a(Html::encode($data->member_name), array("member/view", "id"=>$data->id))',
+			'value' => 'Html::a(Html::encode($data->member_name), array("member/view", "id" => $data->id))',
 		),
 		array(
 			'header' => Yii::t('BbiiModule.bbii', 'Joined'),

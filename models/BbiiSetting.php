@@ -37,10 +37,10 @@ class BbiiSetting extends BbiiAR
 		return array(
 			array('contact_email', 'required'),
 			array('contact_email', 'email'),
-			array('contact_email', 'length', 'max'=>255),
+			array('contact_email', 'length', 'max' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, contact_email', 'safe', 'on'=>'search'),
+			array('id, contact_email', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -56,7 +56,7 @@ class BbiiSetting extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -81,7 +81,7 @@ class BbiiSetting extends BbiiAR
 		$criteria->compare('contact_email',$this->contact_email,true);
 
 		return new ActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 }

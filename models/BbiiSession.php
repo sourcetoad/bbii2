@@ -30,11 +30,11 @@ class BbiiSession extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('id', 'required'),
-			array('id', 'length', 'max'=>128),
+			array('id', 'length', 'max' => 128),
 			array('last_visit', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, last_visit', 'safe', 'on'=>'search'),
+			array('id, last_visit', 'safe', 'on' => 'search'),
 		);
 	}
 	
@@ -54,7 +54,7 @@ class BbiiSession extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -79,7 +79,7 @@ class BbiiSession extends BbiiAR
 		$criteria->compare('last_visit',$this->last_visit,true);
 
 		return new ActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 	
