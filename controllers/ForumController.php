@@ -10,6 +10,7 @@ use frontend\modules\bbii\models\BbiiPost;
 
 use Yii;
 use yii\data\ArrayDataProvider;
+use yii\web\ErrorHandler;
 use yii\web\User;
 
 class ForumController extends BbiiController {
@@ -47,6 +48,12 @@ class ForumController extends BbiiController {
 		);
 	}
 	
+	/**
+	 * [actionIndex description]
+	 *
+	 * @version  2.0.2 [description]
+	 * @return [type] [description]
+	 */
 	public function actionIndex() {
 		if (isset(Yii::$app->user->BbiiTopic_page)) {
 			unset(Yii::$app->user->BbiiTopic_page);	
@@ -56,15 +63,15 @@ class ForumController extends BbiiController {
 		$categories = BbiiForum::find()->all();
 
 		foreach($categories as $category) {
-			if(Yii::$app->user->isGuest) {
+			if (Yii::$app->user->isGuest) {
 
 				$forums = BbiiForum::find()->forum()->public()->membergroup()->sorted()->findAll("cat_id = $category->id");
 			} elseif($this->isModerator()) {
 
 				$forums = BbiiForum::find()->forum()->sorted()->findAll("cat_id = $category->id");
 			} else {
-				$groupId = BbiiMember::find()->findByPk(Yii::$app->user->id)->group_id;
-				$forums = BbiiForum::find()->forum()->membergroup($groupId)->sorted()->findAll("cat_id = $category->id");
+				$groupId = BbiiMember::find(Yii::$app->user->id)->group_id;
+				$forums  = BbiiForum::find()->forum()->membergroup($groupId)->sorted()->findAll("cat_id = $category->id");
 			}
 
 			if(count($forums)) {
@@ -75,13 +82,13 @@ class ForumController extends BbiiController {
 			}
 		}
 
-		// get user messages
-		$messages = BbiiMessage::find()
-			->where(['read_indicator' => 0, 'sendto' =>  Yii::$app->user->id,])
-			->count();
+		$dataProvider = new ArrayDataProvider($model, array(
+			'id'         => 'forum',
+			'pagination' => false
+		));
 
 		return $this->render('index', array(
-			'dataProvider' => new ArrayDataProvider($model, array('id' => 'forum', 'pagination' => false)),
+			'dataProvider' => $dataProvider,
 			'is_admin'     => $this->isModerator(),
 			'is_mod'       => $this->isAdmin(),
 		));
@@ -746,14 +753,18 @@ class ForumController extends BbiiController {
 	
 	/**
 	 * This is the action to handle external exceptions.
+	 *
+	 * @version  2.0.2
 	 */
 	public function actionError() {
-		if($error=Yii::$app->errorHandler->error)
-		{
-			if(Yii::$app->request->isAjaxRequest)
+		if ($error = Yii::$app->errorHandler->error) {
+			if (Yii::$app->request->isAjaxRequest) {
+
 				echo $error['message'];
-			else
+			} else{
+
 				return $this->render('error', $error);
+			}
 		}
 	}
 	
@@ -850,14 +861,11 @@ class ForumController extends BbiiController {
 		$criteria = new CDbCriteria;
 		$criteria->condition = "member_id = :userid and post_id = $post_id";
 		$criteria->params = array(':userid' => Yii::$app->user->id);
-		
-		/*
 		if(BbiiUpvoted::find()->exists($criteria)) {
 			$html = Html::img($assets->baseUrl.'/images/down.gif', 'upvote', array('title' => Yii::t('BbiiModule.bbii', 'Remove your vote'), 'id' => 'upvote_'.$post_id, 'style' => 'cursor:pointer;', 'onclick' => 'upvotePost(' . $post_id . ',"' . $url . '")'));
 		} else {
 			$html = Html::img($assets->baseUrl.'/images/up.gif', 'upvote', array('title' => Yii::t('BbiiModule.bbii', 'Vote this post up'), 'id' => 'upvote_'.$post_id, 'style' => 'cursor:pointer;', 'onclick' => 'upvotePost(' . $post_id . ',"' . $url . '")'));
 		}
-		*/
 
 		return $html;
 	}

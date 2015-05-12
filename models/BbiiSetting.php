@@ -1,5 +1,9 @@
 <?php
 
+namespace frontend\modules\bbii\models;
+
+use frontend\modules\bbii\models\BbiiAR;
+
 /**
  * This is the model class for table "bbii_setting".
  *
@@ -10,19 +14,9 @@
 class BbiiSetting extends BbiiAR
 {
 	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return BbiiSetting the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
-	/**
 	 * @return string the associated database table name
 	 */
-	public function tableName()
+	public static function tableName()
 	{
 		return 'bbii_setting';
 	}

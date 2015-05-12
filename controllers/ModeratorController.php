@@ -420,7 +420,7 @@ class ModeratorController extends BbiiController {
 				if(isset(Yii::$app->request->post()['email'])) {	// e-mails
 					$name = $this->module->forumTitle;
 					$name = '=?UTF-8?B?'.base64_encode($name).'?=';
-					$from = BbiiSetting::find()->find()->contact_email;
+					$from = BbiiSetting::find()->contact_email;
 					$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
 					$headers="From: $name <$from>\r\n".
 						"Reply-To: $from\r\n".

@@ -7,7 +7,7 @@ use yii\web\AssetBundle;
 class AppAsset extends AssetBundle
 {
 	public $css 		= ['css/base/forum.css',];
-	public $js 			= ['js/bbii.js'];
+	public $js 			= ['js/bbii.js', 'js/bbiiSetting.js'];
 	public $sourcePath 	= '@app/modules/bbii/assets/';
 
 	public $depends = [
