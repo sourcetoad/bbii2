@@ -2,6 +2,8 @@
 
 use frontend\modules\bbii\components\SimpleSearchForm;
 use frontend\modules\bbii\models\BbiiForum;
+use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiMessage;
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -9,7 +11,11 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 use frontend\modules\bbii\AppAsset;
-$assets = AppAsset::register($this);
+
+$approvals = BbiiPost::find()->all();
+$assets    = AppAsset::register($this);
+$messages  = false; //BbiiMessage::find()->where(['read_indicator' => 0, 'sendto' =>  Yii::$app->user->id])->count();
+$reports   = BbiiMessage::find()->all();
 
 /* @var $this ForumController */
 /* @var $item array */
@@ -19,7 +25,8 @@ $assets = AppAsset::register($this);
 	<?php if(!Yii::$app->user->isGuest) { ?>
 		<div class="bbii-profile-box">
 			<?php 
-				if ($messages) {
+				// @todo iterate on 'messages' feature
+				/*if ($messages) {
 					echo Html::a(
 						Html::img(
 							$assets->baseUrl.'/images/newmail.png',
@@ -27,6 +34,7 @@ $assets = AppAsset::register($this);
 						),
 						array('message/inbox')
 					); 
+					echo ' | ';
 				} else {
 					echo Html::a(
 						Html::img(
@@ -35,9 +43,10 @@ $assets = AppAsset::register($this);
 						),
 						array('message/inbox')
 					); 
-				}
+					echo ' | ';
+				} */
 
-				echo ' | ';
+
 				echo Html::a(
 					Html::img(
 						$assets->baseUrl.'/images/settings.png',

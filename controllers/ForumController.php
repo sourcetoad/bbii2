@@ -81,12 +81,9 @@ class ForumController extends BbiiController {
 			->count();
 
 		return $this->render('index', array(
-			'approvals'    => BbiiPost::find()->all(),
 			'dataProvider' => new ArrayDataProvider($model, array('id' => 'forum', 'pagination' => false)),
 			'is_admin'     => $this->isModerator(),
 			'is_mod'       => $this->isAdmin(),
-			'messages'     => BbiiMessage::find()->where(['read_indicator' => 0, 'sendto' =>  Yii::$app->user->id])->count(),
-			'reports'      => BbiiMessage::find()->all(),
 		));
 	}
 	
