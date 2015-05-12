@@ -26,7 +26,7 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 ", CClientScript::POS_BEGIN);
 ?>
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item' => $item)); ?>
+	<?= $this->render('_header', array('item' => $item)); ?>
 	
 	<div class="bbii-box-top"><?= Yii::t('BbiiModule.bbii', 'Add category or forum'); ?></div>
 	
@@ -80,7 +80,7 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 		$items = array();
 		foreach($category as $data) {
 			$forum = BbiiForum::find()->sorted()->forum()->findAll("cat_id = $data->id");
-			$items['cat_'.$data->id] = $this->renderPartial('_category', array('data' => $data, 'forum' => $forum), true);
+			$items['cat_'.$data->id] = $this->render('_category', array('data' => $data, 'forum' => $forum), true);
 		}
 		$this->widget('zii.widgets.jui.CJuiSortable', array(
 			'id' => 'sortcategory',
@@ -114,7 +114,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     ),
 ));
 
-    echo $this->renderPartial('_editForum', array('model' => $model));
+    echo $this->render('_editForum', array('model' => $model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>

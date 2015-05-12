@@ -32,7 +32,7 @@ $('.presence').hide();
 
 ?>
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item' => $item)); ?>
+	<?= $this->render('_header', array('item' => $item)); ?>
 	
 	<div class="bbii-box-top"><?= $model->member_name . Yii::t('BbiiModule.bbii', '\'s profile'); ?></div>
 

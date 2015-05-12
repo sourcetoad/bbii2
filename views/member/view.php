@@ -33,7 +33,7 @@ $df = Yii::$app->dateFormatter;
 <?php endif; ?>
 
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item' => $item)); ?>
+	<?= $this->render('_header', array('item' => $item)); ?>
 	
 	<?php if($this->isModerator() || $model->id == Yii::$app->user->id): ?>
 	<?= Html::htmlButton(Yii::t('BbiiModule.bbii', 'Edit profile'), array('class' => 'bbii-button-right', 'onclick' => 'js:document.location.href="' . $this->createAbsoluteUrl('member/update', array('id' => $model->id)) .'"')); ?>
@@ -114,6 +114,6 @@ $df = Yii::$app->dateFormatter;
 		));
 		?>
 	</td></tr><tr><td colspan="2">
-		<?php if($topicProvider->getItemCount()) { $this->renderPartial('_watch', array('topicProvider' => $topicProvider)); } ?>
+		<?php if($topicProvider->getItemCount()) { $this->render('_watch', array('topicProvider' => $topicProvider)); } ?>
 	</td></tr></table>
 </div>

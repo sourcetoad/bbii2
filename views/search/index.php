@@ -25,7 +25,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item' => $item)); ?>
+	<?= $this->render('_header', array('item' => $item)); ?>
 	
 	<?php $form=$this->beginWidget('CActiveForm', array(
 			'id' => 'bbii-search-form',
@@ -46,5 +46,5 @@ $item = array(
 		'itemView' => '_post',
 	)); ?>
 	
-	<?= $this->renderPartial('_footer'); ?>
+	<?= $this->render('_footer'); ?>
 </div>

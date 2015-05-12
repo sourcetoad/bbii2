@@ -17,9 +17,9 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item' => $item)); ?>
+	<?= $this->render('_header', array('item' => $item)); ?>
 
 	<h1><?= ($this->action->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'Reply'); ?></h1>
 
-	<?= $this->renderPartial('_form', array('model' => $model)); ?>
+	<?= $this->render('_form', array('model' => $model)); ?>
 </div>

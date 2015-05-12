@@ -112,7 +112,7 @@ $assets = AppAsset::register($this);
 				<?= Yii::t('BbiiModule.bbii','Changed'). ': ' . DateTimeCalculation::long($data->change_time) . ' ' . Yii::t('BbiiModule.bbii','Reason') . ': ' . Html::encode($data->change_reason); ?>
 			<?php endif; ?>
 		</div>
-		<?= $this->renderPartial('_upvotedBy', array('post_id' => $data->id)); ?>
+		<?= $this->render('_upvotedBy', array('post_id' => $data->id)); ?>
 		<div class="toolbar">
 		<?php if($this->isModerator()): ?>
 			<?= Html::a( Html::img($assets->baseUrl.'/images/warn.png', 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $data->user_id, 'type' => 1) ); ?>

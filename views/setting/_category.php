@@ -5,7 +5,7 @@
 
 $forumitems = array();
 foreach($forum as $forumdata) {
-	$forumitems['frm_'.$forumdata->id] = $this->renderPartial('_forum', array('forumdata' => $forumdata), true);
+	$forumitems['frm_'.$forumdata->id] = $this->render('_forum', array('forumdata' => $forumdata), true);
 }
 ?>
 

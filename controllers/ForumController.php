@@ -599,7 +599,7 @@ class ForumController extends BbiiController {
 					),
 					'pagination' => false,
 				));
-				$json['html'] = $this->renderPartial('poll', array('choiceProvider' => $choiceProvider), true);
+				$json['html'] = $this->render('poll', array('choiceProvider' => $choiceProvider), true);
 				$json['success'] = 'yes';
 			} else {
 				$json['success'] = 'no';
@@ -625,7 +625,7 @@ class ForumController extends BbiiController {
 				),
 				'pagination' => false,
 			));
-			$json['html'] = $this->renderPartial('vote', array('choiceProvider' => $choiceProvider), true);
+			$json['html'] = $this->render('vote', array('choiceProvider' => $choiceProvider), true);
 			$json['success'] = 'yes';
 		} else {
 			$json['success'] = 'no';
@@ -646,7 +646,7 @@ class ForumController extends BbiiController {
 			foreach($models as $model) {
 				$choices[$model->id] = $model->choice;
 			}
-			$json['html'] = $this->renderPartial('editPoll', array('poll' => $poll, 'choices' => $choices), true);
+			$json['html'] = $this->render('editPoll', array('poll' => $poll, 'choices' => $choices), true);
 			$json['success'] = 'yes';
 		} else {
 			$json['success'] = 'no';

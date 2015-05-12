@@ -16,7 +16,7 @@ $item = array(
 ?>
 
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item' => $item)); ?>
+	<?= $this->render('_header', array('item' => $item)); ?>
 
 	<h2><?= Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>
 

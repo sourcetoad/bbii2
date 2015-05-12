@@ -44,7 +44,7 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 <?php endif; ?>
 
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item' => $item)); ?>
+	<?= $this->render('_header', array('item' => $item)); ?>
 	
 	<div class="forum-category center">
 		<div class="header2">
@@ -102,7 +102,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     ),
 ));
 
-	echo $this->renderPartial('_reportForm', array('model' => new BbiiMessage));
+	echo $this->render('_reportForm', array('model' => new BbiiMessage));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>

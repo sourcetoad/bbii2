@@ -22,7 +22,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 ", CClientScript::POS_BEGIN);
 ?>
 <div id="bbii-wrapper">
-	<?= $this->renderPartial('_header', array('item' => $item)); ?>
+	<?= $this->render('_header', array('item' => $item)); ?>
 	
 	<?= Html::button(Yii::t('BbiiModule.bbii', 'New webspider'), array('onclick' => 'BBiiSetting.EditSpider()', 'class' => 'down35')); ?>
 	
@@ -77,7 +77,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     ),
 ));
 
-    echo $this->renderPartial('_editSpider', array('model' => $model));
+    echo $this->render('_editSpider', array('model' => $model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
