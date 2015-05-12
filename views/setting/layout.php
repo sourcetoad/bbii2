@@ -26,9 +26,9 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 ", CClientScript::POS_BEGIN);
 ?>
 <div id="bbii-wrapper">
-	<?= $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<div class="bbii-box-top"><?= Yii::t('BbiiModule.bbii', 'Add category or forum'); ?></div>
+	<div class="bbii-box-top"><?php echo Yii::t('BbiiModule.bbii', 'Add category or forum'); ?></div>
 	
 	<div class="form">
 
@@ -37,36 +37,36 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 		'enableAjaxValidation' => false,
 	)); ?>
 
-		<p class="note"><?= Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
+		<p class="note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
 		
-		<?= $form->errorSummary($model); ?>
+		<?php echo $form->errorSummary($model); ?>
 		
 		<div class="row">
-			<?= $form->labelEx($model,'name'); ?>
-			<?= $form->textField($model,'name',array('size' => 100,'maxlength' => 255, 'id' => 'name')); ?>
-			<?= $form->error($model,'name'); ?>
+			<?php echo $form->labelEx($model,'name'); ?>
+			<?php echo $form->textField($model,'name',array('size' => 100,'maxlength' => 255, 'id' => 'name')); ?>
+			<?php echo $form->error($model,'name'); ?>
 		</div>
 		
 		<div class="row">
-			<?= $form->labelEx($model,'subtitle'); ?>
-			<?= $form->textField($model,'subtitle',array('size' => 100,'maxlength' => 255, 'id' => 'subtitle')); ?>
-			<?= $form->error($model,'subtitle'); ?>
+			<?php echo $form->labelEx($model,'subtitle'); ?>
+			<?php echo $form->textField($model,'subtitle',array('size' => 100,'maxlength' => 255, 'id' => 'subtitle')); ?>
+			<?php echo $form->error($model,'subtitle'); ?>
 		</div>
 		
 		<div class="row">
-			<?= $form->labelEx($model,'type'); ?>
-			<?= $form->dropDownList($model,'type',array('0' => Yii::t('BbiiModule.bbii', 'Category'),'1' => Yii::t('BbiiModule.bbii', 'Forum')), array('id' => 'type')); ?>
-			<?= $form->error($model,'type'); ?>
+			<?php echo $form->labelEx($model,'type'); ?>
+			<?php echo $form->dropDownList($model,'type',array('0' => Yii::t('BbiiModule.bbii', 'Category'),'1' => Yii::t('BbiiModule.bbii', 'Forum')), array('id' => 'type')); ?>
+			<?php echo $form->error($model,'type'); ?>
 		</div>
 		
 		<div class="row">
-			<?= $form->labelEx($model,'cat_id'); ?>
-			<?= $form->dropDownList($model,'cat_id',Html::listData(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
-			<?= $form->error($model,'cat_id'); ?>
+			<?php echo $form->labelEx($model,'cat_id'); ?>
+			<?php echo $form->dropDownList($model,'cat_id',Html::listData(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
+			<?php echo $form->error($model,'cat_id'); ?>
 		</div>
 		
 		<div class="row buttons">
-			<?= Html::submitButton(Yii::t('BbiiModule.bbii', 'Add')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Add')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>
@@ -74,7 +74,7 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 	</div><!-- form -->	
 	
 	
-	<div class="bbii-box-top"><?= Yii::t('BbiiModule.bbii', 'Forum layout'); ?></div>
+	<div class="bbii-box-top"><?php echo Yii::t('BbiiModule.bbii', 'Forum layout'); ?></div>
 	<div class="sortable">
 	<?php
 		$items = array();

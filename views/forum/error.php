@@ -16,11 +16,11 @@ $item = array(
 ?>
 
 <div id="bbii-wrapper">
-	<?= $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('_header', array('item' => $item)); ?>
 
-	<h2><?= Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>
+	<h2><?php echo Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>
 
 	<div class="error">
-		<h4><?= Html::encode($message); ?></h4>
+		<h4><?php echo Html::encode($message); ?></h4>
 	</div>
 </div>

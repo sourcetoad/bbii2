@@ -52,7 +52,7 @@ $assets = AppAsset::register($this);
 		</div>
 	<?php }; ?>
 
-	<div class="bbii-title"><?= $this->context->module->forumTitle; ?></div>
+	<div class="bbii-title"><?php echo $this->context->module->forumTitle; ?></div>
 
 	<table>
 		<tr>
@@ -71,7 +71,7 @@ $assets = AppAsset::register($this);
 			</td>
 			<td>
 				<div class="pull-right">
-					<?= SimpleSearchForm::widget(); ?>
+					<?php echo SimpleSearchForm::widget(); ?>
 				</div>
 			</td>
 		</tr>

@@ -9,24 +9,24 @@
 	'action' => array('forum/updatePoll','id' => $poll->id),
 	'enableAjaxValidation' => false,
 )); ?><div class="row">
-	<?= Html::activeLabel($poll,'question'); ?>
-	<?= Html::activeTextField($poll,'question',array('size' => 100,'maxlength' => 255,'style' => 'width:99%;')); ?>
-	<?= Html::error($poll,'question'); ?>
+	<?php echo Html::activeLabel($poll,'question'); ?>
+	<?php echo Html::activeTextField($poll,'question',array('size' => 100,'maxlength' => 255,'style' => 'width:99%;')); ?>
+	<?php echo Html::error($poll,'question'); ?>
 </div>
-<?= Html::errorSummary($poll); ?>
+<?php echo Html::errorSummary($poll); ?>
 <div class="row">
-	<?= Html::label(Yii::t('BbiiModule.bbii','Choices'),false); ?>
+	<?php echo Html::label(Yii::t('BbiiModule.bbii','Choices'),false); ?>
 	<?php foreach($choices as $key => $value): ?>
-	<?= Html::textField('choice['.$key.']',$value,array('maxlength' => 80,'style' => 'width:99%;')); ?>
+	<?php echo Html::textField('choice['.$key.']',$value,array('maxlength' => 80,'style' => 'width:99%;')); ?>
 	<?php endforeach; ?>
 </div>
 <div class="row">
-	<strong><?= Yii::t('BbiiModule.bbii','Allow revote'); ?>:</strong>
-	<?= Html::activeCheckbox($poll,'allow_revote'); ?> &nbsp;
-	<strong><?= Yii::t('BbiiModule.bbii','Allow multiple choices'); ?>:</strong>
-	<?= Html::activeCheckbox($poll,'allow_multiple'); ?> &nbsp;
-	<strong><?= Yii::t('BbiiModule.bbii','Poll expires'); ?>:</strong>
-	<?= $form->hiddenField($poll,'expire_date'); ?>
+	<strong><?php echo Yii::t('BbiiModule.bbii','Allow revote'); ?>:</strong>
+	<?php echo Html::activeCheckbox($poll,'allow_revote'); ?> &nbsp;
+	<strong><?php echo Yii::t('BbiiModule.bbii','Allow multiple choices'); ?>:</strong>
+	<?php echo Html::activeCheckbox($poll,'allow_multiple'); ?> &nbsp;
+	<strong><?php echo Yii::t('BbiiModule.bbii','Poll expires'); ?>:</strong>
+	<?php echo $form->hiddenField($poll,'expire_date'); ?>
 	<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 		'name' => 'expiredate',
 		'value' => Yii::$app->dateFormatter->formatDateTime($poll->expire_date, 'short', null),
@@ -45,7 +45,7 @@
 	)); ?>
 </div>
 <div class="row button">
-	<?= Html::submitButton(Yii::t('BbiiModule.bbii','Save')); ?>
+	<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save')); ?>
 </div>
 <?php $this->endWidget(); ?>
 </div><!-- form -->

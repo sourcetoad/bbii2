@@ -15,61 +15,61 @@
 	)
 )); ?>
 
-	<p class="note"><?= Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
+	<p class="note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
 
-	<?= $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?= $form->labelEx($model,'name'); ?>
-		<?= $form->textField($model,'name',array('size' => 40)); ?>
-		<?= $form->error($model,'name'); ?>
-	</div>
+	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?= $form->labelEx($model,'subtitle'); ?>
-		<?= $form->textField($model,'subtitle',array('size' => 80)); ?>
-		<?= $form->error($model,'subtitle'); ?>
+		<?php echo $form->labelEx($model,'name'); ?>
+		<?php echo $form->textField($model,'name',array('size' => 40)); ?>
+		<?php echo $form->error($model,'name'); ?>
 	</div>
 
 	<div class="row">
-		<?= $form->labelEx($model,'cat_id', array('id' => 'label_cat_id')); ?>
-			<?= $form->dropDownList($model,'cat_id',Html::listData(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '')); ?>
-		<?= $form->error($model,'cat_id'); ?>
+		<?php echo $form->labelEx($model,'subtitle'); ?>
+		<?php echo $form->textField($model,'subtitle',array('size' => 80)); ?>
+		<?php echo $form->error($model,'subtitle'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'cat_id', array('id' => 'label_cat_id')); ?>
+			<?php echo $form->dropDownList($model,'cat_id',Html::listData(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '')); ?>
+		<?php echo $form->error($model,'cat_id'); ?>
 	</div>
 	
 	<div class="row">
-		<?= $form->labelEx($model,'public', array('id' => 'label_public')); ?>
-		<?= $form->dropDownList($model,'public',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
-		<?= $form->error($model,'public'); ?>
+		<?php echo $form->labelEx($model,'public', array('id' => 'label_public')); ?>
+		<?php echo $form->dropDownList($model,'public',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
+		<?php echo $form->error($model,'public'); ?>
 	</div>
 	
 	<div class="row">
-		<?= $form->labelEx($model,'locked', array('id' => 'label_locked')); ?>
-		<?= $form->dropDownList($model,'locked',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
-		<?= $form->error($model,'locked'); ?>
+		<?php echo $form->labelEx($model,'locked', array('id' => 'label_locked')); ?>
+		<?php echo $form->dropDownList($model,'locked',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
+		<?php echo $form->error($model,'locked'); ?>
 	</div>
 	
 	<div class="row">
-		<?= $form->labelEx($model,'moderated', array('id' => 'label_moderated')); ?>
-		<?= $form->dropDownList($model,'moderated',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
-		<?= $form->error($model,'moderated'); ?>
+		<?php echo $form->labelEx($model,'moderated', array('id' => 'label_moderated')); ?>
+		<?php echo $form->dropDownList($model,'moderated',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
+		<?php echo $form->error($model,'moderated'); ?>
 	</div>
 	
 	<div class="row">
-		<?= $form->labelEx($model,'membergroup_id', array('id' => 'label_membergroup')); ?>
-		<?= $form->dropDownList($model,'membergroup_id',Html::listData(BbiiMembergroup::find()->specific()->findAll(), 'id', 'name'), array('empty' => '')); ?>
-		<?= $form->error($model,'membergroup_id'); ?>
+		<?php echo $form->labelEx($model,'membergroup_id', array('id' => 'label_membergroup')); ?>
+		<?php echo $form->dropDownList($model,'membergroup_id',Html::listData(BbiiMembergroup::find()->specific()->findAll(), 'id', 'name'), array('empty' => '')); ?>
+		<?php echo $form->error($model,'membergroup_id'); ?>
 	</div>
 	
 	<div class="row">
-		<?= $form->labelEx($model,'poll', array('id' => 'label_poll')); ?>
-		<?= $form->dropDownList($model,'poll',array('0' => Yii::t('BbiiModule.bbii', 'No polls'),'1' => Yii::t('BbiiModule.bbii', 'Moderator polls'),'2' => Yii::t('BbiiModule.bbii', 'User polls'))); ?>
-		<?= $form->error($model,'poll'); ?>
+		<?php echo $form->labelEx($model,'poll', array('id' => 'label_poll')); ?>
+		<?php echo $form->dropDownList($model,'poll',array('0' => Yii::t('BbiiModule.bbii', 'No polls'),'1' => Yii::t('BbiiModule.bbii', 'Moderator polls'),'2' => Yii::t('BbiiModule.bbii', 'User polls'))); ?>
+		<?php echo $form->error($model,'poll'); ?>
 	</div>
 	
 	<div class="row">
-		<?= $form->hiddenField($model,'id'); ?>
-		<?= $form->hiddenField($model,'type'); ?>
+		<?php echo $form->hiddenField($model,'id'); ?>
+		<?php echo $form->hiddenField($model,'type'); ?>
 	</div>
 	
 <?php $this->endWidget(); ?>

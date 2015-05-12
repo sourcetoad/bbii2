@@ -37,7 +37,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?= $this->render('_header', array(
+	<?php echo $this->render('_header', array(
 		'item' => $item
 	));
 

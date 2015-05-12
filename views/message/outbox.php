@@ -21,9 +21,9 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?= $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<div class="progress"><div class="progressbar" style="width:<?= (2*$count['outbox']); ?>%"> </div></div>
+	<div class="progress"><div class="progressbar" style="width:<?php echo (2*$count['outbox']); ?>%"> </div></div>
 
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'inbox-grid',

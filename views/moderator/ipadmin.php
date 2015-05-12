@@ -28,7 +28,7 @@ $item = array(
 ?>
 
 <div id="bbii-wrapper">
-	<?= $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('_header', array('item' => $item)); ?>
 
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'ipaddress-grid',

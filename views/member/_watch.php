@@ -3,7 +3,7 @@
 /* @var $topicProvider ActiveDataProvider BbiiTopic*/
 
 ?>
-<div class="header2"><?= Yii::t('BbiiModule.bbii','Watching topics'); ?></div>
+<div class="header2"><?php echo Yii::t('BbiiModule.bbii','Watching topics'); ?></div>
 <div class="form">
 
 	<?php $form=$this->beginWidget('CActiveForm', array(
@@ -49,7 +49,7 @@
 	)); ?>	
 	
 	<div class="row buttons">
-		<?= Html::submitButton(Yii::t('BbiiModule.bbii', 'Delete')); ?>
+		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Delete')); ?>
 	</div>
 	
 	<?php $this->endWidget(); ?>

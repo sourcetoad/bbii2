@@ -7,8 +7,8 @@ $members = BbiiMember::find()->present()->count();
 	<table><tr>
 		<td class="online">
 			<div>
-				<span class="header2"><?= Yii::t('BbiiModule.bbii','{guests} guest(s) and {members} active member(s)', array('{guests}' => ($present - $members), '{members}' => $members));?></span>
-				<?= Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?>
+				<span class="header2"><?php echo Yii::t('BbiiModule.bbii','{guests} guest(s) and {members} active member(s)', array('{guests}' => ($present - $members), '{members}' => $members));?></span>
+				<?php echo Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?>
 			</div>
 			<div>
 				<?php $members = BbiiMember::find()->present()->findAll(); 
@@ -16,24 +16,24 @@ $members = BbiiMember::find()->present()->count();
 						echo Html::a($member->member_name, array('member/view', 'id' => $member->id), array('style' => 'color:#'.$member->group->color)) . '&nbsp;';
 					}
 				?>
-				<?= Yii::t('BbiiModule.bbii','({hidden} anonymous member(s))', array('{hidden}' => BbiiMember::find()->hidden()->present()->count())); ?>
+				<?php echo Yii::t('BbiiModule.bbii','({hidden} anonymous member(s))', array('{hidden}' => BbiiMember::find()->hidden()->present()->count())); ?>
 			</div>
 		</td>
 		<td class="statistics">
 			<table>
 			<caption class="header2">
-				<?= Yii::t('BbiiModule.bbii','Board Statistics'); ?>
+				<?php echo Yii::t('BbiiModule.bbii','Board Statistics'); ?>
 			</caption>
 			<tr>
-				<th><?= Yii::t('BbiiModule.bbii','Total topics'); ?></th><td><?= BbiiTopic::find()->count(); ?></td>
+				<th><?php echo Yii::t('BbiiModule.bbii','Total topics'); ?></th><td><?php echo BbiiTopic::find()->count(); ?></td>
 			</tr><tr>
-				<th><?= Yii::t('BbiiModule.bbii','Total posts'); ?></th><td><?= BbiiPost::find()->count(); ?></td>
+				<th><?php echo Yii::t('BbiiModule.bbii','Total posts'); ?></th><td><?php echo BbiiPost::find()->count(); ?></td>
 			</tr><tr>
-				<th><?= Yii::t('BbiiModule.bbii','Total members'); ?></th><td><?= BbiiMember::find()->count(); ?></td>
+				<th><?php echo Yii::t('BbiiModule.bbii','Total members'); ?></th><td><?php echo BbiiMember::find()->count(); ?></td>
 			</tr><tr>
-				<th><?= Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::find()->newest()->find(); echo Html::a($member->member_name, array('member/view', 'id' => $member->id)); ?></td>
+				<th><?php echo Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::find()->newest()->find(); echo Html::a($member->member_name, array('member/view', 'id' => $member->id)); ?></td>
 			</tr><tr>
-				<th><?= Yii::t('BbiiModule.bbii','Visitors today'); ?></th><td><?= BbiiSession::find()->count(); ?></td>
+				<th><?php echo Yii::t('BbiiModule.bbii','Visitors today'); ?></th><td><?php echo BbiiSession::find()->count(); ?></td>
 			</tr>
 			</table>
 		</td>

@@ -23,11 +23,11 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?= $this->render('_header', array(
+	<?php echo $this->render('_header', array(
 		'item' => $item
 	)); ?>
 	
-	<div class="progress"><div class="progressbar" style="width:<?= ($count['inbox'] < 100)?$count['inbox']:100; ?>%"> </div></div>
+	<div class="progress"><div class="progressbar" style="width:<?php echo ($count['inbox'] < 100)?$count['inbox']:100; ?>%"> </div></div>
 
 	<?php /*$this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'inbox-grid',

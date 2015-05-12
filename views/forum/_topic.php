@@ -8,27 +8,27 @@ $assets = AppAsset::register($this);
 ?>
 
 <div class="topic">
-	<div class="forum-cell <?= $this->topicIcon($data); ?>"></div>
+	<div class="forum-cell <?php echo $this->topicIcon($data); ?>"></div>
 	<div class="forum-cell main">
 		<div class="header2">
-			<?= Html::a(Html::encode($data->title), array('topic', 'id' => $data->id), array('class' => $data->hasPostedClass())); ?>
+			<?php echo Html::a(Html::encode($data->title), array('topic', 'id' => $data->id), array('class' => $data->hasPostedClass())); ?>
 		</div>
 		<div class="header4">
-			<?= Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($data->starter->member_name);?>
-			<?= ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($data->firstPost->create_time); ?>
+			<?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($data->starter->member_name);?>
+			<?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($data->firstPost->create_time); ?>
 		<?php if($this->isModerator()): ?>
-			<?= Html::img($assets->baseUrl.'/images/empty.png', 'empty'; ?>
-			<?= Html::img($assets->baseUrl.'/images/update.png', 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/empty.png', 'empty'; ?>
+			<?php echo Html::img($assets->baseUrl.'/images/update.png', 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
 		<?php endif; ?>
 		</div>
 	</div>
 	<div class="forum-cell center">
-		<?= Html::encode($data->num_replies); ?><br>
-		<?= Html::encode($data->getAttributeLabel('num_replies')); ?>
+		<?php echo Html::encode($data->num_replies); ?><br>
+		<?php echo Html::encode($data->getAttributeLabel('num_replies')); ?>
 	</div>
 	<div class="forum-cell center">
-		<?= Html::encode($data->num_views); ?><br>
-		<?= Html::encode($data->getAttributeLabel('num_views')); ?>
+		<?php echo Html::encode($data->num_views); ?><br>
+		<?php echo Html::encode($data->getAttributeLabel('num_views')); ?>
 	</div>
 	<div class="forum-cell last-cell">
 		<?php 

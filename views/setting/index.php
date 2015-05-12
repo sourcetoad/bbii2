@@ -22,7 +22,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?= $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
 	<div class="form">
 
@@ -31,36 +31,36 @@ $item = array(
 		'enableAjaxValidation' => false,
 	)); ?>
 
-		<p class="note"><?= Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
+		<p class="note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
 
-		<?= $form->errorSummary($model); ?>
+		<?php echo $form->errorSummary($model); ?>
 
 		<div class="row odd">
-			<?= Html::label(Yii::t('BbiiModule.bbii', 'Forum name'), false); ?>
-			<?= Html::img($assets->baseUrl.'/images/info.png', 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum name is set by the module parameter "forumTitle".'))); ?>
-			<?= $this->module->forumTitle; ?>
+			<?php echo Html::label(Yii::t('BbiiModule.bbii', 'Forum name'), false); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/info.png', 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum name is set by the module parameter "forumTitle".'))); ?>
+			<?php echo $this->module->forumTitle; ?>
 		</div>
 
 		<div class="row even">
-			<?= Html::label(Yii::t('BbiiModule.bbii', 'Forum language'), false); ?>
-			<?= Html::img($assets->baseUrl.'/images/info.png', 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum language is set by the application parameter "language".'))); ?>
-			<?= Yii::$app->language; ?>
+			<?php echo Html::label(Yii::t('BbiiModule.bbii', 'Forum language'), false); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/info.png', 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum language is set by the application parameter "language".'))); ?>
+			<?php echo Yii::$app->language; ?>
 		</div>
 
 		<div class="row">
-			<?= Html::label(Yii::t('BbiiModule.bbii', 'Forum timezone'), false); ?>
-			<?= Html::img($assets->baseUrl.'/images/info.png', 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum timezone is set by the PHP.ini parameter "date.timezone".'))); ?>
-			<?= date_default_timezone_get(); ?>
+			<?php echo Html::label(Yii::t('BbiiModule.bbii', 'Forum timezone'), false); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/info.png', 'Information', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum timezone is set by the PHP.ini parameter "date.timezone".'))); ?>
+			<?php echo date_default_timezone_get(); ?>
 		</div>
 
 		<div class="row">
-			<?= $form->labelEx($model,'contact_email'); ?>
-			<?= $form->textField($model,'contact_email',array('size' => 60,'maxlength' => 255)); ?>
-			<?= $form->error($model,'contact_email'); ?>
+			<?php echo $form->labelEx($model,'contact_email'); ?>
+			<?php echo $form->textField($model,'contact_email',array('size' => 60,'maxlength' => 255)); ?>
+			<?php echo $form->error($model,'contact_email'); ?>
 		</div>
 
 		<div class="row buttons">
-			<?= Html::submitButton(Yii::t('BbiiModule.bbii', 'Save')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save')); ?>
 		</div>
 
 	<?php $this->endWidget(); ?>

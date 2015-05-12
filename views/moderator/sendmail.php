@@ -24,8 +24,8 @@ $item = array(
 ?>
 
 <div id="bbii-wrapper">
-	<?= $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('_header', array('item' => $item)); ?>
 
-	<?= $this->render('_form', array('model' => $model)); ?>
+	<?php echo $this->render('_form', array('model' => $model)); ?>
 
 </div>

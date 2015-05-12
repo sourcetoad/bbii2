@@ -79,7 +79,7 @@ $reports   = BbiiMessage::find()->all();
 	<?php }; ?>
 
 	<div class="bbii-title">
-		<?= $this->context->module->forumTitle; ?>
+		<?php echo $this->context->module->forumTitle; ?>
 	</div>
 
 	<table>
@@ -106,7 +106,7 @@ $reports   = BbiiMessage::find()->all();
 			</td>
 			<td>
 				<div class="pull-right">
-					<?= SimpleSearchForm::widget(); ?>
+					<?php echo SimpleSearchForm::widget(); ?>
 				</div>
 			</td>
 		</tr>

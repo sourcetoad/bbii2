@@ -16,9 +16,9 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?= $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<div class="bbii-box-top"><?= Yii::t('BbiiModule.bbii', 'Send e-mail to') . ' ' . $model->member_name; ?></div>
+	<div class="bbii-box-top"><?php echo Yii::t('BbiiModule.bbii', 'Send e-mail to') . ' ' . $model->member_name; ?></div>
 
 	<div class="form">
 
@@ -27,14 +27,14 @@ $item = array(
 		'enableAjaxValidation' => false,
 	)); ?>
 
-		<p class="note"><?= Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
+		<p class="note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
 
-		<?= $form->errorSummary($model); ?>
+		<?php echo $form->errorSummary($model); ?>
 
 		<div class="row">
-			<?= $form->labelEx($model,'subject'); ?>
-			<?= $form->textField($model,'subject',array('size' => 80,'maxlength' => 255)); ?>
-			<?= $form->error($model,'subject'); ?>
+			<?php echo $form->labelEx($model,'subject'); ?>
+			<?php echo $form->textField($model,'subject',array('size' => 80,'maxlength' => 255)); ?>
+			<?php echo $form->error($model,'subject'); ?>
 		</div>
 		
 		<div class="row">
@@ -59,13 +59,13 @@ $item = array(
 				'uiColor' => $this->module->editorUIColor,
 				'contentsCss' => $this->module->editorContentsCss,
 			)); ?>
-			<?= $form->error($model,'body'); ?>
+			<?php echo $form->error($model,'body'); ?>
 		</div>
 
 		<div class="row buttons">
-			<?= $form->hiddenField($model,'member_id'); ?>
-			<?= $form->hiddenField($model,'member_name'); ?>
-			<?= Html::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
+			<?php echo $form->hiddenField($model,'member_id'); ?>
+			<?php echo $form->hiddenField($model,'member_name'); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
 		</div>
 
 	<?php $this->endWidget(); ?>
