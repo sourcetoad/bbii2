@@ -2,11 +2,13 @@
 /* @var $this MemberController */
 /* @var $model MailForm */
 
+/*
 $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Members') => array('member/index'),
 	Yii::t('BbiiModule.bbii', 'Send e-mail')
 );
+*/
 
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),

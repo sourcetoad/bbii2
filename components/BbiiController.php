@@ -23,7 +23,7 @@ class BbiiController extends Controller
 	 * be assigned to {@link CBreadcrumbs::links}. Please refer to {@link CBreadcrumbs::links}
 	 * for more details on how to specify this property.
 	 */
-	public $bbii_breadcrumbs=array();
+	//public $bbii_breadcrumbs=array();
 	
 	public function getPageTitle() {
 		$pageTitle = $this->module->forumTitle;

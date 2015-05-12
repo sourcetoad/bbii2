@@ -3,9 +3,11 @@
 /* @var $error array */
 
 $this->pageTitle=Yii::$app->name . ' - ' . Yii::t('BbiiModule.bbii', 'Error');
+/*
 $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Error'),
 );
+*/
 
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),

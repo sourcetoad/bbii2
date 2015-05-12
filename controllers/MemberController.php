@@ -8,6 +8,7 @@ use frontend\modules\bbii\models\BbiiMessage;
 
 use Yii;
 use yii\web\User;
+use yii\data\ActiveDataProvider;
 
 class MemberController extends BbiiController {
 	/**
@@ -112,7 +113,7 @@ class MemberController extends BbiiController {
 		return $this->render('update', array('model' => $model));
 	}
 	
-	public function actionView($id) {
+	public function actionView($id = null) {
 		if(isset(Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 			$object = new BbiiTopicsRead;
 			$read = BbiiTopicRead::find()->findByPk($id);
@@ -125,16 +126,22 @@ class MemberController extends BbiiController {
 				$read->save();
 			}
 		}
-		$model=$this->loadModel($id);
+
 		$dataProvider = new ActiveDataProvider('BbiiPost', array(
 			'criteria' => array(
 				'condition' => "approved = 1 and user_id = $id",
-				'order' => 'create_time DESC',
-				'with' => 'forum',
-				'limit' => 10,
+				'limit'     => 10,
+				'order'     => 'create_time DESC',
+				'with'      => 'forum',
 			),
 			'pagination' => false,
 		));
+
+echo '<pre>';
+print_r( $dataProvider );
+echo '</pre>';
+exit;
+
 		if($this->isModerator() || $id == Yii::$app->user->id) {
 			$object = new BbiiTopicsRead;
 			$read = BbiiTopicRead::find()->findByPk($id);
@@ -147,6 +154,7 @@ class MemberController extends BbiiController {
 		} else {
 				$in = array(0);
 		}
+
 		$criteria = new CDbCriteria;
 		$criteria->addInCondition('id', $in);
 		$criteria->order = 'id';
@@ -156,8 +164,8 @@ class MemberController extends BbiiController {
 		));
 		
 		return $this->render('view', array(
-			'model' => $model, 
-			'dataProvider' => $dataProvider,
+			'dataProvider'  => $dataProvider,
+			'model'         => $this->loadModel($id), 
 			'topicProvider' => $topicProvider,
 		));
 	}
@@ -242,7 +250,7 @@ class MemberController extends BbiiController {
 	}
 	
 	public function loadModel($id) {
-		$model=BbiiMember::find()->findByPk($id);
+		$model=BbiiMember::find($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

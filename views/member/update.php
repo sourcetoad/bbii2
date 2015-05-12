@@ -6,12 +6,14 @@ $assets = AppAsset::register($this);
 /* @var $this ForumController */
 /* @var $model BbiiMember */
 
+/*
 $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Members') => array('member/index'),
 	$model->member_name . Yii::t('BbiiModule.bbii', '\'s profile') => array('member/view','id' => $model->id),
 	Yii::t('BbiiModule.bbii', 'Update')
 );
+*/
 
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),

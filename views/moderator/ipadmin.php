@@ -6,10 +6,12 @@ $assets = AppAsset::register($this);
 /* @var $this IpaddressController */
 /* @var $model Ipaddress */
 
+/*
 $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Blocked IP'),
 );
+*/
 
 $approvals = BbiiPost::find()->unapproved()->count();
 $reports = BbiiMessage::find()->report()->count();

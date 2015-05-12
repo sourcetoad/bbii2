@@ -3,10 +3,12 @@
 /* @var $forum BbiiForum */
 /* @var $dataProvider CArrayDataProvider */
 
+/*
 $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	$forum->name,
 );
+*/
 
 $approvals = BbiiPost::find()->unapproved()->count();
 $reports = BbiiMessage::find()->report()->count();

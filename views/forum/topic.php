@@ -5,11 +5,14 @@
 /* @var $dataProvider ActiveDataProvider */
 /* @var $postId integer */
 Yii::$app->getClientScript()->registerScriptFile(Yii::$app->getClientScript()->getCoreScriptUrl().'/jui/js/jquery-ui-i18n.min.js',CClientScript::POS_END);
+
+/*
 $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	$forum->name => array('forum/forum', 'id' => $forum->id),
 	$topic->title,
 );
+*/
 
 $approvals = BbiiPost::find()->unapproved()->count();
 $reports = BbiiMessage::find()->report()->count();

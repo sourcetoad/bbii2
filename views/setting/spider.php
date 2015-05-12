@@ -2,11 +2,13 @@
 /* @var $this SettingController */
 /* @var $model BbiiSpider */
 
+/*
 $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Settings') => array('setting/index'),
 	Yii::t('BbiiModule.bbii', 'Webspiders')
 );
+*/
 
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 'url' => array('setting/index')),

@@ -9,10 +9,12 @@ use frontend\modules\bbii\models\BbiiMessage;
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
 
-/*$this->bbii_breadcrumbs=array(
+/*
+$this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Members'),
-);*/
+);
+*/
 
 $approvals = BbiiPost::find()->where('approved IS NOT NULL')->count();
 $reports   = BbiiMessage::find()->count();
