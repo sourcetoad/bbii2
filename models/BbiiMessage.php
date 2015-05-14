@@ -145,7 +145,14 @@ class BbiiMessage extends BbiiAR
 		));
 	}
 	
+	/**
+	 * [scopes description]
+	 *
+	 * @deprecated 2.0.1
+	 * @return [type] [description]
+	 */
 	public function scopes() {
+		return true;
 		return array(
 			'inbox' => array(
 				'condition' => 'inbox = 1',

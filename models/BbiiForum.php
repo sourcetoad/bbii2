@@ -137,7 +137,14 @@ class BbiiForum extends BbiiAR
 		));
 	}
 	
+	/**
+	 * [scopes description]
+	 *
+	 * @deprecated 2.0.1
+	 * @return [type] [description]
+	 */
 	public function scopes() {
+		return true;
 		return array(
 			'categories' => array(
 				'condition' => 'type = 0',

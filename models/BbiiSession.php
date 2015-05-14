@@ -94,7 +94,14 @@ class BbiiSession extends BbiiAR
 		));
 	}
 	
+	/**
+	 * [scopes description]
+	 *
+	 * @deprecated 2.0.1
+	 * @return [type] [description]
+	 */
 	public function scopes() {
+		return true;
 		$recent = date('Y-m-d H:i:s', time() - 900);
 		return array(
 			'present' => array(
