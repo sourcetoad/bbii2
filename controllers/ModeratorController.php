@@ -43,7 +43,7 @@ class ModeratorController extends BbiiController {
 		// restrict filtering to unapproved posts
 		$model->approved = 0;
 
-		$this->render('approval', array(
+		return $this->render('approval', array(
 			'model' => $model, 
 		));
 	}
@@ -81,7 +81,7 @@ class ModeratorController extends BbiiController {
 		// limit posts to approved posts
 		$model->approved = 1;
 		
-		$this->render('admin',array(
+		return $this->render('admin',array(
 			'model' => $model,
 		));
 	}
@@ -93,7 +93,7 @@ class ModeratorController extends BbiiController {
 		if(isset($_GET['BbiiIpaddress']))
 			$model->attributes = $_GET['BbiiIpaddress'];
 
-		$this->render('ipadmin',array(
+		return $this->render('ipadmin',array(
 			'model' => $model,
 		));
 	}
@@ -225,7 +225,7 @@ class ModeratorController extends BbiiController {
 		// limit posts to moderator inbox
 		$model->sendto = 0;
 		
-		$this->render('report',array(
+		return $this->render('report',array(
 			'model' => $model,
 		));
 	}
@@ -451,7 +451,7 @@ class ModeratorController extends BbiiController {
 				}
 			}
 		}
-		$this->render('sendmail', array(
+		return $this->render('sendmail', array(
 			'model' => $model, 
 		));
 	}

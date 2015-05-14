@@ -50,7 +50,7 @@ class SettingController extends BbiiController {
 				$this->redirect(array('index'));
 		}
 
-		$this->render('index', array('model' => $model));
+		return $this->render('index', array('model' => $model));
 	}
 		
 	public function actionLayout() {
@@ -68,7 +68,7 @@ class SettingController extends BbiiController {
 			}
 		}
 		
-		$this->render('layout', array(
+		return $this->render('layout', array(
 			'model' => $model,
 			'category' => $category,
 		));
@@ -80,7 +80,7 @@ class SettingController extends BbiiController {
 		if(isset($_GET['BbiiMembergroup']))
 			$model->attributes = $_GET['BbiiMembergroup'];
 
-		$this->render('group', array('model' => $model));
+		return $this->render('group', array('model' => $model));
 	}
 	
 	public function actionModerator() {
@@ -89,7 +89,7 @@ class SettingController extends BbiiController {
 		if(isset($_GET['BbiiMember']))
 			$model->attributes = $_GET['BbiiMember'];
 
-		$this->render('moderator',array(
+		return $this->render('moderator',array(
 			'model' => $model,
 		));
 	}
@@ -100,7 +100,7 @@ class SettingController extends BbiiController {
 		if(isset($_GET['BbiiSpider']))
 			$model->attributes = $_GET['BbiiSpider'];
 
-		$this->render('spider', array('model' => $model));
+		return $this->render('spider', array('model' => $model));
 	}
 	
 	/**
