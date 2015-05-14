@@ -7,7 +7,7 @@ $members = BbiiMember::find()->present()->count();
 	<table><tr>
 		<td class = "online">
 			<div>
-				<span class = "header2"><?php echo Yii::t('BbiiModule.bbii','{guests} guest(s) and {members} active member(s)', array('{guests}' => ($present - $members), '{members}' => $members));?></span>
+				<span class = "header2"><?php echo Yii::t('BbiiModule.bbii','{0} guest(s) and {1} active member(s)', array(($present - $members), $members));?></span>
 				<?php echo Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?>
 			</div>
 			<div>
@@ -16,7 +16,7 @@ $members = BbiiMember::find()->present()->count();
 						echo Html::a($member->member_name, array('member/view', 'id' => $member->id), array('style' => 'color:#'.$member->group->color)) . '&nbsp;';
 					}
 				?>
-				<?php echo Yii::t('BbiiModule.bbii','({hidden} anonymous member(s))', array('{hidden}' => BbiiMember::find()->hidden()->present()->count())); ?>
+				<?php echo Yii::t('BbiiModule.bbii','({0} anonymous member(s))', array(BbiiMember::find()->hidden()->present()->count())); ?>
 			</div>
 		</td>
 		<td class = "statistics">

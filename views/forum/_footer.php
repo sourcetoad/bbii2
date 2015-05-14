@@ -17,7 +17,7 @@ $present = BbiiSession::find()->present()->count();
 	<table><tr>
 		<td class = "online">
 			<div>
-				<span class = "header2"><?php echo Yii::t('BbiiModule.bbii','{guests} guest(s) and {members} active member(s)', array('{guests}' => ($present - $members), '{members}' => $members));?></span>
+				<span class = "header2"><?php echo Yii::t('BbiiModule.bbii','{0} guest(s) and {1} active member(s)', array(($present - $members), $members));?></span>
 				<?php echo Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?>
 			</div>
 			<div>
@@ -30,7 +30,7 @@ $present = BbiiSession::find()->present()->count();
 						echo Html::a($spider->name, $spider->url, array('class' => 'spider','target' => '_new')) . '&nbsp;';
 					}
 				?>
-				<?php echo Yii::t('BbiiModule.bbii','({hidden} anonymous member(s))', array('{hidden}' => BbiiMember::find()->hidden()->present()->count())); ?>
+				<?php echo Yii::t('BbiiModule.bbii','({0} anonymous member(s))', array(BbiiMember::find()->hidden()->present()->count())); ?>
 			</div>
 		</td>
 		<td class = "statistics">
