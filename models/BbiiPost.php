@@ -5,6 +5,10 @@ namespace frontend\modules\bbii\models;
 use frontend\modules\bbii\models\BbiiAR;
 use frontend\modules\bbii\models\_query\BbiiPostQuery;
 
+use yii;
+use yii\data\ActiveDataProvider;
+use yii\helpers\HtmlPurifier;
+
 /**
  * This is the model class for table "bbii_post".
  *
@@ -46,7 +50,9 @@ class BbiiPost extends BbiiAR
 	public function rules()
 	{
 		$obj = new HtmlPurifier();
-		$obj->options = Yii::$app->getController()->module->purifierOptions;
+
+		//$obj->options = Yii::$app->getController()->module->purifierOptions;
+		$obj->options = Yii::$app->controller->module->purifierOptions;
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
@@ -56,11 +62,11 @@ class BbiiPost extends BbiiAR
 			array('content','filter','filter' => array($obj, 'purify')),
 			array('ip', 'length', 'max' => 39),
 			array('ip', 'blocked'),
-			array('ip', 'default', 'value' => Yii::$app->request->userHostAddress, 'on' => 'insert'),
+			array('ip', 'default', 'value' => $_SERVER['REMOTE_ADDR'], 'on' => 'insert'),
 			array('user_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'insert'),
-			array('create_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'insert'),
+			array('create_time', 'default', 'value' => 'NOW()', 'on' => 'insert'),
 			array('change_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'update'),
-			array('change_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'update'),
+			array('change_time', 'default', 'value' => 'NOW()', 'on' => 'update'),
 			array('create_time, change_time, search', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
