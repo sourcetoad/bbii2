@@ -118,7 +118,7 @@ class SearchController extends BbiiController {
 				$condition = substr($condition, 0, -5);
 			}
 		}
-		$dataProvider = new CActiveDataProvider('BbiiPost', array(
+		$dataProvider = new ActiveDataProvider('BbiiPost', array(
 			'criteria' => array(
 				'condition' => $condition,
 				'order' => 'create_time DESC',

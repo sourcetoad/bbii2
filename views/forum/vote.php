@@ -1,6 +1,6 @@
 ﻿<?php
 /* @var $this ForumController */
-/* @var $choiceProvider CActiveDataProvider */
+/* @var $choiceProvider ActiveDataProvider */
 echo Html::form('', 'post', array('id' => 'bbii-poll-form'));
 echo Html::hiddenField('poll_id', $this->poll->id);
 $this->widget('zii.widgets.CListView', array(

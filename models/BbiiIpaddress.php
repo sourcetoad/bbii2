@@ -93,7 +93,7 @@ class BbiiIpaddress extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
@@ -110,7 +110,7 @@ class BbiiIpaddress extends BbiiAR
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
 	}

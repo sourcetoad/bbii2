@@ -113,7 +113,7 @@ class BbiiMessage extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
@@ -135,7 +135,7 @@ class BbiiMessage extends BbiiAR
 		$criteria->compare('post_id',$this->post_id,true);
 		$criteria->limit = 100;
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 			'pagination' => false,
 			'sort' => array('defaultOrder' => 'id DESC'),

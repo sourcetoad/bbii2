@@ -81,7 +81,7 @@ class BbiiMembergroup extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
@@ -97,7 +97,7 @@ class BbiiMembergroup extends BbiiAR
 		$criteria->compare('color',$this->color,true);
 		$criteria->compare('image',$this->image,true);
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
 	}

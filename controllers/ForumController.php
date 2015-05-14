@@ -139,7 +139,7 @@ class ForumController extends BbiiController {
 			unset(Yii::$app->user->BbiiForum_id);
 			Yii::$app->user->setState('BbiiTopic_page', 0);
 		}
-		$dataProvider = new CActiveDataProvider('BbiiTopic', array(
+		$dataProvider = new ActiveDataProvider('BbiiTopic', array(
 			'criteria' => array(
 				'condition' => 'approved = 1 and (forum_id = ' . $forum->id . ' or global = 1)',
 				'order' => 'global DESC, sticky DESC, last_post_id DESC',
@@ -180,7 +180,7 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		$dataProvider = new CActiveDataProvider('BbiiPost', array(
+		$dataProvider = new ActiveDataProvider('BbiiPost', array(
 			'criteria' => array(
 				'condition' => 'approved = 1 and topic_id = ' . $topic->id,
 				'order' => 't.id',
@@ -195,7 +195,7 @@ class ForumController extends BbiiController {
 		$criteria->condition = 'post_id = ' . $topic->first_post_id;
 		$this->poll = BbiiPoll::find()->find($criteria);
 		if($this->poll !== null) {
-			$this->choiceProvider = new CActiveDataProvider('BbiiChoice', array(
+			$this->choiceProvider = new ActiveDataProvider('BbiiChoice', array(
 				'criteria' => array(
 					'condition' => 'poll_id = ' . $this->poll->id,
 					'order' => 'sort',
@@ -584,7 +584,7 @@ class ForumController extends BbiiController {
 					$model->saveCounters(array('votes' => 1));
 					$this->poll->saveCounters(array('votes' => 1));
 				}
-				$choiceProvider = new CActiveDataProvider('BbiiChoice', array(
+				$choiceProvider = new ActiveDataProvider('BbiiChoice', array(
 					'criteria' => array(
 						'condition' => 'poll_id = ' . $_POST['poll_id'],
 						'order' => 'sort',
@@ -610,7 +610,7 @@ class ForumController extends BbiiController {
 		$json = array();
 		if(isset($_POST['poll_id'])) {
 			$this->poll = BbiiPoll::find()->findByPk($_POST['poll_id']);
-			$choiceProvider = new CActiveDataProvider('BbiiChoice', array(
+			$choiceProvider = new ActiveDataProvider('BbiiChoice', array(
 				'criteria' => array(
 					'condition' => 'poll_id = ' . $_POST['poll_id'],
 					'order' => 'sort',
