@@ -12,8 +12,8 @@ $this->context->bbii_breadcrumbs = array(
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
 	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Approval'), 'url' => array('moderator/approval'), 'visible' => $this->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Posts'), 'url' => array('moderator/admin'), 'visible' => $this->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Approval'), 'url' => array('moderator/approval'), 'visible' => $this->context->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Posts'), 'url' => array('moderator/admin'), 'visible' => $this->context->isModerator()),
 );
 
 Yii::$app->clientScript->registerScript('presence', "
@@ -48,7 +48,7 @@ $('.presence').hide();
 			<?php echo $form->error($model,'member_name'); ?>
 		</div>
 		
-		<?php if($this->isModerator()): ?>
+		<?php if($this->context->isModerator()): ?>
 		<div class = "row">
 			<?php echo $form->labelEx($model,'group_id'); ?>
 			<?php echo $form->dropDownList($model, 'group_id', CHtml::listData(BbiiMembergroup::find()->findAll(), 'id', 'name')); ?>

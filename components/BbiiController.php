@@ -109,7 +109,7 @@ class BbiiController extends Controller
 		if($userId === null) {
 			return false;		// not authenticated
 		} else {
-			if($this->isAdmin()) {
+			if($this->context->isAdmin()) {
 				return true;
 			}
 			if(Yii::$app->authManager && Yii::$app->user->checkAccess('moderator')) {

@@ -17,8 +17,8 @@ $reports = BbiiMessage::find()->report()->count();
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
 	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')', 'url' => array('moderator/approval'), 'visible' => $this->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). ' (' . $reports . ')', 'url' => array('moderator/report'), 'visible' => $this->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')', 'url' => array('moderator/approval'), 'visible' => $this->context->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). ' (' . $reports . ')', 'url' => array('moderator/report'), 'visible' => $this->context->isModerator()),
 );
 
 Yii::$app->clientScript->registerScript('language', "
@@ -59,7 +59,7 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 		<?php endif; ?>
 	<?php endif; ?>
 
-	<?php if(!(Yii::$app->user->isGuest || $topic->locked) || $this->isModerator()): ?>
+	<?php if(!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()): ?>
 	<div class = "form">
 		<?php $form = $this->beginWidget('CActiveForm', array(
 			'id' => 'create-post-form',

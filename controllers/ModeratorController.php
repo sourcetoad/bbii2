@@ -26,7 +26,7 @@ class ModeratorController extends BbiiController {
 			array('allow',
 				'actions' => array('admin','approval','approve','banIp','changeTopic','delete','ipAdmin','ipDelete','view','refreshTopics','report','topic','sendmail'),
 				'users' => array('@'),
-				'expression' => ($this->isModerator())?'true':'false',
+				'expression' => ($this->context->isModerator())?'true':'false',
 			),
 			array('deny',  // deny all users
 				'users' => array('*'),

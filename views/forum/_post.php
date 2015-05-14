@@ -35,7 +35,7 @@
 	</div>
 	<div class = "post-cell">
 		<div class = "post-header">
-			<?php if(!(Yii::$app->user->isGuest || $data->topic->locked) || $this->isModerator()): ?>
+			<?php if(!(Yii::$app->user->isGuest || $data->topic->locked) || $this->context->isModerator()): ?>
 				<div class = "form">
 					<?php $form = $this->beginWidget('CActiveForm', array(
 						'action' => array('forum/quote', 'id' => $data->id),
@@ -45,7 +45,7 @@
 					<?php $this->endWidget(); ?>
 				</div><!-- form -->	
 			<?php endif; ?>
-			<?php if(!($data->user_id != Yii::$app->user->id || $data->topic->locked) || $this->isModerator()): ?>
+			<?php if(!($data->user_id != Yii::$app->user->id || $data->topic->locked) || $this->context->isModerator()): ?>
 				<div class = "form">
 					<?php $form = $this->beginWidget('CActiveForm', array(
 						'action' => array('forum/update', 'id' => $data->id),
@@ -72,7 +72,7 @@
 					'summaryText' => false,
 				)); 
 				echo '<div style = "text-align:center;width:99%">';
-				if($this->poll->user_id == Yii::$app->user->id || $this->isModerator()) {
+				if($this->poll->user_id == Yii::$app->user->id || $this->context->isModerator()) {
 					echo CHtml::button(Yii::t('BbiiModule.bbii', 'Edit poll'), array('onclick' => 'editPoll(' . $this->poll->id . ', "' . $this->createAbsoluteUrl('forum/editPoll') . '");'));
 				}
 				if(!Yii::$app->user->isGuest && $this->poll->allow_revote && (!isset($this->poll->expire_date) || $this->poll->expire_date > date('Y-m-d'))) {
@@ -110,7 +110,7 @@
 		</div>
 		<?php echo $this->render('_upvotedBy', array('post_id' => $data->id)); ?>
 		<div class = "toolbar">
-		<?php if($this->isModerator()): ?>
+		<?php if($this->context->isModerator()): ?>
 			<?php echo CHtml::link( CHtml::image($this->module->getRegisteredImage('warn.png'), 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $data->user_id, 'type' => 1) ); ?>
 			<?php echo CHtml::image($this->module->getRegisteredImage('delete.png'), 'delete', array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if(confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . $this->createAbsoluteUrl('moderator/delete', array('id' => $data->id)) . '") }')); ?>
 			<?php echo CHtml::image($this->module->getRegisteredImage('ban.png'), 'ban', array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if(confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/banIp') . '") }')); ?>

@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
  *
  * @since  0.0.5
  */
-class BbiiMembergroupQuery extends ActiveQuery
+class BbiiMessageQuery extends ActiveQuery
 {
 	public function find()
 	{

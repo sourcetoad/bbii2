@@ -1,4 +1,8 @@
 <?php
+
+use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiMessage;
+
 /* @var $this ForumController */
 /* @var $dataProvider ArrayDataProvider */
 
@@ -12,8 +16,8 @@ $reports = BbiiMessage::find()->report()->count();
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
 	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')', 'url' => array('moderator/approval'), 'visible' => $this->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). ' (' . $reports . ')', 'url' => array('moderator/report'), 'visible' => $this->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')', 'url' => array('moderator/approval'), 'visible' => $this->context->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). ' (' . $reports . ')', 'url' => array('moderator/report'), 'visible' => $this->context->isModerator()),
 );
 ?>
 <div id = "bbii-wrapper">

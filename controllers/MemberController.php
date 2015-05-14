@@ -49,7 +49,7 @@ class MemberController extends BbiiController {
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id);
 		
-		if($id != Yii::$app->user->id && !$this->isModerator()) {
+		if($id != Yii::$app->user->id && !$this->context->isModerator()) {
 			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
 		

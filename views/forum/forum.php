@@ -14,8 +14,8 @@ $reports = BbiiMessage::find()->report()->count();
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
 	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')', 'url' => array('moderator/approval'), 'visible' => $this->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). ' (' . $reports . ')', 'url' => array('moderator/report'), 'visible' => $this->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')', 'url' => array('moderator/approval'), 'visible' => $this->context->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). ' (' . $reports . ')', 'url' => array('moderator/report'), 'visible' => $this->context->isModerator()),
 );
 ?>
 
@@ -34,7 +34,7 @@ $item = array(
 		</div>
 	</div>
 	
-	<?php if(!(Yii::$app->user->isGuest || $forum->locked) || $this->isModerator()): ?>
+	<?php if(!(Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()): ?>
 	<div class = "form">
 		<?php $form = $this->beginWidget('CActiveForm', array(
 			'id' => 'create-topic-form',
@@ -60,7 +60,7 @@ $item = array(
 </div>
 <div style = "display:none;">
 <?php 
-if($this->isModerator()) {
+if($this->context->isModerator()) {
 	$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 		'id' => 'dlgTopicForm',
 		'theme' => $this->module->juiTheme,

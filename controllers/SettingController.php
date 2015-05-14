@@ -30,7 +30,7 @@ class SettingController extends BbiiController {
 			array('allow',
 				'actions' => array('ajaxSort','deleteForum','deleteMembergroup','getForum','getMembergroup','saveForum','saveMembergroup','group','index','layout','spider','getSpider','deleteSpider','saveSpider','moderator','changeModerator'),
 				'users' => array('@'),
-				'expression' => ($this->isAdmin())?'true':'false',
+				'expression' => ($this->context->isAdmin())?'true':'false',
 			),
 			array('deny',  // deny all users
 				'users' => array('*'),

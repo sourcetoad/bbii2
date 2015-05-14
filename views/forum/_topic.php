@@ -12,7 +12,7 @@
 		<div class = "header4">
 			<?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . CHtml::encode($data->starter->member_name);?>
 			<?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($data->firstPost->create_time); ?>
-		<?php if($this->isModerator()): ?>
+		<?php if($this->context->isModerator()): ?>
 			<?php echo CHtml::image($this->module->getRegisteredImage('empty.png'), 'empty'); ?>
 			<?php echo CHtml::image($this->module->getRegisteredImage('update.png'), 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
 		<?php endif; ?>

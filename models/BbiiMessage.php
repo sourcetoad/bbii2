@@ -28,7 +28,7 @@ class BbiiMessage extends BbiiAR
 
     public static function find()
     {
-        return new BbiiPostQuery(get_called_class());
+        return new BbiiMessageQuery(get_called_class());
     }
 
 	/**
