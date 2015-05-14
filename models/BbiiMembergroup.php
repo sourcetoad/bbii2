@@ -20,7 +20,7 @@ class BbiiMembergroup extends BbiiAR
 {
     public static function find()
     {
-        return new BbiiPostQuery(get_called_class());
+        return new BbiiMembergroupQuery(get_called_class());
     }
 
 	/**
@@ -81,9 +81,11 @@ class BbiiMembergroup extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * @deprecated 2.1.5
 	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	/*public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -100,6 +102,32 @@ class BbiiMembergroup extends BbiiAR
 		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}*/
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * 
+	 * @param  [type] $params [description]
+	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search($params){
+		$query        = BbiiMembergroup::find();
+		$dataProvider = new ActiveDataProvider([
+	        'query' => $query,
+	    ]);
+
+	    if (!($this->load($params) && $this->validate())) {
+	        return $dataProvider;
+	    }
+
+		$this->addCondition('color',		$this->color,		true);
+		$this->addCondition('description',	$this->description,	true);
+		$this->addCondition('id',			$this->id,			true);
+		$this->addCondition('image',		$this->image,		true);
+		$this->addCondition('min_posts',	$this->min_posts);
+		$this->addCondition('name',			$this->name,		true);
+
+	    return $dataProvider;
 	}
 	
 	/**

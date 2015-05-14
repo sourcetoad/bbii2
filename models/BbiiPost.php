@@ -112,9 +112,11 @@ class BbiiPost extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * @deprecated 2.1.5
 	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	/*public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -139,6 +141,41 @@ class BbiiPost extends BbiiAR
 		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}*/
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * 
+	 * @param  [type] $params [description]
+	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search($params){
+		$query        = BbiiPost::find();
+		$dataProvider = new ActiveDataProvider([
+	        'query' => $query,
+	    ]);
+
+	    if (!($this->load($params) && $this->validate())) {
+	        return $dataProvider;
+	    }
+
+		$this->with = array('poster');
+
+		$this->addCondition('approved',				$this->approved);
+		$this->addCondition('change_id',			$this->change_id,		true);
+		$this->addCondition('change_reason',		$this->change_reason,	true);
+		$this->addCondition('change_time',			$this->change_time,		true);
+		$this->addCondition('content',				$this->content,			true);
+		$this->addCondition('create_time',			$this->create_time,		true);
+		$this->addCondition('forum_id',				$this->forum_id,		true);
+		$this->addCondition('id',					$this->id,				true);
+		$this->addCondition('ip',					$this->ip,				true);
+		$this->addCondition('poster.member_name',	$this->search,			true);
+		$this->addCondition('subject',				$this->subject,			true);
+		$this->addCondition('topic_id',				$this->topic_id,		true);
+		$this->addCondition('user_id',				$this->user_id,			true);
+
+	    return $dataProvider;
 	}
 	
 	/**

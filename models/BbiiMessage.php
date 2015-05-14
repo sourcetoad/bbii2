@@ -113,9 +113,11 @@ class BbiiMessage extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * @deprecated 2.1.5
 	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	/*public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -140,6 +142,39 @@ class BbiiMessage extends BbiiAR
 			'pagination' => false,
 			'sort' => array('defaultOrder' => 'id DESC'),
 		));
+	}*/
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * 
+	 * @param  [type] $params [description]
+	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search($params){
+		$query        = BbiiMessage::find();
+		$dataProvider = new ActiveDataProvider([
+	        'query' => $query,
+	    ]);
+
+	    if (!($this->load($params) && $this->validate())) {
+	        return $dataProvider;
+	    }
+
+		$this->addCondition('content',			$this->content,			true);
+		$this->addCondition('id',				$this->id,				true);
+		$this->addCondition('inbox',			$this->inbox);
+		$this->addCondition('ip',				$this->ip,				true);
+		$this->addCondition('outbox',			$this->outbox);
+		$this->addCondition('post_id',			$this->post_id,			true);
+		$this->addCondition('read_indicator',	$this->read_indicator);
+		$this->addCondition('sendfrom',			$this->sendfrom,		true);
+		$this->addCondition('sendto',			$this->sendto,			true);
+		$this->addCondition('subject',			$this->subject,			true);
+		$this->addCondition('type',				$this->type);
+
+		$criteria->limit = 100;
+
+	    return $dataProvider;
 	}
 	
 	/**

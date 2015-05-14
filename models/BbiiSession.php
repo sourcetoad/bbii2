@@ -73,9 +73,11 @@ class BbiiSession extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * @deprecated 2.1.5
 	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	/*public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -88,6 +90,28 @@ class BbiiSession extends BbiiAR
 		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}*/
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * 
+	 * @param  [type] $params [description]
+	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search($params){
+		$query        = BbiiSession::find();
+		$dataProvider = new ActiveDataProvider([
+	        'query' => $query,
+	    ]);
+
+	    if (!($this->load($params) && $this->validate())) {
+	        return $dataProvider;
+	    }
+
+		$this->addCondition('id',			$this->id,			true);
+		$this->addCondition('last_visit',	$this->last_visit,	true);
+
+	    return $dataProvider;
 	}
 	
 	/**
