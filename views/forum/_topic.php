@@ -7,14 +7,14 @@
 	<div class = "forum-cell <?php echo $this->topicIcon($data); ?>"></div>
 	<div class = "forum-cell main">
 		<div class = "header2">
-			<?php echo Html::link(Html::encode($data->title), array('topic', 'id' => $data->id), array('class' => $data->hasPostedClass())); ?>
+			<?php echo Html::a(Html::encode($data->title), array('topic', 'id' => $data->id), array('class' => $data->hasPostedClass())); ?>
 		</div>
 		<div class = "header4">
 			<?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($data->starter->member_name);?>
 			<?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($data->firstPost->create_time); ?>
 		<?php if($this->context->isModerator()): ?>
-			<?php echo Html::image($this->module->getRegisteredImage('empty.png'), 'empty'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('update.png'), 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('empty.png'), 'empty'); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('update.png'), 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
 		<?php endif; ?>
 		</div>
 	</div>
@@ -29,7 +29,7 @@
 	<div class = "forum-cell last-cell">
 		<?php 
 			echo Html::encode($data->lastPost->poster->member_name);
-			echo Html::link(Html::image($this->module->getRegisteredImage('next.png'), 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->id, 'nav' => 'last'));
+			echo Html::a(Html::img($this->module->getRegisteredImage('next.png'), 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->id, 'nav' => 'last'));
 			echo '<br>';
 			echo DateTimeCalculation::long($data->lastPost->create_time);
 		?>

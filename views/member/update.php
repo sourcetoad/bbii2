@@ -120,7 +120,7 @@ $('.presence').hide();
 
 		<div class = "row">
 			<?php echo $form->labelEx($model,'avatar'); ?>
-			<?php echo Html::image((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$this->module->getRegisteredImage('empty.jpeg'), 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
+			<?php echo Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$this->module->getRegisteredImage('empty.jpeg'), 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
 			<?php echo $form->labelEx($model,'remove_avatar'); ?>
 			<?php echo $form->checkBox($model, 'remove_avatar'); ?>
 			<?php echo $form->labelEx($model, 'image'); ?>
@@ -155,95 +155,95 @@ $('.presence').hide();
 			<?php echo $form->error($model,'signature'); ?>
 		</div>
 		
-		<?php echo Html::link(Yii::t('BbiiModule.bbii', 'My presence on the internet'),'#',array('class' => 'presence-button')); ?>
+		<?php echo Html::a(Yii::t('BbiiModule.bbii', 'My presence on the internet'),'#',array('class' => 'presence-button')); ?>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'website'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Globe.png'), 'Website', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Globe.png'), 'Website', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'website',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'website'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'blogger'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Blogger.png'), 'Blogger', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Blogger.png'), 'Blogger', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'blogger',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'blogger'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'facebook'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Facebook.png'), 'Facebook', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Facebook.png'), 'Facebook', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'facebook',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'facebook'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'flickr'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Flickr.png'), 'Flickr', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Flickr.png'), 'Flickr', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'flickr',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'flickr'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'google'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Google.png'), 'Google', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Google.png'), 'Google', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'google',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'google'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'linkedin'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Linkedin.png'), 'Linkedin', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Linkedin.png'), 'Linkedin', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'linkedin',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'linkedin'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'metacafe'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Metacafe.png'), 'Metacafe', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Metacafe.png'), 'Metacafe', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'metacafe',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'metacafe'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'myspace'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Myspace.png'), 'Myspace', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Myspace.png'), 'Myspace', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'myspace',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'myspace'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'orkut'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Orkut.png'), 'Orkut', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Orkut.png'), 'Orkut', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'orkut',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'orkut'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'tumblr'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Tumblr.png'), 'Tumblr', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Tumblr.png'), 'Tumblr', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'tumblr',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'tumblr'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'twitter'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Twitter.png'), 'Twitter', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Twitter.png'), 'Twitter', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'twitter',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'twitter'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'wordpress'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Wordpress.png'), 'Wordpress', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Wordpress.png'), 'Wordpress', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'wordpress',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'wordpress'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'youtube'); ?>
-			<?php echo Html::image($this->module->getRegisteredImage('Youtube.png'), 'Youtube', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($this->module->getRegisteredImage('Youtube.png'), 'Youtube', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'youtube',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'youtube'); ?>
 		</div>

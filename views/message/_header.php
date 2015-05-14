@@ -5,7 +5,7 @@
 	<div id = "bbii-header">
 		<?php if(!Yii::$app->user->isGuest): ?>
 			<div class = "bbii-profile-box">
-			<?php echo Html::link(Yii::t('BbiiModule.bbii', 'Forum'), array('forum/index')); ?>
+			<?php echo Html::a(Yii::t('BbiiModule.bbii', 'Forum'), array('forum/index')); ?>
 			</div>
 		<?php endif; ?>
 		<div class = "bbii-title"><?php echo Yii::t('BbiiModule.bbii', 'Private messages'); ?></div>
