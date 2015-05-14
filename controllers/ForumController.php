@@ -3,6 +3,15 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\models\BbiiForum;
+use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiMessage;
+use frontend\modules\bbii\models\BbiiPost;
+
+use Yii;
+use yii\data\ArrayDataProvider;
+use yii\web\ErrorHandler;
+use yii\web\User;
 
 class ForumController extends BbiiController {
 	public $poll;
@@ -42,7 +51,10 @@ class ForumController extends BbiiController {
 	}
 	
 	public function actionIndex() {
-		unset(Yii::$app->user->BbiiTopic_page);
+		if (isset(Yii::$app->user->BbiiTopic_page)) {
+			unset(Yii::$app->user->BbiiTopic_page);			
+		}
+
 		$model = array();
 		$categories = BbiiForum::find()->category()->sorted()->findAll();
 		foreach($categories as $category) {
