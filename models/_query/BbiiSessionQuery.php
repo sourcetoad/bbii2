@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\bbii\models\query;
+namespace frontend\modules\bbii\models\_query;
 
 use yii\db\ActiveQuery;
 
@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
  *
  * @since  0.0.5
  */
-class BbiiMembergroupQuery extends ActiveQuery
+class BbiiSessionQuery extends ActiveQuery
 {
 	public function find()
 	{
@@ -25,9 +25,10 @@ class BbiiMembergroupQuery extends ActiveQuery
 
 	// custom query methods
 
-    public function specific()
+    public function present()
     {
-        return $this->andWhere('id > 0');
+        return $this->andWhere([
+        	'last_visit > \''.date('Y-m-d H:i:s', time() - 900).'\''
+        ])->orderBy('last_visit DESC');
     }
-
 }

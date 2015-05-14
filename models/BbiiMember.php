@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
+use frontend\modules\bbii\models\_query\BbiiMemberQuery;
 
 /**
  * This is the model class for table "bbii_member".
@@ -45,15 +46,11 @@ use frontend\modules\bbii\models\BbiiAR;
 class BbiiMember extends BbiiAR {
 	public $image;
 	public $remove_avatar;
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return BbiiMember the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+
+    public static function find()
+    {
+        return new BbiiPostQuery(get_called_class());
+    }
 
 	/**
 	 * @return string the associated database table name

@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\bbii\models\query;
+namespace frontend\modules\bbii\models\_query;
 
 use yii\db\ActiveQuery;
 
