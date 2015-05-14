@@ -16,11 +16,11 @@ $assets = AppAsset::register($this);
 		<div class = "bbii-profile-box">
 		<?php 
 			if($messages) {
-				echo Html::a(Html::img($asset->baseUrl.'newmail.png', Yii::t('BbiiModule.bbii', 'new messages'), array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
+				echo Html::a(Html::img($assets->baseUrl.'newmail.png', Yii::t('BbiiModule.bbii', 'new messages'), array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
 			} else {
-				echo Html::a(Html::img($asset->baseUrl.'mail.png', Yii::t('BbiiModule.bbii', 'no new messages'), array('title' => Yii::t('BbiiModule.bbii', 'no new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
+				echo Html::a(Html::img($assets->baseUrl.'mail.png', Yii::t('BbiiModule.bbii', 'no new messages'), array('title' => Yii::t('BbiiModule.bbii', 'no new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
 			}
-			echo ' | ' . Html::a(Html::img($asset->baseUrl.'settings.png', Yii::t('BbiiModule.bbii', 'My settings'), array('title' => Yii::t('BbiiModule.bbii', 'My settings'),'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id)); 
+			echo ' | ' . Html::a(Html::img($assets->baseUrl.'settings.png', Yii::t('BbiiModule.bbii', 'My settings'), array('title' => Yii::t('BbiiModule.bbii', 'My settings'),'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id)); 
 		?>
 		</div>
 	<?php endif; ?>
@@ -33,9 +33,9 @@ $assets = AppAsset::register($this);
 		</div>
 	</td></tr></table>
 </div>
-<?php if(isset($this->bbii_breadcrumbs)):?>
+<?php if(isset($this->context->bbii_breadcrumbs)):?>
 	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 		'homeLink' => false,
-		'links' => $this->bbii_breadcrumbs,
+		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
 <?php endif?>

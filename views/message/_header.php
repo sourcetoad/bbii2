@@ -3,8 +3,6 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 
-use frontend\modules\bbii\AppAsset;
-
 /* @var $this MessageController */
 /* @var $item array */
 ?>
@@ -23,9 +21,9 @@ use frontend\modules\bbii\AppAsset;
 		</div>
 	</td></tr></table>
 </div>
-<?php if(isset($this->bbii_breadcrumbs)):?>
+<?php if(isset($this->context->bbii_breadcrumbs)):?>
 	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 		'homeLink' => false,
-		'links' => $this->bbii_breadcrumbs,
+		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
 <?php endif?>

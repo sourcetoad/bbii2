@@ -48,7 +48,7 @@ $item = array(
 				'buttons' => array(
 					'delete' => array(
 						'url' => 'array("moderator/ipDelete", "id" => $data->id)',
-						'imageUrl' => $asset->baseUrl.'delete.png'),
+						'imageUrl' => $assets->baseUrl.'delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)

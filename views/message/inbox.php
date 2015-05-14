@@ -49,17 +49,17 @@ $item = array(
 				'buttons' => array(
 					'view' => array(
 						'url' => '$data->id',
-						'imageUrl' => $asset->baseUrl.'view.png'),
+						'imageUrl' => $assets->baseUrl.'view.png'),
 						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . $this->createAbsoluteUrl('message/view') .'");return false; }',
 					),
 					'reply' => array(
 						'url' => 'array("reply", "id" => $data->id)',
 						'label' => Yii::t('BbiiModule.bbii','Reply'),
-						'imageUrl' => $asset->baseUrl.'reply.png'),
+						'imageUrl' => $assets->baseUrl.'reply.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 					'delete' => array(
-						'imageUrl' => $asset->baseUrl.'delete.png'),
+						'imageUrl' => $assets->baseUrl.'delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)

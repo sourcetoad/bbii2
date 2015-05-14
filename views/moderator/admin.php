@@ -92,16 +92,16 @@ function setAutocomplete(id, data) {
 				'buttons' => array(
 					'view' => array(
 						'url' => 'array("forum/topic", "id" => $data->topic_id, "nav" => $data->id)',
-						'imageUrl' => $asset->baseUrl.'view.png'),
+						'imageUrl' => $assets->baseUrl.'view.png'),
 					),
 					'update' => array(
 						'url' => 'array("forum/update", "id" => $data->id)',
 						'label' => Yii::t('BbiiModule.bbii','Update'),
-						'imageUrl' => $asset->baseUrl.'update.png'),
+						'imageUrl' => $assets->baseUrl.'update.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 					'delete' => array(
-						'imageUrl' => $asset->baseUrl.'delete.png'),
+						'imageUrl' => $assets->baseUrl.'delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)

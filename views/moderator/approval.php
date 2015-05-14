@@ -52,17 +52,17 @@ $item = array(
 				'buttons' => array(
 					'view' => array(
 						'url' => '$data->id',
-						'imageUrl' => $asset->baseUrl.'view.png'),
+						'imageUrl' => $assets->baseUrl.'view.png'),
 						'click' => 'js:function() { viewPost($(this).attr("href"), "' . $this->createAbsoluteUrl('moderator/view') .'");return false; }',
 					),
 					'approve' => array(
 						'url' => 'array("approve", "id" => $data->id)',
 						'label' => Yii::t('BbiiModule.bbii','Approve'),
-						'imageUrl' => $asset->baseUrl.'approve.png'),
+						'imageUrl' => $assets->baseUrl.'approve.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 					'delete' => array(
-						'imageUrl' => $asset->baseUrl.'delete.png'),
+						'imageUrl' => $assets->baseUrl.'delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)

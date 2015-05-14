@@ -54,17 +54,17 @@ $item = array(
 					'view' => array(
 						'url' => 'array("forum/topic", "id" => $data->forumPost->topic_id, "nav" => $data->post_id)',
 						'label' => Yii::t('BbiiModule.bbii','Go to post'),
-						'imageUrl' => $asset->baseUrl.'goto.png'),
+						'imageUrl' => $assets->baseUrl.'goto.png'),
 					),
 					'reply' => array(
 						'url' => 'array("message/reply", "id" => $data->id)',
 						'label' => Yii::t('BbiiModule.bbii','Reply'),
-						'imageUrl' => $asset->baseUrl.'reply.png'),
+						'imageUrl' => $assets->baseUrl.'reply.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 					'delete' => array(
 						'url' => 'array("message/delete", "id" => $data->id)',
-						'imageUrl' => $asset->baseUrl.'delete.png'),
+						'imageUrl' => $assets->baseUrl.'delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)
