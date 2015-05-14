@@ -2,6 +2,8 @@
 
 namespace frontend\modules\bbii\controllers;
 
+use frontend\modules\bbii\components\BbiiController;
+
 class MemberController extends BbiiController {
 	/**
 	 * @return array action filters

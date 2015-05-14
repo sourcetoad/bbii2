@@ -2,6 +2,8 @@
 
 namespace frontend\modules\bbii\controllers;
 
+use frontend\modules\bbii\components\BbiiController;
+
 class ForumController extends BbiiController {
 	public $poll;
 	public $choiceProvider;

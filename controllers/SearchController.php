@@ -2,6 +2,8 @@
 
 namespace frontend\modules\bbii\controllers;
 
+use frontend\modules\bbii\components\BbiiController;
+
 class SearchController extends BbiiController {
 	public $search;
 	Public $type;
