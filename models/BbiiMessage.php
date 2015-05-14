@@ -153,7 +153,9 @@ class BbiiMessage extends BbiiAR
 	public function search($params){
 		$query        = BbiiMessage::find();
 		$dataProvider = new ActiveDataProvider([
-	        'query' => $query,
+			'pagination' => false,
+			'query'      => $query,
+			'sort'       => array('defaultOrder' => 'id DESC'),
 	    ]);
 
 	    if (!($this->load($params) && $this->validate())) {
