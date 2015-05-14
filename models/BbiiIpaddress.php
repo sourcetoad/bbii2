@@ -93,9 +93,11 @@ class BbiiIpaddress extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * @deprecated 2.1.5
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	/*public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -110,11 +112,38 @@ class BbiiIpaddress extends BbiiAR
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}*/
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * 
+	 * @param  [type] $params [description]
+	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search($params){
+		$query        = BbiiIpaddress::find();
+		$dataProvider = new ActiveDataProvider([
+	        'query' => $query,
+	    ]);
+
+	    if (!($this->load($params) && $this->validate())) {
+	        return $dataProvider;
+	    }
+
+		$this->addCondition('address',		$this->address,		true);
+		$this->addCondition('count',		$this->count);
+		$this->addCondition('create_time',	$this->create_time,	true);
+		$this->addCondition('id',			$this->id,			true);
+		$this->addCondition('ip',			$this->ip,			true);
+		$this->addCondition('source',		$this->source);
+		$this->addCondition('update_time',	$this->update_time,	true);
+
+	    return $dataProvider;
 	}
-	
+
 	public static function blocked($ip) {
 		$model = BbiiIpaddress::find()->find("ip = '$ip'");
 		if($model === null) {

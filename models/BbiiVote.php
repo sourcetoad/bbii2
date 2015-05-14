@@ -77,9 +77,11 @@ class BbiiVote extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * @deprecated 2.1.5
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	/*public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -90,8 +92,31 @@ class BbiiVote extends BbiiAR
 		$criteria->compare('choice_id',$this->choice_id,true);
 		$criteria->compare('user_id',$this->user_id,true);
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
-	}
+    }*/
+
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * 
+     * @param  [type] $params [description]
+     * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+     */
+    public function search($params){
+        $query        = BbiiUpvoted::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
+
+		$this->addCondition('choice_id',	$this->choice_id,	true);
+		$this->addCondition('poll_id',	$this->poll_id,		true);
+		$this->addCondition('user_id',	$this->user_id,		true);
+
+        return $dataProvider;
+    }
 }

@@ -108,9 +108,11 @@ class BbiiForum extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * @deprecated 2.1.5
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	/*public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -128,9 +130,39 @@ class BbiiForum extends BbiiAR
 		$criteria->compare('last_post_id',$this->last_post_id,true);
 		$criteria->compare('poll',$this->poll,true);
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}*/
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * 
+	 * @param  [type] $params [description]
+	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search($params){
+		$query        = BbiiForum::find();
+		$dataProvider = new ActiveDataProvider([
+	        'query' => $query,
+	    ]);
+
+	    if (!($this->load($params) && $this->validate())) {
+	        return $dataProvider;
+	    }
+
+		$this->addCondition('cat_id',		$this->cat_id,		true);
+		$this->addCondition('id',			$this->id,			true);
+		$this->addCondition('last_post_id',	$this->last_post_id,true);
+		$this->addCondition('name',			$this->name,		true);
+		$this->addCondition('num_posts',	$this->num_posts);
+		$this->addCondition('num_topics',	$this->num_topics);
+		$this->addCondition('poll',			$this->poll,		true);
+		$this->addCondition('sort',			$this->sort);
+		$this->addCondition('subtitle',		$this->subtitle,	true);
+		$this->addCondition('type',			$this->type);
+
+	    return $dataProvider;
 	}
 	
 	/**

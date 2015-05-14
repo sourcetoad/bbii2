@@ -1,6 +1,6 @@
 <?php
 /* @var $this SearchController */
-/* @var $dataProvider CActiveDataProvider */
+/* @var $dataProvider ActiveDataProvider */
 /* @var $search String */
 /* @var $choice Integer */
 /* @var $type Integer */

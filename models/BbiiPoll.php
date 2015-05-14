@@ -86,9 +86,11 @@ class BbiiPoll extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * @deprecated 2.1.5
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	/*public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -104,8 +106,36 @@ class BbiiPoll extends BbiiAR
 		$criteria->compare('allow_multiple',$this->allow_multiple);
 		$criteria->compare('votes',$this->votes);
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}*/
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * 
+	 * @param  [type] $params [description]
+	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search($params){
+		$query        = BbiiPoll::find();
+		$dataProvider = new ActiveDataProvider([
+	        'query' => $query,
+	    ]);
+
+	    if (!($this->load($params) && $this->validate())) {
+	        return $dataProvider;
+	    }
+
+		$this->addCondition('allow_multiple',	$this->allow_multiple);
+		$this->addCondition('allow_revote',		$this->allow_revote);
+		$this->addCondition('expire_date',		$this->expire_date,		true);
+		$this->addCondition('id',				$this->id,				true);
+		$this->addCondition('post_id',			$this->post_id,			true);
+		$this->addCondition('question',			$this->question,		true);
+		$this->addCondition('user_id',			$this->user_id,			true);
+		$this->addCondition('votes',			$this->votes);
+
+	    return $dataProvider;
 	}
 }

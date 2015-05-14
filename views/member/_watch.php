@@ -1,6 +1,6 @@
 ﻿<?php 
 /* @var $this MemberController */
-/* @var $topicProvider CActiveDataProvider BbiiTopic*/
+/* @var $topicProvider ActiveDataProvider BbiiTopic*/
 
 ?>
 <div class = "header2"><?php echo Yii::t('BbiiModule.bbii','Watching topics'); ?></div>

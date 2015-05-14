@@ -2,7 +2,7 @@
 /* @var $this ForumController */
 /* @var $forum BbiiForum */
 /* @var $topic BbiiTopic */
-/* @var $dataProvider CActiveDataProvider */
+/* @var $dataProvider ActiveDataProvider */
 /* @var $postId integer */
 Yii::$app->getClientScript()->registerScriptFile(Yii::$app->getClientScript()->getCoreScriptUrl().'/jui/js/jquery-ui-i18n.min.js',CClientScript::POS_END);
 $this->context->bbii_breadcrumbs = array(

@@ -103,9 +103,11 @@ class BbiiTopic extends BbiiAR
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * @deprecated 2.1.5
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	/*public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -126,10 +128,44 @@ class BbiiTopic extends BbiiAR
 		$criteria->compare('global',$this->global);
 		$criteria->compare('moved',$this->moved,true);
 
-		return new CActiveDataProvider($this, array(
+		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}*/
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * 
+	 * @param  [type] $params [description]
+	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search($params){
+		$query        = BbiiTopic::find();
+		$dataProvider = new ActiveDataProvider([
+	        'query' => $query,
+	    ]);
+
+	    if (!($this->load($params) && $this->validate())) {
+	        return $dataProvider;
+	    }
+
+		$this->addCondition('approved',		$this->approved);
+		$this->addCondition('first_post_id',$this->first_post_id,	true);
+		$this->addCondition('forum_id',		$this->forum_id,		true);
+		$this->addCondition('global',		$this->global);
+		$this->addCondition('id',			$this->id,				true);
+		$this->addCondition('last_post_id',	$this->last_post_id,	true);
+		$this->addCondition('locked',		$this->locked);
+		$this->addCondition('moved',		$this->moved,			true);
+		$this->addCondition('num_replies',	$this->num_replies,		true);
+		$this->addCondition('num_views',	$this->num_views,		true);
+		$this->addCondition('sticky',		$this->sticky);
+		$this->addCondition('title',		$this->title,			true);
+		$this->addCondition('user_id',		$this->user_id,			true);
+
+	    return $dataProvider;
 	}
+	
 	
 	/**
 	 * Returns the css class when a member has posted in a topic
