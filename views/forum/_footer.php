@@ -3,6 +3,8 @@
 use frontend\modules\bbii\models\BbiiSession;
 use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiSpider;
+use frontend\modules\bbii\models\BbiiTopic;
+use frontend\modules\bbii\models\BbiiPost;
 
 use yii\helpers\Html;
 
