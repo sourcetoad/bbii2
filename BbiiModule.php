@@ -8,13 +8,13 @@ class BbiiModule extends \yii\base\Module
  {
 	public $defaultController = 'forum';
 	public $version 		= '1.0.9';
-	public $adminId 		= false;			// must be overridden to assign admin rights to user id
-	public $avatarStorage 	= '/avatar'; 		// directory in the webroot must exist and allow read/write access
+	public $adminId           = false;			// must be overridden to assign admin rights to user id
+	public $avatarStorage     = '/avatar'; 		// directory in the webroot must exist and allow read/write access
 	public $forumTitle 		= 'BBii Forum';
-	public $userClass 		= 'User';
-	public $userIdColumn 	= 'id';
+	public $userClass         = 'User';
+	public $userIdColumn      = 'id';
 	public $userNameColumn 	= 'username';
-	public $userMailColumn 	= false;
+	public $userMailColumn    = false;
 	public $dbName 			= false;
 	public $allowTopicSub 	= false;
 	public $topicsPerPage 	= 20;
@@ -29,7 +29,7 @@ class BbiiModule extends \yii\base\Module
 		array('Bold', 'Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat'),
 		'-',
 		array('NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
-			'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'),
+		'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'),
 		'/',
 		array('Styles','Format','Font','FontSize'),
 		array('TextColor','BGColor'),
@@ -41,25 +41,33 @@ class BbiiModule extends \yii\base\Module
 	public $editorContentsCss = array();
 	public $juiTheme 		= 'base';
 	public $bbiiTheme 		= 'base';
-	
+
 	private $_assetsUrl;
 	
 	public function init() {
 		$this->registerAssets();
-		
+
+		// @depricated 2.0.0 Use the parent applications error settings
+		/*
 		Yii::$app->setComponents(
 			array(
-				'errorHandler'=>array(
-					'errorAction'=>'forum/forum/error',
-				),
+		        'errorHandler' => [
+		            'errorAction' => 'site/error'
+		        ],
 			)
 		);
+		*/
 		
+		// @todo no longer needed per Yii2
+		/*
 		// import the module-level models and components
 		$this->setImport(array(
 			$this->id.'.models.*',
 			$this->id.'.components.*',
 		));
+		*/
+
+        parent::init();
 	}
 	
     /**
@@ -79,7 +87,7 @@ class BbiiModule extends \yii\base\Module
 	 * Register the CSS and JS files for the module
 	 */
 	public function registerAssets() {
-		return null;
+		return true;
 		/*
 		Yii::$app->clientScript->registerCssFile($this->getAssetsUrl() . '/css/' . $this->bbiiTheme . '/forum.css');
 		Yii::$app->getClientScript()->registerCoreScript('jquery.ui');
