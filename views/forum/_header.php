@@ -3,8 +3,9 @@
 use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiMessage;
 
-use yii\helpers\Html;
 use yii\bootstrap\Nav;
+use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
@@ -46,7 +47,7 @@ $assets = AppAsset::register($this);
 	'onchange' => "window.location.href = '" . Html::normalizeUrl(array('forum')) . "/id/'+$(this).val()",
 ));*/ ?>
 <?php if(isset($this->context->bbii_breadcrumbs)):?>
-	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->

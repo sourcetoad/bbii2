@@ -22,7 +22,7 @@ use yii\bootstrap\Nav;
 	</td></tr></table>
 </div>
 <?php if(isset($this->context->bbii_breadcrumbs)):?>
-	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
