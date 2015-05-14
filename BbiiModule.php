@@ -79,9 +79,12 @@ class BbiiModule extends \yii\base\Module
 	 * Register the CSS and JS files for the module
 	 */
 	public function registerAssets() {
+		return null;
+		/*
 		Yii::$app->clientScript->registerCssFile($this->getAssetsUrl() . '/css/' . $this->bbiiTheme . '/forum.css');
 		Yii::$app->getClientScript()->registerCoreScript('jquery.ui');
 		Yii::$app->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/bbii.js', CClientScript::POS_HEAD);
+		*/
 	}
 	
 	/**
