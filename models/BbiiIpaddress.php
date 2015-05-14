@@ -49,8 +49,8 @@ class BbiiIpaddress extends BbiiAR
 			array('ip', 'unique'),
 			array('address', 'length', 'max' => 255),
 			array('source, count','default','value' => 0, 'on' => 'insert'),
-			array('create_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'insert'),
-			array('update_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'update'),
+			array('create_time', 'default', 'value' => 'NOW()', 'on' => 'insert'),
+			array('update_time', 'default', 'value' => 'NOW()', 'on' => 'update'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, ip, address, source, count, create_time, update_time', 'safe', 'on' => 'search'),

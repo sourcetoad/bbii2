@@ -45,7 +45,7 @@ class BbiiSession extends BbiiAR
 	}
 	
 	public function beforeSave() {
-		$this->last_visit = new CDbExpression('NOW()');
+		$this->last_visit = 'NOW()';
 		return parent::beforeSave();
 	}
 

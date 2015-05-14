@@ -43,7 +43,7 @@ class BbiiSpider extends BbiiAR
 			array('user_agent', 'length', 'max' => 255),
 			array('hits', 'numerical', 'integerOnly' => true),
 			array('hits', 'default',  'value' => 0),
-			array('last_visit', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'visit'),
+			array('last_visit', 'default', 'value' => 'NOW()', 'on' => 'visit'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, user_agent, last_visit', 'safe', 'on' => 'search'),

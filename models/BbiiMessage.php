@@ -54,8 +54,8 @@ class BbiiMessage extends BbiiAR
 			array('content','filter','filter' => array($obj = new HtmlPurifier(), 'purify')),
 			array('ip', 'length', 'max' => 39),
 			array('ip', 'blocked'),
-			array('ip', 'default', 'value' => Yii::$app->request->userHostAddress, 'on' => 'insert'),
-			array('create_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'insert'),
+			array('ip', 'default', 'value' => $_SERVER['REMOTE_ADDR'], 'on' => 'insert'),
+			array('create_time', 'default', 'value' => 'NOW()', 'on' => 'insert'),
 			array('create_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
