@@ -28,7 +28,7 @@ class BbiiForum extends BbiiAR
 {
     public static function find()
     {
-        return new BbiiPostQuery(get_called_class());
+        return new BbiiForumQuery(get_called_class());
     }
 
 	/**

@@ -59,7 +59,7 @@ class ForumController extends BbiiController {
 		$categories = BbiiForum::find()->category()->sorted()->findAll();
 		foreach($categories as $category) {
 			if(Yii::$app->user->isGuest) {
-				$forums = BbiiForum::find()->forum()->public()->membergroup()->sorted()->findAll("cat_id = $category->id");
+				$forums = BbiiForum::find()->forum()->ispublic()->membergroup()->sorted()->findAll("cat_id = $category->id");
 			} elseif($this->isModerator()) {
 				$forums = BbiiForum::find()->forum()->sorted()->findAll("cat_id = $category->id");
 			} else {

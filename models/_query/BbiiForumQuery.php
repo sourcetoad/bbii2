@@ -43,7 +43,7 @@ class BbiiForumQuery extends ActiveQuery
         return $this->andWhere(['type' => 1]);
     }
 
-    public function public()
+    public function ispublic()
     {
 
         return $this->andWhere(['public' => 1]);
