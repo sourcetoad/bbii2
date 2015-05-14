@@ -53,6 +53,7 @@ class BbiiMemberQuery extends ActiveQuery
 
     public function hidden()
     {
-        return true;
+
+        return $this->andWhere(['show_online' => 0]);
     }
 }
