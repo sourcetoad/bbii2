@@ -73,10 +73,12 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		$dataProvider = new ArrayDataProvider($model, array(
-			'id' => 'forum',
+		$dataprovider = new ArrayDataProvider([
+			'allModels'  => $model,
+			'id'         => 'forum',
+			'key'        => 'id', //or whatever you id actually is of these models.
 			'pagination' => false,
-		));
+		]);
 		$this->render('index', array('dataProvider' => $dataProvider));
 	}
 	
