@@ -27,9 +27,9 @@ class BbiiMemberQuery extends ActiveQuery
 
     public function present()
     {
-        return $this->andWhere([
+        return $this->andWhere(
         	'last_visit > \''.date('Y-m-d H:i:s', time() - 900).'\''
-        ])->orderBy('last_visit DESC');
+        )->orderBy('last_visit DESC');
     }
 
 
@@ -49,5 +49,10 @@ class BbiiMemberQuery extends ActiveQuery
     {
 
         return $this->andWhere(['moderator' => 1]);
+    }
+
+    public function hidden()
+    {
+        return true;
     }
 }
