@@ -60,7 +60,7 @@ class ForumController extends BbiiController {
 		foreach($categories as $category) {
 			if(Yii::$app->user->isGuest) {
 				$forums = BbiiForum::find()->forum()->ispublic()->membergroup()->sorted()->findAll("cat_id = $category->id");
-			} elseif($this->context->isModerator()) {
+			} elseif($this->isModerator()) {
 				$forums = BbiiForum::find()->forum()->sorted()->findAll("cat_id = $category->id");
 			} else {
 				$groupId = BbiiMember::find()->findByPk(Yii::$app->user->id)->group_id;
@@ -121,7 +121,7 @@ class ForumController extends BbiiController {
 		if($forum->membergroup_id != 0) {
 			if(Yii::$app->user->isGuest) {
 				throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
-			} elseif(!$this->context->isModerator()) {
+			} elseif(!$this->isModerator()) {
 				$groupId = BbiiMember::find()->findByPk(Yii::$app->user->id)->group_id;
 				if($forum->membergroup_id != $groupId) {
 					throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
@@ -173,7 +173,7 @@ class ForumController extends BbiiController {
 		if($forum->membergroup_id != 0) {
 			if(Yii::$app->user->isGuest) {
 				throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
-			} elseif(!$this->context->isModerator()) {
+			} elseif(!$this->isModerator()) {
 				$groupId = BbiiMember::find()->findByPk(Yii::$app->user->id)->group_id;
 				if($forum->membergroup_id != $groupId) {
 					throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
@@ -455,7 +455,7 @@ class ForumController extends BbiiController {
 		if($post === null) {
 			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
-		if(($post->user_id != Yii::$app->user->id || $post->topic->locked) && !$this->context->isModerator()) {
+		if(($post->user_id != Yii::$app->user->id || $post->topic->locked) && !$this->isModerator()) {
 			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
 		$forum = BbiiForum::find()->findByPk($post->forum_id);
@@ -496,7 +496,7 @@ class ForumController extends BbiiController {
 			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested poll does not exist.'));
 		}
 		$post = BbiiPost::find()->findByPk($poll->post_id);
-		if($poll->user_id != Yii::$app->user->id && !$this->context->isModerator()) {
+		if($poll->user_id != Yii::$app->user->id && !$this->isModerator()) {
 			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
 		if(isset($_POST['BbiiPoll'])) {

@@ -34,7 +34,7 @@ class MessageController extends BbiiController {
 	}
 	
 	public function actionInbox($id = null) {
-		if(!(isset($id) && $this->context->isModerator())) {
+		if(!(isset($id) && $this->isModerator())) {
 			$id = Yii::$app->user->id;
 		}
 		$count['inbox'] = BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.$id);
@@ -55,7 +55,7 @@ class MessageController extends BbiiController {
 	}
 	
 	public function actionOutbox($id = null) {
-		if(!(isset($id) && $this->context->isModerator())) {
+		if(!(isset($id) && $this->isModerator())) {
 			$id = Yii::$app->user->id;
 		}
 		$count['inbox'] = BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.$id);
@@ -100,7 +100,7 @@ class MessageController extends BbiiController {
 					$model->addError('sendto', Yii::t('BbiiModule.bbii','Member not found'));
 				} else {
 					$model->sendto = $member->id;
-					if($this->context->isModerator()) {
+					if($this->isModerator()) {
 						$allowed = true;
 					} else {
 						$allowed = BbiiMember::find()->findByPk($model->sendto)->contact_pm;
@@ -138,7 +138,7 @@ class MessageController extends BbiiController {
 				$this->redirect(array('outbox'));
 		} else {
 			$model = BbiiMessage::find()->findByPk($id);
-			if($model->sendto != Yii::$app->user->id && !$this->context->isModerator()) {
+			if($model->sendto != Yii::$app->user->id && !$this->isModerator()) {
 				throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested message does not exist.'));
 			}
 			$model->sendto = $model->sendfrom;
