@@ -37,15 +37,15 @@ class ForumController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'=>array('createTopic', 'quote', 'reply', 'vote', 'displayVote', 'editPoll', 'updatePoll', 'update', 'upvote', 'markAllRead', 'watch', 'unwatch'),
-				'users'=>array('@'),
+				'actions' => array('createTopic', 'quote', 'reply', 'vote', 'displayVote', 'editPoll', 'updatePoll', 'update', 'upvote', 'markAllRead', 'watch', 'unwatch'),
+				'users' => array('@'),
 			),
 			array('allow',
-				'actions'=>array('error', 'index', 'forum', 'topic','collapsed','setCollapsed'),
-				'users'=>array('*'),
+				'actions' => array('error', 'index', 'forum', 'topic','collapsed','setCollapsed'),
+				'users' => array('*'),
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
@@ -73,11 +73,11 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		$dataProvider=new CArrayDataProvider($model, array(
-			'id'=>'forum',
-			'pagination'=>false,
+		$dataProvider = new ArrayDataProvider($model, array(
+			'id' => 'forum',
+			'pagination' => false,
 		));
-		$this->render('index', array('dataProvider'=>$dataProvider));
+		$this->render('index', array('dataProvider' => $dataProvider));
 	}
 	
 	public function actionMarkAllRead() {
@@ -137,14 +137,14 @@ class ForumController extends BbiiController {
 			unset(Yii::$app->user->BbiiForum_id);
 			Yii::$app->user->setState('BbiiTopic_page', 0);
 		}
-		$dataProvider=new CActiveDataProvider('BbiiTopic', array(
-			'criteria'=>array(
-				'condition'=>'approved = 1 and (forum_id=' . $forum->id . ' or global = 1)',
-				'order'=>'global DESC, sticky DESC, last_post_id DESC',
-				'with'=>array('starter'),
+		$dataProvider = new CActiveDataProvider('BbiiTopic', array(
+			'criteria' => array(
+				'condition' => 'approved = 1 and (forum_id = ' . $forum->id . ' or global = 1)',
+				'order' => 'global DESC, sticky DESC, last_post_id DESC',
+				'with' => array('starter'),
 			),
-			'pagination'=>array(
-				'pageSize'=>$this->module->topicsPerPage,
+			'pagination' => array(
+				'pageSize' => $this->module->topicsPerPage,
 				'currentPage' => Yii::$app->user->getState('BbiiTopic_page', 0),
 			),
 		));
@@ -178,14 +178,14 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		$dataProvider=new CActiveDataProvider('BbiiPost', array(
-			'criteria'=>array(
-				'condition'=>'approved = 1 and topic_id=' . $topic->id,
-				'order'=>'t.id',
-				'with'=>array('poster'),
+		$dataProvider = new CActiveDataProvider('BbiiPost', array(
+			'criteria' => array(
+				'condition' => 'approved = 1 and topic_id = ' . $topic->id,
+				'order' => 't.id',
+				'with' => array('poster'),
 			),
-			'pagination'=>array(
-				'pageSize'=>$this->module->postsPerPage,
+			'pagination' => array(
+				'pageSize' => $this->module->postsPerPage,
 			),
 		));
 		// Determine poll
@@ -193,12 +193,12 @@ class ForumController extends BbiiController {
 		$criteria->condition = 'post_id = ' . $topic->first_post_id;
 		$this->poll = BbiiPoll::find()->find($criteria);
 		if($this->poll !== null) {
-			$this->choiceProvider=new CActiveDataProvider('BbiiChoice', array(
-				'criteria'=>array(
-					'condition'=>'poll_id = ' . $this->poll->id,
-					'order'=>'sort',
+			$this->choiceProvider = new CActiveDataProvider('BbiiChoice', array(
+				'criteria' => array(
+					'condition' => 'poll_id = ' . $this->poll->id,
+					'order' => 'sort',
 				),
-				'pagination'=>false,
+				'pagination' => false,
 			));
 			// Determine whether user has voted
 			if(Yii::$app->user->isGuest) {
@@ -216,7 +216,7 @@ class ForumController extends BbiiController {
 		if(isset($nav)) {
 			$cPage = $dataProvider->getPagination();
 			if(is_numeric($nav)) {
-				$criteria->condition = 'topic_id = ' . $topic->id . ' and id <= ' . $nav . ' and approved = 1';
+				$criteria->condition = 'topic_id = ' . $topic->id . ' and id < =  ' . $nav . ' and approved = 1';
 				$count = BbiiPost::find()->count($criteria);
 				$page = ceil($count/$cPage->pageSize);
 				$post = $nav;
@@ -227,10 +227,10 @@ class ForumController extends BbiiController {
 			if(Yii::$app->user->hasFlash('moderation')) {
 				Yii::$app->user->setFlash('moderation', Yii::$app->user->getFlash('moderation'));
 			}
-			$this->redirect(array('topic', 'id'=>$id, 'BbiiPost_page'=>$page, 'postId'=>$post));;
+			$this->redirect(array('topic', 'id' => $id, 'BbiiPost_page' => $page, 'postId' => $post));;
 		}
 		// Increase topic views
-		$topic->saveCounters(array('num_views'=>1));
+		$topic->saveCounters(array('num_views' => 1));
 		// Register the last visit of a topic
 		if(!Yii::$app->user->isGuest) {
 			$object = new BbiiTopicsRead;
@@ -279,21 +279,21 @@ class ForumController extends BbiiController {
 			}
 			if($post->save()) {
 				if($post->approved) {
-					$forum->saveCounters(array('num_posts'=>1));					// method since Yii 1.1.8
-					$topic->saveCounters(array('num_replies'=>1));					// method since Yii 1.1.8
-					$topic->saveAttributes(array('last_post_id'=>$post->id));
-					$forum->saveAttributes(array('last_post_id'=>$post->id));
-					$post->poster->saveCounters(array('posts'=>1));					// method since Yii 1.1.8
+					$forum->saveCounters(array('num_posts' => 1));					// method since Yii 1.1.8
+					$topic->saveCounters(array('num_replies' => 1));					// method since Yii 1.1.8
+					$topic->saveAttributes(array('last_post_id' => $post->id));
+					$forum->saveAttributes(array('last_post_id' => $post->id));
+					$post->poster->saveCounters(array('posts' => 1));					// method since Yii 1.1.8
 					$this->assignMembergroup(Yii::$app->user->id);
 				} else {
 					Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 				}
-				$this->redirect(array('topic', 'id'=>$post->topic_id, 'nav'=>'last'));
+				$this->redirect(array('topic', 'id' => $post->topic_id, 'nav' => 'last'));
 			}
 		} else {
 			$post = new BbiiPost;
 			$quote = $quoted->poster->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. DateTimeCalculation::longDate($quoted->create_time);
-			$post->content = '<blockquote cite="'. $quote .'"><p class="blockquote-header"><strong>'. $quote .'</strong></p>' . $quoted->content . '</blockquote><p></p>';
+			$post->content = '<blockquote cite = "'. $quote .'"><p class = "blockquote-header"><strong>'. $quote .'</strong></p>' . $quoted->content . '</blockquote><p></p>';
 			$post->subject  = $quoted->subject;
 			$post->forum_id = $quoted->forum_id;
 			$post->topic_id = $quoted->topic_id;
@@ -326,16 +326,16 @@ class ForumController extends BbiiController {
 			}
 			if($post->save()) {
 				if($post->approved) {
-					$forum->saveCounters(array('num_posts'=>1));					// method since Yii 1.1.8
-					$topic->saveCounters(array('num_replies'=>1));					// method since Yii 1.1.8
-					$topic->saveAttributes(array('last_post_id'=>$post->id));
-					$forum->saveAttributes(array('last_post_id'=>$post->id));
-					$post->poster->saveCounters(array('posts'=>1));					// method since Yii 1.1.8
+					$forum->saveCounters(array('num_posts' => 1));					// method since Yii 1.1.8
+					$topic->saveCounters(array('num_replies' => 1));					// method since Yii 1.1.8
+					$topic->saveAttributes(array('last_post_id' => $post->id));
+					$forum->saveAttributes(array('last_post_id' => $post->id));
+					$post->poster->saveCounters(array('posts' => 1));					// method since Yii 1.1.8
 					$this->assignMembergroup(Yii::$app->user->id);
 				} else {
 					Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 				}
-				$this->redirect(array('topic', 'id'=>$post->topic_id, 'nav'=>'last'));
+				$this->redirect(array('topic', 'id' => $post->topic_id, 'nav' => 'last'));
 			}
 		} else {
 			$post->subject = $topic->title;
@@ -375,11 +375,11 @@ class ForumController extends BbiiController {
 			if($post->save()) {
 				// Topic
 				$topic = new BbiiTopic;
-				$topic->forum_id 		= $forum->id;
-				$topic->title 			= $post->subject;
-				$topic->first_post_id 	= $post->id;
-				$topic->last_post_id 	= $post->id;
-				$topic->approved 		= $post->approved;
+				$topic->forum_id 		 =  $forum->id;
+				$topic->title 			 =  $post->subject;
+				$topic->first_post_id 	 =  $post->id;
+				$topic->last_post_id 	 =  $post->id;
+				$topic->approved 		 =  $post->approved;
 				if(isset($_POST['sticky'])) { $topic->sticky = 1; }
 				if(isset($_POST['global'])) { $topic->global = 1; }
 				if(isset($_POST['locked'])) { $topic->locked = 1; }
@@ -409,11 +409,11 @@ class ForumController extends BbiiController {
 				}
 				
 				if($correct && $topic->save()) {
-					$post->topic_id 	= $topic->id;
+					$post->topic_id 	 =  $topic->id;
 					$post->update();
 					if(!$forum->moderated) {
-						$forum->saveCounters(array('num_posts'=>1,'num_topics'=>1));	// method since Yii 1.1.8
-						$post->poster->saveCounters(array('posts'=>1));					// method since Yii 1.1.8
+						$forum->saveCounters(array('num_posts' => 1,'num_topics' => 1));	// method since Yii 1.1.8
+						$post->poster->saveCounters(array('posts' => 1));					// method since Yii 1.1.8
 						$forum->last_post_id = $post->id;
 						$forum->update();
 						$this->assignMembergroup(Yii::$app->user->id);
@@ -434,7 +434,7 @@ class ForumController extends BbiiController {
 							}
 						}
 					}
-					$this->redirect(array('topic', 'id'=>$topic->id));
+					$this->redirect(array('topic', 'id' => $topic->id));
 				} else {
 					$post->delete();
 				}
@@ -468,17 +468,17 @@ class ForumController extends BbiiController {
 			}
 			if($post->save()) {
 				if(!$post->approved) {
-					$forum->saveCounters(array('num_posts'=>-1));					// method since Yii 1.1.8
+					$forum->saveCounters(array('num_posts' => -1));					// method since Yii 1.1.8
 					if($topic->num_replies > 0) {
-						$topic->saveCounters(array('num_replies'=>-1));				// method since Yii 1.1.8
+						$topic->saveCounters(array('num_replies' => -1));				// method since Yii 1.1.8
 					} else {
 						$topic->approved = 0;
 						$topic->update();
-						$forum->saveCounters(array('num_topics'=>-1));				// method since Yii 1.1.8
+						$forum->saveCounters(array('num_topics' => -1));				// method since Yii 1.1.8
 					}
-					$post->poster->saveCounters(array('posts'=>-1));				// method since Yii 1.1.8
+					$post->poster->saveCounters(array('posts' => -1));				// method since Yii 1.1.8
 				}
-				$this->redirect(array('topic', 'id'=>$post->topic_id));
+				$this->redirect(array('topic', 'id' => $post->topic_id));
 			}
 		}
 		$this->render('update', array(
@@ -513,7 +513,7 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		$this->redirect(array('topic', 'id'=>$post->topic_id));
+		$this->redirect(array('topic', 'id' => $post->topic_id));
 	}
 	
 	/**
@@ -530,9 +530,9 @@ class ForumController extends BbiiController {
 				$post = BbiiPost::find()->findByPk($_POST['id']);
 				$topic = BbiiTopic::find()->findByPk($post->topic_id);
 				$member = BbiiMember::find()->findByPk($post->user_id);
-				$post->saveCounters(array('upvoted'=>-1));
-				$topic->saveCounters(array('upvoted'=>-1));
-				$member->saveCounters(array('upvoted'=>-1));
+				$post->saveCounters(array('upvoted' => -1));
+				$topic->saveCounters(array('upvoted' => -1));
+				$member->saveCounters(array('upvoted' => -1));
 			} else {										// add upvote
 				$upvote = new BbiiUpvoted;
 				$upvote->member_id = Yii::$app->user->id;
@@ -541,9 +541,9 @@ class ForumController extends BbiiController {
 				$post = BbiiPost::find()->findByPk($_POST['id']);
 				$topic = BbiiTopic::find()->findByPk($post->topic_id);
 				$member = BbiiMember::find()->findByPk($post->user_id);
-				$post->saveCounters(array('upvoted'=>1));
-				$topic->saveCounters(array('upvoted'=>1));
-				$member->saveCounters(array('upvoted'=>1));
+				$post->saveCounters(array('upvoted' => 1));
+				$topic->saveCounters(array('upvoted' => 1));
+				$member->saveCounters(array('upvoted' => 1));
 			}
 			$json['success'] = 'yes';
 			$json['html'] = $this->showUpvote($_POST['id']);
@@ -567,9 +567,9 @@ class ForumController extends BbiiController {
 				$criteria->condition = 'poll_id = ' . $_POST['poll_id'] . ' and user_id = ' . Yii::$app->user->id;
 				$votes = BbiiVote::find()->findAll($criteria);
 				foreach($votes as $vote) {
-					$this->poll->saveCounters(array('votes'=>-1));
+					$this->poll->saveCounters(array('votes' => -1));
 					$model = BbiiChoice::find()->findByPk($vote->choice_id);
-					$model->saveCounters(array('votes'=>-1));
+					$model->saveCounters(array('votes' => -1));
 					$vote->delete();
 				}
 				foreach($_POST['choice'] as $choice) {
@@ -579,17 +579,17 @@ class ForumController extends BbiiController {
 					$model->user_id = Yii::$app->user->id;
 					$model->save();
 					$model = BbiiChoice::find()->findByPk($choice);
-					$model->saveCounters(array('votes'=>1));
-					$this->poll->saveCounters(array('votes'=>1));
+					$model->saveCounters(array('votes' => 1));
+					$this->poll->saveCounters(array('votes' => 1));
 				}
-				$choiceProvider=new CActiveDataProvider('BbiiChoice', array(
-					'criteria'=>array(
-						'condition'=>'poll_id = ' . $_POST['poll_id'],
-						'order'=>'sort',
+				$choiceProvider = new CActiveDataProvider('BbiiChoice', array(
+					'criteria' => array(
+						'condition' => 'poll_id = ' . $_POST['poll_id'],
+						'order' => 'sort',
 					),
-					'pagination'=>false,
+					'pagination' => false,
 				));
-				$json['html'] = $this->render('poll', array('choiceProvider'=>$choiceProvider), true);
+				$json['html'] = $this->render('poll', array('choiceProvider' => $choiceProvider), true);
 				$json['success'] = 'yes';
 			} else {
 				$json['success'] = 'no';
@@ -608,14 +608,14 @@ class ForumController extends BbiiController {
 		$json = array();
 		if(isset($_POST['poll_id'])) {
 			$this->poll = BbiiPoll::find()->findByPk($_POST['poll_id']);
-			$choiceProvider=new CActiveDataProvider('BbiiChoice', array(
-				'criteria'=>array(
-					'condition'=>'poll_id = ' . $_POST['poll_id'],
-					'order'=>'sort',
+			$choiceProvider = new CActiveDataProvider('BbiiChoice', array(
+				'criteria' => array(
+					'condition' => 'poll_id = ' . $_POST['poll_id'],
+					'order' => 'sort',
 				),
-				'pagination'=>false,
+				'pagination' => false,
 			));
-			$json['html'] = $this->render('vote', array('choiceProvider'=>$choiceProvider), true);
+			$json['html'] = $this->render('vote', array('choiceProvider' => $choiceProvider), true);
 			$json['success'] = 'yes';
 		} else {
 			$json['success'] = 'no';
@@ -636,7 +636,7 @@ class ForumController extends BbiiController {
 			foreach($models as $model) {
 				$choices[$model->id] = $model->choice;
 			}
-			$json['html'] = $this->render('editPoll', array('poll'=>$poll, 'choices'=>$choices), true);
+			$json['html'] = $this->render('editPoll', array('poll' => $poll, 'choices' => $choices), true);
 			$json['success'] = 'yes';
 		} else {
 			$json['success'] = 'no';
@@ -663,7 +663,7 @@ class ForumController extends BbiiController {
 	 * Handle Ajax call to register in a cookie the setting or unsetting the hidden display of a forum group
 	 */
 	public function actionSetCollapsed() {
-		$json = array('success'=>1);
+		$json = array('success' => 1);
 		if(isset($_POST['id']) && isset($_POST['action'])) {
 			if($_POST['action'] == 'set') {
 				if(isset(Yii::$app->request->cookies['bbiiCollapsed'])) {
@@ -700,7 +700,7 @@ class ForumController extends BbiiController {
 	 * Handle Ajax call to register watching a topic by a user
 	 */
 	public function actionWatch() {
-		$json = array('success'=>'yes');
+		$json = array('success' => 'yes');
 		if(isset($_POST['topicId']) && isset($_POST['postId'])) {
 			$object = new BbiiTopicsRead;
 			$model = BbiiTopicRead::find()->findByPk(Yii::$app->user->id);
@@ -722,7 +722,7 @@ class ForumController extends BbiiController {
 	 * Handle Ajax call to register unwatching a topic by a user
 	 */
 	public function actionUnwatch() {
-		$json = array('success'=>'yes');
+		$json = array('success' => 'yes');
 		if(isset($_POST['topicId'])) {
 			$object = new BbiiTopicsRead;
 			$model = BbiiTopicRead::find()->findByPk(Yii::$app->user->id);
@@ -742,7 +742,7 @@ class ForumController extends BbiiController {
 	 */
 	public function actionError()
 	{
-		if($error=Yii::$app->errorHandler->error)
+		if($error = Yii::$app->errorHandler->error)
 		{
 			if(Yii::$app->request->isAjaxRequest)
 				echo $error['message'];
@@ -845,9 +845,9 @@ class ForumController extends BbiiController {
 		$criteria->condition = "member_id = :userid and post_id = $post_id";
 		$criteria->params = array(':userid' => Yii::$app->user->id);
 		if(BbiiUpvoted::find()->exists($criteria)) {
-			$html = CHtml::image($this->module->getRegisteredImage('down.gif'), 'upvote', array('title'=>Yii::t('BbiiModule.bbii', 'Remove your vote'), 'id'=>'upvote_'.$post_id, 'style'=>'cursor:pointer;', 'onclick'=>'upvotePost(' . $post_id . ',"' . $url . '")'));
+			$html = CHtml::image($this->module->getRegisteredImage('down.gif'), 'upvote', array('title' => Yii::t('BbiiModule.bbii', 'Remove your vote'), 'id' => 'upvote_'.$post_id, 'style' => 'cursor:pointer;', 'onclick' => 'upvotePost(' . $post_id . ',"' . $url . '")'));
 		} else {
-			$html = CHtml::image($this->module->getRegisteredImage('up.gif'), 'upvote', array('title'=>Yii::t('BbiiModule.bbii', 'Vote this post up'), 'id'=>'upvote_'.$post_id, 'style'=>'cursor:pointer;', 'onclick'=>'upvotePost(' . $post_id . ',"' . $url . '")'));
+			$html = CHtml::image($this->module->getRegisteredImage('up.gif'), 'upvote', array('title' => Yii::t('BbiiModule.bbii', 'Vote this post up'), 'id' => 'upvote_'.$post_id, 'style' => 'cursor:pointer;', 'onclick' => 'upvotePost(' . $post_id . ',"' . $url . '")'));
 		}
 		return $html;
 	}
@@ -859,7 +859,7 @@ class ForumController extends BbiiController {
 			return;
 		}
 		$criteria = new CDbCriteria;
-		$criteria->condition = "min_posts > 0 and min_posts <= " . $member->posts;
+		$criteria->condition = "min_posts > 0 and min_posts < =  " . $member->posts;
 		$criteria->order = 'min_posts DESC';
 		$newGroup = BbiiMembergroup::find()->find($criteria);
 		if($newGroup !== null and $group->id != $newGroup->id) {
