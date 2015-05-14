@@ -146,7 +146,7 @@ class BbiiMember extends BbiiAR {
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
@@ -155,39 +155,39 @@ class BbiiMember extends BbiiAR {
 
 		$criteria = new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('member_name',$this->member_name,true);
-		$criteria->compare('gender',$this->gender);
-		$criteria->compare('birthdate',$this->birthdate,true);
-		$criteria->compare('location',$this->location,true);
-		$criteria->compare('personal_text',$this->personal_text,true);
-		$criteria->compare('signature',$this->signature,true);
 		$criteria->compare('avatar',		$this->avatar,			true);
-		$criteria->compare('show_online',$this->show_online);
+		$criteria->compare('birthdate',		$this->birthdate,		true);
+		$criteria->compare('blogger',		$this->blogger,			true);
 		$criteria->compare('contact_email',	$this->contact_email);
 		$criteria->compare('contact_pm',	$this->contact_pm);
-		$criteria->compare('timezone',$this->timezone,true);
-		$criteria->compare('first_visit',$this->first_visit,true);
-		$criteria->compare('last_visit',$this->last_visit,true);
-		$criteria->compare('warning',$this->warning);
-		$criteria->compare('posts',$this->posts);
-		$criteria->compare('group_id',$this->group_id);
-		$criteria->compare('upvoted',$this->upvoted);
-		$criteria->compare('blogger',$this->blogger,true);
 		$criteria->compare('facebook',		$this->facebook,		true);
+		$criteria->compare('first_visit',	$this->first_visit,		true);
 		$criteria->compare('flickr',		$this->flickr,			true);
+		$criteria->compare('gender',		$this->gender);
 		$criteria->compare('google',		$this->google,			true);
+		$criteria->compare('group_id',		$this->group_id);
+		$criteria->compare('id',			$this->id, 				true);
+		$criteria->compare('last_visit',	$this->last_visit,		true);
 		$criteria->compare('linkedin',		$this->linkedin,		true);
+		$criteria->compare('location',		$this->location,		true);
+		$criteria->compare('member_name',	$this->member_name,		true);
 		$criteria->compare('metacafe',		$this->metacafe,		true);
+		$criteria->compare('moderator',		$this->moderator,		true);
 		$criteria->compare('myspace',		$this->myspace,			true);
 		$criteria->compare('orkut',			$this->orkut,			true);
+		$criteria->compare('personal_text',	$this->personal_text,	true);
+		$criteria->compare('posts',			$this->posts);
+		$criteria->compare('show_online',	$this->show_online);
+		$criteria->compare('signature',		$this->signature,		true);
+		$criteria->compare('timezone',		$this->timezone,		true);
 		$criteria->compare('tumblr',		$this->tumblr,			true);
 		$criteria->compare('twitter',		$this->twitter,			true);
+		$criteria->compare('upvoted',		$this->upvoted);
+		$criteria->compare('warning',		$this->warning);
 		$criteria->compare('website',		$this->website,			true);
 		$criteria->compare('wordpress',		$this->wordpress,		true);
 		$criteria->compare('yahoo',			$this->yahoo,			true);
 		$criteria->compare('youtube',		$this->youtube,			true);
-		$criteria->compare('moderator',$this->moderator,true);
 
 		return new ActiveDataProvider($this, array(
 			'criteria' => $criteria,
