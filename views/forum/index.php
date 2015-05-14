@@ -23,13 +23,13 @@ $item = array(
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 
-	<?php $this->widget('zii.widgets.CListView', array(
+	<?php /*$this->widget('zii.widgets.CListView', array(
 		'id' => 'bbiiForum',
 		'dataProvider' => $dataProvider,
 		'itemView' => '_forum',
 		'viewData' => array('lastIndex' => ($dataProvider->totalItemCount - 1)),
 		'summaryText' => false,
-	)); ?>
+	));*/ ?>
 	
 	<?php echo $this->render('_footer'); ?>
 	<?php if(!Yii::$app->user->isGuest) echo Html::a(Yii::t('BbiiModule.bbii','Mark all read'), array('forum/markAllRead')); ?>

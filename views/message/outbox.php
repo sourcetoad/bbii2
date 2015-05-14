@@ -1,4 +1,10 @@
 <?php
+
+use yii\helpers\Html;
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this MessageController */
 /* @var $model BbiiMessage */
 /* @var $count Array */
@@ -43,11 +49,11 @@ $item = array(
 				'buttons' => array(
 					'view' => array(
 						'url' => '$data->id',
-						'imageUrl' => $this->module->getRegisteredImage('view.png'),
+						'imageUrl' => $asset->baseUrl.'view.png'),
 						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . $this->createAbsoluteUrl('message/view') .'");return false; }',
 					),
 					'delete' => array(
-						'imageUrl' => $this->module->getRegisteredImage('delete.png'),
+						'imageUrl' => $asset->baseUrl.'delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)

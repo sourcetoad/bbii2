@@ -1,4 +1,10 @@
 <?php
+
+use yii\helpers\Html;
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this ForumController */
 /* @var $data BbiiTopic */
 ?>
@@ -13,8 +19,8 @@
 			<?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($data->starter->member_name);?>
 			<?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($data->firstPost->create_time); ?>
 		<?php if($this->context->isModerator()): ?>
-			<?php echo Html::img($this->module->getRegisteredImage('empty.png'), 'empty'); ?>
-			<?php echo Html::img($this->module->getRegisteredImage('update.png'), 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
+			<?php echo Html::img($asset->baseUrl.'empty.png'), 'empty'); ?>
+			<?php echo Html::img($asset->baseUrl.'update.png'), 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
 		<?php endif; ?>
 		</div>
 	</div>
@@ -29,7 +35,7 @@
 	<div class = "forum-cell last-cell">
 		<?php 
 			echo Html::encode($data->lastPost->poster->member_name);
-			echo Html::a(Html::img($this->module->getRegisteredImage('next.png'), 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->id, 'nav' => 'last'));
+			echo Html::a(Html::img($asset->baseUrl.'next.png'), 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->id, 'nav' => 'last'));
 			echo '<br>';
 			echo DateTimeCalculation::long($data->lastPost->create_time);
 		?>

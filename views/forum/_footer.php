@@ -1,4 +1,11 @@
 <?php
+
+use frontend\modules\bbii\models\BbiiSession;
+use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiSpider;
+
+use yii\helpers\Html;
+
 /* @var $this ForumController */
 $present = BbiiSession::find()->present()->count();
 $members = BbiiMember::find()->present()->count();

@@ -1,4 +1,10 @@
 <?php
+
+use yii\helpers\Html;
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this ForumController */
 
 $this->context->bbii_breadcrumbs = array(
@@ -29,7 +35,7 @@ $item = array(
 		array(
 			'header' => 'Avatar',
 			'type' => 'image',
-			'value' => '(isset($data->avatar))?"'.Yii::$app->request->baseUrl . $this->module->avatarStorage . '/$data->avatar":"'.$this->module->getRegisteredImage('empty.jpeg').'"',
+			'value' => '(isset($data->avatar))?"'.Yii::$app->request->baseUrl . $this->module->avatarStorage . '/$data->avatar":"'.$asset->baseUrl.'empty.jpeg').'"',
 			'htmlOptions' => array('class' => 'img30'),
 		),
 		array(

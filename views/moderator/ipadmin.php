@@ -1,4 +1,10 @@
 <?php
+
+use yii\helpers\Html;
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
+
 /* @var $this IpaddressController */
 /* @var $model Ipaddress */
 
@@ -42,7 +48,7 @@ $item = array(
 				'buttons' => array(
 					'delete' => array(
 						'url' => 'array("moderator/ipDelete", "id" => $data->id)',
-						'imageUrl' => $this->module->getRegisteredImage('delete.png'),
+						'imageUrl' => $asset->baseUrl.'delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)
