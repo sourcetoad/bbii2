@@ -1,5 +1,7 @@
 <?php
 
+namespace frontend\modules\bbii\controllers;
+
 class MessageController extends BbiiController {
 	/**
 	 * @return array action filters

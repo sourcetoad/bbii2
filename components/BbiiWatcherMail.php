@@ -1,4 +1,7 @@
 <?php 
+
+namespace frontend\modules\bbii\components;
+
 class BbiiWatcherMail {
 	private $forum, $bbii_db, $user_db, $table, $id, $user, $email;
 	

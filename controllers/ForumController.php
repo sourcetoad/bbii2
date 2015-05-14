@@ -1,5 +1,7 @@
 <?php
 
+namespace frontend\modules\bbii\controllers;
+
 class ForumController extends BbiiController {
 	public $poll;
 	public $choiceProvider;

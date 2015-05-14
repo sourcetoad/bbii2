@@ -1,5 +1,7 @@
 <?php
 
+namespace frontend\modules\bbii\controllers;
+
 class SearchController extends BbiiController {
 	public $search;
 	Public $type;

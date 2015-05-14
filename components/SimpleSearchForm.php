@@ -1,4 +1,7 @@
 <?php
+
+namespace frontend\modules\bbii\components;
+
 Yii::import('zii.widgets.CPortlet');
  
 class SimpleSearchForm extends CPortlet {

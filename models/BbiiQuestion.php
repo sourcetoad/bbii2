@@ -1,5 +1,7 @@
 <?php
 
+namespace frontend\modules\bbii\models;
+
 /**
  * This is the model class for table "bbii_question".
  *

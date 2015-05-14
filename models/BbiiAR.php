@@ -1,4 +1,7 @@
 <?php 
+
+namespace frontend\modules\bbii\models;
+
 class BbiiAR extends CActiveRecord {
 	public function getDbConnection() {
 		if(Yii::$app->getController()->module->dbName) {

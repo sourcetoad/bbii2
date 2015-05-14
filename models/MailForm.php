@@ -1,5 +1,7 @@
 <?php
 
+namespace frontend\modules\bbii\models;
+
 /**
  * MailForm class.
  */
