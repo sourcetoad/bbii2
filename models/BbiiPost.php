@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
+use frontend\modules\bbii\models\_query\BbiiPostQuery;
 
 /**
  * This is the model class for table "bbii_post".
@@ -25,15 +26,11 @@ use frontend\modules\bbii\models\BbiiAR;
 class BbiiPost extends BbiiAR
 {
 	public $search;
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return BbiiPost the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+
+    public static function find()
+    {
+        return new BbiiPostQuery(get_called_class());
+    }
 
 	/**
 	 * @return string the associated database table name
@@ -144,7 +141,14 @@ class BbiiPost extends BbiiAR
 		));
 	}
 	
+	/**
+	 * [scopes description]
+	 *
+	 * @deprecated 2.0.1
+	 * @return [type] [description]
+	 */
 	public function scopes() {
+		return true;
 		return array(
 			'approved' => array(
 				'condition' => 'approved = 1',

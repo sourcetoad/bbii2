@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
+use frontend\modules\bbii\models\_query\BbiiSpiderQuery;
 
 /**
  * This is the model class for table "bbii_spider".
@@ -16,15 +17,10 @@ use frontend\modules\bbii\models\BbiiAR;
  */
 class BbiiSpider extends BbiiAR
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return BbiiSpider the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+    public static function find()
+    {
+        return new BbiiPostQuery(get_called_class());
+    }
 
 	/**
 	 * @return string the associated database table name
@@ -105,7 +101,14 @@ class BbiiSpider extends BbiiAR
 		));
 	}
 	
+	/**
+	 * [scopes description]
+	 *
+	 * @deprecated 2.0.1
+	 * @return [type] [description]
+	 */
 	public function scopes() {
+		return true;
 		$recent = date('Y-m-d H:i:s', time() - 900);
 		return array(
 			'present' => array(
