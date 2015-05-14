@@ -53,7 +53,7 @@ $item = array(
 						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . $this->createAbsoluteUrl('message/view') .'");return false; }',
 					),
 					'delete' => array(
-						'imageUrl' => $assets->baseUrl.'delete.png'),
+						'imageUrl' => $assets->baseUrl.'/images/delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)

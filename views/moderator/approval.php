@@ -58,11 +58,11 @@ $item = array(
 					'approve' => array(
 						'url' => 'array("approve", "id" => $data->id)',
 						'label' => Yii::t('BbiiModule.bbii','Approve'),
-						'imageUrl' => $assets->baseUrl.'approve.png'),
+						'imageUrl' => $assets->baseUrl.'/images/approve.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 					'delete' => array(
-						'imageUrl' => $assets->baseUrl.'delete.png'),
+						'imageUrl' => $assets->baseUrl.'/images/delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)
