@@ -2,7 +2,7 @@
 /* @var $this ForumController */
 /* @var $model BbiiMember */
 
-$this->bbii_breadcrumbs = array(
+$this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Members') => array('member/index'),
 	$model->member_name . Yii::t('BbiiModule.bbii', '\'s profile') => array('member/view','id' => $model->id),

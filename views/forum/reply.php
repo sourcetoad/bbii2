@@ -4,7 +4,7 @@
 /* @var $topic BbiiTopic */
 /* @var $post BbiiPost */
 
-$this->bbii_breadcrumbs = array(
+$this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	$forum->name => array('forum/forum', 'id' => $forum->id),
 	$topic->title => array('forum/topic', 'id' => $topic->id),

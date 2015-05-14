@@ -2,7 +2,7 @@
 /* @var $this ForumController */
 /* @var $dataProvider ArrayDataProvider */
 
-$this->bbii_breadcrumbs = array(
+$this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum'),
 );
 

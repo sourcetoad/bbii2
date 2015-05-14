@@ -5,7 +5,7 @@
 /* @var $poll BbiiPoll */
 /* @var $choices array */
 
-$this->bbii_breadcrumbs = array(
+$this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	$forum->name => array('forum/forum', 'id' => $forum->id),
 	Yii::t('BbiiModule.bbii', 'New topic'),
