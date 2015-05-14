@@ -168,15 +168,23 @@ class BbiiForum extends BbiiAR
 		return $this;
 	}
 	
+	/**
+	 * 
+	 * @version  2.1.1
+	 * @return
+	 */
 	public static function getForumOptions() {
 		$return = array();
-		$criteria = new CDbCriteria;
-		$criteria->condition = 'type = 0';
-		$criteria->order = 'sort';
-		$category = BbiiForum::find()->findAll($criteria);
+
+		// $criteria = new CDbCriteria;
+		// $criteria->condition = 'type = 0';
+		// $criteria->order = 'sort';
+		// $category = BbiiForum::find()->findAll($criteria);
+		$category = BbiiForum::find()->where('type = 0')->orderBy('sort')->all();
 		foreach($category as $group) {
-			$criteria->condition = 'type = 1 and cat_id = ' . $group->id;
-			$forum = BbiiForum::find()->findAll($criteria);
+			// $criteria->condition = 'type = 1 and cat_id = ' . $group->id;
+			// $forum = BbiiForum::find()->findAll($criteria);
+			$forum = BbiiForum::find()->where('type = 1 and cat_id = ' . $group->id)->all(); 
 			foreach($forum as $option) {
 				if($option->public || !Yii::$app->user->isGuest) {
 					if($option->membergroup_id == 0) {

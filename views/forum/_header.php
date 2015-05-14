@@ -4,6 +4,7 @@ use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiMessage;
 
 use yii\bootstrap\Nav;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
@@ -38,14 +39,16 @@ $assets = AppAsset::register($this);
 		</div>
 	</td><td style = "padding:0;text-align:right;vertical-align:top;">
 		<div class = "search">
-			<?php //$this->widget('SimpleSearchForm'); ?>
+			<?php // @todo Add this feature back - DJE : 2015 - 05-14 
+				//$this->widget('SimpleSearchForm');
+			?>
 		</div>
 	</td></tr></table>
 </div>
-<?php /*echo Html::dropDownList('bbii-jumpto', '', Html::listData(BbiiForum::getForumOptions(), 'id', 'name', 'group'), 
-	array('empty' => Yii::t('BbiiModule.bbii','Select forum'),
-	'onchange' => "window.location.href = '" . Html::normalizeUrl(array('forum')) . "/id/'+$(this).val()",
-));*/ ?>
+<?php echo Html::dropDownList('bbii-jumpto', null, ArrayHelper::map(BbiiForum::getForumOptions(), 'id', 'name', 'group'),
+array('empty' => Yii::t('BbiiModule.bbii','Select forum'),
+	'onchange' => "window.location.href = '" . http_build_query(array('forum')) . "/id/'+$(this).val()",
+)); ?>
 <?php if(isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
