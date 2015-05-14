@@ -410,7 +410,7 @@ class ModeratorController extends BbiiController {
 				}
 				$members = BbiiMember::find()->findAll($criteria);
 				if(isset($_POST['email'])) {	// e-mails
-					$name = $this->module->forumTitle;
+					$name = $this->context->module->forumTitle;
 					$name = ' = ?UTF-8?B?'.base64_encode($name).'? = ';
 					$from = BbiiSetting::find()->find()->contact_email;
 					$subject = ' = ?UTF-8?B?'.base64_encode($model->subject).'? = ';

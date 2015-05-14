@@ -29,7 +29,7 @@ class BbiiController extends Controller
 	public $bbii_breadcrumbs = array();
 	
 	public function getPageTitle() {
-		$pageTitle = $this->module->forumTitle;
+		$pageTitle = $this->context->module->forumTitle;
 		if($this->getId() == 'forum') {
 			switch ($this->getAction()->getId()) {
 				case 'createTopic':

@@ -216,7 +216,7 @@ class MemberController extends BbiiController {
 		$class = new $this->module->userClass;
 		$table = $class::find()->tableName();
 		$obj = new BbiiWatcherMail(
-			$this->module->forumTitle,
+			$this->context->module->forumTitle,
 			$db,
 			$this->module->userClass,
 			$table,
