@@ -1,5 +1,9 @@
 <?php
 
+namespace frontend\modules\bbii\controllers;
+
+use frontend\modules\bbii\components\BbiiController;
+
 class SettingController extends BbiiController {
 	public function init() {
 		Yii::$app->clientScript->registerScriptFile($this->module->getAssetsUrl() . '/js/bbiiSetting.js', CClientScript::POS_HEAD);

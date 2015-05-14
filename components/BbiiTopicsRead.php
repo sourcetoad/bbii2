@@ -1,4 +1,7 @@
 <?php
+
+namespace frontend\modules\bbii\components;
+
 class BbiiTopicsRead implements Serializable {
 	private $data;
 	private $topics;

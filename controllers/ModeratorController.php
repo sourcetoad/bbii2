@@ -1,5 +1,9 @@
 <?php
 
+namespace frontend\modules\bbii\controllers;
+
+use frontend\modules\bbii\components\BbiiController;
+
 class ModeratorController extends BbiiController {
 	/**
 	 * @return array action filters

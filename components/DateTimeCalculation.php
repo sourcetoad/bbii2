@@ -1,4 +1,7 @@
 <?php
+
+namespace frontend\modules\bbii\components;
+
 class DateTimeCalculation {
 	static public function shortDate($timestamp) {
 		$df = Yii::$app->dateFormatter;
