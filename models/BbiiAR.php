@@ -2,7 +2,9 @@
 
 namespace frontend\modules\bbii\models;
 
-class BbiiAR extends CActiveRecord {
+use yii\db\ActiveRecord;
+
+class BbiiAR extends ActiveRecord {
 	public function getDbConnection() {
 		if(Yii::$app->getController()->module->dbName) {
 			if(Yii::$app->hasComponent(Yii::$app->getController()->module->dbName)) {

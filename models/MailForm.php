@@ -2,10 +2,13 @@
 
 namespace frontend\modules\bbii\models;
 
+use frontend\modules\bbii\models\BbiiAR;
+use yii\base\Model;
+
 /**
  * MailForm class.
  */
-class MailForm extends CFormModel
+class MailForm extends Model
 {
 	public $member_id;
 	public $member_name;

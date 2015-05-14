@@ -1,7 +1,8 @@
-
 <?php
 
 namespace frontend\modules\bbii\models;
+
+use frontend\modules\bbii\models\BbiiAR;
 
 /**
  * This is the model class for table "bbii_poll".

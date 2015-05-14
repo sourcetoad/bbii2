@@ -2,11 +2,13 @@
 
 namespace frontend\modules\bbii\components;
 
+use yii\base\Controller;
+
 /**
  * Controller is the customized base controller class.
  * All controller classes for this application should extend from this base class.
  */
-class BbiiController extends CController
+class BbiiController extends Controller
 {
 	/**
 	 * @var string the default layout for the controller view. Defaults to '//layouts/column1',
