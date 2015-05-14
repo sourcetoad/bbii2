@@ -14,7 +14,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('_header', array('item'=>$item)); ?>
 	
 	<div class="bbii-box-top"><?php echo Yii::t('BbiiModule.bbii', 'Send e-mail to') . ' ' . $model->member_name; ?></div>
 

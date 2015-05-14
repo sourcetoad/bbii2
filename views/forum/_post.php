@@ -108,7 +108,7 @@
 				<?php echo Yii::t('BbiiModule.bbii','Changed'). ': ' . DateTimeCalculation::long($data->change_time) . ' ' . Yii::t('BbiiModule.bbii','Reason') . ': ' . CHtml::encode($data->change_reason); ?>
 			<?php endif; ?>
 		</div>
-		<?php echo $this->renderPartial('_upvotedBy', array('post_id'=>$data->id)); ?>
+		<?php echo $this->render('_upvotedBy', array('post_id'=>$data->id)); ?>
 		<div class="toolbar">
 		<?php if($this->isModerator()): ?>
 			<?php echo CHtml::link( CHtml::image($this->module->getRegisteredImage('warn.png'), 'warn', array('title'=>Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id'=>$data->user_id, 'type'=>1) ); ?>

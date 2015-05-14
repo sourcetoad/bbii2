@@ -17,7 +17,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('_header', array('item'=>$item)); ?>
 	
-	<?php echo $this->renderPartial('_form', array('post'=>$post)); ?>
+	<?php echo $this->render('_form', array('post'=>$post)); ?>
 </div>

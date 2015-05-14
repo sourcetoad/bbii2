@@ -240,7 +240,7 @@ class ModeratorController extends BbiiController {
 					}
 				}
 				$json['success'] = 'yes';
-				$json['html'] = $this->renderPartial('_view', array('model' => $model, 'poll' => $poll, 'choices' => $choices), true);
+				$json['html'] = $this->render('_view', array('model' => $model, 'poll' => $poll, 'choices' => $choices), true);
 			} else {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'Post not found.');

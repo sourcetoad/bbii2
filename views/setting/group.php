@@ -21,7 +21,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 ", CClientScript::POS_BEGIN);
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('_header', array('item'=>$item)); ?>
 	
 	<?php echo CHtml::button(Yii::t('BbiiModule.bbii', 'New group'), array('onclick'=>'editMembergroup()', 'class'=>'down35')); ?>
 	
@@ -74,7 +74,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     ),
 ));
 
-    echo $this->renderPartial('_editMembergroup', array('model'=>$model));
+    echo $this->render('_editMembergroup', array('model'=>$model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>

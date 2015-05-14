@@ -177,7 +177,7 @@ class MessageController extends BbiiController {
 			$model = BbiiMessage::model()->findByPk($_POST['id']);
 			if($model !== null && ($this->isModerator() || $model->sendto == Yii::$app->user->id || $model->sendfrom == Yii::$app->user->id)) {
 				$json['success'] = 'yes';
-				$json['html'] = $this->renderPartial('_view', array('model' => $model), true);
+				$json['html'] = $this->render('_view', array('model' => $model), true);
 				if($model->sendto == Yii::$app->user->id) {
 					$model->read_indicator = 1;
 					$model->update();

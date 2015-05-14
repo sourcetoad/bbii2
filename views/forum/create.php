@@ -23,7 +23,7 @@ if(empty($poll->question) && !$poll->hasErrors()) {
 }
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('_header', array('item'=>$item)); ?>
 	
 	<noscript>
 	<div class="flash-notice">

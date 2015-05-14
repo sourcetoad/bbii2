@@ -26,7 +26,7 @@ $item = array(
 <?php endif; ?>
 
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('_header', array('item'=>$item)); ?>
 	
 	<div class="forum-category center">
 		<div class="header2">
@@ -55,7 +55,7 @@ $item = array(
 		'pager'=>array('firstPageCssClass'=>'previous', 'lastPageCssClass'=>'next', 'firstPageLabel'=>'<<', 'lastPageLabel'=>'>>'),
 	)); ?>
 	
-	<?php echo $this->renderPartial('_forumfooter'); ?>
+	<?php echo $this->render('_forumfooter'); ?>
 	<div id="bbii-copyright"><a href="http://www.yiiframework.com/extension/bbii/" target="_blank" title="&copy; 2013-2014 <?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->module->version; ?>">BBii forum software</a></div>
 </div>
 <div style="display:none;">
@@ -77,7 +77,7 @@ if($this->isModerator()) {
 		),
 	));
 
-		echo $this->renderPartial('_topicForm', array('model'=>new BbiiTopic));
+		echo $this->render('_topicForm', array('model'=>new BbiiTopic));
 
 	$this->endWidget('zii.widgets.jui.CJuiDialog');
 }

@@ -19,7 +19,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('_header', array('item'=>$item)); ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'member-grid',
@@ -54,6 +54,6 @@ $item = array(
 )); ?>
 
 	
-	<?php echo $this->renderPartial('_footer'); ?>
+	<?php echo $this->render('_footer'); ?>
 	<div id="bbii-copyright"><a href="http://www.yiiframework.com/extension/bbii/" target="_blank" title="&copy; 2013-2014 <?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->module->version; ?>">BBii forum software</a></div>
 </div>

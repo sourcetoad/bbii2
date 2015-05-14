@@ -15,7 +15,7 @@ $item = array(
 );
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->renderPartial('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('_header', array('item'=>$item)); ?>
 	
 	<div class="progress"><div class="progressbar" style="width:<?php echo (2*$count['outbox']); ?>%"> </div></div>
 
