@@ -404,7 +404,7 @@ class ModeratorController extends BbiiController {
 			}
 			if($model->validate()) {
 				$criteria = new CDbCriteria;
-				if($model->member_id > =  0) {
+				if($model->member_id >=  0) {
 					$criteria->condition = 'group_id = :group';
 					$criteria->params = array(':group' => $model->member_id);
 				}
