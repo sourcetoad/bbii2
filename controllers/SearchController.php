@@ -26,11 +26,11 @@ class SearchController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index'),
-				'users'=>array('*'),
+				'actions' => array('index'),
+				'users' => array('*'),
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
@@ -67,7 +67,7 @@ class SearchController extends BbiiController {
 		}
 		$this->type = $type;
 		if($type == 0 && strlen($search) < 2) {
-			$condition = '1=2';
+			$condition = '1 = 2';
 		} elseif($type == 0) {	// phrase
 			if($choice == 1) {
 				$condition = "subject LIKE '%$search%' OR title LIKE '%$search%'";
@@ -92,7 +92,7 @@ class SearchController extends BbiiController {
 				}
 			}
 			if(strlen($condition) == 0) {
-				$condition = '1=2';
+				$condition = '1 = 2';
 			} else {
 				$condition = substr($condition, 0, -4);
 			}
@@ -113,27 +113,27 @@ class SearchController extends BbiiController {
 				}
 			}
 			if(strlen($condition) == 0) {
-				$condition = '1=2';
+				$condition = '1 = 2';
 			} else {
 				$condition = substr($condition, 0, -5);
 			}
 		}
 		$dataProvider = new CActiveDataProvider('BbiiPost', array(
-			'criteria'=>array(
-				'condition'=>$condition,
-				'order'=>'create_time DESC',
-				'with'=>'topic',
+			'criteria' => array(
+				'condition' => $condition,
+				'order' => 'create_time DESC',
+				'with' => 'topic',
 			),
-			'pagination'=>array(
-				'pageSize'=>10,
+			'pagination' => array(
+				'pageSize' => 10,
 			),
 		));
 
 		$this->render('index', array(
-			'dataProvider'=>$dataProvider,
-			'search'=>$search,
-			'choice'=>$choice,
-			'type'=>$type,
+			'dataProvider' => $dataProvider,
+			'search' => $search,
+			'choice' => $choice,
+			'type' => $type,
 		));
 	}
 	
@@ -171,14 +171,14 @@ class SearchController extends BbiiController {
 				if(strlen($word) > 1 && stripos($value,$word)) {
 					$found = true;
 					$word = preg_quote($word);
-					$value = preg_replace("/(?![^<]*>)($word)/ui", '<span class="highlight">\1</span>', $value);
+					$value = preg_replace("/(?![^<]*>)($word)/ui", '<span class = "highlight">\1</span>', $value);
 				}
 			}
 			if($found) {
 				$result .= '<p>... ' . $value . ' ...</p>';
 			}
 //			if(stripos($value,$search)) {
-//				$result .= '<p>... ' . preg_replace("/(?![^<]*>)($psearch)/ui", '<span class="highlight">\1</span>', $value) . ' ...</p>';
+//				$result .= '<p>... ' . preg_replace("/(?![^<]*>)($psearch)/ui", '<span class = "highlight">\1</span>', $value) . ' ...</p>';
 //			}
 		}
 		if(strlen($result) > 0) {

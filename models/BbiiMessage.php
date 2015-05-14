@@ -48,25 +48,25 @@ class BbiiMessage extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('sendfrom, sendto, subject, content', 'required'),
-			array('sendfrom, sendto, read_indicator, type, inbox, outbox, post_id', 'numerical', 'integerOnly'=>true),
-			array('sendto', 'mailboxFull', 'on'=>'insert'),
-			array('subject', 'length', 'max'=>255),
-			array('content','filter','filter'=>array($obj=new CHtmlPurifier(), 'purify')),
-			array('ip', 'length', 'max'=>39),
+			array('sendfrom, sendto, read_indicator, type, inbox, outbox, post_id', 'numerical', 'integerOnly' => true),
+			array('sendto', 'mailboxFull', 'on' => 'insert'),
+			array('subject', 'length', 'max' => 255),
+			array('content','filter','filter' => array($obj = new CHtmlPurifier(), 'purify')),
+			array('ip', 'length', 'max' => 39),
 			array('ip', 'blocked'),
-			array('ip', 'default', 'value'=>Yii::$app->request->userHostAddress, 'on'=>'insert'),
-			array('create_time', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'insert'),
+			array('ip', 'default', 'value' => Yii::$app->request->userHostAddress, 'on' => 'insert'),
+			array('create_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'insert'),
 			array('create_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, sendfrom, sendto, subject, content, read_indicator, type, inbox, outbox, ip, post_id', 'safe', 'on'=>'search'),
+			array('id, sendfrom, sendto, subject, content, read_indicator, type, inbox, outbox, ip, post_id', 'safe', 'on' => 'search'),
 		);
 	}
 	
 	public function mailboxFull($attr, $params) {
 		$criteria = new CDbCriteria;
 		$criteria->condition = 'outbox = 1 and sendfrom = '. Yii::$app->user->id;
-		if(BbiiMessage::find()->outbox()->count($criteria) >=50) {
+		if(BbiiMessage::find()->outbox()->count($criteria) > = 50) {
 			$this->addError('sendto', Yii::t('BbiiModule.bbii', 'Your outbox is full. Please make room before sending new messages.'));
 		}
 	}
@@ -92,7 +92,7 @@ class BbiiMessage extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -120,7 +120,7 @@ class BbiiMessage extends BbiiAR
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('sendfrom',$this->sendfrom,true);
@@ -136,9 +136,9 @@ class BbiiMessage extends BbiiAR
 		$criteria->limit = 100;
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 			'pagination' => false,
-			'sort'=>array('defaultOrder'=>'id DESC'),
+			'sort' => array('defaultOrder' => 'id DESC'),
 		));
 	}
 	

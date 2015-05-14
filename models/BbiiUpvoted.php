@@ -18,7 +18,7 @@ class BbiiUpvoted extends BbiiAR
 	 * @param string $className active record class name.
 	 * @return BbiiUpvoted the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
@@ -40,10 +40,10 @@ class BbiiUpvoted extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('member_id, post_id', 'required'),
-			array('member_id, post_id', 'length', 'max'=>10),
+			array('member_id, post_id', 'length', 'max' => 10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('member_id, post_id', 'safe', 'on'=>'search'),
+			array('member_id, post_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -59,7 +59,7 @@ class BbiiUpvoted extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -78,13 +78,13 @@ class BbiiUpvoted extends BbiiAR
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('member_id',$this->member_id,true);
 		$criteria->compare('post_id',$this->post_id,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 }

@@ -45,26 +45,26 @@ class BbiiPost extends BbiiAR
 	 */
 	public function rules()
 	{
-		$obj=new CHtmlPurifier();
+		$obj = new CHtmlPurifier();
 		$obj->options = Yii::$app->getController()->module->purifierOptions;
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
 			array('subject, content', 'required'),
-			array('change_id, user_id, topic_id, forum_id, approved, upvoted', 'numerical', 'integerOnly'=>true),
-			array('subject, change_reason', 'length', 'max'=>255),
-			array('content','filter','filter'=>array($obj, 'purify')),
-			array('ip', 'length', 'max'=>39),
+			array('change_id, user_id, topic_id, forum_id, approved, upvoted', 'numerical', 'integerOnly' => true),
+			array('subject, change_reason', 'length', 'max' => 255),
+			array('content','filter','filter' => array($obj, 'purify')),
+			array('ip', 'length', 'max' => 39),
 			array('ip', 'blocked'),
-			array('ip', 'default', 'value'=>Yii::$app->request->userHostAddress, 'on'=>'insert'),
-			array('user_id', 'default', 'value'=>Yii::$app->user->id, 'on'=>'insert'),
-			array('create_time', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'insert'),
-			array('change_id', 'default', 'value'=>Yii::$app->user->id, 'on'=>'update'),
-			array('change_time', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'update'),
+			array('ip', 'default', 'value' => Yii::$app->request->userHostAddress, 'on' => 'insert'),
+			array('user_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'insert'),
+			array('create_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'insert'),
+			array('change_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'update'),
+			array('change_time', 'default', 'value' => new CDbExpression('NOW()'), 'on' => 'update'),
 			array('create_time, change_time, search', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, subject, content, user_id, topic_id, forum_id, ip, create_time, approved, change_id, change_time, change_reason, search', 'safe', 'on'=>'search'),
+			array('id, subject, content, user_id, topic_id, forum_id, ip, create_time, approved, change_id, change_time, change_reason, search', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -89,7 +89,7 @@ class BbiiPost extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -119,7 +119,7 @@ class BbiiPost extends BbiiAR
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 		$criteria->with = array('poster');
 
 		$criteria->compare('id',$this->id,true);
@@ -137,7 +137,7 @@ class BbiiPost extends BbiiAR
 		$criteria->compare('poster.member_name',$this->search,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 	

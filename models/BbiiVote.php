@@ -19,7 +19,7 @@ class BbiiVote extends BbiiAR
 	 * @param string $className active record class name.
 	 * @return BbiiVote the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
@@ -45,10 +45,10 @@ class BbiiVote extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('poll_id, choice_id, user_id', 'required'),
-			array('poll_id, choice_id, user_id', 'length', 'max'=>10),
+			array('poll_id, choice_id, user_id', 'length', 'max' => 10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('poll_id, choice_id, user_id', 'safe', 'on'=>'search'),
+			array('poll_id, choice_id, user_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -64,7 +64,7 @@ class BbiiVote extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -84,14 +84,14 @@ class BbiiVote extends BbiiAR
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('poll_id',$this->poll_id,true);
 		$criteria->compare('choice_id',$this->choice_id,true);
 		$criteria->compare('user_id',$this->user_id,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 }

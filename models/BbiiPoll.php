@@ -24,7 +24,7 @@ class BbiiPoll extends BbiiAR
 	 * @param string $className active record class name.
 	 * @return BbiiPoll the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
@@ -46,13 +46,13 @@ class BbiiPoll extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('question, post_id, user_id', 'required'),
-			array('allow_revote, allow_multiple, votes', 'numerical', 'integerOnly'=>true),
-			array('question', 'length', 'max'=>200),
-			array('post_id, user_id', 'length', 'max'=>10),
+			array('allow_revote, allow_multiple, votes', 'numerical', 'integerOnly' => true),
+			array('question', 'length', 'max' => 200),
+			array('post_id, user_id', 'length', 'max' => 10),
 			array('expire_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, question, post_id, user_id, expire_date, allow_revote, allow_multiple, votes', 'safe', 'on'=>'search'),
+			array('id, question, post_id, user_id, expire_date, allow_revote, allow_multiple, votes', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -68,7 +68,7 @@ class BbiiPoll extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -93,7 +93,7 @@ class BbiiPoll extends BbiiAR
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('question',$this->question,true);
@@ -105,7 +105,7 @@ class BbiiPoll extends BbiiAR
 		$criteria->compare('votes',$this->votes);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 }

@@ -24,37 +24,37 @@ class MemberController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index','mail','members','view','update'),
-				'users'=>array('@'),
+				'actions' => array('index','mail','members','view','update'),
+				'users' => array('@'),
 			),
 			array('allow',
-				'actions'=>array('watch'),
-				'users'=>array('*'),
+				'actions' => array('watch'),
+				'users' => array('*'),
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
 	
 	public function actionIndex() {
-		$model=new BbiiMember('search');
+		$model = new BbiiMember('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMember']))
-			$model->attributes=$_GET['BbiiMember'];
+			$model->attributes = $_GET['BbiiMember'];
 
-		$this->render('index', array('model'=>$model));
+		$this->render('index', array('model' => $model));
 	}
 	
 	public function actionUpdate($id) {
-		$model=$this->loadModel($id);
+		$model = $this->loadModel($id);
 		
 		if($id != Yii::$app->user->id && !$this->isModerator()) {
 			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
 		
 		if(isset($_POST['BbiiMember'])) {
-			$model->attributes=$_POST['BbiiMember'];
+			$model->attributes = $_POST['BbiiMember'];
 			$model->image = CUploadedFile::getInstance($model, 'image');
 			if($model->save()) {
 				$valid = true;
@@ -94,10 +94,10 @@ class MemberController extends BbiiController {
 					}
 				}
 				if($valid)
-					$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array('view','id' => $model->id));
 			}
 		}
-		$this->render('update', array('model'=>$model));
+		$this->render('update', array('model' => $model));
 	}
 	
 	public function actionView($id) {
@@ -113,15 +113,15 @@ class MemberController extends BbiiController {
 				$read->save();
 			}
 		}
-		$model=$this->loadModel($id);
+		$model = $this->loadModel($id);
 		$dataProvider = new CActiveDataProvider('BbiiPost', array(
-			'criteria'=>array(
-				'condition'=>"approved = 1 and user_id = $id",
-				'order'=>'create_time DESC',
-				'with'=>'forum',
-				'limit'=>10,
+			'criteria' => array(
+				'condition' => "approved = 1 and user_id = $id",
+				'order' => 'create_time DESC',
+				'with' => 'forum',
+				'limit' => 10,
 			),
-			'pagination'=>false,
+			'pagination' => false,
 		));
 		if($this->isModerator() || $id == Yii::$app->user->id) {
 			$object = new BbiiTopicsRead;
@@ -139,54 +139,54 @@ class MemberController extends BbiiController {
 		$criteria->addInCondition('id', $in);
 		$criteria->order = 'id';
 		$topicProvider = new CActiveDataProvider('BbiiTopic', array(
-			'criteria'=>$criteria,
-			'pagination'=>false,
+			'criteria' => $criteria,
+			'pagination' => false,
 		));
 		
 		$this->render('view', array(
-			'model'=>$model, 
-			'dataProvider'=>$dataProvider,
-			'topicProvider'=>$topicProvider,
+			'model' => $model, 
+			'dataProvider' => $dataProvider,
+			'topicProvider' => $topicProvider,
 		));
 	}
 	
 	public function actionMail($id) {
-		$model=new MailForm;
+		$model = new MailForm;
 		if(isset($_POST['MailForm'])) {
-			$model->attributes=$_POST['MailForm'];
+			$model->attributes = $_POST['MailForm'];
 			if($model->validate()) {
 				$class = new $this->module->userClass;
 				$criteria = new CDbCriteria;
-				$criteria->condition = $this->module->userIdColumn . '=:id';
-				$criteria->params = array(':id'=>Yii::$app->user->id);
-				$user 	= $class::find()->find($criteria);
-				$from 	= $user->getAttribute($this->module->userMailColumn);
-				$criteria->params = array(':id'=>$model->member_id);
-				$user 	= $class::find()->find($criteria);
-				$to 	= $user->getAttribute($this->module->userMailColumn);
+				$criteria->condition = $this->module->userIdColumn . ' = :id';
+				$criteria->params = array(':id' => Yii::$app->user->id);
+				$user 	 =  $class::find()->find($criteria);
+				$from 	 =  $user->getAttribute($this->module->userMailColumn);
+				$criteria->params = array(':id' => $model->member_id);
+				$user 	 =  $class::find()->find($criteria);
+				$to 	 =  $user->getAttribute($this->module->userMailColumn);
 				
 				$name = BbiiMember::find()->findByPk(Yii::$app->user->id)->member_name;
-				$name='=?UTF-8?B?'.base64_encode($name).'?=';
-				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
+				$name = ' = ?UTF-8?B?'.base64_encode($name).'? = ';
+				$subject = ' = ?UTF-8?B?'.base64_encode($model->subject).'? = ';
 				$sendto = $model->member_name . " <$to>";
-				$headers="From: $name <$from>\r\n".
+				$headers = "From: $name <$from>\r\n".
 					"To: {$sendto}\r\n".
 					"Date: " . date(DATE_RFC2822) . "\r\n".
 					"Reply-To: $from\r\n".
 					"Message-ID: <" . uniqid('', true) . "@bbii.forum>\r\n".
 					"MIME-Version: 1.0\r\n".
-					"Content-type: text/html; charset=UTF-8";
+					"Content-type: text/html; charset = UTF-8";
 
 				mail($sendto,$subject,$model->body,$headers);
-				Yii::$app->user->setFlash('notice',Yii::t('BbiiModule.bbii','You have sent an e-mail to {member_name}.', array('{member_name}'=>$model->member_name)));
+				Yii::$app->user->setFlash('notice',Yii::t('BbiiModule.bbii','You have sent an e-mail to {member_name}.', array('{member_name}' => $model->member_name)));
 				
-				$this->redirect(array('view','id'=>$model->member_id));
+				$this->redirect(array('view','id' => $model->member_id));
 			}
 		} else {
 			$model->member_id = $id;
 			$model->member_name = BbiiMember::find()->findByPk($id)->member_name;
 		}
-		$this->render('mail',array('model'=>$model));
+		$this->render('mail',array('model' => $model));
 	}
 	
 	/**
@@ -200,7 +200,7 @@ class MemberController extends BbiiController {
 			$criteria->limit = 15;
 			$models = BbiiMember::find()->findAll($criteria);
 			foreach($models as $model) {
-				$json[] = array('value'=>$model->id,'label'=>$model->member_name);
+				$json[] = array('value' => $model->id,'label' => $model->member_name);
 			}
 		}
 		echo json_encode($json);
@@ -230,8 +230,8 @@ class MemberController extends BbiiController {
 	}
 	
 	public function loadModel($id) {
-		$model=BbiiMember::find()->findByPk($id);
-		if($model===null)
+		$model = BbiiMember::find()->findByPk($id);
+		if($model === null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
@@ -241,7 +241,7 @@ class MemberController extends BbiiController {
 	 * @param BbiiMembergroup $model the model to be validated
 	 */
 	protected function performAjaxValidation($model) {
-		if(isset($_POST['ajax']) && $_POST['ajax']==='bbii-member-form')
+		if(isset($_POST['ajax']) && $_POST['ajax'] === 'bbii-member-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::$app->end();

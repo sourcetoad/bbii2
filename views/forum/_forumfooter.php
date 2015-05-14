@@ -1,28 +1,28 @@
 <?php
 /* @var $this ForumController */
 ?>
-<div id="bbii-footer">
+<div id = "bbii-footer">
 	<table><tr>
-		<td class="legend">
+		<td class = "legend">
 			<table>
 				<caption>
 					<?php echo Yii::t('BbiiModule.bbii','Forum legend'); ?>
 				</caption>
 				<tr>
 					<td>
-						<div class="forum-cell topic1"></div>
+						<div class = "forum-cell topic1"></div>
 					</td>
 					<td>
 						<?php echo Yii::t('BbiiModule.bbii','Unread topic'); ?>
 					</td>
 					<td>
-						<div class="forum-cell topic1s"></div>
+						<div class = "forum-cell topic1s"></div>
 					</td>
 					<td>
 						<?php echo Yii::t('BbiiModule.bbii','Sticky topic'); ?>
 					</td>
 					<td>
-						<div class="forum-cell topic1g"></div>
+						<div class = "forum-cell topic1g"></div>
 					</td>
 					<td>
 						<?php echo Yii::t('BbiiModule.bbii','Global topic'); ?>
@@ -30,19 +30,19 @@
 				</tr>
 				<tr>
 					<td>
-						<div class="forum-cell topic2"></div>
+						<div class = "forum-cell topic2"></div>
 					</td>
 					<td>
 						<?php echo Yii::t('BbiiModule.bbii','Read topic'); ?>
 					</td>
 					<td>
-						<div class="forum-cell topic1l"></div>
+						<div class = "forum-cell topic1l"></div>
 					</td>
 					<td>
 						<?php echo Yii::t('BbiiModule.bbii','Locked topic'); ?>
 					</td>
 					<td>
-						<div class="forum-cell topic1p"></div>
+						<div class = "forum-cell topic1p"></div>
 					</td>
 					<td>
 						<?php echo Yii::t('BbiiModule.bbii','Poll'); ?>
@@ -50,9 +50,9 @@
 				</tr>
 			</table>
 		</td>
-		<td class="statistics">
+		<td class = "statistics">
 			<table>
-			<caption class="header2">
+			<caption class = "header2">
 				<?php echo Yii::t('BbiiModule.bbii','Board Statistics'); ?>
 			</caption>
 			<tr>
@@ -62,7 +62,7 @@
 			</tr><tr>
 				<th><?php echo Yii::t('BbiiModule.bbii','Total members'); ?></th><td><?php echo BbiiMember::find()->count(); ?></td>
 			</tr><tr>
-				<th><?php echo Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::find()->newest()->find(); echo CHtml::link($member->member_name, array('member/view', 'id'=>$member->id)); ?></td>
+				<th><?php echo Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::find()->newest()->find(); echo CHtml::link($member->member_name, array('member/view', 'id' => $member->id)); ?></td>
 			</tr><tr>
 				<th><?php echo Yii::t('BbiiModule.bbii','Visitors today'); ?></th><td><?php echo BbiiSession::find()->count(); ?></td>
 			</tr>

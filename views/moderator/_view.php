@@ -6,7 +6,7 @@
 ?>
 <table>
 <tr>
-	<th style="width:150px;"><?php echo CHtml::activeLabel($model, 'user_id'); ?></th>
+	<th style = "width:150px;"><?php echo CHtml::activeLabel($model, 'user_id'); ?></th>
 	<td><?php echo CHtml::encode($model->poster->member_name); ?></td>
 </tr>
 <tr>
@@ -31,6 +31,6 @@
 <?php endforeach; ?>
 <?php endif; ?>
 <tr>
-	<td colspan="2"><hr><?php echo $model->content; ?></td>
+	<td colspan = "2"><hr><?php echo $model->content; ?></td>
 </tr>
 </table>

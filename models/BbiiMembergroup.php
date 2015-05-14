@@ -40,16 +40,16 @@ class BbiiMembergroup extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
-			array('min_posts', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>45),
-			array('color', 'length', 'max'=>6),
-			array('color', 'match', 'pattern'=>'/[0-9a-fA-F]{6}/i'),
-			array('image', 'length', 'max'=>255),
-			array('image', 'default', 'value'=>null),
+			array('min_posts', 'numerical', 'integerOnly' => true),
+			array('name', 'length', 'max' => 45),
+			array('color', 'length', 'max' => 6),
+			array('color', 'match', 'pattern' => '/[0-9a-fA-F]{6}/i'),
+			array('image', 'length', 'max' => 255),
+			array('image', 'default', 'value' => null),
 			array('description', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, description, min_posts, color, image', 'safe', 'on'=>'search'),
+			array('id, name, description, min_posts, color, image', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -65,7 +65,7 @@ class BbiiMembergroup extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -88,7 +88,7 @@ class BbiiMembergroup extends BbiiAR
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
@@ -98,7 +98,7 @@ class BbiiMembergroup extends BbiiAR
 		$criteria->compare('image',$this->image,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 	

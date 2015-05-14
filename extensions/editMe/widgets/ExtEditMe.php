@@ -266,7 +266,7 @@ class ExtEditMe extends CInputWidget {
 			Yii::$app -> assetManager -> excludeFiles = $excludeFiles;
 			$ckeAssetPath = str_replace(Yii::$app -> assetManager -> baseUrl, Yii::$app -> assetManager -> basePath, self::$_ckeAssetUrl);
 			if (@is_file($ckeAssetPath . '/editMe.' . md5(self::$_ckeAssetUrl) . '.min.js') === false) {
-				$scriptContents[] = 'var CKEDITOR_BASEPATH=' . CJavaScript::encode(self::$_ckeAssetUrl . '/') . ';';
+				$scriptContents[] = 'var CKEDITOR_BASEPATH = ' . CJavaScript::encode(self::$_ckeAssetUrl . '/') . ';';
 				$scriptContents[] = @file_get_contents($ckeAssetPath . '/ckeditor.js');
 				$scriptContents[] = @file_get_contents($ckeAssetPath . '/adapters/jquery.js');
 				@file_put_contents($ckeAssetPath . '/editMe.' . md5(self::$_ckeAssetUrl) . '.min.js', implode("\n", $scriptContents), LOCK_EX);
@@ -398,7 +398,7 @@ class ExtEditMe extends CInputWidget {
 		} else {
 			$selector = CJavaScript::encode($this -> inlineId);
 			$jqSelector = CJavaScript::encode('#' . $this -> inlineId);
-			Yii::$app -> clientScript -> registerScript('editMe_inline_' . $this -> inlineId, 'jQuery(' . $jqSelector . ').attr("contenteditable",true);CKEDITOR.disableAutoInline=true;CKEDITOR.inline(' . $selector . ',' . $ckeConfig . ');', 2);
+			Yii::$app -> clientScript -> registerScript('editMe_inline_' . $this -> inlineId, 'jQuery(' . $jqSelector . ').attr("contenteditable",true);CKEDITOR.disableAutoInline = true;CKEDITOR.inline(' . $selector . ',' . $ckeConfig . ');', 2);
 		}
 	}
 

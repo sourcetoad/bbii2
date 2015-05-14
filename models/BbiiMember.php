@@ -69,22 +69,22 @@ class BbiiMember extends BbiiAR {
 		// will receive user inputs.
 		return array(
 			array('id, member_name', 'required'),
-			array('posts, group_id, upvoted', 'numerical', 'integerOnly'=>true),
-			array('gender, show_online, contact_email, contact_pm, warning, moderator', 'numerical', 'integerOnly'=>true, 'max'=>1),
-			array('member_name', 'unique', 'on'=>'update'),
-			array('member_name', 'length', 'max'=>45),
+			array('posts, group_id, upvoted', 'numerical', 'integerOnly' => true),
+			array('gender, show_online, contact_email, contact_pm, warning, moderator', 'numerical', 'integerOnly' => true, 'max' => 1),
+			array('member_name', 'unique', 'on' => 'update'),
+			array('member_name', 'length', 'max' => 45),
 			array('image', 'file', 'allowEmpty' => true,'maxSize' => 1025000, 'types' => 'gif, jpg, jpeg, png'),
-			array('location, personal_text, avatar, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'length', 'max'=>255),
-			array('timezone', 'length', 'max'=>80),
-			array('gender, birthdate, location, personal_text, signature, avatar', 'default', 'value'=>null),
+			array('location, personal_text, avatar, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'length', 'max' => 255),
+			array('timezone', 'length', 'max' => 80),
+			array('gender, birthdate, location, personal_text, signature, avatar', 'default', 'value' => null),
 			array('blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'url'),
-			array('blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'default', 'value'=>null),
-			array('timezone', 'default', 'value'=>'Europe/London'),
-			array('signature','filter','filter'=>array($obj=new CHtmlPurifier(), 'purify')),
+			array('blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'default', 'value' => null),
+			array('timezone', 'default', 'value' => 'Europe/London'),
+			array('signature','filter','filter' => array($obj = new CHtmlPurifier(), 'purify')),
 			array('birthdate, signature, first_visit, last_visit, remove_avatar', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, member_name, gender, birthdate, location, personal_text, signature, avatar, show_online, contact_email, contact_pm, timezone, first_visit, last_visit, warning, posts, group_id, upvoted, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube, moderator', 'safe', 'on'=>'search'),
+			array('id, member_name, gender, birthdate, location, personal_text, signature, avatar, show_online, contact_email, contact_pm, timezone, first_visit, last_visit, warning, posts, group_id, upvoted, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube, moderator', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -101,7 +101,7 @@ class BbiiMember extends BbiiAR {
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -153,7 +153,7 @@ class BbiiMember extends BbiiAR {
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('member_name',$this->member_name,true);
@@ -190,7 +190,7 @@ class BbiiMember extends BbiiAR {
 		$criteria->compare('moderator',$this->moderator,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 	

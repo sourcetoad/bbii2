@@ -13,7 +13,7 @@ class BbiiAR extends ActiveRecord {
 				self::$db = Yii::$app->getDb();
 			}
 		} else {
-			if(self::$db!==null) {
+			if(self::$db !== null) {
 				return self::$db;
 			}
 			self::$db = Yii::$app->getDb();

@@ -59,7 +59,7 @@ class DateTimeCalculation {
 		$dateTime1 = new DateTime("now", $dateTimeZone1);
 		$dateTime2 = new DateTime("now", $dateTimeZone2);
 		$diff = ($dateTimeZone2->getOffset($dateTime1) - $dateTimeZone1->getOffset($dateTime1));
-		$time += $diff;
+		$time + =  $diff;
 		return date('Y-m-d H:i:s', $time);
 	}
 	

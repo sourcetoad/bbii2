@@ -21,7 +21,7 @@ class BbiiQuestion extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return BbiiQuestion the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
@@ -43,12 +43,12 @@ class BbiiQuestion extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('question, poll_id', 'required'),
-			array('sort, votes', 'numerical', 'integerOnly'=>true),
-			array('question', 'length', 'max'=>200),
-			array('poll_id', 'length', 'max'=>10),
+			array('sort, votes', 'numerical', 'integerOnly' => true),
+			array('question', 'length', 'max' => 200),
+			array('poll_id', 'length', 'max' => 10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, question, poll_id, sort, votes', 'safe', 'on'=>'search'),
+			array('id, question, poll_id, sort, votes', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -64,7 +64,7 @@ class BbiiQuestion extends CActiveRecord
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -86,7 +86,7 @@ class BbiiQuestion extends CActiveRecord
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('question',$this->question,true);
@@ -95,7 +95,7 @@ class BbiiQuestion extends CActiveRecord
 		$criteria->compare('votes',$this->votes);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 }

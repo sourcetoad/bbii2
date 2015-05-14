@@ -18,7 +18,7 @@ class BbiiSetting extends BbiiAR
 	 * @param string $className active record class name.
 	 * @return BbiiSetting the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
@@ -41,10 +41,10 @@ class BbiiSetting extends BbiiAR
 		return array(
 			array('contact_email', 'required'),
 			array('contact_email', 'email'),
-			array('contact_email', 'length', 'max'=>255),
+			array('contact_email', 'length', 'max' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, contact_email', 'safe', 'on'=>'search'),
+			array('id, contact_email', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -60,7 +60,7 @@ class BbiiSetting extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -79,13 +79,13 @@ class BbiiSetting extends BbiiAR
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('contact_email',$this->contact_email,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 }

@@ -5,7 +5,7 @@
 <table>
 <thead>
 <tr>
-	<th style="width:150px;"><?php echo CHtml::activeLabel($model, 'sendfrom'); ?></th>
+	<th style = "width:150px;"><?php echo CHtml::activeLabel($model, 'sendfrom'); ?></th>
 	<th><?php echo CHtml::encode($model->sender->member_name); ?></th>
 </tr>
 <tr>
@@ -23,7 +23,7 @@
 </thead>
 <tbody>
 <tr>
-	<td colspan="2"><?php echo $model->content; ?></td>
+	<td colspan = "2"><?php echo $model->content; ?></td>
 </tr>
 </tbody>
 </table>

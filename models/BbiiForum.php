@@ -48,17 +48,17 @@ class BbiiForum extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
-			array('type, public, locked, moderated, sort, num_posts, num_topics, last_post_id,membergroup_id, poll', 'numerical', 'integerOnly'=>true),
+			array('type, public, locked, moderated, sort, num_posts, num_topics, last_post_id,membergroup_id, poll', 'numerical', 'integerOnly' => true),
 			array('name', 'unique'),
-			array('cat_id', 'length', 'max'=>10),
-			array('name, subtitle', 'length', 'max'=>255),
+			array('cat_id', 'length', 'max' => 10),
+			array('name, subtitle', 'length', 'max' => 255),
 			array('type', 'validateType'),
 			array('cat_id, subtitle', 'default', 'value' => null),
 			array('public', 'default', 'value' => 1),
 			array('locked, membergroup_id, poll', 'default', 'value' => 0),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, cat_id, name, subtitle, type, sort, num_posts, num_topics, last_post_id, last_post_time, membergroup_id, poll', 'safe', 'on'=>'search'),
+			array('id, cat_id, name, subtitle, type, sort, num_posts, num_topics, last_post_id, last_post_time, membergroup_id, poll', 'safe', 'on' => 'search'),
 		);
 	}
 	
@@ -84,7 +84,7 @@ class BbiiForum extends BbiiAR
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array customized attribute labels (name => label)
 	 */
 	public function attributeLabels()
 	{
@@ -115,7 +115,7 @@ class BbiiForum extends BbiiAR
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('cat_id',$this->cat_id,true);
@@ -129,7 +129,7 @@ class BbiiForum extends BbiiAR
 		$criteria->compare('poll',$this->poll,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 	
@@ -161,9 +161,9 @@ class BbiiForum extends BbiiAR
 		);
 	}
 	
-	public function membergroup($membergroup=0) {
+	public function membergroup($membergroup = 0) {
 		$this->getDbCriteria()->mergeWith(array(
-			'condition'=>"(membergroup_id = 0 or membergroup_id = $membergroup)",
+			'condition' => "(membergroup_id = 0 or membergroup_id = $membergroup)",
 		));
 		return $this;
 	}
@@ -180,11 +180,11 @@ class BbiiForum extends BbiiAR
 			foreach($forum as $option) {
 				if($option->public || !Yii::$app->user->isGuest) {
 					if($option->membergroup_id == 0) {
-						$return[] = array('id'=>$option->id,'name'=>$option->name,'group'=>$group->name);
+						$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
 					} elseif(!Yii::$app->user->isGuest) {
 						$groupId = BbiiMember::find()->findByPk(Yii::$app->user->id)->group_id;
 						if($option->membergroup_id == $groupId) {
-							$return[] = array('id'=>$option->id,'name'=>$option->name,'group'=>$group->name);
+							$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
 						}
 					}
 				}
@@ -203,7 +203,7 @@ class BbiiForum extends BbiiAR
 			$criteria->condition = 'type = 1 and cat_id = ' . $group->id;
 			$forum = BbiiForum::find()->findAll($criteria);
 			foreach($forum as $option) {
-				$return[] = array('id'=>$option->id,'name'=>$option->name,'group'=>$group->name);
+				$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
 			}
 		}
 		return $return;

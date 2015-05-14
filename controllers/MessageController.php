@@ -24,11 +24,11 @@ class MessageController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'=>array('create', 'delete', 'inbox', 'outbox', 'reply', 'view', 'update', 'sendReport'),
-				'users'=>array('@'),
+				'actions' => array('create', 'delete', 'inbox', 'outbox', 'reply', 'view', 'update', 'sendReport'),
+				'users' => array('@'),
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
@@ -39,18 +39,18 @@ class MessageController extends BbiiController {
 		}
 		$count['inbox'] = BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.$id);
 		$count['outbox'] = BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.$id);
-		$model=new BbiiMessage('search');
+		$model = new BbiiMessage('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMessage'])) {
-			$model->attributes=$_GET['BbiiMessage'];
+			$model->attributes = $_GET['BbiiMessage'];
 		}
 		// restrict filtering to own inbox
 		$model->sendto = $id;
 		$model->inbox = 1;
 		
 		$this->render('inbox', array(
-			'model'=>$model, 
-			'count'=>$count
+			'model' => $model, 
+			'count' => $count
 		));
 	}
 	
@@ -60,23 +60,23 @@ class MessageController extends BbiiController {
 		}
 		$count['inbox'] = BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.$id);
 		$count['outbox'] = BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.$id);
-		$model=new BbiiMessage('search');
+		$model = new BbiiMessage('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMessage'])) {
-			$model->attributes=$_GET['BbiiMessage'];
+			$model->attributes = $_GET['BbiiMessage'];
 		}
 		// restrict filtering to own outbox
 		$model->sendfrom = $id;
 		$model->outbox = 1;
 		
 		$this->render('outbox', array(
-			'model'=>$model,
-			'count'=>$count,
+			'model' => $model,
+			'count' => $count,
 		));
 	}
 	
 	public function actionCreate($id = null, $type = null) {
-		$model=new BbiiMessage;
+		$model = new BbiiMessage;
 		$uid = Yii::$app->user->id;
 		$count['inbox'] = BbiiMessage::find()->inbox()->count('sendto = '.$uid);
 		$count['outbox'] = BbiiMessage::find()->outbox()->count('sendfrom = '.$uid);
@@ -85,7 +85,7 @@ class MessageController extends BbiiController {
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['BbiiMessage'])) {
-			$model->attributes=$_POST['BbiiMessage'];
+			$model->attributes = $_POST['BbiiMessage'];
 			$model->search = $_POST['BbiiMessage']['search'];
 			$model->sendfrom = Yii::$app->user->id;
 			if(empty($_POST['BbiiMessage']['search'])) {
@@ -122,8 +122,8 @@ class MessageController extends BbiiController {
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
-			'count'=>$count,
+			'model' => $model,
+			'count' => $count,
 		));
 	}
 	
@@ -144,12 +144,12 @@ class MessageController extends BbiiController {
 			$model->sendto = $model->sendfrom;
 			$model->search = $model->receiver->member_name;
 			$quote = $model->receiver->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. DateTimeCalculation::long($model->create_time);
-			$model->content = '<blockquote cite="'. $quote .'"><p class="blockquote-header"><strong>'. $quote .'</strong></p>' . $model->content . '</blockquote><p></p>';
+			$model->content = '<blockquote cite = "'. $quote .'"><p class = "blockquote-header"><strong>'. $quote .'</strong></p>' . $model->content . '</blockquote><p></p>';
 		}
 
 		$this->render('create', array(
-			'model'=>$model,
-			'count'=>$count,
+			'model' => $model,
+			'count' => $count,
 		));
 	}
 	
@@ -229,7 +229,7 @@ class MessageController extends BbiiController {
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='message-form')
+		if(isset($_POST['ajax']) && $_POST['ajax'] === 'message-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::$app->end();

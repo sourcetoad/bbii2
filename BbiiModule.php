@@ -115,26 +115,26 @@ class BbiiModule extends \yii\base\Module
 			if(Yii::$app->user->id) {
 				$model = BbiiMember::find()->findByPk(Yii::$app->user->id);
 				if($model !== null) {
-					$model->last_visit 	= date('Y-m-d H:i:s');
+					$model->last_visit 	 =  date('Y-m-d H:i:s');
 					$model->save();
 				} else {
 					$criteria = new CDbCriteria;
-					$criteria->condition = $this->userIdColumn . '=:id';
-					$criteria->params = array(':id'=>Yii::$app->user->id);
+					$criteria->condition = $this->userIdColumn . ' = :id';
+					$criteria->params = array(':id' => Yii::$app->user->id);
 					$class = new $this->userClass;
 					$user = $class::find()->find($criteria);
 					$username = $user->getAttribute($this->userNameColumn);
 					$model = new BbiiMember;
-					$model->id 			= Yii::$app->user->id;
+					$model->id 			 =  Yii::$app->user->id;
 					$model->member_name = $username;
 					$model->first_visit = date('Y-m-d H:i:s');
-					$model->last_visit 	= date('Y-m-d H:i:s');
+					$model->last_visit 	 =  date('Y-m-d H:i:s');
 					$model->save();
 				}
 			}
 			// register visit by webspider
 			if(isset($_SERVER['HTTP_USER_AGENT'])) {
-				$spider = BbiiSpider::find()->findByAttributes(array('user_agent'=>$_SERVER['HTTP_USER_AGENT']));
+				$spider = BbiiSpider::find()->findByAttributes(array('user_agent' => $_SERVER['HTTP_USER_AGENT']));
 			} else {
 				$spider = null;
 			}

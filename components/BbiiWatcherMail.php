@@ -16,14 +16,14 @@ class BbiiWatcherMail {
 	 * @param string $email the name of the e-mail address field in the user database table
 	 */
 	public function __construct($forum = 'Forum', $component = 'db', $model = 'User', $table = 'user', $id = 'id', $user = 'username', $email = 'email') {
-		$this->forum 	= $forum;
-		$this->bbii_db 	= Yii::$app->getComponent($component);
+		$this->forum 	 =  $forum;
+		$this->bbii_db 	 =  Yii::$app->getComponent($component);
 		$class = new $model;
-		$this->user_db 	= $class::find()->getDbConnection();
-		$this->table 	= $table;
-		$this->id 		= $id;
-		$this->user 	= $user;
-		$this->email 	= $email;
+		$this->user_db 	 =  $class::find()->getDbConnection();
+		$this->table 	 =  $table;
+		$this->id 		 =  $id;
+		$this->user 	 =  $user;
+		$this->email 	 =  $email;
 	}
 	
 	public function processWatchers($url = null) {
@@ -96,22 +96,22 @@ class BbiiWatcherMail {
 				}
 				if($send) {
 					$precontent = $row_member['member_name'] . ',<br><br>';
-					$precontent .= Yii::t('BbiiModule.bbii', 'This is the digest of posts in the topic(s) "{topics}" for today.', array('{topics}'=>implode('", "', $topics)));
+					$precontent .= Yii::t('BbiiModule.bbii', 'This is the digest of posts in the topic(s) "{topics}" for today.', array('{topics}' => implode('", "', $topics)));
 					$precontent .= '<br>';
-					$postcontent =  '<hr><br>' . Yii::t('BbiiModule.bbii', 'You can unsubscribe at any time by logging into the {forum site} and visit your forum profile page.', array('{forum site}'=>CHtml::link(Yii::t('BbiiModule.bbii', 'website'), $url)));
+					$postcontent =  '<hr><br>' . Yii::t('BbiiModule.bbii', 'You can unsubscribe at any time by logging into the {forum site} and visit your forum profile page.', array('{forum site}' => CHtml::link(Yii::t('BbiiModule.bbii', 'website'), $url)));
 					$content = '<html><body>' . $precontent . $content . $postcontent . '</body></html>';
 					
-					//$name='=?UTF-8?B?'.base64_encode($this->forum).'?=';
+					//$name = ' = ?UTF-8?B?'.base64_encode($this->forum).'? = ';
 					$name = $this->forum;
-					$subject='=?UTF-8?B?'.base64_encode(Yii::t('BbiiModule.bbii', 'Your daily new posts digest')).'?=';
+					$subject = ' = ?UTF-8?B?'.base64_encode(Yii::t('BbiiModule.bbii', 'Your daily new posts digest')).'? = ';
 					$sendto = "{$row_member['member_name']} <{$row_user[$this->email]}>";
-					$headers="From: $name <$from>\r\n".
+					$headers = "From: $name <$from>\r\n".
 						"To: {$sendto}\r\n".
 						"Date: " . date(DATE_RFC2822) . "\r\n".
 						"Reply-To: $from\r\n".
 						"Message-ID: <" . uniqid('', true) . "@{$host}>\r\n".
 						"MIME-Version: 1.0\r\n".
-						"Content-type: text/html; charset=UTF-8";
+						"Content-type: text/html; charset = UTF-8";
 
 					mail($sendto,$subject,$content,$headers);
 				}
