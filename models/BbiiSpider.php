@@ -19,7 +19,7 @@ class BbiiSpider extends BbiiAR
 {
     public static function find()
     {
-        return new BbiiPostQuery(get_called_class());
+        return new BbiiSpiderQuery(get_called_class());
     }
 
 	/**

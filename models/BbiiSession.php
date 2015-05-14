@@ -16,7 +16,7 @@ class BbiiSession extends BbiiAR
 {
     public static function find()
     {
-        return new BbiiPostQuery(get_called_class());
+        return new BbiiSessionQuery(get_called_class());
     }
 
 	/**

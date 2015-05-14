@@ -49,7 +49,7 @@ class BbiiMember extends BbiiAR {
 
     public static function find()
     {
-        return new BbiiPostQuery(get_called_class());
+        return new BbiiMemberQuery(get_called_class());
     }
 
 	/**
