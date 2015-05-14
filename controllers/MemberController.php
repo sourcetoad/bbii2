@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\models\BbiiMember;
 
 class MemberController extends BbiiController {
 	/**
@@ -39,7 +40,8 @@ class MemberController extends BbiiController {
 	
 	public function actionIndex() {
 		$model = new BbiiMember('search');
-		$model->unsetAttributes();  // clear any default values
+		// No longer needed in Yii2+
+		//$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMember']))
 			$model->attributes = $_GET['BbiiMember'];
 

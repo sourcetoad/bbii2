@@ -1,5 +1,8 @@
 <?php
 
+use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiMessage;
+
 use yii\helpers\Html;
 
 use frontend\modules\bbii\AppAsset;
@@ -8,7 +11,7 @@ $assets = AppAsset::register($this);
 /* @var $this ForumController */
 
 $this->context->bbii_breadcrumbs = array(
-	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
+	//Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Members'),
 );
 
@@ -28,10 +31,10 @@ $item = array(
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id' => 'member-grid',
+	'id'           => 'member-grid',
 	'dataProvider' => $model->search(),
-	'filter' => $model,
-	'columns' => array(
+	'filter'       => $model,
+	/*'columns' => array(
 		array(
 			'header' => 'Avatar',
 			'type' => 'image',
@@ -56,7 +59,7 @@ $item = array(
 			'filter' => Html::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'),
 			'value' => '(isset($data->group))?$data->group->name:""',
 		),
-	),
+	),*/
 )); ?>
 
 	
