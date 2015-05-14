@@ -6,8 +6,8 @@ $this->bbii_breadcrumbs=array(
 	Yii::t('BbiiModule.bbii', 'Members'),
 );
 
-$approvals = BbiiPost::model()->unapproved()->count();
-$reports = BbiiMessage::model()->report()->count();
+$approvals = BbiiPost::find()->unapproved()->count();
+$reports = BbiiMessage::find()->report()->count();
 
 $item = array(
 	array('label'=>Yii::t('BbiiModule.bbii', 'Forum'), 'url'=>array('forum/index')),
@@ -47,7 +47,7 @@ $item = array(
 		),
 		array(
 			'name' => 'group_id',
-			'filter' => CHtml::listData(BbiiMembergroup::model()->findAll(), 'id', 'name'),
+			'filter' => CHtml::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'),
 			'value' => '(isset($data->group))?$data->group->name:""',
 		),
 	),

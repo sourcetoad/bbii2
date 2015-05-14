@@ -112,7 +112,7 @@ class BbiiIpaddress extends BbiiAR
 	}
 	
 	public static function blocked($ip) {
-		$model = BbiiIpaddress::model()->find("ip = '$ip'");
+		$model = BbiiIpaddress::find()->find("ip = '$ip'");
 		if($model === null) {
 			return false;
 		} else {

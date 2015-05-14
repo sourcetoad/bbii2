@@ -1,6 +1,6 @@
 <?php
 /* @var $post_id integer */
-$models = BbiiUpvoted::model()->findAllByAttributes(array('post_id'=>$post_id));
+$models = BbiiUpvoted::find()->findAllByAttributes(array('post_id'=>$post_id));
 $count = count($models);
 
 if($count) {
@@ -8,7 +8,7 @@ if($count) {
 	echo Yii::t('BbiiModule.bbii', 'Post appreciated by: '); 
 	$users = array();
 	foreach($models as $model) {
-		$member = BbiiMember::model()->findByPk($model->member_id);
+		$member = BbiiMember::find()->findByPk($model->member_id);
 		if($member !== null) {
 			$users[] = CHtml::link(CHtml::encode($member->member_name), array("member/view", "id"=>$member->id));
 		}

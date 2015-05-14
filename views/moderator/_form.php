@@ -26,7 +26,7 @@
 		
 	<div class="row">
 		<?php echo CHtml::label(Yii::t('BbiiModule.bbii','Member groups'), 'member_id'); ?>
-		<?php echo $form->dropDownList($model, 'member_id', CHtml::listData(BbiiMembergroup::model()->findAll(), 'id', 'name'), array('empty'=>Yii::t('BbiiModule.bbii','All members')));  ?>
+		<?php echo $form->dropDownList($model, 'member_id', CHtml::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'), array('empty'=>Yii::t('BbiiModule.bbii','All members')));  ?>
 		<?php echo $form->error($model,'member_id'); ?>
 	</div>
 

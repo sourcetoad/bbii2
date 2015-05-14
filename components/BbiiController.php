@@ -29,10 +29,10 @@ class BbiiController extends CController
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Create new topic');
 					break;
 				case 'forum':
-					$pageTitle .= ' - ' . @BbiiForum::model()->findByPk($_GET['id'])->name;
+					$pageTitle .= ' - ' . @BbiiForum::find()->findByPk($_GET['id'])->name;
 					break;
 				case 'topic':
-					$pageTitle .= ' - ' . @BbiiTopic::model()->findByPk($_GET['id'])->title;
+					$pageTitle .= ' - ' . @BbiiTopic::find()->findByPk($_GET['id'])->title;
 					break;
 				case 'quote':
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Quote');
@@ -50,7 +50,7 @@ class BbiiController extends CController
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Members');
 					break;
 				case 'view':
-					$pageTitle .= ' - ' . @BbiiMember::model()->findByPk($_GET['id'])->member_name;
+					$pageTitle .= ' - ' . @BbiiMember::find()->findByPk($_GET['id'])->member_name;
 					break;
 				case 'update':
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Update');
@@ -108,7 +108,7 @@ class BbiiController extends CController
 			if(Yii::$app->authManager && Yii::$app->user->checkAccess('moderator')) {
 				return true;	// rbac role "moderator"
 			}
-			if(BbiiMember::model()->cache(900)->moderator()->exists("id = $userId")) {
+			if(BbiiMember::find()->cache(900)->moderator()->exists("id = $userId")) {
 				return true;	// member table moderator value set
 			}
 		}

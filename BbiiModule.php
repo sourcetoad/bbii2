@@ -102,7 +102,7 @@ class BbiiModule extends \yii\base\Module
 			
 			// register last visit by member
 			if(Yii::$app->user->id) {
-				$model = BbiiMember::model()->findByPk(Yii::$app->user->id);
+				$model = BbiiMember::find()->findByPk(Yii::$app->user->id);
 				if($model !== null) {
 					$model->last_visit 	= date('Y-m-d H:i:s');
 					$model->save();
@@ -111,7 +111,7 @@ class BbiiModule extends \yii\base\Module
 					$criteria->condition = $this->userIdColumn . '=:id';
 					$criteria->params = array(':id'=>Yii::$app->user->id);
 					$class = new $this->userClass;
-					$user = $class::model()->find($criteria);
+					$user = $class::find()->find($criteria);
 					$username = $user->getAttribute($this->userNameColumn);
 					$model = new BbiiMember;
 					$model->id 			= Yii::$app->user->id;
@@ -123,7 +123,7 @@ class BbiiModule extends \yii\base\Module
 			}
 			// register visit by webspider
 			if(isset($_SERVER['HTTP_USER_AGENT'])) {
-				$spider = BbiiSpider::model()->findByAttributes(array('user_agent'=>$_SERVER['HTTP_USER_AGENT']));
+				$spider = BbiiSpider::find()->findByAttributes(array('user_agent'=>$_SERVER['HTTP_USER_AGENT']));
 			} else {
 				$spider = null;
 			}
@@ -134,7 +134,7 @@ class BbiiModule extends \yii\base\Module
 				$spider->save();
 			} else {
 				// register visit by guest (when not a webspider)
-				$model = BbiiSession::model()->findByPk(Yii::$app->session->sessionID);
+				$model = BbiiSession::find()->findByPk(Yii::$app->session->sessionID);
 				if($model === null) {
 					$model = new BbiiSession;
 					$model->id = Yii::$app->session->sessionID;
@@ -144,7 +144,7 @@ class BbiiModule extends \yii\base\Module
 			// delete older session entries
 			$criteria = new CDbCriteria;
 			$criteria->condition = 'last_visit < "' . date('Y-m-d H:i:s', (time() - 24*3600)). '"';
-			BbiiSession::model()->deleteAll($criteria);
+			BbiiSession::find()->deleteAll($criteria);
 			return true;
 		}
 		else

@@ -33,7 +33,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cat_id', array('id'=>'label_cat_id')); ?>
-			<?php echo $form->dropDownList($model,'cat_id',CHtml::listData(BbiiForum::model()->categories()->findAll(), 'id', 'name'), array('empty'=>'')); ?>
+			<?php echo $form->dropDownList($model,'cat_id',CHtml::listData(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty'=>'')); ?>
 		<?php echo $form->error($model,'cat_id'); ?>
 	</div>
 	
@@ -57,7 +57,7 @@
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'membergroup_id', array('id'=>'label_membergroup')); ?>
-		<?php echo $form->dropDownList($model,'membergroup_id',CHtml::listData(BbiiMembergroup::model()->specific()->findAll(), 'id', 'name'), array('empty'=>'')); ?>
+		<?php echo $form->dropDownList($model,'membergroup_id',CHtml::listData(BbiiMembergroup::find()->specific()->findAll(), 'id', 'name'), array('empty'=>'')); ?>
 		<?php echo $form->error($model,'membergroup_id'); ?>
 	</div>
 	

@@ -16,7 +16,7 @@ class BbiiWatcherMail {
 		$this->forum 	= $forum;
 		$this->bbii_db 	= Yii::$app->getComponent($component);
 		$class = new $model;
-		$this->user_db 	= $class::model()->getDbConnection();
+		$this->user_db 	= $class::find()->getDbConnection();
 		$this->table 	= $table;
 		$this->id 		= $id;
 		$this->user 	= $user;

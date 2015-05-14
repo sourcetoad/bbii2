@@ -166,16 +166,16 @@ class BbiiForum extends BbiiAR
 		$criteria = new CDbCriteria;
 		$criteria->condition = 'type = 0';
 		$criteria->order = 'sort';
-		$category = BbiiForum::model()->findAll($criteria);
+		$category = BbiiForum::find()->findAll($criteria);
 		foreach($category as $group) {
 			$criteria->condition = 'type = 1 and cat_id = ' . $group->id;
-			$forum = BbiiForum::model()->findAll($criteria);
+			$forum = BbiiForum::find()->findAll($criteria);
 			foreach($forum as $option) {
 				if($option->public || !Yii::$app->user->isGuest) {
 					if($option->membergroup_id == 0) {
 						$return[] = array('id'=>$option->id,'name'=>$option->name,'group'=>$group->name);
 					} elseif(!Yii::$app->user->isGuest) {
-						$groupId = BbiiMember::model()->findByPk(Yii::$app->user->id)->group_id;
+						$groupId = BbiiMember::find()->findByPk(Yii::$app->user->id)->group_id;
 						if($option->membergroup_id == $groupId) {
 							$return[] = array('id'=>$option->id,'name'=>$option->name,'group'=>$group->name);
 						}
@@ -191,10 +191,10 @@ class BbiiForum extends BbiiAR
 		$criteria = new CDbCriteria;
 		$criteria->condition = 'type = 0';
 		$criteria->order = 'sort';
-		$category = BbiiForum::model()->findAll($criteria);
+		$category = BbiiForum::find()->findAll($criteria);
 		foreach($category as $group) {
 			$criteria->condition = 'type = 1 and cat_id = ' . $group->id;
-			$forum = BbiiForum::model()->findAll($criteria);
+			$forum = BbiiForum::find()->findAll($criteria);
 			foreach($forum as $option) {
 				$return[] = array('id'=>$option->id,'name'=>$option->name,'group'=>$group->name);
 			}

@@ -4,7 +4,7 @@
 ?>
 <div id="bbii-header">
 	<?php if(!Yii::$app->user->isGuest): ?>
-		<?php $messages = BbiiMessage::model()->inbox()->unread()->count('sendto = '.Yii::$app->user->id); ?>
+		<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.Yii::$app->user->id); ?>
 		<div class="bbii-profile-box">
 		<?php 
 			if($messages) {
