@@ -59,7 +59,7 @@ $item = array(
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 					'delete' => array(
-						'imageUrl' => $assets->baseUrl.'delete.png'),
+						'imageUrl' => $assets->baseUrl.'/images/delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)

@@ -97,11 +97,11 @@ function setAutocomplete(id, data) {
 					'update' => array(
 						'url' => 'array("forum/update", "id" => $data->id)',
 						'label' => Yii::t('BbiiModule.bbii','Update'),
-						'imageUrl' => $assets->baseUrl.'update.png'),
+						'imageUrl' => $assets->baseUrl.'/images/update.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 					'delete' => array(
-						'imageUrl' => $assets->baseUrl.'delete.png'),
+						'imageUrl' => $assets->baseUrl.'/images/delete.png'),
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)

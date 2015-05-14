@@ -19,8 +19,8 @@ $assets = AppAsset::register($this);
 			<?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($data->starter->member_name);?>
 			<?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($data->firstPost->create_time); ?>
 		<?php if($this->context->isModerator()): ?>
-			<?php echo Html::img($assets->baseUrl.'empty.png'), 'empty'); ?>
-			<?php echo Html::img($assets->baseUrl.'update.png'), 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/empty.png'), 'empty'); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/update.png'), 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
 		<?php endif; ?>
 		</div>
 	</div>
@@ -35,7 +35,7 @@ $assets = AppAsset::register($this);
 	<div class = "forum-cell last-cell">
 		<?php 
 			echo Html::encode($data->lastPost->poster->member_name);
-			echo Html::a(Html::img($assets->baseUrl.'next.png'), 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->id, 'nav' => 'last'));
+			echo Html::a(Html::img($assets->baseUrl.'/images/next.png'), 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->id, 'nav' => 'last'));
 			echo '<br>';
 			echo DateTimeCalculation::long($data->lastPost->create_time);
 		?>
