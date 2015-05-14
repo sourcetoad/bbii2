@@ -31,16 +31,9 @@ $assets = AppAsset::register($this);
 	<div class = "bbii-title"><?php echo $this->context->module->forumTitle; ?></div>
 	<table style = "margin:0;"><tr><td style = "padding:0;">
 		<div id = "bbii-menu">
-		<?php /*$this->widget('zii.widgets.CMenu',array(
-			'items' => $item
-		));*/
-		//NavBar::begin();
-		// if the user has no devices then show the init 'purchase' VW option.
-		echo Nav::widget([
+		<?php  echo Nav::widget([
 		    'items' => $item,
-		]);
-		//NavBar::end();
-		?>
+		]); ?>
 		</div>
 	</td><td style = "padding:0;text-align:right;vertical-align:top;">
 		<div class = "search">

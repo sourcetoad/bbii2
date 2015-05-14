@@ -26,9 +26,9 @@ $assets = AppAsset::register($this);
 	<div class = "bbii-title"><?php echo $this->context->module->forumTitle; ?></div>
 	<table style = "margin:0;"><tr><td style = "padding:0;">
 		<div id = "bbii-menu">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items' => $item
-		)); ?>
+		<?php  echo Nav::widget([
+		    'items' => $item,
+		]); ?>
 		</div>
 	</td></tr></table>
 </div>
