@@ -22,7 +22,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<?php echo CHtml::button(Yii::t('BbiiModule.bbii', 'New webspider'), array('onclick' => 'BBiiSetting.EditSpider()', 'class' => 'down35')); ?>
+	<?php echo Html::button(Yii::t('BbiiModule.bbii', 'New webspider'), array('onclick' => 'BBiiSetting.EditSpider()', 'class' => 'down35')); ?>
 	
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'spider-grid',
@@ -32,7 +32,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 			array(
 				'name' => 'name',
 				'type' => 'raw',
-				'value' => 'CHtml::link($data->name, $data->url, array("target" => "_new")) . "<span style = \"display:none;\">{$data->id}</span>"',
+				'value' => 'Html::link($data->name, $data->url, array("target" => "_new")) . "<span style = \"display:none;\">{$data->id}</span>"',
 			),
 			'user_agent',
 			array(

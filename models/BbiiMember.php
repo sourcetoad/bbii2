@@ -80,7 +80,7 @@ class BbiiMember extends BbiiAR {
 			array('blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'url'),
 			array('blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'default', 'value' => null),
 			array('timezone', 'default', 'value' => 'Europe/London'),
-			array('signature','filter','filter' => array($obj = new CHtmlPurifier(), 'purify')),
+			array('signature','filter','filter' => array($obj = new HtmlPurifier(), 'purify')),
 			array('birthdate, signature, first_visit, last_visit, remove_avatar', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

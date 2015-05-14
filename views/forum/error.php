@@ -19,6 +19,6 @@ $item = array(
 	<h2><?php echo Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>
 
 	<div class = "error">
-		<h4><?php echo CHtml::encode($message); ?></h4>
+		<h4><?php echo Html::encode($message); ?></h4>
 	</div>
 </div>

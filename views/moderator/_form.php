@@ -25,8 +25,8 @@
 	<?php echo $form->errorSummary($model); ?>
 		
 	<div class = "row">
-		<?php echo CHtml::label(Yii::t('BbiiModule.bbii','Member groups'), 'member_id'); ?>
-		<?php echo $form->dropDownList($model, 'member_id', CHtml::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'), array('empty' => Yii::t('BbiiModule.bbii','All members')));  ?>
+		<?php echo Html::label(Yii::t('BbiiModule.bbii','Member groups'), 'member_id'); ?>
+		<?php echo $form->dropDownList($model, 'member_id', Html::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'), array('empty' => Yii::t('BbiiModule.bbii','All members')));  ?>
 		<?php echo $form->error($model,'member_id'); ?>
 	</div>
 
@@ -62,8 +62,8 @@
 	</div>
 
 	<div class = "row buttons">
-		<?php if($this->module->userMailColumn) { echo CHtml::submitButton(Yii::t('BbiiModule.bbii', 'Send e-mail'), array('name' => 'email')); } ?>
-		<?php echo CHtml::submitButton(Yii::t('BbiiModule.bbii', 'Send private message'), array('name' => 'pm')); ?>
+		<?php if($this->module->userMailColumn) { echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send e-mail'), array('name' => 'email')); } ?>
+		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send private message'), array('name' => 'pm')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

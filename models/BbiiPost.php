@@ -45,7 +45,7 @@ class BbiiPost extends BbiiAR
 	 */
 	public function rules()
 	{
-		$obj = new CHtmlPurifier();
+		$obj = new HtmlPurifier();
 		$obj->options = Yii::$app->getController()->module->purifierOptions;
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.

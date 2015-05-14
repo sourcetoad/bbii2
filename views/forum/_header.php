@@ -1,4 +1,8 @@
 <?php
+
+use frontend\modules\bbii\models\BbiiForum;
+use frontend\modules\bbii\models\BbiiMessage;
+
 /* @var $this ForumController */
 /* @var $item array */
 ?>
@@ -8,13 +12,13 @@
 		<div class = "bbii-profile-box">
 		<?php 
 			if($messages) {
-				echo CHtml::link(CHtml::image($this->module->getRegisteredImage('newmail.png'), Yii::t('BbiiModule.bbii', 'new messages'), array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
+				echo Html::link(Html::image($this->module->getRegisteredImage('newmail.png'), Yii::t('BbiiModule.bbii', 'new messages'), array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
 			} else {
-				echo CHtml::link(CHtml::image($this->module->getRegisteredImage('mail.png'), Yii::t('BbiiModule.bbii', 'no new messages'), array('title' => Yii::t('BbiiModule.bbii', 'no new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
+				echo Html::link(Html::image($this->module->getRegisteredImage('mail.png'), Yii::t('BbiiModule.bbii', 'no new messages'), array('title' => Yii::t('BbiiModule.bbii', 'no new messages'),'style' => 'vertical-align:bottom;')), array('message/inbox')); 
 			}
-			echo ' | ' . CHtml::link(CHtml::image($this->module->getRegisteredImage('settings.png'), Yii::t('BbiiModule.bbii', 'My settings'), array('title' => Yii::t('BbiiModule.bbii', 'My settings'),'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id)); 
-			if($this->context->isModerator()) echo ' | ' . CHtml::link(CHtml::image($this->module->getRegisteredImage('moderator.png'), Yii::t('BbiiModule.bbii', 'Moderate'), array('title' => Yii::t('BbiiModule.bbii', 'Moderate'),'style' => 'vertical-align:bottom;')), array('moderator/approval'));
-			if($this->context->isAdmin()) echo ' | ' . CHtml::link(CHtml::image($this->module->getRegisteredImage('config.png'), Yii::t('BbiiModule.bbii', 'Forum settings'), array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'),'style' => 'vertical-align:bottom;')), array('setting/index'));
+			echo ' | ' . Html::link(Html::image($this->module->getRegisteredImage('settings.png'), Yii::t('BbiiModule.bbii', 'My settings'), array('title' => Yii::t('BbiiModule.bbii', 'My settings'),'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id)); 
+			if($this->context->isModerator()) echo ' | ' . Html::link(Html::image($this->module->getRegisteredImage('moderator.png'), Yii::t('BbiiModule.bbii', 'Moderate'), array('title' => Yii::t('BbiiModule.bbii', 'Moderate'),'style' => 'vertical-align:bottom;')), array('moderator/approval'));
+			if($this->context->isAdmin()) echo ' | ' . Html::link(Html::image($this->module->getRegisteredImage('config.png'), Yii::t('BbiiModule.bbii', 'Forum settings'), array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'),'style' => 'vertical-align:bottom;')), array('setting/index'));
 		?>
 		</div>
 	<?php endif; ?>
@@ -31,9 +35,9 @@
 		</div>
 	</td></tr></table>
 </div>
-<?php echo CHtml::dropDownList('bbii-jumpto', '', CHtml::listData(BbiiForum::getForumOptions(), 'id', 'name', 'group'), 
+<?php echo Html::dropDownList('bbii-jumpto', '', Html::listData(BbiiForum::getForumOptions(), 'id', 'name', 'group'), 
 	array('empty' => Yii::t('BbiiModule.bbii','Select forum'),
-	'onchange' => "window.location.href = '" . CHtml::normalizeUrl(array('forum')) . "/id/'+$(this).val()",
+	'onchange' => "window.location.href = '" . Html::normalizeUrl(array('forum')) . "/id/'+$(this).val()",
 )); ?>
 <?php if(isset($this->bbii_breadcrumbs)):?>
 	<?php $this->widget('zii.widgets.CBreadcrumbs', array(

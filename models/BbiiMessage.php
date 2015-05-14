@@ -51,7 +51,7 @@ class BbiiMessage extends BbiiAR
 			array('sendfrom, sendto, read_indicator, type, inbox, outbox, post_id', 'numerical', 'integerOnly' => true),
 			array('sendto', 'mailboxFull', 'on' => 'insert'),
 			array('subject', 'length', 'max' => 255),
-			array('content','filter','filter' => array($obj = new CHtmlPurifier(), 'purify')),
+			array('content','filter','filter' => array($obj = new HtmlPurifier(), 'purify')),
 			array('ip', 'length', 'max' => 39),
 			array('ip', 'blocked'),
 			array('ip', 'default', 'value' => Yii::$app->request->userHostAddress, 'on' => 'insert'),

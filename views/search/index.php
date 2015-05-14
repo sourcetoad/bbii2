@@ -30,11 +30,11 @@ $item = array(
 			'action' => array('search/index'),
 			'enableAjaxValidation' => false,
 	));
-		echo CHtml::textField('search', $search, array('size' => 80,'maxlength' => 100));
-		echo CHtml::submitButton(Yii::t('BbiiModule.bbii','Search')) . '<br>';
-		echo CHtml::radioButtonList('choice', $choice, array('1' => Yii::t('BbiiModule.bbii','Subject'), '2' => Yii::t('BbiiModule.bbii','Content'), '0' => Yii::t('BbiiModule.bbii','Both')), array('separator' => '&nbsp;'));
+		echo Html::textField('search', $search, array('size' => 80,'maxlength' => 100));
+		echo Html::submitButton(Yii::t('BbiiModule.bbii','Search')) . '<br>';
+		echo Html::radioButtonList('choice', $choice, array('1' => Yii::t('BbiiModule.bbii','Subject'), '2' => Yii::t('BbiiModule.bbii','Content'), '0' => Yii::t('BbiiModule.bbii','Both')), array('separator' => '&nbsp;'));
 		echo ' | ';
-		echo CHtml::radioButtonList('type', $type, array('1' => Yii::t('BbiiModule.bbii','Any word'), '2' => Yii::t('BbiiModule.bbii','All words'), '0' => Yii::t('BbiiModule.bbii','Phrase')), array('separator' => '&nbsp;'));
+		echo Html::radioButtonList('type', $type, array('1' => Yii::t('BbiiModule.bbii','Any word'), '2' => Yii::t('BbiiModule.bbii','All words'), '0' => Yii::t('BbiiModule.bbii','Phrase')), array('separator' => '&nbsp;'));
 	$this->endWidget();
 	?>
 

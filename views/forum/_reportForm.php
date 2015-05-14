@@ -12,7 +12,7 @@
 )); ?>
 
 	<div class = "row">
-		<?php echo CHtml::label(Yii::t('BbiiModule.bbii','Short explanation'), 'Bbii_content'); ?>
+		<?php echo Html::label(Yii::t('BbiiModule.bbii','Short explanation'), 'Bbii_content'); ?>
 		<?php $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
 			'model' => $model,
 			'attribute' => 'content',
@@ -29,7 +29,7 @@
 		)); ?>
 		<?php echo $form->error($model,'content'); ?>
 		<?php echo $form->hiddenField($model, 'post_id'); ?>
-		<?php echo CHtml::hiddenField('url', $this->createAbsoluteUrl('message/sendReport')); ?>
+		<?php echo Html::hiddenField('url', $this->createAbsoluteUrl('message/sendReport')); ?>
 	</div>
 	
 <?php $this->endWidget(); ?>

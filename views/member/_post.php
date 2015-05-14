@@ -1,4 +1,4 @@
-﻿<?php echo CHtml::link($data->subject, array(
+﻿<?php echo Html::link($data->subject, array(
 		'forum/topic', 
 		'id' => $data->topic_id, 
 		'nav' => $data->id

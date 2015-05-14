@@ -385,9 +385,9 @@ class ExtEditMe extends CInputWidget {
 			$nameId = $this -> resolveNameID();
 			$this -> htmlOptions['id'] = $nameId[1];
 			if ($this -> hasModel()) {
-				echo CHtml::activeTextArea($this -> model, $this -> attribute, $this -> htmlOptions);
+				echo Html::activeTextArea($this -> model, $this -> attribute, $this -> htmlOptions);
 			} else {
-				echo CHtml::textArea($this -> name, $this -> value, $this -> htmlOptions);
+				echo Html::textArea($this -> name, $this -> value, $this -> htmlOptions);
 			}
 		}
 		// Load CKEditor

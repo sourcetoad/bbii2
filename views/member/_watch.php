@@ -19,17 +19,17 @@
 		'columns' => array(
 			array(
 				'header' => '',
-				'value' => 'CHtml::checkbox("unwatch[$data->id]")',
+				'value' => 'Html::checkbox("unwatch[$data->id]")',
 				'type' => 'raw',
 			),
 			array(
 				'header' => Yii::t('BbiiModule.bbii', 'Topic'),
-				'value' => 'CHtml::link($data->title, array("forum/topic", "id" => $data->id, "nav" => "last"))',
+				'value' => 'Html::link($data->title, array("forum/topic", "id" => $data->id, "nav" => "last"))',
 				'type' => 'raw',
 			),
 			array(
 				'header' => Yii::t('BbiiModule.bbii', 'Forum'),
-				'value' => 'CHtml::link($data->forum->name, array("forum/forum", "id" => $data->forum_id))',
+				'value' => 'Html::link($data->forum->name, array("forum/forum", "id" => $data->forum_id))',
 				'type' => 'raw',
 			),
 			array(
@@ -49,7 +49,7 @@
 	)); ?>	
 	
 	<div class = "row buttons">
-		<?php echo CHtml::submitButton(Yii::t('BbiiModule.bbii', 'Delete')); ?>
+		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Delete')); ?>
 	</div>
 	
 	<?php $this->endWidget(); ?>

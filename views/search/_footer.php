@@ -13,7 +13,7 @@ $members = BbiiMember::find()->present()->count();
 			<div>
 				<?php $members = BbiiMember::find()->present()->findAll(); 
 					foreach($members as $member) {
-						echo CHtml::link($member->member_name, array('member/view', 'id' => $member->id), array('style' => 'color:#'.$member->group->color)) . '&nbsp;';
+						echo Html::link($member->member_name, array('member/view', 'id' => $member->id), array('style' => 'color:#'.$member->group->color)) . '&nbsp;';
 					}
 				?>
 				<?php echo Yii::t('BbiiModule.bbii','({hidden} anonymous member(s))', array('{hidden}' => BbiiMember::find()->hidden()->present()->count())); ?>
@@ -31,7 +31,7 @@ $members = BbiiMember::find()->present()->count();
 			</tr><tr>
 				<th><?php echo Yii::t('BbiiModule.bbii','Total members'); ?></th><td><?php echo BbiiMember::find()->count(); ?></td>
 			</tr><tr>
-				<th><?php echo Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::find()->newest()->find(); echo CHtml::link($member->member_name, array('member/view', 'id' => $member->id)); ?></td>
+				<th><?php echo Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::find()->newest()->find(); echo Html::link($member->member_name, array('member/view', 'id' => $member->id)); ?></td>
 			</tr><tr>
 				<th><?php echo Yii::t('BbiiModule.bbii','Visitors today'); ?></th><td><?php echo BbiiSession::find()->count(); ?></td>
 			</tr>

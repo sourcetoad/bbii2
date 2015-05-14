@@ -35,7 +35,7 @@ $item = array(
 		array(
 			'name' => 'member_name',
 			'type' => 'raw',
-			'value' => 'CHtml::link(CHtml::encode($data->member_name), array("member/view", "id" => $data->id))',
+			'value' => 'Html::link(Html::encode($data->member_name), array("member/view", "id" => $data->id))',
 		),
 		array(
 			'header' => Yii::t('BbiiModule.bbii', 'Joined'),
@@ -47,7 +47,7 @@ $item = array(
 		),
 		array(
 			'name' => 'group_id',
-			'filter' => CHtml::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'),
+			'filter' => Html::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'),
 			'value' => '(isset($data->group))?$data->group->name:""',
 		),
 	),

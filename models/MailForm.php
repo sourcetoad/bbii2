@@ -23,7 +23,7 @@ class MailForm extends Model
 		return array(
 			// name, email, subject and body are required
 			array('member_id, subject, body', 'required'),
-			array('body','filter','filter' => array($obj = new CHtmlPurifier(), 'purify')),
+			array('body','filter','filter' => array($obj = new HtmlPurifier(), 'purify')),
 			array('member_name', 'safe'),
 		);
 	}

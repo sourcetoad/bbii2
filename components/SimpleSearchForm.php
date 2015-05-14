@@ -11,10 +11,10 @@ class SimpleSearchForm extends CPortlet {
 			'action' => array('search/index'),
 			'enableAjaxValidation' => false,
 		));
-			echo CHtml::textField('search','', array('size' => 20,'maxlength' => 50,'class' => 'small-search-field'));
-			echo CHtml::hiddenField('choice','0');
-			echo CHtml::hiddenField('type','0');
-			echo CHtml::submitButton('',array('class' => 'small-search-button'));
+			echo Html::textField('search','', array('size' => 20,'maxlength' => 50,'class' => 'small-search-field'));
+			echo Html::hiddenField('choice','0');
+			echo Html::hiddenField('type','0');
+			echo Html::submitButton('',array('class' => 'small-search-button'));
 		$this->endWidget();
     }
 }

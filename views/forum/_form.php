@@ -46,7 +46,7 @@
 	<div class = "row button">
 		<?php echo $form->hiddenField($post, 'forum_id'); ?>
 		<?php echo $form->hiddenField($post, 'topic_id'); ?>
-		<?php echo CHtml::submitButton(($post->isNewRecord)?Yii::t('BbiiModule.bbii','Create'):Yii::t('BbiiModule.bbii','Save'), array('class' => 'bbii-topic-button')); ?>
+		<?php echo Html::submitButton(($post->isNewRecord)?Yii::t('BbiiModule.bbii','Create'):Yii::t('BbiiModule.bbii','Save'), array('class' => 'bbii-topic-button')); ?>
 	</div>
 	
 	<?php $this->endWidget(); ?>

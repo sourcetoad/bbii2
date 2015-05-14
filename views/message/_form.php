@@ -42,7 +42,7 @@
 		?>
 	<?php else: ?>
 		<?php echo $form->label($model,'sendto'); ?>
-		<strong><?php echo CHtml::encode($model->search); ?></strong>
+		<strong><?php echo Html::encode($model->search); ?></strong>
 	<?php endif; ?>
 		<?php echo $form->hiddenField($model,'sendto'); ?>
 		<?php echo $form->error($model,'sendto'); ?>
@@ -81,7 +81,7 @@
 	
 	<div class = "row buttons">
 		<?php echo $form->hiddenField($model,'type'); ?>
-		<?php echo CHtml::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
+		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
