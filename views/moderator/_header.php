@@ -1,6 +1,10 @@
 <?php
 
+use frontend\modules\bbii\models\BbiiMessage;
+
 use yii\helpers\Html;
+use yii\bootstrap\Nav;
+use yii\widgets\Breadcrumbs;
 
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
@@ -33,9 +37,9 @@ $assets = AppAsset::register($this);
 		</div>
 	</td></tr></table>
 </div>
-<?php if(isset($this->context->bbii_breadcrumbs)):?>
+<?php /*if(isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
-<?php endif?>
+<?php endif*/?>

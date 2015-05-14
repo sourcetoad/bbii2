@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\models\BbiiPost;
 
 class ModeratorController extends BbiiController {
 	/**
@@ -36,7 +37,7 @@ class ModeratorController extends BbiiController {
 	
 	public function actionApproval() {
 		$model = new BbiiPost('search');
-		$model->unsetAttributes();  // clear any default values
+		//$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMessage'])) {
 			$model->attributes = $_GET['BbiiPost'];
 		}
