@@ -112,7 +112,9 @@ class BbiiSpider extends BbiiAR
 	public function search($params){
 		$query        = BbiiSpider::find();
 		$dataProvider = new ActiveDataProvider([
-	        'query' => $query,
+			'pagination' => array('pageSize' => 50,),
+			'query'      => $query,
+			'sort'       => array('defaultOrder' => 'last_visit DESC',),
 	    ]);
 
 	    if (!($this->load($params) && $this->validate())) {

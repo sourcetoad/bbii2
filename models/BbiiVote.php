@@ -114,8 +114,8 @@ class BbiiVote extends BbiiAR
         }
 
 		$this->addCondition('choice_id',	$this->choice_id,	true);
-		$this->addCondition('poll_id',	$this->poll_id,		true);
-		$this->addCondition('user_id',	$this->user_id,		true);
+		$this->addCondition('poll_id',	$this->poll_id,			true);
+		$this->addCondition('user_id',	$this->user_id,			true);
 
         return $dataProvider;
     }
