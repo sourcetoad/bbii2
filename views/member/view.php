@@ -36,7 +36,7 @@ $df = Yii::$app->dateFormatter;
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
 	<?php if($this->isModerator() || $model->id == Yii::$app->user->id): ?>
-	<?php echo Html::htmlButton(Yii::t('BbiiModule.bbii', 'Edit profile'), array('class' => 'bbii-button-right', 'onclick' => 'js:document.location.href = "' . $this->createAbsoluteUrl('member/update', array('id' => $model->id)) .'"')); ?>
+	<?php echo Html::htmlButton(Yii::t('BbiiModule.bbii', 'Edit profile'), array('class' => 'bbii-button-right', 'onclick' => 'js:document.location.href = "' . Yii::$app->urlManager->createAbsoluteUrl('member/update', array('id' => $model->id)) .'"')); ?>
 	<?php endif; ?>
 	
 	<div class = "bbii-box-top"><?php echo Html::encode($model->member_name) . Yii::t('BbiiModule.bbii', '\'s profile'); ?></div>

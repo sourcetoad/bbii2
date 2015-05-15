@@ -71,7 +71,7 @@ if($this->context->isModerator()) {
 			'width' => 800,
 			'show' => 'fade',
 			'buttons' => array(
-				Yii::t('BbiiModule.bbii','Change') => 'js:function(){ BBii.changeTopic("' . $this->createAbsoluteUrl('moderator/changeTopic') . '"); }',
+				Yii::t('BbiiModule.bbii','Change') => 'js:function(){ BBii.changeTopic("' . Yii::$app->urlManager->createAbsoluteUrl('moderator/changeTopic') . '"); }',
 				Yii::t('BbiiModule.bbii','Cancel') => 'js:function(){ $(this).dialog("close"); }',
 			),
 		),

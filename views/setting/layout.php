@@ -87,7 +87,7 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 			'theme' => $this->module->juiTheme,
 			'options' => array(
 				'delay' => '100',
-				'update' => 'js:function(){Sort(this,"' . $this->createAbsoluteUrl('setting/ajaxSort') . '");}',
+				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		));
 	?>
@@ -105,8 +105,8 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 		'width' => 800,
 		'show' => 'fade',
 		'buttons' => array(
-			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ deleteForum("' . $this->createAbsoluteUrl('setting/deleteForum') .'"); }',
-			Yii::t('BbiiModule.bbii', 'Save') => 'js:function(){ saveForum("' . $this->createAbsoluteUrl('setting/saveForum') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ deleteForum("' . Yii::$app->urlManager->createAbsoluteUrl('setting/deleteForum') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Save') => 'js:function(){ saveForum("' . Yii::$app->urlManager->createAbsoluteUrl('setting/saveForum') .'"); }',
 			Yii::t('BbiiModule.bbii', 'Cancel') => 'js:function(){ $(this).dialog("close"); }',
 		),
     ),

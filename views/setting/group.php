@@ -48,7 +48,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 				'template' => '{update}',
 				'buttons' => array(
 					'update' => array(
-						'click' => 'js:function($data) { editMembergroup($(this).closest("tr").children("td:first").text(), "' . $this->createAbsoluteUrl('setting/getMembergroup') .'");return false; }',
+						'click' => 'js:function($data) { editMembergroup($(this).closest("tr").children("td:first").text(), "' . Yii::$app->urlManager->createAbsoluteUrl('setting/getMembergroup') .'");return false; }',
 					),
 				)
 			),
@@ -67,8 +67,8 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 		'width' => 450,
 		'show' => 'fade',
 		'buttons' => array(
-			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ deleteMembergroup("' . $this->createAbsoluteUrl('setting/deleteMembergroup') .'"); }',
-			Yii::t('BbiiModule.bbii', 'Save') => 'js:function(){ saveMembergroup("' . $this->createAbsoluteUrl('setting/saveMembergroup') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ deleteMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('setting/deleteMembergroup') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Save') => 'js:function(){ saveMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('setting/saveMembergroup') .'"); }',
 			Yii::t('BbiiModule.bbii', 'Cancel') => 'js:function(){ $(this).dialog("close"); }',
 		),
     ),

@@ -20,7 +20,7 @@ $assets = AppAsset::register($this);
 			<?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($data->firstPost->create_time); ?>
 		<?php if($this->context->isModerator()): ?>
 			<?php echo Html::img($assets->baseUrl.'/images/empty.png', 'empty'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/update.png', 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . $this->createAbsoluteUrl('moderator/topic') . '")')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/update.png', 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/topic') . '")')); ?>
 		<?php endif; ?>
 		</div>
 	</div>

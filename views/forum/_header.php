@@ -47,7 +47,7 @@ $assets = AppAsset::register($this);
 </div>
 <?php echo Html::dropDownList('bbii-jumpto', null, ArrayHelper::map(BbiiForum::getForumOptions(), 'id', 'name', 'group'),
 array('empty' => Yii::t('BbiiModule.bbii','Select forum'),
-	'onchange' => "window.location.href = '" . http_build_query(array('forum')) . "/id/'+$(this).val()",
+	'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/id/'+$(this).val()",
 )); ?>
 <?php if(isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(

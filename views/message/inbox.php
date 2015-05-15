@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 
+use yii\web\UrlManager;
+
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
 
@@ -50,7 +52,7 @@ $item = array(
 					'view' => array(
 						'url' => '$data->id',
 						'imageUrl' => $assets->baseUrl.'view.png',
-						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . $this->createAbsoluteUrl('message/view') .'");return false; }',
+						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . Yii::$app->urlManager->createAbsoluteUrl('message/view') .'");return false; }',
 					),
 					'reply' => array(
 						'url' => 'array("reply", "id" => $data->id)',

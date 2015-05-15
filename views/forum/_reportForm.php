@@ -29,7 +29,7 @@
 		)); ?>
 		<?php echo $form->error($model,'content'); ?>
 		<?php echo $form->hiddenField($model, 'post_id'); ?>
-		<?php echo Html::hiddenField('url', $this->createAbsoluteUrl('message/sendReport')); ?>
+		<?php echo Html::hiddenField('url', Yii::$app->urlManager->createAbsoluteUrl('message/sendReport')); ?>
 	</div>
 	
 <?php $this->endWidget(); ?>

@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\Nav;
+use yii\helpers\Html;
+use yii\widgets\Breadcrumbs; 
 
 /* @var $this MessageController */
 /* @var $item array */
@@ -22,8 +23,8 @@ use yii\bootstrap\Nav;
 	</td></tr></table>
 </div>
 <?php if(isset($this->context->bbii_breadcrumbs)):?>
-	<?php echo Breadcrumbs::widget(array(
+	<?php /*echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,
-	)); ?><!-- breadcrumbs -->
+	));*/ ?><!-- breadcrumbs -->
 <?php endif?>

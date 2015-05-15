@@ -838,7 +838,7 @@ class ForumController extends BbiiController {
 	}
 	
 	public function showUpvote($post_id) {
-		$url = $this->createAbsoluteUrl('forum/upvote');
+		$url = Yii::$app->urlManager->createAbsoluteUrl('forum/upvote');
 		$post = BbiiPost::find()->findByPk($post_id);
 		if($post === null || $post->user_id == Yii::$app->user->id) {
 			return '';
