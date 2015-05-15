@@ -2,7 +2,14 @@
 
 namespace frontend\modules\bbii;
 
-use Yii;
+use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiSpider;
+use frontend\modules\bbii\models\BbiiSession;
+
+use yii;
+use yii\db\BaseActiveRecord;
+use yii\web\Application;
+use yii\web\Session;
 
 class BbiiModule extends \yii\base\Module
  {
@@ -74,7 +81,7 @@ class BbiiModule extends \yii\base\Module
      * @return string base URL that contains all published asset files of this module.
      */
     public function getAssetsUrl() {
-		if($this->_assetsUrl == null) {
+		if ($this->_assetsUrl == null) {
             $this->_assetsUrl = Yii::$app->assetManager->publish(Yii::getPathOfAlias($this->id.'.assets')
 				// Comment the line below out in production.
 				,false,-1,true
@@ -85,6 +92,8 @@ class BbiiModule extends \yii\base\Module
 	
 	/**
 	 * Register the CSS and JS files for the module
+	 *
+	 * @deprecated 2.0.1
 	 */
 	public function registerAssets() {
 		return true;
@@ -97,68 +106,77 @@ class BbiiModule extends \yii\base\Module
 	
 	/**
 	 * Retrieve url of image in the assets
+	 *
+	 * @deprecated 2.2.0
 	 * @param string filename of the image
 	 * @return string source URL of image
 	 */
 	public function getRegisteredImage($filename) {
-		return $this->getAssetsUrl() .'/images/'. $filename;
+		return true;
+		//return $this->getAssetsUrl() .'/images/'. $filename;
     }
 
-	
-	public function beforeControllerAction($controller, $action)
+	/**
+	 * this method is called before any module controller action is performed
+	 * you may place customized code here
+	 *
+	 * @version  2.2.0
+	 * @param  [type] $controller [description]
+	 * @param  [type] $action     [description]
+	 * @return [type]             [description]
+	 */
+	public function beforeAction($controller, $action)
 	{
-		if(parent::beforeControllerAction($controller, $action)) {
-			// this method is called before any module controller action is performed
-			// you may place customized code here
-			
+		if (parent::beforeAction($controller, $action)) {
+
 			// register last visit by member
-			if(Yii::$app->user->id) {
-				$model = BbiiMember::find(Yii::$app->user->id);
-				if($model !== null) {
-					$model->last_visit 	 =  date('Y-m-d H:i:s');
+			if (Yii::$app->user->id) {
+				//$model = BbiiMember::find(Yii::$app->user->id);
+				$model = BbiiMember::find()->where(['id' => Yii::$app->user->id])->one();
+
+				if ($model !== null) {
+					$model->setAttribute('last_visit', date('Y-m-d H:i:s'));
 					$model->save();
 				} else {
-					$criteria = new CDbCriteria;
-					$criteria->condition = $this->userIdColumn . ' = :id';
-					$criteria->params = array(':id' => Yii::$app->user->id);
-					$class = new $this->userClass;
-					$user = $class::find()->find($criteria);
-					$username = $user->getAttribute($this->userNameColumn);
-					$model = new BbiiMember;
-					$model->id 			 =  Yii::$app->user->id;
-					$model->member_name = $username;
-					$model->first_visit = date('Y-m-d H:i:s');
-					$model->last_visit 	 =  date('Y-m-d H:i:s');
+					$userClass = new $this->userClass;
+					$user      = $userClass::find()->where([$this->userIdColumn => Yii::$app->user->id])->one();
+					$username  = $user->getAttribute($this->userNameColumn);
+
+					$model              = new BbiiMember;
+					$model->setAttribute('first_visit', date('Y-m-d H:i:s'));
+					$model->setAttribute('id', 			Yii::$app->user->id);
+					$model->setAttribute('last_visit', 	date('Y-m-d H:i:s'));
+					$model->setAttribute('member_name', $username);
 					$model->save();
 				}
 			}
+
 			// register visit by webspider
-			if(isset($_SERVER['HTTP_USER_AGENT'])) {
-				$spider = BbiiSpider::find()->findByAttributes(array('user_agent' => $_SERVER['HTTP_USER_AGENT']));
-			} else {
-				$spider = null;
-			}
-			if($spider !== null) {
-				$spider->setScenario('visit');
-				$spider->hits++;
-				$spider->last_visit = null;
-				$spider->save();
-			} else {
-				// register visit by guest (when not a webspider)
-				$model = BbiiSession::find(Yii::$app->session->sessionID);
-				if($model === null) {
-					$model = new BbiiSession;
-					$model->id = Yii::$app->session->sessionID;
+			if (isset($_SERVER['HTTP_USER_AGENT'])) {
+				$spider = BbiiSpider::find()->where(['user_agent' => $_SERVER['HTTP_USER_AGENT']])->one();
+
+				if ($spider !== null) {
+					$spider->setScenario('visit');
+					$spider->hits++;
+					$spider->last_visit = null;
+					$spider->save();
+				} else {
+					// register visit by guest (when not a webspider)
+					$model = BbiiSession::find()->where(['id' => Yii::$app->session->get('id')])->one();
+					if ($model === null) {
+						$model = new BbiiSession;
+						$model->id = Yii::$app->session->get('id');
+					}
+					$model->save();
 				}
-				$model->save();
 			}
+
 			// delete older session entries
-			$criteria = new CDbCriteria;
-			$criteria->condition = 'last_visit < "' . date('Y-m-d H:i:s', (time() - 24*3600)). '"';
-			BbiiSession::find()->deleteAll($criteria);
+			BbiiSession::deleteAll('last_visit < \'' . date('Y-m-d H:i:s', (time() - 24*3600)).'\'');
+			
 			return true;
 		}
-		else
-			return false;
+		
+		return false;
 	}
 }
