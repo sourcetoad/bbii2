@@ -6,6 +6,7 @@ use frontend\modules\bbii\components\BbiiController;
 use frontend\modules\bbii\models\BbiiIpaddress;
 use frontend\modules\bbii\models\BbiiMessage;
 use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\MailForm;
 
 class ModeratorController extends BbiiController {
 	/**

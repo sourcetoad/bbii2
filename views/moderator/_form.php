@@ -1,24 +1,37 @@
 <?php
+
+use frontend\modules\bbii\models\BbiiMembergroup;
+
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 /* @var $this ModeratorController */
 /* @var $model MailForm */
 /* @var $form CActiveForm */
 ?>
 
 <h2><?php echo Yii::t('BbiiModule.bbii','Send mail to multiple forum members'); ?></h2>
-<?php if(Yii::$app->user->hasFlash('success')): ?>
+<?php // @todo re-enable flash messages
+	/*if(Yii::$app->user->hasFlash('success')): ?>
 
 <div class = "flash-success">
 	<?php echo Yii::$app->user->getFlash('success'); ?>
 </div>
 
-<?php endif; ?>
+<?php endif;*/ ?>
 
 <div class = "form">
 
-<?php $form = $this->beginWidget('CActiveForm', array(
-	'id' => 'bbii-mail-form',
-	'enableAjaxValidation' => false,
-)); ?>
+	<?php // @depricated 2.2 Kept for referance
+	/*$form = $this->beginWidget('CActiveForm', array(
+		'id' => 'bbii-mail-form',
+		'enableAjaxValidation' => false,
+	));*/ ?>
+	<?php $form = ActiveForm::begin([
+		'enableAjaxValidation' => false,
+		'id'                   => 'bbii-mail-form',
+	]); ?>
 
 	<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p>
 
@@ -37,7 +50,8 @@
 	</div>
 		
 	<div class = "row">
-		<?php $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
+		<?php // @depricated 2.2 Kept for referance
+		/*$this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
 			'model' => $model,
 			'attribute' => 'body',
 			'autoLanguage' => false,
@@ -56,6 +70,24 @@
 			),
 			'skin' => $this->module->editorSkin,
 			'uiColor' => $this->module->editorUIColor,
+			'contentsCss' => $this->module->editorContentsCss,
+		));*/ ?>
+		<?php
+		echo ExtEditMe::widget(array(
+			'model' => $model,
+			'attribute' => 'body',
+			'autoLanguage' => false,
+			'height' => '300px',
+			'toolbar' => array(
+				array('Bold', 'Italic', 'Underline', 'RemoveFormat'),
+				array('TextColor', 'BGColor',),
+				'-',
+				array('Link', 'Unlink', 'Image'),
+				'-',
+				array('Blockquote'),
+			),
+			'skin'        => $this->module->editorSkin,
+			'uiColor'     => $this->module->editorUIColor,
 			'contentsCss' => $this->module->editorContentsCss,
 		)); ?>
 		<?php echo $form->error($model,'body'); ?>
