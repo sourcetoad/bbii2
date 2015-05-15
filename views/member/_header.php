@@ -36,9 +36,9 @@ $assets = AppAsset::register($this);
 		</div>
 	</td></tr></table>
 </div>
-<?php if (isset($this->context->bbii_breadcrumbs)):?>
+<?php /* if (isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
-<?php endif?>
+<?php endif*/ ?>
