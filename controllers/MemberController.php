@@ -3,7 +3,13 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\components\BbiiTopicsRead;
 use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiTopicRead;
+
+use yii;
+use yii\data\ActiveDataProvider;
+use yii\web\Serializer;
 
 class MemberController extends BbiiController {
 	/**
@@ -102,7 +108,14 @@ class MemberController extends BbiiController {
 		return $this->render('update', array('model' => $model));
 	}
 	
-	public function actionView($id) {
+	/**
+	 * [actionView description]
+	 *
+	 * @deprecated 2.2.0
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	/*public function actionView($id) {
 		if(isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 			$object = new BbiiTopicsRead;
 			$read = BbiiTopicRead::find($id);
@@ -150,8 +163,71 @@ class MemberController extends BbiiController {
 			'dataProvider' => $dataProvider,
 			'topicProvider' => $topicProvider,
 		));
+	}*/
+
+	/**
+	 * [actionView description]
+	 *
+	 * @version  2.2.0
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function actionView($id) {
+		$model  = $this->loadModel($id);
+		$object = new BbiiTopicsRead;
+		$read   = BbiiTopicRead::find($id);
+
+		if(isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+
+			if($read !== null) {
+				$object->unserialize($read->data);
+				foreach($_GET['unwatch'] as $topicId => $val) {
+					$object->unsetFollow($topicId);
+				}
+				$read->data = $object->serialize();
+				$read->save();
+			}
+		}
+
+		$dataProvider = new ActiveDataProvider('BbiiPost', array(
+			'criteria' => array(
+				'condition' => "approved = 1 and user_id = $id",
+				'limit'     => 10,
+				'order'     => 'create_time DESC',
+				'with'      => 'forum',
+			),
+			'pagination' => false,
+		));
+
+		if (
+			($this->isModerator() || $id == Yii::$app->user->id) &&
+			isset($read->data)
+		) {
+			if($read === null) {
+				$in = array(0);
+			} else {
+				$object->unserialize($read->data);
+				$in = array_keys($object->getFollow());
+			}
+		} else {
+				$in = array(0);
+		}
+
+		$topicProvider = new ActiveDataProvider('BbiiTopic', array(
+			'criteria' => array(
+				'in'        => array('id' => $in),
+				'order'     => 'id ASC',
+				'with'      => 'forum',
+			),
+			'pagination' => false,
+		));
+		
+		return $this->render('view', array(
+			'dataProvider'  => $dataProvider,
+			'model'         => $model, 
+			'topicProvider' => $topicProvider,
+		));
 	}
-	
 	public function actionMail($id) {
 		$model = new MailForm;
 		if(isset($_POST['MailForm'])) {
