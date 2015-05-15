@@ -45,7 +45,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 				'value' => 'DateTimeCalculation::full($data->last_visit)',
 			),
 			array(
-				'class' => 'CButtonColumn',
+				'class' => 'yii\grid\ActionColumn',
 				'template' => '{update}',
 				'buttons' => array(
 					'update' => array(

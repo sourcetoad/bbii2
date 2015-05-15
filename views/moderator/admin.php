@@ -87,7 +87,7 @@ function setAutocomplete(id, data) {
 			'ip',
 			'create_time',
 			array(
-				'class' => 'CButtonColumn',
+				'class' => 'yii\grid\ActionColumn',
 				'template' => '{view}{update}{delete}',
 				'buttons' => array(
 					'view' => array(

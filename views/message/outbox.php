@@ -44,7 +44,7 @@ $item = array(
 				'value' => '($data->type)?Yii::t("bbii", "notification"):Yii::t("bbii", "message")',
 			),
 			array(
-				'class' => 'CButtonColumn',
+				'class' => 'yii\grid\ActionColumn',
 				'template' => '{view}{delete}',
 				'buttons' => array(
 					'view' => array(

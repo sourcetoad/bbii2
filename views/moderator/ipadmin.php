@@ -43,7 +43,7 @@ $item = array(
 			*/
 			'update_time',
 			array(
-				'class' => 'CButtonColumn',
+				'class' => 'yii\grid\ActionColumn',
 				'template' => '{delete}',
 				'buttons' => array(
 					'delete' => array(

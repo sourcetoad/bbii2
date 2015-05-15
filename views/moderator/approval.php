@@ -4,7 +4,6 @@ use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiMessage;
 
 use yii\grid\GridView;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 use frontend\modules\bbii\AppAsset;
@@ -52,7 +51,7 @@ $item = array(
 				'value' => 'DateTimeCalculation::long($data->create_time)',
 			),
 			array(
-				'class' => 'CButtonColumn',
+				'class' => 'yii\grid\ActionColumn',
 				'template' => '{view}{approve}{delete}',
 				'buttons' => array(
 					'view' => array(
