@@ -30,7 +30,7 @@ class BbiiController extends Controller
 	
 	public function getPageTitle() {
 		$pageTitle = $this->context->module->forumTitle;
-		if($this->getId() == 'forum') {
+		if ($this->getId() == 'forum') {
 			switch ($this->getAction()->getId()) {
 				case 'createTopic':
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Create new topic');
@@ -51,7 +51,7 @@ class BbiiController extends Controller
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Update');
 					break;
 			}
-		} elseif($this->getId() == 'member') {
+		} elseif ($this->getId() == 'member') {
 			switch ($this->getAction()->getId()) {
 				case 'index':
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Members');
@@ -63,7 +63,7 @@ class BbiiController extends Controller
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Update');
 					break;
 			}
-		} elseif($this->getId() == 'message') {
+		} elseif ($this->getId() == 'message') {
 			switch ($this->getAction()->getId()) {
 				case 'inbox':
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Inbox');
@@ -87,13 +87,13 @@ class BbiiController extends Controller
 	 */
 	public function isAdmin() {
 		$userId = Yii::$app->user->id;
-		if($userId === null) {
+		if ($userId === null) {
 			return false;		// not authenticated
 		} else {
-			if($this->module->adminId && $this->module->adminId == $userId) {
+			if ($this->module->adminId && $this->module->adminId == $userId) {
 				return true;	// by module parameter assigned admin
 			}
-			if(Yii::$app->authManager && Yii::$app->user->checkAccess('admin')) {
+			if (Yii::$app->authManager && Yii::$app->user->checkAccess('admin')) {
 				return true;	// rbac role "admin"
 			}
 		}
@@ -106,16 +106,16 @@ class BbiiController extends Controller
 	 */
 	public function isModerator() {
 		$userId = Yii::$app->user->id;
-		if($userId === null) {
+		if ($userId === null) {
 			return false;		// not authenticated
 		} else {
-			if($this->isAdmin()) {
+			if ($this->isAdmin()) {
 				return true;
 			}
-			if(Yii::$app->authManager && Yii::$app->user->checkAccess('moderator')) {
+			if (Yii::$app->authManager && Yii::$app->user->checkAccess('moderator')) {
 				return true;	// rbac role "moderator"
 			}
-			if(BbiiMember::find()->cache(900)->moderator()->exists("id = $userId")) {
+			if (BbiiMember::find()->cache(900)->moderator()->exists("id = $userId")) {
 				return true;	// member table moderator value set
 			}
 		}

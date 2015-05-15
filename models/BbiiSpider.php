@@ -149,7 +149,7 @@ class BbiiSpider extends BbiiAR
 	
 	public function getUrl() {
 		preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $this->user_agent, $match);
-		if(isset($match[0][0])) {
+		if (isset($match[0][0])) {
 			return $match[0][0];
 		} else {
 			return '';

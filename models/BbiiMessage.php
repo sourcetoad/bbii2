@@ -69,13 +69,13 @@ class BbiiMessage extends BbiiAR
 	public function mailboxFull($attr, $params) {
 		$criteria = new CDbCriteria;
 		$criteria->condition = 'outbox = 1 and sendfrom = '. Yii::$app->user->id;
-		if(BbiiMessage::find()->outbox()->count($criteria) >= 50) {
+		if (BbiiMessage::find()->outbox()->count($criteria) >= 50) {
 			$this->addError('sendto', Yii::t('BbiiModule.bbii', 'Your outbox is full. Please make room before sending new messages.'));
 		}
 	}
 
 	public function blocked($attribute, $params) {
-		if(BbiiIpaddress::blocked($this->ip)) {
+		if (BbiiIpaddress::blocked($this->ip)) {
 			$this->addError('ip', Yii::t('BbiiModule.bbii','Your IP address has been blocked.'));
 		}
 	}

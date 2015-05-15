@@ -17,9 +17,9 @@ $assets = AppAsset::register($this);
 		</td>
 		<td rowspan = "2" style = "width:140px;">
 			<?php echo Html::button(Yii::t('BbiiModule.bbii','Edit'), array('onclick' => 'editForum(' . $forumdata->id . ',"' . Yii::t('BbiiModule.bbii','Edit forum') . '", "' . Yii::$app->urlManager->createAbsoluteUrl('setting/getForum') .'")')); ?>
-			<?php if(!$forumdata->public) echo Html::img($assets->baseUrl.'/images/private.png', 'private', array('style' => 'vertical-align:middle;', 'title' => 'Private')); ?>
-			<?php if($forumdata->locked) echo Html::img($assets->baseUrl.'/images/locked.png', 'locked', array('style' => 'vertical-align:middle;', 'title' => 'Locked')); ?>
-			<?php if($forumdata->moderated) echo Html::img($assets->baseUrl.'/images/moderated.png', 'moderated', array('style' => 'vertical-align:middle;', 'title' => 'Moderated')); ?>
+			<?php if (!$forumdata->public) echo Html::img($assets->baseUrl.'/images/private.png', 'private', array('style' => 'vertical-align:middle;', 'title' => 'Private')); ?>
+			<?php if ($forumdata->locked) echo Html::img($assets->baseUrl.'/images/locked.png', 'locked', array('style' => 'vertical-align:middle;', 'title' => 'Locked')); ?>
+			<?php if ($forumdata->moderated) echo Html::img($assets->baseUrl.'/images/moderated.png', 'moderated', array('style' => 'vertical-align:middle;', 'title' => 'Moderated')); ?>
 		</td>
 	</tr>
 	<tr>

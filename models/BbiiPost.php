@@ -75,7 +75,7 @@ class BbiiPost extends BbiiAR
 	}
 
 	public function blocked($attribute, $params) {
-		if(BbiiIpaddress::blocked($this->ip)) {
+		if (BbiiIpaddress::blocked($this->ip)) {
 			$this->addError('ip', Yii::t('BbiiModule.bbii','Your IP address has been blocked.'));
 		}
 	}

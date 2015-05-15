@@ -171,7 +171,7 @@ class BbiiTopic extends BbiiAR
 	 * Returns the css class when a member has posted in a topic
 	 */
 	public function hasPostedClass() {
-		if(!Yii::$app->user->isGuest && BbiiPost::find()->exists("topic_id = $this->id and user_id = ".Yii::$app->user->id)) {
+		if (!Yii::$app->user->isGuest && BbiiPost::find()->exists("topic_id = $this->id and user_id = ".Yii::$app->user->id)) {
 			return 'posted';
 		}
 		return '';

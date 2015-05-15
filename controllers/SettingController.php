@@ -40,13 +40,13 @@ class SettingController extends BbiiController {
 	
 	public function actionIndex() {
 		$model = BbiiSetting::find()->find();
-		if($model === null) {
+		if ($model === null) {
 			$model = new BbiiSetting;
 		}
 		
-		if(isset($_POST['BbiiSetting'])) {
+		if (isset($_POST['BbiiSetting'])) {
 			$model->attributes = $_POST['BbiiSetting'];
-			if($model->save())
+			if ($model->save())
 				$this->redirect(array('index'));
 		}
 
@@ -61,9 +61,9 @@ class SettingController extends BbiiController {
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['BbiiForum'])) {
+		if (isset($_POST['BbiiForum'])) {
 			$model->attributes = $_POST['BbiiForum'];
-			if($model->save()) {
+			if ($model->save()) {
 				$this->redirect(array('layout'));
 			}
 		}
@@ -77,7 +77,7 @@ class SettingController extends BbiiController {
 	public function actionGroup() {
 		$model = new BbiiMembergroup('search');
 		// $model->unsetAttributes();  // clear any default values
-		if(isset($_GET['BbiiMembergroup']))
+		if (isset($_GET['BbiiMembergroup']))
 			$model->attributes = $_GET['BbiiMembergroup'];
 
 		return $this->render('group', array('model' => $model));
@@ -86,7 +86,7 @@ class SettingController extends BbiiController {
 	public function actionModerator() {
 		$model = new BbiiMember('search');
 		// $model->unsetAttributes();  // clear any default values
-		if(isset($_GET['BbiiMember']))
+		if (isset($_GET['BbiiMember']))
 			$model->attributes = $_GET['BbiiMember'];
 
 		return $this->render('moderator',array(
@@ -97,7 +97,7 @@ class SettingController extends BbiiController {
 	public function actionSpider() {
 		$model = new BbiiSpider('search');
 		// $model->unsetAttributes();  // clear any default values
-		if(isset($_GET['BbiiSpider']))
+		if (isset($_GET['BbiiSpider']))
 			$model->attributes = $_GET['BbiiSpider'];
 
 		return $this->render('spider', array('model' => $model));
@@ -107,7 +107,7 @@ class SettingController extends BbiiController {
 	 * handle Ajax call for sorting categories and forums
 	 */
 	public function actionAjaxSort() {
-		if(isset($_POST['cat'])) {
+		if (isset($_POST['cat'])) {
 			$number = 1;
 			foreach($_POST['cat'] as $id) {
 				$model = BbiiForum::find($id);
@@ -115,7 +115,7 @@ class SettingController extends BbiiController {
 				$model->save();
 			}
 			$json = array('succes' => 'yes');
-		} elseif(isset($_POST['frm'])) {
+		} elseif (isset($_POST['frm'])) {
 			$number = 1;
 			foreach($_POST['frm'] as $id) {
 				$model = BbiiForum::find($id);
@@ -135,9 +135,9 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetForum() {
 		$json = array();
-		if(isset($_GET['id'])) {
+		if (isset($_GET['id'])) {
 			$model = BbiiForum::find($_GET['id']);
-			if($model !== null) {
+			if ($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
 				$json['subtitle'] = $model->subtitle;
@@ -159,12 +159,12 @@ class SettingController extends BbiiController {
 	 */
 	public function actionDeleteForum() {
 		$json = array();
-		if(isset($_POST['id'])) {
+		if (isset($_POST['id'])) {
 			$model = BbiiForum::find($_POST['id']);
-			if(BbiiForum::find()->exists("cat_id = " . $_POST['id'])) {
+			if (BbiiForum::find()->exists("cat_id = " . $_POST['id'])) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'There are still forums in this category. Remove these before deleting the category.');
-			} elseif(BbiiTopic::find()->exists('forum_id = ' . $_POST['id'])) {
+			} elseif (BbiiTopic::find()->exists('forum_id = ' . $_POST['id'])) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'There are still topics in this forum. Remove these before deleting the forum.');
 			} else {
@@ -181,10 +181,10 @@ class SettingController extends BbiiController {
 	 */
 	public function actionSaveForum() {
 		$json = array();
-		if(isset($_POST['BbiiForum'])) {
+		if (isset($_POST['BbiiForum'])) {
 			$model = BbiiForum::find($_POST['BbiiForum']['id']);
 			$model->attributes = $_POST['BbiiForum'];
-			if($model->save()) {
+			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
 				$json['error'] = json_decode(CActiveForm::validate($model));
@@ -199,9 +199,9 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetMembergroup() {
 		$json = array();
-		if(isset($_GET['id'])) {
+		if (isset($_GET['id'])) {
 			$model = BbiiMembergroup::find($_GET['id']);
-			if($model !== null) {
+			if ($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
 				$json['description'] = $model->description;
@@ -219,9 +219,9 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetSpider() {
 		$json = array();
-		if(isset($_GET['id'])) {
+		if (isset($_GET['id'])) {
 			$model = BbiiSpider::find($_GET['id']);
-			if($model !== null) {
+			if ($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
 				$json['user_agent'] = $model->user_agent;
@@ -236,8 +236,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionDeleteMembergroup() {
 		$json = array();
-		if(isset($_POST['id'])) {
-			if($_POST['id'] == 0) {
+		if (isset($_POST['id'])) {
+			if ($_POST['id'] == 0) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'The default member group cannot be removed.');
 			} else {
@@ -254,7 +254,7 @@ class SettingController extends BbiiController {
 	 */
 	public function actionDeleteSpider() {
 		$json = array();
-		if(isset($_POST['id'])) {
+		if (isset($_POST['id'])) {
 			BbiiSpider::find($_POST['id'])->delete();
 			$json['success'] = 'yes';
 		}
@@ -267,14 +267,14 @@ class SettingController extends BbiiController {
 	 */
 	public function actionSaveMembergroup() {
 		$json = array();
-		if(isset($_POST['BbiiMembergroup'])) {
-			if($_POST['BbiiMembergroup']['id'] == '') {
+		if (isset($_POST['BbiiMembergroup'])) {
+			if ($_POST['BbiiMembergroup']['id'] == '') {
 				$model = new BbiiMembergroup;
 			} else {
 				$model = BbiiMembergroup::find($_POST['BbiiMembergroup']['id']);
 			}
 			$model->attributes = $_POST['BbiiMembergroup'];
-			if($model->save()) {
+			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
 				$json['error'] = json_decode(CActiveForm::validate($model));
@@ -289,14 +289,14 @@ class SettingController extends BbiiController {
 	 */
 	public function actionSaveSpider() {
 		$json = array();
-		if(isset($_POST['BbiiSpider'])) {
-			if($_POST['BbiiSpider']['id'] == '') {
+		if (isset($_POST['BbiiSpider'])) {
+			if ($_POST['BbiiSpider']['id'] == '') {
 				$model = new BbiiSpider;
 			} else {
 				$model = BbiiSpider::find($_POST['BbiiSpider']['id']);
 			}
 			$model->attributes = $_POST['BbiiSpider'];
-			if($model->save()) {
+			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
 				$json['error'] = json_decode(CActiveForm::validate($model));
@@ -311,9 +311,9 @@ class SettingController extends BbiiController {
 	 */
 	public function actionChangeModerator() {
 		$json = array();
-		if(isset($_POST['id']) && isset($_POST['moderator'])) {
+		if (isset($_POST['id']) && isset($_POST['moderator'])) {
 			$model = BbiiMember::find($_POST['id']);
-			if($model !== null) {
+			if ($model !== null) {
 				$model->moderator = Html::encode($_POST['moderator']);
 				$model->save();
 				$json['success'] = true;
@@ -325,7 +325,7 @@ class SettingController extends BbiiController {
 	
 	public function loadModel($id) {
 		$model = BbiiMember::find($id);
-		if($model === null)
+		if ($model === null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
@@ -335,7 +335,7 @@ class SettingController extends BbiiController {
 	 * @param BbiiForum $model the model to be validated
 	 */
 	protected function performAjaxValidation($model) {
-		if(isset($_POST['ajax']) && $_POST['ajax'] === 'bbii-member-form')
+		if (isset($_POST['ajax']) && $_POST['ajax'] === 'bbii-member-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::$app->end();

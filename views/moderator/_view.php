@@ -17,7 +17,7 @@
 	<th><?php echo Html::activeLabel($model, 'create_time'); ?></th>
 	<td><?php echo DateTimeCalculation::full($model->create_time); ?></td>
 </tr>
-<?php if($poll !== null): ?>
+<?php if ($poll !== null): ?>
 <tr>
 	<th><?php echo Yii::t('BbiiModule.bbii', 'Poll'); ?></th>
 	<td><?php echo Html::encode($poll->question); ?></td>

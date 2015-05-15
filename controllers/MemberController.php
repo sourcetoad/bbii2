@@ -48,7 +48,7 @@ class MemberController extends BbiiController {
 		$model = new BbiiMember('search');
 		// No longer needed in Yii2+
 		// $model->unsetAttributes();  // clear any default values
-		if(isset($_GET['BbiiMember']))
+		if (isset($_GET['BbiiMember']))
 			$model->attributes = $_GET['BbiiMember'];
 
 		return $this->render('index', array('model' => $model));
@@ -57,16 +57,16 @@ class MemberController extends BbiiController {
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id);
 		
-		if($id != Yii::$app->user->id && !$this->isModerator()) {
+		if ($id != Yii::$app->user->id && !$this->isModerator()) {
 			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
 		
-		if(isset($_POST['BbiiMember'])) {
+		if (isset($_POST['BbiiMember'])) {
 			$model->attributes = $_POST['BbiiMember'];
 			$model->image = CUploadedFile::getInstance($model, 'image');
-			if($model->save()) {
+			if ($model->save()) {
 				$valid = true;
-				if($model->remove_avatar) {
+				if ($model->remove_avatar) {
 					$model->avatar = '';
 					$model->save();
 				} else {
@@ -101,7 +101,7 @@ class MemberController extends BbiiController {
 						}
 					}
 				}
-				if($valid)
+				if ($valid)
 					$this->redirect(array('view','id' => $model->id));
 			}
 		}
@@ -116,10 +116,10 @@ class MemberController extends BbiiController {
 	 * @return [type]     [description]
 	 */
 	/*public function actionView($id) {
-		if(isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+		if (isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 			$object = new BbiiTopicsRead;
 			$read = BbiiTopicRead::find($id);
-			if($read !== null) {
+			if ($read !== null) {
 				$object->unserialize($read->data);
 				foreach($_GET['unwatch'] as $topicId => $val) {
 					$object->unsetFollow($topicId);
@@ -138,10 +138,10 @@ class MemberController extends BbiiController {
 			),
 			'pagination' => false,
 		));
-		if($this->isModerator() || $id == Yii::$app->user->id) {
+		if ($this->isModerator() || $id == Yii::$app->user->id) {
 			$object = new BbiiTopicsRead;
 			$read = BbiiTopicRead::find($id);
-			if($read === null) {
+			if ($read === null) {
 				$in = array(0);
 			} else {
 				$object->unserialize($read->data);
@@ -177,9 +177,9 @@ class MemberController extends BbiiController {
 		$object = new BbiiTopicsRead;
 		$read   = BbiiTopicRead::find($id);
 
-		if(isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+		if (isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 
-			if($read !== null) {
+			if ($read !== null) {
 				$object->unserialize($read->data);
 				foreach($_GET['unwatch'] as $topicId => $val) {
 					$object->unsetFollow($topicId);
@@ -203,7 +203,7 @@ class MemberController extends BbiiController {
 			($this->isModerator() || $id == Yii::$app->user->id) &&
 			isset($read->data)
 		) {
-			if($read === null) {
+			if ($read === null) {
 				$in = array(0);
 			} else {
 				$object->unserialize($read->data);
@@ -230,9 +230,9 @@ class MemberController extends BbiiController {
 	}
 	public function actionMail($id) {
 		$model = new MailForm;
-		if(isset($_POST['MailForm'])) {
+		if (isset($_POST['MailForm'])) {
 			$model->attributes = $_POST['MailForm'];
-			if($model->validate()) {
+			if ($model->validate()) {
 				$class = new $this->module->userClass;
 				$criteria = new CDbCriteria;
 				$criteria->condition = $this->module->userIdColumn . ' = :id';
@@ -272,7 +272,7 @@ class MemberController extends BbiiController {
 	 */
 	public function actionMembers() {
 		$json = array();
-		if(isset($_GET['term'])) {
+		if (isset($_GET['term'])) {
 			$criteria = new CDbCriteria;
 			$criteria->compare('member_name',$_GET['term'],true);
 			$criteria->limit = 15;
@@ -286,7 +286,7 @@ class MemberController extends BbiiController {
 	}
 	
 	public function actionWatch() {
-		if($this->module->dbName === false) {
+		if ($this->module->dbName === false) {
 			$db = 'db';
 		} else {
 			$db = $this->module->dbName;
@@ -309,7 +309,7 @@ class MemberController extends BbiiController {
 	
 	public function loadModel($id) {
 		$model = BbiiMember::find($id);
-		if($model === null)
+		if ($model === null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
@@ -319,7 +319,7 @@ class MemberController extends BbiiController {
 	 * @param BbiiMembergroup $model the model to be validated
 	 */
 	protected function performAjaxValidation($model) {
-		if(isset($_POST['ajax']) && $_POST['ajax'] === 'bbii-member-form')
+		if (isset($_POST['ajax']) && $_POST['ajax'] === 'bbii-member-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::$app->end();
@@ -330,7 +330,7 @@ class MemberController extends BbiiController {
 		$extension = substr($filename, -3);
 		switch($extension) {
 			case 'gif':
-				$image = @imagecreatefromgif($location . $filename);
+				$image = @imagecreatefromgif ($location . $filename);
 				break;
 			case 'jpg':
 				$image = @imagecreatefromjpeg($location . $filename);
@@ -339,14 +339,14 @@ class MemberController extends BbiiController {
 				$image = @imagecreatefrompng($location . $filename);
 				break;
 		}
-		if($image) {
+		if ($image) {
 			$width = imagesx($image);
 			$height = imagesy($image);
 			// medium
-			if($width > 90 || $height > 90) {
+			if ($width > 90 || $height > 90) {
 				$wr = $width/90;
 				$hr = $height/90;
-				if($wr > $hr) {
+				if ($wr > $hr) {
 					$ratio = $wr;
 				} else {
 					$ratio = $hr;
@@ -360,7 +360,7 @@ class MemberController extends BbiiController {
 			$destImage = imagecreatetruecolor ($dest_w, $dest_h);
 			imagecopyresampled($destImage, $image, 0, 0, 0, 0, $dest_w, $dest_h, $width, $height);
 			imagejpeg($destImage, $location . $targetname, 85);
-			if($filename != $targetname) {
+			if ($filename != $targetname) {
 				unlink($location . $filename);
 			}
 		} else {

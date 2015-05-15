@@ -34,11 +34,11 @@ class DateTimeCalculation {
 	 * @return string timestamp format 'yyyy-MM-dd hh:mm:ss'
 	 */
 	static public function userTimestamp($timestamp) {
-		if(Yii::$app->user->isGuest) {
+		if (Yii::$app->user->isGuest) {
 			return $timestamp;
 		}
 		$timezone = BbiiMember::find(Yii::$app->user->id)->timezone;
-		if(empty($timezone)) {
+		if (empty($timezone)) {
 			return $timestamp;
 		} else {
 			return self::convertTimestamp($timestamp, $timezone);
@@ -68,11 +68,11 @@ class DateTimeCalculation {
 	 * @return string
 	 */
 	static public function userTimezoneNotation() {
-		if(Yii::$app->user->isGuest) {
+		if (Yii::$app->user->isGuest) {
 			$timezone = date_default_timezone_get();
 		} else {
 			$timezone = BbiiMember::find(Yii::$app->user->id)->timezone;
-			if(empty($timezone)) {
+			if (empty($timezone)) {
 				$timezone = date_default_timezone_get();
 			}
 		}

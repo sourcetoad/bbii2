@@ -35,7 +35,7 @@
 		<?php echo $form->error($post,'content'); ?>
 	</div>
 	
-	<?php if(!$post->isNewRecord): ?>
+	<?php if (!$post->isNewRecord): ?>
 		<div class = "row">
 			<?php echo $form->labelEx($post,'change_reason'); ?>
 			<?php echo $form->textField($post,'change_reason',array('size' => 100,'maxlength' => 255,'style' => 'width:99%;')); ?>

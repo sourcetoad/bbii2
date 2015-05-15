@@ -63,10 +63,10 @@ class BbiiForum extends BbiiAR
 	}
 	
 	public function validateType($attr, $params) {
-		if($this->type == 0 && !empty($this->cat_id)) {
+		if ($this->type == 0 && !empty($this->cat_id)) {
 			$this->addError('cat_id', Yii::t('BbiiModule.bbii', 'A category cannot be assigned to a category.'));
 		}
-		if($this->type == 1 && empty($this->cat_id)) {
+		if ($this->type == 1 && empty($this->cat_id)) {
 			$this->addError('cat_id', Yii::t('BbiiModule.bbii', 'A forum needs to be assigned to a category.'));
 		}
 	}
@@ -218,12 +218,12 @@ class BbiiForum extends BbiiAR
 			// $forum = BbiiForum::find()->findAll($criteria);
 			$forum = BbiiForum::find()->where('type = 1 and cat_id = ' . $group->id)->all(); 
 			foreach($forum as $option) {
-				if($option->public || !Yii::$app->user->isGuest) {
-					if($option->membergroup_id == 0) {
+				if ($option->public || !Yii::$app->user->isGuest) {
+					if ($option->membergroup_id == 0) {
 						$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
-					} elseif(!Yii::$app->user->isGuest) {
+					} elseif (!Yii::$app->user->isGuest) {
 						$groupId = BbiiMember::find(Yii::$app->user->id)->group_id;
-						if($option->membergroup_id == $groupId) {
+						if ($option->membergroup_id == $groupId) {
 							$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
 						}
 					}

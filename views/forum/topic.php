@@ -27,14 +27,14 @@ CClientScript::POS_BEGIN);
 
 Yii::$app->clientScript->registerScript('scrollToPost', "
 	var aTag = $('a[name = \"" . $postId . "\"]');
-	if(aTag.length > 0) {
+	if (aTag.length > 0) {
 		$('html,body').animate({scrollTop: aTag.offset().top},'fast');
 	}
 ", CClientScript::POS_READY);
 
 ?>
 
-<?php if(Yii::$app->user->hasFlash('moderation')): ?>
+<?php if (Yii::$app->user->hasFlash('moderation')): ?>
 <div class = "flash-notice">
 	<?php echo Yii::$app->user->getFlash('moderation'); ?>
 </div>
@@ -49,8 +49,8 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 		</div>
 	</div>
 	
-	<?php if(!Yii::$app->user->isGuest && $this->module->userMailColumn && $this->module->allowTopicSub): ?>
-		<?php if($this->isWatching($topic->id)): ?>
+	<?php if (!Yii::$app->user->isGuest && $this->module->userMailColumn && $this->module->allowTopicSub): ?>
+		<?php if ($this->isWatching($topic->id)): ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('class' => 'bbii-watch-button','id' => 'unwatch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/unwatch') . '")')); ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('style' => 'display:none','class' => 'bbii-watch-button','id' => 'watch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/watch') . '")')); ?>
 		<?php else: ?>
@@ -59,7 +59,7 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 		<?php endif; ?>
 	<?php endif; ?>
 
-	<?php if(!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()): ?>
+	<?php if (!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()): ?>
 	<div class = "form">
 		<?php $form = $this->beginWidget('CActiveForm', array(
 			'id' => 'create-post-form',

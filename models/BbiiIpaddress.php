@@ -72,7 +72,7 @@ class BbiiIpaddress extends BbiiAR
 	}
 
 	public function beforeValidate() {
-		if(strlen($this->ip) > 0 and $this->address == '') {
+		if (strlen($this->ip) > 0 and $this->address == '') {
 			$this->address = gethostbyaddr($this->ip);
 		}
 		return parent::beforeValidate();
@@ -149,7 +149,7 @@ class BbiiIpaddress extends BbiiAR
 
 	public static function blocked($ip) {
 		$model = BbiiIpaddress::find()->find("ip = '$ip'");
-		if($model === null) {
+		if ($model === null) {
 			return false;
 		} else {
 			$model->saveCounters(array('count' => 1));					// method since Yii 1.1.8

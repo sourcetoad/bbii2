@@ -16,7 +16,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'))
 );
 
-if(empty($poll->question) && !$poll->hasErrors()) {
+if (empty($poll->question) && !$poll->hasErrors()) {
 	$show = false;
 } else {
 	$show = true;
@@ -44,7 +44,7 @@ if(empty($poll->question) && !$poll->hasErrors()) {
 		
 		<?php echo $form->errorSummary($post); ?>
 		
-		<?php if($forum->poll == 2 || ($forum->poll == 1 && $this->context->isModerator())): ?>
+		<?php if ($forum->poll == 2 || ($forum->poll == 1 && $this->context->isModerator())): ?>
 			<div class = "row button" id = "poll-button" style = "<?php echo ($show?'display:none;':''); ?>">
 				<?php echo Html::button(Yii::t('BbiiModule.bbii','Add poll'), array('class' => 'bbii-poll-button','onclick' => 'showPoll()')); ?>
 			</div>
@@ -108,7 +108,7 @@ if(empty($poll->question) && !$poll->hasErrors()) {
 			<?php echo $form->error($post,'content'); ?>
 		</div>
 		
-		<?php if($this->context->isModerator()): ?>
+		<?php if ($this->context->isModerator()): ?>
 		
 			<div class = "row">
 				<strong><?php echo Yii::t('BbiiModule.bbii','Sticky'); ?>:</strong>

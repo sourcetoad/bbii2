@@ -41,7 +41,7 @@ class ModeratorController extends BbiiController {
 	public function actionApproval() {
 		$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
-		if(isset($_GET['BbiiMessage'])) {
+		if (isset($_GET['BbiiMessage'])) {
 			$model->attributes = $_GET['BbiiPost'];
 		}
 		// restrict filtering to unapproved posts
@@ -54,12 +54,12 @@ class ModeratorController extends BbiiController {
 	
 	public function actionApprove($id) {
 		$post = BbiiPost::find($id);
-		if($post === null) {
+		if ($post === null) {
 			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
 		$forum = BbiiForum::find($post->forum_id);
 		$topic = BbiiTopic::find($post->topic_id);
-		if($topic->approved == 0) {
+		if ($topic->approved == 0) {
 			$topic->approved = 1;
 			$topic->update();
 			$forum->saveCounters(array('num_topics' => 1));	// method since Yii 1.1.8
@@ -80,7 +80,7 @@ class ModeratorController extends BbiiController {
 	public function actionAdmin() {
 		$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
-		if(isset($_GET['BbiiPost']))
+		if (isset($_GET['BbiiPost']))
 			$model->attributes = $_GET['BbiiPost'];
 		// limit posts to approved posts
 		$model->approved = 1;
@@ -94,7 +94,7 @@ class ModeratorController extends BbiiController {
 	{
 		$model = new BbiiIpaddress('search');
 		// $model->unsetAttributes();  // clear any default values
-		if(isset($_GET['BbiiIpaddress']))
+		if (isset($_GET['BbiiIpaddress']))
 			$model->attributes = $_GET['BbiiIpaddress'];
 
 		return $this->render('ipadmin',array(
@@ -106,7 +106,7 @@ class ModeratorController extends BbiiController {
 		BbiiIpaddress::find($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
+		if (!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('ipadmin'));
 	}
 
@@ -114,21 +114,21 @@ class ModeratorController extends BbiiController {
 	 * Delete a post
 	 */
 	public function actionDelete($id) {
-		if(isset($_GET['id']))
+		if (isset($_GET['id']))
 			$id = $_GET['id'];
 		$post = BbiiPost::find($id);
-		if($post === null) {
+		if ($post === null) {
 			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
 		$forum = BbiiForum::find($post->forum_id);
 		$topic = BbiiTopic::find($post->topic_id);
 		$post->poster->saveCounters(array('posts' => -1));
 		$post->delete();
-		if($topic->approved == 0) {
+		if ($topic->approved == 0) {
 			$topic->delete();
 		} else {
 			$forum->saveCounters(array('num_posts' => -1));					// method since Yii 1.1.8
-			if($topic->num_replies > 0) {
+			if ($topic->num_replies > 0) {
 				$topic->saveCounters(array('num_replies' => -1));				// method since Yii 1.1.8
 			} else {
 				$topic->delete();
@@ -144,7 +144,7 @@ class ModeratorController extends BbiiController {
 		$model = BbiiMessage::find()->deleteAll($criteria);
 		
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
+		if (!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('approval'));
 		return;
 	}
@@ -157,12 +157,12 @@ class ModeratorController extends BbiiController {
 		$criteria->condition = 'first_post_id = :first_post_id';
 		$criteria->params = array(':first_post_id' => $id);
 		$model = BbiiTopic::find()->find($criteria);
-		if($model !== null) {
+		if ($model !== null) {
 			$criteria->condition = 'topic_id = :topic_id';
 			$criteria->params = array(':topic_id' => $model->id);
 			$criteria->order = 'id DESC';
 			$post = BbiiPost::find()->find($criteria);
-			if($post !== null) {
+			if ($post !== null) {
 				$model->user_id = $post->user_id;
 				$model->first_post_id = $post->id;
 				$model->save();
@@ -178,24 +178,24 @@ class ModeratorController extends BbiiController {
 		$criteria->condition = "last_post_id = $id";
 		$forum = BbiiForum::find()->find($criteria);
 		$topic = BbiiTopic::find()->find($criteria);
-		if($forum !== null) {
+		if ($forum !== null) {
 			$criteria->condition = "forum_id = {$forum->id} and approved = 1";
 			$criteria->order = 'id DESC';
 			$criteria->limit = 1;
 			$post = BbiiPost::find()->find($criteria);
-			if($post === null) {
+			if ($post === null) {
 				$forum->last_post_id = null;
 			} else {
 				$forum->last_post_id = $post->id;
 			}
 			$forum->update();
 		}
-		if($topic !== null) {
+		if ($topic !== null) {
 			$criteria->condition = "topic_id = $topic->id and approved = 1";
 			$criteria->order = 'id DESC';
 			$criteria->limit = 1;
 			$post = BbiiPost::find()->find($criteria);
-			if($post === null) {
+			if ($post === null) {
 				$topic->last_post_id = null;
 			} else {
 				$topic->last_post_id = $post->id;
@@ -213,7 +213,7 @@ class ModeratorController extends BbiiController {
 		$criteria->condition = "forum_id = $id and approved = 1";
 		$criteria->order = 'id DESC';
 		$post = BbiiPost::find()->find($criteria);
-		if($post !== null) {
+		if ($post !== null) {
 			$model->last_post_id = $post->id;
 		} else {
 			$model->last_post_id = null;
@@ -224,7 +224,7 @@ class ModeratorController extends BbiiController {
 	public function actionReport() {
 		$model = new BbiiMessage('search');
 		// $model->unsetAttributes();  // clear any default values
-		if(isset($_GET['BbiiMessage']))
+		if (isset($_GET['BbiiMessage']))
 			$model->attributes = $_GET['BbiiMessage'];
 		// limit posts to moderator inbox
 		$model->sendto = 0;
@@ -236,12 +236,12 @@ class ModeratorController extends BbiiController {
 	
 	public function actionView() {
 		$json = array();
-		if(isset($_POST['id'])) {
+		if (isset($_POST['id'])) {
 			$model = BbiiPost::find($_POST['id']);
-			if($model !== null) {
+			if ($model !== null) {
 				$poll = BBiiPoll::find()->findByAttributes(array('post_id' => $model->id));
 				$choices = array();
-				if($poll !== null) {
+				if ($poll !== null) {
 					$chs = BbiiChoice::find()->findAllByAttributes(array('poll_id' => $poll->id));
 					foreach($chs as $choice) {
 						$choices[] = $choice->choice;
@@ -263,9 +263,9 @@ class ModeratorController extends BbiiController {
 	
 	public function actionTopic() {
 		$json = array();
-		if(isset($_POST['id'])) {
+		if (isset($_POST['id'])) {
 			$model = BbiiTopic::find($_POST['id']);
-			if($model === null) {
+			if ($model === null) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'Topic not found.');
 			} else {
@@ -294,7 +294,7 @@ class ModeratorController extends BbiiController {
 	 */
 	public function actionRefreshTopics() {
 		$json = array();
-		if(isset($_POST['id'])) {
+		if (isset($_POST['id'])) {
 			$json['success'] = 'yes';
 			$json['option'] = '<option value = ""></option>';
 			foreach(BbiiTopic::find()->findAll('forum_id = ' . $_POST['id']) as $topic) {
@@ -314,28 +314,28 @@ class ModeratorController extends BbiiController {
 	 */
 	public function actionChangeTopic() {
 		$json = array();
-		if(isset($_POST['BbiiTopic'])) {
+		if (isset($_POST['BbiiTopic'])) {
 			$model = BbiiTopic::find($_POST['BbiiTopic']['id']);
 			$move = false;
 			$merge = false;
 			$sourceTopicId = $_POST['BbiiTopic']['id'];
 			$sourceForumId = $model->forum_id;
-			if($model->forum_id != $_POST['BbiiTopic']['forum_id']) {
+			if ($model->forum_id != $_POST['BbiiTopic']['forum_id']) {
 				$move = true;
 				$targetForumId = $_POST['BbiiTopic']['forum_id'];
 			}
-			if(!empty($_POST['BbiiTopic']['merge']) && $_POST['BbiiTopic']['id'] != $_POST['BbiiTopic']['merge']) {
+			if (!empty($_POST['BbiiTopic']['merge']) && $_POST['BbiiTopic']['id'] != $_POST['BbiiTopic']['merge']) {
 				$merge = true;
 				$targetTopicId = $_POST['BbiiTopic']['merge'];
 			}
 			$model->attributes = $_POST['BbiiTopic'];
-			if($model->validate()) {
+			if ($model->validate()) {
 				$json['success'] = 'yes';
-				if($merge || $move) {
+				if ($merge || $move) {
 					$criteria = new CDbCriteria();
 					$criteria->condition = "topic_id = $sourceTopicId";
 					$numberOfPosts = BbiiPost::find()->approved()->count($criteria);
-					if($move) {
+					if ($move) {
 						BbiiPost::find()->updateAll(array('forum_id' => $targetForumId), $criteria);
 						$forum = BbiiForum::find($sourceForumId);
 						$forum->saveCounters(array('num_topics' => -1));
@@ -346,9 +346,9 @@ class ModeratorController extends BbiiController {
 						$this->resetLastForumPost($sourceForumId);
 						$this->resetLastForumPost($targetForumId);
 					}
-					if($merge) {
+					if ($merge) {
 						BbiiPost::find()->updateAll(array('topic_id' => $targetTopicId), $criteria);
-						if($move) {
+						if ($move) {
 							$forum = BbiiForum::find($targetForumId);
 						} else {
 							$forum = BbiiForum::find($sourceForumId);
@@ -373,7 +373,7 @@ class ModeratorController extends BbiiController {
 	
 	public function actionBanIp($id) {
 		$post = BbiiPost::find($id);
-		if($post === null) {
+		if ($post === null) {
 			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
 		$ip = new BbiiIpaddress;
@@ -385,14 +385,14 @@ class ModeratorController extends BbiiController {
 	private function assignMembergroup($id) {
 		$member = BbiiMember::find($id);
 		$group = BbiiMembergroup::find($member->group_id);
-		if($group !== null && $group->min_posts < 0) {
+		if ($group !== null && $group->min_posts < 0) {
 			return;
 		}
 		$criteria = new CDbCriteria;
 		$criteria->condition = "min_posts > 0 and min_posts < =  " . $member->posts;
 		$criteria->order = 'min_posts DESC';
 		$newGroup = BbiiMembergroup::find()->find($criteria);
-		if($newGroup !== null and $group->id != $newGroup->id) {
+		if ($newGroup !== null and $group->id != $newGroup->id) {
 			$member->group_id = $newGroup->id;
 			$member->save();
 		}
@@ -401,19 +401,19 @@ class ModeratorController extends BbiiController {
 	public function actionSendmail() {
 		$model = new MailForm;
 		// $model->unsetAttributes();
-		if(isset($_POST['MailForm'])) {
+		if (isset($_POST['MailForm'])) {
 			$model->attributes = $_POST['MailForm'];
-			if(empty($model->member_id)) {
+			if (empty($model->member_id)) {
 				$model->member_id = -1;	// All members
 			}
-			if($model->validate()) {
+			if ($model->validate()) {
 				$criteria = new CDbCriteria;
-				if($model->member_id >=  0) {
+				if ($model->member_id >=  0) {
 					$criteria->condition = 'group_id = :group';
 					$criteria->params = array(':group' => $model->member_id);
 				}
 				$members = BbiiMember::find()->findAll($criteria);
-				if(isset($_POST['email'])) {	// e-mails
+				if (isset($_POST['email'])) {	// e-mails
 					$name = $this->context->module->forumTitle;
 					$name = ' = ?UTF-8?B?'.base64_encode($name).'? = ';
 					$from = BbiiSetting::find()->find()->contact_email;

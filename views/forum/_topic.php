@@ -18,7 +18,7 @@ $assets = AppAsset::register($this);
 		<div class = "header4">
 			<?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($data->starter->member_name);?>
 			<?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($data->firstPost->create_time); ?>
-		<?php if($this->context->isModerator()): ?>
+		<?php if ($this->context->isModerator()): ?>
 			<?php echo Html::img($assets->baseUrl.'/images/empty.png', 'empty'); ?>
 			<?php echo Html::img($assets->baseUrl.'/images/update.png', 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $data->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/topic') . '")')); ?>
 		<?php endif; ?>

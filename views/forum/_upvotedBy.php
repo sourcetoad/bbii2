@@ -3,13 +3,13 @@
 $models = BbiiUpvoted::find()->findAllByAttributes(array('post_id' => $post_id));
 $count = count($models);
 
-if($count) {
+if ($count) {
 	echo '<div class = "post-upvote-footer">' . PHP_EOL;
 	echo Yii::t('BbiiModule.bbii', 'Post appreciated by: '); 
 	$users = array();
 	foreach($models as $model) {
 		$member = BbiiMember::find($model->member_id);
-		if($member !== null) {
+		if ($member !== null) {
 			$users[] = Html::a(Html::encode($member->member_name), array("member/view", "id" => $member->id));
 		}
 	}

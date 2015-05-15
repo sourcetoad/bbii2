@@ -19,7 +19,7 @@ $item = array(
 );
 ?>
 
-<?php if(Yii::$app->user->hasFlash('moderation')): ?>
+<?php if (Yii::$app->user->hasFlash('moderation')): ?>
 <div class = "flash-notice">
 	<?php echo Yii::$app->user->getFlash('moderation'); ?>
 </div>
@@ -34,7 +34,7 @@ $item = array(
 		</div>
 	</div>
 	
-	<?php if(!(Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()): ?>
+	<?php if (!(Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()): ?>
 	<div class = "form">
 		<?php $form = $this->beginWidget('CActiveForm', array(
 			'id' => 'create-topic-form',
@@ -60,7 +60,7 @@ $item = array(
 </div>
 <div style = "display:none;">
 <?php 
-if($this->context->isModerator()) {
+if ($this->context->isModerator()) {
 	$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 		'id' => 'dlgTopicForm',
 		'theme' => $this->module->juiTheme,

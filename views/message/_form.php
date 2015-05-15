@@ -19,7 +19,7 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class = "row">
-	<?php if($this->action->id == 'create'): ?>
+	<?php if ($this->action->id == 'create'): ?>
 		<?php echo $form->labelEx($model,'sendto'); ?>
 		<?php $this->widget('zii.widgets.jui.CJuiAutoComplete',array(
 				'attribute' => 'search',

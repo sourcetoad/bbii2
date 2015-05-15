@@ -8,7 +8,7 @@ use frontend\modules\bbii\AppAsset;
 /* @var $item array */
 ?>
 <div id = "bbii-header">
-	<?php if(!Yii::$app->user->isGuest): ?>
+	<?php if (!Yii::$app->user->isGuest): ?>
 		<div class = "bbii-profile-box">
 		<?php echo Html::a(Yii::t('BbiiModule.bbii', 'Forum'), array('forum/index')); ?>
 		</div>
@@ -22,7 +22,7 @@ use frontend\modules\bbii\AppAsset;
 		</div>
 	</td></tr></table>
 </div>
-<?php if(isset($this->context->bbii_breadcrumbs)):?>
+<?php if (isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,

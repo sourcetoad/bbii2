@@ -27,8 +27,8 @@ class BbiiWatcherMail {
 	}
 	
 	public function processWatchers($url = null) {
-		if($this->email) {
-			if(empty($url)) {
+		if ($this->email) {
+			if (empty($url)) {
 				$url = Yii::$app->createAbsoluteUrl('/');
 			}
 			// forum settings:
@@ -52,7 +52,7 @@ class BbiiWatcherMail {
 				$select = "select * from {$this->table} where {$this->id} = {$row['user_id']}";
 				$cmd_user = $this->user_db->createCommand($select);
 				$row_user = $cmd_user->queryRow();
-				if($row_user && isset($row_user[$this->email])) {
+				if ($row_user && isset($row_user[$this->email])) {
 					// member:
 					$select = "select * from bbii_member where id = {$row['user_id']}";
 					$cmd_member = $this->bbii_db->createCommand($select);
@@ -94,7 +94,7 @@ class BbiiWatcherMail {
 					$cmd_read = $this->bbii_db->createCommand($update);
 					$cmd_read->execute();
 				}
-				if($send) {
+				if ($send) {
 					$precontent = $row_member['member_name'] . ',<br><br>';
 					$precontent .= Yii::t('BbiiModule.bbii', 'This is the digest of posts in the topic(s) "{topics}" for today.', array('{topics}' => implode('", "', $topics)));
 					$precontent .= '<br>';

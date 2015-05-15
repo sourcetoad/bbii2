@@ -15,18 +15,18 @@ $assets = AppAsset::register($this);
 /* @var $item array */
 ?>
 <div id = "bbii-header">
-	<?php if(!Yii::$app->user->isGuest): ?>
+	<?php if (!Yii::$app->user->isGuest): ?>
 		<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.Yii::$app->user->id); ?>
 		<div class = "bbii-profile-box">
 		<?php 
-			if($messages) {
+			if ($messages) {
 				echo Html::a(Html::img($assets->baseUrl.'/images/newmail.png', array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'), 'style' => 'vertical-align:bottom;')), array('message/inbox')); 
 			} else {
 				echo Html::a(Html::img($assets->baseUrl.'/images/mail.png', array('title' => Yii::t('BbiiModule.bbii', 'no new messages'), 'style' => 'vertical-align:bottom;')), array('message/inbox')); 
 			}
 			echo ' | '; echo Html::a(Html::img($assets->baseUrl.'/images/settings.png', array('title' => Yii::t('BbiiModule.bbii', 'My settings'), 'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id)); 
-			if($this->context->isModerator()) echo ' | '; echo Html::a(Html::img($assets->baseUrl.'/images/moderator.png', array('title' => Yii::t('BbiiModule.bbii', 'Moderate'), 'style' => 'vertical-align:bottom;')), array('moderator/approval'));
-			if($this->context->isAdmin()) echo ' | '; echo Html::a(Html::img($assets->baseUrl.'/images/config.png', array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'), 'style' => 'vertical-align:bottom;')), array('setting/index'));
+			if ($this->context->isModerator()) echo ' | '; echo Html::a(Html::img($assets->baseUrl.'/images/moderator.png', array('title' => Yii::t('BbiiModule.bbii', 'Moderate'), 'style' => 'vertical-align:bottom;')), array('moderator/approval'));
+			if ($this->context->isAdmin()) echo ' | '; echo Html::a(Html::img($assets->baseUrl.'/images/config.png', array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'), 'style' => 'vertical-align:bottom;')), array('setting/index'));
 		?>
 		</div>
 	<?php endif; ?>
@@ -49,7 +49,7 @@ $assets = AppAsset::register($this);
 array('empty' => Yii::t('BbiiModule.bbii','Select forum'),
 	'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/id/'+$(this).val()",
 )); ?>
-<?php if(isset($this->context->bbii_breadcrumbs)):?>
+<?php if (isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,

@@ -20,7 +20,7 @@ class BbiiTopicsRead {
 	}
 	
 	public function topicLastRead($topicId) {
-		if(isset($this->topics[$topicId])) {
+		if (isset($this->topics[$topicId])) {
 			return $this->topics[$topicId];
 		} else {
 			return 0;
@@ -36,7 +36,7 @@ class BbiiTopicsRead {
 	}
 	
 	public function follows($topicId) {
-		if(isset($this->follow[$topicId])) {
+		if (isset($this->follow[$topicId])) {
 			return true;
 		} else {
 			return false;
@@ -57,12 +57,12 @@ class BbiiTopicsRead {
 	
 	public function unserialize($data) {
 		$this->data = unserialize($data);
-		if(isset($this->data['topics'])) {
+		if (isset($this->data['topics'])) {
 			$this->topics = $this->data['topics'];
 		} else {
 			$this->topics = array();
 		}
-		if(isset($this->data['follow'])) {
+		if (isset($this->data['follow'])) {
 			$this->follow = $this->data['follow'];
 		} else {
 			$this->follow = array();

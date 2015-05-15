@@ -6,7 +6,7 @@
 
 <h2><?php echo Yii::t('BbiiModule.bbii','Send mail to multiple forum members'); ?></h2>
 <?php // @todo re-enable flash messages
-	/*if(Yii::$app->user->hasFlash('success')): ?>
+	/*if (Yii::$app->user->hasFlash('success')): ?>
 
 <div class = "flash-success">
 	<?php echo Yii::$app->user->getFlash('success'); ?>
@@ -82,7 +82,7 @@
 	</div>
 
 	<div class = "row buttons">
-		<?php if($this->module->userMailColumn) { echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send e-mail'), array('name' => 'email')); } ?>
+		<?php if ($this->module->userMailColumn) { echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send e-mail'), array('name' => 'email')); } ?>
 		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send private message'), array('name' => 'pm')); ?>
 	</div>
 

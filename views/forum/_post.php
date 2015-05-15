@@ -20,8 +20,8 @@ $assets = AppAsset::register($this);
 			<?php echo Html::img((isset($data->poster->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $data->poster->avatar):$assets->baseUrl.'empty.jpeg'), 'avatar'); ?>
 		</div>
 		<div class = "group">
-			<?php if(isset($data->poster->group)) {
-				if(isset($data->poster->group->image)) {
+			<?php if (isset($data->poster->group)) {
+				if (isset($data->poster->group->image)) {
 					echo Html::img($assets->baseUrl.'/'.$data->poster->group->image, 'group') . '<br>';
 				}
 				echo Html::encode($data->poster->group->name);
@@ -32,7 +32,7 @@ $assets = AppAsset::register($this);
 			<?php echo Yii::t('BbiiModule.bbii', 'Joined') . ': ' . DateTimeCalculation::shortDate($data->poster->first_visit); ?>
 		</div>
 		<div style = "text-align:center;margin-top:10px;">
-		<?php if(!Yii::$app->user->isGuest): ?>
+		<?php if (!Yii::$app->user->isGuest): ?>
 			<?php echo Html::img($assets->baseUrl.'/images/warn.png', 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Report post'), 'style' => 'cursor:pointer;', 'onclick' => 'reportPost(' . $data->id . ')')); ?>
 			<?php echo Html::a( Html::img($assets->baseUrl.'/images/pm.png', 'pm', array('title' => Yii::t('BbiiModule.bbii', 'Send private message'))), array('message/create', 'id' => $data->user_id) ); ?>
 			<?php echo $this->showUpvote($data->id); ?>
@@ -41,7 +41,7 @@ $assets = AppAsset::register($this);
 	</div>
 	<div class = "post-cell">
 		<div class = "post-header">
-			<?php if(!(Yii::$app->user->isGuest || $data->topic->locked) || $this->context->isModerator()): ?>
+			<?php if (!(Yii::$app->user->isGuest || $data->topic->locked) || $this->context->isModerator()): ?>
 				<div class = "form">
 					<?php $form = $this->beginWidget('CActiveForm', array(
 						'action' => array('forum/quote', 'id' => $data->id),
@@ -51,7 +51,7 @@ $assets = AppAsset::register($this);
 					<?php $this->endWidget(); ?>
 				</div><!-- form -->	
 			<?php endif; ?>
-			<?php if(!($data->user_id != Yii::$app->user->id || $data->topic->locked) || $this->context->isModerator()): ?>
+			<?php if (!($data->user_id != Yii::$app->user->id || $data->topic->locked) || $this->context->isModerator()): ?>
 				<div class = "form">
 					<?php $form = $this->beginWidget('CActiveForm', array(
 						'action' => array('forum/update', 'id' => $data->id),
@@ -66,11 +66,11 @@ $assets = AppAsset::register($this);
 			<?php echo ' &raquo; ' . DateTimeCalculation::full($data->create_time); ?>
 			<?php echo ' &raquo; <span class = "reputation" title = "' . Yii::t('BbiiModule.bbii','Reputation') . '">' . $data->upvoted . '</span>'; ?>
 		</div>
-		<?php if($this->poll !== null && $this->poll->post_id == $data->id): ?>
+		<?php if ($this->poll !== null && $this->poll->post_id == $data->id): ?>
 		<div class = "bbii-poll">
 			<strong><?php echo Yii::t('BbiiModule.bbii', 'Poll') . ': ' .$this->poll->question; ?></strong>
 			<div id = "poll">
-			<?php if($this->voted): ?>
+			<?php if ($this->voted): ?>
 				<?php $this->widget('zii.widgets.CListView', array(
 					'id' => 'bbiiPoll',
 					'dataProvider' => $this->choiceProvider,
@@ -78,10 +78,10 @@ $assets = AppAsset::register($this);
 					'summaryText' => false,
 				)); 
 				echo '<div style = "text-align:center;width:99%">';
-				if($this->poll->user_id == Yii::$app->user->id || $this->context->isModerator()) {
+				if ($this->poll->user_id == Yii::$app->user->id || $this->context->isModerator()) {
 					echo Html::button(Yii::t('BbiiModule.bbii', 'Edit poll'), array('onclick' => 'editPoll(' . $this->poll->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('forum/editPoll') . '");'));
 				}
-				if(!Yii::$app->user->isGuest && $this->poll->allow_revote && (!isset($this->poll->expire_date) || $this->poll->expire_date > date('Y-m-d'))) {
+				if (!Yii::$app->user->isGuest && $this->poll->allow_revote && (!isset($this->poll->expire_date) || $this->poll->expire_date > date('Y-m-d'))) {
 					echo Html::button(Yii::t('BbiiModule.bbii', 'Change vote'), array('onclick' => 'changeVote(' . $this->poll->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('forum/displayVote') . '");'));
 				}
 				echo '</div>';
@@ -110,16 +110,16 @@ $assets = AppAsset::register($this);
 			<?php echo $data->poster->signature; ?>
 		</div>
 		<div class = "post-footer">
-			<?php if($data->change_reason): ?>
+			<?php if ($data->change_reason): ?>
 				<?php echo Yii::t('BbiiModule.bbii','Changed'). ': ' . DateTimeCalculation::long($data->change_time) . ' ' . Yii::t('BbiiModule.bbii','Reason') . ': ' . Html::encode($data->change_reason); ?>
 			<?php endif; ?>
 		</div>
 		<?php echo $this->render('_upvotedBy', array('post_id' => $data->id)); ?>
 		<div class = "toolbar">
-		<?php if($this->context->isModerator()): ?>
+		<?php if ($this->context->isModerator()): ?>
 			<?php echo Html::a( Html::img($assets->baseUrl.'/images/warn.png', 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $data->user_id, 'type' => 1) ); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/delete.png', 'delete', array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if(confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . Yii::$app->urlManager->createAbsoluteUrl('moderator/delete', array('id' => $data->id)) . '") }')); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/ban.png', 'ban', array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if(confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $data->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/banIp') . '") }')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/delete.png', 'delete', array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . Yii::$app->urlManager->createAbsoluteUrl('moderator/delete', array('id' => $data->id)) . '") }')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/ban.png', 'ban', array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $data->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/banIp') . '") }')); ?>
 		<?php endif; ?>
 		</div>
 	</div>
