@@ -3,8 +3,9 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
-use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiIpaddress;
 use frontend\modules\bbii\models\BbiiMessage;
+use frontend\modules\bbii\models\BbiiPost;
 
 class ModeratorController extends BbiiController {
 	/**
@@ -88,7 +89,7 @@ class ModeratorController extends BbiiController {
 		));
 	}
 	
-	public function actionIpAdmin()
+	public function actionIpadmin()
 	{
 		$model = new BbiiIpaddress('search');
 		// $model->unsetAttributes();  // clear any default values

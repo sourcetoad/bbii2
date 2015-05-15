@@ -4,6 +4,9 @@ namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
 
+use yii;
+use yii\data\ActiveDataProvider;
+
 /**
  * This is the model class for table "bbii_ipaddress".
  *
@@ -81,12 +84,12 @@ class BbiiIpaddress extends BbiiAR
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'ip' => Yii::t('BbiiModule.bbii','IP address'),
-			'address' => Yii::t('BbiiModule.bbii','Host name'),
-			'source' => 'Source',
-			'count' => Yii::t('BbiiModule.bbii','Count'),
+			'address'     => Yii::t('BbiiModule.bbii','Host name'),
+			'count'       => Yii::t('BbiiModule.bbii','Count'),
 			'create_time' => 'Create Time',
+			'id'          => 'ID',
+			'ip'          => Yii::t('BbiiModule.bbii','IP address'),
+			'source'      => 'Source',
 			'update_time' => Yii::t('BbiiModule.bbii','Last blocked'),
 		);
 	}

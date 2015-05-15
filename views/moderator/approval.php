@@ -33,7 +33,7 @@ $item = array(
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<?php 
+	<?php // @depricated 2.1.5 Kept for referance
 	/*$dataProvider = $model->search();
 	$dataProvider->setPagination(array('pageSize' => 10));
 	$this->widget('zii.widgets.grid.CGridView', array(
