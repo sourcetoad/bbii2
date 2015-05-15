@@ -34,14 +34,14 @@ class BbiiSession extends BbiiAR
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
-		return array(
-			array('id', 'required'),
-			array('id', 'length', 'max' => 128),
-			array('last_visit', 'safe'),
+		return [
+			[['id'], 'required'],
+			['id', 'string', 'max' => 128],
+			[['last_visit'], 'safe'],
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, last_visit', 'safe', 'on' => 'search'),
-		);
+			[['id, last_visit'], 'safe', 'on' => 'search'],
+		];
 	}
 	
 	public function beforeSave() {

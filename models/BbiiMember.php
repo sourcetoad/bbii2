@@ -7,6 +7,7 @@ use frontend\modules\bbii\models\_query\BbiiMemberQuery;
 
 use yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\HtmlPurifier;
 
 /**
  * This is the model class for table "bbii_member".
@@ -64,31 +65,38 @@ class BbiiMember extends BbiiAR {
 	}
 
 	/**
+	 *
+	 * [['username', 'password'], 'required'],
+	 * ['username', 'string', 'min' => 3, 'max' => 12],
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('id, member_name', 'required'),
+		return true;
+		// NOTE: you should only define rules for those attributes that will receive user inputs.
+		return [
+			[['id, member_name'], 'required'],
+			// @depricated 2.2.0
 			array('posts, group_id, upvoted', 'numerical', 'integerOnly' => true),
 			array('gender, show_online, contact_email, contact_pm, warning, moderator', 'numerical', 'integerOnly' => true, 'max' => 1),
-			array('member_name', 'unique', 'on' => 'update'),
-			array('member_name', 'length', 'max' => 45),
-			array('image', 'file', 'allowEmpty' => true,'maxSize' => 1025000, 'types' => 'gif, jpg, jpeg, png'),
-			array('location, personal_text, avatar, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'length', 'max' => 255),
-			array('timezone', 'length', 'max' => 80),
+			[['posts, group_id, upvoted'], 'integer'],
+			[['gender, show_online, contact_email, contact_pm, warning, moderator'], 'integer'],
+			array('member_name', 'unique', 'on' => ['update']),
+			['member_name', 'string', 'max' => 45],
+			array('image', 'file', 'allowEmpty' => true, 'maxSize' => 1025000, 'types' => 'gif, jpg, jpeg, png'),
+			array('location, personal_text, avatar, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'string', 'max' => 255),
+			array('timezone','string',  'max' => 80),
 			array('gender, birthdate, location, personal_text, signature, avatar', 'default', 'value' => null),
 			array('blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'url'),
 			array('blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'default', 'value' => null),
-			array('timezone', 'default', 'value' => 'Europe/London'),
+			array('timezone', 'default', 'value' => 'GMT'),
 			array('signature','filter','filter' => array($obj = new HtmlPurifier(), 'purify')),
 			array('birthdate, signature, first_visit, last_visit, remove_avatar', 'safe'),
+
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, member_name, gender, birthdate, location, personal_text, signature, avatar, show_online, contact_email, contact_pm, timezone, first_visit, last_visit, warning, posts, group_id, upvoted, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube, moderator', 'safe', 'on' => 'search'),
-		);
+			[['id, member_name, gender, birthdate, location, personal_text, signature, avatar, show_online, contact_email, contact_pm, timezone, first_visit, last_visit, warning, posts, group_id, upvoted, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube, moderator'], 'safe', 'on' => ['search']],
+		];
 	}
 
 	/**
