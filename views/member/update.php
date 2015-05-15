@@ -126,7 +126,7 @@ $('.presence').hide();
 
 		<div class = "row">
 			<?php echo $form->labelEx($model,'avatar'); ?>
-			<?php echo Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$assets->baseUrl.'/images//empty.jpeg'), 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
+			<?php echo Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$assets->baseUrl.'/images/empty.jpeg', 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
 			<?php echo $form->labelEx($model,'remove_avatar'); ?>
 			<?php echo $form->checkBox($model, 'remove_avatar'); ?>
 			<?php echo $form->labelEx($model, 'image'); ?>

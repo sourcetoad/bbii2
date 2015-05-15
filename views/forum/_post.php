@@ -22,7 +22,7 @@ $assets = AppAsset::register($this);
 		<div class = "group">
 			<?php if(isset($data->poster->group)) {
 				if(isset($data->poster->group->image)) {
-					echo Html::img($this->module->getRegisteredImage($data->poster->group->image), 'group') . '<br>';
+					echo Html::img($assets->baseUrl.'/'.$data->poster->group->image, 'group') . '<br>';
 				}
 				echo Html::encode($data->poster->group->name);
 			} ?>
