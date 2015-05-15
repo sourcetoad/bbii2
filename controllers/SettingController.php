@@ -5,7 +5,11 @@ namespace frontend\modules\bbii\controllers;
 use frontend\modules\bbii\components\BbiiController;
 use frontend\modules\bbii\models\BbiiSetting;
 
+use yii;
+use yii\widgets\ActiveForm;
+
 class SettingController extends BbiiController {
+
 	/**
 	 * [init description]
 	 *
@@ -35,9 +39,9 @@ class SettingController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions' => array('ajaxSort','deleteForum','deleteMembergroup','getForum','getMembergroup','saveForum','saveMembergroup','group','index','layout','spider','getSpider','deleteSpider','saveSpider','moderator','changeModerator'),
-				'users' => array('@'),
+				'actions'    => array('ajaxSort','deleteForum','deleteMembergroup','getForum','getMembergroup','saveForum','saveMembergroup','group','index','layout','spider','getSpider','deleteSpider','saveSpider','moderator','changeModerator'),
 				'expression' => ($this->isAdmin())?'true':'false',
+				'users'      => array('@'),
 			),
 			array('deny',  // deny all users
 				'users' => array('*'),
@@ -46,10 +50,11 @@ class SettingController extends BbiiController {
 	}
 	
 	public function actionIndex() {
-		$model = BbiiSetting::find();
-		if ($model === null) {
+		// Alwasy return
+		// $model = BbiiSetting::find();
+		// if ($model === null) {
 			$model = new BbiiSetting;
-		}
+		// }
 		
 		if (isset($_POST['BbiiSetting'])) {
 			$model->attributes = $_POST['BbiiSetting'];
