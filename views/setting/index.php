@@ -14,11 +14,11 @@ $this->context->bbii_breadcrumbs = array(
 );
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 'url' => array('setting/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 	'url' => array('setting/index')),
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum layout'), 'url' => array('setting/layout')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'), 'url' => array('setting/group')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 'url' => array('setting/moderator')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 'url' => array('setting/spider')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'),'url' => array('setting/group')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 	'url' => array('setting/moderator')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 	'url' => array('setting/spider')),
 );
 ?>
 <div id = "bbii-wrapper">
@@ -26,9 +26,9 @@ $item = array(
 	
 	<div class = "form">
 
-	<?php $form = $this->beginWidget('CActiveForm', array(
-		'id' => 'bbii-setting-form',
+	<?php /* $form = $this->beginWidget('CActiveForm', array(
 		'enableAjaxValidation' => false,
+		'id'                   => 'bbii-setting-form',
 	)); ?>
 
 		<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p>
@@ -63,7 +63,7 @@ $item = array(
 			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save')); ?>
 		</div>
 
-	<?php $this->endWidget(); ?>
+	<?php $this->endWidget();*/ ?>
 
 	</div><!-- form -->	
 </div>

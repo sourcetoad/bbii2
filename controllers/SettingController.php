@@ -3,10 +3,17 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\models\BbiiSetting;
 
 class SettingController extends BbiiController {
+	/**
+	 * [init description]
+	 *
+	 * @deprecated 2.2.0
+	 * @return [type] [description]
+	 */
 	public function init() {
-		Yii::$app->clientScript->registerScriptFile($this->module->getAssetsUrl() . '/js/bbiiSetting.js', CClientScript::POS_HEAD);
+		//Yii::$app->clientScript->registerScriptFile($this->module->getAssetsUrl() . '/js/bbiiSetting.js', CClientScript::POS_HEAD);
 	}
 
 	/**
@@ -39,7 +46,7 @@ class SettingController extends BbiiController {
 	}
 	
 	public function actionIndex() {
-		$model = BbiiSetting::find()->find();
+		$model = BbiiSetting::find();
 		if ($model === null) {
 			$model = new BbiiSetting;
 		}
