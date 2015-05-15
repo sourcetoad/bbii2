@@ -40,7 +40,7 @@ class MessageController extends BbiiController {
 		$count['inbox'] = BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.$id);
 		$count['outbox'] = BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.$id);
 		$model = new BbiiMessage('search');
-		$model->unsetAttributes();  // clear any default values
+		// $model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMessage'])) {
 			$model->attributes = $_GET['BbiiMessage'];
 		}
@@ -61,7 +61,7 @@ class MessageController extends BbiiController {
 		$count['inbox'] = BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.$id);
 		$count['outbox'] = BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.$id);
 		$model = new BbiiMessage('search');
-		$model->unsetAttributes();  // clear any default values
+		// $model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMessage'])) {
 			$model->attributes = $_GET['BbiiMessage'];
 		}

@@ -41,7 +41,7 @@ class MemberController extends BbiiController {
 	public function actionIndex() {
 		$model = new BbiiMember('search');
 		// No longer needed in Yii2+
-		//$model->unsetAttributes();  // clear any default values
+		// $model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMember']))
 			$model->attributes = $_GET['BbiiMember'];
 

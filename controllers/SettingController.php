@@ -76,7 +76,7 @@ class SettingController extends BbiiController {
 	
 	public function actionGroup() {
 		$model = new BbiiMembergroup('search');
-		$model->unsetAttributes();  // clear any default values
+		// $model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMembergroup']))
 			$model->attributes = $_GET['BbiiMembergroup'];
 
@@ -85,7 +85,7 @@ class SettingController extends BbiiController {
 	
 	public function actionModerator() {
 		$model = new BbiiMember('search');
-		$model->unsetAttributes();  // clear any default values
+		// $model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiMember']))
 			$model->attributes = $_GET['BbiiMember'];
 
@@ -96,7 +96,7 @@ class SettingController extends BbiiController {
 	
 	public function actionSpider() {
 		$model = new BbiiSpider('search');
-		$model->unsetAttributes();  // clear any default values
+		// $model->unsetAttributes();  // clear any default values
 		if(isset($_GET['BbiiSpider']))
 			$model->attributes = $_GET['BbiiSpider'];
 
