@@ -29,7 +29,7 @@ $item = array(
 			array(
 				'name' => 'group_id',
 				'value' => '$data->group->name',
-				'filter' => Html::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'),
+				'filter' => ArrayHelper::map(BbiiMembergroup::find()->findAll(), 'id', 'name'),
 			),
 			array(
 				'name' => 'moderator',

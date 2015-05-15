@@ -60,7 +60,7 @@ $item = array(
 			),
 			array(
 				'name' => 'group_id',
-				'filter' => Html::listData(BbiiMembergroup::find()->findAll(), 'id', 'name'),
+				'filter' => ArrayHelper::map(BbiiMembergroup::find()->findAll(), 'id', 'name'),
 				'value' => '(isset($data->group))?$data->group->name:""',
 			),
 		),

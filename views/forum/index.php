@@ -13,7 +13,7 @@ $this->context->bbii_breadcrumbs = array(
 );
 
 $approvals = BbiiPost::find()->unapproved()->count();
-$reports = BbiiMessage::find()->report()->count();
+$reports   = BbiiMessage::find()->report()->count();
 
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 								'url' => array('forum/index')),

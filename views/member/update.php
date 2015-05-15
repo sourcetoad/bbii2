@@ -57,7 +57,7 @@ $('.presence').hide();
 		<?php if($this->context->isModerator()): ?>
 		<div class = "row">
 			<?php echo $form->labelEx($model,'group_id'); ?>
-			<?php echo $form->dropDownList($model, 'group_id', Html::listData(BbiiMembergroup::find()->findAll(), 'id', 'name')); ?>
+			<?php echo $form->dropDownList($model, 'group_id', ArrayHelper::map(BbiiMembergroup::find()->findAll(), 'id', 'name')); ?>
 			<?php echo $form->error($model,'group_id'); ?>
 		</div>
 		<?php endif; ?>

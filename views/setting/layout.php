@@ -59,7 +59,7 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 		
 		<div class = "row">
 			<?php echo $form->labelEx($model,'cat_id'); ?>
-			<?php echo $form->dropDownList($model,'cat_id',Html::listData(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
+			<?php echo $form->dropDownList($model,'cat_id',ArrayHelper::map(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
 			<?php echo $form->error($model,'cat_id'); ?>
 		</div>
 		

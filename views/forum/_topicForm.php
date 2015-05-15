@@ -17,7 +17,7 @@
 		
 		<div class = "row">
 			<?php echo $form->labelEx($model,'forum_id'); ?>
-			<?php echo $form->dropDownList($model,'forum_id',Html::listData(BbiiForum::find()->forum()->findAll(), 'id', 'name'), array('onchange' => 'refreshTopics(this, "' . $this->createAbsoluteUrl('moderator/refreshTopics') . '")')); ?>
+			<?php echo $form->dropDownList($model,'forum_id',ArrayHelper::map(BbiiForum::find()->forum()->findAll(), 'id', 'name'), array('onchange' => 'refreshTopics(this, "' . $this->createAbsoluteUrl('moderator/refreshTopics') . '")')); ?>
 			<?php echo $form->error($model,'forum_id'); ?>
 		</div>
 		
