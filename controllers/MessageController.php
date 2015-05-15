@@ -2,7 +2,10 @@
 
 namespace frontend\modules\bbii\controllers;
 
+use frontend\modules\bbii\models\BbiiMessage;
 use frontend\modules\bbii\components\BbiiController;
+
+use yii;
 
 class MessageController extends BbiiController {
 	/**

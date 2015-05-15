@@ -1,11 +1,4 @@
 <?php
-
-use frontend\modules\bbii\models\BbiiMembergroup;
-
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-
 /* @var $this ModeratorController */
 /* @var $model MailForm */
 /* @var $form CActiveForm */
@@ -23,15 +16,10 @@ use yii\widgets\ActiveForm;
 
 <div class = "form">
 
-	<?php // @depricated 2.2 Kept for referance
-	/*$form = $this->beginWidget('CActiveForm', array(
-		'id' => 'bbii-mail-form',
-		'enableAjaxValidation' => false,
-	));*/ ?>
-	<?php $form = ActiveForm::begin([
-		'enableAjaxValidation' => false,
-		'id'                   => 'bbii-mail-form',
-	]); ?>
+<?php /* $form = $this->beginWidget('CActiveForm', array(
+	'id' => 'bbii-mail-form',
+	'enableAjaxValidation' => false,
+)); ?>
 
 	<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p>
 
@@ -72,7 +60,7 @@ use yii\widgets\ActiveForm;
 			'uiColor' => $this->module->editorUIColor,
 			'contentsCss' => $this->module->editorContentsCss,
 		));*/ ?>
-		<?php
+		<?php /*
 		echo ExtEditMe::widget(array(
 			'model' => $model,
 			'attribute' => 'body',
@@ -98,6 +86,6 @@ use yii\widgets\ActiveForm;
 		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send private message'), array('name' => 'pm')); ?>
 	</div>
 
-<?php $this->endWidget(); ?>
+<?php $this->endWidget();*/ ?>
 
 </div><!-- form -->

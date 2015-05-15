@@ -49,11 +49,11 @@ $item = array(
 				'buttons' => array(
 					'view' => array(
 						'url' => '$data->id',
-						'imageUrl' => $assets->baseUrl.'view.png'),
+						'imageUrl' => $assets->baseUrl.'view.png',
 						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . $this->createAbsoluteUrl('message/view') .'");return false; }',
 					),
 					'delete' => array(
-						'imageUrl' => $assets->baseUrl.'/images/delete.png'),
+						'imageUrl' => $assets->baseUrl.'/images/delete.png',
 						'options' => array('style' => 'margin-left:5px;'),
 					),
 				)

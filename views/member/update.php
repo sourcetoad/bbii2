@@ -165,91 +165,91 @@ $('.presence').hide();
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'website'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Globe.png'), 'Website', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Globe.png', 'Website', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'website',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'website'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'blogger'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Blogger.png'), 'Blogger', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Blogger.png', 'Blogger', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'blogger',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'blogger'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'facebook'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Facebook.png'), 'Facebook', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Facebook.png', 'Facebook', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'facebook',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'facebook'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'flickr'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Flickr.png'), 'Flickr', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Flickr.png', 'Flickr', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'flickr',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'flickr'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'google'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Google.png'), 'Google', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Google.png', 'Google', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'google',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'google'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'linkedin'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Linkedin.png'), 'Linkedin', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Linkedin.png', 'Linkedin', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'linkedin',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'linkedin'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'metacafe'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Metacafe.png'), 'Metacafe', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Metacafe.png', 'Metacafe', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'metacafe',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'metacafe'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'myspace'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Myspace.png'), 'Myspace', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Myspace.png', 'Myspace', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'myspace',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'myspace'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'orkut'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Orkut.png'), 'Orkut', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Orkut.png', 'Orkut', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'orkut',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'orkut'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'tumblr'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Tumblr.png'), 'Tumblr', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Tumblr.png', 'Tumblr', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'tumblr',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'tumblr'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'twitter'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Twitter.png'), 'Twitter', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Twitter.png', 'Twitter', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'twitter',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'twitter'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'wordpress'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Wordpress.png'), 'Wordpress', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Wordpress.png', 'Wordpress', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'wordpress',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'wordpress'); ?>
 		</div>
 
 		<div class = "row presence">
 			<?php echo $form->labelEx($model,'youtube'); ?>
-			<?php echo Html::img($assets->baseUrl.'/images/Youtube.png'), 'Youtube', array('style' => 'vertical-align:middle')); ?>
+			<?php echo Html::img($assets->baseUrl.'/images/Youtube.png', 'Youtube', array('style' => 'vertical-align:middle')); ?>
 			<?php echo $form->textField($model,'youtube',array('size' => 100,'maxlength' => 255)); ?>
 			<?php echo $form->error($model,'youtube'); ?>
 		</div>
