@@ -5,6 +5,9 @@ namespace frontend\modules\bbii\models;
 use frontend\modules\bbii\models\BbiiAR;
 use frontend\modules\bbii\models\_query\BbiiMessageQuery;
 
+use yii;
+use yii\data\ActiveDataProvider;
+
 /**
  * This is the model class for table "bbii_message".
  *
@@ -97,17 +100,17 @@ class BbiiMessage extends BbiiAR
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'sendfrom' => Yii::t('BbiiModule.bbii', 'From'),
-			'sendto' => Yii::t('BbiiModule.bbii', 'To'),
-			'subject' => Yii::t('BbiiModule.bbii', 'Subject'),
-			'content' => Yii::t('BbiiModule.bbii', 'Content'),
-			'create_time' => Yii::t('BbiiModule.bbii', 'Posted'),
+			'content'        => Yii::t('BbiiModule.bbii', 'Content'),
+			'create_time'    => Yii::t('BbiiModule.bbii', 'Posted'),
+			'id'             => 'ID',
+			'inbox'          => Yii::t('BbiiModule.bbii', 'Inbox'),
+			'ip'             => 'Ip',
+			'outbox'         => Yii::t('BbiiModule.bbii', 'Outbox'),
 			'read_indicator' => Yii::t('BbiiModule.bbii', 'Read'),
-			'type' => Yii::t('BbiiModule.bbii', 'Type'),
-			'inbox' => Yii::t('BbiiModule.bbii', 'Inbox'),
-			'outbox' => Yii::t('BbiiModule.bbii', 'Outbox'),
-			'ip' => 'Ip',
+			'sendfrom'       => Yii::t('BbiiModule.bbii', 'From'),
+			'sendto'         => Yii::t('BbiiModule.bbii', 'To'),
+			'subject'        => Yii::t('BbiiModule.bbii', 'Subject'),
+			'type'           => Yii::t('BbiiModule.bbii', 'Type'),
 		);
 	}
 
