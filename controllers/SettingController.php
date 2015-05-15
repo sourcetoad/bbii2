@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiSetting;
 
 use yii;
@@ -48,7 +49,7 @@ class SettingController extends BbiiController {
 			),
 		);
 	}
-	
+
 	public function actionIndex() {
 		// Alwasy return
 		// $model = BbiiSetting::find();
@@ -66,9 +67,9 @@ class SettingController extends BbiiController {
 	}
 		
 	public function actionLayout() {
-		$model = new BbiiForum;
-		$forum = array();
-		$category = BbiiForum::find()->sorted()->category()->findAll();
+		$category = BbiiForum::find()->sorted()->category()->all();
+		$forum    = array();
+		$model    = new BbiiForum;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -85,7 +86,7 @@ class SettingController extends BbiiController {
 			'category' => $category,
 		));
 	}
-	
+
 	public function actionGroup() {
 		$model = new BbiiMembergroup('search');
 		// $model->unsetAttributes();  // clear any default values
@@ -94,7 +95,7 @@ class SettingController extends BbiiController {
 
 		return $this->render('group', array('model' => $model));
 	}
-	
+
 	public function actionModerator() {
 		$model = new BbiiMember('search');
 		// $model->unsetAttributes();  // clear any default values
@@ -105,7 +106,7 @@ class SettingController extends BbiiController {
 			'model' => $model,
 		));
 	}
-	
+
 	public function actionSpider() {
 		$model = new BbiiSpider('search');
 		// $model->unsetAttributes();  // clear any default values
@@ -114,7 +115,7 @@ class SettingController extends BbiiController {
 
 		return $this->render('spider', array('model' => $model));
 	}
-	
+
 	/**
 	 * handle Ajax call for sorting categories and forums
 	 */
@@ -141,7 +142,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for getting forum
 	 */
@@ -165,7 +166,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for deleting forum
 	 */
@@ -187,7 +188,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for saving forum
 	 */
@@ -205,7 +206,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for getting membergroup
 	 */
@@ -225,7 +226,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for getting spider
 	 */
@@ -242,7 +243,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for deleting membergroup
 	 */
@@ -260,7 +261,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for deleting spider
 	 */
@@ -273,7 +274,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for saving membergroup
 	 */
@@ -295,7 +296,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for saving spider
 	 */
@@ -317,7 +318,7 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	/**
 	 * handle Ajax call for changing moderator
 	 */
@@ -334,14 +335,14 @@ class SettingController extends BbiiController {
 		echo json_encode($json);
 		Yii::$app->end();
 	}
-	
+
 	public function loadModel($id) {
 		$model = BbiiMember::find($id);
 		if ($model === null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
-	
+
 	/**
 	 * Performs the AJAX validation.
 	 * @param BbiiForum $model the model to be validated

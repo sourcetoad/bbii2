@@ -1,4 +1,7 @@
 <?php
+
+use yii\bootstrap\ActiveForm;
+
 /* @var $this SettingController */
 /* @var $model BbiiForum */
 /* @var $form CActiveForm */
@@ -6,15 +9,14 @@
 
 <div class = "form">
 
-<?php $form = $this->beginWidget('CActiveForm', array(
-	'id' => 'edit-forum-form',
+<?php $form = ActiveForm::begin([
 	'enableAjaxValidation' => true,
-	'clientOptions' => array(
-		'validateOnSubmit' => true,
-		'validateOnChange' => false,
-	)
-)); ?>
-
+	'id'                   => 'edit-forum-form',
+	'validateOnChange'     => false,
+	'validateOnSubmit'     => true,
+]); ?>
+<?php // @todo Iterate on forms - DJE : 2015-05-15
+/*
 	<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p>
 
 	<?php echo $form->errorSummary($model); ?>
@@ -71,7 +73,7 @@
 		<?php echo $form->hiddenField($model,'id'); ?>
 		<?php echo $form->hiddenField($model,'type'); ?>
 	</div>
-	
-<?php $this->endWidget(); ?>
+*/ ?>	
+<?php ActiveForm::end(); ?>
 
 </div><!-- form -->

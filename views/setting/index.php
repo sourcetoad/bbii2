@@ -38,7 +38,8 @@ $item = array(
 		'enableAjaxValidation' => false,
 		'id'                   => 'bbii-setting-form',
 	]);?>
-
+		<?php // @todo Iterate on forms - DJE : 2015-05-15
+		/*
 		<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p>
 
 		<?php echo $form->errorSummary($model); ?>
@@ -62,18 +63,14 @@ $item = array(
 		</div>
 
 		<div class = "row even">
-			<?php // @todo Figure out why this causes the form to break - DJE : 2015-05-15
-			//echo $form->field($model, 'contact_email')->label($model,'contact_email')->textInput(['maxlength' => 255,'width' => 60]); ?>
-		    <?php //echo $form->error($model, 'contact_email'); ?>
+			<?php echo $form->field($model, 'contact_email')->label($model,'contact_email')->textInput(['maxlength' => 255,'width' => 60]); ?>
+		    <?php echo $form->error($model, 'contact_email'); ?>
 		</div>
 
 		<div class = "row odd buttons">
 			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save')); ?>
 		</div>
-
-
-	<?php // @depricated 2.2.0 
-	//$this->endWidget(); ?>
+	*/ ?>
 	<?php ActiveForm::end(); ?>
 	
 	</div><!-- form -->	
