@@ -17,9 +17,9 @@ $this->context->bbii_breadcrumbs = array(
 );
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') .' ('. $count['inbox'] .')', 'url' => array('message/inbox')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Outbox') .' ('. $count['outbox'] .')', 'url' => array('message/outbox')),
-	array('label' => Yii::t('BbiiModule.bbii', 'New message'), 'url' => array('message/create'))
+	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') 	.' ('. $count['inbox'] .')', 	'url' => array('message/inbox')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Outbox') 	.' ('. $count['outbox'] .')', 	'url' => array('message/outbox')),
+	array('label' => Yii::t('BbiiModule.bbii', 'New message'), 								'url' => array('message/create'))
 );
 ?>
 <div id = "bbii-wrapper">
@@ -73,16 +73,16 @@ $item = array(
 	<?php echo GridView::widget(array(
 		'columns'      => array(
 			array(
-				'header' => 'sendfrom',
+				'header' => 'Sent From',
 				'value'  => '$data->sender->member_name'
 			),
 			'subject',
 			array(
-				'header' => 'create_time',
+				'header' => 'Created',
 				'value'  => 'DateTimeCalculation::long($data->create_time)',
 			),
 			array(
-				'header' => 'type',
+				'header' => 'Type',
 				'value'  => '($data->type)?Yii::t("bbii", "notification"):Yii::t("bbii", "message")',
 			),
 			array(

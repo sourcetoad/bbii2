@@ -11,7 +11,7 @@
 
 <div class = "form">
 
-<?php $form = $this->beginWidget('CActiveForm', array(
+<?php /*$form = $this->beginWidget('CActiveForm', array(
 	'id' => 'message-form',
 	'enableAjaxValidation' => false,
 )); ?>
@@ -84,6 +84,6 @@
 		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
 	</div>
 
-<?php $this->endWidget(); ?>
+<?php $this->endWidget();*/ ?>
 
 </div><!-- form -->

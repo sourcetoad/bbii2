@@ -1,8 +1,11 @@
 <?php
 
-use yii\bootstrap\Nav;
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs; 
+use yii\bootstrap\Nav;
+use yii\widgets\Breadcrumbs;
+
+use frontend\modules\bbii\AppAsset;
+$assets = AppAsset::register($this);
 
 /* @var $this MessageController */
 /* @var $item array */
