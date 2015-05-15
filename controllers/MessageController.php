@@ -106,7 +106,7 @@ class MessageController extends BbiiController {
 					if($this->isModerator()) {
 						$allowed = true;
 					} else {
-						$allowed = BbiiMember::find()->findByPk($model->sendto)->contact_pm;
+						$allowed = BbiiMember::find($model->sendto)->contact_pm;
 					}
 					if(!$allowed) {
 						$model->addError('sendto', Yii::t('BbiiModule.bbii','This user does not want to receive private messages.'));
@@ -140,7 +140,7 @@ class MessageController extends BbiiController {
 			if($model->save())
 				$this->redirect(array('outbox'));
 		} else {
-			$model = BbiiMessage::find()->findByPk($id);
+			$model = BbiiMessage::find($id);
 			if($model->sendto != Yii::$app->user->id && !$this->isModerator()) {
 				throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested message does not exist.'));
 			}
@@ -157,7 +157,7 @@ class MessageController extends BbiiController {
 	}
 	
 	public function actionDelete($id) {
-		$model = BbiiMessage::find()->findByPk($id);
+		$model = BbiiMessage::find($id);
 		if($model->sendto == Yii::$app->user->id || $model->sendto == 0) {
 			$model->inbox = 0;
 		}
@@ -181,7 +181,7 @@ class MessageController extends BbiiController {
 	public function actionView() {
 		$json = array();
 		if(isset($_POST['id'])) {
-			$model = BbiiMessage::find()->findByPk($_POST['id']);
+			$model = BbiiMessage::find($_POST['id']);
 			if($model !== null && ($this->isModerator() || $model->sendto == Yii::$app->user->id || $model->sendfrom == Yii::$app->user->id)) {
 				$json['success'] = 'yes';
 				$json['html'] = $this->render('_view', array('model' => $model), true);
@@ -209,7 +209,7 @@ class MessageController extends BbiiController {
 		if(isset($_POST['BbiiMessage'])) {
 			$model = new BbiiMessage;
 			$model->attributes = $_POST['BbiiMessage'];
-			$model->subject = Yii::t('BbiiModule.bbii', 'Post reported: ') . BbiiPost::find()->findByPk($model->post_id)->subject;
+			$model->subject = Yii::t('BbiiModule.bbii', 'Post reported: ') . BbiiPost::find($model->post_id)->subject;
 			$model->sendto = 0;
 			$model->sendfrom = Yii::$app->user->id;
 			$model->outbox = 0;

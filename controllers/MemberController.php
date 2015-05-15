@@ -105,7 +105,7 @@ class MemberController extends BbiiController {
 	public function actionView($id) {
 		if(isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 			$object = new BbiiTopicsRead;
-			$read = BbiiTopicRead::find()->findByPk($id);
+			$read = BbiiTopicRead::find($id);
 			if($read !== null) {
 				$object->unserialize($read->data);
 				foreach($_GET['unwatch'] as $topicId => $val) {
@@ -127,7 +127,7 @@ class MemberController extends BbiiController {
 		));
 		if($this->isModerator() || $id == Yii::$app->user->id) {
 			$object = new BbiiTopicsRead;
-			$read = BbiiTopicRead::find()->findByPk($id);
+			$read = BbiiTopicRead::find($id);
 			if($read === null) {
 				$in = array(0);
 			} else {
@@ -167,7 +167,7 @@ class MemberController extends BbiiController {
 				$user 	 =  $class::find()->find($criteria);
 				$to 	 =  $user->getAttribute($this->module->userMailColumn);
 				
-				$name = BbiiMember::find()->findByPk(Yii::$app->user->id)->member_name;
+				$name = BbiiMember::find(Yii::$app->user->id)->member_name;
 				$name = ' = ?UTF-8?B?'.base64_encode($name).'? = ';
 				$subject = ' = ?UTF-8?B?'.base64_encode($model->subject).'? = ';
 				$sendto = $model->member_name . " <$to>";
@@ -186,7 +186,7 @@ class MemberController extends BbiiController {
 			}
 		} else {
 			$model->member_id = $id;
-			$model->member_name = BbiiMember::find()->findByPk($id)->member_name;
+			$model->member_name = BbiiMember::find($id)->member_name;
 		}
 		return $this->render('mail',array('model' => $model));
 	}
@@ -232,7 +232,7 @@ class MemberController extends BbiiController {
 	}
 	
 	public function loadModel($id) {
-		$model = BbiiMember::find()->findByPk($id);
+		$model = BbiiMember::find($id);
 		if($model === null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

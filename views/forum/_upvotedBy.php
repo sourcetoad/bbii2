@@ -8,7 +8,7 @@ if($count) {
 	echo Yii::t('BbiiModule.bbii', 'Post appreciated by: '); 
 	$users = array();
 	foreach($models as $model) {
-		$member = BbiiMember::find()->findByPk($model->member_id);
+		$member = BbiiMember::find($model->member_id);
 		if($member !== null) {
 			$users[] = Html::a(Html::encode($member->member_name), array("member/view", "id" => $member->id));
 		}

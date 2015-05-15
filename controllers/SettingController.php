@@ -110,7 +110,7 @@ class SettingController extends BbiiController {
 		if(isset($_POST['cat'])) {
 			$number = 1;
 			foreach($_POST['cat'] as $id) {
-				$model = BbiiForum::find()->findByPk($id);
+				$model = BbiiForum::find($id);
 				$model->sort = $number++;
 				$model->save();
 			}
@@ -118,7 +118,7 @@ class SettingController extends BbiiController {
 		} elseif(isset($_POST['frm'])) {
 			$number = 1;
 			foreach($_POST['frm'] as $id) {
-				$model = BbiiForum::find()->findByPk($id);
+				$model = BbiiForum::find($id);
 				$model->sort = $number++;
 				$model->save();
 			}
@@ -136,7 +136,7 @@ class SettingController extends BbiiController {
 	public function actionGetForum() {
 		$json = array();
 		if(isset($_GET['id'])) {
-			$model = BbiiForum::find()->findByPk($_GET['id']);
+			$model = BbiiForum::find($_GET['id']);
 			if($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -160,7 +160,7 @@ class SettingController extends BbiiController {
 	public function actionDeleteForum() {
 		$json = array();
 		if(isset($_POST['id'])) {
-			$model = BbiiForum::find()->findByPk($_POST['id']);
+			$model = BbiiForum::find($_POST['id']);
 			if(BbiiForum::find()->exists("cat_id = " . $_POST['id'])) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'There are still forums in this category. Remove these before deleting the category.');
@@ -168,7 +168,7 @@ class SettingController extends BbiiController {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'There are still topics in this forum. Remove these before deleting the forum.');
 			} else {
-				BbiiForum::find()->findByPk($_POST['id'])->delete();
+				BbiiForum::find($_POST['id'])->delete();
 				$json['success'] = 'yes';
 			}
 		}
@@ -182,7 +182,7 @@ class SettingController extends BbiiController {
 	public function actionSaveForum() {
 		$json = array();
 		if(isset($_POST['BbiiForum'])) {
-			$model = BbiiForum::find()->findByPk($_POST['BbiiForum']['id']);
+			$model = BbiiForum::find($_POST['BbiiForum']['id']);
 			$model->attributes = $_POST['BbiiForum'];
 			if($model->save()) {
 				$json['success'] = 'yes';
@@ -200,7 +200,7 @@ class SettingController extends BbiiController {
 	public function actionGetMembergroup() {
 		$json = array();
 		if(isset($_GET['id'])) {
-			$model = BbiiMembergroup::find()->findByPk($_GET['id']);
+			$model = BbiiMembergroup::find($_GET['id']);
 			if($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -220,7 +220,7 @@ class SettingController extends BbiiController {
 	public function actionGetSpider() {
 		$json = array();
 		if(isset($_GET['id'])) {
-			$model = BbiiSpider::find()->findByPk($_GET['id']);
+			$model = BbiiSpider::find($_GET['id']);
 			if($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -241,7 +241,7 @@ class SettingController extends BbiiController {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'The default member group cannot be removed.');
 			} else {
-				BbiiMembergroup::find()->findByPk($_POST['id'])->delete();
+				BbiiMembergroup::find($_POST['id'])->delete();
 				$json['success'] = 'yes';
 			}
 		}
@@ -255,7 +255,7 @@ class SettingController extends BbiiController {
 	public function actionDeleteSpider() {
 		$json = array();
 		if(isset($_POST['id'])) {
-			BbiiSpider::find()->findByPk($_POST['id'])->delete();
+			BbiiSpider::find($_POST['id'])->delete();
 			$json['success'] = 'yes';
 		}
 		echo json_encode($json);
@@ -271,7 +271,7 @@ class SettingController extends BbiiController {
 			if($_POST['BbiiMembergroup']['id'] == '') {
 				$model = new BbiiMembergroup;
 			} else {
-				$model = BbiiMembergroup::find()->findByPk($_POST['BbiiMembergroup']['id']);
+				$model = BbiiMembergroup::find($_POST['BbiiMembergroup']['id']);
 			}
 			$model->attributes = $_POST['BbiiMembergroup'];
 			if($model->save()) {
@@ -293,7 +293,7 @@ class SettingController extends BbiiController {
 			if($_POST['BbiiSpider']['id'] == '') {
 				$model = new BbiiSpider;
 			} else {
-				$model = BbiiSpider::find()->findByPk($_POST['BbiiSpider']['id']);
+				$model = BbiiSpider::find($_POST['BbiiSpider']['id']);
 			}
 			$model->attributes = $_POST['BbiiSpider'];
 			if($model->save()) {
@@ -312,7 +312,7 @@ class SettingController extends BbiiController {
 	public function actionChangeModerator() {
 		$json = array();
 		if(isset($_POST['id']) && isset($_POST['moderator'])) {
-			$model = BbiiMember::find()->findByPk($_POST['id']);
+			$model = BbiiMember::find($_POST['id']);
 			if($model !== null) {
 				$model->moderator = Html::encode($_POST['moderator']);
 				$model->save();
@@ -324,7 +324,7 @@ class SettingController extends BbiiController {
 	}
 	
 	public function loadModel($id) {
-		$model = BbiiMember::find()->findByPk($id);
+		$model = BbiiMember::find($id);
 		if($model === null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

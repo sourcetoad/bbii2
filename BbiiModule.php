@@ -113,7 +113,7 @@ class BbiiModule extends \yii\base\Module
 			
 			// register last visit by member
 			if(Yii::$app->user->id) {
-				$model = BbiiMember::find()->findByPk(Yii::$app->user->id);
+				$model = BbiiMember::find(Yii::$app->user->id);
 				if($model !== null) {
 					$model->last_visit 	 =  date('Y-m-d H:i:s');
 					$model->save();
@@ -145,7 +145,7 @@ class BbiiModule extends \yii\base\Module
 				$spider->save();
 			} else {
 				// register visit by guest (when not a webspider)
-				$model = BbiiSession::find()->findByPk(Yii::$app->session->sessionID);
+				$model = BbiiSession::find(Yii::$app->session->sessionID);
 				if($model === null) {
 					$model = new BbiiSession;
 					$model->id = Yii::$app->session->sessionID;

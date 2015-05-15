@@ -37,7 +37,7 @@ class DateTimeCalculation {
 		if(Yii::$app->user->isGuest) {
 			return $timestamp;
 		}
-		$timezone = BbiiMember::find()->findByPk(Yii::$app->user->id)->timezone;
+		$timezone = BbiiMember::find(Yii::$app->user->id)->timezone;
 		if(empty($timezone)) {
 			return $timestamp;
 		} else {
@@ -71,7 +71,7 @@ class DateTimeCalculation {
 		if(Yii::$app->user->isGuest) {
 			$timezone = date_default_timezone_get();
 		} else {
-			$timezone = BbiiMember::find()->findByPk(Yii::$app->user->id)->timezone;
+			$timezone = BbiiMember::find(Yii::$app->user->id)->timezone;
 			if(empty($timezone)) {
 				$timezone = date_default_timezone_get();
 			}

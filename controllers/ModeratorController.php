@@ -53,12 +53,12 @@ class ModeratorController extends BbiiController {
 	}
 	
 	public function actionApprove($id) {
-		$post = BbiiPost::find()->findByPk($id);
+		$post = BbiiPost::find($id);
 		if($post === null) {
 			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
-		$forum = BbiiForum::find()->findByPk($post->forum_id);
-		$topic = BbiiTopic::find()->findByPk($post->topic_id);
+		$forum = BbiiForum::find($post->forum_id);
+		$topic = BbiiTopic::find($post->topic_id);
 		if($topic->approved == 0) {
 			$topic->approved = 1;
 			$topic->update();
@@ -103,7 +103,7 @@ class ModeratorController extends BbiiController {
 	}
 	
 	public function actionIpDelete($id) {
-		BbiiIpaddress::find()->findByPk($id)->delete();
+		BbiiIpaddress::find($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -116,12 +116,12 @@ class ModeratorController extends BbiiController {
 	public function actionDelete($id) {
 		if(isset($_GET['id']))
 			$id = $_GET['id'];
-		$post = BbiiPost::find()->findByPk($id);
+		$post = BbiiPost::find($id);
 		if($post === null) {
 			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
-		$forum = BbiiForum::find()->findByPk($post->forum_id);
-		$topic = BbiiTopic::find()->findByPk($post->topic_id);
+		$forum = BbiiForum::find($post->forum_id);
+		$topic = BbiiTopic::find($post->topic_id);
 		$post->poster->saveCounters(array('posts' => -1));
 		$post->delete();
 		if($topic->approved == 0) {
@@ -208,7 +208,7 @@ class ModeratorController extends BbiiController {
 	 * Reset the last post of a forum
 	 */
 	private function resetLastForumPost($id) {
-		$model = BbiiForum::find()->findByPk($id);
+		$model = BbiiForum::find($id);
 		$criteria = new CDbCriteria;
 		$criteria->condition = "forum_id = $id and approved = 1";
 		$criteria->order = 'id DESC';
@@ -237,7 +237,7 @@ class ModeratorController extends BbiiController {
 	public function actionView() {
 		$json = array();
 		if(isset($_POST['id'])) {
-			$model = BbiiPost::find()->findByPk($_POST['id']);
+			$model = BbiiPost::find($_POST['id']);
 			if($model !== null) {
 				$poll = BBiiPoll::find()->findByAttributes(array('post_id' => $model->id));
 				$choices = array();
@@ -264,7 +264,7 @@ class ModeratorController extends BbiiController {
 	public function actionTopic() {
 		$json = array();
 		if(isset($_POST['id'])) {
-			$model = BbiiTopic::find()->findByPk($_POST['id']);
+			$model = BbiiTopic::find($_POST['id']);
 			if($model === null) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'Topic not found.');
@@ -315,7 +315,7 @@ class ModeratorController extends BbiiController {
 	public function actionChangeTopic() {
 		$json = array();
 		if(isset($_POST['BbiiTopic'])) {
-			$model = BbiiTopic::find()->findByPk($_POST['BbiiTopic']['id']);
+			$model = BbiiTopic::find($_POST['BbiiTopic']['id']);
 			$move = false;
 			$merge = false;
 			$sourceTopicId = $_POST['BbiiTopic']['id'];
@@ -337,10 +337,10 @@ class ModeratorController extends BbiiController {
 					$numberOfPosts = BbiiPost::find()->approved()->count($criteria);
 					if($move) {
 						BbiiPost::find()->updateAll(array('forum_id' => $targetForumId), $criteria);
-						$forum = BbiiForum::find()->findByPk($sourceForumId);
+						$forum = BbiiForum::find($sourceForumId);
 						$forum->saveCounters(array('num_topics' => -1));
 						$forum->saveCounters(array('num_posts' => -$numberOfPosts));
-						$forum = BbiiForum::find()->findByPk($targetForumId);
+						$forum = BbiiForum::find($targetForumId);
 						$forum->saveCounters(array('num_topics' => 1));
 						$forum->saveCounters(array('num_posts' => $numberOfPosts));
 						$this->resetLastForumPost($sourceForumId);
@@ -349,12 +349,12 @@ class ModeratorController extends BbiiController {
 					if($merge) {
 						BbiiPost::find()->updateAll(array('topic_id' => $targetTopicId), $criteria);
 						if($move) {
-							$forum = BbiiForum::find()->findByPk($targetForumId);
+							$forum = BbiiForum::find($targetForumId);
 						} else {
-							$forum = BbiiForum::find()->findByPk($sourceForumId);
+							$forum = BbiiForum::find($sourceForumId);
 						}
 						$forum->saveCounters(array('num_topics' => -1));
-						$topic = BbiiTopic::find()->findByPk($targetTopicId);
+						$topic = BbiiTopic::find($targetTopicId);
 						$topic->saveCounters(array('num_replies' => $numberOfPosts));
 						$model->delete();
 					} else {
@@ -372,7 +372,7 @@ class ModeratorController extends BbiiController {
 	}
 	
 	public function actionBanIp($id) {
-		$post = BbiiPost::find()->findByPk($id);
+		$post = BbiiPost::find($id);
 		if($post === null) {
 			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
@@ -383,8 +383,8 @@ class ModeratorController extends BbiiController {
 	}
 	
 	private function assignMembergroup($id) {
-		$member = BbiiMember::find()->findByPk($id);
-		$group = BbiiMembergroup::find()->findByPk($member->group_id);
+		$member = BbiiMember::find($id);
+		$group = BbiiMembergroup::find($member->group_id);
 		if($group !== null && $group->min_posts < 0) {
 			return;
 		}
