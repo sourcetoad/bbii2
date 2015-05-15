@@ -2,7 +2,10 @@
 
 namespace frontend\modules\bbii\components;
 
-class BbiiTopicsRead implements Serializable {
+use yii;
+use yii\db\ActiveRecord;
+
+class BbiiTopicsRead {
 	private $data;
 	private $topics;
 	private $follow;
