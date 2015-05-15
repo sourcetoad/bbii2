@@ -4,6 +4,8 @@ namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
 
+use yii;
+
 /**
  * This is the model class for table "bbii_topic".
  *

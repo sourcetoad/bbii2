@@ -5,6 +5,8 @@ namespace frontend\modules\bbii\controllers;
 use frontend\modules\bbii\components\BbiiController;
 use frontend\modules\bbii\components\BbiiTopicsRead;
 use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiTopic;
 use frontend\modules\bbii\models\BbiiTopicRead;
 
 use yii;
@@ -188,39 +190,31 @@ class MemberController extends BbiiController {
 				$read->save();
 			}
 		}
-
-		$dataProvider = new ActiveDataProvider('BbiiPost', array(
-			'criteria' => array(
-				'condition' => "approved = 1 and user_id = $id",
-				'limit'     => 10,
-				'order'     => 'create_time DESC',
-				'with'      => 'forum',
-			),
-			'pagination' => false,
-		));
-
-		if (
-			($this->isModerator() || $id == Yii::$app->user->id) &&
-			isset($read->data)
-		) {
+		if ( ($this->isModerator() || $id == Yii::$app->user->id) && isset($read->data) ) {
 			if ($read === null) {
+
 				$in = array(0);
 			} else {
 				$object->unserialize($read->data);
 				$in = array_keys($object->getFollow());
 			}
 		} else {
+
 				$in = array(0);
 		}
 
-		$topicProvider = new ActiveDataProvider('BbiiTopic', array(
-			'criteria' => array(
-				'in'        => array('id' => $in),
-				'order'     => 'id ASC',
-				'with'      => 'forum',
-			),
+
+		// @todo Need to figure out the Yii2 version of `'with' => 'forum',` for ADP - DJE : 2015-05-15
+		$dataProvider = new ActiveDataProvider([
 			'pagination' => false,
-		));
+			'query'      => BbiiPost::find()->where(['approved' => 1, 'user_id' => $id])->orderBy('create_time DESC')->limit(10),
+	    ]);
+
+		// @todo Need to figure out the Yii2 version of `'with' => 'forum',` for ADP - DJE : 2015-05-15
+		$topicProvider = new ActiveDataProvider([
+			'pagination' => false,
+			'query'      => BbiiTopic::find()->where(['id' => $in])->orderBy('id ASC')
+		]);
 		
 		return $this->render('view', array(
 			'dataProvider'  => $dataProvider,
@@ -228,6 +222,7 @@ class MemberController extends BbiiController {
 			'topicProvider' => $topicProvider,
 		));
 	}
+
 	public function actionMail($id) {
 		$model = new MailForm;
 		if (isset($_POST['MailForm'])) {

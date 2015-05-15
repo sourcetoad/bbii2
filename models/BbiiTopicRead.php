@@ -1,4 +1,4 @@
- <?php
+<?php
 
 namespace frontend\modules\bbii\models;
 
