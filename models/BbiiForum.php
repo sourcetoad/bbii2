@@ -235,13 +235,15 @@ class BbiiForum extends BbiiAR
 	
 	public static function getAllForumOptions() {
 		$return = array();
-		$criteria = new CDbCriteria;
-		$criteria->condition = 'type = 0';
-		$criteria->order = 'sort';
-		$category = BbiiForum::find()->findAll($criteria);
+		// $criteria = new CDbCriteria;
+		// $criteria->condition = 'type = 0';
+		// $criteria->order = 'sort';
+		// $category = BbiiForum::find()->findAll($criteria);
+		$category = BbiiForum::find()->where('type = 0')->orderBy('sort')->all();
 		foreach($category as $group) {
-			$criteria->condition = 'type = 1 and cat_id = ' . $group->id;
-			$forum = BbiiForum::find()->findAll($criteria);
+			//$criteria->condition = 'type = 1 and cat_id = ' . $group->id;
+			//$forum = BbiiForum::find()->findAll($criteria);
+			$forum = BbiiForum::find()->where('type = 1 and cat_id = ' . $group->id)->all();
 			foreach($forum as $option) {
 				$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
 			}
