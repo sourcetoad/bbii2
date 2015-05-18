@@ -57,7 +57,7 @@ $item = array(
 			array(
 				'attribute' => 'group_id',
 				'filter'    => ArrayHelper::map(BbiiMembergroup::find()->findAll(), 'id', 'name'),
-				'value'     => function ($data) { return (isset($group->group->name)) ? $group->group->name : null ; },
+				'value'     => function ($data) { return (isset($data->group)) ? $data->group->name : null ; },
 			),
 			array(
 				'attribute' => 'moderator',
@@ -65,7 +65,13 @@ $item = array(
 				'format'    => 'raw',
 				'options'   => array("style" => "text-align:center"),
 				//'value'     => 'Html::checkBox("moderator", $data->moderator, array("onclick" => "changeModeration(this,$data->id,\'' . Yii::$app->urlManager->createAbsoluteUrl('setting/changeModerator') . '\')"))',
-			)),
+			),
+			
+			// @todo use prop Yii2 CRUD to view/update/delete forum groups.
+			[
+				'class'    => 'yii\grid\ActionColumn',
+			],
+		),
 		'dataProvider'          => $model,
 		'id'                    => 'bbii-member-grid',
 		// @todo Figure out the Yii2 version of this logic - DJE : 2015-05-15

@@ -1,30 +1,36 @@
 <?php
+
+use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\web\UrlManager;
+
 /* @var $this SettingController */
 /* @var $model BbiiSpider */
 
 $this->context->bbii_breadcrumbs = array(
-	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
-	Yii::t('BbiiModule.bbii', 'Settings') => array('setting/index'),
+	Yii::t('BbiiModule.bbii', 'Forum') 		=> array('forum/index'),
+	Yii::t('BbiiModule.bbii', 'Settings') 	=> array('setting/index'),
 	Yii::t('BbiiModule.bbii', 'Webspiders')
 );
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 'url' => array('setting/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 	'url' => array('setting/index')),
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum layout'), 'url' => array('setting/layout')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'), 'url' => array('setting/group')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 'url' => array('setting/moderator'))
+	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'),'url' => array('setting/group')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 	'url' => array('setting/moderator'))
 );
 
-Yii::$app->clientScript->registerScript('confirmation', "
+/*Yii::$app->clientScript->registerScript('confirmation', "
 var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this webspider?') . "'
-", CClientScript::POS_BEGIN);
+", CClientScript::POS_BEGIN);*/
 ?>
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
 	<?php echo Html::button(Yii::t('BbiiModule.bbii', 'New webspider'), array('onclick' => 'BBiiSetting.EditSpider()', 'class' => 'down35')); ?>
 	
-	<?php $this->widget('zii.widgets.grid.CGridView', array(
+	<?php // @depricated 2.3.0 Kept for referance
+	/* $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'spider-grid',
 		'dataProvider' => $model->search(),
 		'filter' => $model,
@@ -54,11 +60,35 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 				)
 			),
 		),
+	));*/ ?>
+
+	<?php echo GridView::widget(array(
+		'columns' => array(
+			array(
+				'attribute' => 'name',
+				'format'    => 'raw',
+				'value'     => function ($data) { return (isset($data->name)) ? Html::a($data->name, $data->url, array("target" => "_new")) . "<span style = \"display:none;\">{$data->id}</span>" : null ; },
+			),
+			'user_agent',
+			array(
+				'header'  => Yii::t('BbiiModule.bbii', 'Hits'),
+				'options' => array('style' => 'text-align:center;'),
+				'value'   => function ($data) { return $data->hits; },
+			),
+			'last_visit:datetime',
+			
+			// @todo use prop Yii2 CRUD to view/update/delete forum groups.
+			[
+				'class'    => 'yii\grid\ActionColumn',
+			], 
+		),
+		'dataProvider' => $model,
+		'id'           => 'spider-grid',
 	)); ?>
 </div>
 
-<?php
-$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+<?php // @depricated 2.3.0 Kept for referance
+/* $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     'id' => 'dlgEditSpider',
 	'theme' => $this->module->juiTheme,
     'options' => array(
@@ -78,4 +108,4 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     echo $this->render('_editSpider', array('model' => $model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
-?>
+*/

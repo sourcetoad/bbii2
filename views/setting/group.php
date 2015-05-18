@@ -80,7 +80,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 				'value'  => function ($data) { return '<p style="font-weight: bold;color: #'.$data->color.'">'.$data->color.'</p>'; },
 			),
 			'image',
-
+			
 			// @todo use prop Yii2 CRUD to view/update/delete forum groups.
 			[
 				'class'    => 'yii\grid\ActionColumn',

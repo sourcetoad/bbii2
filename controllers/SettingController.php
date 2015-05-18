@@ -7,6 +7,7 @@ use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiSetting;
 use frontend\modules\bbii\models\BbiiMembergroup;
 use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiSpider;
 
 use yii;
 use yii\widgets\ActiveForm;
@@ -112,7 +113,8 @@ class SettingController extends BbiiController {
 	}
 
 	public function actionSpider() {
-		$model = new BbiiSpider('search');
+		$model = new BbiiSpider();
+		$model = $model->search();
 		// $model->unsetAttributes();  // clear any default values
 		if (isset($_GET['BbiiSpider']))
 			$model->attributes = $_GET['BbiiSpider'];

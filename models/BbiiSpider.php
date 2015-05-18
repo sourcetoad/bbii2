@@ -5,6 +5,9 @@ namespace frontend\modules\bbii\models;
 use frontend\modules\bbii\models\BbiiAR;
 use frontend\modules\bbii\models\_query\BbiiSpiderQuery;
 
+use yii;
+use yii\data\ActiveDataProvider;
+
 /**
  * This is the model class for table "bbii_spider".
  *

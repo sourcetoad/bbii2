@@ -27,7 +27,7 @@ $item = array(
 	
 	<div class = "form">
 
-	<?php // @depricated 2.2.0
+	<?php // @depricated 2.2.0 Kept for referance
 	/*$form = $this->beginWidget('CActiveForm', array(
 		'enableAjaxValidation' => false,
 		'id'                   => 'bbii-setting-form',
