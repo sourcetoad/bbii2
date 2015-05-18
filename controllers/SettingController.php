@@ -51,18 +51,19 @@ class SettingController extends BbiiController {
 	}
 
 	public function actionIndex() {
-		// Alwasy return
-		// $model = BbiiSetting::find();
-		// if ($model === null) {
+		/*
+		$model = BbiiSetting::find();
+		if ($model === null) {
 			$model = new BbiiSetting;
-		// }
+		}
 		
 		if (isset($_POST['BbiiSetting'])) {
 			$model->attributes = $_POST['BbiiSetting'];
 			if ($model->save())
 				$this->redirect(array('index'));
-		}
+		}*/
 
+		$model = new BbiiSetting();
 		return $this->render('index', array('model' => $model));
 	}
 		
