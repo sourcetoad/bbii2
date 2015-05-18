@@ -6,6 +6,7 @@ use frontend\modules\bbii\components\BbiiController;
 use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiSetting;
 use frontend\modules\bbii\models\BbiiMembergroup;
+use frontend\modules\bbii\models\BbiiMember;
 
 use yii;
 use yii\widgets\ActiveForm;
@@ -99,7 +100,8 @@ class SettingController extends BbiiController {
 	}
 
 	public function actionModerator() {
-		$model = new BbiiMember('search');
+		$model = new BbiiMember();
+		$model = $model->search();
 		// $model->unsetAttributes();  // clear any default values
 		if (isset($_GET['BbiiMember']))
 			$model->attributes = $_GET['BbiiMember'];
