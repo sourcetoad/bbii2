@@ -72,7 +72,7 @@ class SettingController extends BbiiController {
 	public function actionLayout() {
 		$category = BbiiForum::find()->sorted()->category()->all();
 		$forum    = array();
-		$model    = new BbiiForum;
+		$model    = new BbiiForum();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
