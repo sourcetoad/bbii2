@@ -63,8 +63,8 @@ class MemberController extends BbiiController {
 			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
 		
-		if (isset($_POST['BbiiMember'])) {
-			$model->attributes = $_POST['BbiiMember'];
+		if (isset(Yii::$app->request->post()['BbiiMember'])) {
+			$model->attributes = Yii::$app->request->post()['BbiiMember'];
 			$model->image = CUploadedFile::getInstance($model, 'image');
 			if ($model->save()) {
 				$valid = true;
@@ -225,8 +225,8 @@ class MemberController extends BbiiController {
 
 	public function actionMail($id) {
 		$model = new MailForm;
-		if (isset($_POST['MailForm'])) {
-			$model->attributes = $_POST['MailForm'];
+		if (isset(Yii::$app->request->post()['MailForm'])) {
+			$model->attributes = Yii::$app->request->post()['MailForm'];
 			if ($model->validate()) {
 				$class = new $this->module->userClass;
 				$criteria = new CDbCriteria;
@@ -314,7 +314,7 @@ class MemberController extends BbiiController {
 	 * @param BbiiMembergroup $model the model to be validated
 	 */
 	protected function performAjaxValidation($model) {
-		if (isset($_POST['ajax']) && $_POST['ajax'] === 'bbii-member-form')
+		if (isset(Yii::$app->request->post()['ajax']) && Yii::$app->request->post()['ajax'] === 'bbii-member-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::$app->end();

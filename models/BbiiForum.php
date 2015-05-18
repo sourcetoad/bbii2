@@ -28,6 +28,21 @@ use yii;
  */
 class BbiiForum extends BbiiAR
 {
+	public $cat_id;
+	public $id;
+	public $last_post_id;
+	public $locked;
+	public $membergroup_id;
+	public $moderated;
+	public $name;
+	public $num_posts;
+	public $num_topics;
+	public $poll;
+	public $public;
+	public $sort;
+	public $subtitle;
+	public $type;
+
     public static function find()
     {
         return new BbiiForumQuery(get_called_class());
@@ -49,7 +64,7 @@ class BbiiForum extends BbiiAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
+			/*array('name', 'required'),
 			[['type, public, locked, moderated, sort, num_posts, num_topics, last_post_id,membergroup_id, poll'], 'integer'],
 			array('name', 'unique'),
 			['cat_id', 'string', 'max' => 10],
@@ -59,7 +74,7 @@ class BbiiForum extends BbiiAR
 			array('public', 'default', 'value' => 1),
 			array('locked, membergroup_id, poll', 'default', 'value' => 0),
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// Please remove those attributes that should not be searched.*/
 			array('id, cat_id, name, subtitle, type, sort, num_posts, num_topics, last_post_id, last_post_time, membergroup_id, poll', 'safe', 'on' => 'search'),
 		);
 	}
@@ -91,20 +106,20 @@ class BbiiForum extends BbiiAR
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'cat_id' => Yii::t('BbiiModule.bbii', 'Category'),
-			'name' => Yii::t('BbiiModule.bbii', 'Name'),
-			'subtitle' => Yii::t('BbiiModule.bbii', 'Subtitle'),
-			'type' => Yii::t('BbiiModule.bbii', 'Type'),
-			'public' => Yii::t('BbiiModule.bbii', 'Public'),
-			'locked' => Yii::t('BbiiModule.bbii', 'Locked'),
-			'moderated' => Yii::t('BbiiModule.bbii', 'Moderated'),
-			'sort' => 'Sort',
-			'num_posts' => Yii::t('BbiiModule.bbii', 'posts'),
-			'num_topics' => Yii::t('BbiiModule.bbii', 'topics'),
-			'last_post_id' => 'Last Post',
+			'cat_id'         => Yii::t('BbiiModule.bbii', 'Category'),
+			'id'             => 'ID',
+			'last_post_id'   => 'Last Post',
+			'locked'         => Yii::t('BbiiModule.bbii', 'Locked'),
 			'membergroup_id' => Yii::t('BbiiModule.bbii', 'For member group'),
-			'poll' => Yii::t('BbiiModule.bbii', 'Poll'),
+			'moderated'      => Yii::t('BbiiModule.bbii', 'Moderated'),
+			'name'           => Yii::t('BbiiModule.bbii', 'Name'),
+			'num_posts'      => Yii::t('BbiiModule.bbii', 'posts'),
+			'num_topics'     => Yii::t('BbiiModule.bbii', 'topics'),
+			'poll'           => Yii::t('BbiiModule.bbii', 'Poll'),
+			'public'         => Yii::t('BbiiModule.bbii', 'Public'),
+			'sort'           => 'Sort',
+			'subtitle'       => Yii::t('BbiiModule.bbii', 'Subtitle'),
+			'type'           => Yii::t('BbiiModule.bbii', 'Type'),
 		);
 	}
 
