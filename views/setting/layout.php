@@ -1,8 +1,12 @@
 <?php
 
+use frontend\modules\bbii\models\BbiiForum;
+
 use yii\bootstrap\ActiveForm;
-use yii\jui\Sortable;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\jui\Dialog;
+use yii\jui\Sortable;
 
 /* @var $this SettingController */
 /* @var $model BbiiForum */
@@ -42,29 +46,23 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 	]); ?>
 
 		<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p>
-		
-		<?php echo $form->errorSummary($model); ?>
-		
+
 		<div class = "row">
-			<?php echo $form->field($model,'name')->textInput(array('size' => 100,'maxlength' => 255, 'id' => 'name')); ?>
-			<?php echo $form->error($model,'name'); ?>
+			<?php echo $form->field($model,'name')->label('name')->textInput(array('size' => 100,'maxlength' => 255, 'id' => 'name')); ?>
 		</div>
-		
+	
 		<div class = "row">
 			<?php echo $form->field($model,'subtitle')->textInput(array('size' => 100,'maxlength' => 255, 'id' => 'subtitle')); ?>
-			<?php echo $form->error($model,'subtitle'); ?>
 		</div>
-		
+
 		<div class = "row">
-			<?php echo $form->dropDownList($model,'type',array('0' => Yii::t('BbiiModule.bbii', 'Category'),'1' => Yii::t('BbiiModule.bbii', 'Forum')), array('id' => 'type')); ?>
-			<?php echo $form->error($model,'type'); ?>
+			<?php echo Html::dropDownList($model, 'type', array('0'  => Yii::t('BbiiModule.bbii', 'Category'), '1' => Yii::t('BbiiModule.bbii', 'Forum')), array('id' => 'type')); ?>
 		</div>
-		
+
 		<div class = "row">
-			<?php echo $form->dropDownList($model,'cat_id',ArrayHelper::map(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
-			<?php echo $form->error($model,'cat_id'); ?>
+			<?php echo Html::dropDownList($model, 'cat_id', ArrayHelper::map(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
 		</div>
-		
+
 		<div class = "row buttons">
 			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Add')); ?>
 		</div>
