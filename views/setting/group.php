@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\jui\Dialog;
 
 /* @var $this SettingController */
 /* @var $model BbiiMembergroup */
@@ -67,8 +68,8 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 	<?php echo GridView::widget(array(
 		'columns'      => array(
 			array(
-				'label' => 'id',
-				// 'visible' => false,
+				'label'   => 'id',
+				'visible' => false,
 			),
 			'name',
 			'description',
@@ -76,19 +77,14 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 			array(
 				'format' => 'raw',
 				'label'  => 'color',
-				'value'  => 'color',
+				'value'  => function ($data) { return '<p style="font-weight: bold;color: #'.$data->color.'">'.$data->color.'</p>'; },
 			),
 			'image',
 
-			/*array(
-				'class' => 'yii\grid\ActionColumn',
-				'template' => '{update}',
-				'buttons' => array(
-					'update' => array(
-						'click' => 'js:function($data) { editMembergroup($(this).closest("tr").children("td:first").text(), "' . Yii::$app->urlManager->createAbsoluteUrl('setting/getMembergroup') .'");return false; }',
-					),
-				)
-			),*/
+			// @todo use prop Yii2 CRUD to view/update/delete forum groups.
+			[
+				'class'    => 'yii\grid\ActionColumn',
+			],
 		),
 		'dataProvider' => $model->search(),
 		'id'           => 'membergroup-grid',
@@ -117,4 +113,3 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
     echo $this->render('_editMembergroup', array('model' => $model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
-*/
