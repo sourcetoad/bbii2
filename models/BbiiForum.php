@@ -50,10 +50,10 @@ class BbiiForum extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
-			array('type, public, locked, moderated, sort, num_posts, num_topics, last_post_id,membergroup_id, poll', 'numerical', 'integerOnly' => true),
+			[['type, public, locked, moderated, sort, num_posts, num_topics, last_post_id,membergroup_id, poll'], 'integer'],
 			array('name', 'unique'),
-			array('cat_id', 'length', 'max' => 10),
-			array('name, subtitle', 'length', 'max' => 255),
+			['cat_id', 'string', 'max' => 10],
+			['name, subtitle', 'string', 'max' => 255],
 			array('type', 'validateType'),
 			array('cat_id, subtitle', 'default', 'value' => null),
 			array('public', 'default', 'value' => 1),

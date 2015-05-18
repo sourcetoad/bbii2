@@ -42,9 +42,9 @@ class BbiiSpider extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('name, user_agent', 'required'),
-			array('name', 'length', 'max' => 45),
-			array('user_agent', 'length', 'max' => 255),
-			array('hits', 'numerical', 'integerOnly' => true),
+			['name', 'string', 'max' => 45],
+			['user_agent', 'string', 'max' => 255],
+			[['hits', 'numerical'], 'integer'],
 			array('hits', 'default',  'value' => 0),
 			array('last_visit', 'default', 'value' => 'NOW()', 'on' => 'visit'),
 			// The following rule is used by search().

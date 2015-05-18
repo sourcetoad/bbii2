@@ -43,9 +43,9 @@ class BbiiQuestion extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('question, poll_id', 'required'),
-			array('sort, votes', 'numerical', 'integerOnly' => true),
-			array('question', 'length', 'max' => 200),
-			array('poll_id', 'length', 'max' => 10),
+			[['sort, votes', 'numerical'], 'integer'],
+			['question', 'string', 'max' => 200],
+			['poll_id', 'string', 'max' => 10],
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, question, poll_id, sort, votes', 'safe', 'on' => 'search'),
