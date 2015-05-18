@@ -42,7 +42,7 @@ class BbiiMembergroup extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('name', 	'required'),
-			[['min_posts', 	'numerical'], 'integer'),
+			[['min_posts', 	'numerical'], 'integer'],
 			['name', 'string', 'max' => 45],
 			['color', 'string', 'max' => 6],
 			array('color', 	'match', 'pattern' => '/[0-9a-fA-F]{6}/i'),

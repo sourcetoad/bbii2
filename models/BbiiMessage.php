@@ -51,7 +51,7 @@ class BbiiMessage extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('sendfrom, sendto, subject, content', 'required'),
-			['sendfrom, sendto, read_indicator, type, inbox, outbox, post_id'], 'integer'],
+			['sendfrom, sendto, read_indicator, type, inbox, outbox, post_id', 'integer'],
 			array('sendto', 'mailboxFull', 'on' => 'insert'),
 			['subject', 'string', 'max' => 255],
 			array('content','filter','filter' => array($obj = new HtmlPurifier(), 'purify')),
