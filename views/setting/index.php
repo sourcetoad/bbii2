@@ -62,7 +62,7 @@ $item = array(
 		</div>
 
 		<div class = "row even">
-			<?php echo $form->field($model, 'contact_email')->label('contact_email')->textInput(['maxlength' => 255]); ?>
+			<?php echo $form->field($model, 'contact_email')->label('Contact Email')->textInput(['maxlength' => 255]); ?>
 		</div>
 
 		<div class = "row odd buttons">

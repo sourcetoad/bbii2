@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
+use frontend\modules\bbii\models\_query\BbiiSettingQuery;
 
 use yii;
 

@@ -2,6 +2,7 @@
 
 namespace frontend\modules\bbii\models\_query;
 
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 
 /**
