@@ -11,6 +11,7 @@ use frontend\modules\bbii\models\BbiiSpider;
 
 use yii;
 use yii\widgets\ActiveForm;
+use yii\web\Controller;
 
 class SettingController extends BbiiController {
 
@@ -62,7 +63,10 @@ class SettingController extends BbiiController {
 		if (isset($_POST['BbiiSetting'])) {
 			$model->attributes = $_POST['BbiiSetting'];
 			if ($model->save()) {
-				$this->redirect(array('index'));
+
+				// @depricated 2.0.0
+				//$this->redirect(array('index'));
+				return Yii::$app->response->redirect(array(Yii::$app->requestedRoute));
 			}
 		}
 

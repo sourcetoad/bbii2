@@ -5,6 +5,7 @@ namespace frontend\modules\bbii\components;
 use Yii;
 use yii\base\Controller;
 use yii\data\ArrayDataProvider;
+use yii\web\Response;
 
 /**
  * Controller is the customized base controller class.
