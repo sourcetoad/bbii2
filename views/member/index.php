@@ -93,7 +93,6 @@ $item = array(
 				'value'  => '(isset($data->group))?$data->group->name:""',
 			)),
 		'dataProvider' => $model->search(),
-		'filterModel'  => $model,
 		'id'           => 'member-grid',
 	)); ?>
 
