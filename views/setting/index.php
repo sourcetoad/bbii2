@@ -39,7 +39,7 @@ $item = array(
 	]);?>
 		<?php // @todo Iterate on forms - DJE : 2015-05-15 ?>
 
-		<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p>
+		<?php //<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p> ?>
 
 		<?php echo $form->errorSummary($model); ?>
 
