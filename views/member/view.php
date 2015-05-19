@@ -46,7 +46,7 @@ $item = array(
 			Yii::t('BbiiModule.bbii', 'Edit profile'),
 			array(
 				'class'   => 'bbii-button-right',
-				'onclick' => 'js:document.location.href = "' . Yii::$app->urlManager->createAbsoluteUrl('member/update', array('id' => $userData->getAttribute('id'))) .'"'
+				'onclick' => 'js:document.location.href = "' . Yii::$app->urlManager->createAbsoluteUrl('forum/member/update', array('id' => $userData->getAttribute('id'))) .'"'
 			)
 		);
 	}; ?>
