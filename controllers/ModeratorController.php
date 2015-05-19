@@ -74,7 +74,7 @@ class ModeratorController extends BbiiController {
 		$post->poster->saveCounters(array('posts' => 1));		// method since Yii 1.1.8
 		$this->assignMembergroup($post->user_id);
 		
-		$this->redirect(array('approval'));
+		return Yii::$app->response->redirect(array('forum/approval'));
 	}
 	
 	public function actionAdmin() {

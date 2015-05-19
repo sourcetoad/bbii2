@@ -103,7 +103,7 @@ class ForumController extends BbiiController {
 			}
 			$model->data = $object->serialize();
 			$model->save();
-			$this->redirect(array('index'));
+			return Yii::$app->response->redirect(array('forum/index'));
 		}
 	}
 	
@@ -229,7 +229,7 @@ class ForumController extends BbiiController {
 			if (Yii::$app->user->hasFlash('moderation')) {
 				Yii::$app->user->setFlash('moderation', Yii::$app->user->getFlash('moderation'));
 			}
-			$this->redirect(array('topic', 'id' => $id, 'BbiiPost_page' => $page, 'postId' => $post));;
+			return Yii::$app->response->redirect(array('forum/topic', 'id' => $id, 'BbiiPost_page' => $page, 'postId' => $post));;
 		}
 		// Increase topic views
 		$topic->saveCounters(array('num_views' => 1));
@@ -290,7 +290,7 @@ class ForumController extends BbiiController {
 				} else {
 					Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 				}
-				$this->redirect(array('topic', 'id' => $post->topic_id, 'nav' => 'last'));
+				return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
 			}
 		} else {
 			$post = new BbiiPost;
@@ -337,7 +337,7 @@ class ForumController extends BbiiController {
 				} else {
 					Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 				}
-				$this->redirect(array('topic', 'id' => $post->topic_id, 'nav' => 'last'));
+				return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
 			}
 		} else {
 			$post->subject = $topic->title;
@@ -436,7 +436,7 @@ class ForumController extends BbiiController {
 							}
 						}
 					}
-					$this->redirect(array('topic', 'id' => $topic->id));
+					return Yii::$app->response->redirect(array('forum/topic', 'id' => $topic->id));
 				} else {
 					$post->delete();
 				}
@@ -480,7 +480,7 @@ class ForumController extends BbiiController {
 					}
 					$post->poster->saveCounters(array('posts' => -1));				// method since Yii 1.1.8
 				}
-				$this->redirect(array('topic', 'id' => $post->topic_id));
+				return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id));
 			}
 		}
 		return $this->render('update', array(
@@ -515,7 +515,7 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		$this->redirect(array('topic', 'id' => $post->topic_id));
+		return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id));
 	}
 	
 	/**

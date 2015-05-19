@@ -65,7 +65,7 @@ class SettingController extends BbiiController {
 			if ($model->save()) {
 
 				// @depricated 2.0.0
-				//$this->redirect(array('index'));
+				//return Yii::$app->response->redirect(array('forum/index'));
 				return Yii::$app->response->redirect(array(Yii::$app->requestedRoute));
 			}
 		}
@@ -84,7 +84,10 @@ class SettingController extends BbiiController {
 		if (isset(Yii::$app->request->post()['BbiiForum'])) {
 			$model->attributes = Yii::$app->request->post()['BbiiForum'];
 			if ($model->save()) {
-				$this->redirect(array('layout'));
+
+				// @depricated 2.3.0
+				//return Yii::$app->response->redirect(array('forum/layout'));
+				return Yii::$app->response->redirect(array('forum/setting/layout'));
 			}
 		}
 		

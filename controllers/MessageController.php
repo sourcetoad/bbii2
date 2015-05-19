@@ -112,7 +112,7 @@ class MessageController extends BbiiController {
 						$model->addError('sendto', Yii::t('BbiiModule.bbii','This user does not want to receive private messages.'));
 					}
 					if ($allowed && $model->save()) {
-						$this->redirect(array('outbox'));
+						return Yii::$app->response->redirect(array('forum/outbox'));
 					}
 				}
 			}
@@ -138,7 +138,7 @@ class MessageController extends BbiiController {
 			$model->attributes = Yii::$app->request->post()['BbiiMessage'];
 			$model->sendfrom = Yii::$app->user->id;
 			if ($model->save())
-				$this->redirect(array('outbox'));
+				return Yii::$app->response->redirect(array('forum/outbox'));
 		} else {
 			$model = BbiiMessage::find($id);
 			if ($model->sendto != Yii::$app->user->id && !$this->isModerator()) {

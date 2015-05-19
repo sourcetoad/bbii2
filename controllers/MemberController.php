@@ -104,7 +104,7 @@ class MemberController extends BbiiController {
 					}
 				}
 				if ($valid)
-					$this->redirect(array('view','id' => $model->id));
+					return Yii::$app->response->redirect(array('forum/view','id' => $model->id));
 			}
 		}
 		return $this->render('update', array('model' => $model));
@@ -253,7 +253,7 @@ class MemberController extends BbiiController {
 				mail($sendto,$subject,$model->body,$headers);
 				Yii::$app->user->setFlash('notice',Yii::t('BbiiModule.bbii','You have sent an e-mail to {member_name}.', array('{member_name}' => $model->member_name)));
 				
-				$this->redirect(array('view','id' => $model->member_id));
+				return Yii::$app->response->redirect(array('forum/view','id' => $model->member_id));
 			}
 		} else {
 			$model->member_id = $id;
