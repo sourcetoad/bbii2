@@ -72,30 +72,24 @@ class BbiiMember extends BbiiAR {
 	 */
 	public function rules()
 	{
-		return true;
 		// NOTE: you should only define rules for those attributes that will receive user inputs.
 		return [
-			[['id, member_name'], 'required'],
-			// @depricated 2.2.0
-			[['posts, group_id, upvoted', 'numerical'], 'integer'],
-			[['gender, show_online, contact_email, contact_pm, warning, moderator'], 'integer'],
-			[['posts, group_id, upvoted'], 'integer'],
-			[['gender, show_online, contact_email, contact_pm, warning, moderator'], 'integer'],
-			array('member_name', 'unique', 'on' => ['update']),
-			['member_name', 'string', 'max' => 45],
-			array('image', 'file', 'allowEmpty' => true, 'maxSize' => 1025000, 'types' => 'gif, jpg, jpeg, png'),
-			array('location, personal_text, avatar, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'string', 'max' => 255),
-			array('timezone','string',  'max' => 80),
-			array('gender, birthdate, location, personal_text, signature, avatar', 'default', 'value' => null),
-			array('blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'url'),
-			array('blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube', 'default', 'value' => null),
-			array('timezone', 'default', 'value' => 'GMT'),
-			array('signature','filter','filter' => array($obj = new HtmlPurifier(), 'purify')),
-			array('birthdate, signature, first_visit, last_visit, remove_avatar', 'safe'),
+			[['id', 'member_name'], 'required'],
+			[['posts', 'group_id', 'upvoted', 'gender', 'show_online', 'contact_email', 'contact_pm', 'warning', 'moderator', 'posts', 'group_id', 'upvoted', 'gender', 'show_online', 'contact_email', 'contact_pm', 'warning', 'moderator'], 'integer'],
+			[['member_name'], 'string', 'max' => 45],
+			[['image'], 'file', 'skipOnEmpty' => true, 'maxSize' => 1025000, 'extensions' => ['gif', 'jpg', 'jpeg', 'png']],
+			[['location', 'personal_text', 'avatar', 'blogger', 'facebook', 'flickr', 'google', 'linkedin', 'metacafe', 'myspace', 'orkut', 'tumblr', 'twitter', 'website', 'wordpress', 'yahoo', 'youtube'], 'string', 'max' => 255],
+			[['timezone'],'string', 'max' => 80],
+			[['gender', 'birthdate', 'location', 'personal_text', 'signature', 'avatar'], 'default', 'value' => null],
+			[['blogger', 'facebook', 'flickr', 'google', 'linkedin', 'metacafe', 'myspace', 'orkut', 'tumblr', 'twitter', 'website', 'wordpress', 'yahoo', 'youtube'], 'url'],
+			[['blogger', 'facebook', 'flickr', 'google', 'linkedin', 'metacafe', 'myspace', 'orkut', 'tumblr', 'twitter', 'website', 'wordpress', 'yahoo', 'youtube'], 'default', 'value' => null],
+			[['timezone'], 'default', 'value' => 'GMT'],
+			//['signature', 'filter'], 'filter' => [$obj => new HtmlPurifier()]],
+			[['birthdate', 'signature', 'first_visit', 'last_visit', 'remove_avatar'], 'safe'],
 
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			[['id, member_name, gender, birthdate, location, personal_text, signature, avatar, show_online, contact_email, contact_pm, timezone, first_visit, last_visit, warning, posts, group_id, upvoted, blogger, facebook, flickr, google, linkedin, metacafe, myspace, orkut, tumblr, twitter, website, wordpress, yahoo, youtube, moderator'], 'safe', 'on' => ['search']],
+			// scenarios
+			[['member_name'], 'unique', 'on' => ['update']],
+			[['id', 'member_name', 'gender', 'birthdate', 'location', 'personal_text', 'signature', 'avatar', 'show_online', 'contact_email', 'contact_pm', 'timezone', 'first_visit', 'last_visit', 'warning', 'posts', 'group_id', 'upvoted', 'blogger', 'facebook', 'flickr', 'google', 'linkedin', 'metacafe', 'myspace', 'orkut', 'tumblr', 'twitter', 'website', 'wordpress', 'yahoo', 'youtube', 'moderator'], 'safe', 'on' => ['search']],
 		];
 	}
 

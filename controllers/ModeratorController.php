@@ -8,6 +8,8 @@ use frontend\modules\bbii\models\BbiiMessage;
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\MailForm;
 
+use yii;
+
 class ModeratorController extends BbiiController {
 	/**
 	 * @return array action filters

@@ -12,6 +12,7 @@ use frontend\modules\bbii\models\BbiiTopicRead;
 use yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Serializer;
+use yii\web\UploadedFile;
 
 class MemberController extends BbiiController {
 	/**
@@ -57,16 +58,20 @@ class MemberController extends BbiiController {
 	}
 	
 	public function actionUpdate($id) {
-		$model = $this->loadModel($id);
-		
+		$model = $this->loadModel($id)->one();
+
 		if ($id != Yii::$app->user->id && !$this->isModerator()) {
-			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
+			Yii::$app->user->setFlash('error', Yii::t('BbiiModule.bbii', 'Not Authorized'));
+			return Yii::$app->response->redirect(array('member/index'));
 		}
-		
+
 		if (isset(Yii::$app->request->post()['BbiiMember'])) {
-			$model->attributes = Yii::$app->request->post()['BbiiMember'];
-			$model->image = CUploadedFile::getInstance($model, 'image');
-			if ($model->save()) {
+			//$model->attributes = Yii::$app->request->post()['BbiiMember'];
+			$model->setAttributes(Yii::$app->request->post('BbiiMember'));
+			$model->image = UploadedFile::getInstance($model, 'image');
+
+			if ($model->validate() && $model->save()) {
+
 				$valid = true;
 				if ($model->remove_avatar) {
 					$model->avatar = '';
@@ -104,10 +109,16 @@ class MemberController extends BbiiController {
 					}
 				}
 				if ($valid)
-					return Yii::$app->response->redirect(array('forum/view','id' => $model->id));
+					return Yii::$app->response->redirect(array('forum/member/view','id' => $model->id));
+			} else {
+
+				Yii::$app->user->setFlash('error',Yii::t('BbiiModule.bbii','Error while saving.'));
 			}
 		}
-		return $this->render('update', array('model' => $model));
+
+		return $this->render('update', array(
+			'model' => $model
+		));
 	}
 	
 	/**

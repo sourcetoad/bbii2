@@ -45,7 +45,7 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 		'id'                   => 'bbii-forum-form',
 	]); ?>
 
-		<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p>
+		<?php //<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ? ></p> ?>
 
 		<div class = "row">
 			<?php echo $form->field($model,'name')->label('name')->textInput(array('size' => 100,'maxlength' => 255, 'id' => 'name')); ?>
