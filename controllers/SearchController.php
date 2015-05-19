@@ -7,11 +7,11 @@ use frontend\modules\bbii\components\BbiiController;
 class SearchController extends BbiiController {
 	public $search;
 	Public $type;
+
 	/**
 	 * @return array action filters
 	 */
-	public function filters()
-	{
+	public function filters() {
 		return array(
 			'accessControl',
 		);
@@ -22,8 +22,7 @@ class SearchController extends BbiiController {
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
-	{
+	public function accessRules() {
 		return array(
 			array('allow',
 				'actions' => array('index'),
@@ -39,16 +38,16 @@ class SearchController extends BbiiController {
 		$search = '';
 		$choice = 0;
 		$type = 0;
-		if (isset($_POST['search'])) {
-//			$search = trim(Html::encode($_POST['search']));
+		if (isset(Yii::$app->request->post()['search'])) {
+		// $search = trim(Html::encode(Yii::$app->request->post()['search']));
 			$search = trim(filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING));
 			Yii::$app->session['search'] = $search;
 		} elseif (isset(Yii::$app->session['search'])) {
 			$search = Yii::$app->session['search'];
 		}
 		$this->search = $search;
-		if (isset($_POST['choice'])) {
-			$choice = $_POST['choice'];
+		if (isset(Yii::$app->request->post()['choice'])) {
+			$choice = Yii::$app->request->post()['choice'];
 			if ($choice != '0' && $choice != '1' && $choice != '2') {
 				$choice = 0;
 			}
@@ -56,8 +55,8 @@ class SearchController extends BbiiController {
 		} elseif (isset(Yii::$app->session['choice'])) {
 			$choice = Yii::$app->session['choice'];
 		}
-		if (isset($_POST['type'])) {
-			$type = $_POST['type'];
+		if (isset(Yii::$app->request->post()['type'])) {
+			$type = Yii::$app->request->post()['type'];
 			if ($type != '0' && $type != '1' && $type != '2') {
 				$type = 0;
 			}
@@ -177,9 +176,9 @@ class SearchController extends BbiiController {
 			if ($found) {
 				$result .= '<p>... ' . $value . ' ...</p>';
 			}
-//			if (stripos($value,$search)) {
-//				$result .= '<p>... ' . preg_replace("/(?![^<]*>)($psearch)/ui", '<span class = "highlight">\1</span>', $value) . ' ...</p>';
-//			}
+			// if (stripos($value,$search)) {
+				// $result .= '<p>... ' . preg_replace("/(?![^<]*>)($psearch)/ui", '<span class = "highlight">\1</span>', $value) . ' ...</p>';
+			// }
 		}
 		if (strlen($result) > 0) {
 			return $result;

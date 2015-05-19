@@ -1,4 +1,13 @@
 <?php
+
+use frontend\modules\bbii\models\BbiiForum;
+
+use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\jui\Dialog;
+use yii\jui\Sortable;
+
 /* @var $this SettingController */
 /* @var $model BbiiForum */
 /* @var $category[] BbiiForum  */
@@ -17,11 +26,12 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 'url' => array('setting/spider')),
 );
 
-Yii::$app->clientScript->registerScript('confirmation', "
+// @depricated 2.2.0 Load all the needed assets via AppAsset - DJE : 2015-05-15
+/*Yii::$app->clientScript->registerScript('confirmation', "
 var confirmation = new Array();
 confirmation[0] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this category?') . "';
 confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this forum?') . "';
-", CClientScript::POS_BEGIN);
+", CClientScript::POS_BEGIN);*/
 ?>
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
@@ -30,48 +40,38 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 	
 	<div class = "form">
 
-	<?php $form = $this->beginWidget('CActiveForm', array(
-		'id' => 'bbii-forum-form',
+	<?php $form = ActiveForm::begin([
 		'enableAjaxValidation' => false,
-	)); ?>
+		'id'                   => 'bbii-forum-form',
+	]); ?>
 
 		<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ?></p>
-		
-		<?php echo $form->errorSummary($model); ?>
-		
+
 		<div class = "row">
-			<?php echo $form->labelEx($model,'name'); ?>
-			<?php echo $form->textField($model,'name',array('size' => 100,'maxlength' => 255, 'id' => 'name')); ?>
-			<?php echo $form->error($model,'name'); ?>
+			<?php echo $form->field($model,'name')->label('name')->textInput(array('size' => 100,'maxlength' => 255, 'id' => 'name')); ?>
 		</div>
-		
+	
 		<div class = "row">
-			<?php echo $form->labelEx($model,'subtitle'); ?>
-			<?php echo $form->textField($model,'subtitle',array('size' => 100,'maxlength' => 255, 'id' => 'subtitle')); ?>
-			<?php echo $form->error($model,'subtitle'); ?>
+			<?php echo $form->field($model,'subtitle')->textInput(array('size' => 100,'maxlength' => 255, 'id' => 'subtitle')); ?>
 		</div>
-		
+
 		<div class = "row">
-			<?php echo $form->labelEx($model,'type'); ?>
-			<?php echo $form->dropDownList($model,'type',array('0' => Yii::t('BbiiModule.bbii', 'Category'),'1' => Yii::t('BbiiModule.bbii', 'Forum')), array('id' => 'type')); ?>
-			<?php echo $form->error($model,'type'); ?>
+			<?php echo Html::dropDownList($model, 'type', array('0'  => Yii::t('BbiiModule.bbii', 'Category'), '1' => Yii::t('BbiiModule.bbii', 'Forum')), array('id' => 'type')); ?>
 		</div>
-		
+
 		<div class = "row">
-			<?php echo $form->labelEx($model,'cat_id'); ?>
-			<?php echo $form->dropDownList($model,'cat_id',ArrayHelper::map(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
-			<?php echo $form->error($model,'cat_id'); ?>
+			<?php echo Html::dropDownList($model, 'cat_id', ArrayHelper::map(BbiiForum::find()->categories()->findAll(), 'id', 'name'), array('empty' => '', 'id' => 'cat_id')); ?>
 		</div>
-		
+
 		<div class = "row buttons">
 			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Add')); ?>
 		</div>
-		
-	<?php $this->endWidget(); ?>
 	
+	<?php ActiveForm::end(); ?>
+
 	</div><!-- form -->	
 	
-	
+	<?php /*
 	<div class = "bbii-box-top"><?php echo Yii::t('BbiiModule.bbii', 'Forum layout'); ?></div>
 	<div class = "sortable">
 	<?php
@@ -80,6 +80,8 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 			$forum = BbiiForum::find()->sorted()->forum()->findAll("cat_id = $data->id");
 			$items['cat_'.$data->id] = $this->render('_category', array('data' => $data, 'forum' => $forum), true);
 		}
+		// @depricated 2.2.0 Kept for referance
+
 		$this->widget('zii.widgets.jui.CJuiSortable', array(
 			'id' => 'sortcategory',
 			'items' => $items,
@@ -90,11 +92,22 @@ confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		));
+		echo Sortable::widget([
+			'id' => 'sortcategory',
+			'clientOptions' => ['cursor' => 'move'],
+			'itemOptions'   => ['tag' => 'li'],
+			'items'         => $items,
+			'options'       => array(
+				'delay'  => '100',
+				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
+			),
+		]);
 	?>
 	</div>
 </div>
 
-<?php
+<?php // @depricated 2.2.0 Kept for referance
+
 $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     'id' => 'dlgEditForum',
 	'theme' => $this->module->juiTheme,
@@ -111,8 +124,17 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 		),
     ),
 ));
-
-    echo $this->render('_editForum', array('model' => $model));
-
+echo $this->render('_editForum', array('model' => $model));
 $this->endWidget('zii.widgets.jui.CJuiDialog');
-?>
+
+
+Dialog::begin([
+    'clientOptions' => [
+        'modal' => true,
+    ],
+]);
+
+echo $this->render('_editForum', array('model' => $model));
+
+Dialog::end();
+*/

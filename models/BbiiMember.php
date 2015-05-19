@@ -77,8 +77,8 @@ class BbiiMember extends BbiiAR {
 		return [
 			[['id, member_name'], 'required'],
 			// @depricated 2.2.0
-			array('posts, group_id, upvoted', 'numerical', 'integerOnly' => true),
-			array('gender, show_online, contact_email, contact_pm, warning, moderator', 'numerical', 'integerOnly' => true, 'max' => 1),
+			[['posts, group_id, upvoted', 'numerical'], 'integer'],
+			[['gender, show_online, contact_email, contact_pm, warning, moderator'], 'integer'],
 			[['posts, group_id, upvoted'], 'integer'],
 			[['gender, show_online, contact_email, contact_pm, warning, moderator'], 'integer'],
 			array('member_name', 'unique', 'on' => ['update']),

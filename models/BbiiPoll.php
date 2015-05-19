@@ -47,8 +47,8 @@ class BbiiPoll extends BbiiAR
 		return array(
 			array('question, post_id, user_id', 'required'),
 			array('allow_revote, allow_multiple, votes', 'numerical', 'integerOnly' => true),
-			array('question', 'length', 'max' => 200),
-			array('post_id, user_id', 'length', 'max' => 10),
+			['question', 'string', 'max' => 200],
+			['post_id, user_id', 'string', 'max' => 10],
 			array('expire_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

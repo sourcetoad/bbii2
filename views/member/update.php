@@ -57,14 +57,14 @@ $('.presence').hide();
 		<?php if ($this->context->isModerator()): ?>
 		<div class = "row">
 			<?php echo $form->labelEx($model,'group_id'); ?>
-			<?php echo $form->dropDownList($model, 'group_id', ArrayHelper::map(BbiiMembergroup::find()->findAll(), 'id', 'name')); ?>
+			<?php echo Html::dropDownList($model, 'group_id', ArrayHelper::map(BbiiMembergroup::find()->findAll(), 'id', 'name')); ?>
 			<?php echo $form->error($model,'group_id'); ?>
 		</div>
 		<?php endif; ?>
 		
 		<div class = "row" style = "clear:both;">
 			<?php echo $form->labelEx($model,'gender'); ?>
-			<?php echo $form->dropDownList($model,'gender',array('' => '','0' => Yii::t('BbiiModule.bbii', 'Male'),'1' => Yii::t('BbiiModule.bbii', 'Female'))); ?>
+			<?php echo Html::dropDownList($model,'gender',array('' => '','0' => Yii::t('BbiiModule.bbii', 'Male'),'1' => Yii::t('BbiiModule.bbii', 'Female'))); ?>
 			<?php echo $form->error($model,'gender'); ?>
 		</div>
 
@@ -102,25 +102,25 @@ $('.presence').hide();
 
 		<div class = "row">
 			<?php echo $form->labelEx($model,'show_online'); ?>
-			<?php echo $form->dropDownList($model,'show_online',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
+			<?php echo Html::dropDownList($model,'show_online',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
 			<?php echo $form->error($model,'show_online'); ?>
 		</div>
 
 		<div class = "row">
 			<?php echo $form->labelEx($model,'contact_email'); ?>
-			<?php echo $form->dropDownList($model,'contact_email',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
+			<?php echo Html::dropDownList($model,'contact_email',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
 			<?php echo $form->error($model,'contact_email'); ?>
 		</div>
 
 		<div class = "row">
 			<?php echo $form->labelEx($model,'contact_pm'); ?>
-			<?php echo $form->dropDownList($model,'contact_pm',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
+			<?php echo Html::dropDownList($model,'contact_pm',array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes'))); ?>
 			<?php echo $form->error($model,'contact_pm'); ?>
 		</div>
 
 		<div class = "row">
 			<?php echo $form->labelEx($model,'timezone'); ?>
-			<?php echo $form->dropDownList($model, 'timezone', array_combine(DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers())); ?>
+			<?php echo Html::dropDownList($model, 'timezone', array_combine(DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers())); ?>
 			<?php echo $form->error($model,'timezone'); ?>
 		</div>
 

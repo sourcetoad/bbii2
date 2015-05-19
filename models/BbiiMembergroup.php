@@ -5,6 +5,8 @@ namespace frontend\modules\bbii\models;
 use frontend\modules\bbii\models\BbiiAR;
 use frontend\modules\bbii\models\_query\BbiiMembergroupQuery;
 
+use yii\data\ActiveDataProvider;
+
 /**
  * This is the model class for table "bbii_membergroup".
  *
@@ -39,13 +41,13 @@ class BbiiMembergroup extends BbiiAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
-			array('min_posts', 'numerical', 'integerOnly' => true),
-			array('name', 'length', 'max' => 45),
-			array('color', 'length', 'max' => 6),
-			array('color', 'match', 'pattern' => '/[0-9a-fA-F]{6}/i'),
-			array('image', 'length', 'max' => 255),
-			array('image', 'default', 'value' => null),
+			array('name', 	'required'),
+			[['min_posts', 	'numerical'], 'integer'],
+			['name', 'string', 'max' => 45],
+			['color', 'string', 'max' => 6],
+			array('color', 	'match', 'pattern' => '/[0-9a-fA-F]{6}/i'),
+			['image', 'string', 'max' => 255],
+			array('image', 	'default', 'value' => null),
 			array('description', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

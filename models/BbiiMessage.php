@@ -7,6 +7,7 @@ use frontend\modules\bbii\models\_query\BbiiMessageQuery;
 
 use yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\HtmlPurifier;
 
 /**
  * This is the model class for table "bbii_message".
@@ -51,11 +52,11 @@ class BbiiMessage extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('sendfrom, sendto, subject, content', 'required'),
-			array('sendfrom, sendto, read_indicator, type, inbox, outbox, post_id', 'numerical', 'integerOnly' => true),
+			['sendfrom, sendto, read_indicator, type, inbox, outbox, post_id', 'integer'],
 			array('sendto', 'mailboxFull', 'on' => 'insert'),
-			array('subject', 'length', 'max' => 255),
+			['subject', 'string', 'max' => 255],
 			array('content','filter','filter' => array($obj = new HtmlPurifier(), 'purify')),
-			array('ip', 'length', 'max' => 39),
+			['ip', 'string', 'max' => 39],
 			array('ip', 'blocked'),
 			array('ip', 'default', 'value' => $_SERVER['REMOTE_ADDR'], 'on' => 'insert'),
 			array('create_time', 'default', 'value' => 'NOW()', 'on' => 'insert'),

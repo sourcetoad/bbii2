@@ -1,4 +1,13 @@
 <?php
+
+use frontend\modules\bbii\models\BbiiMembergroup;
+
+use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\jui\Dialog;
+
 /* @var $this SettingController */
 /* @var $model BbiiMembergroup */
 
@@ -16,23 +25,24 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 'url' => array('setting/spider')),
 );
 
-Yii::$app->clientScript->registerScript('confirmation', "
+/*Yii::$app->clientScript->registerScript('confirmation', "
 var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this member group?') . "'
-", CClientScript::POS_BEGIN);
+", CClientScript::POS_BEGIN);*/
 ?>
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
 	<?php echo Html::button(Yii::t('BbiiModule.bbii', 'New group'), array('onclick' => 'editMembergroup()', 'class' => 'down35')); ?>
 	
-	<?php $this->widget('zii.widgets.grid.CGridView', array(
+	<?php // @depricated 2.3 Kept for referance
+	/* $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'membergroup-grid',
 		'dataProvider' => $model->search(),
 		'filter' => $model,
 		'columns' => array(
 			array(
 				'name' => 'id',
-	//			'visible' => false,
+				// 'visible' => false,
 			),
 			'name',
 			'description',
@@ -53,11 +63,37 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 				)
 			),
 		),
+	));*/ ?>
+
+	<?php echo GridView::widget(array(
+		'columns'      => array(
+			array(
+				'label'   => 'id',
+				'visible' => false,
+			),
+			'name',
+			'description',
+			'min_posts',
+			array(
+				'format' => 'raw',
+				'label'  => 'color',
+				'value'  => function ($data) { return '<p style="font-weight: bold;color: #'.$data->color.'">'.$data->color.'</p>'; },
+			),
+			'image',
+			
+			// @todo use prop Yii2 CRUD to view/update/delete forum groups.
+			[
+				'class'    => 'yii\grid\ActionColumn',
+			],
+		),
+		'dataProvider' => $model->search(),
+		'id'           => 'membergroup-grid',
 	)); ?>
+
 </div>
 
-<?php
-$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+<?php // @depricated 2.3 Kept for referance
+/* $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     'id' => 'dlgEditMembergroup',
 	'theme' => $this->module->juiTheme,
     'options' => array(
@@ -77,4 +113,3 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     echo $this->render('_editMembergroup', array('model' => $model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
-?>

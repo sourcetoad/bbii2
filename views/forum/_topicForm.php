@@ -17,13 +17,13 @@
 		
 		<div class = "row">
 			<?php echo $form->labelEx($model,'forum_id'); ?>
-			<?php echo $form->dropDownList($model,'forum_id',ArrayHelper::map(BbiiForum::find()->forum()->findAll(), 'id', 'name'), array('onchange' => 'refreshTopics(this, "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/refreshTopics') . '")')); ?>
+			<?php echo Html::dropDownList($model,'forum_id',ArrayHelper::map(BbiiForum::find()->forum()->findAll(), 'id', 'name'), array('onchange' => 'refreshTopics(this, "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/refreshTopics') . '")')); ?>
 			<?php echo $form->error($model,'forum_id'); ?>
 		</div>
 		
 		<div class = "row">
 			<?php echo $form->labelEx($model,'merge'); ?>
-			<?php echo $form->dropDownList($model,'merge',array()); ?>
+			<?php echo Html::dropDownList($model,'merge',array()); ?>
 			<?php echo $form->error($model,'merge'); ?>
 		</div>
 		
@@ -35,19 +35,19 @@
 		
 		<div class = "row">
 			<?php echo $form->labelEx($model,'locked'); ?>
-			<?php echo $form->dropDownList($model,'locked',array('0' => Yii::t('BbiiModule.bbii','No'), '1' => Yii::t('BbiiModule.bbii','Yes'))); ?>
+			<?php echo Html::dropDownList($model,'locked',array('0' => Yii::t('BbiiModule.bbii','No'), '1' => Yii::t('BbiiModule.bbii','Yes'))); ?>
 			<?php echo $form->error($model,'locked'); ?>
 		</div>
 		
 		<div class = "row">
 			<?php echo $form->labelEx($model,'sticky'); ?>
-			<?php echo $form->dropDownList($model,'sticky',array('0' => Yii::t('BbiiModule.bbii','No'), '1' => Yii::t('BbiiModule.bbii','Yes'))); ?>
+			<?php echo Html::dropDownList($model,'sticky',array('0' => Yii::t('BbiiModule.bbii','No'), '1' => Yii::t('BbiiModule.bbii','Yes'))); ?>
 			<?php echo $form->error($model,'sticky'); ?>
 		</div>
 		
 		<div class = "row">
 			<?php echo $form->labelEx($model,'global'); ?>
-			<?php echo $form->dropDownList($model,'global',array('0' => Yii::t('BbiiModule.bbii','No'), '1' => Yii::t('BbiiModule.bbii','Yes'))); ?>
+			<?php echo Html::dropDownList($model,'global',array('0' => Yii::t('BbiiModule.bbii','No'), '1' => Yii::t('BbiiModule.bbii','Yes'))); ?>
 			<?php echo $form->error($model,'global'); ?>
 		</div>
 		

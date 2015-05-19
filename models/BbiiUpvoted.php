@@ -40,7 +40,7 @@ class BbiiUpvoted extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('member_id, post_id', 'required'),
-			array('member_id, post_id', 'length', 'max' => 10),
+			['member_id, post_id', 'string', 'max' => 10],
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('member_id, post_id', 'safe', 'on' => 'search'),

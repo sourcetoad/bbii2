@@ -73,42 +73,24 @@ $item = array(
 	<?php echo GridView::widget(array(
 		'columns'      => array(
 			array(
-				'header' => 'Sent From',
-				'value'  => '$data->sender->member_name'
+				'attribute' => 'sendfrom',
+				'value'     => 'member_name'
 			),
 			'subject',
 			array(
-				'header' => 'Created',
-				'value'  => 'DateTimeCalculation::long($data->create_time)',
+				'attribute' => 'create_time',
+				'value'     => 'create_time:datetime',
 			),
 			array(
-				'header' => 'Type',
-				'value'  => '($data->type)?Yii::t("bbii", "notification"):Yii::t("bbii", "message")',
+				'attribute' => 'type',
+				'value'     => '($data->type) ? Yii::t("bbii", "notification") : Yii::t("bbii", "message")',
 			),
-			array(
-				'buttons'  => array(
-					'view' => array(
-						'click'    => 'js:function() { viewMessage($(this).attr("href"), "' . Yii::$app->urlManager->createAbsoluteUrl('message/view') .'");return false; }',
-						'imageUrl' => $assets->baseUrl.'view.png',
-						'url'      => '$data->id',
-					),
-					'reply' => array(
-						'imageUrl' => $assets->baseUrl.'reply.png',
-						'label'    => Yii::t('BbiiModule.bbii','Reply'),
-						'options'  => array('style' => 'margin-left:5px;'),
-						'url'      => 'array("reply", "id" => $data->id)',
-					),
-					'delete' => array(
-						'imageUrl' => $assets->baseUrl.'/images/delete.png',
-						'options'  => array('style' => 'margin-left:5px;'),
-					),),
+
+			[
 				'class'    => 'yii\grid\ActionColumn',
-				'template' => '{view}{reply}{delete}',
-			)),
-		'dataProvider'          => $model->search(),
-		'id'                    => 'inbox-grid',
-		// @todo Figure out the Yii2 version of this logic - DJE : 2015-05-15
-		//'rowCssClassExpression' => '($data->read_indicator)?"":"unread"',
+			]),
+		'dataProvider' => $model,
+		'id'           => 'inbox-grid',
 	)); ?>
 
 	<div id = "bbii-message"></div>

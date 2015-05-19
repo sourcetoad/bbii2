@@ -47,10 +47,10 @@ class BbiiIpaddress extends BbiiAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('source, count', 'numerical', 'integerOnly' => true),
-			array('ip', 'length', 'max' => 39),
+			[['source, count', 'numerical'], 'integer'],
+			['ip', 'string', 'max' => 39],
 			array('ip', 'unique'),
-			array('address', 'length', 'max' => 255),
+			['address', 'string', 'max' => 255],
 			array('source, count','default','value' => 0, 'on' => 'insert'),
 			array('create_time', 'default', 'value' => 'NOW()', 'on' => 'insert'),
 			array('update_time', 'default', 'value' => 'NOW()', 'on' => 'update'),

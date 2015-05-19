@@ -56,8 +56,8 @@ class BbiiTopic extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('forum_id, title, first_post_id, last_post_id', 'required'),
-			array('forum_id, user_id, first_post_id, last_post_id, num_replies, num_views, moved, approved, locked, sticky, global, upvoted', 'numerical', 'integerOnly' => true),
-			array('title', 'length', 'max' => 255),
+			[['forum_id, user_id, first_post_id, last_post_id, num_replies, num_views, moved, approved, locked, sticky, global, upvoted'], 'integer'],
+			['title', 'string', 'max' => 255],
 			array('user_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'insert'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

@@ -57,10 +57,10 @@ class BbiiPost extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('subject, content', 'required'),
-			array('change_id, user_id, topic_id, forum_id, approved, upvoted', 'numerical', 'integerOnly' => true),
-			array('subject, change_reason', 'length', 'max' => 255),
+			[['change_id, user_id, topic_id, forum_id, approved, upvoted'], 'integer'],
+			['subject, change_reason', 'string', 'max' => 255],
 			array('content','filter','filter' => array($obj, 'purify')),
-			array('ip', 'length', 'max' => 39),
+			['ip', 'string', 'max' => 39],
 			array('ip', 'blocked'),
 			array('ip', 'default', 'value' => $_SERVER['REMOTE_ADDR'], 'on' => 'insert'),
 			array('user_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'insert'),

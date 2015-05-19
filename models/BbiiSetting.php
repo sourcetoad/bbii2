@@ -3,6 +3,9 @@
 namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
+use frontend\modules\bbii\models\_query\BbiiSettingQuery;
+
+use yii;
 
 /**
  * This is the model class for table "bbii_setting".
@@ -13,6 +16,11 @@ use frontend\modules\bbii\models\BbiiAR;
  */
 class BbiiSetting extends BbiiAR
 {
+    public static function find()
+    {
+        return new BbiiSettingQuery(get_called_class());
+    }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -20,6 +28,7 @@ class BbiiSetting extends BbiiAR
 	 */
 	public static function model($className = __CLASS__)
 	{
+
 		return parent::model($className);
 	}
 
@@ -28,6 +37,7 @@ class BbiiSetting extends BbiiAR
 	 */
 	public static function tableName()
 	{
+
 		return 'bbii_setting';
 	}
 
@@ -41,7 +51,7 @@ class BbiiSetting extends BbiiAR
 		return array(
 			array('contact_email', 'required'),
 			array('contact_email', 'email'),
-			array('contact_email', 'length', 'max' => 255),
+			array('contact_email', 'string', 'max' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, contact_email', 'safe', 'on' => 'search'),
@@ -90,26 +100,4 @@ class BbiiSetting extends BbiiAR
 			'criteria' => $criteria,
 		));
 	}*/
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * 
-	 * @param  [type] $params [description]
-	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search($params){
-		$query        = BbiiSetting::find();
-		$dataProvider = new ActiveDataProvider([
-	        'query' => $query,
-	    ]);
-
-	    if (!($this->load($params) && $this->validate())) {
-	        return $dataProvider;
-	    }
-
-		$this->addCondition('id',			$this->id,				true);
-		$this->addCondition('contact_email',$this->contact_email,	true);
-
-	    return $dataProvider;
-	}
 }

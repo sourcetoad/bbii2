@@ -103,7 +103,7 @@ class ForumController extends BbiiController {
 			}
 			$model->data = $object->serialize();
 			$model->save();
-			$this->redirect(array('index'));
+			return Yii::$app->response->redirect(array('forum/index'));
 		}
 	}
 	
@@ -229,7 +229,7 @@ class ForumController extends BbiiController {
 			if (Yii::$app->user->hasFlash('moderation')) {
 				Yii::$app->user->setFlash('moderation', Yii::$app->user->getFlash('moderation'));
 			}
-			$this->redirect(array('topic', 'id' => $id, 'BbiiPost_page' => $page, 'postId' => $post));;
+			return Yii::$app->response->redirect(array('forum/topic', 'id' => $id, 'BbiiPost_page' => $page, 'postId' => $post));;
 		}
 		// Increase topic views
 		$topic->saveCounters(array('num_views' => 1));
@@ -270,9 +270,9 @@ class ForumController extends BbiiController {
 		}
 		$forum = BbiiForum::find($quoted->forum_id);
 		$topic = BbiiTopic::find($quoted->topic_id);
-		if (isset($_POST['BbiiPost'])) {
+		if (isset(Yii::$app->request->post()['BbiiPost'])) {
 			$post = new BbiiPost;
-			$post->attributes = $_POST['BbiiPost'];
+			$post->attributes = Yii::$app->request->post()['BbiiPost'];
 			$post->user_id = Yii::$app->user->id;
 			if ($forum->moderated) {
 				$post->approved = 0;
@@ -290,7 +290,7 @@ class ForumController extends BbiiController {
 				} else {
 					Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 				}
-				$this->redirect(array('topic', 'id' => $post->topic_id, 'nav' => 'last'));
+				return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
 			}
 		} else {
 			$post = new BbiiPost;
@@ -318,8 +318,8 @@ class ForumController extends BbiiController {
 		}
 		$forum = BbiiForum::find($topic->forum_id);
 		$post = new BbiiPost;
-		if (isset($_POST['BbiiPost'])) {
-			$post->attributes = $_POST['BbiiPost'];
+		if (isset(Yii::$app->request->post()['BbiiPost'])) {
+			$post->attributes = Yii::$app->request->post()['BbiiPost'];
 			$post->user_id = Yii::$app->user->id;
 			if ($forum->moderated) {
 				$post->approved = 0;
@@ -337,7 +337,7 @@ class ForumController extends BbiiController {
 				} else {
 					Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 				}
-				$this->redirect(array('topic', 'id' => $post->topic_id, 'nav' => 'last'));
+				return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
 			}
 		} else {
 			$post->subject = $topic->title;
@@ -354,20 +354,20 @@ class ForumController extends BbiiController {
 	public function actionCreateTopic() {
 		$post = new BbiiPost;
 		$poll = new BbiiPoll;
-		if (isset($_POST['BbiiForum'])) {
-			$post->forum_id = $_POST['BbiiForum']['id'];
+		if (isset(Yii::$app->request->post()['BbiiForum'])) {
+			$post->forum_id = Yii::$app->request->post()['BbiiForum']['id'];
 			$forum = BbiiForum::find($post->forum_id);
 		}
-		if (isset($_POST['choice'])) {
-			$choiceArr = $_POST['choice'];
+		if (isset(Yii::$app->request->post()['choice'])) {
+			$choiceArr = Yii::$app->request->post()['choice'];
 			while(count($choiceArr) < 3) {
 				$choiceArr[] = '';
 			}
 		} else {
 			$choiceArr = array('', '', '');
 		}
-		if (isset($_POST['BbiiPost'])) {
-			$post->attributes = $_POST['BbiiPost'];
+		if (isset(Yii::$app->request->post()['BbiiPost'])) {
+			$post->attributes = Yii::$app->request->post()['BbiiPost'];
 			$forum = BbiiForum::find($post->forum_id);
 			if ($forum->moderated) {
 				$post->approved = 0;
@@ -382,19 +382,19 @@ class ForumController extends BbiiController {
 				$topic->first_post_id 	 =  $post->id;
 				$topic->last_post_id 	 =  $post->id;
 				$topic->approved 		 =  $post->approved;
-				if (isset($_POST['sticky'])) { $topic->sticky = 1; }
-				if (isset($_POST['global'])) { $topic->global = 1; }
-				if (isset($_POST['locked'])) { $topic->locked = 1; }
+				if (isset(Yii::$app->request->post()['sticky'])) { $topic->sticky = 1; }
+				if (isset(Yii::$app->request->post()['global'])) { $topic->global = 1; }
+				if (isset(Yii::$app->request->post()['locked'])) { $topic->locked = 1; }
 				// Poll
-				if (isset($_POST['BbiiPoll']) && isset($_POST['addPoll']) && $_POST['addPoll'] == 'yes') {
-					$poll->attributes = $_POST['BbiiPoll'];
+				if (isset(Yii::$app->request->post()['BbiiPoll']) && isset(Yii::$app->request->post()['addPoll']) && Yii::$app->request->post()['addPoll'] == 'yes') {
+					$poll->attributes = Yii::$app->request->post()['BbiiPoll'];
 					$poll->post_id = $post->id;
 					$poll->user_id = Yii::$app->user->id;
 					if (empty($poll->expire_date)) {
 						unset($poll->expire_date);
 					}
 					$count = 0;
-					$choices = $_POST['choice'];
+					$choices = Yii::$app->request->post()['choice'];
 					foreach($choices as $choice) {
 						if (!empty($choice)) { $count++; }
 					}
@@ -422,9 +422,9 @@ class ForumController extends BbiiController {
 					} else {
 						Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 					}
-					if (isset($_POST['BbiiPoll'])) {
+					if (isset(Yii::$app->request->post()['BbiiPoll'])) {
 						$poll->save();
-						$choices = $_POST['choice'];
+						$choices = Yii::$app->request->post()['choice'];
 						$i = 1;
 						foreach($choices as $choice) {
 							if (!empty($choice)) {
@@ -436,7 +436,7 @@ class ForumController extends BbiiController {
 							}
 						}
 					}
-					$this->redirect(array('topic', 'id' => $topic->id));
+					return Yii::$app->response->redirect(array('forum/topic', 'id' => $topic->id));
 				} else {
 					$post->delete();
 				}
@@ -460,8 +460,8 @@ class ForumController extends BbiiController {
 		}
 		$forum = BbiiForum::find($post->forum_id);
 		$topic = BbiiTopic::find($post->topic_id);
-		if (isset($_POST['BbiiPost'])) {
-			$post->attributes = $_POST['BbiiPost'];
+		if (isset(Yii::$app->request->post()['BbiiPost'])) {
+			$post->attributes = Yii::$app->request->post()['BbiiPost'];
 			$post->change_id = Yii::$app->user->id;
 			if ($forum->moderated) {
 				$post->approved = 0;
@@ -480,7 +480,7 @@ class ForumController extends BbiiController {
 					}
 					$post->poster->saveCounters(array('posts' => -1));				// method since Yii 1.1.8
 				}
-				$this->redirect(array('topic', 'id' => $post->topic_id));
+				return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id));
 			}
 		}
 		return $this->render('update', array(
@@ -499,13 +499,13 @@ class ForumController extends BbiiController {
 		if ($poll->user_id != Yii::$app->user->id && !$this->isModerator()) {
 			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
-		if (isset($_POST['BbiiPoll'])) {
-			$poll->attributes = $_POST['BbiiPoll'];
+		if (isset(Yii::$app->request->post()['BbiiPoll'])) {
+			$poll->attributes = Yii::$app->request->post()['BbiiPoll'];
 			if (empty($poll->expire_date)) {
 				unset($poll->expire_date);
 			}
 			if ($poll->save()) {
-				$choices = $_POST['choice'];
+				$choices = Yii::$app->request->post()['choice'];
 				foreach($choices as $key => $choice) {
 					$ch = BbiiChoice::find($key);
 					if ($ch !== null) {
@@ -515,7 +515,7 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		$this->redirect(array('topic', 'id' => $post->topic_id));
+		return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id));
 	}
 	
 	/**
@@ -523,13 +523,13 @@ class ForumController extends BbiiController {
 	 */
 	public function actionUpvote() {
 		$json = array();
-		if (isset($_POST['id'])) {
+		if (isset(Yii::$app->request->post()['id'])) {
 			$criteria = new CDbCriteria;
 			$criteria->condition = "member_id = :userid and post_id = :post_id";
-			$criteria->params = array(':userid' => Yii::$app->user->id, ':post_id' => $_POST['id']);
+			$criteria->params = array(':userid' => Yii::$app->user->id, ':post_id' => Yii::$app->request->post()['id']);
 			if (BbiiUpvoted::find()->exists($criteria)) {	// remove upvote
 				BbiiUpvoted::find()->deleteAll($criteria);
-				$post = BbiiPost::find($_POST['id']);
+				$post = BbiiPost::find(Yii::$app->request->post()['id']);
 				$topic = BbiiTopic::find($post->topic_id);
 				$member = BbiiMember::find($post->user_id);
 				$post->saveCounters(array('upvoted' => -1));
@@ -538,9 +538,9 @@ class ForumController extends BbiiController {
 			} else {										// add upvote
 				$upvote = new BbiiUpvoted;
 				$upvote->member_id = Yii::$app->user->id;
-				$upvote->post_id = $_POST['id'];
+				$upvote->post_id = Yii::$app->request->post()['id'];
 				$upvote->save();
-				$post = BbiiPost::find($_POST['id']);
+				$post = BbiiPost::find(Yii::$app->request->post()['id']);
 				$topic = BbiiTopic::find($post->topic_id);
 				$member = BbiiMember::find($post->user_id);
 				$post->saveCounters(array('upvoted' => 1));
@@ -548,7 +548,7 @@ class ForumController extends BbiiController {
 				$member->saveCounters(array('upvoted' => 1));
 			}
 			$json['success'] = 'yes';
-			$json['html'] = $this->showUpvote($_POST['id']);
+			$json['html'] = $this->showUpvote(Yii::$app->request->post()['id']);
 		} else {
 			$json['success'] = 'no';
 		}
@@ -561,12 +561,12 @@ class ForumController extends BbiiController {
 	 */
 	public function actionVote() {
 		$json = array();
-		if (isset($_POST['poll_id'])) {
-			$this->poll = BbiiPoll::find($_POST['poll_id']);
-			if (isset($_POST['choice'])) {
+		if (isset(Yii::$app->request->post()['poll_id'])) {
+			$this->poll = BbiiPoll::find(Yii::$app->request->post()['poll_id']);
+			if (isset(Yii::$app->request->post()['choice'])) {
 				// In case of a revote: remove previous votes
 				$criteria = new CDbCriteria;
-				$criteria->condition = 'poll_id = ' . $_POST['poll_id'] . ' and user_id = ' . Yii::$app->user->id;
+				$criteria->condition = 'poll_id = ' . Yii::$app->request->post()['poll_id'] . ' and user_id = ' . Yii::$app->user->id;
 				$votes = BbiiVote::find()->findAll($criteria);
 				foreach($votes as $vote) {
 					$this->poll->saveCounters(array('votes' => -1));
@@ -574,9 +574,9 @@ class ForumController extends BbiiController {
 					$model->saveCounters(array('votes' => -1));
 					$vote->delete();
 				}
-				foreach($_POST['choice'] as $choice) {
+				foreach(Yii::$app->request->post()['choice'] as $choice) {
 					$model = new BbiiVote;
-					$model->poll_id = $_POST['poll_id'];
+					$model->poll_id = Yii::$app->request->post()['poll_id'];
 					$model->choice_id = $choice;
 					$model->user_id = Yii::$app->user->id;
 					$model->save();
@@ -586,7 +586,7 @@ class ForumController extends BbiiController {
 				}
 				$choiceProvider = new ActiveDataProvider('BbiiChoice', array(
 					'criteria' => array(
-						'condition' => 'poll_id = ' . $_POST['poll_id'],
+						'condition' => 'poll_id = ' . Yii::$app->request->post()['poll_id'],
 						'order' => 'sort',
 					),
 					'pagination' => false,
@@ -608,11 +608,11 @@ class ForumController extends BbiiController {
 	 */
 	public function actionDisplayVote() {
 		$json = array();
-		if (isset($_POST['poll_id'])) {
-			$this->poll = BbiiPoll::find($_POST['poll_id']);
+		if (isset(Yii::$app->request->post()['poll_id'])) {
+			$this->poll = BbiiPoll::find(Yii::$app->request->post()['poll_id']);
 			$choiceProvider = new ActiveDataProvider('BbiiChoice', array(
 				'criteria' => array(
-					'condition' => 'poll_id = ' . $_POST['poll_id'],
+					'condition' => 'poll_id = ' . Yii::$app->request->post()['poll_id'],
 					'order' => 'sort',
 				),
 				'pagination' => false,
@@ -631,8 +631,8 @@ class ForumController extends BbiiController {
 	 */
 	public function actionEditPoll() {
 		$json = array();
-		if (isset($_POST['poll_id'])) {
-			$poll = BbiiPoll::find($_POST['poll_id']);
+		if (isset(Yii::$app->request->post()['poll_id'])) {
+			$poll = BbiiPoll::find(Yii::$app->request->post()['poll_id']);
 			$choices = array();
 			$models = BbiiChoice::find()->findAll('poll_id = '.$poll->id);
 			foreach($models as $model) {
@@ -666,19 +666,19 @@ class ForumController extends BbiiController {
 	 */
 	public function actionSetCollapsed() {
 		$json = array('success' => 1);
-		if (isset($_POST['id']) && isset($_POST['action'])) {
-			if ($_POST['action'] == 'set') {
+		if (isset(Yii::$app->request->post()['id']) && isset(Yii::$app->request->post()['action'])) {
+			if (Yii::$app->request->post()['action'] == 'set') {
 				if (isset(Yii::$app->request->cookies['bbiiCollapsed'])) {
 					$json['cookies'] = Yii::$app->request->cookies['bbiiCollapsed'];
 					$catArray = explode('_', Yii::$app->request->cookies['bbiiCollapsed']->value);
-					$catArray[] = $_POST['id'];
+					$catArray[] = Yii::$app->request->post()['id'];
 					$catArray = array_unique($catArray);
 					$cookie = new CHttpCookie('bbiiCollapsed', implode('_', $catArray));
 					$cookie->expire = time() + (60*60*24*28);
 					$cookie->path = Yii::$app->createUrl($this->module->id);
 					Yii::$app->request->cookies['bbiiCollapsed'] = $cookie;
 				} else {
-					$cookie = new CHttpCookie('bbiiCollapsed', $_POST['id']);
+					$cookie = new CHttpCookie('bbiiCollapsed', Yii::$app->request->post()['id']);
 					$cookie->expire = time() + (60*60*24*28);
 					$cookie->path = Yii::$app->createUrl($this->module->id);
 					Yii::$app->request->cookies['bbiiCollapsed'] = $cookie;
@@ -686,7 +686,7 @@ class ForumController extends BbiiController {
 			} else {
 				if (isset(Yii::$app->request->cookies['bbiiCollapsed'])) {
 					$catArray = explode('_', Yii::$app->request->cookies['bbiiCollapsed']->value);
-					$catArray = array_diff($catArray, array($_POST['id']));
+					$catArray = array_diff($catArray, array(Yii::$app->request->post()['id']));
 					$cookie = new CHttpCookie('bbiiCollapsed', implode('_', $catArray));
 					$cookie->expire = time() + (60*60*24*28);
 					$cookie->path = Yii::$app->createUrl($this->module->id);
@@ -703,7 +703,7 @@ class ForumController extends BbiiController {
 	 */
 	public function actionWatch() {
 		$json = array('success' => 'yes');
-		if (isset($_POST['topicId']) && isset($_POST['postId'])) {
+		if (isset(Yii::$app->request->post()['topicId']) && isset(Yii::$app->request->post()['postId'])) {
 			$object = new BbiiTopicsRead;
 			$model = BbiiTopicRead::find(Yii::$app->user->id);
 			if ($model === null) {
@@ -712,7 +712,7 @@ class ForumController extends BbiiController {
 			} else {
 				$object->unserialize($model->data);
 			}
-			$object->setFollow($_POST['topicId'], $_POST['postId']);
+			$object->setFollow(Yii::$app->request->post()['topicId'], Yii::$app->request->post()['postId']);
 			$model->data = $object->serialize();
 			$model->save();
 		}
@@ -725,12 +725,12 @@ class ForumController extends BbiiController {
 	 */
 	public function actionUnwatch() {
 		$json = array('success' => 'yes');
-		if (isset($_POST['topicId'])) {
+		if (isset(Yii::$app->request->post()['topicId'])) {
 			$object = new BbiiTopicsRead;
 			$model = BbiiTopicRead::find(Yii::$app->user->id);
 			if ($model !== null) {
 				$object->unserialize($model->data);
-				$object->unsetFollow($_POST['topicId']);
+				$object->unsetFollow(Yii::$app->request->post()['topicId']);
 				$model->data = $object->serialize();
 				$model->save();
 			}
@@ -850,9 +850,9 @@ class ForumController extends BbiiController {
 		// @todo this should be moved to the VW - DJE : 2015-05-14
 		$assets = AppAsset::register($this);
 		if (BbiiUpvoted::find()->exists($criteria)) {
-			$html = Html::img($asset->baseUrl.'down.gif', 'upvote', array('title' => Yii::t('BbiiModule.bbii', 'Remove your vote'), 'id' => 'upvote_'.$post_id, 'style' => 'cursor:pointer;', 'onclick' => 'upvotePost(' . $post_id . ',"' . $url . '")'));
+			$html = Html::img($asset->baseUrl.'/images/down.gif', 'upvote', array('title' => Yii::t('BbiiModule.bbii', 'Remove your vote'), 'id' => 'upvote_'.$post_id, 'style' => 'cursor:pointer;', 'onclick' => 'upvotePost(' . $post_id . ',"' . $url . '")'));
 		} else {
-			$html = Html::img($asset->baseUrl.'up.gif', 'upvote', array('title' => Yii::t('BbiiModule.bbii', 'Vote this post up'), 'id' => 'upvote_'.$post_id, 'style' => 'cursor:pointer;', 'onclick' => 'upvotePost(' . $post_id . ',"' . $url . '")'));
+			$html = Html::img($asset->baseUrl.'/images/up.gif', 'upvote', array('title' => Yii::t('BbiiModule.bbii', 'Vote this post up'), 'id' => 'upvote_'.$post_id, 'style' => 'cursor:pointer;', 'onclick' => 'upvotePost(' . $post_id . ',"' . $url . '")'));
 		}
 		return $html;
 	}

@@ -43,9 +43,9 @@ class BbiiChoice extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('choice, poll_id', 'required'),
-			array('sort, votes', 'numerical', 'integerOnly' => true),
-			array('choice', 'length', 'max' => 200),
-			array('poll_id', 'length', 'max' => 10),
+			[['sort, votes', 'numerical'], 'integer'],
+			['choice', 'string', 'max' => 200],
+			['poll_id', , 'string', 'max' => 10],
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, choice, poll_id, sort, votes', 'safe', 'on' => 'search'),

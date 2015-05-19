@@ -45,7 +45,7 @@ class BbiiVote extends BbiiAR
 		// will receive user inputs.
 		return array(
 			array('poll_id, choice_id, user_id', 'required'),
-			array('poll_id, choice_id, user_id', 'length', 'max' => 10),
+			['poll_id, choice_id, user_id', 'string', 'max' => 10],
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('poll_id, choice_id, user_id', 'safe', 'on' => 'search'),
