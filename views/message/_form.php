@@ -1,4 +1,8 @@
 <?php
+
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+
 /* @var $this MessageController */
 /* @var $model BbiiMessage */
 /* @var $form CActiveForm */
@@ -11,51 +15,58 @@
 
 <div class = "form">
 
-<?php /*$form = $this->beginWidget('CActiveForm', array(
-	'id' => 'message-form',
-	'enableAjaxValidation' => false,
-)); ?>
+	<?php // @depricated 2.5.0 Kept for referance
+	/*$form = $this->beginWidget('CActiveForm', array(
+		'id' => 'message-form',
+		'enableAjaxValidation' => false,
+	));*/ ?>
+
+	<?php $form = ActiveForm::begin([
+		'enableAjaxValidation' => false,
+		'id'                   => 'message-form',
+	]); ?>
 
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class = "row">
-	<?php if ($this->action->id == 'create'): ?>
-		<?php echo $form->labelEx($model,'sendto'); ?>
-		<?php $this->widget('zii.widgets.jui.CJuiAutoComplete',array(
-				'attribute' => 'search',
-				'model' => $model,
-				'sourceUrl' => array('member/members'),
-				'theme' => $this->module->juiTheme,
-				'options' => array(
-					'minLength' => 2,
-					'delay' => 200,
-					'select' => 'js:function(event, ui) { 
-						$("#BbiiMessage_search").val(ui.item.label);
-						$("#BbiiMessage_sendto").val(ui.item.value);
-						return false;
-					}',
-				),
-				'htmlOptions' => array(
-					'style' => 'height:20px;',
-				),
-			)); 
-		?>
-	<?php else: ?>
-		<?php echo $form->label($model,'sendto'); ?>
-		<strong><?php echo Html::encode($model->search); ?></strong>
-	<?php endif; ?>
-		<?php echo $form->hiddenField($model,'sendto'); ?>
-		<?php echo $form->error($model,'sendto'); ?>
+	<?php if (Yii::$app->controller->action->id == 'create') {
+		// echo $form->labelEx($model,'sendto');
+		// @todo iterate on this - DJE : 2015-05-19
+		/*$this->widget('zii.widgets.jui.CJuiAutoComplete',array(
+			'attribute' => 'search',
+			'model' => $model,
+			'sourceUrl' => array('member/members'),
+			'theme' => $this->module->juiTheme,
+			'options' => array(
+				'minLength' => 2,
+				'delay' => 200,
+				'select' => 'js:function(event, ui) { 
+					$("#BbiiMessage_search").val(ui.item.label);
+					$("#BbiiMessage_sendto").val(ui.item.value);
+					return false;
+				}',
+			),
+			'htmlOptions' => array(
+				'style' => 'height:20px;',
+			),
+		)); */
+		} else{
+			echo $form->label($model,'sendto');
+			echo '<strong>'.Html::encode($model->search).'</strong>';
+		} ?>
+		<?php echo $form->field($model, 'sendto'); ?>
+		<?php // echo $form->error($model,'sendto'); ?>
 	</div>
 	
 	<div class = "row">
-		<?php echo $form->labelEx($model,'subject'); ?>
-		<?php echo $form->textField($model,'subject',array('size' => 100,'maxlength' => 255)); ?>
-		<?php echo $form->error($model,'subject'); ?>
+		<?php // echo $form->labelEx($model,'subject'); ?>
+		<?php echo $form->field($model,'subject')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+		<?php // echo $form->error($model,'subject'); ?>
 	</div>
 	
 	<div class = "row">
-		<?php $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
+		<?php // @todo iterate on this - DJE : 2015-05-19
+		/* $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
 			'model' => $model,
 			'attribute' => 'content',
 			'autoLanguage' => false,
@@ -75,15 +86,16 @@
 			'skin' => $this->module->editorSkin,
 			'uiColor' => $this->module->editorUIColor,
 			'contentsCss' => $this->module->editorContentsCss,
-		)); ?>
-		<?php echo $form->error($model,'content'); ?>
+		));*/ ?>
+		<?php echo $form->field($model,'content')->textArea(['rows' => '6']);  ?>
+		<?php // echo $form->error($model,'content'); ?>
 	</div>
 	
 	<div class = "row buttons">
-		<?php echo $form->hiddenField($model,'type'); ?>
+		<?php echo $form->field($model,'type')->input('hidden')->label(false);  ?>
 		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
 	</div>
 
-<?php $this->endWidget();*/ ?>
+	<?php ActiveForm::end(); ?>
 
 </div><!-- form -->

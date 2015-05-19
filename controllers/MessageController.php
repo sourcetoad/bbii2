@@ -98,17 +98,24 @@ class MessageController extends BbiiController {
 	
 	public function actionCreate($id = null, $type = null) {
 		$model = new BbiiMessage;
-		$uid = Yii::$app->user->id;
-		$count['inbox'] = BbiiMessage::find()->inbox()->count('sendto = '.$uid);
-		$count['outbox'] = BbiiMessage::find()->outbox()->count('sendfrom = '.$uid);
+		$count['inbox']  = BbiiMessage::find()->inbox()->count('sendto = '.Yii::$app->user->id);
+		$count['outbox'] = BbiiMessage::find()->outbox()->count('sendfrom = '.Yii::$app->user->id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if (isset(Yii::$app->request->post()['BbiiMessage'])) {
-			$model->attributes = Yii::$app->request->post()['BbiiMessage'];
-			$model->search = Yii::$app->request->post()['BbiiMessage']['search'];
-			$model->sendfrom = Yii::$app->user->id;
+			$model->load(Yii::$app->request->post('BbiiMessage'));
+			//$model->search = Yii::$app->request->post()['BbiiMessage']['search'];
+			//$model->sendfrom = Yii::$app->user->id;
+
+			$errors = $model->validate();
+echo '<pre>';
+print_r( $errors );
+print_r( $model );
+echo '</pre>';
+exit;
+
 			if (empty(Yii::$app->request->post()['BbiiMessage']['search'])) {
 				unset($model->sendto);
 			} else {

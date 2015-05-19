@@ -67,21 +67,22 @@ $item = array(
 	<?php echo GridView::widget(array(
 		'columns'      => array(
 			array(
-				'header' => 'Send To',
-				'value' => '$data->receiver->member_name'
+				'attribute' => 'sendto',
+				'value'     => '$data->receiver->member_name'
 			),
 			'subject',
 			array(
-				'header' => 'Created',
-				'value' => 'DateTimeCalculation::long($data->create_time)',
+				'attribute' => 'create_time',
+				'value'     => 'create_time:datetime',
 			),
 			array(
-				'header' => 'Type',
-				'value' => '($data->type)?Yii::t("bbii", "notification"):Yii::t("bbii", "message")',
+				'attribute' => 'type',
+				'value'     => '($data->type) ? Yii::t("bbii", "notification") : Yii::t("bbii", "message")',
 			),
-			array(
+
+			[
 				'class' => 'yii\grid\ActionColumn',
-				'template' => '{view}{delete}',
+				/*'template' => '{view}{delete}',
 				'buttons' => array(
 					'view' => array(
 						'url' => '$data->id',
@@ -92,8 +93,8 @@ $item = array(
 						'imageUrl' => $assets->baseUrl.'/images/delete.png',
 						'options' => array('style' => 'margin-left:5px;'),
 					),
-				)
-			)),
+				)*/
+			]),
 		'dataProvider'          => $model->search(),
 		'id'                    => 'inbox-grid',
 		// @todo Figure out the Yii2 version of this logic - DJE : 2015-05-15
