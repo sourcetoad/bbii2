@@ -90,7 +90,7 @@ $item = array(
            ],
 		'dataProvider' => $model->search(),
 		'id'           => 'member-grid',
-	)); ?>
+	]); ?>
 
 	<?php echo $this->render('_footer'); ?>
 	<div id = "bbii-copyright"><a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-2014 <?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a></div>
