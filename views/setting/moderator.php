@@ -52,7 +52,7 @@ $item = array(
 	));*/ ?>
 
 	<?php echo GridView::widget(array(
-		'columns'               => array(
+		'columns' 		=> array(
 			'member_name',
 			array(
 				'attribute' => 'group_id',
@@ -67,13 +67,11 @@ $item = array(
 				//'value'     => 'Html::checkBox("moderator", $data->moderator, array("onclick" => "changeModeration(this,$data->id,\'' . Yii::$app->urlManager->createAbsoluteUrl('setting/changeModerator') . '\')"))',
 			),
 			
-			// @todo use prop Yii2 CRUD to view/update/delete forum groups.
 			[
 				'class'    => 'yii\grid\ActionColumn',
-			],
-		),
-		'dataProvider'          => $model,
-		'id'                    => 'bbii-member-grid',
+			]),
+		'dataProvider'  => $model,
+		'id' 			=> 'bbii-member-grid',
 		// @todo Figure out the Yii2 version of this logic - DJE : 2015-05-15
 		//'rowCssClassExpression' => '(Yii::$app->authManager && Yii::$app->authManager->checkAccess("moderator", $data->id))?"moderator":(($row % 2)?"even":"odd")',
 	)); ?>

@@ -7,6 +7,7 @@ use frontend\modules\bbii\models\_query\BbiiMessageQuery;
 
 use yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\HtmlPurifier;
 
 /**
  * This is the model class for table "bbii_message".

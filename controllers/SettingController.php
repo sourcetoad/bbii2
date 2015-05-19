@@ -85,8 +85,6 @@ class SettingController extends BbiiController {
 			$model->attributes = Yii::$app->request->post()['BbiiForum'];
 			if ($model->save()) {
 
-				// @depricated 2.3.0
-				//return Yii::$app->response->redirect(array('forum/layout'));
 				return Yii::$app->response->redirect(array('forum/setting/layout'));
 			}
 		}
@@ -110,9 +108,11 @@ class SettingController extends BbiiController {
 	public function actionModerator() {
 		$model = new BbiiMember();
 		$model = $model->search();
+
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiMember']))
+		if (isset($_GET['BbiiMember'])) {
 			$model->attributes = $_GET['BbiiMember'];
+		}
 
 		return $this->render('moderator',array(
 			'model' => $model,

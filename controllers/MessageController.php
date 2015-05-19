@@ -36,7 +36,15 @@ class MessageController extends BbiiController {
 		);
 	}
 	
+	/**
+	 * [actionInbox description]
+	 *
+	 * @version  2.4.0
+	 * @param  integer $id
+	 * @return array
+	 */
 	public function actionInbox($id = null) {
+		/*
 		if (!(isset($id) && $this->isModerator())) {
 			$id = Yii::$app->user->id;
 		}
@@ -50,13 +58,23 @@ class MessageController extends BbiiController {
 		// restrict filtering to own inbox
 		$model->sendto = $id;
 		$model->inbox = 1;
+		*/
+
+		$id = ($id != null) ? $id : Yii::$app->user->id;
 		
+		$count['inbox']  = BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.$id);
+		$count['outbox'] = BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.$id);
+
+		$model           = new BbiiMessage();
+		$model->setAttributes( (isset($_GET['BbiiMessage']) ? $_GET['BbiiMessage'] : ['inbox' => 1, 'sendto' => $id]) );
+		$model           = $model->search();
+
 		return $this->render('inbox', array(
 			'model' => $model, 
 			'count' => $count
 		));
 	}
-	
+
 	public function actionOutbox($id = null) {
 		if (!(isset($id) && $this->isModerator())) {
 			$id = Yii::$app->user->id;
