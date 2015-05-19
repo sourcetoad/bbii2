@@ -110,6 +110,9 @@ class MemberController extends BbiiController {
 				}
 				if ($valid)
 					return Yii::$app->response->redirect(array('forum/member/view','id' => $model->id));
+			} else {
+
+				Yii::$app->user->setFlash('error',Yii::t('BbiiModule.bbii','Error while saving.'));
 			}
 		}
 
