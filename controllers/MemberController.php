@@ -66,9 +66,12 @@ class MemberController extends BbiiController {
 		}
 
 		if (isset(Yii::$app->request->post()['BbiiMember'])) {
-			$model->attributes = Yii::$app->request->post()['BbiiMember'];
+			//$model->attributes = Yii::$app->request->post()['BbiiMember'];
+			$model->setAttributes(Yii::$app->request->post('BbiiMember'));
 			$model->image = UploadedFile::getInstance($model, 'image');
-			if ($model->save()) {
+
+			if ($model->validate() && $model->save()) {
+
 				$valid = true;
 				if ($model->remove_avatar) {
 					$model->avatar = '';

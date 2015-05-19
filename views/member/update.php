@@ -55,6 +55,10 @@ $('.presence').hide();
 			'options'              => array('enctype' => 'multipart/form-data'),
 		]); ?>
 
+			<div class = "row buttons">
+				<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save')); ?>
+			</div>
+
 			<?php //<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ? ></p> ?>
 
 			<?php //echo $form->errorSummary($model); ?>
