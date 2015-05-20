@@ -31,3 +31,8 @@ $assets = AppAsset::register($this);
 		'links' => $this->context->bbii_breadcrumbs,
 	));*/ ?><!-- breadcrumbs -->
 <?php endif?>
+
+<?php if (isset($count) && is_array($count)) {
+	$percentFull = ($count[$box] < 100) ? $count[$box] : 100;
+	echo '<div class = "progress"><div class = "progressbar" style = "width:'.$percentFull.'%"> </div></div>';
+}; ?>

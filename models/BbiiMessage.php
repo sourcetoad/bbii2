@@ -50,21 +50,24 @@ class BbiiMessage extends BbiiAR
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
-		return array(
-			array('sendfrom, sendto, subject, content', 'required'),
-			['sendfrom, sendto, read_indicator, type, inbox, outbox, post_id', 'integer'],
-			array('sendto', 'mailboxFull', 'on' => 'insert'),
-			['subject', 'string', 'max' => 255],
-			array('content','filter','filter' => array($obj = new HtmlPurifier(), 'purify')),
-			['ip', 'string', 'max' => 39],
-			array('ip', 'blocked'),
-			array('ip', 'default', 'value' => $_SERVER['REMOTE_ADDR'], 'on' => 'insert'),
-			array('create_time', 'default', 'value' => 'NOW()', 'on' => 'insert'),
-			array('create_time', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, sendfrom, sendto, subject, content, read_indicator, type, inbox, outbox, ip, post_id', 'safe', 'on' => 'search'),
-		);
+		return [
+			// @todo iterate on this rule - DJE : 2015-05-19
+
+			// [['content'], 'filter', 'filter' => [$obj = new HtmlPurifier(), 'purify']],
+			// [['create_time'], 'safe'],
+			[['ip'], 'blocked'],
+			[['ip'], 'string', 'max' => 39],
+			[['sendfrom', 'sendto', 'read_indicator', 'type', 'inbox', 'outbox', 'post_id'], 'integer'],
+			[['sendfrom', 'sendto', 'subject', 'content'], 'required'],
+			[['subject'], 'string', 'max' => 255],
+			[['sendfrom', 'sendto', 'subject', 'content'], 'safe'],
+
+			// scenarios
+			[['create_time'], 'default', 'value' => 'NOW()', 'on' => 'insert'],
+			[['sendto'], 'mailboxFull', 'on' => 'insert'],
+			[['id', 'sendfrom', 'sendto', 'subject', 'content', 'read_indicator', 'type', 'inbox', 'outbox', 'ip', 'post_id'], 'safe', 'on' => 'search'],
+			[['ip'], 'default', 'value' => $_SERVER['REMOTE_ADDR'], 'on' => 'insert'],
+		];
 	}
 	
 	public function mailboxFull($attr, $params) {

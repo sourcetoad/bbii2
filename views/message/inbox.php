@@ -23,9 +23,7 @@ $item = array(
 );
 ?>
 <div id = "bbii-wrapper">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
-	
-	<div class = "progress"><div class = "progressbar" style = "width:<?php echo ($count['inbox'] < 100)?$count['inbox']:100; ?>%"> </div></div>
+	<?php echo $this->render('_header', array('item' => $item, 'count' => $count, 'box' => 'inbox')); ?>
 
 	<?php // @depricated 2.1.5 Kept for referance
 	/*$this->widget('zii.widgets.grid.CGridView', array(
@@ -74,20 +72,21 @@ $item = array(
 		'columns'      => array(
 			array(
 				'attribute' => 'sendfrom',
-				'value'     => 'member_name'
+				'value'     => 'sendfrom'
 			),
 			'subject',
 			array(
 				'attribute' => 'create_time',
-				'value'     => 'create_time:datetime',
+				'value'     => 'create_time',
 			),
 			array(
 				'attribute' => 'type',
-				'value'     => '($data->type) ? Yii::t("bbii", "notification") : Yii::t("bbii", "message")',
+				'value'     =>  'type',
 			),
 
 			[
 				'class'    => 'yii\grid\ActionColumn',
+				'template' => '{view}{delete}',
 			]),
 		'dataProvider' => $model,
 		'id'           => 'inbox-grid',
