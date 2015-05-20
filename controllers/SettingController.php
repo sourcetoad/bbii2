@@ -73,24 +73,27 @@ class SettingController extends BbiiController {
 		return $this->render('index', array('model' => $model));
 	}
 
+	/**
+	 * [actionLayout description]
+	 *
+	 * @todo  This should be moved to the BbiiForm CNTL - DJE : 2015-05-20
+	 * @return [type] [description]
+	 */
 	public function actionLayout() {
 		$model    = new BbiiForum();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if (isset(Yii::$app->request->post()['BbiiForum'])) {
+		if (Yii::$app->request->post('BbiiForum')) {
 			$model->setAttributes(Yii::$app->request->post('BbiiForum'));
 
 			if ($model->validate() && $model->save()) {
 
-				return Yii::$app->response->redirect(array('forum/setting'));
+				Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Operation successful.'));
 			} else {
-				Yii::$app->session->setFlash('error', Yii::t('BbiiModule.bbii', 'Forum setting edit failed.'));
-				return Yii::$app->response->redirect(array('forum/setting/layout'));
+
+				Yii::$app->session->setFlash('error', Yii::t('BbiiModule.bbii', 'Operation failed.'));
 			}
 		}
-		
+
 		return $this->render('layout', array(
 			'category' => BbiiForum::find()->sorted()->category()->all(),
 			'model'    => $model,

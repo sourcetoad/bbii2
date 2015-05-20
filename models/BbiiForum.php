@@ -28,21 +28,6 @@ use yii;
  */
 class BbiiForum extends BbiiAR
 {
-	public $cat_id;
-	public $id;
-	public $last_post_id;
-	public $locked;
-	public $membergroup_id;
-	public $moderated;
-	public $name;
-	public $num_posts;
-	public $num_topics;
-	public $poll;
-	public $public;
-	public $sort;
-	public $subtitle;
-	public $type;
-
     public static function find()
     {
         return new BbiiForumQuery(get_called_class());
@@ -64,12 +49,12 @@ class BbiiForum extends BbiiAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		// propert 'last_post_time' has been removed - DJE : 2015-05-20
-		return array(
+		return [
 			[['name'], 'required'],
 			[['type', 'public', 'locked', 'moderated', 'sort', 'num_posts', 'num_topics', 'last_post_id', 'membergroup_id', 'poll'], 'integer'],
 			[['name'], 'unique'],
+			[['name', 'subtitle'],  'string', 'min' => 4,  'max' => 255],
 			['cat_id',  'string',  'max' => 10],
-			[['name', 'subtitle'], 'string',  'max' => 255],
 			[['type'], 'validateType'],
 			[['cat_id', 'subtitle'], 'default',  'value' => null],
 			[['public'], 'default',  'value' => 1],
@@ -77,7 +62,7 @@ class BbiiForum extends BbiiAR
 			[['name', 'subtitle', 'type', 'sort', 'num_posts', 'num_topics', 'last_post_id', 'membergroup_id', 'poll'], 'safe'],
 
 			[['id', 'cat_id', 'name', 'subtitle', 'type', 'sort', 'num_posts', 'num_topics', 'last_post_id', 'membergroup_id', 'poll'], 'safe',  'on' => 'search'],
-		);
+		];
 	}
 	
 	public function validateType($attr, $params) {
