@@ -23,9 +23,7 @@ $item = array(
 );
 ?>
 <div id = "bbii-wrapper">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
-	
-	<div class = "progress"><div class = "progressbar" style = "width:<?php echo ($count['inbox'] < 100)?$count['inbox']:100; ?>%"> </div></div>
+	<?php echo $this->render('_header', array('item' => $item, 'count' => $count, 'box' => 'inbox')); ?>
 
 	<?php // @depricated 2.1.5 Kept for referance
 	/*$this->widget('zii.widgets.grid.CGridView', array(

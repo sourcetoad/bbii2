@@ -23,13 +23,11 @@ $item = array(
 );
 ?>
 <div id = "bbii-wrapper">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
-	
-	<div class = "progress"><div class = "progressbar" style = "width:<?php echo (2*$count['outbox']); ?>%"> </div></div>
+	<?php echo $this->render('_header', array('item' => $item, 'count' => $count, 'box' => 'outbox')); ?>
 
 	<?php // @depricated 2.1.5 Kept for referance
 	/*$this->widget('zii.widgets.grid.CGridView', array(
-		'id' => 'inbox-grid',
+		'id' => 'outbox-grid',
 		'dataProvider' => $model->search(),
 		'rowCssClassExpression' => '($data->read_indicator)?"":"unread"',
 		'columns' => array(
