@@ -204,6 +204,13 @@ class MessageController extends BbiiController {
 		));
 	}
 	
+	/**
+	 * [actionReply description]
+	 *
+	 * @todo  Iterate on the 'reply' functionality - DJE : 2015-05-20
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
 	public function actionReply($id) {
 		if (isset(Yii::$app->request->post()['BbiiMessage'])) {
 			$model = new BbiiMessage;
@@ -251,7 +258,7 @@ class MessageController extends BbiiController {
 			return Yii::$app->response->redirect(
 				isset(Yii::$app->request->post()['returnUrl'])
 				? Yii::$app->request->post()['returnUrl']
-				: ['forum/messages/inbox']
+				: ['forum/message/inbox']
 			);
 		}
 	}
@@ -358,8 +365,8 @@ class MessageController extends BbiiController {
 	 */
 	private function getMessageCount($param = null) {
 		return [
-			'inbox'  => BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.$this->getMessageID($param)),
-			'outbox' => BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.$this->getMessageID($param))
+			'inbox'  => BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.Yii::$app->user->id),
+			'outbox' => BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.Yii::$app->user->id)
 		];
 	}
 
@@ -369,7 +376,20 @@ class MessageController extends BbiiController {
 	 * @return [type]        [description]
 	 */
 	private function getMessageID($param = null) {
-		return ($param == null ? Yii::$app->user->id : $param);
+
+		if (is_numeric($param)) { return $param; }
+
+		$param = Yii::$app->request->post('BbiiMessage')['id'];
+		if (is_numeric($param)) {
+			return $param;
+		}
+
+		$param = Yii::$app->request->get('id');
+		if (is_numeric($param)) {
+			return $param;
+		}
+
+		return $param;
 	}
 
 	/**
