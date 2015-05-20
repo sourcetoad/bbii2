@@ -1,7 +1,12 @@
 <?php
 
+use frontend\modules\bbii\models\BbiiMember;
+
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
+use yii\jui\AutoComplete;
+use yii\web\JsExpression;
 
 /* @var $this MessageController */
 /* @var $model BbiiMessage */
@@ -34,10 +39,10 @@ use yii\bootstrap\ActiveForm;
 		// @todo iterate on this - DJE : 2015-05-19
 		/*$this->widget('zii.widgets.jui.CJuiAutoComplete',array(
 			'attribute' => 'search',
-			'model' => $model,
+			'model'     => $model,
 			'sourceUrl' => array('member/members'),
-			'theme' => $this->module->juiTheme,
-			'options' => array(
+			'theme'     => $this->module->juiTheme,
+			'options'   => array(
 				'minLength' => 2,
 				'delay' => 200,
 				'select' => 'js:function(event, ui) { 
@@ -50,11 +55,26 @@ use yii\bootstrap\ActiveForm;
 				'style' => 'height:20px;',
 			),
 		)); */
-		} else{
+
+
+			echo '<label class="control-label" for="bbiimessage-sendto">Send To</label>';
+
+		    echo AutoComplete::widget([
+		    	'clientOptions' => [
+					'source'    => BbiiMember::find()->select(['member_name as value', 'member_name as label','id as id'])->asArray()->all(),
+					'autoFill'  => true,
+					'minLength' => '4',
+					'select'    => new JsExpression("function( event, ui ) { $('#bbiimessage-sendto').val(ui.item.id); }")
+				],
+				'id'      => 'bbiimessage-sendto',
+				'name'    => 'BbiiMessage[sendto]',
+				'options' => ['class' => 'form-control']
+		    ]);
+
+		} else{ 
 			echo $form->label($model,'sendto');
 			echo '<strong>'.Html::encode($model->search).'</strong>';
 		} ?>
-		<?php echo $form->field($model, 'sendto'); ?>
 		<?php // echo $form->error($model,'sendto'); ?>
 	</div>
 	
@@ -87,12 +107,12 @@ use yii\bootstrap\ActiveForm;
 			'uiColor' => $this->module->editorUIColor,
 			'contentsCss' => $this->module->editorContentsCss,
 		));*/ ?>
-		<?php echo $form->field($model,'content')->textArea(['rows' => '6']);  ?>
+		<?php echo $form->field($model, 'content')->textArea(['rows' => '6']);  ?>
 		<?php // echo $form->error($model,'content'); ?>
 	</div>
 	
 	<div class = "row buttons">
-		<?php echo $form->field($model,'type')->input('hidden')->label(false);  ?>
+		<?php echo $form->field($model, 'type')->input('hidden')->label(false);  ?>
 		<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send')); ?>
 	</div>
 

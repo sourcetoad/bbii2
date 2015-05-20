@@ -74,20 +74,21 @@ $item = array(
 		'columns'      => array(
 			array(
 				'attribute' => 'sendfrom',
-				'value'     => 'member_name'
+				'value'     => 'sendfrom'
 			),
 			'subject',
 			array(
 				'attribute' => 'create_time',
-				'value'     => 'create_time:datetime',
+				'value'     => 'create_time',
 			),
 			array(
 				'attribute' => 'type',
-				'value'     => '($data->type) ? Yii::t("bbii", "notification") : Yii::t("bbii", "message")',
+				'value'     =>  'type',
 			),
 
 			[
 				'class'    => 'yii\grid\ActionColumn',
+				'template' => '{view}{delete}',
 			]),
 		'dataProvider' => $model,
 		'id'           => 'inbox-grid',

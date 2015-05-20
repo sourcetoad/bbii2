@@ -68,37 +68,24 @@ $item = array(
 		'columns'      => array(
 			array(
 				'attribute' => 'sendto',
-				'value'     => '$data->receiver->member_name'
+				'value'     => 'sendto'
 			),
 			'subject',
 			array(
 				'attribute' => 'create_time',
-				'value'     => 'create_time:datetime',
+				'value'     => 'create_time',
 			),
 			array(
 				'attribute' => 'type',
-				'value'     => '($data->type) ? Yii::t("bbii", "notification") : Yii::t("bbii", "message")',
+				'value'     => 'type',
 			),
 
 			[
 				'class' => 'yii\grid\ActionColumn',
-				/*'template' => '{view}{delete}',
-				'buttons' => array(
-					'view' => array(
-						'url' => '$data->id',
-						'imageUrl' => $assets->baseUrl.'view.png',
-						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . Yii::$app->urlManager->createAbsoluteUrl('message/view') .'");return false; }',
-					),
-					'delete' => array(
-						'imageUrl' => $assets->baseUrl.'/images/delete.png',
-						'options' => array('style' => 'margin-left:5px;'),
-					),
-				)*/
+				'template' => '{view}{delete}',
 			]),
 		'dataProvider'          => $model->search(),
 		'id'                    => 'inbox-grid',
-		// @todo Figure out the Yii2 version of this logic - DJE : 2015-05-15
-		//'rowCssClassExpression' => '($data->read_indicator)?"":"unread"',
 	)); ?>
 
 	<div id = "bbii-message"></div>

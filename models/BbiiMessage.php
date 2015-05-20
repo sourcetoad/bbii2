@@ -53,14 +53,15 @@ class BbiiMessage extends BbiiAR
 		return [
 			// @todo iterate on this rule - DJE : 2015-05-19
 
-			[['content'], 'filter', 'filter' => [$obj = new HtmlPurifier(), 'purify']],
-			[['create_time'], 'safe'],
+			// [['content'], 'filter', 'filter' => [$obj = new HtmlPurifier(), 'purify']],
+			// [['create_time'], 'safe'],
 			[['ip'], 'blocked'],
-			[['ip'], 'string', 'max'         => 39],
+			[['ip'], 'string', 'max' => 39],
 			[['sendfrom', 'sendto', 'read_indicator', 'type', 'inbox', 'outbox', 'post_id'], 'integer'],
 			[['sendfrom', 'sendto', 'subject', 'content'], 'required'],
-			[['subject'], 'string', 'max'    => 255],
-			
+			[['subject'], 'string', 'max' => 255],
+			[['sendfrom', 'sendto', 'subject', 'content'], 'safe'],
+
 			// scenarios
 			[['create_time'], 'default', 'value' => 'NOW()', 'on' => 'insert'],
 			[['sendto'], 'mailboxFull', 'on' => 'insert'],
