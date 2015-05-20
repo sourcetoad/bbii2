@@ -72,25 +72,27 @@ class SettingController extends BbiiController {
 
 		return $this->render('index', array('model' => $model));
 	}
-		
+
 	public function actionLayout() {
-		$category = BbiiForum::find()->sorted()->category()->all();
-		$forum    = array();
 		$model    = new BbiiForum();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if (isset(Yii::$app->request->post()['BbiiForum'])) {
-			$model->attributes = Yii::$app->request->post()['BbiiForum'];
-			if ($model->save()) {
+			$model->setAttributes(Yii::$app->request->post('BbiiForum'));
 
+			if ($model->validate() && $model->save()) {
+
+				return Yii::$app->response->redirect(array('forum/setting'));
+			} else {
+				Yii::$app->session->setFlash('error', Yii::t('BbiiModule.bbii', 'Forum setting edit failed.'));
 				return Yii::$app->response->redirect(array('forum/setting/layout'));
 			}
 		}
 		
 		return $this->render('layout', array(
-			'category' => $category,
+			'category' => BbiiForum::find()->sorted()->category()->all(),
 			'model'    => $model,
 		));
 	}
