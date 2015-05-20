@@ -52,7 +52,7 @@ class BbiiMessage extends BbiiAR
 		// will receive user inputs.
 		return [
 			// @todo iterate on this rule - DJE : 2015-05-19
-			// [['sendto', 'mailboxFull'], 'on' => 'insert'],
+
 			[['content'], 'filter', 'filter' => [$obj = new HtmlPurifier(), 'purify']],
 			[['create_time'], 'safe'],
 			[['ip'], 'blocked'],
@@ -63,6 +63,7 @@ class BbiiMessage extends BbiiAR
 			
 			// scenarios
 			[['create_time'], 'default', 'value' => 'NOW()', 'on' => 'insert'],
+			[['sendto'], 'mailboxFull', 'on' => 'insert'],
 			[['id', 'sendfrom', 'sendto', 'subject', 'content', 'read_indicator', 'type', 'inbox', 'outbox', 'ip', 'post_id'], 'safe', 'on' => 'search'],
 			[['ip'], 'default', 'value' => $_SERVER['REMOTE_ADDR'], 'on' => 'insert'],
 		];

@@ -3,7 +3,9 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\models\BbiiMessage;
+use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\components\BbiiController;
+
 
 use yii;
 
@@ -104,25 +106,19 @@ class MessageController extends BbiiController {
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset(Yii::$app->request->post()['BbiiMessage'])) {
+		if (Yii::$app->request->post('BbiiMessage')) {
 			$model->load(Yii::$app->request->post('BbiiMessage'));
 			//$model->search = Yii::$app->request->post()['BbiiMessage']['search'];
 			//$model->sendfrom = Yii::$app->user->id;
 
-			$errors = $model->validate();
-echo '<pre>';
-print_r( $errors );
-print_r( $model );
-echo '</pre>';
-exit;
-
-			if (empty(Yii::$app->request->post()['BbiiMessage']['search'])) {
+			if ($model->validate() && empty(Yii::$app->request->post('BbiiMessage')['search'])) {
 				unset($model->sendto);
 			} else {
-				$criteria = new CDbCriteria;
-				$criteria->condition = 'member_name = :search';
-				$criteria->params = array(':search' => Yii::$app->request->post()['BbiiMessage']['search']);
-				$member = BbiiMember::find()->find($criteria);
+				// $criteria = new CDbCriteria;
+				// $criteria->condition = 'member_name = :search';
+				// $criteria->params = array(':search' => Yii::$app->request->post()['BbiiMessage']['search']);
+				// $member = BbiiMember::find()->find($criteria);
+				$member = BbiiMember::find()->where(['member_name' => Yii::$app->request->post('BbiiMessage')['search']])->one();
 				if ($member === null) {
 					unset($model->sendto);
 					$model->addError('sendto', Yii::t('BbiiModule.bbii','Member not found'));
