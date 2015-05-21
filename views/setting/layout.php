@@ -95,7 +95,8 @@ $this->registerJs($script, View::POS_BEGIN);
 					'cat_id',
 					ArrayHelper::map(BbiiForum::find()->categories()->all(), 'id', 'name'),
 					array(
-						'class' => 'form-control', 'prompt'=>'None', 'id'=>'cat_id')
+						'class' => 'form-control', 'prompt'=>'None', 'id'=>'cat_id'
+					)
 				); ?>
 				<?php //echo $form->error($model,'cat_id'); ?>
 			</div>
@@ -137,7 +138,7 @@ $this->registerJs($script, View::POS_BEGIN);
 			'items'         => $items,
 			'options'		=> array(
 				'delay'  => '100',
-				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
+				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxSort') . '");}',
 			)
 		]);
 	?>
@@ -147,9 +148,9 @@ $this->registerJs($script, View::POS_BEGIN);
 <?php // @depricated 2.5.0 Kept for Referance
 /*
 $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
-    'id'=>'dlgEditForum',
-	'theme'=>$this->module->juiTheme,
-    'options'=>array(
+	'id'      => 'dlgEditForum',
+	'theme'   => $this->module->juiTheme,
+	'options' => array(
         'title'=>'Edit',
         'autoOpen'=>false,
 		'modal'=>true,
@@ -169,24 +170,22 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
 */
 
 Dialog::begin([
-	'id'            => 'dlgEditForum',
-	'clientOptions'       => array(
+	'id'           => 'dlgEditForum',
+	'clientOptions'=> [
 		'autoOpen' => false,
-		'buttons'  => array(
-			Yii::t('BbiiModule.bbii', 'Cancel') => 'js:function(){ $(this).dialog("close"); }',
-			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ deleteForum("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteForum') .'"); }',
-			Yii::t('BbiiModule.bbii', 'Save')   => 'js:function(){ saveForum("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveForum') .'"); }',
-		),
-		'modal'    => true,
+		'buttons'  => [
+			['text' => Yii::t('BbiiModule.bbii', 'Cancel'), 'click' => 'js:function() {$( this ).dialog( "close" );}'],
+			['text' => Yii::t('BbiiModule.bbii', 'Delete'), 'click' => 'js:function(){ deleteForum("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteForum') .'"); }'],
+			['text' => Yii::t('BbiiModule.bbii', 'Save') ,  'click' => 'js:function(){ saveForum("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveForum') .'"); }'],],
 		'modal'    => true,
 		'show'     => 'fade',
 		'title'    => 'Edit',
 		'width'    => 800,
-	),
+	],
 ]);
 
 echo $this->render('_editForum', array(
-	'model' => $model
+	'model' => $model,
 ));
 
 Dialog::end();
