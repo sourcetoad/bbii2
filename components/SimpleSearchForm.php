@@ -6,7 +6,7 @@ Yii::import('zii.widgets.CPortlet');
  
 class SimpleSearchForm extends CPortlet {
     protected function renderContent() {
-		$form = $this->beginWidget('CActiveForm', array(
+		$form = $this->beginWidget('ActiveForm', array(
 			'id' => 'simple-search-form',
 			'action' => array('search/index'),
 			'enableAjaxValidation' => false,

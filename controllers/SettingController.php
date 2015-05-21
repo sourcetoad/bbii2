@@ -228,7 +228,7 @@ class SettingController extends BbiiController {
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
-				$json['error'] = json_decode(CActiveForm::validate($model));
+				$json['error'] = json_decode(ActiveForm::validate($model));
 			}
 		}
 		echo json_encode($json);
@@ -318,7 +318,7 @@ class SettingController extends BbiiController {
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
-				$json['error'] = json_decode(CActiveForm::validate($model));
+				$json['error'] = json_decode(ActiveForm::validate($model));
 			}
 		}
 		echo json_encode($json);
@@ -340,7 +340,7 @@ class SettingController extends BbiiController {
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
-				$json['error'] = json_decode(CActiveForm::validate($model));
+				$json['error'] = json_decode(ActiveForm::validate($model));
 			}
 		}
 		echo json_encode($json);
@@ -378,7 +378,7 @@ class SettingController extends BbiiController {
 	protected function performAjaxValidation($model) {
 		if (isset(Yii::$app->request->post()['ajax']) && Yii::$app->request->post()['ajax'] === 'bbii-member-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::$app->end();
 		}
 	}

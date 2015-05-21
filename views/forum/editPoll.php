@@ -4,7 +4,7 @@
 /* @var $choices array */
 ?>
 <div class = "form">
-<?php $form = $this->beginWidget('CActiveForm', array(
+<?php $form = $this->beginWidget('ActiveForm', array(
 	'id' => 'edit-poll-form',
 	'action' => array('forum/updatePoll','id' => $poll->id),
 	'enableAjaxValidation' => false,

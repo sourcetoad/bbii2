@@ -25,7 +25,7 @@ $item = array(
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<?php $form = $this->beginWidget('CActiveForm', array(
+	<?php $form = $this->beginWidget('ActiveForm', array(
 			'id' => 'bbii-search-form',
 			'action' => array('search/index'),
 			'enableAjaxValidation' => false,

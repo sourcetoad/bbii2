@@ -36,7 +36,7 @@ $item = array(
 	
 	<?php if (!(Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()): ?>
 	<div class = "form">
-		<?php $form = $this->beginWidget('CActiveForm', array(
+		<?php $form = $this->beginWidget('ActiveForm', array(
 			'id' => 'create-topic-form',
 			'action' => array('forum/createTopic'),
 			'enableAjaxValidation' => false,

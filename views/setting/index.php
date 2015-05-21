@@ -28,7 +28,7 @@ $item = array(
 	<div class = "form">
 
 	<?php // @depricated 2.2.0 Kept for referance
-	/*$form = $this->beginWidget('CActiveForm', array(
+	/*$form = $this->beginWidget('ActiveForm', array(
 		'enableAjaxValidation' => false,
 		'id'                   => 'bbii-setting-form',
 	));*/ ?>

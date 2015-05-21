@@ -43,7 +43,7 @@ $('.presence').hide();
 	<div class = "form">
 
 		<?php // @depricated 2.4 Kept for referance
-		/*$form = $this->beginWidget('CActiveForm', array(
+		/*$form = $this->beginWidget('ActiveForm', array(
 			'enableAjaxValidation' => false,
 			'htmlOptions'          => array('enctype' => 'multipart/form-data'),
 			'id'                   => 'bbii-member-form',

@@ -43,7 +43,7 @@ $assets = AppAsset::register($this);
 		<div class = "post-header">
 			<?php if (!(Yii::$app->user->isGuest || $data->topic->locked) || $this->context->isModerator()): ?>
 				<div class = "form">
-					<?php $form = $this->beginWidget('CActiveForm', array(
+					<?php $form = $this->beginWidget('ActiveForm', array(
 						'action' => array('forum/quote', 'id' => $data->id),
 						'enableAjaxValidation' => false,
 					)); ?>
@@ -53,7 +53,7 @@ $assets = AppAsset::register($this);
 			<?php endif; ?>
 			<?php if (!($data->user_id != Yii::$app->user->id || $data->topic->locked) || $this->context->isModerator()): ?>
 				<div class = "form">
-					<?php $form = $this->beginWidget('CActiveForm', array(
+					<?php $form = $this->beginWidget('ActiveForm', array(
 						'action' => array('forum/update', 'id' => $data->id),
 						'enableAjaxValidation' => false,
 					)); ?>

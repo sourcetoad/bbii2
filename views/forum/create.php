@@ -32,7 +32,7 @@ if (empty($poll->question) && !$poll->hasErrors()) {
 	</noscript>
 
 	<div class = "form">
-		<?php $form = $this->beginWidget('CActiveForm', array(
+		<?php $form = $this->beginWidget('ActiveForm', array(
 			'id' => 'create-topic-form',
 			'enableAjaxValidation' => false,
 		)); ?>

@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 /* @var $this SettingController */
 /* @var $model BbiiForum */
-/* @var $form CActiveForm */
+/* @var $form ActiveForm */
 ?>
 
 <div class = "form">

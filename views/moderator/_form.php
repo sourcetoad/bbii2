@@ -1,7 +1,7 @@
 <?php
 /* @var $this ModeratorController */
 /* @var $model MailForm */
-/* @var $form CActiveForm */
+/* @var $form ActiveForm */
 ?>
 
 <h2><?php echo Yii::t('BbiiModule.bbii','Send mail to multiple forum members'); ?></h2>
@@ -16,7 +16,7 @@
 
 <div class = "form">
 
-<?php /* $form = $this->beginWidget('CActiveForm', array(
+<?php /* $form = $this->beginWidget('ActiveForm', array(
 	'id' => 'bbii-mail-form',
 	'enableAjaxValidation' => false,
 )); ?>

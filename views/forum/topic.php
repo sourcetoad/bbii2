@@ -61,7 +61,7 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 
 	<?php if (!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()): ?>
 	<div class = "form">
-		<?php $form = $this->beginWidget('CActiveForm', array(
+		<?php $form = $this->beginWidget('ActiveForm', array(
 			'id' => 'create-post-form',
 			'action' => array('forum/reply', 'id' => $topic->id),
 			'enableAjaxValidation' => false,

@@ -51,7 +51,7 @@ $this->registerJs($script, View::POS_BEGIN);
 	<div class="form">
 
 	<?php // @depricated 2.4 Kept for referance
-    /* $form=$this->beginWidget('CActiveForm', array(
+    /* $form=$this->beginWidget('ActiveForm', array(
 		'id'=>'bbii-forum-form',
 		'enableAjaxValidation'=>false,
 	));*/ ?>

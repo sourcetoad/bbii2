@@ -345,7 +345,7 @@ class MessageController extends BbiiController {
 	{
 		if (isset(Yii::$app->request->post()['ajax']) && Yii::$app->request->post()['ajax'] === 'message-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::$app->end();
 		}
 	}
