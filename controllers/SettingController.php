@@ -44,7 +44,24 @@ class SettingController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'    => array('ajaxSort','deleteForum','deleteMembergroup','getForum','getMembergroup','saveForum','saveMembergroup','group','index','layout','spider','getSpider','deleteSpider','saveSpider','moderator','changeModerator'),
+				'actions'    => array(
+					'getforum',
+					'ajaxSort',
+					'changeModerator',
+					'deleteForum',
+					'deleteMembergroup',
+					'deleteSpider',
+					'getMembergroup',
+					'getSpider',
+					'group',
+					'index',
+					'layout',
+					'moderator',
+					'saveForum',
+					'saveMembergroup',
+					'saveSpider',
+					'spider',
+				),
 				'expression' => ($this->isAdmin())?'true':'false',
 				'users'      => array('@'),
 			),
@@ -163,25 +180,17 @@ class SettingController extends BbiiController {
 
 	/**
 	 * handle Ajax call for getting forum
+	 *
+	 * Method names in Yii2 can not have a 2nd capital letter. Only upper case the first letter of the first word after 'action' - DJE : 2015-05-21
 	 */
-	public function actionGetForum() {
-		$json = array();
-		if (isset($_GET['id'])) {
-			$model = BbiiForum::find($_GET['id']);
-			if ($model !== null) {
-				$json['id'] = $model->id;
-				$json['name'] = $model->name;
-				$json['subtitle'] = $model->subtitle;
-				$json['cat_id'] = $model->cat_id;
-				$json['type'] = $model->type;
-				$json['locked'] = $model->locked;
-				$json['public'] = $model->public;
-				$json['moderated'] = $model->moderated;
-				$json['membergroup_id'] = $model->membergroup_id;
-				$json['poll'] = $model->poll;
-			}
-		}
-		echo json_encode($json);
+	public function actionGetforum() {
+		$id = Yii::$app->request->get('id');
+
+		echo json_encode($returnData = (is_numeric($id))
+			? BbiiForum::find()->where(['id' => $id])->asArray()->one()
+			: ['error' => 'Unable to retrieve requested information.']
+		);
+
 		Yii::$app->end();
 	}
 
