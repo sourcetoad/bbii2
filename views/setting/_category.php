@@ -25,7 +25,11 @@ foreach($forum as $forumdata) {
 				echo Html::button(
 					Yii::t('BbiiModule.bbii', 'Edit'),
 					array(
-						'onclick' => 'js:editCategory(' . $data->id . ',"' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/getforum') .'")'
+						'onclick' => 'js:editCategory(
+							' . $data->id . ',
+							"' . Yii::t('BbiiModule.bbii','Edit category') . '",
+							"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/getforum') .'"
+						)'
 					)
 				); ?>
 		</td>
@@ -56,7 +60,7 @@ foreach($forum as $forumdata) {
 			'itemOptions'   => ['tag' => 'li'],
 			'items'         => $forumitems,
 			'options' => array(
-				'delay' => '100',
+				'delay'  => '100',
 				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		]);
