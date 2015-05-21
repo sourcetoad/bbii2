@@ -183,10 +183,11 @@ class SettingController extends BbiiController {
 	 *
 	 * Method names in Yii2 can not have a 2nd capital letter. Only upper case the first letter of the first word after 'action' - DJE : 2015-05-21
 	 */
-	public function actionGetforum() {
-		$id = Yii::$app->request->get('id');
+	public function actionGetforum($id = null) {
+		$id = ($id == null) ? Yii::$app->request->get('id') : $id;
 
-		echo json_encode($returnData = (is_numeric($id))
+		echo json_encode(
+			(is_numeric($id))
 			? BbiiForum::find()->where(['id' => $id])->asArray()->one()
 			: ['error' => 'Unable to retrieve requested information.']
 		);

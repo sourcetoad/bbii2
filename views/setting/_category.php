@@ -25,7 +25,7 @@ foreach($forum as $forumdata) {
 				echo Html::button(
 					Yii::t('BbiiModule.bbii', 'Edit'),
 					array(
-						'onclick' => 'editCategory(' . $data->id . ',"' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/_getForum/') .'")'
+						'onclick' => 'js:editCategory(' . $data->id . ',"' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/getforum') .'")'
 					)
 				); ?>
 		</td>

@@ -35,11 +35,10 @@ confirmation[0] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this forum?') . "';
 ", CClientScript::POS_BEGIN);*/
 
-$script = <<< JS
+$script = "
 var confirmation = new Array();
 confirmation[0] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this category?') . "';
-confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this forum?') . "';
-JS;
+confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this forum?') . "';";
 $this->registerJs($script, View::POS_BEGIN);
 // where $position can be View::POS_READY (the default), 
 // or View::POS_HEAD, View::POS_BEGIN, View::POS_END
@@ -168,4 +167,26 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 */
-?>
+
+Dialog::begin([
+	'id'            => 'dlgEditForum',
+	'clientOptions'       => array(
+		'autoOpen' => false,
+		'buttons'  => array(
+			Yii::t('BbiiModule.bbii', 'Cancel') => 'js:function(){ $(this).dialog("close"); }',
+			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ deleteForum("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteForum') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Save')   => 'js:function(){ saveForum("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveForum') .'"); }',
+		),
+		'modal'    => true,
+		'modal'    => true,
+		'show'     => 'fade',
+		'title'    => 'Edit',
+		'width'    => 800,
+	),
+]);
+
+echo $this->render('_editForum', array(
+	'model' => $model
+));
+
+Dialog::end();
