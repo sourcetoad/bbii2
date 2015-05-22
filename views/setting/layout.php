@@ -117,7 +117,10 @@ $this->registerJs($script, View::POS_BEGIN);
 		$items = array();
 		foreach($category as $data) {
 			$forum = BbiiForum::find()->where(["cat_id" => $data->getAttribute('id')])->sorted()->forum()->all();
-			$items['cat_'.$data->id] = $this->render('_category', array('data' => $data, 'forum' => $forum), true);
+			$items['cat_'.$data->id] = $this->render('_category', array(
+				'forum' => $forum,
+				'data'  => $data,
+			), true);
 		}
 		/*
 		$this->widget('zii.widgets.jui.CJuiSortable', array(
@@ -132,7 +135,28 @@ $this->registerJs($script, View::POS_BEGIN);
 		));*/
 
 		echo Sortable::widget([
-			'clientEvents'  => ['update' => 'function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxsort') . '");}',],
+			'clientEvents'  => [
+				'update' => 'function( event, ui ) {
+
+ 					/*var arr = new Array();
+					$(".ui-sortable-handle table").each(function() {
+					    arr.push( $(this).data("id"));
+					});*/
+
+
+var order = null;
+$("#linksSortable tbody").sortable({
+    handle  : ".handle", 
+    update  : function () { 
+		order = $("#linksSortable tbody").sortable("serialize"); 
+    }
+});
+
+console.log( order );
+
+					//Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/ajaxsort']) . '");
+				}',
+			],
 			'clientOptions' => ['cursor' => 'move'],
 			'id'            => 'sortcategory',
 			'itemOptions'   => ['tag' 	 => 'li'],

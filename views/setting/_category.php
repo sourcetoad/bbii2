@@ -14,7 +14,7 @@ foreach($forum as $forumdata) {
 }
 ?>
 
-<table style = "margin:0;">
+<table style = "margin:0;" data-id="<?php echo $data->id; ?>">
 <tbody class = "category">
 	<tr>
 		<td class = "name">
@@ -25,7 +25,6 @@ foreach($forum as $forumdata) {
 				echo Html::buttonInput(
 					Yii::t('BbiiModule.bbii', 'Edit'),
 					[
-						'class'   => 'btn btn-primary',
 						'onclick' => 'js:editCategory(' . $data->id . ', "' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/getforum') .'")'
 						//'onclick' => 'function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxsort') . '");}();'
 					]
@@ -51,7 +50,7 @@ foreach($forum as $forumdata) {
 				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		));*/
-
+/*
 		echo Sortable::widget([
 			'clientOptions' => ['cursor' => 'move'],
 			'id'            => 'sortfrm' . $data->id,
@@ -62,6 +61,7 @@ foreach($forum as $forumdata) {
 				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		]);
+*/
 	?>
 	</td>
 </tr>

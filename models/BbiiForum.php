@@ -54,7 +54,7 @@ class BbiiForum extends BbiiAR
 			[['type', 'public', 'locked', 'moderated', 'sort', 'num_posts', 'num_topics', 'last_post_id', 'membergroup_id', 'poll'], 'integer'],
 			[['name'], 'unique'],
 			[['name', 'subtitle'],  'string', 'min' => 4,  'max' => 255],
-			['cat_id',  'string',  'max' => 10],
+			[['cat_id'],  'string',  'max' => 10],
 			[['type'], 'validateType'],
 			[['cat_id', 'subtitle'], 'default',  'value' => null],
 			[['public'], 'default',  'value' => 1],
