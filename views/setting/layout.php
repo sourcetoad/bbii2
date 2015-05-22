@@ -21,11 +21,11 @@ $this->context->bbii_breadcrumbs = array(
 );
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 'url' => array('setting/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 	'url' => array('setting/index')),
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum layout'), 'url' => array('setting/layout')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'), 'url' => array('setting/group')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 'url' => array('setting/moderator')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 'url' => array('setting/spider')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'),'url' => array('setting/group')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 	'url' => array('setting/moderator')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 	'url' => array('setting/spider')),
 );
 
 // @depricated 2.5.0 By Yii2.x
@@ -132,14 +132,12 @@ $this->registerJs($script, View::POS_BEGIN);
 		));*/
 
 		echo Sortable::widget([
+			'clientEvents'  => ['update' => 'function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxsort') . '");}',],
 			'clientOptions' => ['cursor' => 'move'],
 			'id'            => 'sortcategory',
-			'itemOptions'   => ['tag' => 'li'],
+			'itemOptions'   => ['tag' 	 => 'li'],
 			'items'         => $items,
-			'options'		=> array(
-				'delay'  => '100',
-				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxSort') . '");}',
-			)
+			'options'       => ['delay'  => '100']
 		]);
 	?>
 	</div>
@@ -172,11 +170,14 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
 Dialog::begin([
 	'id'           => 'dlgEditForum',
 	'clientOptions'=> [
+		'closeButton' => true,
 		'autoOpen' => false,
+		// @todo get the resolution for this issue - DJE : 2015-05-21
 		'buttons'  => [
-			['text' => Yii::t('BbiiModule.bbii', 'Cancel'), 'click' => 'js:function() {$( this ).dialog( "close" );}'],
-			['text' => Yii::t('BbiiModule.bbii', 'Delete'), 'click' => 'js:function(){ deleteForum("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteForum') .'"); }'],
-			['text' => Yii::t('BbiiModule.bbii', 'Save') ,  'click' => 'js:function(){ saveForum("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveForum') .'"); }'],],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Cancel'), 'click' => 'function(){cancelForum( $( this ).dialog( "close" ); )}'],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Delete'), 'click' => 'function(){deleteForum(' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteForum') .'); }'],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Save') ,  'click' => 'function(){saveForum(' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveForum') .'); }'],
+		],
 		'modal'    => true,
 		'show'     => 'fade',
 		'title'    => 'Edit',

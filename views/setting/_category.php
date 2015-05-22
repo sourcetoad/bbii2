@@ -22,15 +22,13 @@ foreach($forum as $forumdata) {
 		</td>
 		<td rowspan = "2" style = "width:140px;">
 			<?php
-				echo Html::button(
+				echo Html::buttonInput(
 					Yii::t('BbiiModule.bbii', 'Edit'),
-					array(
-						'onclick' => 'js:editCategory(
-							' . $data->id . ',
-							"' . Yii::t('BbiiModule.bbii','Edit category') . '",
-							"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/getforum') .'"
-						)'
-					)
+					[
+						'class'   => 'btn btn-primary',
+						'onclick' => 'js:editCategory(' . $data->id . ', "' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/getforum') .'")'
+						//'onclick' => 'function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxsort') . '");}();'
+					]
 				); ?>
 		</td>
 	</tr>

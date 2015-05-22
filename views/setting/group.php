@@ -84,6 +84,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 			// @todo use prop Yii2 CRUD to view/update/delete forum groups.
 			[
 				'class'    => 'yii\grid\ActionColumn',
+				'template' => '{update}'
 			],
 		),
 		'dataProvider' => $model->search(),
@@ -113,3 +114,28 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
     echo $this->render('_editMembergroup', array('model' => $model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
+*/
+
+Dialog::begin([
+	'id'           => 'dlgEditMembergroup',
+	'clientOptions'=> [
+		'closeButton' => true,
+		'autoOpen' => false,
+		// @todo get the resolution for this issue - DJE : 2015-05-21
+		'buttons'  => [
+			['text' => Yii::t('BbiiModule.bbii', 'Cancel'), 	'click' => 'js:function(){ $(this).dialog("close"); }'],
+			['text' => Yii::t('BbiiModule.bbii', 'Delete'), 	'click' => 'js:function(){ deleteMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteMembergroup') .'"); }'],
+			['text' => Yii::t('BbiiModule.bbii', 'Save'), 		'click' => 'js:function(){ saveMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveMembergroup') .'"); }'],
+		],
+		'modal'    => true,
+		'show'     => 'fade',
+		'title'    => 'Edit',
+		'width'    => 800,
+	],
+]);
+
+echo $this->render('_editMembergroup', array(
+	'model' => $model,
+));
+
+Dialog::end();

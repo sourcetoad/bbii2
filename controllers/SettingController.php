@@ -154,7 +154,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for sorting categories and forums
 	 */
-	public function actionAjaxSort() {
+	public function actionAjaxsort() {
 		if (isset(Yii::$app->request->post()['cat'])) {
 			$number = 1;
 			foreach(Yii::$app->request->post()['cat'] as $id) {
