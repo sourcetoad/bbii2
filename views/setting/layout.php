@@ -138,23 +138,12 @@ $this->registerJs($script, View::POS_BEGIN);
 			'clientEvents'  => [
 				'update' => 'function( event, ui ) {
 
- 					/*var arr = new Array();
+ 					var arr = new Array();
 					$(".ui-sortable-handle table").each(function() {
 					    arr.push( $(this).data("id"));
-					});*/
+					});
 
-
-var order = null;
-$("#linksSortable tbody").sortable({
-    handle  : ".handle", 
-    update  : function () { 
-		order = $("#linksSortable tbody").sortable("serialize"); 
-    }
-});
-
-console.log( order );
-
-					//Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/ajaxsort']) . '");
+					Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/ajaxsort']) . '");
 				}',
 			],
 			'clientOptions' => ['cursor' => 'move'],
