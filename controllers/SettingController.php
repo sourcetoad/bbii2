@@ -200,16 +200,16 @@ class SettingController extends BbiiController {
 	 */
 	public function actionDeleteForum() {
 		$json = array();
-		if (isset(Yii::$app->request->post('id'))) {
-			$model = BbiiForum::find(Yii::$app->request->post('id'));
-			if (BbiiForum::find()->exists("cat_id = " . Yii::$app->request->post('id'))) {
+		if (isset(Yii::$app->request->post()['id'])) {
+			$model = BbiiForum::find(Yii::$app->request->post()['id']);
+			if (BbiiForum::find()->exists("cat_id = " . Yii::$app->request->post()['id'])) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'There are still forums in this category. Remove these before deleting the category.');
-			} elseif (BbiiTopic::find()->exists('forum_id = ' . Yii::$app->request->post('id'))) {
+			} elseif (BbiiTopic::find()->exists('forum_id = ' . Yii::$app->request->post()['id'])) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'There are still topics in this forum. Remove these before deleting the forum.');
 			} else {
-				BbiiForum::find(Yii::$app->request->post('id'))->delete();
+				BbiiForum::find(Yii::$app->request->post()['id'])->delete();
 				$json['success'] = 'yes';
 			}
 		}
@@ -277,12 +277,12 @@ class SettingController extends BbiiController {
 	 */
 	public function actionDeleteMembergroup() {
 		$json = array();
-		if (isset(Yii::$app->request->post('id'))) {
-			if (Yii::$app->request->post('id') == 0) {
+		if (isset(Yii::$app->request->post()['id'])) {
+			if (Yii::$app->request->post()['id'] == 0) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'The default member group cannot be removed.');
 			} else {
-				BbiiMembergroup::find(Yii::$app->request->post('id'))->delete();
+				BbiiMembergroup::find(Yii::$app->request->post()['id'])->delete();
 				$json['success'] = 'yes';
 			}
 		}
@@ -295,8 +295,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionDeleteSpider() {
 		$json = array();
-		if (isset(Yii::$app->request->post('id'))) {
-			BbiiSpider::find(Yii::$app->request->post('id'))->delete();
+		if (isset(Yii::$app->request->post()['id'])) {
+			BbiiSpider::find(Yii::$app->request->post()['id'])->delete();
 			$json['success'] = 'yes';
 		}
 		echo json_encode($json);
@@ -352,8 +352,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionChangeModerator() {
 		$json = array();
-		if (isset(Yii::$app->request->post('id')) && isset(Yii::$app->request->post()['moderator'])) {
-			$model = BbiiMember::find(Yii::$app->request->post('id'));
+		if (isset(Yii::$app->request->post()['id']) && isset(Yii::$app->request->post()['moderator'])) {
+			$model = BbiiMember::find(Yii::$app->request->post()['id']);
 			if ($model !== null) {
 				$model->moderator = Html::encode(Yii::$app->request->post()['moderator']);
 				$model->save();

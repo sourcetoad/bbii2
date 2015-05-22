@@ -523,13 +523,13 @@ class ForumController extends BbiiController {
 	 */
 	public function actionUpvote() {
 		$json = array();
-		if (isset(Yii::$app->request->post('id'))) {
+		if (isset(Yii::$app->request->post()['id'])) {
 			$criteria = new CDbCriteria;
 			$criteria->condition = "member_id = :userid and post_id = :post_id";
-			$criteria->params = array(':userid' => Yii::$app->user->id, ':post_id' => Yii::$app->request->post('id'));
+			$criteria->params = array(':userid' => Yii::$app->user->id, ':post_id' => Yii::$app->request->post()['id']);
 			if (BbiiUpvoted::find()->exists($criteria)) {	// remove upvote
 				BbiiUpvoted::find()->deleteAll($criteria);
-				$post = BbiiPost::find(Yii::$app->request->post('id'));
+				$post = BbiiPost::find(Yii::$app->request->post()['id']);
 				$topic = BbiiTopic::find($post->topic_id);
 				$member = BbiiMember::find($post->user_id);
 				$post->saveCounters(array('upvoted' => -1));
@@ -538,9 +538,9 @@ class ForumController extends BbiiController {
 			} else {										// add upvote
 				$upvote = new BbiiUpvoted;
 				$upvote->member_id = Yii::$app->user->id;
-				$upvote->post_id = Yii::$app->request->post('id');
+				$upvote->post_id = Yii::$app->request->post()['id'];
 				$upvote->save();
-				$post = BbiiPost::find(Yii::$app->request->post('id'));
+				$post = BbiiPost::find(Yii::$app->request->post()['id']);
 				$topic = BbiiTopic::find($post->topic_id);
 				$member = BbiiMember::find($post->user_id);
 				$post->saveCounters(array('upvoted' => 1));
@@ -548,7 +548,7 @@ class ForumController extends BbiiController {
 				$member->saveCounters(array('upvoted' => 1));
 			}
 			$json['success'] = 'yes';
-			$json['html'] = $this->showUpvote(Yii::$app->request->post('id'));
+			$json['html'] = $this->showUpvote(Yii::$app->request->post()['id']);
 		} else {
 			$json['success'] = 'no';
 		}
@@ -666,19 +666,19 @@ class ForumController extends BbiiController {
 	 */
 	public function actionSetCollapsed() {
 		$json = array('success' => 1);
-		if (isset(Yii::$app->request->post('id')) && isset(Yii::$app->request->post()['action'])) {
+		if (isset(Yii::$app->request->post()['id']) && isset(Yii::$app->request->post()['action'])) {
 			if (Yii::$app->request->post()['action'] == 'set') {
 				if (isset(Yii::$app->request->cookies['bbiiCollapsed'])) {
 					$json['cookies'] = Yii::$app->request->cookies['bbiiCollapsed'];
 					$catArray = explode('_', Yii::$app->request->cookies['bbiiCollapsed']->value);
-					$catArray[] = Yii::$app->request->post('id');
+					$catArray[] = Yii::$app->request->post()['id'];
 					$catArray = array_unique($catArray);
 					$cookie = new CHttpCookie('bbiiCollapsed', implode('_', $catArray));
 					$cookie->expire = time() + (60*60*24*28);
 					$cookie->path = Yii::$app->createUrl($this->module->id);
 					Yii::$app->request->cookies['bbiiCollapsed'] = $cookie;
 				} else {
-					$cookie = new CHttpCookie('bbiiCollapsed', Yii::$app->request->post('id'));
+					$cookie = new CHttpCookie('bbiiCollapsed', Yii::$app->request->post()['id']);
 					$cookie->expire = time() + (60*60*24*28);
 					$cookie->path = Yii::$app->createUrl($this->module->id);
 					Yii::$app->request->cookies['bbiiCollapsed'] = $cookie;
@@ -686,7 +686,7 @@ class ForumController extends BbiiController {
 			} else {
 				if (isset(Yii::$app->request->cookies['bbiiCollapsed'])) {
 					$catArray = explode('_', Yii::$app->request->cookies['bbiiCollapsed']->value);
-					$catArray = array_diff($catArray, array(Yii::$app->request->post('id')));
+					$catArray = array_diff($catArray, array(Yii::$app->request->post()['id']));
 					$cookie = new CHttpCookie('bbiiCollapsed', implode('_', $catArray));
 					$cookie->expire = time() + (60*60*24*28);
 					$cookie->path = Yii::$app->createUrl($this->module->id);

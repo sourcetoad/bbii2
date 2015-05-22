@@ -271,8 +271,8 @@ class MessageController extends BbiiController {
 	 */
 	/*public function actionView() {
 		$json = array();
-		if (isset(Yii::$app->request->post('id'))) {
-			$model = BbiiMessage::find(Yii::$app->request->post('id'));
+		if (isset(Yii::$app->request->post()['id'])) {
+			$model = BbiiMessage::find(Yii::$app->request->post()['id']);
 			if ($model !== null && ($this->isModerator() || $model->sendto == Yii::$app->user->id || $model->sendfrom == Yii::$app->user->id)) {
 				$json['success'] = 'yes';
 				$json['html'] = $this->render('_view', array('model' => $model), true);
