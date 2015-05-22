@@ -123,9 +123,9 @@ Dialog::begin([
 		'autoOpen' => false,
 		// @todo get the resolution for this issue - DJE : 2015-05-21
 		'buttons'  => [
-			['text' => Yii::t('BbiiModule.bbii', 'Cancel'), 	'click' => 'js:function(){ $(this).dialog("close"); }'],
-			['text' => Yii::t('BbiiModule.bbii', 'Delete'), 	'click' => 'js:function(){ deleteMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteMembergroup') .'"); }'],
-			['text' => Yii::t('BbiiModule.bbii', 'Save'), 		'click' => 'js:function(){ saveMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveMembergroup') .'"); }'],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Cancel'), 	'click' => 'js:function(){ $(this).dialog("close"); }'],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Delete'), 	'click' => 'js:function(){ deleteMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteMembergroup') .'"); }'],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Save'), 		'click' => 'js:function(){ saveMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveMembergroup') .'"); }'],
 		],
 		'modal'    => true,
 		'show'     => 'fade',
