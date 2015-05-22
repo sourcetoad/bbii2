@@ -238,8 +238,8 @@ class ModeratorController extends BbiiController {
 	
 	public function actionView() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
-			$model = BbiiPost::find(Yii::$app->request->post()['id']);
+		if (isset(Yii::$app->request->post('id'))) {
+			$model = BbiiPost::find(Yii::$app->request->post('id'));
 			if ($model !== null) {
 				$poll = BBiiPoll::find()->findByAttributes(array('post_id' => $model->id));
 				$choices = array();
@@ -265,8 +265,8 @@ class ModeratorController extends BbiiController {
 	
 	public function actionTopic() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
-			$model = BbiiTopic::find(Yii::$app->request->post()['id']);
+		if (isset(Yii::$app->request->post('id'))) {
+			$model = BbiiTopic::find(Yii::$app->request->post('id'));
 			if ($model === null) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'Topic not found.');
@@ -296,10 +296,10 @@ class ModeratorController extends BbiiController {
 	 */
 	public function actionRefreshTopics() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
+		if (isset(Yii::$app->request->post('id'))) {
 			$json['success'] = 'yes';
 			$json['option'] = '<option value = ""></option>';
-			foreach(BbiiTopic::find()->findAll('forum_id = ' . Yii::$app->request->post()['id']) as $topic) {
+			foreach(BbiiTopic::find()->findAll('forum_id = ' . Yii::$app->request->post('id')) as $topic) {
 				$json['option'] .= '<option value = "' . $topic->id. '">' . $topic->title . '</option>';
 			}
 		} else {
