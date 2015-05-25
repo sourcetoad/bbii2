@@ -54,4 +54,9 @@ class BbiiForumQuery extends ActiveQuery
 
         return $this->orderBy('sort');
     }
+
+    public function membergroup()
+    {
+        return $this->andWhere('id > 0');
+    }
 }
