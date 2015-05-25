@@ -15,17 +15,9 @@ $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Settings') => array('setting/index'),
 	Yii::t('BbiiModule.bbii', 'Moderators')
 );
-
-$item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 'url' => array('setting/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum layout'), 'url' => array('setting/layout')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'), 'url' => array('setting/group')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 'url' => array('setting/moderator')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 'url' => array('setting/spider')),
-);
 ?>
 <div id = "bbii-wrapper">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('template/_header', array('item' => $item)); ?>
 
 	<?php // @depricated 2.3.0 Kept for referance
 	/* $this->widget('zii.widgets.grid.CGridView', array(

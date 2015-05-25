@@ -20,14 +20,6 @@ $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum layout'),
 );
 
-$item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 	'url' => array('setting/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum layout'), 'url' => array('setting/layout')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'),'url' => array('setting/group')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 	'url' => array('setting/moderator')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 	'url' => array('setting/spider')),
-);
-
 // @depricated 2.5.0 By Yii2.x
 /*Yii::$app->clientScript->registerScript('confirmation', "
 var confirmation = new Array();
@@ -44,7 +36,7 @@ $this->registerJs($script, View::POS_BEGIN);
 // or View::POS_HEAD, View::POS_BEGIN, View::POS_END
 ?>
 <div id="bbii-wrapper">
-	<?php echo $this->render('_header', array('item'=>$item)); ?>
+	<?php echo $this->render('template/_header'); ?>
 	
 	<div class="bbii-box-top"><?php echo Yii::t('BbiiModule.bbii', 'Add category or forum'); ?></div>
 	

@@ -7,6 +7,14 @@ use yii\widgets\Breadcrumbs;
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
 
+$item = array(
+	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 	'url' => array('setting/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Forum layout'), 'url' => array('setting/layout')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'),'url' => array('setting/group')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 	'url' => array('setting/moderator')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 	'url' => array('setting/spider')),
+);
+
 /* @var $this ForumController */
 /* @var $item array */
 ?>

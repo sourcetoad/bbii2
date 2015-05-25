@@ -17,20 +17,12 @@ $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Member groups')
 );
 
-$item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Settings'), 'url' => array('setting/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum layout'), 'url' => array('setting/layout')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Member groups'), 'url' => array('setting/group')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Moderators'), 'url' => array('setting/moderator')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Webspiders'), 'url' => array('setting/spider')),
-);
-
 /*Yii::$app->clientScript->registerScript('confirmation', "
 var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this member group?') . "'
 ", CClientScript::POS_BEGIN);*/
 ?>
 <div id = "bbii-wrapper">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('template/_header'); ?>
 	
     <p>
         <?= Html::a('Create Member Group', ['createmembergroup'], ['class' => 'btn btn-success']) ?>
