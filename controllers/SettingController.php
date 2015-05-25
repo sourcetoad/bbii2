@@ -54,7 +54,6 @@ class SettingController extends BbiiController {
 					'deleteSpider',
 					'getMembergroup',
 					'getSpider',
-					'group',
 					'index',
 					'layout',
 					'moderator',
