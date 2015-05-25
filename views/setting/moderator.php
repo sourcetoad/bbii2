@@ -52,7 +52,7 @@ $item = array(
 	));*/ ?>
 
 	<?php echo GridView::widget(array(
-		'columns' 		=> array(
+		'columns'      => array(
 			'member_name',
 			array(
 				'attribute' => 'group_id',
@@ -68,11 +68,21 @@ $item = array(
 			),
 			
 			[
+				'buttons'=>[
+					'update' => function ($url, $model) {     
+						return Html::a(
+							'<span class="glyphicon glyphicon-pencil"></span>',
+							'../member/update?id='.$model->id,
+							['title' => Yii::t('yii', 'Update')]
+						);                                
+					}
+				],
 				'class'    => 'yii\grid\ActionColumn',
-			]),
-		'dataProvider'  => $model,
-		'id' 			=> 'bbii-member-grid',
-		// @todo Figure out the Yii2 version of this logic - DJE : 2015-05-15
-		//'rowCssClassExpression' => '(Yii::$app->authManager && Yii::$app->authManager->checkAccess("moderator", $data->id))?"moderator":(($row % 2)?"even":"odd")',
+				'template' => '{update}'
+			],
+		),
+		'dataProvider' => $model,
+		'id'           => 'moderator-grid',
 	)); ?>
+
 </div>
