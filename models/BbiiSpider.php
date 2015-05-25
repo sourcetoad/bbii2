@@ -41,15 +41,16 @@ class BbiiSpider extends BbiiAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, user_agent', 'required'),
+			[['name', 'user_agent'], 'required'],
 			['name', 'string', 'max' => 45],
 			['user_agent', 'string', 'max' => 255],
-			[['hits', 'numerical'], 'integer'],
+			[['hits'], 'integer', 'min' => 0],
 			array('hits', 'default',  'value' => 0),
 			array('last_visit', 'default', 'value' => 'NOW()', 'on' => 'visit'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, user_agent, last_visit', 'safe', 'on' => 'search'),
+
+			//array('id, name, user_agent, last_visit', 'safe', 'on' => 'search'),
 		);
 	}
 

@@ -63,24 +63,26 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 	));*/ ?>
 
 	<?php echo GridView::widget(array(
+
 		'columns' => array(
-			array(
-				'attribute' => 'name',
-				'format'    => 'raw',
-				'value'     => function ($data) { return (isset($data->name)) ? Html::a($data->name, $data->url, array("target" => "_new")) . "<span style = \"display:none;\">{$data->id}</span>" : null ; },
-			),
+			'name',
 			'user_agent',
-			array(
-				'header'  => Yii::t('BbiiModule.bbii', 'Hits'),
-				'options' => array('style' => 'text-align:center;'),
-				'value'   => function ($data) { return $data->hits; },
-			),
+			'hits',
 			'last_visit:datetime',
-			
-			// @todo use prop Yii2 CRUD to view/update/delete forum groups.
+
 			[
+				'buttons'=>[
+					'update' => function ($url, $model) {     
+						return Html::a(
+							'<span class="glyphicon glyphicon-pencil"></span>',
+							'updatespider?id='.$model->id,
+							['title' => Yii::t('yii', 'Update')]
+						);                                
+					}
+				],
 				'class'    => 'yii\grid\ActionColumn',
-			], 
+				'template' => '{update}'
+			],
 		),
 		'dataProvider' => $model,
 		'id'           => 'spider-grid',

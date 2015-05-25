@@ -67,6 +67,8 @@ class SettingController extends BbiiController {
 
 					'createmembergroup',
 					'updateMembergroup',
+
+					'updatespider'
 				),
 				'expression' => ($this->isAdmin())?'true':'false',
 				'users'      => array('@'),
@@ -467,6 +469,28 @@ class SettingController extends BbiiController {
             
         } else {
             return $this->render('update/membergroup', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdatespider($id) {
+    	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
+        $model = BbiiSpider::find()->where(['id' => $id])->one();
+
+        // set data
+        if ($model->load(Yii::$app->request->post())) {
+
+        	// validate and save
+        	if ($model->validate() && $model->save()) {
+				Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
+				return Yii::$app->response->redirect('spider');
+			// error when saving
+        	}
+            
+        } else {
+
+            return $this->render('update/spider', [
                 'model' => $model,
             ]);
         }
