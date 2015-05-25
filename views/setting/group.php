@@ -32,7 +32,9 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<?php echo Html::button(Yii::t('BbiiModule.bbii', 'New group'), array('onclick' => 'editMembergroup()', 'class' => 'down35')); ?>
+    <p>
+        <?= Html::a('Create Device', ['createmembergroup'], ['class' => 'btn btn-success']) ?>
+    </p>
 	
 	<?php // @depricated 2.3 Kept for referance
 	/* $this->widget('zii.widgets.grid.CGridView', array(

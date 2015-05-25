@@ -66,6 +66,7 @@ class SettingController extends BbiiController {
 
 					'updateForum',
 
+					'createmembergroup',
 					'updateMembergroup',
 				),
 				'expression' => ($this->isAdmin())?'true':'false',
@@ -425,6 +426,31 @@ class SettingController extends BbiiController {
         }
     }
 
+    /**
+     * [actionCreatemembergroup description]
+     * 
+     * @return [type] [description]
+     */
+    public function actionCreatemembergroup()
+    {
+        $model = new BbiiMembergroup();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        	return Yii::$app->response->redirect(['forum/setting/group']);
+        } else {
+            return $this->render('update/membergroup', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * [actionUpdatemembergroup description]
+     * 
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function actionUpdatemembergroup($id)
     {
     	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
