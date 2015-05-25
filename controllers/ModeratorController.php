@@ -366,7 +366,7 @@ class ModeratorController extends BbiiController {
 					$model->save();
 				}
 			} else {
-				$json['error'] = json_decode(CActiveForm::validate($model));
+				$json['error'] = json_decode(ActiveForm::validate($model));
 			}
 		}
 		echo json_encode($json);

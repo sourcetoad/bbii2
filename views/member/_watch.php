@@ -6,7 +6,7 @@
 <div class = "header2"><?php echo Yii::t('BbiiModule.bbii','Watching topics'); ?></div>
 <div class = "form">
 
-	<?php $form = $this->beginWidget('CActiveForm', array(
+	<?php $form = $this->beginWidget('ActiveForm', array(
 		'id' => 'bbii-watch-form',
 		'method' => 'get',
 		'enableAjaxValidation' => false,

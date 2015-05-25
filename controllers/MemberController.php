@@ -327,7 +327,7 @@ class MemberController extends BbiiController {
 	protected function performAjaxValidation($model) {
 		if (isset(Yii::$app->request->post()['ajax']) && Yii::$app->request->post()['ajax'] === 'bbii-member-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::$app->end();
 		}
 	}

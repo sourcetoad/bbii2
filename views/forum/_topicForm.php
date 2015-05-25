@@ -1,11 +1,11 @@
 ﻿<?php
 /* @var $this ForumController */
 /* @var $model BbiiTopic */
-/* @var $form CActiveForm */
+/* @var $form ActiveForm */
 ?>
 
 <div class = "form">
-	<?php $form = $this->beginWidget('CActiveForm', array(
+	<?php $form = $this->beginWidget('ActiveForm', array(
 		'id' => 'update-topic-form',
 		'enableAjaxValidation' => true,
 		'clientOptions' => array(

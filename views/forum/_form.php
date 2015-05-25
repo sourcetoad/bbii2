@@ -1,7 +1,7 @@
 ﻿<?php
 /* @var $this ForumController */
 /* @var $post BbiiPost */
-/* @var $form CActiveForm */
+/* @var $form ActiveForm */
 ?>
 <noscript>
 <div class = "flash-notice">
@@ -9,7 +9,7 @@
 </div>
 </noscript>
 <div class = "form">
-	<?php $form = $this->beginWidget('CActiveForm', array(
+	<?php $form = $this->beginWidget('ActiveForm', array(
 		'id' => 'create-topic-form',
 		'enableAjaxValidation' => false,
 	)); ?>

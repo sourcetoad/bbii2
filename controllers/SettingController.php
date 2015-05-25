@@ -12,6 +12,7 @@ use frontend\modules\bbii\models\BbiiSpider;
 use yii;
 use yii\widgets\ActiveForm;
 use yii\web\Controller;
+use yii\web\User;
 
 class SettingController extends BbiiController {
 
@@ -44,7 +45,25 @@ class SettingController extends BbiiController {
 	{
 		return array(
 			array('allow',
-				'actions'    => array('ajaxSort','deleteForum','deleteMembergroup','getForum','getMembergroup','saveForum','saveMembergroup','group','index','layout','spider','getSpider','deleteSpider','saveSpider','moderator','changeModerator'),
+				'actions'    => array(
+					'getforum',
+					'ajaxSort',
+					'changeModerator',
+					'deleteForum',
+					'deleteMembergroup',
+					'deleteSpider',
+					'getMembergroup',
+					'getSpider',
+					'group',
+					'index',
+					'layout',
+					'moderator',
+					'update',
+					'saveForum',
+					'saveMembergroup',
+					'saveSpider',
+					'spider',
+				),
 				'expression' => ($this->isAdmin())?'true':'false',
 				'users'      => array('@'),
 			),
@@ -72,25 +91,30 @@ class SettingController extends BbiiController {
 
 		return $this->render('index', array('model' => $model));
 	}
-		
+
+	/**
+	 * [actionLayout description]
+	 *
+	 * @todo  This should be moved to the BbiiForm CNTL - DJE : 2015-05-20
+	 * @return [type] [description]
+	 */
 	public function actionLayout() {
-		$category = BbiiForum::find()->sorted()->category()->all();
-		$forum    = array();
 		$model    = new BbiiForum();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		if (Yii::$app->request->post('BbiiForum')) {
+			$model->setAttributes(Yii::$app->request->post('BbiiForum'));
 
-		if (isset(Yii::$app->request->post()['BbiiForum'])) {
-			$model->attributes = Yii::$app->request->post()['BbiiForum'];
-			if ($model->save()) {
+			if ($model->validate() && $model->save()) {
 
-				return Yii::$app->response->redirect(array('forum/setting/layout'));
+				Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Operation successful.'));
+			} else {
+
+				Yii::$app->session->setFlash('error', Yii::t('BbiiModule.bbii', 'Operation failed.'));
 			}
 		}
-		
+
 		return $this->render('layout', array(
-			'category' => $category,
+			'category' => BbiiForum::find()->sorted()->category()->all(),
 			'model'    => $model,
 		));
 	}
@@ -132,7 +156,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for sorting categories and forums
 	 */
-	public function actionAjaxSort() {
+	public function actionAjaxsort() {
 		if (isset(Yii::$app->request->post()['cat'])) {
 			$number = 1;
 			foreach(Yii::$app->request->post()['cat'] as $id) {
@@ -158,25 +182,18 @@ class SettingController extends BbiiController {
 
 	/**
 	 * handle Ajax call for getting forum
+	 *
+	 * Method names in Yii2 can not have a 2nd capital letter. Only upper case the first letter of the first word after 'action' - DJE : 2015-05-21
 	 */
-	public function actionGetForum() {
-		$json = array();
-		if (isset($_GET['id'])) {
-			$model = BbiiForum::find($_GET['id']);
-			if ($model !== null) {
-				$json['id'] = $model->id;
-				$json['name'] = $model->name;
-				$json['subtitle'] = $model->subtitle;
-				$json['cat_id'] = $model->cat_id;
-				$json['type'] = $model->type;
-				$json['locked'] = $model->locked;
-				$json['public'] = $model->public;
-				$json['moderated'] = $model->moderated;
-				$json['membergroup_id'] = $model->membergroup_id;
-				$json['poll'] = $model->poll;
-			}
-		}
-		echo json_encode($json);
+	public function actionGetforum($id = null) {
+		$id = ($id == null) ? Yii::$app->request->get('id') : $id;
+
+		echo json_encode(
+			(is_numeric($id))
+			? BbiiForum::find()->where(['id' => $id])->asArray()->one()
+			: ['error' => 'Unable to retrieve requested information.']
+		);
+
 		Yii::$app->end();
 	}
 
@@ -213,7 +230,7 @@ class SettingController extends BbiiController {
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
-				$json['error'] = json_decode(CActiveForm::validate($model));
+				$json['error'] = json_decode(ActiveForm::validate($model));
 			}
 		}
 		echo json_encode($json);
@@ -303,7 +320,7 @@ class SettingController extends BbiiController {
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
-				$json['error'] = json_decode(CActiveForm::validate($model));
+				$json['error'] = json_decode(ActiveForm::validate($model));
 			}
 		}
 		echo json_encode($json);
@@ -325,7 +342,7 @@ class SettingController extends BbiiController {
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
-				$json['error'] = json_decode(CActiveForm::validate($model));
+				$json['error'] = json_decode(ActiveForm::validate($model));
 			}
 		}
 		echo json_encode($json);
@@ -363,8 +380,44 @@ class SettingController extends BbiiController {
 	protected function performAjaxValidation($model) {
 		if (isset(Yii::$app->request->post()['ajax']) && Yii::$app->request->post()['ajax'] === 'bbii-member-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::$app->end();
 		}
 	}
+
+
+
+	// Yii2 CRUD style method boilerplate methods
+
+
+
+	/**
+	 * [update description]
+	 * @version 2.7.0
+	 * @since  2.7.0
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+    public function actionUpdate($id)
+    {
+    	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
+        $model = BbiiForum::find()->where(['id' => $id])->one();
+
+
+        // set data
+        if ($model->load(Yii::$app->request->post())) {
+
+        	// validate and save
+        	if ($model->validate() && $model->save()) {
+				Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
+				return Yii::$app->response->redirect('layout');
+			// error when saving
+        	}
+            
+        } else {
+            return $this->render('update/forum', [
+                'model' => $model,
+            ]);
+        }
+    }
 }

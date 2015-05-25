@@ -1,12 +1,12 @@
 <?php
 /* @var $this ForumController */
 /* @var $model BbiiMessage */
-/* @var $form CActiveForm */
+/* @var $form ActiveForm */
 ?>
 
 <div class = "form">
 
-<?php $form = $this->beginWidget('CActiveForm', array(
+<?php $form = $this->beginWidget('ActiveForm', array(
 	'id' => 'report-form',
 	'enableAjaxValidation' => true,
 )); ?>

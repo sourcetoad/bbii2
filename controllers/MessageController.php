@@ -183,10 +183,11 @@ class MessageController extends BbiiController {
 
 			if ($model->validate() && $model->save()) {
 				Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Message sent successfully.'));
-				return Yii::$app->response->redirect(array('forum/message/inbox'));
+				return Yii::$app->response->redirect(array('forum/message/layout'));
 			} else {
 
 				Yii::$app->session->setFlash('error',Yii::t('BbiiModule.bbii', 'Could not send message.'));
+				return Yii::$app->response->redirect(array('forum/message/layout'));
 			}
 
 		} elseif (isset($id)) {
@@ -344,7 +345,7 @@ class MessageController extends BbiiController {
 	{
 		if (isset(Yii::$app->request->post()['ajax']) && Yii::$app->request->post()['ajax'] === 'message-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::$app->end();
 		}
 	}

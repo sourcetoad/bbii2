@@ -28,21 +28,6 @@ use yii;
  */
 class BbiiForum extends BbiiAR
 {
-	public $cat_id;
-	public $id;
-	public $last_post_id;
-	public $locked;
-	public $membergroup_id;
-	public $moderated;
-	public $name;
-	public $num_posts;
-	public $num_topics;
-	public $poll;
-	public $public;
-	public $sort;
-	public $subtitle;
-	public $type;
-
     public static function find()
     {
         return new BbiiForumQuery(get_called_class());
@@ -63,20 +48,20 @@ class BbiiForum extends BbiiAR
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
-		return array(
-			/*array('name', 'required'),
-			[['type, public, locked, moderated, sort, num_posts, num_topics, last_post_id,membergroup_id, poll'], 'integer'],
-			array('name', 'unique'),
-			['cat_id', 'string', 'max' => 10],
-			['name, subtitle', 'string', 'max' => 255],
-			array('type', 'validateType'),
-			array('cat_id, subtitle', 'default', 'value' => null),
-			array('public', 'default', 'value' => 1),
-			array('locked, membergroup_id, poll', 'default', 'value' => 0),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.*/
-			array('id, cat_id, name, subtitle, type, sort, num_posts, num_topics, last_post_id, last_post_time, membergroup_id, poll', 'safe', 'on' => 'search'),
-		);
+		// propert 'last_post_time' has been removed - DJE : 2015-05-20
+		return [
+			[['name'], 'required'],
+			[['type', 'public', 'locked', 'moderated', 'sort', 'num_posts', 'num_topics', 'last_post_id', 'membergroup_id', 'poll'], 'integer'],
+			[['name'], 'unique'],
+			[['name', 'subtitle'],  'string', 'min' => 4,  'max' => 255],
+			[['type'], 'validateType'],
+			[['cat_id', 'subtitle'], 'default',  'value' => null],
+			[['public'], 'default',  'value' => 1],
+			[['locked', 'membergroup_id', 'poll'], 'default',  'value' => 0],
+			[['name', 'subtitle', 'type', 'sort', 'num_posts', 'num_topics', 'last_post_id', 'membergroup_id', 'poll'], 'safe'],
+
+			[['id', 'cat_id', 'name', 'subtitle', 'type', 'sort', 'num_posts', 'num_topics', 'last_post_id', 'membergroup_id', 'poll'], 'safe',  'on' => 'search'],
+		];
 	}
 	
 	public function validateType($attr, $params) {
@@ -225,15 +210,10 @@ class BbiiForum extends BbiiAR
 	public static function getForumOptions() {
 		$return = array();
 
-		// $criteria = new CDbCriteria;
-		// $criteria->condition = 'type = 0';
-		// $criteria->order = 'sort';
-		// $category = BbiiForum::find()->findAll($criteria);
-		$category = BbiiForum::find()->where('type = 0')->orderBy('sort')->all();
-		foreach($category as $group) {
-			// $criteria->condition = 'type = 1 and cat_id = ' . $group->id;
-			// $forum = BbiiForum::find()->findAll($criteria);
+		$groups = BbiiForum::find()->where('type = 0')->orderBy('sort')->all();
+		foreach($groups as $group) {
 			$forum = BbiiForum::find()->where('type = 1 and cat_id = ' . $group->id)->all(); 
+
 			foreach($forum as $option) {
 				if ($option->public || !Yii::$app->user->isGuest) {
 					if ($option->membergroup_id == 0) {

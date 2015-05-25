@@ -20,7 +20,7 @@ $item = array(
 
 	<div class = "form">
 
-	<?php $form = $this->beginWidget('CActiveForm', array(
+	<?php $form = $this->beginWidget('ActiveForm', array(
 		'id' => 'bbii-mail-form',
 		'enableAjaxValidation' => false,
 	)); ?>

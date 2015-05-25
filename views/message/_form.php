@@ -10,7 +10,7 @@ use yii\web\JsExpression;
 
 /* @var $this MessageController */
 /* @var $model BbiiMessage */
-/* @var $form CActiveForm */
+/* @var $form ActiveForm */
 ?>
 <noscript>
 <div class = "flash-notice">
@@ -21,7 +21,7 @@ use yii\web\JsExpression;
 <div class = "form">
 
 	<?php // @depricated 2.5.0 Kept for referance
-	/*$form = $this->beginWidget('CActiveForm', array(
+	/*$form = $this->beginWidget('ActiveForm', array(
 		'id' => 'message-form',
 		'enableAjaxValidation' => false,
 	));*/ ?>
