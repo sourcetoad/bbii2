@@ -12,6 +12,7 @@ use frontend\modules\bbii\models\BbiiSpider;
 use yii;
 use yii\widgets\ActiveForm;
 use yii\web\Controller;
+use yii\web\User;
 
 class SettingController extends BbiiController {
 
@@ -57,6 +58,7 @@ class SettingController extends BbiiController {
 					'index',
 					'layout',
 					'moderator',
+					'update',
 					'saveForum',
 					'saveMembergroup',
 					'saveSpider',
@@ -382,4 +384,40 @@ class SettingController extends BbiiController {
 			Yii::$app->end();
 		}
 	}
+
+
+
+	// Yii2 CRUD style method boilerplate methods
+
+
+
+	/**
+	 * [update description]
+	 * @version 2.7.0
+	 * @since  2.7.0
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+    public function actionUpdate($id)
+    {
+    	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
+        $model = BbiiForum::find()->where(['id' => $id])->one();
+
+
+        // set data
+        if ($model->load(Yii::$app->request->post())) {
+
+        	// validate and save
+        	if ($model->validate() && $model->save()) {
+				Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
+				return Yii::$app->response->redirect('layout');
+			// error when saving
+        	}
+            
+        } else {
+            return $this->render('update/forum', [
+                'model' => $model,
+            ]);
+        }
+    }
 }

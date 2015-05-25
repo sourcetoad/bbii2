@@ -22,13 +22,20 @@ foreach($forum as $forumdata) {
 		</td>
 		<td rowspan = "2" style = "width:140px;">
 			<?php
-				echo Html::buttonInput(
-					Yii::t('BbiiModule.bbii', 'Edit'),
-					[
+				/*
+					echo Html::buttonInput(
+						Yii::t('BbiiModule.bbii', 'Edit'),
+						[
 						'onclick' => 'js:editCategory(' . $data->id . ', "' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/getforum') .'")'
-						//'onclick' => 'function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxsort') . '");}();'
-					]
-				); ?>
+							//'onclick' => 'function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxsort') . '");}();'
+						]
+					);
+				*/
+				echo Html::a(
+					Yii::t('BbiiModule.bbii', 'Edit'),
+					Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/update', 'id' => $data->id])
+				);
+			?>
 		</td>
 	</tr>
 	<tr>
@@ -50,7 +57,7 @@ foreach($forum as $forumdata) {
 				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		));*/
-/*
+
 		echo Sortable::widget([
 			'clientOptions' => ['cursor' => 'move'],
 			'id'            => 'sortfrm' . $data->id,
@@ -61,7 +68,6 @@ foreach($forum as $forumdata) {
 				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		]);
-*/
 	?>
 	</td>
 </tr>

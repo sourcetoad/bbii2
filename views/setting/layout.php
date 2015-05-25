@@ -178,8 +178,8 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
     echo $this->renderPartial('_editForum', array('model'=>$model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
-*/
 
+// @todo Tried this buyt jQuery UI + Dialog + Yii2 just did not seem to work the way I wanted - DJE : 2015-05-25
 Dialog::begin([
 	'id'           => 'dlgEditForum',
 	'clientOptions'=> [
@@ -203,3 +203,4 @@ echo $this->render('_editForum', array(
 ));
 
 Dialog::end();
+*/
