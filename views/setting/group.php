@@ -32,7 +32,9 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<?php echo Html::button(Yii::t('BbiiModule.bbii', 'New group'), array('onclick' => 'editMembergroup()', 'class' => 'down35')); ?>
+    <p>
+        <?= Html::a('Create Device', ['createmembergroup'], ['class' => 'btn btn-success']) ?>
+    </p>
 	
 	<?php // @depricated 2.3 Kept for referance
 	/* $this->widget('zii.widgets.grid.CGridView', array(
@@ -74,15 +76,24 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 			'name',
 			'description',
 			'min_posts',
-			array(
+			/*array(
 				'format' => 'raw',
 				'label'  => 'color',
 				'value'  => function ($data) { return '<p style="font-weight: bold;color: #'.$data->color.'">'.$data->color.'</p>'; },
 			),
-			'image',
+			'image',*/
 			
 			// @todo use prop Yii2 CRUD to view/update/delete forum groups.
 			[
+				'buttons'=>[
+					'update' => function ($url, $model) {     
+						return Html::a(
+							'<span class="glyphicon glyphicon-pencil"></span>',
+							'updatemembergroup?id='.$model->id,
+							['title' => Yii::t('yii', 'Update')]
+						);                                
+					}
+				],
 				'class'    => 'yii\grid\ActionColumn',
 				'template' => '{update}'
 			],

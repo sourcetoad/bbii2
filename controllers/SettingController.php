@@ -63,6 +63,11 @@ class SettingController extends BbiiController {
 					'saveMembergroup',
 					'saveSpider',
 					'spider',
+
+					'updateForum',
+
+					'createmembergroup',
+					'updateMembergroup',
 				),
 				'expression' => ($this->isAdmin())?'true':'false',
 				'users'      => array('@'),
@@ -398,7 +403,7 @@ class SettingController extends BbiiController {
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-    public function actionUpdate($id)
+    public function actionUpdateforum($id)
     {
     	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
         $model = BbiiForum::find()->where(['id' => $id])->one();
@@ -416,6 +421,53 @@ class SettingController extends BbiiController {
             
         } else {
             return $this->render('update/forum', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * [actionCreatemembergroup description]
+     * 
+     * @return [type] [description]
+     */
+    public function actionCreatemembergroup()
+    {
+        $model = new BbiiMembergroup();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        	return Yii::$app->response->redirect(['forum/setting/group']);
+        } else {
+            return $this->render('update/membergroup', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * [actionUpdatemembergroup description]
+     * 
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function actionUpdatemembergroup($id)
+    {
+    	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
+        $model = BbiiMembergroup::find()->where(['id' => $id])->one();
+
+        // set data
+        if ($model->load(Yii::$app->request->post())) {
+
+        	// validate and save
+        	if ($model->validate() && $model->save()) {
+				Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
+				return Yii::$app->response->redirect('group');
+			// error when saving
+        	}
+            
+        } else {
+            return $this->render('update/membergroup', [
                 'model' => $model,
             ]);
         }
