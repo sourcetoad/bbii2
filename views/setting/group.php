@@ -33,7 +33,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
     <p>
-        <?= Html::a('Create Device', ['createmembergroup'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Member Group', ['createmembergroup'], ['class' => 'btn btn-success']) ?>
     </p>
 	
 	<?php // @depricated 2.3 Kept for referance
@@ -125,7 +125,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
     echo $this->render('_editMembergroup', array('model' => $model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
-*/
+
 
 Dialog::begin([
 	'id'           => 'dlgEditMembergroup',
@@ -150,3 +150,4 @@ echo $this->render('_editMembergroup', array(
 ));
 
 Dialog::end();
+*/

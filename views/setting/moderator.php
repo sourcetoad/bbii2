@@ -26,7 +26,7 @@ $item = array(
 ?>
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
-	
+
 	<?php // @depricated 2.3.0 Kept for referance
 	/* $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'bbii-member-grid',
@@ -50,6 +50,12 @@ $item = array(
 			
 		),
 	));*/ ?>
+
+    <p>
+        <?php // This is done via the web app itself - DJE : 2015-05-25
+        //echo Html::a('Create Moderator', ['../member/create'], ['class' => 'btn btn-success']);
+        ?>
+    </p>
 
 	<?php echo GridView::widget(array(
 		'columns'      => array(
