@@ -27,7 +27,9 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<?php echo Html::button(Yii::t('BbiiModule.bbii', 'New webspider'), array('onclick' => 'BBiiSetting.EditSpider()', 'class' => 'down35')); ?>
+    <p>
+        <?= Html::a('Create Web Spider', ['createspider'], ['class' => 'btn btn-success']) ?>
+    </p>
 	
 	<?php // @depricated 2.3.0 Kept for referance
 	/* $this->widget('zii.widgets.grid.CGridView', array(

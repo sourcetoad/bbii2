@@ -68,6 +68,7 @@ class SettingController extends BbiiController {
 					'createmembergroup',
 					'updateMembergroup',
 
+					'createspider',
 					'updatespider'
 				),
 				'expression' => ($this->isAdmin())?'true':'false',
@@ -474,7 +475,26 @@ class SettingController extends BbiiController {
         }
     }
 
-    public function actionUpdatespider($id) {
+    /**
+     * [actionCreatemembergroup description]
+     * @return [type] [description]
+     */
+    public function actionCreatespider()
+    {
+        $model = new BbiiSpider();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        	return Yii::$app->response->redirect(['forum/setting/spider']);
+        } else {
+            return $this->render('update/spider', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdatespider($id)
+    {
     	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
         $model = BbiiSpider::find()->where(['id' => $id])->one();
 
