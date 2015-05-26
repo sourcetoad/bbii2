@@ -56,15 +56,17 @@ class ForumController extends BbiiController {
 		}
 
 		$model = array();
-		$categories = BbiiForum::find()->category()->sorted()->findAll();
+		$categories = BbiiForum::find()->category()->sorted()->all();
+
 		foreach($categories as $category) {
+
 			if (Yii::$app->user->isGuest) {
-				$forums = BbiiForum::find()->forum()->ispublic()->membergroup()->sorted()->findAll("cat_id = $category->id");
+				$forums = BbiiForum::find()->where("cat_id = $category->id")->forum()->ispublic()->membergroup()->sorted()->all();
 			} elseif ($this->isModerator()) {
-				$forums = BbiiForum::find()->forum()->sorted()->findAll("cat_id = $category->id");
+				$forums = BbiiForum::find()->where("cat_id = $category->id")->forum()->sorted()->all();
 			} else {
 				$groupId = BbiiMember::find(Yii::$app->user->id)->group_id;
-				$forums = BbiiForum::find()->forum()->membergroup($groupId)->sorted()->findAll("cat_id = $category->id");
+				$forums = BbiiForum::find()->where("cat_id = $category->id")->forum()->membergroup($groupId)->sorted()->all();
 			}
 			if (count($forums)) {
 				$model[] = $category;
@@ -73,13 +75,17 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
+
 		$dataprovider = new ArrayDataProvider([
 			'allModels'  => $model,
 			'id'         => 'forum',
-			'key'        => 'id', //or whatever you id actually is of these models.
+			'key'        => 'id',
 			'pagination' => false,
 		]);
-		return $this->render('index', array('dataProvider' => $dataProvider));
+
+		return $this->render('index', array(
+			'dataProvider' => $dataProvider
+		));
 	}
 	
 	public function actionMarkAllRead() {
