@@ -5,6 +5,7 @@ namespace frontend\modules\bbii\controllers;
 use frontend\modules\bbii\components\BbiiController;
 use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiMembergroup;
 use frontend\modules\bbii\models\BbiiMessage;
 use frontend\modules\bbii\models\BbiiPoll;
 use frontend\modules\bbii\models\BbiiPost;
@@ -407,12 +408,6 @@ class ForumController extends BbiiController {
 			$post->setAttributes(Yii::$app->request->post('BbiiPost'));
 			$post->approved = ($forum->moderated ? 0 : 1);
 
-echo '<pre>';
-print_r( Yii::$app->request->post()['BbiiPost'] );
-print_r( $post );
-echo '</pre>';
-exit;
-
 			if ($post->validate() && $post->save()) {
 				// Topic
 				$topic = new BbiiTopic;
@@ -469,10 +464,12 @@ exit;
 
 
 					if (!$forum->moderated) {
-						$forum->saveCounters(array('num_posts' => 1,'num_topics' => 1));	// method since Yii 1.1.8
-						$post->poster->saveCounters(array('posts' => 1));					// method since Yii 1.1.8
+						$forum->updateCounters(array('num_posts' => 1,'num_topics' => 1));	// method since Yii 2.0
+						//$post->poster->updateCounters(array('posts' => 1));					// method since Yii 2.0
+						
 						$forum->last_post_id = $post->id;
 						$forum->update();
+
 						$this->assignMembergroup(Yii::$app->user->id);
 					} else {
 
@@ -923,8 +920,11 @@ exit;
 	}
 	
 	private function assignMembergroup($id) {
-		$member = BbiiMember::find($id);
+		$member = BbiiMember::findOne($id);
 		$group = BbiiMembergroup::find($member->group_id);
+
+
+
 		if ($group !== null && $group->min_posts < 0) {
 			return;
 		}
