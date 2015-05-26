@@ -383,6 +383,7 @@ class ForumController extends BbiiController {
 	}
 	
 	public function actionCreatetopic() {
+		$poll = new BbiiPoll;
 		$post = new BbiiPost;
 
 		if (Yii::$app->request->post('BbiiForum')) {
@@ -400,37 +401,35 @@ class ForumController extends BbiiController {
 			$choiceArr = array('', '', '');
 		}
 
-		if (isset(Yii::$app->request->post()['BbiiPost'])) {
-			$post->setAttributes(Yii::$app->request->post()['BbiiPost']);
+		if (Yii::$app->request->post()['BbiiPost']) {
+			$forum = BbiiForum::findOne(Yii::$app->request->post('BbiiPost')['forum_id']);
 
-			if (!$post->forum_id) {
-				throw new HttpException(404, Yii::t('BbiiModule.bbii', 'Topics must have associated Forums id.'));
-			}
-
-			$forum = BbiiForum::findAll($post->forum_id);
+			$post->setAttributes(Yii::$app->request->post('BbiiPost'));
+			$post->approved = ($forum->moderated ? 0 : 1);
 
 echo '<pre>';
+print_r( Yii::$app->request->post()['BbiiPost'] );
 print_r( $post );
-//print_r( $forum->getAttributes() );
 echo '</pre>';
 exit;
 
-			if ($forum->moderated()) {
-				$post->approved = 0;
-			} else {
-				$post->approved = 1;
-			}
-			if ($post->save()) {
+			if ($post->validate() && $post->save()) {
 				// Topic
 				$topic = new BbiiTopic;
-				$topic->forum_id 		 =  $forum->id;
-				$topic->title 			 =  $post->subject;
-				$topic->first_post_id 	 =  $post->id;
-				$topic->last_post_id 	 =  $post->id;
-				$topic->approved 		 =  $post->approved;
-				if (isset(Yii::$app->request->post()['sticky'])) { $topic->sticky = 1; }
-				if (isset(Yii::$app->request->post()['global'])) { $topic->global = 1; }
-				if (isset(Yii::$app->request->post()['locked'])) { $topic->locked = 1; }
+				$topic->approved      =  $post->approved;
+				$topic->first_post_id =  $post->id;
+				$topic->forum_id      =  $forum->id;
+				$topic->last_post_id  =  $post->id;
+				$topic->title         =  $post->subject;
+
+				if (Yii::$app->request->post('sticky')) { $topic->sticky = 1; }
+				if (Yii::$app->request->post('global')) { $topic->global = 1; }
+				if (Yii::$app->request->post('locked')) { $topic->locked = 1; }
+
+
+
+				// @todo Enable this feature - DJE : 2015-05-26
+				/*
 				// Poll
 				if (isset(Yii::$app->request->post()['BbiiPoll']) && isset(Yii::$app->request->post()['addPoll']) && Yii::$app->request->post()['addPoll'] == 'yes') {
 					$poll->attributes = Yii::$app->request->post()['BbiiPoll'];
@@ -453,12 +452,22 @@ exit;
 						}
 					}
 				} else {
+
 					$correct = true;
 				}
-				
-				if ($correct && $topic->save()) {
-					$post->topic_id 	 =  $topic->id;
+				*/
+
+
+
+				//if ($correct && $topic->save()) {
+				if ($topic->validate() && $topic->save()) {
+					
+					// update post with topic
+					$post->topic_id = $topic->id;
 					$post->update();
+
+
+
 					if (!$forum->moderated) {
 						$forum->saveCounters(array('num_posts' => 1,'num_topics' => 1));	// method since Yii 1.1.8
 						$post->poster->saveCounters(array('posts' => 1));					// method since Yii 1.1.8
@@ -466,24 +475,33 @@ exit;
 						$forum->update();
 						$this->assignMembergroup(Yii::$app->user->id);
 					} else {
+
 						Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 					}
+
+					// @todo Enable this feature - DJE : 2015-05-26
+					/*
 					if (isset(Yii::$app->request->post()['BbiiPoll'])) {
-						$poll->save();
+						// @todo Enable this feature - DJE : 2015-05-26
+						// $poll->save(); 
 						$choices = Yii::$app->request->post()['choice'];
 						$i = 1;
 						foreach($choices as $choice) {
 							if (!empty($choice)) {
-								$ch = new BbiiChoice;
-								$ch->choice = $choice;
+								$ch          = new BbiiChoice;
+								$ch->choice  = $choice;
 								$ch->poll_id = $poll->id;
-								$ch->sort = $i++;
+								$ch->sort    = $i++;
+
 								$ch->save();
 							}
 						}
 					}
+					*/
+
 					return Yii::$app->response->redirect(array('forum/topic', 'id' => $topic->id));
 				} else {
+					Yii::$app->user->setFlash('error', Yii::t('BbiiModule.bbii', 'Error, unable to save post.'));
 					$post->delete();
 				}
 			}
@@ -492,7 +510,7 @@ exit;
 		return $this->render('update/forum', array(
 			'choices' => $choiceArr,
 			'forum'   => $forum,
-			'poll'    => new BbiiPoll,
+			'poll'    => $poll,
 			'post'    => $post,
 		));
 	}
