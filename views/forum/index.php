@@ -37,8 +37,9 @@ $item = array(
 
 	<?php echo ListView::widget([
 			'dataProvider' => $dataProvider,
+			'id'           => 'bbiiForum',
 			'itemOptions'  => ['class' => 'item'],
-			'itemView'     => function ($model, $key, $index, $widget) { return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);},
+			'itemView'     => '_forum',
 	]) ?>
 
 	<?php echo $this->render('_footer'); ?>

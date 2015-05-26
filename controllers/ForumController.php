@@ -76,7 +76,7 @@ class ForumController extends BbiiController {
 			}
 		}
 
-		$dataprovider = new ArrayDataProvider([
+		$dataProvider = new ArrayDataProvider([
 			'allModels'  => $model,
 			'id'         => 'forum',
 			'key'        => 'id',
