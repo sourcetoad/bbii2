@@ -57,7 +57,7 @@ class ModeratorController extends BbiiController {
 	public function actionApprove($id) {
 		$post = BbiiPost::find($id);
 		if ($post === null) {
-			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
+			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
 		$forum = BbiiForum::find($post->forum_id);
 		$topic = BbiiTopic::find($post->topic_id);
@@ -120,7 +120,7 @@ class ModeratorController extends BbiiController {
 			$id = $_GET['id'];
 		$post = BbiiPost::find($id);
 		if ($post === null) {
-			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
+			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
 		$forum = BbiiForum::find($post->forum_id);
 		$topic = BbiiTopic::find($post->topic_id);
@@ -376,7 +376,7 @@ class ModeratorController extends BbiiController {
 	public function actionBanIp($id) {
 		$post = BbiiPost::find($id);
 		if ($post === null) {
-			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
+			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
 		$ip = new BbiiIpaddress;
 		$ip->ip = $post->ip;

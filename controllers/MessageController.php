@@ -222,7 +222,7 @@ class MessageController extends BbiiController {
 		} else {
 			$model = BbiiMessage::find($id);
 			if ($model->sendto != Yii::$app->user->id && !$this->isModerator()) {
-				throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested message does not exist.'));
+				throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested message does not exist.'));
 			}
 			$model->sendto = $model->sendfrom;
 			$model->search = $model->receiver->member_name;

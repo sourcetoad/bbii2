@@ -6,6 +6,7 @@ use frontend\modules\bbii\components\BbiiController;
 use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiMessage;
+use frontend\modules\bbii\models\BbiiPoll;
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiTopic;
 
@@ -13,6 +14,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\web\ErrorHandler;
+use yii\web\HttpException;
 use yii\web\User;
 
 class ForumController extends BbiiController {
@@ -126,23 +128,23 @@ class ForumController extends BbiiController {
 
 
 		if ($forum === null) {
-			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested forum does not exist.'));
+			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested forum does not exist.'));
 		}
 
 
 		if (Yii::$app->user->isGuest && $forum->public == 0) {
-			throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
+			throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
 		}
 
 
 
 		if ($forum->membergroup_id != 0) {
 			if (Yii::$app->user->isGuest) {
-				throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
+				throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
 			} elseif (!$this->isModerator()) {
 				$groupId = BbiiMember::find(Yii::$app->user->id)->group_id;
 				if ($forum->membergroup_id != $groupId) {
-					throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
+					throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
 				}
 			}
 		}
@@ -193,19 +195,19 @@ class ForumController extends BbiiController {
 	public function actionTopic($id, $nav = null, $postId = null) {
 		$topic = BbiiTopic::find($id);
 		if ($topic === null) {
-			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested topic does not exist.'));
+			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested topic does not exist.'));
 		}
 		$forum = BbiiForum::find($topic->forum_id);
 		if (Yii::$app->user->isGuest && $forum->public == 0) {
-			throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
+			throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
 		}
 		if ($forum->membergroup_id != 0) {
 			if (Yii::$app->user->isGuest) {
-				throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
+				throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
 			} elseif (!$this->isModerator()) {
 				$groupId = BbiiMember::find(Yii::$app->user->id)->group_id;
 				if ($forum->membergroup_id != $groupId) {
-					throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
+					throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
 				}
 			}
 		}
@@ -295,7 +297,7 @@ class ForumController extends BbiiController {
 	public function actionQuote($id) {
 		$quoted = BbiiPost::find($id);
 		if ($quoted === null) {
-			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
+			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
 		$forum = BbiiForum::find($quoted->forum_id);
 		$topic = BbiiTopic::find($quoted->topic_id);
@@ -343,7 +345,7 @@ class ForumController extends BbiiController {
 	public function actionReply($id) {
 		$topic = BbiiTopic::find($id);
 		if ($topic === null) {
-			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested topic does not exist.'));
+			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested topic does not exist.'));
 		}
 		$forum = BbiiForum::find($topic->forum_id);
 		$post = new BbiiPost;
@@ -382,24 +384,38 @@ class ForumController extends BbiiController {
 	
 	public function actionCreatetopic() {
 		$post = new BbiiPost;
-		$poll = new BbiiPoll;
 
-		if (isset(Yii::$app->request->post()['BbiiForum'])) {
-			$post->forum_id = Yii::$app->request->post()['BbiiForum']['id'];
+		if (Yii::$app->request->post('BbiiForum')) {
+			$post->forum_id = Yii::$app->request->post('BbiiForum')['id'];
 			$forum = BbiiForum::find($post->forum_id);
 		}
+
 		if (isset(Yii::$app->request->post()['choice'])) {
 			$choiceArr = Yii::$app->request->post()['choice'];
 			while(count($choiceArr) < 3) {
 				$choiceArr[] = '';
 			}
 		} else {
+
 			$choiceArr = array('', '', '');
 		}
+
 		if (isset(Yii::$app->request->post()['BbiiPost'])) {
-			$post->attributes = Yii::$app->request->post()['BbiiPost'];
-			$forum = BbiiForum::find($post->forum_id);
-			if ($forum->moderated) {
+			$post->setAttributes(Yii::$app->request->post()['BbiiPost']);
+
+			if (!$post->forum_id) {
+				throw new HttpException(404, Yii::t('BbiiModule.bbii', 'Topics must have associated Forums id.'));
+			}
+
+			$forum = BbiiForum::findAll($post->forum_id);
+
+echo '<pre>';
+print_r( $post );
+//print_r( $forum->getAttributes() );
+echo '</pre>';
+exit;
+
+			if ($forum->moderated()) {
 				$post->approved = 0;
 			} else {
 				$post->approved = 1;
@@ -476,7 +492,7 @@ class ForumController extends BbiiController {
 		return $this->render('update/forum', array(
 			'choices' => $choiceArr,
 			'forum'   => $forum,
-			'poll'    => $poll,
+			'poll'    => new BbiiPoll,
 			'post'    => $post,
 		));
 	}
@@ -484,10 +500,10 @@ class ForumController extends BbiiController {
 	public function actionUpdate($id) {
 		$post = BbiiPost::find($id);
 		if ($post === null) {
-			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
+			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
 		if (($post->user_id != Yii::$app->user->id || $post->topic->locked) && !$this->isModerator()) {
-			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
+			throw new HttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
 		$forum = BbiiForum::find($post->forum_id);
 		$topic = BbiiTopic::find($post->topic_id);
@@ -524,11 +540,11 @@ class ForumController extends BbiiController {
 	public function actionUpdatePoll($id) {
 		$poll = BbiiPoll::find($id);
 		if ($poll === null) {
-			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested poll does not exist.'));
+			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested poll does not exist.'));
 		}
 		$post = BbiiPost::find($poll->post_id);
 		if ($poll->user_id != Yii::$app->user->id && !$this->isModerator()) {
-			throw new CHttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
+			throw new HttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
 		if (isset(Yii::$app->request->post()['BbiiPoll'])) {
 			$poll->attributes = Yii::$app->request->post()['BbiiPoll'];

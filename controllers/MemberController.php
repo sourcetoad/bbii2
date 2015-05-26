@@ -316,7 +316,7 @@ class MemberController extends BbiiController {
 	public function loadModel($id) {
 		$model = BbiiMember::find($id);
 		if ($model === null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new HttpException(404,'The requested page does not exist.');
 		return $model;
 	}
 
