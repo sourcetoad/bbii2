@@ -180,7 +180,10 @@ class ForumController extends BbiiController {
 		*/
 
 		$dataProvider = new ActiveDataProvider([
-			'query'      => BbiiTopic::find()->where(['approved' => 1])->where('(forum_id = ' . $forum->id . ' or global = 1)')->orderBy('id DESC'),
+			'query' => BbiiTopic::find()
+				->where(['approved' => 1])
+				->andWhere('(forum_id = ' . $forum->id . ' or global = 1)')
+				->orderBy('id DESC')
 	    ]);
 
 		return $this->render('forum', array(
