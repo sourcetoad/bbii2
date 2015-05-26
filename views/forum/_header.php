@@ -33,13 +33,14 @@ $assets = AppAsset::register($this);
 	<div class = "bbii-title"><?php echo $this->context->module->forumTitle; ?></div>
 	<table style = "margin:0;"><tr><td style = "padding:0;">
 		<div id = "bbii-menu">
-		<?php  echo Nav::widget([
+		<?php // @todo Add this feature back - DJE : 2015-05-26 
+		/*echo Nav::widget([
 		    'items' => $item,
-		]); ?>
+		]);*/ ?>
 		</div>
 	</td><td style = "padding:0;text-align:right;vertical-align:top;">
 		<div class = "search">
-			<?php // @todo Add this feature back - DJE : 2015 - 05-14 
+			<?php // @todo Add this feature back - DJE : 2015-05-14 
 				//$this->widget('SimpleSearchForm');
 			?>
 		</div>

@@ -7,8 +7,10 @@ use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiMessage;
 use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiTopic;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\web\ErrorHandler;
 use yii\web\User;
@@ -115,15 +117,25 @@ class ForumController extends BbiiController {
 	
 	/**
 	 * Show forum with topics
+	 *
+	 * @version  2.7.5
 	 */
 	public function actionForum($id) {
-		$forum = BbiiForum::find($id);
+		$id = ($id == null) ? Yii::$app->request->get('id') : $id;
+		$forum = BbiiForum::findOne($id);
+
+
 		if ($forum === null) {
 			throw new CHttpException(404, Yii::t('BbiiModule.bbii', 'The requested forum does not exist.'));
 		}
+
+
 		if (Yii::$app->user->isGuest && $forum->public == 0) {
 			throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
 		}
+
+
+
 		if ($forum->membergroup_id != 0) {
 			if (Yii::$app->user->isGuest) {
 				throw new CHttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
@@ -134,12 +146,17 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
+
+
+		// @todo Is this just a complicated way of getting a forum topics? - DJE : 2015-05-26
+		/*
 		if (isset($_GET['BbiiTopic_page']) && isset($_GET['ajax'])) {
             $topicPage = (int) $_GET['BbiiTopic_page'] - 1;
             Yii::$app->user->setState('BbiiTopic_page', $topicPage);
 			Yii::$app->user->setState('BbiiForum_id', $id);
             unset($_GET['BbiiTopic_page']);
         } elseif (isset($_GET['ajax'])) {
+
             Yii::$app->user->setState('BbiiTopic_page', 0);
 		} elseif (Yii::$app->user->hasState('BbiiForum_id') && Yii::$app->user->BbiiForum_id != $id) {
 			unset(Yii::$app->user->BbiiForum_id);
@@ -148,17 +165,23 @@ class ForumController extends BbiiController {
 		$dataProvider = new ActiveDataProvider('BbiiTopic', array(
 			'criteria' => array(
 				'condition' => 'approved = 1 and (forum_id = ' . $forum->id . ' or global = 1)',
-				'order' => 'global DESC, sticky DESC, last_post_id DESC',
-				'with' => array('starter'),
+				'order'     => 'global DESC, sticky DESC, last_post_id DESC',
+				'with'      => array('starter'),
 			),
 			'pagination' => array(
-				'pageSize' => $this->module->topicsPerPage,
 				'currentPage' => Yii::$app->user->getState('BbiiTopic_page', 0),
+				'pageSize'    => $this->module->topicsPerPage,
 			),
 		));
+		*/
+
+		$dataProvider = new ActiveDataProvider([
+			'query'      => BbiiTopic::find()->where(['approved' => 1])->where('(forum_id = ' . $forum->id . ' or global = 1)')->orderBy('id DESC'),
+	    ]);
+
 		return $this->render('forum', array(
-			'forum' => $forum,
-			'dataProvider' => $dataProvider
+			'dataProvider' => $dataProvider,
+			'forum'        => $forum,
 		));
 	}
 	
@@ -357,9 +380,10 @@ class ForumController extends BbiiController {
 		));
 	}
 	
-	public function actionCreateTopic() {
+	public function actionCreatetopic() {
 		$post = new BbiiPost;
 		$poll = new BbiiPoll;
+
 		if (isset(Yii::$app->request->post()['BbiiForum'])) {
 			$post->forum_id = Yii::$app->request->post()['BbiiForum']['id'];
 			$forum = BbiiForum::find($post->forum_id);
@@ -448,11 +472,12 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		return $this->render('create', array(
-			'forum' => $forum,
-			'post' => $post,
-			'poll' => $poll,
+
+		return $this->render('update/forum', array(
 			'choices' => $choiceArr,
+			'forum'   => $forum,
+			'poll'    => $poll,
+			'post'    => $post,
 		));
 	}
 	

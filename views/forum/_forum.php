@@ -58,6 +58,8 @@ if (!$model->public) {
 </div>
 
 <?php } else { ?>
+	<? // @todo re-enable collapsable feature - DJE : 2015-05-26 ?>
+	<?php /*
 	<?php if ($index > 0) { echo '</div>'; } ?>
 	<div class = "forum-category" onclick = "BBii.toggleForumGroup(<?php echo $model->id; ?>,'<?php echo Yii::$app->urlManager->createAbsoluteUrl($this->context->module->id.'/forum/setCollapsed'); ?>');">
 		<div class = "header2">
@@ -67,7 +69,8 @@ if (!$model->public) {
 			<?php echo Html::encode($model->subtitle); ?>
 		</div>
 	</div>
-	<div class = "forum-group" id = "category_<?php echo $model->id; ?>" <?php //if ($this->collapsed($model->id)) { echo 'style = "display:none;"';}?>>
+	<div class = "forum-group" id = "category_<?php echo $model->id; ?>" <?php if ($this->collapsed($model->id)) { echo 'style = "display:none;"';}?>>
+	*/ ?>
 <?php }; ?>
 
 <?php if ($index == $lastIndex) { echo '</div>'; } ?>
