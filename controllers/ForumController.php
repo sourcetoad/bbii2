@@ -10,6 +10,7 @@ use frontend\modules\bbii\models\BbiiMessage;
 use frontend\modules\bbii\models\BbiiPoll;
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiTopic;
+use frontend\modules\bbii\models\BbiiTopicRead;
 
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -820,16 +821,19 @@ class ForumController extends BbiiController {
 	 * @param integer forum id
 	 * @return boolean
 	 */
-	public function forumIsRead($forum_id) {
+	public static function forumIsRead($forum_id) {
+
 		if (Yii::$app->user->isGuest) {
 			return false;
 		} else {
-			$model = BbiiTopicRead::find(Yii::$app->user->id);
+			$model = BbiiTopicRead::findOne(Yii::$app->user->id);
 			if ($model === null) {
 				return false;
 			} else {
-				$object = new BbiiTopicsRead;
+				$object = new BbiiTopicRead;
 				$object->unserialize($model->data);
+
+
 				$criteria = new CDbCriteria;
 				$criteria->condition = "forum_id = $forum_id";
 				$criteria->order = 'last_post_id DESC';
