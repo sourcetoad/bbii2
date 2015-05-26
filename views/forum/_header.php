@@ -56,3 +56,9 @@ array('empty' => Yii::t('BbiiModule.bbii','Select forum'),
 		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
 <?php endif?>
+
+<noscript>
+	<div class = "flash-notice">
+	<?php echo Yii::t('BbiiModule.bbii', 'Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
+	</div>
+</noscript>

@@ -231,8 +231,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionSaveForum() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['BbiiForum'])) {
-			$model = BbiiForum::find(Yii::$app->request->post()['BbiiForum']['id']);
+		if (Yii::$app->request->post('BbiiForum')) {
+			$model = BbiiForum::find(Yii::$app->request->post('BbiiForum')['id']);
 			$model->attributes = Yii::$app->request->post()['BbiiForum'];
 			if ($model->save()) {
 				$json['success'] = 'yes';
