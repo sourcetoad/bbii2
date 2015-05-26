@@ -54,15 +54,16 @@ class BbiiTopic extends BbiiAR
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
-		return array(
-			array('forum_id, title, first_post_id, last_post_id', 'required'),
-			[['forum_id, user_id, first_post_id, last_post_id, num_replies, num_views, moved, approved, locked, sticky, global, upvoted'], 'integer'],
-			['title', 'string', 'max' => 255],
-			array('user_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'insert'),
-			// The following rule is used by search().
+		return [
+			[['forum_id', 'title', 'first_post_id', 'last_post_id'], 'required'],
+			[['forum_id', 'user_id', 'first_post_id', 'last_post_id', 'num_replies', 'num_views', 'moved', 'approved', 'locked', 'sticky', 'global', 'upvoted'], 'integer'],
+			['title', 'string', 'max' 		=> 255],
+			['user_id', 'default', 'value'  => Yii::$app->user->id, 'on' => 'insert'],
+
+			// The following rule is used by search(].
 			// Please remove those attributes that should not be searched.
-			array('id, forum_id, user_id, title, first_post_id, last_post_id, num_replies, num_views, approved, locked, sticky, global, moved', 'safe', 'on' => 'search'),
-		);
+			[['id', 'forum_id', 'user_id', 'title', 'first_post_id', 'last_post_id', 'num_replies', 'num_views', 'approved', 'locked', 'sticky', 'global', 'moved'], 'safe', 'on' => 'search'],
+		];
 	}
 
 	/**

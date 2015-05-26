@@ -59,9 +59,9 @@ class BbiiPost extends BbiiAR
 			[['subject', 'create_time', 'change_time', 'search'], 'safe'],
 			[['subject', 'content'], 'required'],
 
-			[['change_id, user_id, topic_id, forum_id, approved, upvoted'], 'integer'],
-			['subject, change_reason', 'string', 'max' => 255],
-			['content','filter','filter'               => [$obj, 'purify']],
+			[['change_id', 'user_id', 'topic_id', 'forum_id', 'approved', 'upvoted'], 'integer'],
+			[['subject', 'change_reason'], 'string', 'max' => 255],
+			//['content', 'filter', 'filter'               => [$obj, 'purify']],
 
 			// IP stuff
 			['ip', 'string', 'max'                     => 39],
@@ -76,7 +76,7 @@ class BbiiPost extends BbiiAR
 
 			// The following rule is used by search(].
 			// Please remove those attributes that should not be searched.
-			['id, subject, content, user_id, topic_id, forum_id, ip, create_time, approved, change_id, change_time, change_reason, search', 'safe', 'on' => 'search'],
+			[['id', 'subject', 'content', 'user_id', 'topic_id', 'forum_id', 'ip', 'create_time', 'approved', 'change_id', 'change_time', 'change_reason', 'search'], 'safe', 'on' => 'search'],
 		];
 	}
 
