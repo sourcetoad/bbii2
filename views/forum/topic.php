@@ -3,6 +3,10 @@
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiMessage;
 
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
+use yii\widgets\ListView;
+
 /* @var $this ForumController */
 /* @var $forum BbiiForum */
 /* @var $topic BbiiTopic */
@@ -53,15 +57,15 @@ $item = array(
 		</div>
 	</div>
 	
-	<?php if (!Yii::$app->user->isGuest && $this->context->module->userMailColumn && $this->context->module->allowTopicSub): ?>
-		<?php if ($this->isWatching($topic->id)): ?>
+	<?php if (!Yii::$app->user->isGuest && $this->context->module->userMailColumn && $this->context->module->allowTopicSub) { ?>
+		<?php if ($this->isWatching($topic->id)) { ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('class' => 'bbii-watch-button','id' => 'unwatch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/unwatch') . '")')); ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('style' => 'display:none','class' => 'bbii-watch-button','id' => 'watch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/watch') . '")')); ?>
-		<?php else: ?>
+		<?php } else { ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('style' => 'display:none','class' => 'bbii-watch-button','id' => 'unwatch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/unwatch') . '")')); ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('class' => 'bbii-watch-button','id' => 'watch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/watch') . '")')); ?>
-		<?php endif; ?>
-	<?php endif; ?>
+		<?php }; ?>
+	<?php }; ?>
 
 	<?php if (!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()): ?>
 	<div class = "form">
