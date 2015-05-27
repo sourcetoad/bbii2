@@ -39,11 +39,12 @@ class BbiiTopicRead extends BbiiAR
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_id, data', 'required'),
-            ['user_id', 'string', 'max' => 10],
+            [['user_id', 'data'], 'required'],
+            ['user_id', 'integer', 'max' => 11],
+
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('user_id, data', 'safe', 'on' => 'search'),
+            [['user_id', 'data'], 'safe'],
         );
     }
 

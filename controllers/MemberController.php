@@ -3,7 +3,7 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
-use frontend\modules\bbii\components\BbiiTopicsRead;
+use frontend\modules\bbii\components\BbiiTopicRead;
 use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiTopic;
@@ -130,7 +130,7 @@ class MemberController extends BbiiController {
 	 */
 	/*public function actionView($id) {
 		if (isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
-			$object = new BbiiTopicsRead;
+			$object = new BbiiTopicRead;
 			$read = BbiiTopicRead::find($id);
 			if ($read !== null) {
 				$object->unserialize($read->data);
@@ -152,7 +152,7 @@ class MemberController extends BbiiController {
 			'pagination' => false,
 		));
 		if ($this->isModerator() || $id == Yii::$app->user->id) {
-			$object = new BbiiTopicsRead;
+			$object = new BbiiTopicRead;
 			$read = BbiiTopicRead::find($id);
 			if ($read === null) {
 				$in = array(0);
@@ -187,7 +187,7 @@ class MemberController extends BbiiController {
 	 */
 	public function actionView($id) {
 		$model  = $this->loadModel($id);
-		$object = new BbiiTopicsRead;
+		$object = new BbiiTopicRead;
 		$read   = BbiiTopicRead::find($id);
 
 		if (isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {

@@ -1,5 +1,6 @@
 <?php
 
+use frontend\modules\bbii\controllers\ForumController;
 use yii\helpers\Html;
 use yii\i18n\Formatter;
 
@@ -11,7 +12,7 @@ $assets = AppAsset::register($this);
 ?>
 
 <div class = "topic">
-	<div class = "forum-cell <?php echo $this->topicIcon($model); ?>"></div>
+	<div class = "forum-cell <?php echo ForumController::topicIcon($model); ?>"></div>
 	<div class = "forum-cell main">
 		<div class = "header2">
 			<?php echo Html::a(

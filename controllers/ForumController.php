@@ -12,6 +12,8 @@ use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiTopic;
 use frontend\modules\bbii\models\BbiiTopicRead;
 
+use frontend\modules\bbii\components\BbiiTopicsRead;
+
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
@@ -96,7 +98,7 @@ class ForumController extends BbiiController {
 	
 	public function actionMarkAllRead() {
 		if (!Yii::$app->user->isGuest) {
-			$object = new BbiiTopicsRead;
+			$object = new BbiiTopicRead;
 			$criteria = new CDbCriteria;
 			$criteria->limit = 100;
 			$criteria->order = 'last_post_id DESC';
@@ -128,17 +130,13 @@ class ForumController extends BbiiController {
 		$id = ($id == null) ? Yii::$app->request->get('id') : $id;
 		$forum = BbiiForum::findOne($id);
 
-
 		if ($forum === null) {
 			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested forum does not exist.'));
 		}
 
-
 		if (Yii::$app->user->isGuest && $forum->public == 0) {
 			throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
 		}
-
-
 
 		if ($forum->membergroup_id != 0) {
 			if (Yii::$app->user->isGuest) {
@@ -150,7 +148,6 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-
 
 		// @todo Is this just a complicated way of getting a forum topics? - DJE : 2015-05-26
 		/*
@@ -197,15 +194,19 @@ class ForumController extends BbiiController {
 	 * @param $id integer topic_id
 	 * @param $nav string post-id or "last"
 	 */
-	public function actionTopic($id, $nav = null, $postId = null) {
-		$topic = BbiiTopic::find($id);
+	public function actionTopic($id = null, $nav = null, $postId = null) {
+		$id = $id?: Yii::$app->request->get('id');
+
+		$topic = BbiiTopic::findOne($id);
 		if ($topic === null) {
 			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested topic does not exist.'));
 		}
-		$forum = BbiiForum::find($topic->forum_id);
+
+		$forum = BbiiForum::findOne($topic->forum_id);
 		if (Yii::$app->user->isGuest && $forum->public == 0) {
 			throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
 		}
+
 		if ($forum->membergroup_id != 0) {
 			if (Yii::$app->user->isGuest) {
 				throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
@@ -216,17 +217,21 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
+
 		$dataProvider = new ActiveDataProvider('BbiiPost', array(
 			'criteria' => array(
 				'condition' => 'approved = 1 and topic_id = ' . $topic->id,
-				'order' => 't.id',
-				'with' => array('poster'),
+				'order'     => 't.id',
+				'with'      => array('poster'),
 			),
 			'pagination' => array(
 				'pageSize' => $this->module->postsPerPage,
 			),
 		));
+
+		// @todo Poll not enabled for inital release - DJE : 2015-05-27
 		// Determine poll
+		/*
 		$criteria = new CDbCriteria;
 		$criteria->condition = 'post_id = ' . $topic->first_post_id;
 		$this->poll = BbiiPoll::find()->find($criteria);
@@ -250,6 +255,8 @@ class ForumController extends BbiiController {
 				$this->voted = true;
 			}
 		}
+		*/
+
 		// Navigate to a post in a topic
 		if (isset($nav)) {
 			$cPage = $dataProvider->getPagination();
@@ -267,31 +274,44 @@ class ForumController extends BbiiController {
 			}
 			return Yii::$app->response->redirect(array('forum/topic', 'id' => $id, 'BbiiPost_page' => $page, 'postId' => $post));;
 		}
+
 		// Increase topic views
-		$topic->saveCounters(array('num_views' => 1));
+		$topic->updateCounters(array('num_views' => 1));
+
 		// Register the last visit of a topic
 		if (!Yii::$app->user->isGuest) {
 			$object = new BbiiTopicsRead;
-			$model = BbiiTopicRead::find(Yii::$app->user->id);
-			if ($model === null) {
+			$model  = BbiiTopicRead::find(Yii::$app->user->id)->one();
+
+			if (empty($model->data)) {
 				$model = new BbiiTopicRead;
 				$model->user_id = Yii::$app->user->id;
 			} else {
 				$object->unserialize($model->data);
 			}
+
 			$object->setRead($topic->id, $topic->last_post_id);
+
 			if ($object->follows($topic->id)) {
 				$object->setFollow($topic->id, $topic->last_post_id);
 			}
-			$model->data = $object->serialize();
-			$model->save();
+
+			$model->setAttribute('data', $object->serialize());
+
+			if (!$model->validate() || !$model->save()){
+				echo '<pre>';
+				print_r( $model->getErrors() );
+				echo '</pre>';
+				exit;
+			}
+
 		}
 
 		return $this->render('topic', array(
-			'forum' => $forum,
-			'topic' => $topic,
 			'dataProvider' => $dataProvider,
-			'postId' => $postId,
+			'forum'        => $forum,
+			'postId'       => $postId,
+			'topic'        => $topic,
 		));
 	}
 	
@@ -770,7 +790,7 @@ class ForumController extends BbiiController {
 	public function actionWatch() {
 		$json = array('success' => 'yes');
 		if (isset(Yii::$app->request->post()['topicId']) && isset(Yii::$app->request->post()['postId'])) {
-			$object = new BbiiTopicsRead;
+			$object = new BbiiTopicRead;
 			$model = BbiiTopicRead::find(Yii::$app->user->id);
 			if ($model === null) {
 				$model = new BbiiTopicRead;
@@ -792,7 +812,7 @@ class ForumController extends BbiiController {
 	public function actionUnwatch() {
 		$json = array('success' => 'yes');
 		if (isset(Yii::$app->request->post()['topicId'])) {
-			$object = new BbiiTopicsRead;
+			$object = new BbiiTopicRead;
 			$model = BbiiTopicRead::find(Yii::$app->user->id);
 			if ($model !== null) {
 				$object->unserialize($model->data);
@@ -861,10 +881,12 @@ class ForumController extends BbiiController {
 	 */
 	public function topicIsRead($topic_id) {
 		if (Yii::$app->user->isGuest) {
+
 			return false;
 		} else {
-			$model = BbiiTopicRead::find(Yii::$app->user->id);
-			if ($model === null) {
+			$model = BbiiTopicRead::find(Yii::$app->user->id)->select('*')->all();
+
+			if (count($model) > 0) {
 				return false;
 			} else {
 				$object = new BbiiTopicsRead;
@@ -882,24 +904,30 @@ class ForumController extends BbiiController {
 	/**
 	 * Determine the icon for a topic
 	 */
-	public function topicIcon($topic) {
+	public static function topicIcon($topic) {
 		$img = 'topic';
-		if ($this->topicIsRead($topic->id)) {
+
+		if (self::topicIsRead($topic->id)) {
 			$img .= '2';
 		} else {
 			$img .= '1';
 		}
+
 		if ($topic->global) {
 			$img .= 'g';
 		}
+
 		if ($topic->sticky) {
 			$img .= 's';
 		}
-		$criteria = new CDbCriteria;
+
+		// @todo Poll sdisabled for init release - DJE : 2015-05-27
+		/*$criteria = new CDbCriteria;
 		$criteria->condition = 'post_id = ' . $topic->first_post_id;
 		if (BbiiPoll::find()->exists($criteria)) {
 			$img .= 'p';
-		}
+		}*/
+
 		if ($topic->locked) {
 			$img .= 'l';
 		}
@@ -945,7 +973,7 @@ class ForumController extends BbiiController {
 	}
 	
 	public function isWatching($topic_id) {
-		$object = new BbiiTopicsRead;
+		$object = new BbiiTopicRead;
 		$model = BbiiTopicRead::find(Yii::$app->user->id);
 		if ($model === null) {
 			return false;
