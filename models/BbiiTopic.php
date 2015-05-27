@@ -67,6 +67,7 @@ class BbiiTopic extends BbiiAR
 	}
 
 	/**
+	 * @deprecated 2.7
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -74,10 +75,10 @@ class BbiiTopic extends BbiiAR
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'forum' => array(self::BELONGS_TO, 'BbiiForum', 'forum_id'),
-			'starter' => array(self::BELONGS_TO, 'BbiiMember', 'user_id'),
 			'firstPost' => array(self::BELONGS_TO, 'BbiiPost', 'first_post_id'),
-			'lastPost' => array(self::BELONGS_TO, 'BbiiPost', 'last_post_id'),
+			'forum'     => array(self::BELONGS_TO, 'BbiiForum', 'forum_id'),
+			'lastPost'  => array(self::BELONGS_TO, 'BbiiPost', 'last_post_id'),
+			'starter'   => array(self::BELONGS_TO, 'BbiiMember', 'user_id'),
 		);
 	}
 
@@ -87,20 +88,20 @@ class BbiiTopic extends BbiiAR
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'forum_id' => Yii::t('BbiiModule.bbii', 'Forum'),
-			'user_id' => 'User',
-			'title' => Yii::t('BbiiModule.bbii', 'Title'),
+			'approved'      => 'Approved',
 			'first_post_id' => 'First Post',
-			'last_post_id' => 'Last Post',
-			'num_replies' => Yii::t('BbiiModule.bbii', 'replies'),
-			'num_views' => Yii::t('BbiiModule.bbii', 'views'),
-			'approved' => 'Approved',
-			'locked' => Yii::t('BbiiModule.bbii', 'Locked'),
-			'sticky' => Yii::t('BbiiModule.bbii', 'Sticky'),
-			'global' => Yii::t('BbiiModule.bbii', 'Global'),
-			'moved' => 'Moved',
-			'merge' => Yii::t('BbiiModule.bbii', 'Merge with topic'),
+			'forum_id'      => Yii::t('BbiiModule.bbii', 'Forum'),
+			'global'        => Yii::t('BbiiModule.bbii', 'Global'),
+			'id'            => 'ID',
+			'last_post_id'  => 'Last Post',
+			'locked'        => Yii::t('BbiiModule.bbii', 'Locked'),
+			'merge'         => Yii::t('BbiiModule.bbii', 'Merge with topic'),
+			'moved'         => 'Moved',
+			'num_replies'   => Yii::t('BbiiModule.bbii', 'replies'),
+			'num_views'     => Yii::t('BbiiModule.bbii', 'views'),
+			'sticky'        => Yii::t('BbiiModule.bbii', 'Sticky'),
+			'title'         => Yii::t('BbiiModule.bbii', 'Title'),
+			'user_id'       => 'User',
 		);
 	}
 
