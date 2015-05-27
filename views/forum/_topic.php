@@ -8,15 +8,10 @@ $assets = AppAsset::register($this);
 
 /* @var $this ForumController */
 /* @var $data BbiiTopic */
-echo '<pre>';
-print_r( $model->getStarter() );
-echo '</pre>';
-//echo $model->getStarter()->member_name;
-exit;
 ?>
 
 <div class = "topic">
-	<div class = "forum-cell <?php //echo $this->topicIcon($model); ?>"></div>
+	<div class = "forum-cell <?php echo $this->topicIcon($model); ?>"></div>
 	<div class = "forum-cell main">
 		<div class = "header2">
 			<?php echo Html::a(
@@ -26,9 +21,9 @@ exit;
 		</div>
 
 		<div class = "header4">
-			<?php //echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($model->getStarter()->member_name);?>
+			<?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($model->starter->member_name);?>
 			<?php //echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($model->firstPost->create_time); ?>
-			<?php echo Yii::$app->formatter->formatDateTime(self::userTimestamp($model->getFirstPost()->create_time), 'short', ''); ?>
+			<?php //echo Yii::$app->formatter->formatDateTime(self::userTimestamp($model->getFirstPost()->create_time), 'short', ''); ?>
 		</div>	
 
 		<?php /*
