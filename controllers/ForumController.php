@@ -930,16 +930,15 @@ class ForumController extends BbiiController {
 		$member = BbiiMember::findOne($id);
 		$group = BbiiMembergroup::find($member->group_id);
 
-
-
-		if ($group !== null && $group->min_posts < 0) {
+		if ($group !== null && (isset($group->min_posts) &&$group->min_posts < 0)) {
 			return;
 		}
-		$criteria = new CDbCriteria;
-		$criteria->condition = "min_posts > 0 and min_posts < =  " . $member->posts;
-		$criteria->order = 'min_posts DESC';
-		$newGroup = BbiiMembergroup::find()->find($criteria);
-		if ($newGroup !== null and $group->id != $newGroup->id) {
+
+		$newGroup = BbiiMembergroup::find()
+			->where("min_posts > 0 and min_posts < =  " . $member->posts)
+			->orderBy('min_posts DESC');
+		
+		if ($newGroup !== null && isset($group->id) && ($group->id != $newGroup->id)) {
 			$member->group_id = $newGroup->id;
 			$member->save();
 		}

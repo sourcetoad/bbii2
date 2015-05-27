@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
+use frontend\modules\bbii\models\BbiiPost;
 
 use yii;
 
@@ -70,7 +71,7 @@ class BbiiTopic extends BbiiAR
 	 * @deprecated 2.7
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/* public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
@@ -80,7 +81,7 @@ class BbiiTopic extends BbiiAR
 			'lastPost'  => array(self::BELONGS_TO, 'BbiiPost', 'last_post_id'),
 			'starter'   => array(self::BELONGS_TO, 'BbiiMember', 'user_id'),
 		);
-	}
+	} */
 
 	/**
 	 * @return array customized attribute labels (name => label)
@@ -170,14 +171,26 @@ class BbiiTopic extends BbiiAR
 	    return $dataProvider;
 	}
 	
-	
 	/**
 	 * Returns the css class when a member has posted in a topic
 	 */
 	public function hasPostedClass() {
-		if (!Yii::$app->user->isGuest && BbiiPost::find()->exists("topic_id = $this->id and user_id = ".Yii::$app->user->id)) {
+
+		if (!Yii::$app->user->isGuest && BbiiPost::find()->where("topic_id = ".$this->id." and user_id = ".Yii::$app->user->id)) {
 			return 'posted';
 		}
 		return '';
 	}
+
+    public function getStarter()
+    {
+
+        return $this->hasOne(BbiiMember::className(), ['id' => 'user_id']);
+    }
+
+    public function getFirstPost()
+    {
+
+        return $this->hasOne(BbiiPost::className(), ['id' => 'first_post_id']);
+    }
 }
