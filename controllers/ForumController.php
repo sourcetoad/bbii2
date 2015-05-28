@@ -127,7 +127,7 @@ class ForumController extends BbiiController {
 	 * @version  2.7.5
 	 */
 	public function actionForum($id) {
-		$id = ($id == null) ? Yii::$app->request->get('id') : $id;
+		$id    = is_numeric($id) ?: Yii::$app->request->get('id');
 		$forum = BbiiForum::findOne($id);
 
 		if ($forum === null) {
@@ -218,7 +218,8 @@ class ForumController extends BbiiController {
 			}
 		}
 
-		$dataProvider = new ActiveDataProvider('BbiiPost', array(
+		/* $dataProvider = new ActiveDataProvider(
+			'BbiiPost', array(
 			'criteria' => array(
 				'condition' => 'approved = 1 and topic_id = ' . $topic->id,
 				'order'     => 't.id',
@@ -227,7 +228,13 @@ class ForumController extends BbiiController {
 			'pagination' => array(
 				'pageSize' => $this->module->postsPerPage,
 			),
-		));
+		)); */
+
+		$dataProvider = new ActiveDataProvider([
+			'query' => BbiiPost::find()
+				->where('approved = 1 and topic_id = ' . $topic->id)
+				->orderBy('id DESC')
+	    ]);
 
 		// @todo Poll not enabled for inital release - DJE : 2015-05-27
 		// Determine poll
@@ -326,7 +333,7 @@ class ForumController extends BbiiController {
 		}
 		$forum = BbiiForum::find($quoted->forum_id);
 		$topic = BbiiTopic::find($quoted->topic_id);
-		if (isset(Yii::$app->request->post()['BbiiPost'])) {
+		if (Yii::$app->request->post('BbiiPost')) {
 			$post = new BbiiPost;
 			$post->load(Yii::$app->request->post()['BbiiPost']);
 			$post->user_id = Yii::$app->user->id;
@@ -365,30 +372,40 @@ class ForumController extends BbiiController {
 	
 	/**
 	 * Reply to a topic
+	 *
+	 * @version  2.7.5
 	 * @param $id integer topic_id
 	 */
 	public function actionReply($id) {
+		$id    = is_numeric($id) ?: Yii::$app->request->get('id');
+		$post  = new BbiiPost;
 		$topic = BbiiTopic::find($id);
+
 		if ($topic === null) {
 			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested topic does not exist.'));
 		}
+
 		$forum = BbiiForum::find($topic->forum_id);
-		$post = new BbiiPost;
-		if (isset(Yii::$app->request->post()['BbiiPost'])) {
-			$post->load(Yii::$app->request->post()['BbiiPost']);
+
+		if (Yii::$app->request->post('BbiiPost')) {
+			$post->load(Yii::$app->request->post('BbiiPost'));
 			$post->user_id = Yii::$app->user->id;
+
 			if ($forum->moderated) {
 				$post->approved = 0;
 			} else {
 				$post->approved = 1;
 			}
+
 			if ($post->save()) {
 				if ($post->approved) {
-					$forum->saveCounters(array('num_posts' => 1));					// method since Yii 1.1.8
-					$topic->saveCounters(array('num_replies' => 1));					// method since Yii 1.1.8
+					// $post->updateCounters(['view_count' => 1]);
+					$forum->updateCounters(array('num_posts' => 1));
+					$topic->updateCounters(array('num_replies' => 1));
+					
 					$topic->saveAttributes(array('last_post_id' => $post->id));
 					$forum->saveAttributes(array('last_post_id' => $post->id));
-					$post->poster->saveCounters(array('posts' => 1));					// method since Yii 1.1.8
+					$post->poster->updateCounters(array('posts' => 1));
 					$this->assignMembergroup(Yii::$app->user->id);
 				} else {
 					Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
@@ -400,10 +417,11 @@ class ForumController extends BbiiController {
 			$post->forum_id = $forum->id;
 			$post->topic_id = $topic->id;
 		}
+
 		return $this->render('reply', array(
 			'forum' => $forum,
+			'post'  => $post,
 			'topic' => $topic,
-			'post' => $post
 		));
 	}
 	
@@ -426,7 +444,7 @@ class ForumController extends BbiiController {
 			$choiceArr = array('', '', '');
 		}
 
-		if (Yii::$app->request->post()['BbiiPost']) {
+		if (Yii::$app->request->post('BbiiPost')) {
 			$forum = BbiiForum::findOne(Yii::$app->request->post('BbiiPost')['forum_id']);
 
 			$post->setAttributes(Yii::$app->request->post('BbiiPost'));
@@ -546,8 +564,8 @@ class ForumController extends BbiiController {
 		}
 		$forum = BbiiForum::find($post->forum_id);
 		$topic = BbiiTopic::find($post->topic_id);
-		if (isset(Yii::$app->request->post()['BbiiPost'])) {
-			$post->load(Yii::$app->request->post()['BbiiPost']);
+		if (Yii::$app->request->post('BbiiPost')) {
+			$post->attributes = Yii::$app->request->post('BbiiPost');
 			$post->change_id = Yii::$app->user->id;
 			if ($forum->moderated) {
 				$post->approved = 0;

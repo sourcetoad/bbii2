@@ -1,6 +1,8 @@
 <?php
 
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use yii\i18n\Formatter;
 
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
@@ -9,7 +11,6 @@ $assets = AppAsset::register($this);
 /* @var $data BbiiPost */
 /* @var $postId integer */
 ?>
-
 <div class = "post">
 	<?php echo Html::tag('a', array('name' => $data->id)); ?>
 	<div class = "member-cell">
@@ -17,7 +18,7 @@ $assets = AppAsset::register($this);
 			<?php echo Html::a(Html::encode($data->poster->member_name), array('member/view', 'id' => $data->poster->id)); ?>
 		</div>
 		<div class = "avatar">
-			<?php echo Html::img((isset($data->poster->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $data->poster->avatar):$assets->baseUrl.'empty.jpeg'), 'avatar'); ?>
+			<?php echo Html::img((isset($data->poster->avatar) ? Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $data->poster->avatar : $assets->baseUrl.'/images/empty.jpeg'), 'avatar'); ?>
 		</div>
 		<div class = "group">
 			<?php if (isset($data->poster->group)) {
@@ -29,44 +30,49 @@ $assets = AppAsset::register($this);
 		</div>
 		<div class = "memberinfo">
 			<?php echo Yii::t('BbiiModule.bbii', 'Posts') . ': ' . Html::encode($data->poster->posts); ?><br>
-			<?php echo Yii::t('BbiiModule.bbii', 'Joined') . ': ' . DateTimeCalculation::shortDate($data->poster->first_visit); ?>
+			<?php echo Yii::t('BbiiModule.bbii', 'Joined') . ': ' . Yii::$app->formatter->asDatetime($data->poster->first_visit); ?>
 		</div>
 		<div style = "text-align:center;margin-top:10px;">
-		<?php if (!Yii::$app->user->isGuest): ?>
+		<?php if (!Yii::$app->user->isGuest) { ?>
 			<?php echo Html::img($assets->baseUrl.'/images/warn.png', 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Report post'), 'style' => 'cursor:pointer;', 'onclick' => 'reportPost(' . $data->id . ')')); ?>
 			<?php echo Html::a( Html::img($assets->baseUrl.'/images/pm.png', 'pm', array('title' => Yii::t('BbiiModule.bbii', 'Send private message'))), array('message/create', 'id' => $data->user_id) ); ?>
-			<?php echo $this->showUpvote($data->id); ?>
-		<?php endif; ?>
+			<?php //@todo rep mod disabled for init release - DJE : 2015-05-28 ?>
+			<?php //echo $this->showUpvote($data->id); ?>
+		<?php }; ?>
 		</div>
 	</div>
 	<div class = "post-cell">
 		<div class = "post-header">
-			<?php if (!(Yii::$app->user->isGuest || $data->topic->locked) || $this->context->isModerator()): ?>
+			<?php if (!(Yii::$app->user->isGuest || $data->topic->locked) || $this->context->isModerator()) { ?>
 				<div class = "form">
-					<?php $form = $this->beginWidget('ActiveForm', array(
-						'action' => array('forum/quote', 'id' => $data->id),
+					<?php $form = ActiveForm::begin([
+						'action'               => array('forum/quote', 'id' => $data->id),
 						'enableAjaxValidation' => false,
-					)); ?>
+					]); ?>
 						<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Quote'), array('class' => 'bbii-quote-button')); ?>
-					<?php $this->endWidget(); ?>
+					<?php ActiveForm::end(); ?>
 				</div><!-- form -->	
-			<?php endif; ?>
-			<?php if (!($data->user_id != Yii::$app->user->id || $data->topic->locked) || $this->context->isModerator()): ?>
+			<?php }; ?>
+
+			<?php if (!($data->user_id != Yii::$app->user->id || $data->topic->locked) || $this->context->isModerator()) { ?>
 				<div class = "form">
-					<?php $form = $this->beginWidget('ActiveForm', array(
-						'action' => array('forum/update', 'id' => $data->id),
+					<?php $form = ActiveForm::begin([
+						'action'               => array('forum/update', 'id' => $data->id),
 						'enableAjaxValidation' => false,
-					)); ?>
+					]); ?>
 						<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Edit'), array('class' => 'bbii-edit-button')); ?>
-					<?php $this->endWidget(); ?>
+					<?php ActiveForm::end(); ?>
 				</div><!-- form -->	
-			<?php endif; ?>
+			<?php }; ?>
+
 			<div class = "header2<?php echo (isset($postId) && $postId == $data->id)?' target':''; ?>"><?php echo Html::encode($data->subject); ?></div>
 			<?php echo '&raquo; ' . Html::encode($data->poster->member_name); ?>
-			<?php echo ' &raquo; ' . DateTimeCalculation::full($data->create_time); ?>
+			<?php echo ' &raquo; ' . Yii::$app->formatter->asDatetime($data->create_time); ?>
 			<?php echo ' &raquo; <span class = "reputation" title = "' . Yii::t('BbiiModule.bbii','Reputation') . '">' . $data->upvoted . '</span>'; ?>
 		</div>
-		<?php if ($this->poll !== null && $this->poll->post_id == $data->id): ?>
+
+		<?php //@todo Poll disabled for init release - DJE : 2015-05-28
+		/* if ($this->poll !== null && $this->poll->post_id == $data->id): ?>
 		<div class = "bbii-poll">
 			<strong><?php echo Yii::t('BbiiModule.bbii', 'Poll') . ': ' .$this->poll->question; ?></strong>
 			<div id = "poll">
@@ -102,7 +108,7 @@ $assets = AppAsset::register($this);
 			<?php endif; ?>
 			</div>
 		</div>
-		<?php endif; ?>
+		<?php endif; */ ?>
 		<div class = "post-content">
 			<?php echo $data->content; ?>
 		</div>
@@ -111,10 +117,11 @@ $assets = AppAsset::register($this);
 		</div>
 		<div class = "post-footer">
 			<?php if ($data->change_reason): ?>
-				<?php echo Yii::t('BbiiModule.bbii','Changed'). ': ' . DateTimeCalculation::long($data->change_time) . ' ' . Yii::t('BbiiModule.bbii','Reason') . ': ' . Html::encode($data->change_reason); ?>
+				<?php echo Yii::t('BbiiModule.bbii','Changed'). ': ' . Yii::$app->formatter->asDatetime($data->change_time) . ' ' . Yii::t('BbiiModule.bbii','Reason') . ': ' . Html::encode($data->change_reason); ?>
 			<?php endif; ?>
 		</div>
-		<?php echo $this->render('_upvotedBy', array('post_id' => $data->id)); ?>
+		<?php // @todo rep mod disabled for init release - DJE : 2015-05-28 ?>
+		<?php // echo $this->render('_upvotedBy', array('post_id' => $data->id)); ?>
 		<div class = "toolbar">
 		<?php if ($this->context->isModerator()): ?>
 			<?php echo Html::a( Html::img($assets->baseUrl.'/images/warn.png', 'warn', array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $data->user_id, 'type' => 1) ); ?>

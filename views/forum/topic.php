@@ -67,7 +67,7 @@ $item = array(
 		<?php }; ?>
 	<?php }; ?>
 
-	<?php if (!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()): ?>
+	<?php if (!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()) { ?>
 	<div class = "form">
 		<?php // @deprecated 2.7.5
 		/* $form = $this->beginWidget('ActiveForm', array(
@@ -88,7 +88,7 @@ $item = array(
 		ActiveForm::end();
 		?>
 	</div><!-- form -->	
-	<?php endif; ?>
+	<?php }; ?>
 	
 	<?php // @deprecated 2.7.5
 	/* $this->widget('zii.widgets.CListView', array(
@@ -100,6 +100,12 @@ $item = array(
 		'template'        => '{pager}{items}{pager}',
 		'viewData'        => array('postId' => $postId),
 	));*/ ?>
+
+	<?php echo ListView::widget([
+		'dataProvider' => $dataProvider,
+		'id'           => 'bbiiTopic',
+		'itemView'     => '_post',
+	]) ?>
 </div>
 <div style = "display:none;">
 <?php // @deprecated 2.7.5
