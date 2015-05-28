@@ -1,4 +1,16 @@
 <?php
+
+use frontend\modules\bbii\models\BbiiForum;
+use frontend\modules\bbii\models\BbiiMember;
+use frontend\modules\bbii\models\BbiiMessage;
+use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiSession;
+use frontend\modules\bbii\models\BbiiTopic;
+
+use yii\helpers\Html;
+
+$member = BbiiMember::find()->newest()->one();
+
 /* @var $this ForumController */
 ?>
 <div id = "bbii-footer">
@@ -62,7 +74,7 @@
 			</tr><tr>
 				<th><?php echo Yii::t('BbiiModule.bbii','Total members'); ?></th><td><?php echo BbiiMember::find()->count(); ?></td>
 			</tr><tr>
-				<th><?php echo Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php $member = BbiiMember::find()->newest()->find(); echo Html::a($member->member_name, array('member/view', 'id' => $member->id)); ?></td>
+				<th><?php echo Yii::t('BbiiModule.bbii','Newest member'); ?></th><td><?php echo Html::a($member->member_name, array('member/view', 'id' => $member->id)); ?></td>
 			</tr><tr>
 				<th><?php echo Yii::t('BbiiModule.bbii','Visitors today'); ?></th><td><?php echo BbiiSession::find()->count(); ?></td>
 			</tr>

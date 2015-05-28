@@ -3,7 +3,7 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
-use frontend\modules\bbii\components\BbiiTopicsRead;
+use frontend\modules\bbii\components\BbiiTopicRead;
 use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiTopic;
@@ -51,8 +51,8 @@ class MemberController extends BbiiController {
 		$model = new BbiiMember('search');
 		// No longer needed in Yii2+
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiMember']))
-			$model->attributes = $_GET['BbiiMember'];
+		if (isset(Yii::$app->request->get()['BbiiMember']))
+			$model->load(Yii::$app->request->get()['BbiiMember'];
 
 		return $this->render('index', array('model' => $model));
 	}
@@ -66,7 +66,7 @@ class MemberController extends BbiiController {
 		}
 
 		if (isset(Yii::$app->request->post()['BbiiMember'])) {
-			//$model->attributes = Yii::$app->request->post()['BbiiMember'];
+			//$model->load(Yii::$app->request->post()['BbiiMember'];
 			$model->setAttributes(Yii::$app->request->post('BbiiMember'));
 			$model->image = UploadedFile::getInstance($model, 'image');
 
@@ -129,12 +129,12 @@ class MemberController extends BbiiController {
 	 * @return [type]     [description]
 	 */
 	/*public function actionView($id) {
-		if (isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
-			$object = new BbiiTopicsRead;
+		if (isset(Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+			$object = new BbiiTopicRead;
 			$read = BbiiTopicRead::find($id);
 			if ($read !== null) {
 				$object->unserialize($read->data);
-				foreach($_GET['unwatch'] as $topicId => $val) {
+				foreach(Yii::$app->request->get()['unwatch'] as $topicId => $val) {
 					$object->unsetFollow($topicId);
 				}
 				$read->data = $object->serialize();
@@ -152,7 +152,7 @@ class MemberController extends BbiiController {
 			'pagination' => false,
 		));
 		if ($this->isModerator() || $id == Yii::$app->user->id) {
-			$object = new BbiiTopicsRead;
+			$object = new BbiiTopicRead;
 			$read = BbiiTopicRead::find($id);
 			if ($read === null) {
 				$in = array(0);
@@ -187,14 +187,14 @@ class MemberController extends BbiiController {
 	 */
 	public function actionView($id) {
 		$model  = $this->loadModel($id);
-		$object = new BbiiTopicsRead;
+		$object = new BbiiTopicRead;
 		$read   = BbiiTopicRead::find($id);
 
-		if (isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+		if (isset(Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 
 			if ($read !== null) {
 				$object->unserialize($read->data);
-				foreach($_GET['unwatch'] as $topicId => $val) {
+				foreach(Yii::$app->request->get()['unwatch'] as $topicId => $val) {
 					$object->unsetFollow($topicId);
 				}
 				$read->data = $object->serialize();
@@ -237,7 +237,7 @@ class MemberController extends BbiiController {
 	public function actionMail($id) {
 		$model = new MailForm;
 		if (isset(Yii::$app->request->post()['MailForm'])) {
-			$model->attributes = Yii::$app->request->post()['MailForm'];
+			$model->load(Yii::$app->request->post()['MailForm'];
 			if ($model->validate()) {
 				$class = new $this->module->userClass;
 				$criteria = new CDbCriteria;
@@ -278,9 +278,9 @@ class MemberController extends BbiiController {
 	 */
 	public function actionMembers() {
 		$json = array();
-		if (isset($_GET['term'])) {
+		if (isset(Yii::$app->request->get()['term'])) {
 			$criteria = new CDbCriteria;
-			$criteria->compare('member_name',$_GET['term'],true);
+			$criteria->compare('member_name',Yii::$app->request->get()['term'],true);
 			$criteria->limit = 15;
 			$models = BbiiMember::find()->findAll($criteria);
 			foreach($models as $model) {
@@ -316,7 +316,7 @@ class MemberController extends BbiiController {
 	public function loadModel($id) {
 		$model = BbiiMember::find($id);
 		if ($model === null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new HttpException(404,'The requested page does not exist.');
 		return $model;
 	}
 

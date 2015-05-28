@@ -1,55 +1,58 @@
 <?php
 
+use frontend\modules\bbii\controllers\ForumController;
+
 use yii\helpers\Html;
 
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
 
 /* @var $this ForumController */
-/* @var $data BbiiForum */
+/* @var $model BbiiForum */
 
-	$image = 'forum';
-	if (!isset($data->last_post_id) || $this->forumIsRead($data->id)) {
-		$image .= '2';
-	} else {
-		$image .= '1';
-	}
-	if ($data->locked) {
-		$image .= 'l';
-	}
-	if ($data->moderated) {
-		$image .= 'm';
-	}
-	if (!$data->public) {
-		$image .= 'h';
-	}
+$image = 'forum';
+if (!isset($model->last_post_id) || ForumController::forumIsRead($model->id)) {
+	$image .= '2';
+} else {
+	$image .= '1';
+}
+if ($model->locked) {
+	$image .= 'l';
+}
+if ($model->moderated) {
+	$image .= 'm';
+}
+if (!$model->public) {
+	$image .= 'h';
+}
 ?>
 
-<?php if ($data->type): ?>
+<?php if ($model->type) { ?>
 <div class = "forum">
 	<div class = "forum-cell <?php echo $image; ?>"></div>
 	<div class = "forum-cell main">
 		<div class = "header2">
-			<?php echo Html::a(Html::encode($data->name), array('forum', 'id' => $data->id)); ?>
+			<?php echo Html::a(Html::encode($model->name), array('forum', 'id' => $model->id)); ?>
 		</div>
 		<div class = "header4">
-			<?php echo Html::encode($data->subtitle); ?>
+			<?php echo Html::encode($model->subtitle); ?>
 		</div>
 	</div>
 	<div class = "forum-cell center">
-		<?php echo Html::encode($data->num_posts); ?><br>
-		<?php echo Html::encode($data->getAttributeLabel('num_posts')); ?>
+		<?php echo Html::encode($model->num_posts); ?><br>
+		<?php echo Html::encode($model->getAttributeLabel('num_posts')); ?>
 	</div>
 	<div class = "forum-cell center">
-		<?php echo Html::encode($data->num_topics); ?><br>
-		<?php echo Html::encode($data->getAttributeLabel('num_topics')); ?>
+		<?php echo Html::encode($model->num_topics); ?><br>
+		<?php echo Html::encode($model->getAttributeLabel('num_topics')); ?>
 	</div>
 	<div class = "forum-cell last-cell">
-		<?php if ($data->last_post_id && $data->lastPost) {
-			echo Html::encode($data->lastPost->poster->member_name);
-			echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $data->lastPost->topic_id, 'nav' => 'last'));
+		<?php
+		if (is_numeric($model->last_post_id) && !empty($model->lastPost)) {
+			echo Html::encode($model->lastPost->poster->member_name);
+			echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $model->lastPost->topic_id, 'nav' => 'last'));
 			echo '<br>';
-			echo DateTimeCalculation::long($data->lastPost->create_time);
+			echo Yii::$app->formatter->asDatetime($model->lastPost->create_time);
 		} else {
 			echo Yii::t('BbiiModule.bbii', 'No posts');
 		}
@@ -57,17 +60,20 @@ $assets = AppAsset::register($this);
 	</div>
 </div>
 
-<?php else: ?>
+<?php } else { ?>
+	<? // @todo re-enable collapsable feature - DJE : 2015-05-26 ?>
+	<?php /*
 	<?php if ($index > 0) { echo '</div>'; } ?>
-	<div class = "forum-category" onclick = "BBii.toggleForumGroup(<?php echo $data->id; ?>,'<?php echo Yii::$app->createAbsoluteUrl($this->module->id.'/forum/setCollapsed'); ?>');">
+	<div class = "forum-category" onclick = "BBii.toggleForumGroup(<?php echo $model->id; ?>,'<?php echo Yii::$app->urlManager->createAbsoluteUrl($this->context->module->id.'/forum/setCollapsed'); ?>');">
 		<div class = "header2">
-			<?php echo Html::encode($data->name); ?>
+			<?php echo Html::encode($model->name); ?>
 		</div>
 		<div class = "header4">
-			<?php echo Html::encode($data->subtitle); ?>
+			<?php echo Html::encode($model->subtitle); ?>
 		</div>
 	</div>
-	<div class = "forum-group" id = "category_<?php echo $data->id; ?>" <?php if ($this->collapsed($data->id)) { echo 'style = "display:none;"';}?>>
-<?php endif; ?>
+	<div class = "forum-group" id = "category_<?php echo $model->id; ?>" <?php if ($this->collapsed($model->id)) { echo 'style = "display:none;"';}?>>
+	*/ ?>
+<?php }; ?>
 
 <?php if ($index == $lastIndex) { echo '</div>'; } ?>

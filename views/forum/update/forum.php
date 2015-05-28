@@ -1,15 +1,20 @@
 <?php
+
+use yii\bootstrap\ActiveForm;
+
+use yii\helpers\Html;
+
 /* @var $this ForumController */
 /* @var $forum BbiiForum */
 /* @var $post BbiiPost */
 /* @var $poll BbiiPoll */
 /* @var $choices array */
 
-$this->context->bbii_breadcrumbs = array(
+/* $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	$forum->name => array('forum/forum', 'id' => $forum->id),
 	Yii::t('BbiiModule.bbii', 'New topic'),
-);
+);*/
 
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
@@ -23,16 +28,11 @@ if (empty($poll->question) && !$poll->hasErrors()) {
 }
 ?>
 <div id = "bbii-wrapper">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
+	<?php echo $this->render('../_header', array('item' => $item)); ?>
 	
-	<noscript>
-	<div class = "flash-notice">
-	<?php echo Yii::t('BbiiModule.bbii','Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
-	</div>
-	</noscript>
-
 	<div class = "form">
-		<?php $form = $this->beginWidget('ActiveForm', array(
+		<?php // @depricated  2.7.5 Kept for referance
+		/*$form = $this->beginWidget('ActiveForm', array(
 			'id' => 'create-topic-form',
 			'enableAjaxValidation' => false,
 		)); ?>
@@ -41,9 +41,7 @@ if (empty($poll->question) && !$poll->hasErrors()) {
 			<?php echo $form->textField($post,'subject',array('size' => 100,'maxlength' => 255,'style' => 'width:99%;')); ?>
 			<?php echo $form->error($post,'subject'); ?>
 		</div>
-		
-		<?php echo $form->errorSummary($post); ?>
-		
+				
 		<?php if ($forum->poll == 2 || ($forum->poll == 1 && $this->context->isModerator())): ?>
 			<div class = "row button" id = "poll-button" style = "<?php echo ($show?'display:none;':''); ?>">
 				<?php echo Html::button(Yii::t('BbiiModule.bbii','Add poll'), array('class' => 'bbii-poll-button','onclick' => 'showPoll()')); ?>
@@ -118,7 +116,6 @@ if (empty($poll->question) && !$poll->hasErrors()) {
 				<strong><?php echo Yii::t('BbiiModule.bbii','Locked'); ?>:</strong>
 				<?php echo Html::checkbox('locked'); ?> &nbsp; 
 			</div>
-		
 		<?php endif; ?>
 		
 		<div class = "row button">
@@ -126,6 +123,36 @@ if (empty($poll->question) && !$poll->hasErrors()) {
 			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'bbii-topic-button')); ?>
 		</div>
 		<?php $this->endWidget(); ?>
+		*/ ?> 
+		<?php $form = ActiveForm::begin([
+			'enableAjaxValidation' => false,
+			'id'                   => 'create-topic-form',
+		]); ?>
+
+			<?php echo $form->errorSummary($post); ?>
+
+			<?php // @todo Poll feature turned off for init relase - DJE : 2015-05-26 ?>
+
+			<?php echo $form->field($post, 'subject')->textInput(array('class' => 'form-control')); ?>
+
+			<?php // @todo re-enable ExtEditMe extention - DJE : 2015-05-26 ?>
+			<?php echo $form->field($post, 'content')->textarea(array('class' => 'form-control')); ?>
+
+			<?php if ($this->context->isModerator()) { ?>
+				<div class = "row">
+					<strong><?php echo Yii::t('BbiiModule.bbii', 'Sticky'); ?>:</strong><?php echo Html::checkbox('sticky'); ?><br /> 
+					<strong><?php echo Yii::t('BbiiModule.bbii', 'Global'); ?>:</strong><?php echo Html::checkbox('global'); ?><br /> 
+					<strong><?php echo Yii::t('BbiiModule.bbii', 'Locked'); ?>:</strong><?php echo Html::checkbox('locked'); ?><br />
+				</div>
+			<?php }; ?>
+
+			<?php echo $form->field($post, 'forum_id')->hiddenInput(array('class' => 'form-control'))->label(false); ?>
+
+			<div class = "row odd buttons">
+				<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-primary')); ?>
+			</div>
+
+		<?php ActiveForm::end(); ?>
 	</div><!-- form -->	
 
 </div>

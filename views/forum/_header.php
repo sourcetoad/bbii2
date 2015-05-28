@@ -33,13 +33,14 @@ $assets = AppAsset::register($this);
 	<div class = "bbii-title"><?php echo $this->context->module->forumTitle; ?></div>
 	<table style = "margin:0;"><tr><td style = "padding:0;">
 		<div id = "bbii-menu">
-		<?php  echo Nav::widget([
+		<?php // @todo Add this feature back - DJE : 2015-05-26 
+		/*echo Nav::widget([
 		    'items' => $item,
-		]); ?>
+		]);*/ ?>
 		</div>
 	</td><td style = "padding:0;text-align:right;vertical-align:top;">
 		<div class = "search">
-			<?php // @todo Add this feature back - DJE : 2015 - 05-14 
+			<?php // @todo Add this feature back - DJE : 2015-05-14 
 				//$this->widget('SimpleSearchForm');
 			?>
 		</div>
@@ -47,11 +48,18 @@ $assets = AppAsset::register($this);
 </div>
 <?php echo Html::dropDownList('bbii-jumpto', null, ArrayHelper::map(BbiiForum::getForumOptions(), 'id', 'name', 'group'),
 array('empty' => Yii::t('BbiiModule.bbii','Select forum'),
-	'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/id/'+$(this).val()",
+	'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/forum/forum?id='+$(this).val()",
 )); ?>
-<?php if (isset($this->context->bbii_breadcrumbs)):?>
+<?php // @todo Breadcrumb disabled for initial release - DJE : 2015-05-28
+/* if (isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
-<?php endif?>
+<?php endif */ ?>
+
+<noscript>
+	<div class = "flash-notice">
+	<?php echo Yii::t('BbiiModule.bbii', 'Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
+	</div>
+</noscript>

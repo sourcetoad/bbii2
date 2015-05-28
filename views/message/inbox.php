@@ -38,7 +38,7 @@ $item = array(
 			'subject',
 			array(
 				'name' => 'create_time',
-				'value' => 'DateTimeCalculation::long($data->create_time)',
+				'value' => 'Yii::$app->formatter->asDatetime($data->create_time)',
 			),
 			array(
 				'name' => 'type',

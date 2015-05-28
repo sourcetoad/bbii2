@@ -50,28 +50,34 @@ class BbiiPost extends BbiiAR
 	public function rules()
 	{
 		$obj = new HtmlPurifier();
-
 		//$obj->options = Yii::$app->getController()->module->purifierOptions;
 		$obj->options = Yii::$app->controller->module->purifierOptions;
+
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
-		return array(
-			array('subject, content', 'required'),
-			[['change_id, user_id, topic_id, forum_id, approved, upvoted'], 'integer'],
-			['subject, change_reason', 'string', 'max' => 255],
-			array('content','filter','filter' => array($obj, 'purify')),
-			['ip', 'string', 'max' => 39],
-			array('ip', 'blocked'),
-			array('ip', 'default', 'value' => $_SERVER['REMOTE_ADDR'], 'on' => 'insert'),
-			array('user_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'insert'),
-			array('create_time', 'default', 'value' => 'NOW()', 'on' => 'insert'),
-			array('change_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'update'),
-			array('change_time', 'default', 'value' => 'NOW()', 'on' => 'update'),
-			array('create_time, change_time, search', 'safe'),
-			// The following rule is used by search().
+		return [
+			[['subject', 'create_time', 'change_time', 'search'], 'safe'],
+			[['subject', 'content'], 'required'],
+
+			[['change_id', 'user_id', 'topic_id', 'forum_id', 'approved', 'upvoted'], 'integer'],
+			[['subject', 'change_reason'], 'string', 'max' => 255],
+			//['content', 'filter', 'filter'               => [$obj, 'purify']],
+
+			// IP stuff
+			['ip', 'string', 'max'                     => 39],
+			['ip', 'blocked'],
+			['ip', 'default', 'value'                  => $_SERVER['REMOTE_ADDR'], 	'on' => 'insert'],
+
+			// event stuff
+			['change_id', 	'default', 'value' => Yii::$app->user->id, 'on' => 'update'],
+			['change_time', 'default', 'value' => 'NOW()', 			   'on' => 'update'],
+			['create_time', 'default', 'value' => 'NOW()', 			   'on' => 'insert'],
+			['user_id', 	'default', 'value' => Yii::$app->user->id, 'on' => 'insert'],
+
+			// The following rule is used by search(].
 			// Please remove those attributes that should not be searched.
-			array('id, subject, content, user_id, topic_id, forum_id, ip, create_time, approved, change_id, change_time, change_reason, search', 'safe', 'on' => 'search'),
-		);
+			[['id', 'subject', 'content', 'user_id', 'topic_id', 'forum_id', 'ip', 'create_time', 'approved', 'change_id', 'change_time', 'change_reason', 'search'], 'safe', 'on' => 'search'],
+		];
 	}
 
 	public function blocked($attribute, $params) {
@@ -81,9 +87,10 @@ class BbiiPost extends BbiiAR
 	}
 	
 	/**
+	 * @deprecated 2.7.5
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/* public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
@@ -92,7 +99,7 @@ class BbiiPost extends BbiiAR
 			'forum' => array(self::BELONGS_TO, 'BbiiForum', 'forum_id'),
 			'topic' => array(self::BELONGS_TO, 'BbiiTopic', 'topic_id'),
 		);
-	}
+	} */
 
 	/**
 	 * @return array customized attribute labels (name => label)
@@ -190,7 +197,7 @@ class BbiiPost extends BbiiAR
 	 * @deprecated 2.0.1
 	 * @return [type] [description]
 	 */
-	public function scopes() {
+	/* public function scopes() {
 		return true;
 		return array(
 			'approved' => array(
@@ -200,5 +207,23 @@ class BbiiPost extends BbiiAR
 				'condition' => 'approved = 0',
 			),
 		);
-	}
+	} */
+
+    public function getForum()
+    {
+
+        return $this->hasOne(BbiiForum::className(), ['id' => 'forum_id']);
+    }
+
+    public function getPoster()
+    {
+
+        return $this->hasOne(BbiiMember::className(), ['id' => 'user_id']);
+    }
+
+    public function getTopic()
+    {
+
+        return $this->hasOne(BbiiTopic::className(), ['id' => 'topic_id']);
+    }
 }

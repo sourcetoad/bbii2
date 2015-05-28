@@ -873,8 +873,10 @@ button.bbii-button-right {
 	text-align: center;
 }
 
+
+
 #bbii-wrapper .post {
-	border: 1px solid #c9e0ed;
+	/*border: 1px solid #c9e0ed;*/
 	border-radius: 10px;
 	display: table;
 	margin-bottom: 2px;
@@ -891,7 +893,7 @@ button.bbii-button-right {
 }
 
 #bbii-wrapper .post-cell .post-header {
-	border: solid 1px #c9e0ed;
+	/* border: solid 1px #c9e0ed; */
 	background: linear-gradient(to right,#c9e0ed, #ffffff);
 	padding: 3px 10px;
 }
@@ -909,12 +911,6 @@ button.bbii-button-right {
 	display: table-cell;
 }
 
-#bbii-wrapper .post {
-	border: 1px solid #c9e0ed;
-	display: table;
-	width: 100%;
-}
-
 #bbii-wrapper .post-footer {
 	font-style: italic;
 	padding: 5px 10px;
@@ -927,6 +923,8 @@ button.bbii-button-right {
 	padding: 5px 5px;
 	margin: 2px 10px;
 }
+
+
 
 #bbii-wrapper .signature {
 	border-top: solid 2px #c9e0ed;

@@ -4,16 +4,17 @@
 /* @var $topic BbiiTopic */
 /* @var $post BbiiPost */
 
-$this->context->bbii_breadcrumbs = array(
+// @todo disabled for initial release - DJE : 2015-05-28
+/*$this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	$forum->name => array('forum/forum', 'id' => $forum->id),
 	$topic->title => array('forum/topic', 'id' => $topic->id),
 	Yii::t('BbiiModule.bbii', 'Reply'),
-);
+);*/
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'))
+	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 	'url' => array('forum/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 	'url' => array('member/index'))
 );
 ?>
 <div id = "bbii-wrapper">

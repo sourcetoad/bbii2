@@ -87,7 +87,7 @@ class SettingController extends BbiiController {
 		}
 
 		if (isset(Yii::$app->request->post()['BbiiSetting'])) {
-			$model->attributes = Yii::$app->request->post()['BbiiSetting'];
+			$model->load(Yii::$app->request->post()['BbiiSetting'];
 			if ($model->save()) {
 
 				// @depricated 2.0.0
@@ -129,8 +129,8 @@ class SettingController extends BbiiController {
 	public function actionGroup() {
 		$model = new BbiiMembergroup();
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiMembergroup'])) {
-			$model->attributes = $_GET['BbiiMembergroup'];
+		if (isset(Yii::$app->request->get()['BbiiMembergroup'])) {
+			$model->load(Yii::$app->request->get()['BbiiMembergroup'];
 		}
 
 		return $this->render('group', array('model' => $model));
@@ -141,8 +141,8 @@ class SettingController extends BbiiController {
 		$model = $model->search();
 
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiMember'])) {
-			$model->attributes = $_GET['BbiiMember'];
+		if (isset(Yii::$app->request->get()['BbiiMember'])) {
+			$model->load(Yii::$app->request->get()['BbiiMember'];
 		}
 
 		return $this->render('moderator',array(
@@ -154,8 +154,8 @@ class SettingController extends BbiiController {
 		$model = new BbiiSpider();
 		$model = $model->search();
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiSpider']))
-			$model->attributes = $_GET['BbiiSpider'];
+		if (isset(Yii::$app->request->get()['BbiiSpider']))
+			$model->load(Yii::$app->request->get()['BbiiSpider'];
 
 		return $this->render('spider', array('model' => $model));
 	}
@@ -231,9 +231,9 @@ class SettingController extends BbiiController {
 	 */
 	public function actionSaveForum() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['BbiiForum'])) {
-			$model = BbiiForum::find(Yii::$app->request->post()['BbiiForum']['id']);
-			$model->attributes = Yii::$app->request->post()['BbiiForum'];
+		if (Yii::$app->request->post('BbiiForum')) {
+			$model = BbiiForum::find(Yii::$app->request->post('BbiiForum')['id']);
+			$model->load(Yii::$app->request->post()['BbiiForum'];
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
@@ -249,8 +249,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetMembergroup() {
 		$json = array();
-		if (isset($_GET['id'])) {
-			$model = BbiiMembergroup::find($_GET['id']);
+		if (isset(Yii::$app->request->get()['id'])) {
+			$model = BbiiMembergroup::find(Yii::$app->request->get()['id']);
 			if ($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -269,8 +269,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetSpider() {
 		$json = array();
-		if (isset($_GET['id'])) {
-			$model = BbiiSpider::find($_GET['id']);
+		if (isset(Yii::$app->request->get()['id'])) {
+			$model = BbiiSpider::find(Yii::$app->request->get()['id']);
 			if ($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -323,7 +323,7 @@ class SettingController extends BbiiController {
 			} else {
 				$model = BbiiMembergroup::find(Yii::$app->request->post()['BbiiMembergroup']['id']);
 			}
-			$model->attributes = Yii::$app->request->post()['BbiiMembergroup'];
+			$model->load(Yii::$app->request->post()['BbiiMembergroup'];
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
@@ -345,7 +345,7 @@ class SettingController extends BbiiController {
 			} else {
 				$model = BbiiSpider::find(Yii::$app->request->post()['BbiiSpider']['id']);
 			}
-			$model->attributes = Yii::$app->request->post()['BbiiSpider'];
+			$model->load(Yii::$app->request->post()['BbiiSpider'];
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
@@ -376,7 +376,7 @@ class SettingController extends BbiiController {
 	public function loadModel($id) {
 		$model = BbiiMember::find($id);
 		if ($model === null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new HttpException(404,'The requested page does not exist.');
 		return $model;
 	}
 

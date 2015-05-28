@@ -3,6 +3,7 @@
 namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
+use frontend\modules\bbii\models\BbiiPost;
 
 use yii;
 
@@ -25,6 +26,7 @@ use yii;
  * @property integer $moved
  * @property integer $upvoted
  */
+
 class BbiiTopic extends BbiiAR
 {
 	public $merge;
@@ -54,31 +56,33 @@ class BbiiTopic extends BbiiAR
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
-		return array(
-			array('forum_id, title, first_post_id, last_post_id', 'required'),
-			[['forum_id, user_id, first_post_id, last_post_id, num_replies, num_views, moved, approved, locked, sticky, global, upvoted'], 'integer'],
-			['title', 'string', 'max' => 255],
-			array('user_id', 'default', 'value' => Yii::$app->user->id, 'on' => 'insert'),
-			// The following rule is used by search().
+		return [
+			[['forum_id', 'title', 'first_post_id', 'last_post_id'], 'required'],
+			[['forum_id', 'user_id', 'first_post_id', 'last_post_id', 'num_replies', 'num_views', 'moved', 'approved', 'locked', 'sticky', 'global', 'upvoted'], 'integer'],
+			['title', 'string', 'max' 		=> 255],
+			['user_id', 'default', 'value'  => Yii::$app->user->id, 'on' => 'insert'],
+
+			// The following rule is used by search(].
 			// Please remove those attributes that should not be searched.
-			array('id, forum_id, user_id, title, first_post_id, last_post_id, num_replies, num_views, approved, locked, sticky, global, moved', 'safe', 'on' => 'search'),
-		);
+			[['id', 'forum_id', 'user_id', 'title', 'first_post_id', 'last_post_id', 'num_replies', 'num_views', 'approved', 'locked', 'sticky', 'global', 'moved'], 'safe', 'on' => 'search'],
+		];
 	}
 
 	/**
+	 * @deprecated 2.7
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/* public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'forum' => array(self::BELONGS_TO, 'BbiiForum', 'forum_id'),
-			'starter' => array(self::BELONGS_TO, 'BbiiMember', 'user_id'),
 			'firstPost' => array(self::BELONGS_TO, 'BbiiPost', 'first_post_id'),
-			'lastPost' => array(self::BELONGS_TO, 'BbiiPost', 'last_post_id'),
+			'forum'     => array(self::BELONGS_TO, 'BbiiForum', 'forum_id'),
+			'lastPost'  => array(self::BELONGS_TO, 'BbiiPost', 'last_post_id'),
+			'starter'   => array(self::BELONGS_TO, 'BbiiMember', 'user_id'),
 		);
-	}
+	} */
 
 	/**
 	 * @return array customized attribute labels (name => label)
@@ -86,20 +90,20 @@ class BbiiTopic extends BbiiAR
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'forum_id' => Yii::t('BbiiModule.bbii', 'Forum'),
-			'user_id' => 'User',
-			'title' => Yii::t('BbiiModule.bbii', 'Title'),
+			'approved'      => 'Approved',
 			'first_post_id' => 'First Post',
-			'last_post_id' => 'Last Post',
-			'num_replies' => Yii::t('BbiiModule.bbii', 'replies'),
-			'num_views' => Yii::t('BbiiModule.bbii', 'views'),
-			'approved' => 'Approved',
-			'locked' => Yii::t('BbiiModule.bbii', 'Locked'),
-			'sticky' => Yii::t('BbiiModule.bbii', 'Sticky'),
-			'global' => Yii::t('BbiiModule.bbii', 'Global'),
-			'moved' => 'Moved',
-			'merge' => Yii::t('BbiiModule.bbii', 'Merge with topic'),
+			'forum_id'      => Yii::t('BbiiModule.bbii', 'Forum'),
+			'global'        => Yii::t('BbiiModule.bbii', 'Global'),
+			'id'            => 'ID',
+			'last_post_id'  => 'Last Post',
+			'locked'        => Yii::t('BbiiModule.bbii', 'Locked'),
+			'merge'         => Yii::t('BbiiModule.bbii', 'Merge with topic'),
+			'moved'         => 'Moved',
+			'num_replies'   => Yii::t('BbiiModule.bbii', 'replies'),
+			'num_views'     => Yii::t('BbiiModule.bbii', 'views'),
+			'sticky'        => Yii::t('BbiiModule.bbii', 'Sticky'),
+			'title'         => Yii::t('BbiiModule.bbii', 'Title'),
+			'user_id'       => 'User',
 		);
 	}
 
@@ -141,7 +145,8 @@ class BbiiTopic extends BbiiAR
 	 * @param  [type] $params [description]
 	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search($params){
+	public function search($params)
+	{
 		$query        = BbiiTopic::find();
 		$dataProvider = new ActiveDataProvider([
 	        'query' => $query,
@@ -168,14 +173,33 @@ class BbiiTopic extends BbiiAR
 	    return $dataProvider;
 	}
 	
-	
 	/**
 	 * Returns the css class when a member has posted in a topic
 	 */
-	public function hasPostedClass() {
-		if (!Yii::$app->user->isGuest && BbiiPost::find()->exists("topic_id = $this->id and user_id = ".Yii::$app->user->id)) {
+	public function hasPostedClass()
+	{
+
+		if (!Yii::$app->user->isGuest && BbiiPost::find()->where("topic_id = ".$this->id." and user_id = ".Yii::$app->user->id)) {
 			return 'posted';
 		}
 		return '';
 	}
+
+    public function getStarter()
+    {
+
+        return $this->hasOne(BbiiMember::className(), ['id' => 'user_id']);
+    }
+
+    public function getFirstPost()
+    {
+
+        return $this->hasOne(BbiiPost::className(), ['id' => 'first_post_id']);
+    }
+
+    public function getLastPost()
+    {
+
+        return $this->hasOne(BbiiPost::className(), ['id' => 'last_post_id']);
+    }
 }
