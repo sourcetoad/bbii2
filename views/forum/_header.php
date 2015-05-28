@@ -50,12 +50,13 @@ $assets = AppAsset::register($this);
 array('empty' => Yii::t('BbiiModule.bbii','Select forum'),
 	'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/id/'+$(this).val()",
 )); ?>
-<?php if (isset($this->context->bbii_breadcrumbs)):?>
+<?php // @todo Breadcrumb disabled for initial release - DJE : 2015-05-28
+/* if (isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
-<?php endif?>
+<?php endif */ ?>
 
 <noscript>
 	<div class = "flash-notice">

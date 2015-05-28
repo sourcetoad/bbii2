@@ -78,6 +78,15 @@ $item = array(
 			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Reply'), array('class' => 'bbii-topic-button')); ?>
 		<?php $this->endWidget(); ?>
 		*/ ?>
+		<?php
+		$form = ActiveForm::begin([
+			'action'               => array('forum/reply', 'id' => $topic->id),
+			'enableAjaxValidation' => false,
+			'id'                   => 'create-post-form',
+		]);
+			echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Reply'), array('class' => 'btn btn-primary'));
+		ActiveForm::end();
+		?>
 	</div><!-- form -->	
 	<?php endif; ?>
 	
