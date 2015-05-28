@@ -7,10 +7,6 @@ use yii\i18n\Formatter;
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
 
-echo '<pre>';
-print_r( $model->poster );
-echo '</pre>';
-
 /* @var $this ForumController */
 /* @var $model BbiiPost */
 /* @var $postId integer */
