@@ -117,7 +117,7 @@ class ForumController extends BbiiController {
 			}
 			$model->data = $object->serialize();
 			$model->save();
-			return Yii::$app->response->redirect(array('forum/index'));
+			return Yii::$app->response->redirect(array('forum/forum/index'));
 		}
 	}
 	
@@ -233,7 +233,7 @@ class ForumController extends BbiiController {
 		$dataProvider = new ActiveDataProvider([
 			'query' => BbiiPost::find()
 				->where('approved = 1 and topic_id = ' . $topic->id)
-				->orderBy('id DESC')
+				->orderBy('id ASC')
 	    ]);
 
 		// @todo Poll not enabled for inital release - DJE : 2015-05-27
@@ -279,7 +279,7 @@ class ForumController extends BbiiController {
 			if (Yii::$app->user->hasFlash('moderation')) {
 				Yii::$app->user->setFlash('moderation', Yii::$app->user->getFlash('moderation'));
 			}
-			return Yii::$app->response->redirect(array('forum/topic', 'id' => $id, 'BbiiPost_page' => $page, 'postId' => $post));;
+			return Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $id, 'BbiiPost_page' => $page, 'postId' => $post));;
 		}
 
 		// Increase topic views
@@ -327,46 +327,69 @@ class ForumController extends BbiiController {
 	 * @param $id integer post_id
 	 */
 	public function actionQuote($id) {
-		$quoted = BbiiPost::find($id);
+		$id     = $id?: Yii::$app->request->get('id');
+		$quoted = BbiiPost::findOne($id);
+
 		if ($quoted === null) {
 			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
-		$forum = BbiiForum::find($quoted->forum_id);
-		$topic = BbiiTopic::find($quoted->topic_id);
+
+		$forum = BbiiForum::findOne($quoted->forum_id);
+		$topic = BbiiTopic::findOne($quoted->topic_id);
+
 		if (Yii::$app->request->post('BbiiPost')) {
+
 			$post = new BbiiPost;
-			$post->load(Yii::$app->request->post()['BbiiPost']);
+			$post->load(Yii::$app->request->post());
 			$post->user_id = Yii::$app->user->id;
+			$post->create_time = date('Y-m-d H:m:i');
+
 			if ($forum->moderated) {
 				$post->approved = 0;
 			} else {
 				$post->approved = 1;
 			}
-			if ($post->save()) {
+			if ($post->validate() && $post->save()) {
 				if ($post->approved) {
-					$forum->saveCounters(array('num_posts' => 1));					// method since Yii 1.1.8
-					$topic->saveCounters(array('num_replies' => 1));					// method since Yii 1.1.8
-					$topic->saveAttributes(array('last_post_id' => $post->id));
-					$forum->saveAttributes(array('last_post_id' => $post->id));
-					$post->poster->saveCounters(array('posts' => 1));					// method since Yii 1.1.8
+					$forum->updateCounters(array('num_posts' => 1));
+					$topic->updateCounters(array('num_replies' => 1));
+					
+					$topic->last_post_id = $post->id;
+					$forum->last_post_id = $post->id;
+					
+					$topic->update();
+					$forum->update();
+
+					$post->poster->updateCounters(array('posts' => 1));
 					$this->assignMembergroup(Yii::$app->user->id);
 				} else {
 					Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 				}
-				return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
+				return Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
+			} else {
+				echo '<pre>';
+				print_r( $post->getErrors() );
+				echo '</pre>';
+				exit;
 			}
+
 		} else {
+
 			$post = new BbiiPost;
 			$quote = $quoted->poster->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. Yii::$app->formatter->asDatetime($quoted->create_time);
+
 			$post->content = '<blockquote cite = "'. $quote .'"><p class = "blockquote-header"><strong>'. $quote .'</strong></p>' . $quoted->content . '</blockquote><p></p>';
 			$post->subject  = $quoted->subject;
 			$post->forum_id = $quoted->forum_id;
 			$post->topic_id = $quoted->topic_id;
 		}
+
+
+
 		return $this->render('reply', array(
 			'forum' => $forum,
+			'post'  => $post,
 			'topic' => $topic,
-			'post' => $post
 		));
 	}
 	
@@ -379,17 +402,19 @@ class ForumController extends BbiiController {
 	public function actionReply($id) {
 		$id    = is_numeric($id) ?: Yii::$app->request->get('id');
 		$post  = new BbiiPost;
-		$topic = BbiiTopic::find($id);
+		$topic = BbiiTopic::findOne($id);
 
 		if ($topic === null) {
 			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested topic does not exist.'));
 		}
 
-		$forum = BbiiForum::find($topic->forum_id);
+		$forum = BbiiForum::findOne($topic->forum_id);
 
 		if (Yii::$app->request->post('BbiiPost')) {
-			$post->load(Yii::$app->request->post('BbiiPost'));
+
+			$post->load(Yii::$app->request->post());
 			$post->user_id = Yii::$app->user->id;
+			$post->create_time = date('Y-m-d H:m:i');
 
 			if ($forum->moderated) {
 				$post->approved = 0;
@@ -397,20 +422,31 @@ class ForumController extends BbiiController {
 				$post->approved = 1;
 			}
 
-			if ($post->save()) {
+			if ($post->validate() && $post->save()) {
 				if ($post->approved) {
 					// $post->updateCounters(['view_count' => 1]);
 					$forum->updateCounters(array('num_posts' => 1));
 					$topic->updateCounters(array('num_replies' => 1));
 					
-					$topic->saveAttributes(array('last_post_id' => $post->id));
-					$forum->saveAttributes(array('last_post_id' => $post->id));
+					$topic->last_post_id = $post->id;
+					$forum->last_post_id = $post->id;
+
+					$topic->update();
+					$forum->update();
+
 					$post->poster->updateCounters(array('posts' => 1));
 					$this->assignMembergroup(Yii::$app->user->id);
 				} else {
-					Yii::$app->user->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
+
+					Yii::$app->user->setFlash('success ',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 				}
-				return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
+
+				return Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
+			} else {
+				echo '<pre>';
+				print_r( $post->getErrors() );
+				echo '</pre>';
+				exit;
 			}
 		} else {
 			$post->subject = $topic->title;
@@ -539,7 +575,7 @@ class ForumController extends BbiiController {
 					}
 					*/
 
-					return Yii::$app->response->redirect(array('forum/topic', 'id' => $topic->id));
+					return Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $topic->id));
 				} else {
 					Yii::$app->user->setFlash('error', Yii::t('BbiiModule.bbii', 'Error, unable to save post.'));
 					$post->delete();
@@ -556,24 +592,31 @@ class ForumController extends BbiiController {
 	}
 	
 	public function actionUpdate($id) {
-		$post = BbiiPost::find($id);
+		$id    = is_numeric($id) ?: Yii::$app->request->get('id');
+		$post = BbiiPost::findOne($id);
+
 		if ($post === null) {
 			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
 		if (($post->user_id != Yii::$app->user->id || $post->topic->locked) && !$this->isModerator()) {
 			throw new HttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
-		$forum = BbiiForum::find($post->forum_id);
-		$topic = BbiiTopic::find($post->topic_id);
+		$forum = BbiiForum::findOne($post->forum_id);
+		$topic = BbiiTopic::findOne($post->topic_id);
+
 		if (Yii::$app->request->post('BbiiPost')) {
-			$post->attributes = Yii::$app->request->post('BbiiPost');
-			$post->change_id = Yii::$app->user->id;
+
+			$post->attributes  = Yii::$app->request->post('BbiiPost');
+			$post->change_id   = Yii::$app->user->id;
+			$post->change_time = date('Y-m-d H:m:i');
+
 			if ($forum->moderated) {
 				$post->approved = 0;
 			} else {
 				$post->approved = 1;
 			}
-			if ($post->save()) {
+
+			if ($post->validate() && $post->save()) {
 				if (!$post->approved) {
 					$forum->saveCounters(array('num_posts' => -1));					// method since Yii 1.1.8
 					if ($topic->num_replies > 0) {
@@ -585,7 +628,13 @@ class ForumController extends BbiiController {
 					}
 					$post->poster->saveCounters(array('posts' => -1));				// method since Yii 1.1.8
 				}
-				return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id));
+
+				return Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id));
+			} else {
+				echo '<pre>';
+				print_r( $model->getErrors() );
+				echo '</pre>';
+				exit;
 			}
 		}
 		return $this->render('update', array(
@@ -620,7 +669,7 @@ class ForumController extends BbiiController {
 				}
 			}
 		}
-		return Yii::$app->response->redirect(array('forum/topic', 'id' => $post->topic_id));
+		return Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id));
 	}
 	
 	/**
