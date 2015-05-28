@@ -618,15 +618,15 @@ class ForumController extends BbiiController {
 
 			if ($post->validate() && $post->save()) {
 				if (!$post->approved) {
-					$forum->saveCounters(array('num_posts' => -1));					// method since Yii 1.1.8
+					$forum->updateCounters(array('num_posts' => -1));					// method since Yii 1.1.8
 					if ($topic->num_replies > 0) {
-						$topic->saveCounters(array('num_replies' => -1));				// method since Yii 1.1.8
+						$topic->updateCounters(array('num_replies' => -1));				// method since Yii 1.1.8
 					} else {
 						$topic->approved = 0;
 						$topic->update();
-						$forum->saveCounters(array('num_topics' => -1));				// method since Yii 1.1.8
+						$forum->updateCounters(array('num_topics' => -1));				// method since Yii 1.1.8
 					}
-					$post->poster->saveCounters(array('posts' => -1));				// method since Yii 1.1.8
+					$post->poster->updateCounters(array('posts' => -1));				// method since Yii 1.1.8
 				}
 
 				return Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id));
@@ -686,9 +686,9 @@ class ForumController extends BbiiController {
 				$post = BbiiPost::find(Yii::$app->request->post()['id']);
 				$topic = BbiiTopic::find($post->topic_id);
 				$member = BbiiMember::find($post->user_id);
-				$post->saveCounters(array('upvoted' => -1));
-				$topic->saveCounters(array('upvoted' => -1));
-				$member->saveCounters(array('upvoted' => -1));
+				$post->updateCounters(array('upvoted' => -1));
+				$topic->updateCounters(array('upvoted' => -1));
+				$member->updateCounters(array('upvoted' => -1));
 			} else {										// add upvote
 				$upvote = new BbiiUpvoted;
 				$upvote->member_id = Yii::$app->user->id;
@@ -697,9 +697,9 @@ class ForumController extends BbiiController {
 				$post = BbiiPost::find(Yii::$app->request->post()['id']);
 				$topic = BbiiTopic::find($post->topic_id);
 				$member = BbiiMember::find($post->user_id);
-				$post->saveCounters(array('upvoted' => 1));
-				$topic->saveCounters(array('upvoted' => 1));
-				$member->saveCounters(array('upvoted' => 1));
+				$post->updateCounters(array('upvoted' => 1));
+				$topic->updateCounters(array('upvoted' => 1));
+				$member->updateCounters(array('upvoted' => 1));
 			}
 			$json['success'] = 'yes';
 			$json['html'] = $this->showUpvote(Yii::$app->request->post()['id']);
@@ -723,9 +723,9 @@ class ForumController extends BbiiController {
 				$criteria->condition = 'poll_id = ' . Yii::$app->request->post()['poll_id'] . ' and user_id = ' . Yii::$app->user->id;
 				$votes = BbiiVote::find()->findAll($criteria);
 				foreach($votes as $vote) {
-					$this->poll->saveCounters(array('votes' => -1));
+					$this->poll->updateCounters(array('votes' => -1));
 					$model = BbiiChoice::find($vote->choice_id);
-					$model->saveCounters(array('votes' => -1));
+					$model->updateCounters(array('votes' => -1));
 					$vote->delete();
 				}
 				foreach(Yii::$app->request->post()['choice'] as $choice) {
@@ -735,8 +735,8 @@ class ForumController extends BbiiController {
 					$model->user_id = Yii::$app->user->id;
 					$model->save();
 					$model = BbiiChoice::find($choice);
-					$model->saveCounters(array('votes' => 1));
-					$this->poll->saveCounters(array('votes' => 1));
+					$model->updateCounters(array('votes' => 1));
+					$this->poll->updateCounters(array('votes' => 1));
 				}
 				$choiceProvider = new ActiveDataProvider('BbiiChoice', array(
 					'criteria' => array(

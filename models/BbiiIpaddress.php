@@ -152,7 +152,7 @@ class BbiiIpaddress extends BbiiAR
 		if ($model === null) {
 			return false;
 		} else {
-			$model->saveCounters(array('count' => 1));					// method since Yii 1.1.8
+			$model->updateCounters(array('count' => 1));					// method since Yii 1.1.8
 			return true;
 		}
 	}

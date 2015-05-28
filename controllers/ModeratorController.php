@@ -64,16 +64,16 @@ class ModeratorController extends BbiiController {
 		if ($topic->approved == 0) {
 			$topic->approved = 1;
 			$topic->update();
-			$forum->saveCounters(array('num_topics' => 1));	// method since Yii 1.1.8
+			$forum->updateCounters(array('num_topics' => 1));	// method since Yii 1.1.8
 		} else {
-			$topic->saveCounters(array('num_replies' => 1));				// method since Yii 1.1.8
+			$topic->updateCounters(array('num_replies' => 1));				// method since Yii 1.1.8
 		}
 		$topic->saveAttributes(array('last_post_id' => $post->id));
 		$post->approved = 1;
 		$post->update();
 		$this->resetLastForumPost($forum->id);
-		$forum->saveCounters(array('num_posts' => 1));		// method since Yii 1.1.8
-		$post->poster->saveCounters(array('posts' => 1));		// method since Yii 1.1.8
+		$forum->updateCounters(array('num_posts' => 1));		// method since Yii 1.1.8
+		$post->poster->updateCounters(array('posts' => 1));		// method since Yii 1.1.8
 		$this->assignMembergroup($post->user_id);
 		
 		return Yii::$app->response->redirect(array('forum/approval'));
@@ -124,17 +124,17 @@ class ModeratorController extends BbiiController {
 		}
 		$forum = BbiiForum::find($post->forum_id);
 		$topic = BbiiTopic::find($post->topic_id);
-		$post->poster->saveCounters(array('posts' => -1));
+		$post->poster->updateCounters(array('posts' => -1));
 		$post->delete();
 		if ($topic->approved == 0) {
 			$topic->delete();
 		} else {
-			$forum->saveCounters(array('num_posts' => -1));					// method since Yii 1.1.8
+			$forum->updateCounters(array('num_posts' => -1));					// method since Yii 1.1.8
 			if ($topic->num_replies > 0) {
-				$topic->saveCounters(array('num_replies' => -1));				// method since Yii 1.1.8
+				$topic->updateCounters(array('num_replies' => -1));				// method since Yii 1.1.8
 			} else {
 				$topic->delete();
-				$forum->saveCounters(array('num_topics' => -1));				// method since Yii 1.1.8
+				$forum->updateCounters(array('num_topics' => -1));				// method since Yii 1.1.8
 			}
 		}
 		$this->resetFirstTopicPost($id);
@@ -340,11 +340,11 @@ class ModeratorController extends BbiiController {
 					if ($move) {
 						BbiiPost::find()->updateAll(array('forum_id' => $targetForumId), $criteria);
 						$forum = BbiiForum::find($sourceForumId);
-						$forum->saveCounters(array('num_topics' => -1));
-						$forum->saveCounters(array('num_posts' => -$numberOfPosts));
+						$forum->updateCounters(array('num_topics' => -1));
+						$forum->updateCounters(array('num_posts' => -$numberOfPosts));
 						$forum = BbiiForum::find($targetForumId);
-						$forum->saveCounters(array('num_topics' => 1));
-						$forum->saveCounters(array('num_posts' => $numberOfPosts));
+						$forum->updateCounters(array('num_topics' => 1));
+						$forum->updateCounters(array('num_posts' => $numberOfPosts));
 						$this->resetLastForumPost($sourceForumId);
 						$this->resetLastForumPost($targetForumId);
 					}
@@ -355,9 +355,9 @@ class ModeratorController extends BbiiController {
 						} else {
 							$forum = BbiiForum::find($sourceForumId);
 						}
-						$forum->saveCounters(array('num_topics' => -1));
+						$forum->updateCounters(array('num_topics' => -1));
 						$topic = BbiiTopic::find($targetTopicId);
-						$topic->saveCounters(array('num_replies' => $numberOfPosts));
+						$topic->updateCounters(array('num_replies' => $numberOfPosts));
 						$model->delete();
 					} else {
 						$model->save();
