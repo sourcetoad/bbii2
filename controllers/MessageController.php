@@ -226,7 +226,7 @@ class MessageController extends BbiiController {
 			}
 			$model->sendto = $model->sendfrom;
 			$model->search = $model->receiver->member_name;
-			$quote = $model->receiver->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. DateTimeCalculation::long($model->create_time);
+			$quote = $model->receiver->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. Yii::$app->formatter->asDatetime(::long($model->create_time);
 			$model->content = '<blockquote cite = "'. $quote .'"><p class = "blockquote-header"><strong>'. $quote .'</strong></p>' . $model->content . '</blockquote><p></p>';
 		}
 
