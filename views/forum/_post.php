@@ -118,9 +118,9 @@ $assets = AppAsset::register($this);
 			<?php echo $model->poster->signature; ?>
 		</div>
 		<div class = "post-footer">
-			<?php if ($model->change_reason): ?>
+			<?php if ($model->change_reason) { ?>
 				<?php echo Yii::t('BbiiModule.bbii','Changed'). ': ' . Yii::$app->formatter->asDatetime($model->change_time) . ' ' . Yii::t('BbiiModule.bbii','Reason') . ': ' . Html::encode($model->change_reason); ?>
-			<?php endif; ?>
+			<?php }; ?>
 		</div>
 		<?php // @todo rep mod disabled for init release - DJE : 2015-05-28 ?>
 		<?php // echo $this->render('_upvotedBy', array('post_id' => $model->id)); ?>

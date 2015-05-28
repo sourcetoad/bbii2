@@ -8,11 +8,6 @@ use yii\helpers\Html;
 /* @var $post BbiiPost */
 /* @var $form ActiveForm */
 ?>
-<noscript>
-<div class = "flash-notice">
-<?php echo Yii::t('BbiiModule.bbii','Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
-</div>
-</noscript>
 <div class = "form">
 	<?php //@deprecated 2.7.5 Kept for referance
 	/* $form = $this->beginWidget('ActiveForm', array(
