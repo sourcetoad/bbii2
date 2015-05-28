@@ -26,6 +26,7 @@ use yii;
  * @property integer $moved
  * @property integer $upvoted
  */
+
 class BbiiTopic extends BbiiAR
 {
 	public $merge;
@@ -144,7 +145,8 @@ class BbiiTopic extends BbiiAR
 	 * @param  [type] $params [description]
 	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search($params){
+	public function search($params)
+	{
 		$query        = BbiiTopic::find();
 		$dataProvider = new ActiveDataProvider([
 	        'query' => $query,
@@ -174,7 +176,8 @@ class BbiiTopic extends BbiiAR
 	/**
 	 * Returns the css class when a member has posted in a topic
 	 */
-	public function hasPostedClass() {
+	public function hasPostedClass()
+	{
 
 		if (!Yii::$app->user->isGuest && BbiiPost::find()->where("topic_id = ".$this->id." and user_id = ".Yii::$app->user->id)) {
 			return 'posted';

@@ -24,7 +24,7 @@ $assets = AppAsset::register($this);
 
 		<div class = "header4">
 			<?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($model->starter->member_name);?>
-			<?php //echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . DateTimeCalculation::medium($model->firstPost->create_time); ?>
+			<?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . Yii::$app->formatter->asDatetime($model->firstPost->create_time); ?>
 			<?php //echo Yii::$app->formatter->formatDateTime(self::userTimestamp($model->getFirstPost()->create_time), 'short', ''); ?>
 		</div>	
 
