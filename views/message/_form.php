@@ -12,12 +12,6 @@ use yii\web\JsExpression;
 /* @var $model BbiiMessage */
 /* @var $form ActiveForm */
 ?>
-<noscript>
-<div class = "flash-notice">
-<?php echo Yii::t('BbiiModule.bbii','Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
-</div>
-</noscript>
-
 <div class = "form">
 
 	<?php // @depricated 2.5.0 Kept for referance

@@ -87,9 +87,10 @@ class BbiiPost extends BbiiAR
 	}
 	
 	/**
+	 * @deprecated 2.7.5
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/* public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
@@ -98,7 +99,7 @@ class BbiiPost extends BbiiAR
 			'forum' => array(self::BELONGS_TO, 'BbiiForum', 'forum_id'),
 			'topic' => array(self::BELONGS_TO, 'BbiiTopic', 'topic_id'),
 		);
-	}
+	} */
 
 	/**
 	 * @return array customized attribute labels (name => label)
@@ -196,7 +197,7 @@ class BbiiPost extends BbiiAR
 	 * @deprecated 2.0.1
 	 * @return [type] [description]
 	 */
-	public function scopes() {
+	/* public function scopes() {
 		return true;
 		return array(
 			'approved' => array(
@@ -206,5 +207,23 @@ class BbiiPost extends BbiiAR
 				'condition' => 'approved = 0',
 			),
 		);
-	}
+	} */
+
+    public function getForum()
+    {
+
+        return $this->hasOne(BbiiForum::className(), ['id' => 'forum_id']);
+    }
+
+    public function getPoster()
+    {
+
+        return $this->hasOne(BbiiMember::className(), ['id' => 'user_id']);
+    }
+
+    public function getTopic()
+    {
+
+        return $this->hasOne(BbiiTopic::className(), ['id' => 'topic_id']);
+    }
 }

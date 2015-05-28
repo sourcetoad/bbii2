@@ -94,16 +94,17 @@ class BbiiMember extends BbiiAR {
 	}
 
 	/**
+	 * @deprecated 2.7.5
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/* public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
 			'group' => array(self::BELONGS_TO, 'BbiiMembergroup', 'group_id'),
 		);
-	}
+	} */
 
 	/**
 	 * @return array customized attribute labels (name => label)
@@ -281,5 +282,12 @@ class BbiiMember extends BbiiAR {
 				'condition' => 'moderator = 1',
 			),
 		);
+	
 	}
+
+    public function getGroup()
+    {
+
+        return $this->hasOne(BbiiMembergroup::className(), ['id' => 'group_id']);
+    }
 }

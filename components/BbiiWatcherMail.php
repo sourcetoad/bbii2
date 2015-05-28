@@ -40,7 +40,7 @@ class BbiiWatcherMail {
 			$subject = '';
 			
 			// watchers:
-			$bbiiTopics = new BbiiTopicsRead;
+			$bbiiTopics = new BbiiTopicRead;
 			$select = 'select * from bbii_topic_read';
 			$cmd = $this->bbii_db->createCommand($select);
 			$result = $cmd->query();

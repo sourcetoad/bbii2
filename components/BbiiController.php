@@ -37,10 +37,10 @@ class BbiiController extends Controller
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Create new topic');
 					break;
 				case 'forum':
-					$pageTitle .= ' - ' . @BbiiForum::find($_GET['id'])->name;
+					$pageTitle .= ' - ' . @BbiiForum::find(Yii::$app->request->get()['id'])->name;
 					break;
 				case 'topic':
-					$pageTitle .= ' - ' . @BbiiTopic::find($_GET['id'])->title;
+					$pageTitle .= ' - ' . @BbiiTopic::find(Yii::$app->request->get()['id'])->title;
 					break;
 				case 'quote':
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Quote');
@@ -58,7 +58,7 @@ class BbiiController extends Controller
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Members');
 					break;
 				case 'view':
-					$pageTitle .= ' - ' . @BbiiMember::find($_GET['id'])->member_name;
+					$pageTitle .= ' - ' . @BbiiMember::find(Yii::$app->request->get()['id'])->member_name;
 					break;
 				case 'update':
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Update');

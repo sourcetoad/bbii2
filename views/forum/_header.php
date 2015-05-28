@@ -48,14 +48,15 @@ $assets = AppAsset::register($this);
 </div>
 <?php echo Html::dropDownList('bbii-jumpto', null, ArrayHelper::map(BbiiForum::getForumOptions(), 'id', 'name', 'group'),
 array('empty' => Yii::t('BbiiModule.bbii','Select forum'),
-	'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/id/'+$(this).val()",
+	'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/forum/forum?id='+$(this).val()",
 )); ?>
-<?php if (isset($this->context->bbii_breadcrumbs)):?>
+<?php // @todo Breadcrumb disabled for initial release - DJE : 2015-05-28
+/* if (isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(
 		'homeLink' => false,
 		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
-<?php endif?>
+<?php endif */ ?>
 
 <noscript>
 	<div class = "flash-notice">

@@ -85,9 +85,10 @@ class BbiiMessage extends BbiiAR
 	}
 	
 	/**
+	 * @deprecated 2.7.5
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/* public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
@@ -96,7 +97,7 @@ class BbiiMessage extends BbiiAR
 			'receiver' => array(self::BELONGS_TO, 'BbiiMember', 'sendto'),
 			'forumPost' => array(self::BELONGS_TO, 'BbiiPost', 'post_id'),
 		);
-	}
+	} */
 
 	/**
 	 * @return array customized attribute labels (name => label)
@@ -209,4 +210,22 @@ class BbiiMessage extends BbiiAR
 			),
 		);
 	}
+
+    public function getSender()
+    {
+
+        return $this->hasOne(BbiiMember::className(), ['id' => 'sendfrom']);
+    }
+
+    public function getReciever()
+    {
+
+        return $this->hasOne(BbiiMember::className(), ['id' => 'sendto']);
+    }
+
+    public function getForumPost()
+    {
+
+        return $this->hasOne(BbiiPost::className(), ['id' => 'post_id']);
+    }
 }

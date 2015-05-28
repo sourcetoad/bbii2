@@ -1,25 +1,21 @@
 <?php
+
+use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiMessage;
+
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
+use yii\widgets\ListView;
+
 /* @var $this ForumController */
 /* @var $forum BbiiForum */
 /* @var $topic BbiiTopic */
 /* @var $dataProvider ActiveDataProvider */
 /* @var $postId integer */
+
+// @note Old JS client logic inclustion
+/*
 Yii::$app->getClientScript()->registerScriptFile(Yii::$app->getClientScript()->getCoreScriptUrl().'/jui/js/jquery-ui-i18n.min.js',CClientScript::POS_END);
-$this->context->bbii_breadcrumbs = array(
-	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
-	$forum->name => array('forum/forum', 'id' => $forum->id),
-	$topic->title,
-);
-
-$approvals = BbiiPost::find()->unapproved()->count();
-$reports = BbiiMessage::find()->report()->count();
-
-$item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')', 'url' => array('moderator/approval'), 'visible' => $this->context->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). ' (' . $reports . ')', 'url' => array('moderator/report'), 'visible' => $this->context->isModerator()),
-);
 
 Yii::$app->clientScript->registerScript('language', "
 	var language = \"" . substr(Yii::$app->language, 0, 2) . "\";", 
@@ -31,14 +27,26 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 		$('html,body').animate({scrollTop: aTag.offset().top},'fast');
 	}
 ", CClientScript::POS_READY);
+*/
 
+/* $this->context->bbii_breadcrumbs = array(
+	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
+	$forum->name => array('forum/forum', 'id' => $forum->id),
+	$topic->title,
+);*/ 
+
+$approvals = BbiiPost::find()->unapproved()->count();
+$reports   = BbiiMessage::find()->report()->count();
+
+$item = array(
+	array('label' => Yii::t('BbiiModule.bbii', 'Forum'),							'url' => array('forum/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 							'url' => array('member/index')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')','url' => array('moderator/approval'), 	'visible' => $this->context->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). 	' (' . $reports . ')', 	'url' => array('moderator/report'), 	'visible' => $this->context->isModerator()),
+);
 ?>
 
-<?php if (Yii::$app->user->hasFlash('moderation')): ?>
-<div class = "flash-notice">
-	<?php echo Yii::$app->user->getFlash('moderation'); ?>
-</div>
-<?php endif; ?>
+<?php echo Yii::$app->session->getFlash(); ?>
 
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
@@ -49,58 +57,72 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 		</div>
 	</div>
 	
-	<?php if (!Yii::$app->user->isGuest && $this->module->userMailColumn && $this->module->allowTopicSub): ?>
-		<?php if ($this->isWatching($topic->id)): ?>
+	<?php if (!Yii::$app->user->isGuest && $this->context->module->userMailColumn && $this->context->module->allowTopicSub) { ?>
+		<?php if ($this->isWatching($topic->id)) { ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('class' => 'bbii-watch-button','id' => 'unwatch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/unwatch') . '")')); ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('style' => 'display:none','class' => 'bbii-watch-button','id' => 'watch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/watch') . '")')); ?>
-		<?php else: ?>
+		<?php } else { ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('style' => 'display:none','class' => 'bbii-watch-button','id' => 'unwatch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/unwatch') . '")')); ?>
 			<?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('class' => 'bbii-watch-button','id' => 'watch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/watch') . '")')); ?>
-		<?php endif; ?>
-	<?php endif; ?>
+		<?php }; ?>
+	<?php }; ?>
 
-	<?php if (!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()): ?>
+	<?php if (!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()) { ?>
 	<div class = "form">
-		<?php $form = $this->beginWidget('ActiveForm', array(
-			'id' => 'create-post-form',
-			'action' => array('forum/reply', 'id' => $topic->id),
+		<?php // @deprecated 2.7.5
+		/* $form = $this->beginWidget('ActiveForm', array(
+			'action'               => array('forum/reply', 'id' => $topic->id),
 			'enableAjaxValidation' => false,
+			'id'                   => 'create-post-form',
 		)); ?>
 			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Reply'), array('class' => 'bbii-topic-button')); ?>
 		<?php $this->endWidget(); ?>
+		*/ ?>
+		<?php
+		$form = ActiveForm::begin([
+			'action'               => array('forum/reply', 'id' => $topic->id),
+			'enableAjaxValidation' => false,
+			'id'                   => 'create-post-form',
+		]);
+			echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Reply'), array('class' => 'btn btn-primary'));
+		ActiveForm::end();
+		?>
 	</div><!-- form -->	
-	<?php endif; ?>
+	<?php }; ?>
 	
-	<?php $this->widget('zii.widgets.CListView', array(
-		'id' => 'bbiiPost',
-		'dataProvider' => $dataProvider,
-		'itemView' => '_post',
-		'viewData' => array('postId' => $postId),
-		'template' => '{pager}{items}{pager}',
-		'pager' => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
+	<?php // @deprecated 2.7.5
+	/* $this->widget('zii.widgets.CListView', array(
 		'afterAjaxUpdate' => 'function(){$(window).scrollTop(0);}',
-	)); ?>
+		'dataProvider'    => $dataProvider,
+		'id'              => 'bbiiPost',
+		'itemView'        => '_post',
+		'pager'           => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
+		'template'        => '{pager}{items}{pager}',
+		'viewData'        => array('postId' => $postId),
+	));*/ ?>
+
+	<?php echo ListView::widget([
+		'dataProvider' => $dataProvider,
+		'id'           => 'bbiiTopic',
+		'itemView'     => '_post',
+	]) ?>
 </div>
 <div style = "display:none;">
-<?php
-$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
-    'id' => 'dlgReportForm',
-	'theme' => $this->module->juiTheme,
-    'options' => array(
-        'title' => Yii::t('BbiiModule.bbii', 'Report post'),
-        'autoOpen' => false,
-		'modal' => true,
-		'width' => 800,
-		'show' => 'fade',
-		'buttons' => array(
-			Yii::t('BbiiModule.bbii','Send') => 'js:function(){ sendReport(); }',
-			Yii::t('BbiiModule.bbii','Cancel') => 'js:function(){ $(this).dialog("close"); }',
-		),
-    ),
+<?php // @deprecated 2.7.5
+/*$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+	'id'      => 'dlgReportForm',
+	'options' => array(
+		'modal'    => true,
+		'show'     => 'fade',
+		'title'    => Yii::t('BbiiModule.bbii', 'Report post'),
+		'width'    => 800,
+	),
+	'theme'   => $this->module->juiTheme,
 ));
 
 	echo $this->render('_reportForm', array('model' => new BbiiMessage));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
+*/
 ?>
 </div>
