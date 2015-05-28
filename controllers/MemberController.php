@@ -51,8 +51,8 @@ class MemberController extends BbiiController {
 		$model = new BbiiMember('search');
 		// No longer needed in Yii2+
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiMember']))
-			$model->attributes = $_GET['BbiiMember'];
+		if (isset(Yii::$app->request->get()['BbiiMember']))
+			$model->attributes = Yii::$app->request->get()['BbiiMember'];
 
 		return $this->render('index', array('model' => $model));
 	}
@@ -129,12 +129,12 @@ class MemberController extends BbiiController {
 	 * @return [type]     [description]
 	 */
 	/*public function actionView($id) {
-		if (isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+		if (isset(Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 			$object = new BbiiTopicRead;
 			$read = BbiiTopicRead::find($id);
 			if ($read !== null) {
 				$object->unserialize($read->data);
-				foreach($_GET['unwatch'] as $topicId => $val) {
+				foreach(Yii::$app->request->get()['unwatch'] as $topicId => $val) {
 					$object->unsetFollow($topicId);
 				}
 				$read->data = $object->serialize();
@@ -190,11 +190,11 @@ class MemberController extends BbiiController {
 		$object = new BbiiTopicRead;
 		$read   = BbiiTopicRead::find($id);
 
-		if (isset($_GET['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+		if (isset(Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
 
 			if ($read !== null) {
 				$object->unserialize($read->data);
-				foreach($_GET['unwatch'] as $topicId => $val) {
+				foreach(Yii::$app->request->get()['unwatch'] as $topicId => $val) {
 					$object->unsetFollow($topicId);
 				}
 				$read->data = $object->serialize();
@@ -278,9 +278,9 @@ class MemberController extends BbiiController {
 	 */
 	public function actionMembers() {
 		$json = array();
-		if (isset($_GET['term'])) {
+		if (isset(Yii::$app->request->get()['term'])) {
 			$criteria = new CDbCriteria;
-			$criteria->compare('member_name',$_GET['term'],true);
+			$criteria->compare('member_name',Yii::$app->request->get()['term'],true);
 			$criteria->limit = 15;
 			$models = BbiiMember::find()->findAll($criteria);
 			foreach($models as $model) {

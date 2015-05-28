@@ -43,8 +43,8 @@ class ModeratorController extends BbiiController {
 	public function actionApproval() {
 		$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiMessage'])) {
-			$model->attributes = $_GET['BbiiPost'];
+		if (isset(Yii::$app->request->get()['BbiiMessage'])) {
+			$model->attributes = Yii::$app->request->get()['BbiiPost'];
 		}
 		// restrict filtering to unapproved posts
 		$model->approved = 0;
@@ -82,8 +82,8 @@ class ModeratorController extends BbiiController {
 	public function actionAdmin() {
 		$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiPost']))
-			$model->attributes = $_GET['BbiiPost'];
+		if (isset(Yii::$app->request->get()['BbiiPost']))
+			$model->attributes = Yii::$app->request->get()['BbiiPost'];
 		// limit posts to approved posts
 		$model->approved = 1;
 		
@@ -96,8 +96,8 @@ class ModeratorController extends BbiiController {
 	{
 		$model = new BbiiIpaddress('search');
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiIpaddress']))
-			$model->attributes = $_GET['BbiiIpaddress'];
+		if (isset(Yii::$app->request->get()['BbiiIpaddress']))
+			$model->attributes = Yii::$app->request->get()['BbiiIpaddress'];
 
 		return $this->render('ipadmin',array(
 			'model' => $model,
@@ -108,7 +108,7 @@ class ModeratorController extends BbiiController {
 		BbiiIpaddress::find($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if (!isset($_GET['ajax']))
+		if (!isset(Yii::$app->request->get()['ajax']))
 			$this->redirect(isset(Yii::$app->request->post()['returnUrl']) ? Yii::$app->request->post()['returnUrl'] : array('ipadmin'));
 	}
 
@@ -116,8 +116,8 @@ class ModeratorController extends BbiiController {
 	 * Delete a post
 	 */
 	public function actionDelete($id) {
-		if (isset($_GET['id']))
-			$id = $_GET['id'];
+		if (isset(Yii::$app->request->get()['id']))
+			$id = Yii::$app->request->get()['id'];
 		$post = BbiiPost::find($id);
 		if ($post === null) {
 			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
@@ -146,7 +146,7 @@ class ModeratorController extends BbiiController {
 		$model = BbiiMessage::find()->deleteAll($criteria);
 		
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if (!isset($_GET['ajax']))
+		if (!isset(Yii::$app->request->get()['ajax']))
 			$this->redirect(isset(Yii::$app->request->post()['returnUrl']) ? Yii::$app->request->post()['returnUrl'] : array('approval'));
 		return;
 	}
@@ -226,8 +226,8 @@ class ModeratorController extends BbiiController {
 	public function actionReport() {
 		$model = new BbiiMessage('search');
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiMessage']))
-			$model->attributes = $_GET['BbiiMessage'];
+		if (isset(Yii::$app->request->get()['BbiiMessage']))
+			$model->attributes = Yii::$app->request->get()['BbiiMessage'];
 		// limit posts to moderator inbox
 		$model->sendto = 0;
 		

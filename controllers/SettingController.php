@@ -129,8 +129,8 @@ class SettingController extends BbiiController {
 	public function actionGroup() {
 		$model = new BbiiMembergroup();
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiMembergroup'])) {
-			$model->attributes = $_GET['BbiiMembergroup'];
+		if (isset(Yii::$app->request->get()['BbiiMembergroup'])) {
+			$model->attributes = Yii::$app->request->get()['BbiiMembergroup'];
 		}
 
 		return $this->render('group', array('model' => $model));
@@ -141,8 +141,8 @@ class SettingController extends BbiiController {
 		$model = $model->search();
 
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiMember'])) {
-			$model->attributes = $_GET['BbiiMember'];
+		if (isset(Yii::$app->request->get()['BbiiMember'])) {
+			$model->attributes = Yii::$app->request->get()['BbiiMember'];
 		}
 
 		return $this->render('moderator',array(
@@ -154,8 +154,8 @@ class SettingController extends BbiiController {
 		$model = new BbiiSpider();
 		$model = $model->search();
 		// $model->unsetAttributes();  // clear any default values
-		if (isset($_GET['BbiiSpider']))
-			$model->attributes = $_GET['BbiiSpider'];
+		if (isset(Yii::$app->request->get()['BbiiSpider']))
+			$model->attributes = Yii::$app->request->get()['BbiiSpider'];
 
 		return $this->render('spider', array('model' => $model));
 	}
@@ -249,8 +249,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetMembergroup() {
 		$json = array();
-		if (isset($_GET['id'])) {
-			$model = BbiiMembergroup::find($_GET['id']);
+		if (isset(Yii::$app->request->get()['id'])) {
+			$model = BbiiMembergroup::find(Yii::$app->request->get()['id']);
 			if ($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -269,8 +269,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetSpider() {
 		$json = array();
-		if (isset($_GET['id'])) {
-			$model = BbiiSpider::find($_GET['id']);
+		if (isset(Yii::$app->request->get()['id'])) {
+			$model = BbiiSpider::find(Yii::$app->request->get()['id']);
 			if ($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
