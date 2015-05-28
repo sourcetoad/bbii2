@@ -845,35 +845,33 @@ class ForumController extends BbiiController {
 	 * @return boolean
 	 */
 	public static function forumIsRead($forum_id) {
+		$returnData = false;
+
+		if (!Yii::$app->user->isGuest) {
 			
-		if (Yii::$app->user->isGuest) {
-			return false;
-		} else {
 			$model = BbiiTopicRead::findOne(Yii::$app->user->id);
-			if ($model === null) {
-				return false;
-			} else {
-				$object = new BbiiTopicRead;
+			if ($model !== null) {
+				$object = new BbiiTopicsRead;
 				$object->unserialize($model->data);
 
+				$models = BbiiTopic::find()
+					->where('forum_id = '.$forum_id)
+					->limit(100)
+					->orderBy('last_post_id DESC')
+					->all();
 
-				$criteria = new CDbCriteria;
-				$criteria->condition = "forum_id = $forum_id";
-				$criteria->order = 'last_post_id DESC';
-				$criteria->limit = 100;
-				$models = BbiiTopic::find()->findAll($criteria);
-				$result = true;
+				$returnData = true;
 				foreach($models as $topic) {
 					if ($topic->last_post_id > $object->topicLastRead($topic->id)) {
 						$result = false;
 						break;
 					}
 				}
-				return $result;
 			}
 		}
-	}
-	
+
+		return $returnData;
+	}	
 	/**
 	 * Determine whether a topic is completely read by a user
 	 * @param integer forum id
