@@ -74,6 +74,7 @@ class BbiiForum extends BbiiAR
 	}
 
 	/**
+	 * @deprecated 2.7.5
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -247,4 +248,10 @@ class BbiiForum extends BbiiAR
 		}
 		return $return;
 	}
+
+    public function getLastPost()
+    {
+
+        return $this->hasOne(BbiiPost::className(), ['id' => 'last_post_id']);
+    }
 }

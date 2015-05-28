@@ -196,4 +196,10 @@ class BbiiTopic extends BbiiAR
 
         return $this->hasOne(BbiiPost::className(), ['id' => 'first_post_id']);
     }
+
+    public function getLastPost()
+    {
+
+        return $this->hasOne(BbiiPost::className(), ['id' => 'last_post_id']);
+    }
 }
