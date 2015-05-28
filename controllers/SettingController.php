@@ -87,7 +87,7 @@ class SettingController extends BbiiController {
 		}
 
 		if (isset(Yii::$app->request->post()['BbiiSetting'])) {
-			$model->attributes = Yii::$app->request->post()['BbiiSetting'];
+			$model->load(Yii::$app->request->post()['BbiiSetting'];
 			if ($model->save()) {
 
 				// @depricated 2.0.0
@@ -130,7 +130,7 @@ class SettingController extends BbiiController {
 		$model = new BbiiMembergroup();
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiMembergroup'])) {
-			$model->attributes = Yii::$app->request->get()['BbiiMembergroup'];
+			$model->load(Yii::$app->request->get()['BbiiMembergroup'];
 		}
 
 		return $this->render('group', array('model' => $model));
@@ -142,7 +142,7 @@ class SettingController extends BbiiController {
 
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiMember'])) {
-			$model->attributes = Yii::$app->request->get()['BbiiMember'];
+			$model->load(Yii::$app->request->get()['BbiiMember'];
 		}
 
 		return $this->render('moderator',array(
@@ -155,7 +155,7 @@ class SettingController extends BbiiController {
 		$model = $model->search();
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiSpider']))
-			$model->attributes = Yii::$app->request->get()['BbiiSpider'];
+			$model->load(Yii::$app->request->get()['BbiiSpider'];
 
 		return $this->render('spider', array('model' => $model));
 	}
@@ -233,7 +233,7 @@ class SettingController extends BbiiController {
 		$json = array();
 		if (Yii::$app->request->post('BbiiForum')) {
 			$model = BbiiForum::find(Yii::$app->request->post('BbiiForum')['id']);
-			$model->attributes = Yii::$app->request->post()['BbiiForum'];
+			$model->load(Yii::$app->request->post()['BbiiForum'];
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
@@ -323,7 +323,7 @@ class SettingController extends BbiiController {
 			} else {
 				$model = BbiiMembergroup::find(Yii::$app->request->post()['BbiiMembergroup']['id']);
 			}
-			$model->attributes = Yii::$app->request->post()['BbiiMembergroup'];
+			$model->load(Yii::$app->request->post()['BbiiMembergroup'];
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
@@ -345,7 +345,7 @@ class SettingController extends BbiiController {
 			} else {
 				$model = BbiiSpider::find(Yii::$app->request->post()['BbiiSpider']['id']);
 			}
-			$model->attributes = Yii::$app->request->post()['BbiiSpider'];
+			$model->load(Yii::$app->request->post()['BbiiSpider'];
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {

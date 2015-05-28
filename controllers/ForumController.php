@@ -328,7 +328,7 @@ class ForumController extends BbiiController {
 		$topic = BbiiTopic::find($quoted->topic_id);
 		if (isset(Yii::$app->request->post()['BbiiPost'])) {
 			$post = new BbiiPost;
-			$post->attributes = Yii::$app->request->post()['BbiiPost'];
+			$post->load(Yii::$app->request->post()['BbiiPost'];
 			$post->user_id = Yii::$app->user->id;
 			if ($forum->moderated) {
 				$post->approved = 0;
@@ -375,7 +375,7 @@ class ForumController extends BbiiController {
 		$forum = BbiiForum::find($topic->forum_id);
 		$post = new BbiiPost;
 		if (isset(Yii::$app->request->post()['BbiiPost'])) {
-			$post->attributes = Yii::$app->request->post()['BbiiPost'];
+			$post->load(Yii::$app->request->post()['BbiiPost'];
 			$post->user_id = Yii::$app->user->id;
 			if ($forum->moderated) {
 				$post->approved = 0;
@@ -451,7 +451,7 @@ class ForumController extends BbiiController {
 				/*
 				// Poll
 				if (isset(Yii::$app->request->post()['BbiiPoll']) && isset(Yii::$app->request->post()['addPoll']) && Yii::$app->request->post()['addPoll'] == 'yes') {
-					$poll->attributes = Yii::$app->request->post()['BbiiPoll'];
+					$poll->load(Yii::$app->request->post()['BbiiPoll'];
 					$poll->post_id = $post->id;
 					$poll->user_id = Yii::$app->user->id;
 					if (empty($poll->expire_date)) {
@@ -547,7 +547,7 @@ class ForumController extends BbiiController {
 		$forum = BbiiForum::find($post->forum_id);
 		$topic = BbiiTopic::find($post->topic_id);
 		if (isset(Yii::$app->request->post()['BbiiPost'])) {
-			$post->attributes = Yii::$app->request->post()['BbiiPost'];
+			$post->load(Yii::$app->request->post()['BbiiPost'];
 			$post->change_id = Yii::$app->user->id;
 			if ($forum->moderated) {
 				$post->approved = 0;
@@ -586,7 +586,7 @@ class ForumController extends BbiiController {
 			throw new HttpException(403, Yii::t('yii', 'You are not authorized to perform this action.'));
 		}
 		if (isset(Yii::$app->request->post()['BbiiPoll'])) {
-			$poll->attributes = Yii::$app->request->post()['BbiiPoll'];
+			$poll->load(Yii::$app->request->post()['BbiiPoll'];
 			if (empty($poll->expire_date)) {
 				unset($poll->expire_date);
 			}
