@@ -52,7 +52,7 @@ if (!$model->public) {
 			echo Html::encode($model->lastPost->poster->member_name);
 			echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $model->lastPost->topic_id, 'nav' => 'last'));
 			echo '<br>';
-			echo DateTimeCalculation::long($model->lastPost->create_time);
+			echo Yii::$app->formatter->asDatetime($model->lastPost->create_time);
 		} else {
 			echo Yii::t('BbiiModule.bbii', 'No posts');
 		}

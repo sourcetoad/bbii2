@@ -48,7 +48,7 @@ $item = array(
 			'ip',
 			array(
 				'name' => 'create_time',
-				'value' => 'DateTimeCalculation::long($data->create_time)',
+				'value' => 'Yii::$app->formatter->asDatetime($data->create_time)',
 			),
 			array(
 				'class' => 'yii\grid\ActionColumn',
@@ -87,7 +87,7 @@ $item = array(
 			'ip',
 			array(
 				'header' => 'Create Time',
-				'value'  => 'DateTimeCalculation::long($data->create_time)',
+				'value'  => 'Yii::$app->formatter->asDatetime($data->create_time)',
 			),
 			array(
 				'class'    => 'yii\grid\ActionColumn',

@@ -25,10 +25,6 @@ $assets = AppAsset::register($this);
 		<div class = "header4">
 			<?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($model->starter->member_name);?>
 			<?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' ' . Yii::$app->formatter->asDatetime($model->firstPost->create_time); ?>
-			<?php //echo Yii::$app->formatter->formatDateTime(self::userTimestamp($model->getFirstPost()->create_time), 'short', ''); ?>
-		</div>	
-
-		<?php /*
 			<?php if ($this->context->isModerator()) { ?>
 				<?php echo Html::img($assets->baseUrl.'/images/empty.png', 'empty'); ?>
 				<?php echo Html::img($assets->baseUrl.'/images/update.png', 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $model->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/topic') . '")')); ?>
@@ -49,7 +45,7 @@ $assets = AppAsset::register($this);
 			echo Html::encode($model->lastPost->poster->member_name);
 			echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $model->id, 'nav' => 'last'));
 			echo '<br>';
-			echo DateTimeCalculation::long($model->lastPost->create_time);
-		*/?>
+			echo Yii::$app->formatter->asDatetime($model->lastPost->create_time);
+		?>
 	</div>
 </div>

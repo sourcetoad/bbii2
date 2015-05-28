@@ -357,7 +357,7 @@ class ForumController extends BbiiController {
 			}
 		} else {
 			$post = new BbiiPost;
-			$quote = $quoted->poster->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. Yii::$app->formatter->asDatetime(::longDate($quoted->create_time);
+			$quote = $quoted->poster->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. Yii::$app->formatter->asDatetime($quoted->create_time);
 			$post->content = '<blockquote cite = "'. $quote .'"><p class = "blockquote-header"><strong>'. $quote .'</strong></p>' . $quoted->content . '</blockquote><p></p>';
 			$post->subject  = $quoted->subject;
 			$post->forum_id = $quoted->forum_id;
