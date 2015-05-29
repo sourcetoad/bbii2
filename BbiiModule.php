@@ -47,7 +47,7 @@ class BbiiModule extends \yii\base\Module
 	public $userIdColumn      = 'id';
 	public $userMailColumn    = false;
 	public $userNameColumn    = 'username';
-	public $version           = '2.0.1';
+	public $version           = '2.7.5';
 
 	private $_assetsUrl;
 	
@@ -151,23 +151,34 @@ class BbiiModule extends \yii\base\Module
 				}
 			}
 
-			// register visit by webspider
+			// register visits
 			if (isset($_SERVER['HTTP_USER_AGENT'])) {
-				$spider = BbiiSpider::find()->where(['user_agent' => $_SERVER['HTTP_USER_AGENT']])->one();
 
+				// web spider visit
+				$spider = BbiiSpider::find()->where(['user_agent' => $_SERVER['HTTP_USER_AGENT']])->one();
 				if ($spider !== null) {
 					$spider->setScenario('visit');
 					$spider->hits++;
 					$spider->last_visit = null;
-					$spider->save();
-				} else {
-					// register visit by guest (when not a webspider)
-					$model = BbiiSession::find()->where(['id' => Yii::$app->session->get('id')])->one();
-					if ($model === null) {
-						$model = new BbiiSession;
-						$model->id = Yii::$app->session->get('id');
+					if (!$spider->validate() || !$spider->save()) {
+						echo '<pre>';
+						print_r( $spider->getErrors() );
+						echo '</pre>';
+						exit;
 					}
-					$model->save();
+				// guest visit
+				} else {
+					$model = BbiiSession::find()->where(['id' => Yii::$app->session->getId()])->one();
+					$model = $model ?: new BbiiSession();
+
+					$model->id = Yii::$app->session->getId();
+
+					if (!$model->validate() || !$model->save()) {
+						echo '<pre>';
+						print_r( $model->getErrors() );
+						echo '</pre>';
+						exit;
+					}
 				}
 			}
 
