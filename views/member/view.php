@@ -42,10 +42,9 @@ $item = array(
 	<?php
 	if ($this->context->isModerator() || $userData->getAttribute('id') == Yii::$app->user->id) {
 		//echo Html::htmlButton(Yii::t('BbiiModule.bbii', 'Edit profile'), array('class' => 'bbii-button-right', 'onclick' => 'js:document.location.href = "' . Yii::$app->urlManager->createAbsoluteUrl('member/update', array('id' => $userData->getAttribute('id)) .'"'));
-		echo Html::button(
-			Yii::t('BbiiModule.bbii', 'Edit profile'),
+		echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Edit profile'),
 			array(
-				'class'   => 'bbii-button-right',
+				'class' => 'btn btn-success',
 				'onclick' => 'js:document.location.href = "' . Yii::$app->urlManager->createAbsoluteUrl('forum/member/update', array('id' => $userData->getAttribute('id'))) .'"'
 			)
 		);

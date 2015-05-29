@@ -96,27 +96,26 @@ class ForumController extends BbiiController {
 		));
 	}
 	
-	public function actionMarkAllRead() {
+	public function actionMarkallread() {
 		if (!Yii::$app->user->isGuest) {
-			$object = new BbiiTopicRead;
-			$criteria = new CDbCriteria;
-			$criteria->limit = 100;
-			$criteria->order = 'last_post_id DESC';
-			$forums = BbiiForum::find()->forum()->findAll();
+			$object = new BbiiTopicsRead;
+			$query = null;
+
+			$forums = BbiiForum::find()->forum()->all();
 			foreach($forums as $forum) {
-				$topics = BbiiTopic::find()->findAll($criteria);
-				$criteria->condition = 'forum_id = ' . $forum->id;
+				$topics = BbiiTopic::find()->where($query)->limit(100)->orderBy('last_post_id DESC')->all();
+				$query = 'forum_id = ' . $forum->id;
 				foreach($topics as $topic) {
 					$object->setRead($topic->id, $topic->last_post_id);
 				}
 			}
-			$model = BbiiTopicRead::find(Yii::$app->user->id);
-			if ($model === null) {
-				$model = new BbiiTopicRead;
-				$model->user_id = Yii::$app->user->id;
-			}
+
+			$model = BbiiTopicRead::findOne(Yii::$app->user->id);
+			$model = $model ?: new BbiiTopicRead();
+			$model->user_id = Yii::$app->user->id;
 			$model->data = $object->serialize();
 			$model->save();
+
 			return Yii::$app->response->redirect(array('forum/forum/index'));
 		}
 	}
