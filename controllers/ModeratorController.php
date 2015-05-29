@@ -227,7 +227,7 @@ class ModeratorController extends BbiiController {
 		$model = new BbiiMessage('search');
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiMessage']))
-			$model->load(Yii::$app->request->get()['BbiiMessage'];
+			$model->load(Yii::$app->request->get()['BbiiMessage']);
 		// limit posts to moderator inbox
 		$model->sendto = 0;
 		

@@ -56,7 +56,7 @@ class MessageController extends BbiiController {
 		$model = new BbiiMessage('search');
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiMessage'])) {
-			$model->load(Yii::$app->request->get()['BbiiMessage'];
+			$model->load(Yii::$app->request->get()['BbiiMessage']);
 		}
 		// restrict filtering to own inbox
 		$model->sendto = $id;
@@ -83,7 +83,7 @@ class MessageController extends BbiiController {
 		$model = new BbiiMessage('search');
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiMessage'])) {
-			$model->load(Yii::$app->request->get()['BbiiMessage'];
+			$model->load(Yii::$app->request->get()['BbiiMessage']);
 		}
 		// restrict filtering to own outbox
 		$model->sendfrom = $id;
@@ -215,7 +215,7 @@ class MessageController extends BbiiController {
 	public function actionReply($id) {
 		if (isset(Yii::$app->request->post()['BbiiMessage'])) {
 			$model = new BbiiMessage;
-			$model->load(Yii::$app->request->post()['BbiiMessage'];
+			$model->load(Yii::$app->request->post()['BbiiMessage']);
 			$model->sendfrom = Yii::$app->user->id;
 			if ($model->save())
 				return Yii::$app->response->redirect(array('forum/outbox'));
@@ -226,7 +226,7 @@ class MessageController extends BbiiController {
 			}
 			$model->sendto = $model->sendfrom;
 			$model->search = $model->receiver->member_name;
-			$quote = $model->receiver->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. Yii::$app->formatter->asDatetime(::long($model->create_time);
+			$quote = $model->receiver->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. Yii::$app->formatter->asDatetime($model->create_time);
 			$model->content = '<blockquote cite = "'. $quote .'"><p class = "blockquote-header"><strong>'. $quote .'</strong></p>' . $model->content . '</blockquote><p></p>';
 		}
 
@@ -319,7 +319,7 @@ class MessageController extends BbiiController {
 		$json = array();
 		if (isset(Yii::$app->request->post()['BbiiMessage'])) {
 			$model = new BbiiMessage;
-			$model->load(Yii::$app->request->post()['BbiiMessage'];
+			$model->load(Yii::$app->request->post()['BbiiMessage']);
 			$model->subject = Yii::t('BbiiModule.bbii', 'Post reported: ') . BbiiPost::find($model->post_id)->subject;
 			$model->sendto = 0;
 			$model->sendfrom = Yii::$app->user->id;
