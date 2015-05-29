@@ -3,11 +3,11 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
-use frontend\modules\bbii\components\BbiiTopicRead;
+use frontend\modules\bbii\components\BbiiTopicsRead;
 use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiTopic;
-use frontend\modules\bbii\models\BbiiTopicsRead;
+use frontend\modules\bbii\models\BbiiTopicRead;
 
 use yii;
 use yii\data\ActiveDataProvider;
