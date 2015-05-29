@@ -22,18 +22,23 @@ use yii\helpers\Html;
 		<?php echo $form->errorSummary($model); ?>
 
 		<div class = "row">
-			<?php echo $form->field($model,'name')->textInput(array('value' => $model->getAttribute('name'), 'size' => 40)); ?>
+			<?php echo $form->field($model,'name')->textInput(); ?>
 		</div>
 
 		<div class = "row">
-			<?php echo $form->field($model,'subtitle')->textInput(array('size' => 80)); ?>
+			<?php echo $form->field($model,'subtitle')->textInput(); ?>
 		</div>
 
 		<div class="row">
 			<div class="form-group field-bbiiforum-cateogry">
 				<label class="control-label" for="name">Categories</label>
 					<?php echo Html::dropDownList($model,'cat_id',
-						ArrayHelper::map(BbiiForum::find()->categories()->all(), 'id', 'name'), array('empty' => '', 'class' => 'form-control')); ?>
+						ArrayHelper::map(BbiiForum::find()->categories()->all(), 'id', 'name'),
+						array(
+							'prompt'=> 'None',
+							'class' => 'form-control'
+						)
+					); ?>
 			</div>
 		</div>
 
@@ -42,7 +47,13 @@ use yii\helpers\Html;
 			<div class="form-group field-bbiiforum-public">
 				<label class="control-label" for="name">Public</label>
 				<?php echo Html::dropDownList($model,'public',
-					array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes')), array('class' => 'form-control')); ?>
+					array(
+						'0' => Yii::t('BbiiModule.bbii', 'No'),
+						'1' => Yii::t('BbiiModule.bbii', 'Yes')),
+					array(
+						'class' => 'form-control'
+					)
+				); ?>
 			</div>
 		</div>
 		
@@ -50,7 +61,14 @@ use yii\helpers\Html;
 			<div class="form-group field-bbiiforum-locked">
 				<label class="control-label" for="name">Locked</label>
 				<?php echo Html::dropDownList($model,'locked',
-					array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes')), array('class' => 'form-control')); ?>
+					array(
+						'0' => Yii::t('BbiiModule.bbii', 'No'),
+						'1' => Yii::t('BbiiModule.bbii', 'Yes')
+					),
+					array(
+						'class' => 'form-control'
+					)
+				); ?>
 			</div>
 		</div>
 		
@@ -58,7 +76,13 @@ use yii\helpers\Html;
 			<div class="form-group field-bbiiforum-moderated">
 				<label class="control-label" for="name">Moderated</label>
 				<?php echo Html::dropDownList($model,'moderated',
-					array('0' => Yii::t('BbiiModule.bbii', 'No'),'1' => Yii::t('BbiiModule.bbii', 'Yes')), array('class' => 'form-control')); ?>
+					array(
+						'0' => Yii::t('BbiiModule.bbii', 'No'),
+						'1' => Yii::t('BbiiModule.bbii', 'Yes')
+					),
+					array(
+						'class' => 'form-control')
+				); ?>
 			</div>
 		</div>
 		
@@ -66,11 +90,16 @@ use yii\helpers\Html;
 			<div class="form-group field-bbiiforum-membergroup">
 				<label class="control-label" for="name">Member Group</label>
 				<?php echo Html::dropDownList($model,'membergroup_id',
-					ArrayHelper::map(BbiiMembergroup::find()->specific()->all(), 'id', 'name'), array('empty' => '', 'class' => 'form-control')); ?>
+					ArrayHelper::map(BbiiMembergroup::find()->specific()->all(), 'id', 'name'),
+					array(
+						'prompt' => 'None',
+						'class' => 'form-control'
+					)
+				); ?>
 			</div>
 		</div>
 		
-		<?php // @todo Polls are disabled for the time being - DJE : 2015-05-25; ?>
+		<?php // @todo Polls are disabled for the init relase - DJE : 2015-05-25; ?>
 		<?php /*
 		<div class="row">
 			<div class="form-group field-bbiiforum-poll">
@@ -82,8 +111,8 @@ use yii\helpers\Html;
 		*/ ?>
 		
 		<div class = "row">
-			<?php echo $form->field($model,'id')->hiddenInput()->label(false); ?>
-			<?php echo $form->field($model,'type')->hiddenInput()->label(false); ?>
+			<?php echo $form->field($model, 'id')->hiddenInput()->label(false); ?>
+			<?php echo $form->field($model, 'type')->hiddenInput()->label(false); ?>
 		</div>
 
 		<div class = "row button">
