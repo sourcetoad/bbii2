@@ -31,40 +31,36 @@ $assets = AppAsset::register($this);
 		</div>
 		<div class = "memberinfo">
 			<?php echo Yii::t('BbiiModule.bbii', 'Posts') . ': ' . Html::encode($model->poster->posts); ?><br>
-			<?php echo Yii::t('BbiiModule.bbii', 'Joined') . ': ' . Yii::$app->formatter->asDatetime($model->poster->first_visit); ?>
+			<?php echo Yii::t('BbiiModule.bbii', 'Joined') . ': ' . Yii::$app->formatter->asDate($model->poster->first_visit); ?>
 		</div>
 		<div style = "text-align:center;margin-top:10px;">
-		<?php if (!Yii::$app->user->isGuest) { ?>
+		<?php //@todo no rep mod for init release, no extra features either - DJE : 2015-05-29 ?>
+		<?php /* if (!Yii::$app->user->isGuest) { ?>
 			<?php echo Html::img($assets->baseUrl.'/images/warn.png', array('title' => Yii::t('BbiiModule.bbii', 'Report post'), 'style' => 'cursor:pointer;', 'onclick' => 'reportPost(' . $model->id . ')')); ?>
 			<?php echo Html::a( Html::img($assets->baseUrl.'/images/pm.png', array('title' => Yii::t('BbiiModule.bbii', 'Send private message'))), array('message/create', 'id' => $model->user_id) ); ?>
-			<?php //@todo rep mod disabled for init release - DJE : 2015-05-28 ?>
-			<?php //echo $this->showUpvote($model->id); ?>
-		<?php }; ?>
+			<?php echo $this->showUpvote($model->id); ?>
+		<?php };*/ ?>
 		</div>
 	</div>
 
 	<div class = "post-cell">
 		<div class = "post-header">
 			<?php if (!(Yii::$app->user->isGuest || $model->topic->locked) || $this->context->isModerator()) { ?>
-				<div class = "form">
-					<?php $form = ActiveForm::begin([
-						'action'               => array('forum/quote', 'id' => $model->id),
-						'enableAjaxValidation' => false,
-					]); ?>
-						<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Quote'), array('class' => 'bbii-quote-button')); ?>
-					<?php ActiveForm::end(); ?>
-				</div><!-- form -->	
+				<?php $form = ActiveForm::begin([
+					'action'               => array('forum/quote', 'id' => $model->id),
+					'enableAjaxValidation' => false,
+				]); ?>
+					<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Quote'), array('class' => 'bbii-quote-button')); ?>
+				<?php ActiveForm::end(); ?>
 			<?php }; ?>
 
 			<?php if (!($model->user_id != Yii::$app->user->id || $model->topic->locked) || $this->context->isModerator()) { ?>
-				<div class = "form">
-					<?php $form = ActiveForm::begin([
-						'action'               => array('forum/update', 'id' => $model->id),
-						'enableAjaxValidation' => false,
-					]); ?>
-						<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Edit'), array('class' => 'bbii-edit-button')); ?>
-					<?php ActiveForm::end(); ?>
-				</div><!-- form -->	
+				<?php $form = ActiveForm::begin([
+					'action'               => array('forum/update', 'id' => $model->id),
+					'enableAjaxValidation' => false,
+				]); ?>
+					<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Edit'), array('class' => 'bbii-edit-button')); ?>
+				<?php ActiveForm::end(); ?>
 			<?php }; ?>
 
 			<div class = "header2<?php echo (isset($postId) && $postId == $model->id)?' target':''; ?>"><?php echo Html::encode($model->subject); ?></div>

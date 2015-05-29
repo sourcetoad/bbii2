@@ -57,13 +57,13 @@ $this->registerJs($script, View::POS_BEGIN);
 		
 		<div class="row">
 			<?php //echo $form->labelEx($model,'name'); ?>
-			<?php echo $form->field($model,'name')->textInput(array('size'=>100,'maxlength'=>255, 'id'=>'name')); ?>
+			<?php echo $form->field($model,'name')->textInput(); ?>
 			<?php //echo $form->error($model,'name'); ?>
 		</div>
 		
 		<div class="row">
 			<?php //echo $form->labelEx($model,'subtitle'); ?>
-			<?php echo $form->field($model,'subtitle')->textInput(array('size'=>100,'maxlength'=>255, 'id'=>'subtitle')); ?>
+			<?php echo $form->field($model,'subtitle')->textInput(); ?>
 			<?php //echo $form->error($model,'subtitle'); ?>
 		</div>
 
@@ -71,7 +71,19 @@ $this->registerJs($script, View::POS_BEGIN);
 			<div class="form-group field-bbiiforum-cateogry">
 				<label class="control-label" for="name">Category/Forum</label>
 				<?php //echo $form->labelEx($model,'type'); ?>
-				<?php echo Html::activeDropDownList($model,'type',array('0'=>Yii::t('BbiiModule.bbii', 'Category'),'1'=>Yii::t('BbiiModule.bbii', 'Forum')), array('class' => 'form-control', 'id'=>'type')); ?>
+				<?php echo Html::activeDropDownList(
+					$model,
+					'type',
+					array(
+						'0'=>Yii::t('BbiiModule.bbii', 'Category'),
+						'1'=>Yii::t('BbiiModule.bbii', 'Forum')
+					),
+					array(
+						'class'  => 'form-control',
+						'id'     => 'cateogry',
+						'prompt' => 'None',
+					)
+				); ?>
 				<?php //echo $form->error($model,'type'); ?>
 			</div>
 		</div>
@@ -85,7 +97,9 @@ $this->registerJs($script, View::POS_BEGIN);
 					'cat_id',
 					ArrayHelper::map(BbiiForum::find()->categories()->all(), 'id', 'name'),
 					array(
-						'class' => 'form-control', 'prompt'=>'None', 'id'=>'cat_id'
+						'class'  => 'form-control',
+						'id'     => 'cat_id',
+						'prompt' => 'None',
 					)
 				); ?>
 				<?php //echo $form->error($model,'cat_id'); ?>

@@ -80,23 +80,27 @@ class SettingController extends BbiiController {
 		);
 	}
 
+	/**
+	 * [actionIndex description]
+	 *
+	 * @version  3.0
+	 * @return [type] [description]
+	 */
 	public function actionIndex() {
-		$model = BbiiSetting::find()->one();
-		if ($model === null) {
-			$model = new BbiiSetting();
+		$model = BbiiSetting::find()->one() ?: new BbiiSetting();;
+
+		if (Yii::$app->request->post()['BbiiSetting']) {
+
+			$model->load(Yii::$app->request->post());
+			if ($model->validate() && $model->save()) {
+
+				Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
+			} 
 		}
 
-		if (isset(Yii::$app->request->post()['BbiiSetting'])) {
-			$model->load(Yii::$app->request->post()['BbiiSetting']);
-			if ($model->save()) {
-
-				// @depricated 2.0.0
-				//return Yii::$app->response->redirect(array('forum/index'));
-				return Yii::$app->response->redirect(array(Yii::$app->requestedRoute));
-			}
-		}
-
-		return $this->render('index', array('model' => $model));
+		return $this->render('index', array(
+			'model' => $model
+		));
 	}
 
 	/**
@@ -106,7 +110,7 @@ class SettingController extends BbiiController {
 	 * @return [type] [description]
 	 */
 	public function actionLayout() {
-		$model    = new BbiiForum();
+		$model = new BbiiForum();
 
 		if (Yii::$app->request->post('BbiiForum')) {
 			$model->setAttributes(Yii::$app->request->post('BbiiForum'));

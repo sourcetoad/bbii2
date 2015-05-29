@@ -16,7 +16,7 @@ $this->context->bbii_breadcrumbs = array(
 ?>
 <div id = "bbii-wrapper">
 	<?php echo $this->render('template/_header'); ?>
-	
+
 	<div class = "form">
 
 	<?php // @depricated 2.2.0 Kept for referance

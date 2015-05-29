@@ -53,12 +53,15 @@ $member = BbiiMember::find()->newest()->one();
 					<td>
 						<?php echo Yii::t('BbiiModule.bbii','Locked topic'); ?>
 					</td>
+					<?php // @todo Polls disabled for init release - DJE : 2015-05-29 ?>
+					<?php /*
 					<td>
 						<div class = "forum-cell topic1p"></div>
 					</td>
 					<td>
 						<?php echo Yii::t('BbiiModule.bbii','Poll'); ?>
 					</td>
+					*/?>
 				</tr>
 			</table>
 		</td>
