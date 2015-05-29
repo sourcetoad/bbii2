@@ -53,8 +53,6 @@ $this->registerJs($script, View::POS_BEGIN);
 		'id'                   => 'forum-form',
 	]); ?>
 
-		<p class="note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class="required">*</span> are required.'); ?></p>
-		
 		<?php echo $form->errorSummary($model); ?>
 		
 		<div class="row">

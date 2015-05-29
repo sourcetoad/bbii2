@@ -31,8 +31,6 @@ $this->context->bbii_breadcrumbs = array(
 	]);?>
 		<?php // @todo Iterate on forms - DJE : 2015-05-15 ?>
 
-		<?php //<p class = "note"><?php echo Yii::t('BbiiModule.bbii', 'Fields with <span class = "required">*</span> are required.'); ? ></p> ?>
-
 		<?php echo $form->errorSummary($model); ?>
 
 		<div class = "row odd">
