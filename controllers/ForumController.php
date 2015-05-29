@@ -577,7 +577,7 @@ class ForumController extends BbiiController {
 
 					return Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $topic->id));
 				} else {
-					Yii::$app->user->setFlash('error', Yii::t('BbiiModule.bbii', 'Error, unable to save post.'));
+					Yii::$app->user->setFlash('warning', Yii::t('BbiiModule.bbii', 'Error, unable to save post.'));
 					$post->delete();
 				}
 			}

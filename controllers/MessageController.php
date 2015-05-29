@@ -186,7 +186,7 @@ class MessageController extends BbiiController {
 				return Yii::$app->response->redirect(array('forum/message/layout'));
 			} else {
 
-				Yii::$app->session->setFlash('error',Yii::t('BbiiModule.bbii', 'Could not send message.'));
+				Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii', 'Could not send message.'));
 				return Yii::$app->response->redirect(array('forum/message/layout'));
 			}
 

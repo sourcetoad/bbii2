@@ -33,7 +33,7 @@ foreach($forum as $forumdata) {
 				*/
 				echo Html::a(
 					Yii::t('BbiiModule.bbii', 'Edit'),
-					Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/update', 'id' => $data->id])
+					Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/updateforum', 'id' => $data->id])
 				);
 			?>
 		</td>

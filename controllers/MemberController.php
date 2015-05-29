@@ -7,7 +7,7 @@ use frontend\modules\bbii\components\BbiiTopicRead;
 use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiTopic;
-use frontend\modules\bbii\models\BbiiTopicRead;
+use frontend\modules\bbii\models\BbiiTopicsRead;
 
 use yii;
 use yii\data\ActiveDataProvider;
@@ -61,7 +61,7 @@ class MemberController extends BbiiController {
 		$model = $this->loadModel($id)->one();
 
 		if ($id != Yii::$app->user->id && !$this->isModerator()) {
-			Yii::$app->user->setFlash('error', Yii::t('BbiiModule.bbii', 'Not Authorized'));
+			Yii::$app->user->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
 			return Yii::$app->response->redirect(array('member/index'));
 		}
 
@@ -111,7 +111,7 @@ class MemberController extends BbiiController {
 					return Yii::$app->response->redirect(array('forum/member/view','id' => $model->id));
 			} else {
 
-				Yii::$app->user->setFlash('error',Yii::t('BbiiModule.bbii','Error while saving.'));
+				Yii::$app->user->setFlash('warning',Yii::t('BbiiModule.bbii','Error while saving.'));
 			}
 		}
 

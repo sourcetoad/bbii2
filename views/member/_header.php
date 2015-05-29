@@ -42,3 +42,16 @@ $assets = AppAsset::register($this);
 		'links' => $this->context->bbii_breadcrumbs,
 	)); ?><!-- breadcrumbs -->
 <?php endif*/ ?>
+
+<?php
+foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+    echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
+}
+Yii::$app->session->removeFlash();
+?>
+
+<noscript>
+	<div class = "flash-notice">
+	<?php echo Yii::t('BbiiModule.bbii', 'Your web browser does not support JavaScript, or you have temporarily disabled scripting. This site needs JavaScript to function correct.'); ?>
+	</div>
+</noscript>

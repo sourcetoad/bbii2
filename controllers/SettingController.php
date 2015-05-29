@@ -113,10 +113,10 @@ class SettingController extends BbiiController {
 
 			if ($model->validate() && $model->save()) {
 
-				Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Operation successful.'));
+				Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
 			} else {
 
-				Yii::$app->session->setFlash('error', Yii::t('BbiiModule.bbii', 'Operation failed.'));
+				Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Change failed.'));
 			}
 		}
 
