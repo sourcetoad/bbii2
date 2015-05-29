@@ -44,7 +44,7 @@ class ModeratorController extends BbiiController {
 		$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiMessage'])) {
-			$model->load(Yii::$app->request->get()['BbiiPost'];
+			$model->load(Yii::$app->request->get()['BbiiPost']);
 		}
 		// restrict filtering to unapproved posts
 		$model->approved = 0;
@@ -83,7 +83,7 @@ class ModeratorController extends BbiiController {
 		$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiPost']))
-			$model->load(Yii::$app->request->get()['BbiiPost'];
+			$model->load(Yii::$app->request->get()['BbiiPost']);
 		// limit posts to approved posts
 		$model->approved = 1;
 		
@@ -97,7 +97,7 @@ class ModeratorController extends BbiiController {
 		$model = new BbiiIpaddress('search');
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiIpaddress']))
-			$model->load(Yii::$app->request->get()['BbiiIpaddress'];
+			$model->load(Yii::$app->request->get()['BbiiIpaddress']);
 
 		return $this->render('ipadmin',array(
 			'model' => $model,
@@ -330,7 +330,7 @@ class ModeratorController extends BbiiController {
 				$merge = true;
 				$targetTopicId = Yii::$app->request->post()['BbiiTopic']['merge'];
 			}
-			$model->load(Yii::$app->request->post()['BbiiTopic'];
+			$model->load(Yii::$app->request->post()['BbiiTopic']);
 			if ($model->validate()) {
 				$json['success'] = 'yes';
 				if ($merge || $move) {
@@ -404,7 +404,7 @@ class ModeratorController extends BbiiController {
 		$model = new MailForm;
 		// $model->unsetAttributes();
 		if (isset(Yii::$app->request->post()['MailForm'])) {
-			$model->load(Yii::$app->request->post()['MailForm'];
+			$model->load(Yii::$app->request->post()['MailForm']);
 			if (empty($model->member_id)) {
 				$model->member_id = -1;	// All members
 			}

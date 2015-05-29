@@ -52,7 +52,7 @@ class MemberController extends BbiiController {
 		// No longer needed in Yii2+
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiMember']))
-			$model->load(Yii::$app->request->get()['BbiiMember'];
+			$model->load(Yii::$app->request->get()['BbiiMember']);
 
 		return $this->render('index', array('model' => $model));
 	}
@@ -66,8 +66,7 @@ class MemberController extends BbiiController {
 		}
 
 		if (isset(Yii::$app->request->post()['BbiiMember'])) {
-			//$model->load(Yii::$app->request->post()['BbiiMember'];
-			$model->setAttributes(Yii::$app->request->post('BbiiMember'));
+			$model->load(Yii::$app->request->post()['BbiiMember']);
 			$model->image = UploadedFile::getInstance($model, 'image');
 
 			if ($model->validate() && $model->save()) {
@@ -237,7 +236,8 @@ class MemberController extends BbiiController {
 	public function actionMail($id) {
 		$model = new MailForm;
 		if (isset(Yii::$app->request->post()['MailForm'])) {
-			$model->load(Yii::$app->request->post()['MailForm'];
+			$model->load(Yii::$app->request->post()['MailForm']);
+
 			if ($model->validate()) {
 				$class = new $this->module->userClass;
 				$criteria = new CDbCriteria;
