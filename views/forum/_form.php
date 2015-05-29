@@ -76,7 +76,7 @@ use yii\helpers\Html;
 		<div class = "row">
 			<?php echo $form->field($post, 'forum_id')->hiddenInput()->label(false); ?>
 			<?php echo $form->field($post, 'topic_id')->hiddenInput()->label(false); ?>
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-primary')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success')); ?>
 		</div>
 
 	<?php ActiveForm::end(); ?>

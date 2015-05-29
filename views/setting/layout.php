@@ -52,7 +52,7 @@ $this->registerJs($script, View::POS_BEGIN);
 		'enableAjaxValidation' => false,
 		'id'                   => 'forum-form',
 	]); ?>
-
+	
 		<?php echo $form->errorSummary($model); ?>
 		
 		<div class="row">
@@ -92,8 +92,8 @@ $this->registerJs($script, View::POS_BEGIN);
 			</div>
 		</div>
 		
-		<div class="row buttons">
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Add')); ?>
+		<div class="row button">
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success')); ?>
 		</div>
 		
 	<?php ActiveForm::end(); ?>

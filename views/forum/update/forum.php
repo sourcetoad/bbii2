@@ -149,7 +149,7 @@ if (empty($poll->question) && !$poll->hasErrors()) {
 			<?php echo $form->field($post, 'forum_id')->hiddenInput(array('class' => 'form-control'))->label(false); ?>
 
 			<div class = "row odd buttons">
-				<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-primary')); ?>
+				<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success')); ?>
 			</div>
 
 		<?php ActiveForm::end(); ?>

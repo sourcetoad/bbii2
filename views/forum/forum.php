@@ -57,7 +57,7 @@ $item = array(
 				'id'                   => 'create-topic-form',
 		]);
 			echo $form->field($forum, 'id')->hiddenInput()->label(false);
-			echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Create new topic'), array('class' => 'btn btn-primary'));
+			echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Create new topic'), array('class' => 'btn btn-success'));
 		ActiveForm::end();
 		?>
 	</div><!-- form -->	
