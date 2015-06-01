@@ -66,7 +66,15 @@ use yii\helpers\Html;
 		<div class = "row">
 			<?php echo $form->field($post, 'content')->textArea(); ?>
 		</div>
-	
+
+		<?php if ($this->context->isModerator()) { ?>
+			<div class = "row">
+				<strong><?php echo Yii::t('BbiiModule.bbii', 'Sticky'); ?>:</strong><?php echo Html::checkbox('sticky'); ?><br /> 
+				<strong><?php echo Yii::t('BbiiModule.bbii', 'Global'); ?>:</strong><?php echo Html::checkbox('global'); ?><br /> 
+				<strong><?php echo Yii::t('BbiiModule.bbii', 'Locked'); ?>:</strong><?php echo Html::checkbox('locked'); ?><br />
+			</div>
+		<?php }; ?>
+				
 		<?php if (!$post->isNewRecord) { ?>
 			<div class = "row">			
 				<?php echo $form->field($post,'change_reason')->textInput(array('size' => 100,'maxlength' => 255,'style' => 'width:99%;')); ?>

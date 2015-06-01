@@ -81,7 +81,8 @@ $item = array(
 
 	<?php echo $this->render('_forumfooter'); ?>
 	<div id = "bbii-copyright">
-		<a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-2014 <?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a>
+		<a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-<?php echo date('Y'); ?><?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a>
+		, <a href = "http://www.sourcetoad.com/" 				target = "_blank" >&copy; <?php echo date('Y'); ?> Sourcetoad, LLC.</a>
 	</div>
 </div>
 
