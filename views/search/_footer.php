@@ -7,7 +7,10 @@ $members = BbiiMember::find()->present()->count();
 	<table><tr>
 		<td class = "online">
 			<div>
-				<span class = "header2"><?php echo Yii::t('BbiiModule.bbii','{0} guest(s) and {1} active member(s)', array(($present - $members), $members));?></span>
+				<span class = "header2"><?php echo Yii::t('BbiiModule.bbii','{0} guest(s) and {1} active member(s)', array(
+					($present - $members) > 0 ?: 0,
+					$members
+				));?></span>
 				<?php echo Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?>
 			</div>
 			<div>

@@ -27,8 +27,6 @@ class BbiiSessionQuery extends ActiveQuery
 
     public function present()
     {
-        return $this->andWhere(
-        	'last_visit > \''.date('Y-m-d H:i:s', time() - 900).'\''
-        )->orderBy('last_visit DESC');
+        return $this->andWhere('last_visit > \''.date('Y-m-d H:i:s', time() - 900).'\'')->orderBy('last_visit DESC');
     }
 }

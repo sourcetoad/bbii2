@@ -673,6 +673,8 @@ class ForumController extends BbiiController {
 	
 	/**
 	 * Handle Ajax call for upvote/downvote of post
+	 *
+	 * @todo not available for init release - DJE : 2015-06-03
 	 */
 	public function actionUpvote() {
 		$json = array();
@@ -956,7 +958,9 @@ class ForumController extends BbiiController {
 			} else {
 				$object = new BbiiTopicsRead;
 				$object->unserialize($model->data);
-				$lastPost = BbiiTopic::find()->cache(300)->findByPk($topic_id)->last_post_id;
+				// @todo turn caching back on - DJE : 2015-06-03
+				//$lastPost = BbiiTopic::find()->cache(300)->findByPk($topic_id)->last_post_id;
+				$lastPost = BbiiTopic::find()->findByPk($topic_id)->last_post_id;
 				if ($lastPost > $object->topicLastRead($topic_id)) {
 					$result = false;
 				} else {

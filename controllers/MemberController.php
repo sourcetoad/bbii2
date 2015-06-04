@@ -185,7 +185,6 @@ class MemberController extends BbiiController {
 	 * @return [type]     [description]
 	 */
 	public function actionView($id) {
-		$model  = $this->loadModel($id);
 		$object = new BbiiTopicRead;
 		$read   = BbiiTopicRead::find($id);
 
@@ -228,8 +227,8 @@ class MemberController extends BbiiController {
 		
 		return $this->render('view', array(
 			'dataProvider'  => $dataProvider,
-			'model'         => $model, 
 			'topicProvider' => $topicProvider,
+			'userData'      => BbiiMember::find()->where(['id' => Yii::$app->user->id])->one(), 
 		));
 	}
 

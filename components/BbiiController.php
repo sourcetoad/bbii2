@@ -2,6 +2,8 @@
 
 namespace frontend\modules\bbii\components;
 
+use frontend\modules\bbii\models\BbiiMember;
+
 use Yii;
 use yii\base\Controller;
 use yii\data\ArrayDataProvider;
@@ -94,7 +96,10 @@ class BbiiController extends Controller
 			if ($this->module->adminId && $this->module->adminId == $userId) {
 				return true;	// by module parameter assigned admin
 			}
-			if (Yii::$app->authManager && Yii::$app->user->checkAccess('admin')) {
+
+			if (Yii::$app->authManager
+				&& Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)['user']->type  == 3
+			) {
 				return true;	// rbac role "admin"
 			}
 		}
@@ -107,19 +112,29 @@ class BbiiController extends Controller
 	 */
 	public function isModerator() {
 		$userId = Yii::$app->user->id;
+
 		if ($userId === null) {
+
 			return false;		// not authenticated
 		} else {
+
 			if ($this->isAdmin()) {
 				return true;
 			}
-			if (Yii::$app->authManager && Yii::$app->user->checkAccess('moderator')) {
+
+			if (Yii::$app->authManager
+				&& Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)['user']->type  == 2
+			) {
 				return true;	// rbac role "moderator"
 			}
-			if (BbiiMember::find()->cache(900)->moderator()->exists("id = $userId")) {
+
+			// @todo turn caching back on - DJE : 2015-06-03
+			//if (BbiiMember::find()->cache(900)->moderator()->exists("id = $userId")) {
+			if (BbiiMember::find()->moderator()->where(['id' => $userId])) {
 				return true;	// member table moderator value set
 			}
 		}
+
 		return false;
 	}
 }

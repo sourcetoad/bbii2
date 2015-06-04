@@ -43,11 +43,11 @@ class BbiiModule extends \yii\base\Module
 	);
 	public $postsPerPage      = 20;
 	public $topicsPerPage     = 20;
-	public $userClass         = 'frontend\modules\user\Module'; // change this to your user module
+	public $userClass         = 'common\models\User'; // change this to your user module
 	public $userIdColumn      = 'id';
-	public $userMailColumn    = false;
+	public $userMailColumn    = 'email';
 	public $userNameColumn    = 'username';
-	public $version           = '2.7.5';
+	public $version           = '3.0.5';
 
 	private $_assetsUrl;
 	
@@ -138,7 +138,7 @@ class BbiiModule extends \yii\base\Module
 					$model->setAttribute('last_visit', date('Y-m-d H:i:s'));
 					$model->save();
 				} else {
-					$userClass = new $this->userClass;
+					$userClass = new User;
 					$user      = $userClass::find()->where([$this->userIdColumn => Yii::$app->user->id])->one();
 					$username  = $user->getAttribute($this->userNameColumn);
 

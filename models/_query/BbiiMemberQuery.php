@@ -41,7 +41,6 @@ class BbiiMemberQuery extends ActiveQuery
 
     public function newest()
     {
-
         return $this->orderBy('first_visit DESC')->limit(1);
     }
 
