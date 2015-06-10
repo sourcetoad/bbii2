@@ -10,6 +10,7 @@ use yii;
 use yii\db\BaseActiveRecord;
 use yii\web\Application;
 use yii\web\Session;
+use common\models\User;
 
 class BbiiModule extends \yii\base\Module
  {
