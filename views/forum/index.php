@@ -25,7 +25,7 @@ $item = array(
 
 ?>
 
-<div id = "bbii-wrapper">
+<div id = "bbii-wrapper" class="row">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 
 	<?php // @depricated 2.7.0
