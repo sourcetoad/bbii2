@@ -56,7 +56,7 @@ $item = array(
 		);
         echo '</div>';
 	} ?>
-	<div id = "bbii-copyright">
+	<div class="col col-md-12 text-right small">
 		<a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-<?php echo date('Y'); ?><?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a>
 		, <a href = "http://www.sourcetoad.com/" 				target = "_blank" >&copy; <?php echo date('Y'); ?> Sourcetoad, LLC.</a>
 	</div>
