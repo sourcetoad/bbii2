@@ -50,7 +50,7 @@ $item = array(
 	<?php if (!Yii::$app->user->isGuest) {
         echo '<div class="col col-md-12">';
 		echo Html::a(
-			Yii::t('BbiiModule.bbii','Mark all read'),
+			Yii::t('BbiiModule.bbii','<i class="glyphicon glyphicon-ok"></i> Mark all read'),
 			array('forum/markallread'),
 			['class' => 'btn btn-success']
 		);
