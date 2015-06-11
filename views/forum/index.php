@@ -48,11 +48,13 @@ $item = array(
 
 	<?php echo $this->render('_footer'); ?>
 	<?php if (!Yii::$app->user->isGuest) {
+        echo '<div class="col col-md-12">';
 		echo Html::a(
 			Yii::t('BbiiModule.bbii','Mark all read'),
 			array('forum/markallread'),
 			['class' => 'btn btn-success']
 		);
+        echo '</div>';
 	} ?>
 	<div id = "bbii-copyright">
 		<a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-<?php echo date('Y'); ?><?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a>
