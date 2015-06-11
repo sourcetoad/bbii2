@@ -14,7 +14,8 @@ $newest  = BbiiMember::find()->newest()->one();
 $present = BbiiSession::find()->present()->count();
 
 ?>
-<div id = "bbii-footer">
+<div class="col col-md-12">
+    <div class="well">
 	<table><tr>
 		<td class = "online">
 			<div>
@@ -63,4 +64,5 @@ $present = BbiiSession::find()->present()->count();
 			</table>
 		</td>
 	</tr></table>
+    </div>
 </div>
