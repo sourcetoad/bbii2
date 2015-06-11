@@ -27,38 +27,38 @@ $item = array(
 
 <div id = "bbii-wrapper" class="row">
     <div class="col col-md-12">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
+        <?php echo $this->render('_header', array('item' => $item)); ?>
 
-	<?php // @depricated 2.7.0
-	/*$this->widget('zii.widgets.CListView', array(
-		'id' => 'bbiiForum',
-		'dataProvider' => $dataProvider,
-		'itemView' => '_forum',
-		'viewData' => array('lastIndex' => ($dataProvider->totalItemCount - 1)),
-		'summaryText' => false,
-	));*/ ?>
+        <?php // @depricated 2.7.0
+        /*$this->widget('zii.widgets.CListView', array(
+            'id' => 'bbiiForum',
+            'dataProvider' => $dataProvider,
+            'itemView' => '_forum',
+            'viewData' => array('lastIndex' => ($dataProvider->totalItemCount - 1)),
+            'summaryText' => false,
+        ));*/ ?>
 
-	<?php echo ListView::widget([
-			'dataProvider' => $dataProvider,
-			'id'           => 'bbiiForum',
-			'itemOptions'  => ['class' => 'item'],
-			'itemView'     => '_forum',
-			'summary'      => false, 
-	]) ?>
+        <?php echo ListView::widget([
+                'dataProvider' => $dataProvider,
+                'id'           => 'bbiiForum',
+                'itemOptions'  => ['class' => 'item'],
+                'itemView'     => '_forum',
+                'summary'      => false,
+        ]) ?>
 
-	<?php echo $this->render('_footer'); ?>
-	<?php if (!Yii::$app->user->isGuest) {
-        echo '<div class="col col-md-12">';
-		echo Html::a(
-			Yii::t('BbiiModule.bbii','<i class="glyphicon glyphicon-ok"></i> Mark all read'),
-			array('forum/markallread'),
-			['class' => 'btn btn-success']
-		);
-        echo '</div>';
-	} ?>
-	<div class="col col-md-12 text-right small">
-		<a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-<?php echo date('Y'); ?><?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a>
-		, <a href = "http://www.sourcetoad.com/" 				target = "_blank" >&copy; <?php echo date('Y'); ?> Sourcetoad, LLC.</a>
-	</div>
+        <?php echo $this->render('_footer'); ?>
+        <?php if (!Yii::$app->user->isGuest) {
+            echo '<div class="col col-md-12">';
+            echo Html::a(
+                Yii::t('BbiiModule.bbii','<i class="glyphicon glyphicon-ok"></i> Mark all read'),
+                array('forum/markallread'),
+                ['class' => 'btn btn-success']
+            );
+            echo '</div>';
+        } ?>
+        <div class="col col-md-12 text-right small">
+            <a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-<?php echo date('Y'); ?><?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a>
+            , <a href = "http://www.sourcetoad.com/" target = "_blank" >&copy; <?php echo date('Y'); ?> Sourcetoad, LLC.</a>
+        </div>
     </div>
 </div>
