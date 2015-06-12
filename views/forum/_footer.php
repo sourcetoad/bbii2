@@ -41,16 +41,31 @@ $present = BbiiSession::find()->present()->count();
                 </h4>
                 <div class="panel">
                     <ul class="list-group">
-                        <li class="list-group-item"><?php echo Yii::t('BbiiModule.bbii','Total topics'); ?> <?php echo BbiiTopic::find()->count(); ?></li>
-                        <li class="list-group-item"><?php echo Yii::t('BbiiModule.bbii','Total posts'); ?> <?php echo BbiiPost::find()->count(); ?></li>
-                        <li class="list-group-item"><?php echo Yii::t('BbiiModule.bbii','Total members'); ?> <?php echo BbiiMember::find()->count(); ?></li>
-                        <li class="list-group-item"><?php echo Yii::t('BbiiModule.bbii','Newest member'); ?>
-                        <?php
-                            if ($newest->member_name != NULL) {
-                                echo Html::a($newest->member_name, array('member/view', 'id' => $newest->id));
-                            }
-                        ?></li>
-                        <li class="list-group-item"><?php echo Yii::t('BbiiModule.bbii','Visitors today'); ?> <?php echo BbiiSession::find()->count(); ?></li>
+                        <li class="list-group-item">
+                            <?php echo Yii::t('BbiiModule.bbii','Total topics'); ?>
+                            <div class="badge pull-right"><?php echo BbiiTopic::find()->count(); ?></div>
+                        </li>
+                        <li class="list-group-item">
+                            <?php echo Yii::t('BbiiModule.bbii','Total posts'); ?>
+                            <div class="badge pull-right"><?php echo BbiiPost::find()->count(); ?></div>
+                        </li>
+                        <li class="list-group-item">
+                            <?php echo Yii::t('BbiiModule.bbii','Total members'); ?>
+                            <div class="badge pull-right"><?php echo BbiiMember::find()->count(); ?></div>
+                        </li>
+                        <li class="list-group-item">
+                            <?php echo Yii::t('BbiiModule.bbii','Newest member'); ?>
+                            <div class="pull-right">
+                              <?php
+                                if ($newest->member_name != NULL)
+                                    echo Html::a($newest->member_name, array('member/view', 'id' => $newest->id));
+                              ?>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <?php echo Yii::t('BbiiModule.bbii','Visitors today'); ?>
+                            <div class="badge pull-right"><?php echo BbiiSession::find()->count(); ?></div>
+                        </li>
                     </ul>
                 </div>
 
