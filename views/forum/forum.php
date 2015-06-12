@@ -32,10 +32,10 @@ $item = array(
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<div class = "forum-category center">
-		<div class = "header2">
+	<div>
+		<h2>
 			<?php echo $forum->name; ?>
-		</div>
+		</h2>
 	</div>
 	
 	<?php if (!(Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()) { ?>
