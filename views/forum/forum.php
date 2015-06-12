@@ -30,13 +30,13 @@ $item = array(
 <?php echo Yii::$app->session->getFlash(); ?>
 
 <div id = "bbii-wrapper">
+    <div class="row">
+        <div class="col col-md-12">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<div>
-		<h2>
-			<?php echo $forum->name; ?>
-		</h2>
-	</div>
+    <h2>
+        <?php echo $forum->name; ?>
+    </h2>
 	
 	<?php if (!(Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()) { ?>
 	<div class = "form">
@@ -84,6 +84,8 @@ $item = array(
 		<a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-<?php echo date('Y'); ?><?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a>
 		, <a href = "http://www.sourcetoad.com/" 				target = "_blank" >&copy; <?php echo date('Y'); ?> Sourcetoad, LLC.</a>
 	</div>
+        </div>
+    </div>
 </div>
 
 
