@@ -56,7 +56,7 @@ $this->context->bbii_breadcrumbs = array(
 		</div>
 
 		<div class = "odd buttons">
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success btn-lg')); ?>
 		</div>
 
 	<?php ActiveForm::end(); ?>

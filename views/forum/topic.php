@@ -82,7 +82,7 @@ $item = array(
 			'enableAjaxValidation' => false,
 			'id'                   => 'create-post-form',
 		]);
-			echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Reply'), array('class' => 'btn btn-success'));
+			echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Reply'), array('class' => 'btn btn-success btn-lg'));
 		ActiveForm::end();
 		?>
 	</div><!-- form -->	

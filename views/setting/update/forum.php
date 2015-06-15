@@ -116,7 +116,7 @@ use yii\helpers\Html;
 		</div>
 
 		<div class = "button">
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success')); ?>
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success btn-lg')); ?>
 		</div>
 
 	<?php ActiveForm::end(); ?>
