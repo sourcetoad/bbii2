@@ -25,8 +25,8 @@ $item = array(
 
 ?>
 
-<div id = "bbii-wrapper" class="row">
-    <div class="col col-md-12">
+<div id = "bbii-wrapper">
+    <div>
         <?php echo $this->render('_header', array('item' => $item)); ?>
 
         <?php // @depricated 2.7.0
@@ -48,7 +48,7 @@ $item = array(
 
         <?php echo $this->render('_footer'); ?>
         <?php if (!Yii::$app->user->isGuest) {
-            echo '<div class="col col-md-12">';
+            echo '<div class="">';
             echo Html::a(
                 Yii::t('BbiiModule.bbii','<i class="glyphicon glyphicon-ok"></i> Mark all read'),
                 array('forum/markallread'),
@@ -56,7 +56,7 @@ $item = array(
             );
             echo '</div>';
         } ?>
-        <div class="col col-md-12 text-right small">
+        <div class="text-right small">
             <a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-<?php echo date('Y'); ?><?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a>
             , <a href = "http://www.sourcetoad.com/" target = "_blank" >&copy; <?php echo date('Y'); ?> Sourcetoad, LLC.</a>
         </div>
