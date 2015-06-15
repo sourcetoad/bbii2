@@ -45,28 +45,35 @@ $assets = AppAsset::register($this);
 
 	<div class = "post-cell">
 		<div class = "post-header">
-			<?php if (!(Yii::$app->user->isGuest || $model->topic->locked) || $this->context->isModerator()) { ?>
-				<?php $form = ActiveForm::begin([
-					'action'               => array('forum/quote', 'id' => $model->id),
-					'enableAjaxValidation' => false,
-				]); ?>
-					<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Quote'), array('class' => 'bbii-quote-button')); ?>
-				<?php ActiveForm::end(); ?>
-			<?php }; ?>
 
-			<?php if (!($model->user_id != Yii::$app->user->id || $model->topic->locked) || $this->context->isModerator()) { ?>
-				<?php $form = ActiveForm::begin([
-					'action'               => array('forum/update', 'id' => $model->id),
-					'enableAjaxValidation' => false,
-				]); ?>
-					<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Edit'), array('class' => 'bbii-edit-button')); ?>
-				<?php ActiveForm::end(); ?>
-			<?php }; ?>
+            <div class="pull-right">
+                <?php if (!(Yii::$app->user->isGuest || $model->topic->locked) || $this->context->isModerator()) { ?>
+                    <?php $form = ActiveForm::begin([
+                        'action'               => array('forum/quote', 'id' => $model->id),
+                        'enableAjaxValidation' => false,
+                    ]); ?>
+                        <?php echo Html::submitButton(Yii::t('BbiiModule.bbii',
+                                                             '<span class="glyphicon glyphicon-pencil"></span> Quote'),
+                                                      array('class' => 'btn btn-primary btn-xs btn-round pull-right')); ?>
+                    <?php ActiveForm::end(); ?>
+                <?php }; ?>
+
+                <?php if (!($model->user_id != Yii::$app->user->id || $model->topic->locked) || $this->context->isModerator()) { ?>
+                    <?php $form = ActiveForm::begin([
+                        'action'               => array('forum/update', 'id' => $model->id),
+                        'enableAjaxValidation' => false,
+                    ]); ?>
+                        <?php echo Html::submitButton(Yii::t('BbiiModule.bbii',
+                                                             '<span class="glyphicon glyphicon-pencil"></span> Edit'),
+                                                      array('class' => 'btn btn-primary btn-xs btn-round pull-right')); ?>
+                    <?php ActiveForm::end(); ?>
+                <?php }; ?>
+            </div>
 
 			<div class = "header2<?php echo (isset($postId) && $postId == $model->id)?' target':''; ?>"><?php echo Html::encode($model->subject); ?></div>
 			<?php echo '&raquo; ' . Html::encode($model->poster->member_name); ?>
 			<?php echo ' &raquo; ' . Yii::$app->formatter->asDatetime($model->create_time); ?>
-			<?php echo ' &raquo; <span class = "reputation" title = "' . Yii::t('BbiiModule.bbii','Reputation') . '">' . $model->upvoted . '</span>'; ?>
+			<?php echo ' &raquo; <span class = "badge" title = "' . Yii::t('BbiiModule.bbii','Reputation') . '">' . $model->upvoted . '</span>'; ?>
 		</div>
 
 		<?php //@todo Poll disabled for init release - DJE : 2015-05-28
