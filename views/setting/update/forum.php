@@ -12,6 +12,10 @@ use yii\helpers\Html;
 /* @var $form ActiveForm */
 ?>
 
+<?php echo $this->render('../template/_header'); ?>
+
+<br />
+
 <div class = "form">
 
 	<?php $form = ActiveForm::begin([
