@@ -91,6 +91,7 @@ $this->registerJs($script, View::POS_READY);
                     ); ?>
                     <?php //echo $form->error($model,'group_id'); ?>
 				</div>
+                <br />
 			<?php } ?>
 
 			<div>
@@ -107,6 +108,7 @@ $this->registerJs($script, View::POS_READY);
                 ); ?>
                 <?php //echo $form->error($model,'gender'); ?>
 			</div>
+            <br />
 
 			<div>
                 <?php //echo $form->labelEx($model,'birthdate'); ?>
@@ -155,6 +157,7 @@ $this->registerJs($script, View::POS_READY);
                 ); ?>
                 <?php //echo $form->error($model,'show_online'); ?>
 			</div>
+            <br />
 
 			<div>
                 <?php //echo $form->labelEx($model,'contact_email'); ?>
@@ -170,6 +173,7 @@ $this->registerJs($script, View::POS_READY);
                 ); ?>
                 <?php //echo $form->error($model,'contact_email'); ?>
 			</div>
+            <br />
 
 			<div>
                 <?php //echo $form->labelEx($model,'contact_pm'); ?>
@@ -185,6 +189,7 @@ $this->registerJs($script, View::POS_READY);
                 ); ?>
                 <?php //echo $form->error($model,'contact_pm'); ?>
 			</div>
+            <br />
 
 			<div>
                 <?php //echo $form->labelEx($model,'timezone'); ?>
@@ -199,6 +204,7 @@ $this->registerJs($script, View::POS_READY);
                 ); ?>
                 <?php //echo $form->error($model,'timezone'); ?>
 			</div>
+            <br />
 
 			<div>
                 <?php //echo $form->labelEx($model,'avatar'); ?>
@@ -206,10 +212,11 @@ $this->registerJs($script, View::POS_READY);
                 <?php //echo $form->labelEx($model,'remove_avatar'); ?>
                 <?php echo Html::activeCheckbox($model, 'remove_avatar'); ?>
                 <?php //echo $form->labelEx($model, 'image'); ?>
-                <?php echo $form->field($model, 'image')->fileInput(array('size' => 90)); ?><br>
+                <?php echo $form->field($model, 'image')->fileInput(array('size' => 90)); ?>
                 <?php echo Yii::t('BbiiModule.bbii', 'Large images will be resized to fit a size of 90 pixels by 90 pixels.'); ?>
                 <?php //echo $form->error($model, 'image'); ?>
 			</div>
+            <br />
 
 			<div>
                 <?php //echo $form->labelEx($model,'signature'); ?>
