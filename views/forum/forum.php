@@ -62,6 +62,7 @@ $item = array(
                 ?>
             </div><!-- form -->
             <?php }; ?>
+            <br />
 
             <?php // @depricated 2.7.5 Kept for referance
             /* $this->widget('zii.widgets.CListView', array(
@@ -77,7 +78,9 @@ $item = array(
                 'itemView'     => '_topic',
                 //'pager'        => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
                 //'template'     => '{pager}{items}{pager}',
-            ]) ?>
+                ]);
+            ?>
+            <br />
 
             <?php echo $this->render('_forumfooter'); ?>
             <div id = "bbii-copyright">
