@@ -13,6 +13,9 @@
     border-radius: 1000px;
 }
 
+#bbii-wrapper .nav {
+    margin-bottom: 20px;
+}
 
 
 /* General: */
@@ -193,8 +196,8 @@
 
 /* Topic page */
 
-#bbii-wrapper #w0,
-#bbii-wrapper #w1 {
+#bbii-wrapper w0,
+#bbii-wrapper w1 {
     float: right;
     padding-left: 10px;
 }
