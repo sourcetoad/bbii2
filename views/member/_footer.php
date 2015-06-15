@@ -20,7 +20,7 @@ $present = BbiiSession::find()->present()->count();
             <h4>
                 <?php echo Yii::t('BbiiModule.bbii','Who\'s Online'); ?>
             </h4>
-            <div class="col col-sm-12 panel">
+            <div class="col col-sm-12">
                 <h5>
                     <?php echo Yii::t('BbiiModule.bbii','{0} guest(s) and {1} active member(s)', array(($present - $members) > 0 ?: 0,$members));?>
                     <small><?php echo Yii::t('BbiiModule.bbii','(in the past 15 minutes)');?></small>
