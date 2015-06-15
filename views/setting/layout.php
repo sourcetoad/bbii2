@@ -53,19 +53,19 @@ $this->registerJs($script, View::POS_READY);
 	
 		<?php echo $form->errorSummary($model); ?>
 		
-		<div class="row">
+		<div>
 			<?php //echo $form->labelEx($model,'name'); ?>
 			<?php echo $form->field($model,'name')->textInput(); ?>
 			<?php //echo $form->error($model,'name'); ?>
 		</div>
 		
-		<div class="row">
+		<div>
 			<?php //echo $form->labelEx($model,'subtitle'); ?>
 			<?php echo $form->field($model,'subtitle')->textInput(); ?>
 			<?php //echo $form->error($model,'subtitle'); ?>
 		</div>
 
-		<div class="row">
+		<div>
 			<div class="form-group field-bbiiforum-cateogry">
 				<label class="control-label" for="name">Category/Forum</label>
 				<?php //echo $form->labelEx($model,'type'); ?>
@@ -86,7 +86,7 @@ $this->registerJs($script, View::POS_READY);
 			</div>
 		</div>
 
-		<div class="row">
+		<div>
 			<div class="form-group field-bbiiforum-cat_id">
 				<label class="control-label" for="name">Category</label>
 				<?php //echo $form->labelEx($model,'cat_id'); ?>
@@ -104,7 +104,7 @@ $this->registerJs($script, View::POS_READY);
 			</div>
 		</div>
 		
-		<div class="row button">
+		<div class="button">
 			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success')); ?>
 		</div>
 		
