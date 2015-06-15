@@ -17,6 +17,11 @@
     margin-bottom: 20px;
 }
 
+#bbii-wrapper .ui-sortable {
+  list-style: none;
+}
+
+
 
 /* General: */
 #bbii-wrapper a {
@@ -904,7 +909,7 @@ button.bbii-button-right {
 	/*border: 1px solid #c9e0ed;*/
 	border-radius: 10px;
 	display: table;
-	margin-bottom: 2px;
+	margin-bottom: 20px;
 	width: 100%;
 }
 
