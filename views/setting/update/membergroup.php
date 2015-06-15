@@ -18,15 +18,15 @@ use yii\helpers\Html;
 		'id'                   => 'edit-membergroup-form',
 	]); ?>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'name')->textInput(array('size' => 40)); ?>
 		</div>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'description')->textInput(array('size' => 40)); ?>
 		</div>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'min_posts')->textInput(array('size' => 10)); ?>
 		</div>
 
@@ -41,11 +41,11 @@ use yii\helpers\Html;
 		</div>
 		*/ ?>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'id')->hiddenInput()->label(false); ?>
 		</div>
 
-		<div class = "row button">
+		<div class = "button">
 			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success')); ?>
 		</div>
 
