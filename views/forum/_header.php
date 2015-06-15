@@ -17,7 +17,7 @@ $assets = AppAsset::register($this);
 <div id = "bbii-header">
 	<?php if (!Yii::$app->user->isGuest): ?>
 		<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.Yii::$app->user->id); ?>
-		<div class = "bbii-profile-box">
+		<div class = "btn btn-primary pull-right">
 		<?php 
 			if ($messages) {
 				echo Html::a(Html::img($assets->baseUrl.'/images/newmail.png', array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'), 'style' => 'vertical-align:bottom;')), array('message/inbox')); 
@@ -25,12 +25,12 @@ $assets = AppAsset::register($this);
 				echo Html::a(Html::img($assets->baseUrl.'/images/mail.png', array('title' => Yii::t('BbiiModule.bbii', 'no new messages'), 'style' => 'vertical-align:bottom;')), array('message/inbox')); 
 			}
 			echo ' | '; echo Html::a(Html::img($assets->baseUrl.'/images/settings.png', array('title' => Yii::t('BbiiModule.bbii', 'My settings'), 'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id)); 
-			if ($this->context->isModerator()) echo ' | '; echo Html::a(Html::img($assets->baseUrl.'/images/moderator.png', array('title' => Yii::t('BbiiModule.bbii', 'Moderate'), 'style' => 'vertical-align:bottom;')), array('moderator/approval'));
+			if ($this->context->isModerator()) echo ' | '; echo Html::a(Html::img($assets->baseUrl.'/images/moderator.png', array('title' => Yii::t('BbiiModule.bbii', 'Moderate'), 'style' => 'vertical-align:bottom;')), array('moderator/approval')); echo ' | ';
 			if ($this->context->isAdmin()) echo ' | '; echo Html::a(Html::img($assets->baseUrl.'/images/config.png', array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'), 'style' => 'vertical-align:bottom;')), array('setting/index'));
 		?>
 		</div>
 	<?php endif; ?>
-	<div class = "bbii-title"><?php echo $this->context->module->forumTitle; ?></div>
+	<h2><?php echo $this->context->module->forumTitle; ?></h2>
 	<table style = "margin:0;"><tr><td style = "padding:0;">
 		<div id = "bbii-menu">
 		<?php // @todo Add this feature back - DJE : 2015-05-26 
@@ -58,6 +58,9 @@ echo Html::dropDownList(
 		'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/forum/forum?id='+$(this).val()",
 	)
 ); ?>
+
+<br />
+
 <?php // @todo Breadcrumb disabled for initial release - DJE : 2015-05-28
 /* if (isset($this->context->bbii_breadcrumbs)):?>
 	<?php echo Breadcrumbs::widget(array(
