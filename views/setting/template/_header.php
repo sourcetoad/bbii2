@@ -20,8 +20,8 @@ $item = array(
 ?>
 <div id = "bbii-header">
 	<?php if (!Yii::$app->user->isGuest): ?>
-		<div class = "btn btn-primary pull-right">
-		<?php echo Html::a(Yii::t('BbiiModule.bbii', 'Forum'), array('forum/index')); ?>
+		<div class = "pull-right">
+		<?php echo Html::a(Yii::t('BbiiModule.bbii', 'Forum'), array('forum/index'),array('class'=>'btn btn-primary')); ?>
 		</div>
 	<?php endif; ?>
 	<h2><?php echo Yii::t('BbiiModule.bbii', 'Forum settings'); ?></h2>
