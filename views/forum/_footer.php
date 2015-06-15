@@ -35,6 +35,7 @@ $present = BbiiSession::find()->present()->count();
                             echo Html::a($spider->name, $spider->url, array('class' => 'spider','target' => '_new')) . '&nbsp;';
                         }
                     ?>
+                    <br />
                     <?php echo Yii::t('BbiiModule.bbii','({0} anonymous member(s))', array(BbiiMember::find()->hidden()->present()->count())); ?>
                 </div>
             </div>
@@ -71,7 +72,6 @@ $present = BbiiSession::find()->present()->count();
                         </li>
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>
