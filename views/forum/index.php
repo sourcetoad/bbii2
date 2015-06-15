@@ -44,17 +44,17 @@ $item = array(
                 'itemOptions'  => ['class' => 'item'],
                 'itemView'     => '_forum',
                 'summary'      => false,
-        ]) ?>
+              ]);
+        ?>
+        <br />
 
         <?php echo $this->render('_footer'); ?>
         <?php if (!Yii::$app->user->isGuest) {
-            echo '<div class="">';
             echo Html::a(
                 Yii::t('BbiiModule.bbii','<i class="glyphicon glyphicon-ok"></i> Mark all read'),
                 array('forum/markallread'),
                 ['class' => 'btn btn-success']
             );
-            echo '</div>';
         } ?>
         <div class="text-right small">
             <a href = "http://www.yiiframework.com/extension/bbii/" target = "_blank" title = "&copy; 2013-<?php echo date('Y'); ?><?php echo Yii::t('BbiiModule.bbii','version') . ' ' . $this->context->module->version; ?>">BBii forum software</a>
