@@ -65,328 +65,275 @@ $this->registerJs($script, View::POS_READY);
 			'options'              => array('enctype' => 'multipart/form-data'),
 		]); ?>
 
-			<div class = "row buttons">
-                <div class="col col-md-12">
-				    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success')); ?>
-                </div>
+			<div class = "buttons">
+                <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success')); ?>
 			</div>
+            <br />
 
 			<?php echo $form->errorSummary($model); ?>
 
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'member_name'); ?>
-                    <?php echo $form->field($model,'member_name')->textInput(array('size' => 45,'maxlength' => 45)); ?>
-                    <?php //echo $form->error($model,'member_name'); ?>
-                </div>
+			<div>
+                <?php //echo $form->labelEx($model,'member_name'); ?>
+                <?php echo $form->field($model,'member_name')->textInput(array('size' => 45,'maxlength' => 45)); ?>
+                <?php //echo $form->error($model,'member_name'); ?>
 			</div>
 
 			<?php if ($this->context->isModerator()) { ?>
-				<div class = "row">
-                    <div class="col col-md-12">
-                        <?php //echo $form->labelEx($model,'group_id'); ?>
-                        <?php //->label('Group Name') ?>
-                        <label class="control-label" for="bbiimember-group">Group</label>
-                        <?php echo Html::dropDownList(
-                            $model,
-                            'group_id',
-                            ArrayHelper::map(BbiiMembergroup::find()->all(), 'id', 'name'),
-                            ['prompt' => 'Group', 'class' => 'form-control']
-                        ); ?>
-                        <?php //echo $form->error($model,'group_id'); ?>
-                    </div>
+				<div>
+                    <?php //echo $form->labelEx($model,'group_id'); ?>
+                    <?php //->label('Group Name') ?>
+                    <label class="control-label" for="bbiimember-group">Group</label>
+                    <?php echo Html::dropDownList(
+                        $model,
+                        'group_id',
+                        ArrayHelper::map(BbiiMembergroup::find()->all(), 'id', 'name'),
+                        ['prompt' => 'Group', 'class' => 'form-control']
+                    ); ?>
+                    <?php //echo $form->error($model,'group_id'); ?>
 				</div>
 			<?php } ?>
-			
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'gender'); ?>
-                    <label class="control-label" for="bbiimember-gender">Gender</label>
-                    <?php echo Html::dropDownList(
-                        $model,
-                        'gender',
+
+			<div>
+                <?php //echo $form->labelEx($model,'gender'); ?>
+                <label class="control-label" for="bbiimember-gender">Gender</label>
+                <?php echo Html::dropDownList(
+                    $model,
+                    'gender',
+                    array(
+                        '0' => Yii::t('BbiiModule.bbii', 'Male'),
+                        '1' => Yii::t('BbiiModule.bbii', 'Female')
+                    ),
+                    ['prompt' => 'Gender', 'class' => 'form-control']
+                ); ?>
+                <?php //echo $form->error($model,'gender'); ?>
+			</div>
+
+			<div>
+                <?php //echo $form->labelEx($model,'birthdate'); ?>
+                <?php //echo $form->field($model,'birthdate'); ?>
+                <?php // @todo iterate on this custom text field - DJE : 2015-05-19
+                /* echo DatePicker::widget(array(
+                    // 'htmlOptions' => array(
+                    // 	'style' => 'height:20px;'
+                    // ),
+                    'language' => substr(Yii::$app->language, 0, 2),
+                    'name'     => 'birthdate',
+                    'options' => array(
+                        'altField' => '#BbiiMember_birthdate',
+                        'altFormat' => 'yy-mm-dd',
+                        'showAnim' => 'fold',
+                    ),
+                    //'theme'    => $this->module->juiTheme,
+                    'value'    => Yii::$app->formatter->asDate($model->birthdate, 'short', null),
+                ));*/ ?>
+                <?php //echo $form->error($model,'birthdate'); ?>
+			</div>
+
+			<div>
+                <?php //echo $form->labelEx($model,'location'); ?>
+                <?php echo $form->field($model,'location')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'location'); ?>
+			</div>
+
+			<div>
+                <?php //echo $form->labelEx($model,'personal_text'); ?>
+                <?php echo $form->field($model,'personal_text')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'personal_text'); ?>
+			</div>
+
+			<div>
+                <?php //echo $form->labelEx($model,'show_online'); ?>
+                <label class="control-label" for="bbiimember-show_online">Show Online</label>
+                <?php echo Html::dropDownList(
+                    $model,
+                    'show_online',
+                    array(
+                        '0' => Yii::t('BbiiModule.bbii', 'No'),
+                        '1' => Yii::t('BbiiModule.bbii', 'Yes')
+                    ),
+                    ['class' => 'form-control']
+                ); ?>
+                <?php //echo $form->error($model,'show_online'); ?>
+			</div>
+
+			<div>
+                <?php //echo $form->labelEx($model,'contact_email'); ?>
+                <label class="control-label" for="bbiimember-contact_email">Contact Email</label>
+                <?php echo Html::dropDownList(
+                    $model,
+                    'contact_email',
+                    array(
+                        '0' => Yii::t('BbiiModule.bbii', 'No'),
+                        '1' => Yii::t('BbiiModule.bbii', 'Yes')
+                    ),
+                    ['class' => 'form-control']
+                ); ?>
+                <?php //echo $form->error($model,'contact_email'); ?>
+			</div>
+
+			<div>
+                <?php //echo $form->labelEx($model,'contact_pm'); ?>
+                <label class="control-label" for="bbiimember-contact_pm">Contact PM</label>
+                <?php echo Html::dropDownList(
+                    $model,
+                    'contact_pm',
+                    array(
+                        '0' => Yii::t('BbiiModule.bbii', 'No'),
+                        '1' => Yii::t('BbiiModule.bbii', 'Yes')
+                    ),
+                    ['class' => 'form-control']
+                ); ?>
+                <?php //echo $form->error($model,'contact_pm'); ?>
+			</div>
+
+			<div>
+                <?php //echo $form->labelEx($model,'timezone'); ?>
+                <label class="control-label" for="bbiimember-timezone">Timezone</label>
+                <?php echo Html::dropDownList(
+                    $model,
+                    'timezone',
+                    array_combine(
+                        DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers()
+                    ),
+                    ['class' => 'form-control']
+                ); ?>
+                <?php //echo $form->error($model,'timezone'); ?>
+			</div>
+
+			<div>
+                <?php //echo $form->labelEx($model,'avatar'); ?>
+                <?php echo Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$assets->baseUrl.'/images/empty.jpeg', 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
+                <?php //echo $form->labelEx($model,'remove_avatar'); ?>
+                <?php echo Html::activeCheckbox($model, 'remove_avatar'); ?>
+                <?php //echo $form->labelEx($model, 'image'); ?>
+                <?php echo $form->field($model, 'image')->fileInput(array('size' => 90)); ?><br>
+                <?php echo Yii::t('BbiiModule.bbii', 'Large images will be resized to fit a size of 90 pixels by 90 pixels.'); ?>
+                <?php //echo $form->error($model, 'image'); ?>
+			</div>
+
+			<div>
+                <?php //echo $form->labelEx($model,'signature'); ?>
+                <?php // @todo iterate on this custom text field - DJE : 2015-05-19
+                /*$this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
+                    'model' => $model,
+                    'attribute' => 'signature',
+                    'autoLanguage' => false,
+                    'height' => '120px',
+                    'toolbar' => array(
                         array(
-                            '0' => Yii::t('BbiiModule.bbii', 'Male'),
-                            '1' => Yii::t('BbiiModule.bbii', 'Female')
+                            'Bold', 'Italic', 'Underline', 'RemoveFormat'
                         ),
-                        ['prompt' => 'Gender', 'class' => 'form-control']
-                    ); ?>
-                    <?php //echo $form->error($model,'gender'); ?>
-                </div>
-			</div>
-
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'birthdate'); ?>
-                    <?php //echo $form->field($model,'birthdate'); ?>
-                    <?php // @todo iterate on this custom text field - DJE : 2015-05-19
-                    /* echo DatePicker::widget(array(
-                        // 'htmlOptions' => array(
-                        // 	'style' => 'height:20px;'
-                        // ),
-                        'language' => substr(Yii::$app->language, 0, 2),
-                        'name'     => 'birthdate',
-                        'options' => array(
-                            'altField' => '#BbiiMember_birthdate',
-                            'altFormat' => 'yy-mm-dd',
-                            'showAnim' => 'fold',
-                        ),
-                        //'theme'    => $this->module->juiTheme,
-                        'value'    => Yii::$app->formatter->asDate($model->birthdate, 'short', null),
-                    ));*/ ?>
-                    <?php //echo $form->error($model,'birthdate'); ?>
-                </div>
-			</div>
-
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'location'); ?>
-                    <?php echo $form->field($model,'location')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'location'); ?>
-                </div>
-			</div>
-
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'personal_text'); ?>
-                    <?php echo $form->field($model,'personal_text')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'personal_text'); ?>
-                </div>
-			</div>
-
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'show_online'); ?>
-                    <label class="control-label" for="bbiimember-show_online">Show Online</label>
-                    <?php echo Html::dropDownList(
-                        $model,
-                        'show_online',
                         array(
-                            '0' => Yii::t('BbiiModule.bbii', 'No'),
-                            '1' => Yii::t('BbiiModule.bbii', 'Yes')
+                                'TextColor', 'BGColor',
                         ),
-                        ['class' => 'form-control']
-                    ); ?>
-                    <?php //echo $form->error($model,'show_online'); ?>
-                </div>
-			</div>
+                        '-',
+                        array('Link', 'Unlink', 'Image'),
+                        '-',
+                        array('Blockquote'),
+                    ),
+                    'skin' => $this->module->editorSkin,
+                    'uiColor' => $this->module->editorUIColor,
+                    'contentsCss' => $this->module->editorContentsCss,
+                ));*/ ?>
+                <?php //echo $form->error($model,'signature'); ?>
 
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'contact_email'); ?>
-                    <label class="control-label" for="bbiimember-contact_email">Contact Email</label>
-                    <?php echo Html::dropDownList(
-                        $model,
-                        'contact_email',
-                        array(
-                            '0' => Yii::t('BbiiModule.bbii', 'No'),
-                            '1' => Yii::t('BbiiModule.bbii', 'Yes')
-                        ),
-                        ['class' => 'form-control']
-                    ); ?>
-                    <?php //echo $form->error($model,'contact_email'); ?>
-                </div>
-			</div>
-
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'contact_pm'); ?>
-                    <label class="control-label" for="bbiimember-contact_pm">Contact PM</label>
-                    <?php echo Html::dropDownList(
-                        $model,
-                        'contact_pm',
-                        array(
-                            '0' => Yii::t('BbiiModule.bbii', 'No'),
-                            '1' => Yii::t('BbiiModule.bbii', 'Yes')
-                        ),
-                        ['class' => 'form-control']
-                    ); ?>
-                    <?php //echo $form->error($model,'contact_pm'); ?>
-                </div>
-			</div>
-
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'timezone'); ?>
-                    <label class="control-label" for="bbiimember-timezone">Timezone</label>
-                    <?php echo Html::dropDownList(
-                        $model,
-                        'timezone',
-                        array_combine(
-                            DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers()
-                        ),
-                        ['class' => 'form-control']
-                    ); ?>
-                    <?php //echo $form->error($model,'timezone'); ?>
-                </div>
-			</div>
-
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'avatar'); ?>
-                    <?php echo Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$assets->baseUrl.'/images/empty.jpeg', 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
-                    <?php //echo $form->labelEx($model,'remove_avatar'); ?>
-                    <?php echo Html::activeCheckbox($model, 'remove_avatar'); ?>
-                    <?php //echo $form->labelEx($model, 'image'); ?>
-                    <?php echo $form->field($model, 'image')->fileInput(array('size' => 90)); ?><br>
-                    <?php echo Yii::t('BbiiModule.bbii', 'Large images will be resized to fit a size of 90 pixels by 90 pixels.'); ?>
-                    <?php //echo $form->error($model, 'image'); ?>
-                </div>
-			</div>
-
-			<div class = "row">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'signature'); ?>
-                    <?php // @todo iterate on this custom text field - DJE : 2015-05-19
-                    /*$this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
-                        'model' => $model,
-                        'attribute' => 'signature',
-                        'autoLanguage' => false,
-                        'height' => '120px',
-                        'toolbar' => array(
-                            array(
-                                'Bold', 'Italic', 'Underline', 'RemoveFormat'
-                            ),
-                            array(
-                                    'TextColor', 'BGColor',
-                            ),
-                            '-',
-                            array('Link', 'Unlink', 'Image'),
-                            '-',
-                            array('Blockquote'),
-                        ),
-                        'skin' => $this->module->editorSkin,
-                        'uiColor' => $this->module->editorUIColor,
-                        'contentsCss' => $this->module->editorContentsCss,
-                    ));*/ ?>
-                    <?php //echo $form->error($model,'signature'); ?>
-
-                    <?php echo $form->field($model, 'signature')->textArea(array('class' => 'form-control')); ?>
-                </div>
+                <?php echo $form->field($model, 'signature')->textArea(array('class' => 'form-control')); ?>
 			</div>
 			
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'website'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Globe.png', 'Website', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'website')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'website'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'website'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Globe.png', 'Website', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'website')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'website'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'blogger'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Blogger.png', 'Blogger', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'blogger')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'blogger'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'blogger'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Blogger.png', 'Blogger', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'blogger')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'blogger'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'facebook'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Facebook.png', 'Facebook', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'facebook')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'facebook'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'facebook'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Facebook.png', 'Facebook', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'facebook')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'facebook'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'flickr'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Flickr.png', 'Flickr', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'flickr')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'flickr'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'flickr'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Flickr.png', 'Flickr', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'flickr')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'flickr'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'google'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Google.png', 'Google', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'google')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'google'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'google'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Google.png', 'Google', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'google')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'google'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'linkedin'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Linkedin.png', 'Linkedin', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'linkedin')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'linkedin'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'linkedin'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Linkedin.png', 'Linkedin', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'linkedin')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'linkedin'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'metacafe'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Metacafe.png', 'Metacafe', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'metacafe')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'metacafe'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'metacafe'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Metacafe.png', 'Metacafe', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'metacafe')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'metacafe'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'myspace'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Myspace.png', 'Myspace', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'myspace')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'myspace'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'myspace'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Myspace.png', 'Myspace', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'myspace')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'myspace'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'orkut'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Orkut.png', 'Orkut', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'orkut')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'orkut'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'orkut'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Orkut.png', 'Orkut', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'orkut')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'orkut'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'tumblr'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Tumblr.png', 'Tumblr', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'tumblr')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'tumblr'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'tumblr'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Tumblr.png', 'Tumblr', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'tumblr')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'tumblr'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'twitter'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Twitter.png', 'Twitter', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'twitter')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'twitter'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'twitter'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Twitter.png', 'Twitter', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'twitter')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'twitter'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'wordpress'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Wordpress.png', 'Wordpress', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'wordpress')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'wordpress'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'wordpress'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Wordpress.png', 'Wordpress', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'wordpress')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'wordpress'); ?>
 			</div>
 
-			<div class = "row presence">
-                <div class="col col-md-12">
-                    <?php //echo $form->labelEx($model,'youtube'); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/Youtube.png', 'Youtube', array('class' => 'form-control')); ?>
-                    <?php echo $form->field($model,'youtube')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                    <?php //echo $form->error($model,'youtube'); ?>
-                </div>
+			<div class = "presence">
+                <?php //echo $form->labelEx($model,'youtube'); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/Youtube.png', 'Youtube', array('class' => 'form-control')); ?>
+                <?php echo $form->field($model,'youtube')->textInput(array('size' => 100,'maxlength' => 255)); ?>
+                <?php //echo $form->error($model,'youtube'); ?>
 			</div>
 
-			<div class = "row buttons">
-                <div class="col col-md-12">
-                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Show social media options'), array('class' => 'btn btn-success btn-lg presence-button')); ?>
-                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success btn-lg')); ?>
-                </div>
+			<div class = "buttons">
+                <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Show social media options'), array('class' => 'btn btn-success btn-lg presence-button')); ?>
+                <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success btn-lg')); ?>
 			</div>
 
 		<?php ActiveForm::end(); ?>
