@@ -16,7 +16,7 @@ $assets = AppAsset::register($this);
 <div id = "bbii-header">
 	<?php if (!Yii::$app->user->isGuest): ?>
 	<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.Yii::$app->user->id); ?>
-		<div class = "bbii-profile-box">
+		<div class = "btn btn-primary pull-right">
 		<?php 
 			if ($messages) {
 				echo Html::a(Html::img($assets->baseUrl.'/images/newmail.png', array('title' => $messages . ' ' . Yii::t('BbiiModule.bbii', 'new messages'), 'style' => 'vertical-align:bottom;')), array('message/inbox')); 
@@ -27,7 +27,7 @@ $assets = AppAsset::register($this);
 		?>
 		</div>
 	<?php endif; ?>
-	<div class = "bbii-title"><?php echo $this->context->module->forumTitle; ?></div>
+	<h2><?php echo $this->context->module->forumTitle; ?></h2>
 	<table style = "margin:0;"><tr><td style = "padding:0;">
 		<div id = "bbii-menu">
 		<?php  echo Nav::widget([
