@@ -384,8 +384,8 @@ $this->registerJs($script, View::POS_READY);
 
 			<div class = "row buttons">
                 <div class="col col-md-12">
-                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Show social media options'), array('class' => 'btn btn-success presence-button')); ?>
-                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success')); ?>
+                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Show social media options'), array('class' => 'btn btn-success btn-lg presence-button')); ?>
+                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success btn-lg')); ?>
                 </div>
 			</div>
 

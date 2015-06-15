@@ -114,7 +114,7 @@ use yii\web\JsExpression;
 	<div class = "row buttons">
         <div class="col col-md-12">
             <?php echo $form->field($model, 'type')->input('hidden')->label(false);  ?>
-            <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send'), array('class' => 'btn btn-primary')); ?>
+            <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send'), array('class' => 'btn btn-success btn-lg')); ?>
         </div>
 	</div>
 
