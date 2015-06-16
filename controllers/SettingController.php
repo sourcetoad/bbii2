@@ -13,6 +13,7 @@ use yii;
 use yii\widgets\ActiveForm;
 use yii\web\Controller;
 use yii\web\User;
+use yii\filters\AccessControl;
 
 class SettingController extends BbiiController {
 
@@ -97,33 +98,37 @@ class SettingController extends BbiiController {
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-					'getforum',
-					'ajaxSort',
-					'changeModerator',
-					'deleteForum',
-					'deleteMembergroup',
-					'deleteSpider',
-					'getMembergroup',
-					'getSpider',
-					'index',
-					'layout',
-					'moderator',
-					'update',
-					'saveForum',
-					'saveMembergroup',
-					'saveSpider',
-					'spider',
+                    [
+						'actions'       => [
+							'getforum',
+							'ajaxSort',
+							'changeModerator',
+							'deleteForum',
+							'deleteMembergroup',
+							'deleteSpider',
+							'getMembergroup',
+							'getSpider',
+							'index',
+							'layout',
+							'moderator',
+							'update',
+							'saveForum',
+							'saveMembergroup',
+							'saveSpider',
+							'spider',
 
-					'updateForum',
+							'updateForum',
 
-					'createmembergroup',
-					'updateMembergroup',
+							'createmembergroup',
+							'updateMembergroup',
 
-					'createspider',
-					'updatespider',
-				],
-				'allow'         => true,
-				'matchCallback' => function() { return $this->isModerator(); },
+							'createspider',
+							'updatespider',
+						],
+						'allow'         => true,
+						'matchCallback' => function() { return $this->isModerator(); },
+                    ],
+                ],
             ],
         ];
     }
