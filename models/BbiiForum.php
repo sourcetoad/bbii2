@@ -220,7 +220,7 @@ class BbiiForum extends BbiiAR
 					if ($option->membergroup_id == 0) {
 						$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
 					} elseif (!Yii::$app->user->isGuest) {
-						$groupId = BbiiMember::find(Yii::$app->user->id)->group_id;
+						$groupId = BbiiMember::find(Yii::$app->user->id)->one()->group_id;
 						if ($option->membergroup_id == $groupId) {
 							$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
 						}

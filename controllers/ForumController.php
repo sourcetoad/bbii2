@@ -73,7 +73,7 @@ class ForumController extends BbiiController {
 			} elseif ($this->isModerator()) {
 				$forums = BbiiForum::find()->where("cat_id = $category->id")->forum()->sorted()->all();
 			} else {
-				$groupId = BbiiMember::find(Yii::$app->user->id)->group_id;
+				$groupId = BbiiMember::find(Yii::$app->user->id)->one()->group_id;
 				$forums = BbiiForum::find()->where("cat_id = $category->id")->forum()->membergroup($groupId)->sorted()->all();
 			}
 			if (count($forums)) {
@@ -141,7 +141,7 @@ class ForumController extends BbiiController {
 			if (Yii::$app->user->isGuest) {
 				throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
 			} elseif (!$this->isModerator()) {
-				$groupId = BbiiMember::find(Yii::$app->user->id)->group_id;
+				$groupId = BbiiMember::find(Yii::$app->user->id)->one()->group_id;
 				if ($forum->membergroup_id != $groupId) {
 					throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to view requested forum.'));
 				}
@@ -210,7 +210,7 @@ class ForumController extends BbiiController {
 			if (Yii::$app->user->isGuest) {
 				throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
 			} elseif (!$this->isModerator()) {
-				$groupId = BbiiMember::find(Yii::$app->user->id)->group_id;
+				$groupId = BbiiMember::find(Yii::$app->user->id)->one()->group_id;
 				if ($forum->membergroup_id != $groupId) {
 					throw new HttpException(403, Yii::t('BbiiModule.bbii', 'You have no permission to read requested topic.'));
 				}
