@@ -42,8 +42,8 @@ $this->registerJs($script, View::POS_READY);
 
 	<?php // @depricated 2.4 Kept for referance
     /* $form=$this->beginWidget('ActiveForm', array(
-		'id'=>'bbii-forum-form',
-		'enableAjaxValidation'=>false,
+		'id' => 'bbii-forum-form',
+		'enableAjaxValidation' => false,
 	));*/ ?>
 
 	<?php $form = ActiveForm::begin([
@@ -67,19 +67,19 @@ $this->registerJs($script, View::POS_READY);
 
 		<div class="row">
 			<div class="form-group field-bbiiforum-cateogry">
-				<label class="control-label" for="name">Category/Forum</label>
+				<label class="control-label" for="name">Category / Forum</label>
 				<?php //echo $form->labelEx($model,'type'); ?>
 				<?php echo Html::activeDropDownList(
 					$model,
 					'type',
 					array(
-						'0'=>Yii::t('BbiiModule.bbii', 'Category'),
-						'1'=>Yii::t('BbiiModule.bbii', 'Forum')
+						'0' => Yii::t('BbiiModule.bbii', 'Category'),
+						'1' => Yii::t('BbiiModule.bbii', 'Forum')
 					),
 					array(
-						'class'  => 'form-control',
-						'id'     => 'cateogry',
-						'prompt' => 'None',
+						'class'    => 'form-control',
+						'id'       => 'cateogry',
+						'selected' => 1,
 					)
 				); ?>
 				<?php //echo $form->error($model,'type'); ?>
@@ -128,11 +128,11 @@ $this->registerJs($script, View::POS_READY);
 		$this->widget('zii.widgets.jui.CJuiSortable', array(
 			'id' => 'sortcategory',
 			'items' => $items,
-			'htmlOptions'=>array('style'=>'list-style:none;;margin-top:1px'),
-			'theme'=>$this->module->juiTheme,
-			'options'=>array(
-				'delay'=>'100',
-				'update'=>'js:function(){Sort(this,"' . $this->createAbsoluteUrl('setting/ajaxSort') . '");}',
+			'htmlOptions' => array('style' => 'list-style:none;;margin-top:1px'),
+			'theme' => $this->module->juiTheme,
+			'options' => array(
+				'delay' => '100',
+				'update' => 'js:function(){Sort(this,"' . $this->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		));*/
 
@@ -164,27 +164,27 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 	'id'      => 'dlgEditForum',
 	'theme'   => $this->module->juiTheme,
 	'options' => array(
-        'title'=>'Edit',
-        'autoOpen'=>false,
-		'modal'=>true,
-		'width'=>800,
-		'show'=>'fade',
-		'buttons'=>array(
-			Yii::t('BbiiModule.bbii', 'Delete')=>'js:function(){ deleteForum("' . $this->createAbsoluteUrl('setting/deleteForum') .'"); }',
-			Yii::t('BbiiModule.bbii', 'Save')=>'js:function(){ saveForum("' . $this->createAbsoluteUrl('setting/saveForum') .'"); }',
-			Yii::t('BbiiModule.bbii', 'Cancel')=>'js:function(){ $(this).dialog("close"); }',
+        'title' => 'Edit',
+        'autoOpen' => false,
+		'modal' => true,
+		'width' => 800,
+		'show' => 'fade',
+		'buttons' => array(
+			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ deleteForum("' . $this->createAbsoluteUrl('setting/deleteForum') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Save') => 'js:function(){ saveForum("' . $this->createAbsoluteUrl('setting/saveForum') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Cancel') => 'js:function(){ $(this).dialog("close"); }',
 		),
     ),
 ));
 
-    echo $this->renderPartial('_editForum', array('model'=>$model));
+    echo $this->renderPartial('_editForum', array('model' => $model));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 
 // @todo Tried this buyt jQuery UI + Dialog + Yii2 just did not seem to work the way I wanted - DJE : 2015-05-25
 Dialog::begin([
 	'id'           => 'dlgEditForum',
-	'clientOptions'=> [
+	'clientOptions' =>  [
 		'closeButton' => true,
 		'autoOpen' => false,
 		// @todo get the resolution for this issue - DJE : 2015-05-21
