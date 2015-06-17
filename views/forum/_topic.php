@@ -32,6 +32,7 @@ $assets = AppAsset::register($this);
 		</div>
 
 	</div>
+	<!--
 	<div class = "forum-cell center">
 		<?php echo Html::encode($model->num_replies); ?><br>
 		<?php echo Html::encode($model->getAttributeLabel('num_replies')); ?>
@@ -40,9 +41,10 @@ $assets = AppAsset::register($this);
 		<?php echo Html::encode($model->num_views); ?><br>
 		<?php echo Html::encode($model->getAttributeLabel('num_views')); ?>
 	</div>
+	-->
 	<div class = "forum-cell last-cell">
 		<?php 
-			echo Html::encode($model->lastPost->poster->member_name);
+			// echo Html::encode($model->lastPost->poster->member_name);
 			echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $model->id, 'nav' => 'last'));
 			echo '<br>';
 			echo Yii::$app->formatter->asDatetime($model->lastPost->create_time);
