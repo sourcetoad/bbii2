@@ -5,6 +5,7 @@ use frontend\modules\bbii\models\BbiiMessage;
 
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\i18n\Formatter;
 
 use frontend\modules\bbii\AppAsset;
 $assets = AppAsset::register($this);
@@ -81,13 +82,13 @@ $item = array(
 		'columns' => array(
 			array(
 				'header' => 'Member Name',
-				'value'  => '$data->poster->member_name'
+				'value'  => (isset($data->poster->member_name) ?: null),
 			),
 			'subject',
 			'ip',
 			array(
 				'header' => 'Create Time',
-				'value'  => 'Yii::$app->formatter->asDatetime($data->create_time)',
+				'value'  => (isset($data->create_time) ? Yii::$app->formatter->asDatetime($data->create_time) : null),
 			),
 			array(
 				'class'    => 'yii\grid\ActionColumn',
