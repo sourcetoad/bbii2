@@ -9,6 +9,10 @@ use yii\helpers\Html;
 /* @var $form ActiveForm */
 ?>
 
+<?php echo $this->render('../template/_header'); ?>
+
+<br />
+
 <div class = "form">
 
 	<?php $form = ActiveForm::begin([
@@ -18,24 +22,24 @@ use yii\helpers\Html;
 
 		<?php echo $form->errorSummary($model); ?>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'name')->textInput(array('size' => 25)); ?>
 		</div>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'user_agent')->textInput(array('size' => 70)); ?>
 		</div>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'hits')->textInput(array('size' => 11)); ?>
 		</div>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'id')->hiddenInput()->label(false); ?>
 		</div>
 
-		<div class = "row button">
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success')); ?>
+		<div class = "button">
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success btn-lg')); ?>
 		</div>
 
 	<?php ActiveForm::end(); ?>

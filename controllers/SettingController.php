@@ -13,6 +13,7 @@ use yii;
 use yii\widgets\ActiveForm;
 use yii\web\Controller;
 use yii\web\User;
+use yii\filters\AccessControl;
 
 class SettingController extends BbiiController {
 
@@ -27,23 +28,28 @@ class SettingController extends BbiiController {
 	}
 
 	/**
+	 * @deprecated 3.0.6fd6d72
 	 * @return array action filters
 	 */
 	public function filters()
 	{
-		return array(
+		return false;
+		/* return array(
 			'accessControl',
-		);
+		); */
 	}
 
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
+	 *
+	 * @deprecated 3.0.6fd6d72
 	 * @return array access control rules
 	 */
 	public function accessRules()
 	{
-		return array(
+		return false;
+		/* return array(
 			array('allow',
 				'actions'    => array(
 					'getforum',
@@ -77,8 +83,55 @@ class SettingController extends BbiiController {
 			array('deny',  // deny all users
 				'users' => array('*'),
 			),
-		);
+		); */
 	}
+
+	/**
+	 * Yii2 simple RBAL ACL
+	 *
+	 * @version  3.0.6fd6d72
+	 * @since 3.0.6fd6d72
+	 * @return array
+	 */
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+						'actions'       => [
+							'getforum',
+							'ajaxSort',
+							'changeModerator',
+							'deleteForum',
+							'deleteMembergroup',
+							'deleteSpider',
+							'getMembergroup',
+							'getSpider',
+							'index',
+							'layout',
+							'moderator',
+							'update',
+							'saveForum',
+							'saveMembergroup',
+							'saveSpider',
+							'spider',
+
+							'updateForum',
+
+							'createmembergroup',
+							'updateMembergroup',
+
+							'createspider',
+							'updatespider',
+						],
+						'allow'         => true,
+						'matchCallback' => function() { return $this->isModerator(); },
+                    ],
+                ],
+            ],
+        ];
+    }
 
 	/**
 	 * [actionIndex description]

@@ -14,8 +14,16 @@ use common\models\User;
 
 class BbiiModule extends \yii\base\Module
  {
-	public $adminId           = false;		// must be overridden to assign admin rights to user id
-	public $allowTopicSub     = false;
+	public $adminId        = 1; // must be overridden to assign admin rights to user id
+	public $allowTopicSub  = false;
+	public $postsPerPage   = 20;
+	public $topicsPerPage  = 20;
+	public $userClass      = 'common\models\User'; // change this to your user module
+	public $userIdColumn   = 'id';
+	public $userMailColumn = 'email';
+	public $userNameColumn = 'username';
+
+	// 'normal' Class properties set w/i the class
 	public $avatarStorage     = '/avatar'; 	// directory in the webroot must exist and allow read/write access
 	public $bbiiTheme         = 'base';
 	public $dbName            = false;
@@ -42,12 +50,6 @@ class BbiiModule extends \yii\base\Module
 		'HTML.SafeIframe'          => true,
 		'URI.SafeIframeRegexp'     => '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',
 	);
-	public $postsPerPage      = 20;
-	public $topicsPerPage     = 20;
-	public $userClass         = 'common\models\User'; // change this to your user module
-	public $userIdColumn      = 'id';
-	public $userMailColumn    = 'email';
-	public $userNameColumn    = 'username';
 	public $version           = '3.0.5';
 
 	private $_assetsUrl;

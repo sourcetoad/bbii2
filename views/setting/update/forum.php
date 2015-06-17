@@ -12,6 +12,10 @@ use yii\helpers\Html;
 /* @var $form ActiveForm */
 ?>
 
+<?php echo $this->render('../template/_header'); ?>
+
+<br />
+
 <div class = "form">
 
 	<?php $form = ActiveForm::begin([
@@ -21,15 +25,15 @@ use yii\helpers\Html;
 
 		<?php echo $form->errorSummary($model); ?>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'name')->textInput(); ?>
 		</div>
 
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model,'subtitle')->textInput(); ?>
 		</div>
 
-		<div class="row">
+		<div>
 			<div class="form-group field-bbiiforum-cateogry">
 				<label class="control-label" for="name">Categories</label>
 					<?php echo Html::dropDownList($model,'cat_id',
@@ -43,7 +47,7 @@ use yii\helpers\Html;
 		</div>
 
 
-		<div class="row">
+		<div>
 			<div class="form-group field-bbiiforum-public">
 				<label class="control-label" for="name">Public</label>
 				<?php echo Html::dropDownList($model,'public',
@@ -57,7 +61,7 @@ use yii\helpers\Html;
 			</div>
 		</div>
 		
-		<div class="row">
+		<div>
 			<div class="form-group field-bbiiforum-locked">
 				<label class="control-label" for="name">Locked</label>
 				<?php echo Html::dropDownList($model,'locked',
@@ -72,7 +76,7 @@ use yii\helpers\Html;
 			</div>
 		</div>
 		
-			<div class="row">
+		<div>
 			<div class="form-group field-bbiiforum-moderated">
 				<label class="control-label" for="name">Moderated</label>
 				<?php echo Html::dropDownList($model,'moderated',
@@ -86,7 +90,7 @@ use yii\helpers\Html;
 			</div>
 		</div>
 		
-		<div class="row">
+		<div>
 			<div class="form-group field-bbiiforum-membergroup">
 				<label class="control-label" for="name">Member Group</label>
 				<?php echo Html::dropDownList($model,'membergroup_id',
@@ -110,13 +114,13 @@ use yii\helpers\Html;
 		</div>
 		*/ ?>
 		
-		<div class = "row">
+		<div>
 			<?php echo $form->field($model, 'id')->hiddenInput()->label(false); ?>
 			<?php echo $form->field($model, 'type')->hiddenInput()->label(false); ?>
 		</div>
 
-		<div class = "row button">
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success')); ?>
+		<div class = "button">
+			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success btn-lg')); ?>
 		</div>
 
 	<?php ActiveForm::end(); ?>

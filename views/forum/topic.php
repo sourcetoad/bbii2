@@ -51,11 +51,9 @@ $item = array(
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
-	<div class = "forum-category center">
-		<div class = "header2">
-			<?php echo $topic->title; ?>
-		</div>
-	</div>
+	<h3>
+        <?php echo $topic->title; ?>
+    </h3>
 	
 	<?php if (!Yii::$app->user->isGuest && $this->context->module->userMailColumn && $this->context->module->allowTopicSub) { ?>
 		<?php if ($this->isWatching($topic->id)) { ?>
@@ -84,7 +82,7 @@ $item = array(
 			'enableAjaxValidation' => false,
 			'id'                   => 'create-post-form',
 		]);
-			echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Reply'), array('class' => 'btn btn-success'));
+			echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Reply'), array('class' => 'btn btn-success btn-lg'));
 		ActiveForm::end();
 		?>
 	</div><!-- form -->	

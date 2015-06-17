@@ -9,26 +9,32 @@ use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\MailForm;
 
 use yii;
+use yii\filters\AccessControl;
 
 class ModeratorController extends BbiiController {
+	
 	/**
+	 *
+	 * @deprecated 3.0.6fd6d72
 	 * @return array action filters
 	 */
-	public function filters()
-	{
-		return array(
+	public function filters() {
+		return false;
+		/* return array(
 			'accessControl',
-		);
+		); */
 	}
 
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
+	 *
+	 * @deprecated 3.0.6fd6d72
 	 * @return array access control rules
 	 */
-	public function accessRules()
-	{
-		return array(
+	public function accessRules() {
+		return false;
+		/* return array(
 			array('allow',
 				'actions' => array('admin','approval','approve','banIp','changeTopic','delete','ipAdmin','ipDelete','view','refreshTopics','report','topic','sendmail'),
 				'users' => array('@'),
@@ -37,9 +43,31 @@ class ModeratorController extends BbiiController {
 			array('deny',  // deny all users
 				'users' => array('*'),
 			),
-		);
+		); */
 	}
-	
+
+	/**
+	 * Yii2 simple RBAL ACL
+	 *
+	 * @version  3.0.6fd6d72
+	 * @since 3.0.6fd6d72
+	 * @return array
+	 */
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+						'actions'       => array('admin','approval','approve','banIp','changeTopic','delete','ipAdmin','ipDelete','view','refreshTopics','report','topic','sendmail'),
+						'allow'         => true,
+						'matchCallback' => function() { return $this->isModerator(); },
+                    ],
+                ],
+            ],
+        ];
+    }
+
 	public function actionApproval() {
 		$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
@@ -92,8 +120,7 @@ class ModeratorController extends BbiiController {
 		));
 	}
 	
-	public function actionIpadmin()
-	{
+	public function actionIpadmin() {
 		$model = new BbiiIpaddress('search');
 		// $model->unsetAttributes();  // clear any default values
 		if (isset(Yii::$app->request->get()['BbiiIpaddress']))

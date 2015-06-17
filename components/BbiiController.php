@@ -89,20 +89,16 @@ class BbiiController extends Controller
 	 * @return boolean
 	 */
 	public function isAdmin() {
-		$userId = Yii::$app->user->id;
-		if ($userId === null) {
-			return false;		// not authenticated
-		} else {
-			if ($this->module->adminId && $this->module->adminId == $userId) {
-				return true;	// by module parameter assigned admin
-			}
 
-			if (Yii::$app->authManager
-				&& Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)['user']->type  == 3
-			) {
-				return true;	// rbac role "admin"
-			}
+		if ($this->module->adminId && $this->module->adminId ===  Yii::$app->user->id) {
+			return true;	// by module parameter assigned admin
 		}
+
+		if (Yii::$app->authManager && Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)['user']->type  == 3
+		) {
+			return true;	// rbac role "admin"
+		}
+
 		return false;
 	}
 	
@@ -111,29 +107,22 @@ class BbiiController extends Controller
 	 * @return boolean
 	 */
 	public function isModerator() {
-		$userId = Yii::$app->user->id;
 
-		if ($userId === null) {
-
-			return false;		// not authenticated
-		} else {
-
-			if ($this->isAdmin()) {
-				return true;
-			}
-
-			if (Yii::$app->authManager
-				&& Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)['user']->type  == 2
-			) {
-				return true;	// rbac role "moderator"
-			}
-
-			// @todo turn caching back on - DJE : 2015-06-03
-			//if (BbiiMember::find()->cache(900)->moderator()->exists("id = $userId")) {
-			if (BbiiMember::find()->moderator()->where(['id' => $userId])) {
-				return true;	// member table moderator value set
-			}
+		// user not logged into web-app
+		if (!Yii::$app->user->id) { return false; }
+		
+		// rbac role "moderator"
+		if (Yii::$app->authManager && Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)['user']->type  == 2 ) {
+			return true;	
 		}
+
+		// @todo turn caching back on - DJE : 2015-06-03
+		/* if (BbiiMember::find()->cache(900)->moderator()->exists("id = $userId")) {
+			return true;	// member table moderator value set
+		} */
+
+		// if use is admin, they are admin
+		if ($this->isAdmin()) { return true; }
 
 		return false;
 	}
