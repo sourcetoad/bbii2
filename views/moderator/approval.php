@@ -77,43 +77,25 @@ $item = array(
 
 	<?php
 	$dataProvider = $model->search();
-	$dataProvider->setPagination(array('pageSize' => 10));
 	echo GridView::widget(array(
-		'columns' => array(
+		'columns'         => array(
 			array(
 				'header' => 'Member Name',
-				'value'  => (isset($data->poster->member_name) ?: null),
+				'value'  => 'poster.member_name',
 			),
+
+			array(
+				'header' => 'Forum Name',
+				'value'  => 'forum.name',
+			),
+
 			'subject',
-			'ip',
-			array(
-				'header' => 'Create Time',
-				'value'  => (isset($data->create_time) ? Yii::$app->formatter->asDatetime($data->create_time) : null),
-			),
-			array(
-				'class'    => 'yii\grid\ActionColumn',
-				'template' => '{view}{approve}{delete}',
-				'buttons' => array(
-					'view' => array(
-						'click'    => 'js:function() { viewPost($(this).attr("href"), "' .'moderator/view' .'");return false; }',
-						'imageUrl' => $assets->baseUrl.'view.png',
-						'url'      => '$data->id',
-					),
-					'approve' => array(
-						'imageUrl' => $assets->baseUrl.'/images/approve.png',
-						'label'    => Yii::t('BbiiModule.bbii','Approve'),
-						'options'  => array('style' => 'margin-left:5px;'),
-						'url'      => 'array("approve", "id" => $data->id)',
-					),
-					'delete' => array(
-						'imageUrl' => $assets->baseUrl.'/images/delete.png',
-						'options'  => array('style' => 'margin-left:5px;'),
-					),
-				),
-			),
+			'create_time:datetime',
+
+			['class' => 'yii\grid\ActionColumn'],
 		),
-		'dataProvider' => $dataProvider,
-		'id'           => 'member-grid',
+		'dataProvider'    => $dataProvider,
+		'id'              => 'bbii-member-grid',
 	)); ?>
 
 	<div id = "bbii-message"></div>

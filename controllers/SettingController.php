@@ -100,29 +100,28 @@ class SettingController extends BbiiController {
                 'rules' => [
                     [
 						'actions'       => [
-							'getforum',
 							'ajaxSort',
 							'changeModerator',
+							'createmembergroup',
+							'createspider',
 							'deleteForum',
 							'deleteMembergroup',
 							'deleteSpider',
+							'getforum',
 							'getMembergroup',
 							'getSpider',
+							'group',
 							'index',
 							'layout',
 							'moderator',
-							'update',
 							'saveForum',
 							'saveMembergroup',
 							'saveSpider',
 							'spider',
-
+							'update',
 							'updateForum',
-
-							'createmembergroup',
+							'updateforum',
 							'updateMembergroup',
-
-							'createspider',
 							'updatespider',
 						],
 						'allow'         => true,
@@ -511,6 +510,8 @@ class SettingController extends BbiiController {
      */
     public function actionUpdatemembergroup($id)
     {
+    	echo 'asdf';exit;
+
     	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
         $model = BbiiMembergroup::find()->where(['id' => $id])->one();
 

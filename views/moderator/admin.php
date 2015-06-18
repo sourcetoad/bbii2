@@ -116,62 +116,20 @@ function setAutocomplete(id, data) {
 	));*/ ?>
 	<?php
 	$dataProvider = $model->search();
-	$dataProvider->setPagination(array('pageSize' => 20));
-	//$dataProvider->setSort(array('defaultOrder' => 'create_time DESC'));
 	echo GridView::widget(array(
 		'id'              => 'bbii-post-grid',
 		'dataProvider'    => $dataProvider,
 		'columns'         => array(
 			array(
-				'header' => 'Forum Name',
-				'value' => '$data->forum->name',
 				'filter' => ArrayHelper::map(BbiiForum::getAllForumOptions(), 'id', 'name', 'group'),
+				'header' => 'Forum Name',
+				'value'  => 'forum.name',
 			),
+
 			'subject',
-			array(
-				'header' => 'Search',
-				/*'filter'  => $this->widget('zii.widgets.jui.CJuiAutoComplete',array(
-					'attribute' => 'search',
-					'model' => $model,
-					'sourceUrl' => array('member/members'),
-					'theme' => $this->module->juiTheme,
-					'options' => array(
-						'minLength' => 2,
-						'delay' => 200,
-						'select' => 'js:function(event, ui) { 
-							$("#BbiiPost_search").val(ui.item.label);
-							$("#bbii-post-grid").yiiGridView("update", { data: $(this).serialize() });
-							return false;
-						}',
-					),
-					'htmlOptions' => array(
-						'style' => 'height:20px;',
-					),
-				), true),*/
-				'value' => '$data->poster->member_name',
-			),
-			'ip',
-			'create_time',
-			array(
-				'class' => 'yii\grid\ActionColumn',
-				'template' => '{view}{update}{delete}',
-				'buttons' => array(
-					'view' => array(
-						'url' => 'array("forum/topic", "id" => $data->topic_id, "nav" => $data->id)',
-						'imageUrl' => $assets->baseUrl.'view.png',
-					),
-					'update' => array(
-						'url' => 'array("forum/update", "id" => $data->id)',
-						'label' => Yii::t('BbiiModule.bbii','Update'),
-						'imageUrl' => $assets->baseUrl.'/images/update.png',
-						'options' => array('style' => 'margin-left:5px;'),
-					),
-					'delete' => array(
-						'imageUrl' => $assets->baseUrl.'/images/delete.png',
-						'options' => array('style' => 'margin-left:5px;'),
-					),
-				)
-			),
+			'create_time:datetime',
+
+			['class' => 'yii\grid\ActionColumn'],
 		),
 	)); ?>
 </div>
