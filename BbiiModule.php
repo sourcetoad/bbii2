@@ -16,6 +16,7 @@ class BbiiModule extends \yii\base\Module
  {
 	public $adminId        = 1; // must be overridden to assign admin rights to user id
 	public $allowTopicSub  = false;
+	public $accessControl  = false;
 	public $postsPerPage   = 20;
 	public $topicsPerPage  = 20;
 	public $userClass      = 'common\models\User'; // change this to your user module

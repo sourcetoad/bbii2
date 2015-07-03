@@ -126,4 +126,21 @@ class BbiiController extends Controller
 
 		return false;
 	}
+
+    public function behaviors() {
+    	if ($this->module->adminId == 'AccessControl') {
+
+	        return [
+	            'access' => [
+	                'class' => \yii\filters\AccessControl::className(),
+	                'rules' => [
+	                    [
+	                        'allow'   => true,
+	                        'roles'   => ['@'],
+	                    ]
+	                ],
+	            ],
+	        ];
+	    }
+    }
 }
