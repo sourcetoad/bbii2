@@ -28,8 +28,8 @@ if (!$model->public) {
 ?>
 
 <?php if ($model->type) { ?>
-<div class = "forum">
-    <table class="table table-striped">
+<div class = "forum well">
+    <table class="table table-striped table-condensed">
         <tr>
             <td class = "forum-cell <?php echo $image; ?> hidden-xs">
             </td>
