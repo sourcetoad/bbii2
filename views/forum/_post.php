@@ -19,7 +19,12 @@ $assets = AppAsset::register($this);
 			<?php echo Html::a(Html::encode($model->poster->member_name), array('member/view', 'id' => $model->poster->id)); ?>
 		</div>
 		<div class = "avatar">
-			<?php echo Html::img((isset($model->poster->avatar) ? Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->poster->avatar : $assets->baseUrl.'/images/empty.jpeg'), array('title' => 'avatar')); ?>
+			<?php echo Html::img((isset($model->poster->avatar) ? Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->poster->avatar : $assets->baseUrl.'/images/empty.jpeg'),
+                             array(
+                               'title' => 'avatar',
+                               'class' => 'img-responsive img-circle')
+                            );
+          ?>
 		</div>
 		<div class = "group">
 			<?php if (isset($model->poster->group)) {
