@@ -867,6 +867,12 @@ button.bbii-button-right {
 	white-space: nowrap;
 }
 
+#bbii-wrapper .forum-posts,
+#bbii-wrapper .forum-date {
+  padding-top: 4px;
+}
+
+
 #bbii-wrapper .img30 img {
 	height: 30px;
 	width: 30px;
@@ -874,8 +880,8 @@ button.bbii-button-right {
 
 #bbii-wrapper .last-cell {
 	text-align: right;
-	vertical-align: middle;
-	min-width: 180px;
+	vertical-align: top;
+	min-width: auto;
 }
 
 #bbii-wrapper .main {
@@ -1145,3 +1151,23 @@ tr.moderator {
 	padding: 2px;
 	margin: 2px 1px;
 }
+
+
+
+/* Media Queries */
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+
+  /* forum content */
+  .forum-posts,
+  .forum-date{
+    font-size: 11px;
+  }
+
+  /* posts conent */
+
+  .post-posts,
+  .post-date{
+    font-size: 11px;
+  }
