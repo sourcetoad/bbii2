@@ -884,9 +884,9 @@ button.bbii-button-right {
 
 #bbii-wrapper .member-cell {
 	background-color: inherit;
-	display: table-cell;
-	padding: 0 10px;
-	width: 175px;
+	display: block;
+	padding: 0;
+	width: 100%;
 }
 
 #bbii-wrapper .member-cell .membername {
@@ -904,7 +904,7 @@ button.bbii-button-right {
 }
 
 #bbii-wrapper .member-cell .img-circle {
-    border: 5px #0192BC solid;
+    border: 2px #0192BC solid;
 }
 
 
@@ -930,7 +930,7 @@ button.bbii-button-right {
 }
 
 #bbii-wrapper .post-cell {
-	display: table-cell;
+	display: block;
 	padding: 0;
     vertical-align: top;
 }
