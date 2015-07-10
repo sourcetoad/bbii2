@@ -52,7 +52,7 @@ $item = array(
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
 	<h3>
-        <?php echo $topic->title; ?>
+        Topic: <?php echo $topic->title; ?>
     </h3>
 	
 	<?php if (!Yii::$app->user->isGuest && $this->context->module->userMailColumn && $this->context->module->allowTopicSub) { ?>
