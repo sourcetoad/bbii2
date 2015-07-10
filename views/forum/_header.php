@@ -14,6 +14,22 @@ $assets = AppAsset::register($this);
 /* @var $this ForumController */
 /* @var $item array */
 ?>
+
+<?php
+echo Html::dropDownList(
+	'bbii-jumpto',
+	null,
+	ArrayHelper::map(BbiiForum::getForumOptions(), 'id', 'name'),
+	array(
+		'prompt' => 'Pick a forum',
+		'class'    => 'form-control',
+		//'empty'    => Yii::t('BbiiModule.bbii', 'Select forum'),
+		'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/forum/forum?id='+$(this).val()",
+	)
+); ?>
+
+<br />
+
 <div id = "bbii-header">
 	<?php if (!Yii::$app->user->isGuest): ?>
 		<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.Yii::$app->user->id); ?>
@@ -47,20 +63,6 @@ $assets = AppAsset::register($this);
 		</div>
 	</td></tr></table>
 </div>
-<?php
-echo Html::dropDownList(
-	'bbii-jumpto',
-	null,
-	ArrayHelper::map(BbiiForum::getForumOptions(), 'id', 'name'),
-	array(
-		'prompt' => 'Pick a forum',
-		'class'    => 'form-control',
-		//'empty'    => Yii::t('BbiiModule.bbii', 'Select forum'),
-		'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/forum/forum?id='+$(this).val()",
-	)
-); ?>
-
-<br />
 
 <?php // @todo Breadcrumb disabled for initial release - DJE : 2015-05-28
 /* if (isset($this->context->bbii_breadcrumbs)):?>
