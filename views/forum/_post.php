@@ -81,9 +81,9 @@ $assets = AppAsset::register($this);
                     </div>
 
                     <div class = "header2<?php echo (isset($postId) && $postId == $model->id)?' target':''; ?>"><?php echo Html::encode($model->subject); ?></div>
-                    <?php echo '&raquo; ' . Html::encode($model->poster->member_name); ?>
-                    <?php echo ' &raquo; ' . Yii::$app->formatter->asDatetime($model->create_time); ?>
-                    <?php echo ' &raquo; <span class = "badge" title = "' . Yii::t('BbiiModule.bbii','Reputation') . '">' . $model->upvoted . '</span>'; ?>
+                    <?php echo Html::encode($model->poster->member_name); ?>
+                    <?php echo Yii::$app->formatter->asDatetime($model->create_time); ?>
+                    <?php echo '<span class = "badge" title = "' . Yii::t('BbiiModule.bbii','Reputation') . '">' . $model->upvoted . '</span>'; ?>
                 </div>
 
                 <?php //@todo Poll disabled for init release - DJE : 2015-05-28

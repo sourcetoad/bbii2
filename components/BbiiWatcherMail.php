@@ -85,7 +85,7 @@ class BbiiWatcherMail {
 							$cmd_poster = $this->bbii_db->createCommand($select);
 							$row_poster = $cmd_poster->queryRow();
 							
-							$content .= "<h4>{$row_poster['member_name']} &raquo; {$timestamp}</h4>" .PHP_EOL;
+							$content .= "<h4>{$row_poster['member_name']} {$timestamp}</h4>" .PHP_EOL;
 							$content .= $row_post['content'];
 							$content .= '<br>' . PHP_EOL;
 						}

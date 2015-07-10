@@ -9,8 +9,8 @@
 			<?php echo Html::a(Html::encode($data->subject), array('forum/topic', 'id' => $data->topic_id, 'nav' => $data->id)); ?>
 		</div>
 		<div class = "header4">
-			<?php echo '&nbsp;&raquo; ' . Html::encode($data->poster->member_name); ?>
-			<?php echo ' &raquo; ' . DateTimeCalculation::full($data->create_time); ?>
+			<?php echo '; ' . Html::encode($data->poster->member_name); ?>
+			<?php echo '; ' . DateTimeCalculation::full($data->create_time); ?>
 			<?php echo Yii::t('BbiiModule.bbii','in'); ?>
 			<?php echo Html::a($data->forum->name, array('forum/forum', 'id' => $data->forum_id)); ?>
 		</div>
