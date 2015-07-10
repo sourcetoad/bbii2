@@ -72,15 +72,20 @@ $item = array(
                 'template' => '{pager}{items}{pager}',
                 'pager' => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
             ));*/ ?>
-            <div class="well clearfix">
-                <?php echo ListView::widget([
-                        'dataProvider' => $dataProvider,
-                        'id'           => 'bbiiTopic',
-                        'itemView'     => '_topic',
-                        //'pager'        => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
-                        //'template'     => '{pager}{items}{pager}',
-                    ]);
-                ?>
+
+            <div class="well">
+                <div class = "topic">
+                    <table class="table table-striped table-condensed">
+                        <?php echo ListView::widget([
+                                'dataProvider' => $dataProvider,
+                                'id'           => 'bbiiTopic',
+                                'itemView'     => '_topic',
+                                //'pager'        => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
+                                //'template'     => '{pager}{items}{pager}',
+                            ]);
+                        ?>
+                    </table>
+                </div>
             </div>
             <br />
 
