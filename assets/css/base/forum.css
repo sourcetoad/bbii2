@@ -873,9 +873,13 @@ button.bbii-button-right {
 	margin-bottom: -35px;
 }
 
+#bbii-wrapper .forum-icon {
+	width: 37px;
+}
+
 #bbii-wrapper .forum-cell {
 	display: table-cell;
-	padding: 2px 5px;
+	padding: 4px 5px;
 	vertical-align: top;
 	white-space: nowrap;
 }
@@ -893,7 +897,7 @@ button.bbii-button-right {
 
 #bbii-wrapper .last-cell {
 	text-align: right;
-	vertical-align: top;
+	vertical-align: bottom;
 	min-width: auto;
 }
 
@@ -999,10 +1003,14 @@ button.bbii-button-right {
 
 #bbii-wrapper .topic {
 	display: block;
-	margin: 10px 1px 10px 1px;
-    padding: 10px 4px 4px 4px;
-    border-top: 1px #DDD solid;
+	margin: 0 1px;
+    padding: 0 4px;
 }
+
+#bbii-wrapper .topic .topic-date {
+	font-size: 10px;
+}
+
 
 #bbii-wrapper .toolbar {
 	padding: 1px 0 3px 10px;
