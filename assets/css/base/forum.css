@@ -884,7 +884,7 @@ button.bbii-button-right {
 
 #bbii-wrapper .last-cell {
 	text-align: right;
-	vertical-align: bottom;
+	vertical-align: top;
 	min-width: auto;
 }
 
