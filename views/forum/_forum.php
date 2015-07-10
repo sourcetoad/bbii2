@@ -28,36 +28,47 @@ if (!$model->public) {
 ?>
 
 <?php if ($model->type) { ?>
-<div class = "forum">
-	<div class = "forum-cell <?php echo $image; ?>"></div>
-	<div class = "forum-cell main">
-		<div class = "header2">
-			<?php echo Html::a(Html::encode($model->name), array('forum', 'id' => $model->id)); ?>
-		</div>
-		<div class = "header4">
-			<?php echo Html::encode($model->subtitle); ?>
-		</div>
-	</div>
-	<div class = "forum-cell center">
-		<?php echo Html::encode($model->num_posts); ?><br>
-		<?php echo Html::encode($model->getAttributeLabel('num_posts')); ?>
-	</div>
-	<div class = "forum-cell center">
-		<?php echo Html::encode($model->num_topics); ?><br>
-		<?php echo Html::encode($model->getAttributeLabel('num_topics')); ?>
-	</div>
-	<div class = "forum-cell last-cell">
-		<?php
-		if (is_numeric($model->last_post_id) && !empty($model->lastPost)) {
-			echo Html::encode($model->lastPost->poster->member_name);
-			echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $model->lastPost->topic_id, 'nav' => 'last'));
-			echo '<br>';
-			echo Yii::$app->formatter->asDatetime($model->lastPost->create_time);
-		} else {
-			echo Yii::t('BbiiModule.bbii', 'No posts');
-		}
-		?>
-	</div>
+<div class = "forum well">
+    <table class="table table-striped table-condensed">
+        <tr>
+            <td class = "forum-cell <?php echo $image; ?>">
+            </td>
+            <td>
+                <span class = "header2">
+                    <?php echo Html::a(Html::encode($model->name), array('forum', 'id' => $model->id)); ?>
+                </span><br>
+                <span class = "header4">
+                    <?php echo Html::encode($model->subtitle); ?>
+                </span>
+            </td>
+            <td class = "forum-cell forum-posts center">
+                <?php echo Html::encode($model->num_posts); ?><br>
+                <?php echo Html::encode($model->getAttributeLabel('num_posts')); ?>
+            </td>
+            <td class = "forum-cell forum-posts center">
+                <?php echo Html::encode($model->num_topics); ?><br>
+                <?php echo Html::encode($model->getAttributeLabel('num_topics')); ?>
+            </td>
+            <td class = "forum-cell forum-date last-cell">
+                <?php
+                if (is_numeric($model->last_post_id) && !empty($model->lastPost)) {
+                    //echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $model->lastPost->topic_id, 'nav' => 'last'));
+                    echo Html::encode($model->lastPost->poster->member_name);
+                    echo '<br>';
+
+                    // Responive date formate display
+                    $forumDateLong = Yii::$app->formatter->asDatetime($model->lastPost->create_time);
+                    $forumDate = Yii::$app->formatter->asDatetime($model->lastPost->create_time, $format='php:M d, Y');
+                    echo '<span class="hidden-xs">'.$forumDateLong.'</span>';
+                    echo '<span class="visible-xs">'.$forumDate.'</span>';
+
+                } else {
+                    echo Yii::t('BbiiModule.bbii', 'No posts');
+                }
+                ?>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <?php } else { ?>

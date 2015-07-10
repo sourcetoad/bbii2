@@ -12,7 +12,7 @@ $assets = AppAsset::register($this);
 /* @var $data BbiiTopic */
 ?>
 
-<div class = "topic">
+<div class = "topic well">
 	<div class = "forum-cell <?php echo ForumController::topicIcon($model); ?>"></div>
 	<div class = "forum-cell main">
 		<div class = "header2">
@@ -47,7 +47,13 @@ $assets = AppAsset::register($this);
 			// echo Html::encode($model->lastPost->poster->member_name);
 			echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $model->id, 'nav' => 'last'));
 			echo '<br>';
-			echo Yii::$app->formatter->asDatetime($model->lastPost->create_time);
+
+            $postDateLong = Yii::$app->formatter->asDatetime($model->lastPost->create_time);
+            $postDate = Yii::$app->formatter->asDatetime($model->lastPost->create_time, $format='php:M d, Y');
+
+            echo '<span class="hidden-xs">'.$postDateLong.'</span>';
+            echo '<span class="visible-xs">'.$postDate.'</span>';
+
 		?>
 	</div>
 </div>
