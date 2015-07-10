@@ -158,6 +158,15 @@
 	font-weight: bold;
 }
 
+.legend .list-group-item {
+    height: 45px;
+    padding: 12px 15px 0;
+}
+
+.legend .list-group-item i {
+    margin-top: -10px;
+}
+
 #bbii-footer .online {
 	vertical-align: top;
 	width: 65%;
