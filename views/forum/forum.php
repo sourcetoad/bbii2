@@ -72,14 +72,16 @@ $item = array(
                 'template' => '{pager}{items}{pager}',
                 'pager' => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
             ));*/ ?>
-            <?php echo ListView::widget([
-                'dataProvider' => $dataProvider,
-                'id'           => 'bbiiTopic',
-                'itemView'     => '_topic',
-                //'pager'        => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
-                //'template'     => '{pager}{items}{pager}',
-                ]);
-            ?>
+            <div class="well clearfix">
+                <?php echo ListView::widget([
+                        'dataProvider' => $dataProvider,
+                        'id'           => 'bbiiTopic',
+                        'itemView'     => '_topic',
+                        //'pager'        => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
+                        //'template'     => '{pager}{items}{pager}',
+                    ]);
+                ?>
+            </div>
             <br />
 
             <?php echo $this->render('_forumfooter'); ?>

@@ -12,7 +12,7 @@ $assets = AppAsset::register($this);
 /* @var $data BbiiTopic */
 ?>
 
-<div class = "topic well">
+<div class = "topic">
 	<div class = "forum-cell <?php echo ForumController::topicIcon($model); ?>"></div>
 	<div class = "forum-cell main">
 		<div class = "header2">
