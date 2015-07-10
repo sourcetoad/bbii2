@@ -15,8 +15,8 @@ $present = BbiiSession::find()->present()->count();
 
 ?>
 
-<div class="well">
-    <div class="clearfix">
+<div class="well clearfix">
+    <div class="row">
         <div class="col-sm-12 col-md-8 online">
             <h4>
                 <?php echo Yii::t('BbiiModule.bbii','Who\'s Online'); ?>
