@@ -936,16 +936,6 @@ button.bbii-button-right {
     padding: 20px;
 	margin-bottom: 20px;
 	width: 100%;
-    border-radius: 10px;
-    border: 1px solid #CCC;
-}
-
-/* stripped block display */
-#bbii-wrapper .post:nth-child(odd) {
-    background-color: #EFEFEF;
-}
-#bbii-wrapper .post:nth-child(even) {
-    background-color: #CECECE;
 }
 
 #bbii-wrapper .post hr {
