@@ -64,7 +64,21 @@ use yii\helpers\Html;
 		</div>
 
 		<div>
-			<?php echo $form->field($post, 'content')->textArea(); ?>
+			<?php //echo $form->field($post, 'content')->textArea(); ?>
+		    <?php echo $form->field($post, 'content')->widget(
+		        \yii\imperavi\Widget::className(),
+		        [
+		            //'plugins' => ['fullscreen', 'fontcolor', 'video'],
+		            'options' => [
+		                'buttonSource'    => true,
+		                'convertDivs'     => true,
+		                //'imageUpload'     => Yii::$app->urlManager->createUrl(['/file-storage/upload-imperavi']),
+		                //'maxHeight'       => 400,
+		                //'minHeight'       => 400,
+		                'removeEmptyTags' => true,
+		            ]
+		        ]
+		    ) ?>
 		</div>
 
 		<?php if ($this->context->isModerator()) { ?>
