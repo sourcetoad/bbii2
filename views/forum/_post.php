@@ -11,7 +11,7 @@ $assets = AppAsset::register($this);
 /* @var $model BbiiPost */
 /* @var $postId integer */
 ?>
-<div class="post">
+<div class="post well">
     <div class="row">
         <div class="col-xs-3 col-sm-2 text-center">
             <?php //echo Html::tag('a', array('name' => $model->id)); ?>
