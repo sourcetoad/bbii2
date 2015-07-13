@@ -35,33 +35,41 @@ $item = array(
             <?php echo $this->render('_header', array('item' => $item)); ?>
 
             <div class="well clearfix">
-                <h2>
-                    <?php echo $forum->name; ?>
-                </h2>
-                <?php if (!(Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()) { ?>
-                <div class = "form">
-                    <?php // @depricated Kept for referance
-                    /* $form = $this->beginWidget('ActiveForm', array(
-                        'id' => 'create-topic-form',
-                        'action' => array('forum/createTopic'),
-                        'enableAjaxValidation' => false,
-                    )); ?>
-                        <?php echo $form->hiddenField($forum, 'id'); ?>
-                        <?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Create new topic'), array('class' => 'bbii-topic-button')); ?>
-                    <?php $this->endWidget(); ?>
-                    */ ?>
-                    <?php
-                    $form = ActiveForm::begin([
-                            'action'               => array('createtopic'),
-                            'enableAjaxValidation' => false,
-                            'id'                   => 'create-topic-form',
-                    ]);
-                        echo $form->field($forum, 'id')->hiddenInput()->label(false);
-                        echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Create new topic'), array('class' => 'btn btn-success btn-lg'));
-                    ActiveForm::end();
-                    ?>
-                </div><!-- form -->
-                <?php }; ?>
+                <table width="100%">
+                    <tr>
+                        <td align="left">
+                            <h2>
+                                <?php echo $forum->name; ?>
+                            </h2>
+                        </td>
+                        <td align="right">
+                            <?php if (!(Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()) { ?>
+                            <div class = "form">
+                                <?php // @depricated Kept for referance
+                                /* $form = $this->beginWidget('ActiveForm', array(
+                                    'id' => 'create-topic-form',
+                                    'action' => array('forum/createTopic'),
+                                    'enableAjaxValidation' => false,
+                                )); ?>
+                                    <?php echo $form->hiddenField($forum, 'id'); ?>
+                                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Create new topic'), array('class' => 'bbii-topic-button')); ?>
+                                <?php $this->endWidget(); ?>
+                                */ ?>
+                                <?php
+                                $form = ActiveForm::begin([
+                                        'action'               => array('createtopic'),
+                                        'enableAjaxValidation' => false,
+                                        'id'                   => 'create-topic-form',
+                                ]);
+                                    echo $form->field($forum, 'id')->hiddenInput()->label(false);
+                                    echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Create new topic'), array('class' => 'btn btn-success btn-lg'));
+                                ActiveForm::end();
+                                ?>
+                            </div><!-- form -->
+                            <?php }; ?>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
             <?php // @depricated 2.7.5 Kept for referance
