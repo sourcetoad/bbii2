@@ -83,7 +83,7 @@ $item = array(
 
             <div class="well">
                 <div class = "topic">
-                    <table class="table table-striped table-condensed">
+                    <table class="table table-condensed">
                         <?php echo ListView::widget([
                                 'dataProvider' => $dataProvider,
                                 'id'           => 'bbiiTopic',
