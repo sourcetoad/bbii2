@@ -31,7 +31,8 @@ if (!$model->public) {
 <div class = "forum well">
     <table class="table table-striped table-condensed">
         <tr>
-            <td class = "forum-cell <?php echo $image; ?>">
+            <td class = "forum-cell">
+                <i class="forum-cell <?php echo $image; ?>"></i>
             </td>
             <td>
                 <span class = "header2">
