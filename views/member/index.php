@@ -67,6 +67,7 @@ $item = array(
 		),
 	));*/ ?>
 
+  <div class="well clearfix">
     <?= GridView::widget([
 		'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -91,6 +92,7 @@ $item = array(
 		'dataProvider' => $model->search(),
 		'id'           => 'member-grid',
 	]); ?>
+    </div>
 
 	<?php echo $this->render('_footer'); ?>
 
