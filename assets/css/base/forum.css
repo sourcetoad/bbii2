@@ -2,29 +2,40 @@
 
 /* bootstrap */
 #bbii-wrapper .row {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 #bbii-wrapper .btn a {
   color: #FFF!important;
 }
 
-
 #bbii-wrapper .btn-round {
     border-radius: 1000px;
 }
+#bbiiTopic .btn-round {
+  margin-bottom: 4px;
+}
 
 #bbii-wrapper .nav {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #bbii-wrapper .ui-sortable {
   list-style: none;
 }
 
-#bbiiTopic .btn-round {
-  margin-bottom: 4px;
+#bbii-wrapper .btn-default,
+#bbii-wrapper .nav-pills > li a {
+  background: transparent linear-gradient(#FFF, #EFEFEF) repeat scroll 0% 0;
+  border: 1px #DEDEDE solid;
+}
+#bbii-wrapper .btn-default:hover {
+  background: #F2F2F2;
 }
 
+#bbii-wrapper .nav-pills > li.active a{
+  background: transparent linear-gradient(#03A6D6, #0192BC) repeat scroll 0% 0%;
+  border: 1px #0192BC solid;
+}
 
 
 /* General: */
