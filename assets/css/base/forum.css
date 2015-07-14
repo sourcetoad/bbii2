@@ -1034,14 +1034,12 @@ button.bbii-button-right {
 }
 
 .bbii-box-top {
-	background-color: #337ab7;
-	border-radius: 6px 6px 0 0;
 	clear: both;
-	color: #fff;
-	font-size: 16px;
+	color: inherit;
+	font-size: 20px;
 	font-weight: bold;
-	padding: 5px;
-	margin: 15px 0;
+	padding: 0;
+	margin-bottom: 20px;
 }
 
 .bbii-poll {
