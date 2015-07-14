@@ -61,31 +61,30 @@ $item = array(
 			),
 		),
 	));*/ ?>
-	
-	<?php echo GridView::widget(array(
-		'columns'      => array(
-			array(
-				'attribute' => 'sendto',
-				'value'     => 'sendto'
-			),
-			'subject',
-			array(
-				'attribute' => 'create_time',
-				'value'     => 'create_time',
-			),
-			array(
-				'attribute' => 'type',
-				'value'     => 'type',
-			),
+	<div class="well clearix">
+        <?php echo GridView::widget(array(
+            'columns'      => array(
+                array(
+                    'attribute' => 'sendto',
+                    'value'     => 'sendto'
+                ),
+                'subject',
+                array(
+                    'attribute' => 'create_time',
+                    'value'     => 'create_time',
+                ),
+                array(
+                    'attribute' => 'type',
+                    'value'     => 'type',
+                ),
 
-			[
-				'class' => 'yii\grid\ActionColumn',
-				'template' => '{view}{delete}',
-			]),
-		'dataProvider'          => $model->search(),
-		'id'                    => 'inbox-grid',
-	)); ?>
-
-	<div id = "bbii-message"></div>
-
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{view}{delete}',
+                ]),
+            'dataProvider'          => $model->search(),
+            'id'                    => 'inbox-grid',
+        )); ?>
+	   <div id = "bbii-message"></div>
+    </div>
 </div>

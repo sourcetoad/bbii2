@@ -22,5 +22,7 @@ $item = array(
 
 	<h1><?php echo (Yii::$app->requestedAction->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'Reply'); ?></h1>
 
-	<?php echo $this->render('_form', array('model' => $model)); ?>
+    <div class="well clearfix">
+	   <?php echo $this->render('_form', array('model' => $model)); ?>
+    </div>
 </div>
