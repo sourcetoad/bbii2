@@ -12,6 +12,9 @@
 	Yii::t('BbiiModule.bbii', 'Reply'),
 );*/
 
+$this->title = Yii::t('forum', 'Forum');
+$this->params['breadcrumbs'][] = $this->title;
+
 $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 	'url' => array('forum/index')),
 	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 	'url' => array('member/index'))

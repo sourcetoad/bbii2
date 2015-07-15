@@ -13,6 +13,9 @@ $assets = AppAsset::register($this);
 /* @var $this ModeratorController */
 /* @var $model BbiiPost */
 
+$this->title = Yii::t('forum', 'Forum');
+$this->params['breadcrumbs'][] = $this->title;
+
 $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Approval'),

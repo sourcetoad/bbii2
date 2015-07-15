@@ -16,6 +16,9 @@ use yii\widgets\ListView;
 	$forum->name,
 ); */
 
+$this->title = Yii::t('forum', 'Forum');
+$this->params['breadcrumbs'][] = $this->title;
+
 $approvals = BbiiPost::find()->unapproved()->count();
 $reports   = BbiiMessage::find()->report()->count();
 

@@ -13,6 +13,9 @@ $assets = AppAsset::register($this);
 /* @var $dataProvider ActiveDataProvider BbiiPost */
 /* @var $topicProvider ActiveDataProvider BbiiTopic*/
 
+$this->title = Yii::t('forum', 'Forum');
+$this->params['breadcrumbs'][] = $this->title;
+
 $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum')   => array('forum/index'),
 	Yii::t('BbiiModule.bbii', 'Members') => array('member/index'),

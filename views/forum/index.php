@@ -9,6 +9,9 @@ use yii\widgets\ListView;
 /* @var $this ForumController */
 /* @var $dataProvider ArrayDataProvider */
 
+$this->title = Yii::t('forum', 'Forum');
+$this->params['breadcrumbs'][] = $this->title;
+
 $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum'),
 );
@@ -22,7 +25,6 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')','url' => array('moderator/approval'), 	'visible' => $this->context->isModerator()),
 	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). 	' (' . $reports . ')', 	'url' => array('moderator/report'), 	'visible' => $this->context->isModerator()),
 );
-
 ?>
 
 <div id = "bbii-wrapper">

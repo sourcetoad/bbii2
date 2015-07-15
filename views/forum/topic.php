@@ -35,6 +35,9 @@ Yii::$app->clientScript->registerScript('scrollToPost', "
 	$topic->title,
 );*/ 
 
+$this->title = Yii::t('forum', 'Forum');
+$this->params['breadcrumbs'][] = $this->title;
+
 $approvals = BbiiPost::find()->unapproved()->count();
 $reports   = BbiiMessage::find()->report()->count();
 
