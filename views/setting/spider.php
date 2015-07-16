@@ -16,7 +16,7 @@ $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Webspiders')
 );
 
-/*Yii::$app->clientScript->registerScript('confirmation', "
+/*\Yii::$app->clientScript->registerScript('confirmation', "
 var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this webspider?') . "'
 ", CClientScript::POS_BEGIN);*/
 ?>
@@ -53,7 +53,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 				'template' => '{update}',
 				'buttons' => array(
 					'update' => array(
-						'click' => 'js:function($data) { BBiiSetting.EditSpider($(this).closest("tr").children("td:first").children("span").text(), "' . Yii::$app->urlManager->createAbsoluteUrl('setting/getSpider') .'");return false; }',
+						'click' => 'js:function($data) { BBiiSetting.EditSpider($(this).closest("tr").children("td:first").children("span").text(), "' . \Yii::$app->urlManager->createAbsoluteUrl('setting/getSpider') .'");return false; }',
 					),
 				)
 			),
@@ -98,8 +98,8 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 		'width' => 700,
 		'show' => 'fade',
 		'buttons' => array(
-			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ BBiiSetting.DeleteSpider("' . Yii::$app->urlManager->createAbsoluteUrl('setting/deleteSpider') .'"); }',
-			Yii::t('BbiiModule.bbii', 'Save') => 'js:function(){ BBiiSetting.SaveSpider("' . Yii::$app->urlManager->createAbsoluteUrl('setting/saveSpider') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ BBiiSetting.DeleteSpider("' . \Yii::$app->urlManager->createAbsoluteUrl('setting/deleteSpider') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Save') => 'js:function(){ BBiiSetting.SaveSpider("' . \Yii::$app->urlManager->createAbsoluteUrl('setting/saveSpider') .'"); }',
 			Yii::t('BbiiModule.bbii', 'Cancel') => 'js:function(){ $(this).dialog("close"); }',
 		),
     ),

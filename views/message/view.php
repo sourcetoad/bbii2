@@ -1,6 +1,6 @@
 <?php
 
-use yii;
+use Yii;
 use yii\helpers\Html;
 
 /* @var $this MessageController */
@@ -24,7 +24,7 @@ $item = array(
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 
-	<h1><?php echo (Yii::$app->requestedAction->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'View Message'); ?></h1>
+	<h1><?php echo (\Yii::$app->requestedAction->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'View Message'); ?></h1>
 
 	<table>
 		<thead>

@@ -51,7 +51,7 @@ $item = array(
         <br />
 
         <?php echo $this->render('_footer'); ?>
-        <?php if (!Yii::$app->user->isGuest) {
+        <?php if (!\Yii::$app->user->isGuest) {
             echo Html::a(
                 Yii::t('BbiiModule.bbii','<i class="glyphicon glyphicon-ok"></i> Mark all read'),
                 array('forum/markallread'),

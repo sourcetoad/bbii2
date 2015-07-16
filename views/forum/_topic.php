@@ -25,15 +25,15 @@ $assets = AppAsset::register($this);
         </div>
         <div class = "header4">
             <?php
-                $startDateLong = Yii::$app->formatter->asDatetime($model->firstPost->create_time);
-                $startDate = Yii::$app->formatter->asDatetime($model->firstPost->create_time, $format='php: M d, Y');
+                $startDateLong = \Yii::$app->formatter->asDatetime($model->firstPost->create_time);
+                $startDate = \Yii::$app->formatter->asDatetime($model->firstPost->create_time, $format='php: M d, Y');
             ?>
             <?php echo Yii::t('BbiiModule.bbii', 'Started by') . ': ' . Html::encode($model->starter->member_name);?>
             <?php echo ' ' . Yii::t('BbiiModule.bbii', 'on') . ' <span class="visible-xs">' . $startDate . '</span><span class="hidden-xs">' . $startDateLong . '</span>'; ?>
 
             <?php if ($this->context->isModerator()) { ?>
                 <?php echo Html::img($assets->baseUrl.'/images/empty.png', 'empty'); ?>
-                <?php echo Html::img($assets->baseUrl.'/images/update.png', 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $model->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/topic') . '")')); ?>
+                <?php echo Html::img($assets->baseUrl.'/images/update.png', 'update', array('title' => Yii::t('BbiiModule.bbii', 'Update topic'), 'style' => 'cursor:pointer', 'onclick' => 'BBii.updateTopic(' . $model->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/topic') . '")')); ?>
             <?php }; ?>
         </div>
     </td>
@@ -43,8 +43,8 @@ $assets = AppAsset::register($this);
             echo Html::a(Html::img($assets->baseUrl.'/images/next.png', array('alt' => 'next', 'style' => 'margin-left:5px;')), array('topic', 'id' => $model->id, 'nav' => 'last'));
             echo '<br>';
 
-            $postDateLong = Yii::$app->formatter->asDatetime($model->lastPost->create_time);
-            $postDate = Yii::$app->formatter->asDatetime($model->lastPost->create_time, $format='php:M d, Y');
+            $postDateLong = \Yii::$app->formatter->asDatetime($model->lastPost->create_time);
+            $postDate = \Yii::$app->formatter->asDatetime($model->lastPost->create_time, $format='php:M d, Y');
             echo '<span class="topic-date hidden-xs">'.$postDateLong.'</span>';
             echo '<span class="topic-date visible-xs">'.$postDate.'</span>';
 

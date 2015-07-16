@@ -21,7 +21,7 @@ use yii\web\UrlManager;
 ); */
 
 // @depricated 2.5.0 By Yii2.x
-/*Yii::$app->clientScript->registerScript('confirmation', "
+/*\Yii::$app->clientScript->registerScript('confirmation', "
 var confirmation = new Array();
 confirmation[0] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this category?') . "';
 confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this forum?') . "';
@@ -145,7 +145,7 @@ $this->registerJs($script, View::POS_READY);
 					    arr.push( $(this).data("id"));
 					});
 
-					Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/ajaxsort']) . '");
+					Sort(this,"' . \Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/ajaxsort']) . '");
 				}',
 			],
 			'clientOptions' => ['cursor' => 'move'],
@@ -190,8 +190,8 @@ Dialog::begin([
 		// @todo get the resolution for this issue - DJE : 2015-05-21
 		'buttons'  => [
 			// ['text' => Yii::t('BbiiModule.bbii', 'Cancel'), 'click' => 'function(){cancelForum( $( this ).dialog( "close" ); )}'],
-			// ['text' => Yii::t('BbiiModule.bbii', 'Delete'), 'click' => 'function(){deleteForum(' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteForum') .'); }'],
-			// ['text' => Yii::t('BbiiModule.bbii', 'Save') ,  'click' => 'function(){saveForum(' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveForum') .'); }'],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Delete'), 'click' => 'function(){deleteForum(' . \Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteForum') .'); }'],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Save') ,  'click' => 'function(){saveForum(' . \Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveForum') .'); }'],
 		],
 		'modal'    => true,
 		'show'     => 'fade',

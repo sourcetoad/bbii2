@@ -31,10 +31,10 @@ $item = array(
 ?>
 
 <?php
-foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
-Yii::$app->session->removeAllFlashes();
+\Yii::$app->session->removeAllFlashes();
 ?>
 
 <div id = "bbii-wrapper">
@@ -51,7 +51,7 @@ Yii::$app->session->removeAllFlashes();
                             </h2>
                         </td>
                         <td align="right">
-                            <?php if (!(Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()) { ?>
+                            <?php if (!(\Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()) { ?>
                             <div class = "form">
                                 <?php // @depricated Kept for referance
                                 /* $form = $this->beginWidget('ActiveForm', array(
@@ -134,7 +134,7 @@ Yii::$app->session->removeAllFlashes();
 				'width' => 800,
 				'show' => 'fade',
 				'buttons' => array(
-					Yii::t('BbiiModule.bbii','Change') => 'js:function(){ BBii.changeTopic("' . Yii::$app->urlManager->createAbsoluteUrl('moderator/changeTopic') . '"); }',
+					Yii::t('BbiiModule.bbii','Change') => 'js:function(){ BBii.changeTopic("' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/changeTopic') . '"); }',
 					Yii::t('BbiiModule.bbii','Cancel') => 'js:function(){ $(this).dialog("close"); }',
 				),
 			),

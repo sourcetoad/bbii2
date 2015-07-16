@@ -9,7 +9,7 @@ use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\BbiiTopic;
 use frontend\modules\bbii\models\BbiiTopicRead;
 
-use yii;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Serializer;
 use yii\web\UploadedFile;
@@ -48,25 +48,28 @@ class MemberController extends BbiiController {
 	}
 	
 	public function actionIndex() {
-		$model = new BbiiMember('search');
+		//$model = new BbiiMember('search');
 		// No longer needed in Yii2+
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiMember']))
-			$model->load(Yii::$app->request->get()['BbiiMember']);
+		
+		$model = new BbiiMember;
+
+		if (isset(\Yii::$app->request->get()['BbiiMember']))
+			$model->load(\Yii::$app->request->get()['BbiiMember']);
 
 		return $this->render('index', array('model' => $model));
 	}
 	
-	public function actionUpdate($id) {
+	public function actionUpdate($id = null) {
 		$model = $this->loadModel($id)->one();
 
-		if ($id != Yii::$app->user->id && !$this->isModerator()) {
-			Yii::$app->user->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
-			return Yii::$app->response->redirect(array('member/index'));
+		if ($id != \Yii::$app->user->id && !$this->isModerator()) {
+			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
+			return \Yii::$app->response->redirect(array('forum/member/index'));
 		}
 
-		if (isset(Yii::$app->request->post()['BbiiMember'])) {
-			$model->load(Yii::$app->request->post()['BbiiMember']);
+		if (isset(\Yii::$app->request->post()['BbiiMember'])) {
+			$model->load(\Yii::$app->request->post()['BbiiMember']);
 			$model->image = UploadedFile::getInstance($model, 'image');
 
 			if ($model->validate() && $model->save()) {
@@ -108,10 +111,10 @@ class MemberController extends BbiiController {
 					}
 				}
 				if ($valid)
-					return Yii::$app->response->redirect(array('forum/member/view','id' => $model->id));
+					return \Yii::$app->response->redirect(array('forum/member/view','id' => $model->id));
 			} else {
 
-				Yii::$app->user->setFlash('warning',Yii::t('BbiiModule.bbii','Error while saving.'));
+				\Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii','Error while saving.'));
 			}
 		}
 
@@ -128,12 +131,12 @@ class MemberController extends BbiiController {
 	 * @return [type]     [description]
 	 */
 	/*public function actionView($id) {
-		if (isset(Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+		if (isset(\Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == \Yii::$app->user->id)) {
 			$object = new BbiiTopicRead;
 			$read = BbiiTopicRead::find($id);
 			if ($read !== null) {
 				$object->unserialize($read->data);
-				foreach(Yii::$app->request->get()['unwatch'] as $topicId => $val) {
+				foreach(\Yii::$app->request->get()['unwatch'] as $topicId => $val) {
 					$object->unsetFollow($topicId);
 				}
 				$read->data = $object->serialize();
@@ -150,7 +153,7 @@ class MemberController extends BbiiController {
 			),
 			'pagination' => false,
 		));
-		if ($this->isModerator() || $id == Yii::$app->user->id) {
+		if ($this->isModerator() || $id == \Yii::$app->user->id) {
 			$object = new BbiiTopicRead;
 			$read = BbiiTopicRead::find($id);
 			if ($read === null) {
@@ -184,22 +187,22 @@ class MemberController extends BbiiController {
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function actionView($id) {
+	public function actionView($id = null) {
 		$object = new BbiiTopicRead;
 		$read   = BbiiTopicRead::find($id);
 
-		if (isset(Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == Yii::$app->user->id)) {
+		if (isset(\Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == \Yii::$app->user->id)) {
 
 			if ($read !== null) {
 				$object->unserialize($read->data);
-				foreach(Yii::$app->request->get()['unwatch'] as $topicId => $val) {
+				foreach(\Yii::$app->request->get()['unwatch'] as $topicId => $val) {
 					$object->unsetFollow($topicId);
 				}
 				$read->data = $object->serialize();
 				$read->save();
 			}
 		}
-		if ( ($this->isModerator() || $id == Yii::$app->user->id) && isset($read->data) ) {
+		if ( ($this->isModerator() || $id == \Yii::$app->user->id) && isset($read->data) ) {
 			if ($read === null) {
 
 				$in = array(0);
@@ -228,27 +231,27 @@ class MemberController extends BbiiController {
 		return $this->render('view', array(
 			'dataProvider'  => $dataProvider,
 			'topicProvider' => $topicProvider,
-			'userData'      => BbiiMember::find()->where(['id' => Yii::$app->user->id])->one(), 
+			'userData'      => BbiiMember::find()->where(['id' => \Yii::$app->user->id])->one(), 
 		));
 	}
 
 	public function actionMail($id) {
 		$model = new MailForm;
-		if (isset(Yii::$app->request->post()['MailForm'])) {
-			$model->load(Yii::$app->request->post()['MailForm']);
+		if (isset(\Yii::$app->request->post()['MailForm'])) {
+			$model->load(\Yii::$app->request->post()['MailForm']);
 
 			if ($model->validate()) {
 				$class = new $this->module->userClass;
 				$criteria = new CDbCriteria;
 				$criteria->condition = $this->module->userIdColumn . ' = :id';
-				$criteria->params = array(':id' => Yii::$app->user->id);
+				$criteria->params = array(':id' => \Yii::$app->user->id);
 				$user 	 =  $class::find()->find($criteria);
 				$from 	 =  $user->getAttribute($this->module->userMailColumn);
 				$criteria->params = array(':id' => $model->member_id);
 				$user 	 =  $class::find()->find($criteria);
 				$to 	 =  $user->getAttribute($this->module->userMailColumn);
 				
-				$name = BbiiMember::find(Yii::$app->user->id)->member_name;
+				$name = BbiiMember::find(\Yii::$app->user->id)->member_name;
 				$name = ' = ?UTF-8?B?'.base64_encode($name).'? = ';
 				$subject = ' = ?UTF-8?B?'.base64_encode($model->subject).'? = ';
 				$sendto = $model->member_name . " <$to>";
@@ -261,9 +264,9 @@ class MemberController extends BbiiController {
 					"Content-type: text/html; charset = UTF-8";
 
 				mail($sendto,$subject,$model->body,$headers);
-				Yii::$app->user->setFlash('notice',Yii::t('BbiiModule.bbii','You have sent an e-mail to {member_name}.', array('{member_name}' => $model->member_name)));
+				\Yii::$app->session->setFlash('notice',Yii::t('BbiiModule.bbii','You have sent an e-mail to {member_name}.', array('{member_name}' => $model->member_name)));
 				
-				return Yii::$app->response->redirect(array('forum/view','id' => $model->member_id));
+				return \Yii::$app->response->redirect(array('forum/view','id' => $model->member_id));
 			}
 		} else {
 			$model->member_id = $id;
@@ -277,9 +280,9 @@ class MemberController extends BbiiController {
 	 */
 	public function actionMembers() {
 		$json = array();
-		if (isset(Yii::$app->request->get()['term'])) {
+		if (isset(\Yii::$app->request->get()['term'])) {
 			$criteria = new CDbCriteria;
-			$criteria->compare('member_name',Yii::$app->request->get()['term'],true);
+			$criteria->compare('member_name',\Yii::$app->request->get()['term'],true);
 			$criteria->limit = 15;
 			$models = BbiiMember::find()->findAll($criteria);
 			foreach($models as $model) {
@@ -287,7 +290,7 @@ class MemberController extends BbiiController {
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 	
 	public function actionWatch() {
@@ -309,7 +312,7 @@ class MemberController extends BbiiController {
 		);
 		$obj->processWatchers();
 		echo 'Complete';
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 	
 	public function loadModel($id) {
@@ -324,10 +327,10 @@ class MemberController extends BbiiController {
 	 * @param BbiiMembergroup $model the model to be validated
 	 */
 	protected function performAjaxValidation($model) {
-		if (isset(Yii::$app->request->post()['ajax']) && Yii::$app->request->post()['ajax'] === 'bbii-member-form')
+		if (isset(\Yii::$app->request->post()['ajax']) && \Yii::$app->request->post()['ajax'] === 'bbii-member-form')
 		{
 			echo ActiveForm::validate($model);
-			Yii::$app->end();
+			\Yii::$app->end();
 		}
 	}
 	

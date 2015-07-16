@@ -20,7 +20,7 @@ $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Member groups')
 );
 
-/*Yii::$app->clientScript->registerScript('confirmation', "
+/*\Yii::$app->clientScript->registerScript('confirmation', "
 var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this member group?') . "'
 ", CClientScript::POS_BEGIN);*/
 ?>
@@ -55,7 +55,7 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 				'template' => '{update}',
 				'buttons' => array(
 					'update' => array(
-						'click' => 'js:function($data) { editMembergroup($(this).closest("tr").children("td:first").text(), "' . Yii::$app->urlManager->createAbsoluteUrl('setting/getMembergroup') .'");return false; }',
+						'click' => 'js:function($data) { editMembergroup($(this).closest("tr").children("td:first").text(), "' . \Yii::$app->urlManager->createAbsoluteUrl('setting/getMembergroup') .'");return false; }',
 					),
 				)
 			),
@@ -110,8 +110,8 @@ var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to
 		'width' => 450,
 		'show' => 'fade',
 		'buttons' => array(
-			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ deleteMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('setting/deleteMembergroup') .'"); }',
-			Yii::t('BbiiModule.bbii', 'Save') => 'js:function(){ saveMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('setting/saveMembergroup') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Delete') => 'js:function(){ deleteMembergroup("' . \Yii::$app->urlManager->createAbsoluteUrl('setting/deleteMembergroup') .'"); }',
+			Yii::t('BbiiModule.bbii', 'Save') => 'js:function(){ saveMembergroup("' . \Yii::$app->urlManager->createAbsoluteUrl('setting/saveMembergroup') .'"); }',
 			Yii::t('BbiiModule.bbii', 'Cancel') => 'js:function(){ $(this).dialog("close"); }',
 		),
     ),
@@ -130,8 +130,8 @@ Dialog::begin([
 		// @todo get the resolution for this issue - DJE : 2015-05-21
 		'buttons'  => [
 			// ['text' => Yii::t('BbiiModule.bbii', 'Cancel'), 	'click' => 'js:function(){ $(this).dialog("close"); }'],
-			// ['text' => Yii::t('BbiiModule.bbii', 'Delete'), 	'click' => 'js:function(){ deleteMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteMembergroup') .'"); }'],
-			// ['text' => Yii::t('BbiiModule.bbii', 'Save'), 		'click' => 'js:function(){ saveMembergroup("' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveMembergroup') .'"); }'],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Delete'), 	'click' => 'js:function(){ deleteMembergroup("' . \Yii::$app->urlManager->createAbsoluteUrl('forum/setting/deleteMembergroup') .'"); }'],
+			// ['text' => Yii::t('BbiiModule.bbii', 'Save'), 		'click' => 'js:function(){ saveMembergroup("' . \Yii::$app->urlManager->createAbsoluteUrl('forum/setting/saveMembergroup') .'"); }'],
 		],
 		'modal'    => true,
 		'show'     => 'fade',

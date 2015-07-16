@@ -6,7 +6,7 @@ use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiSpider;
 use frontend\modules\bbii\models\BbiiSession;
 
-use yii;
+use Yii;
 use yii\db\BaseActiveRecord;
 use yii\web\Application;
 use yii\web\Session;
@@ -60,7 +60,7 @@ class BbiiModule extends \yii\base\Module
 
 		// @depricated 2.0.0 Use the parent applications error settings
 		/*
-		Yii::$app->setComponents(
+		\Yii::$app->setComponents(
 			array(
 		        'errorHandler' => [
 		            'errorAction' => 'site/error'
@@ -86,7 +86,7 @@ class BbiiModule extends \yii\base\Module
      */
     public function getAssetsUrl() {
 		if ($this->_assetsUrl == null) {
-            $this->_assetsUrl = Yii::$app->assetManager->publish(Yii::getPathOfAlias($this->id.'.assets')
+            $this->_assetsUrl = \Yii::$app->assetManager->publish(Yii::getPathOfAlias($this->id.'.assets')
 				// Comment the line below out in production.
 				,false,-1,true
 			);
@@ -102,9 +102,9 @@ class BbiiModule extends \yii\base\Module
 	public function registerAssets() {
 		return true;
 		/*
-		Yii::$app->clientScript->registerCssFile($this->getAssetsUrl() . '/css/' . $this->bbiiTheme . '/forum.css');
-		Yii::$app->getClientScript()->registerCoreScript('jquery.ui');
-		Yii::$app->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/bbii.js', CClientScript::POS_HEAD);
+		\Yii::$app->clientScript->registerCssFile($this->getAssetsUrl() . '/css/' . $this->bbiiTheme . '/forum.css');
+		\Yii::$app->getClientScript()->registerCoreScript('jquery.ui');
+		\Yii::$app->clientScript->registerScriptFile($this->getAssetsUrl() . '/js/bbii.js', CClientScript::POS_HEAD);
 		*/
 	}
 	
@@ -115,7 +115,7 @@ class BbiiModule extends \yii\base\Module
 	 * @param string filename of the image
 	 * @return string source URL of image
 	 */
-	public function getRegisteredImage($filename) {
+	public function getRegisteredImage($filename = null) {
 		return true;
 		//return $this->getAssetsUrl() .'/images/'. $filename;
     }
@@ -134,21 +134,21 @@ class BbiiModule extends \yii\base\Module
 		if (parent::beforeAction($controller, $action)) {
 
 			// register last visit by member
-			if (Yii::$app->user->id) {
-				//$model = BbiiMember::find(Yii::$app->user->id);
-				$model = BbiiMember::find()->where(['id' => Yii::$app->user->id])->one();
+			if (\Yii::$app->user->id) {
+				//$model = BbiiMember::find(\Yii::$app->user->id);
+				$model = BbiiMember::find()->where(['id' => \Yii::$app->user->id])->one();
 
 				if ($model !== null) {
 					$model->setAttribute('last_visit', date('Y-m-d H:i:s'));
 					$model->save();
 				} else {
 					$userClass = new User;
-					$user      = $userClass::find()->where([$this->userIdColumn => Yii::$app->user->id])->one();
+					$user      = $userClass::find()->where([$this->userIdColumn => \Yii::$app->user->id])->one();
 					$username  = $user->getAttribute($this->userNameColumn);
 
 					$model              = new BbiiMember;
 					$model->setAttribute('first_visit', date('Y-m-d H:i:s'));
-					$model->setAttribute('id', 			Yii::$app->user->id);
+					$model->setAttribute('id', 			\Yii::$app->user->id);
 					$model->setAttribute('last_visit', 	date('Y-m-d H:i:s'));
 					$model->setAttribute('member_name', $username);
 					$model->save();
@@ -172,10 +172,10 @@ class BbiiModule extends \yii\base\Module
 					}
 				// guest visit
 				} else {
-					$model = BbiiSession::find()->where(['id' => Yii::$app->session->getId()])->one();
+					$model = BbiiSession::find()->where(['id' => \Yii::$app->session->getId()])->one();
 					$model = $model ?: new BbiiSession();
 
-					$model->id = Yii::$app->session->getId();
+					$model->id = \Yii::$app->session->getId();
 
 					if (!$model->validate() || !$model->save()) {
 						echo '<pre>';

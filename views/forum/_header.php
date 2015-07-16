@@ -24,15 +24,15 @@ echo Html::dropDownList(
 		'prompt' => 'Pick a forum',
 		'class'    => 'form-control',
 		//'empty'    => Yii::t('BbiiModule.bbii', 'Select forum'),
-		'onchange' => "window.location.href = '" . Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/forum/forum?id='+$(this).val()",
+		'onchange' => "window.location.href = '" . \Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/forum/forum?id='+$(this).val()",
 	)
 ); ?>
 
 <br />
 
 <div id = "bbii-header">
-	<?php if (!Yii::$app->user->isGuest): ?>
-		<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.Yii::$app->user->id); ?>
+	<?php if (!\Yii::$app->user->isGuest): ?>
+		<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.\Yii::$app->user->id); ?>
 		<div class = "btn-group pull-right">
 		<?php 
 			if ($messages) {
@@ -40,7 +40,7 @@ echo Html::dropDownList(
 			} else {
 				echo Html::a(Html::img($assets->baseUrl.'/images/mail.png', array('title' => Yii::t('BbiiModule.bbii', 'no new messages'), 'style' => 'vertical-align:bottom;')), array('message/inbox'),array('class'=>'btn btn-default'));
 			}
-			echo Html::a(Html::img($assets->baseUrl.'/images/settings.png', array('title' => Yii::t('BbiiModule.bbii', 'My settings'), 'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id),array('class'=>'btn btn-default'));
+			echo Html::a(Html::img($assets->baseUrl.'/images/settings.png', array('title' => Yii::t('BbiiModule.bbii', 'My settings'), 'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => \Yii::$app->user->id),array('class'=>'btn btn-default'));
 			echo Html::a(Html::img($assets->baseUrl.'/images/moderator.png', array('title' => Yii::t('BbiiModule.bbii', 'Moderate'), 'style' => 'vertical-align:bottom;')), array('moderator/approval'),array('class'=>'btn btn-default'));
 			echo Html::a(Html::img($assets->baseUrl.'/images/config.png', array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'), 'style' => 'vertical-align:bottom;')), array('setting/index'),array('class'=>'btn btn-default'));
 		?>
@@ -73,10 +73,10 @@ echo Html::dropDownList(
 <?php endif */ ?>
 
 <?php
-foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
-Yii::$app->session->removeAllFlashes();
+\Yii::$app->session->removeAllFlashes();
 ?>
 
 <noscript>

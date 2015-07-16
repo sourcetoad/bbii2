@@ -9,7 +9,7 @@ use frontend\modules\bbii\models\BbiiMembergroup;
 use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiSpider;
 
-use yii;
+use Yii;
 use yii\widgets\ActiveForm;
 use yii\web\Controller;
 use yii\web\User;
@@ -24,7 +24,7 @@ class SettingController extends BbiiController {
 	 * @return [type] [description]
 	 */
 	public function init() {
-		//Yii::$app->clientScript->registerScriptFile($this->module->getAssetsUrl() . '/js/bbiiSetting.js', CClientScript::POS_HEAD);
+		//\Yii::$app->clientScript->registerScriptFile($this->module->getAssetsUrl() . '/js/bbiiSetting.js', CClientScript::POS_HEAD);
 	}
 
 	/**
@@ -141,12 +141,12 @@ class SettingController extends BbiiController {
 	public function actionIndex() {
 		$model = BbiiSetting::find()->one() ?: new BbiiSetting();;
 
-		if (Yii::$app->request->post()['BbiiSetting']) {
+		if (\Yii::$app->request->post()['BbiiSetting']) {
 
-			$model->load(Yii::$app->request->post());
+			$model->load(\Yii::$app->request->post());
 			if ($model->validate() && $model->save()) {
 
-				Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
+				\Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
 			} 
 		}
 
@@ -164,15 +164,15 @@ class SettingController extends BbiiController {
 	public function actionLayout() {
 		$model = new BbiiForum();
 
-		if (Yii::$app->request->post('BbiiForum')) {
-			$model->setAttributes(Yii::$app->request->post('BbiiForum'));
+		if (\Yii::$app->request->post('BbiiForum')) {
+			$model->setAttributes(\Yii::$app->request->post('BbiiForum'));
 
 			if ($model->validate() && $model->save()) {
 
-				Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
+				\Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
 			} else {
 
-				Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Change failed.'));
+				\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Change failed.'));
 			}
 		}
 
@@ -185,8 +185,8 @@ class SettingController extends BbiiController {
 	public function actionGroup() {
 		$model = new BbiiMembergroup();
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiMembergroup'])) {
-			$model->load(Yii::$app->request->get()['BbiiMembergroup']);
+		if (isset(\Yii::$app->request->get()['BbiiMembergroup'])) {
+			$model->load(\Yii::$app->request->get()['BbiiMembergroup']);
 		}
 
 		return $this->render('group', array('model' => $model));
@@ -197,8 +197,8 @@ class SettingController extends BbiiController {
 		$model = $model->search();
 
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiMember'])) {
-			$model->load(Yii::$app->request->get()['BbiiMember']);
+		if (isset(\Yii::$app->request->get()['BbiiMember'])) {
+			$model->load(\Yii::$app->request->get()['BbiiMember']);
 		}
 
 		return $this->render('moderator',array(
@@ -210,8 +210,8 @@ class SettingController extends BbiiController {
 		$model = new BbiiSpider();
 		$model = $model->search();
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiSpider']))
-			$model->load(Yii::$app->request->get()['BbiiSpider']);
+		if (isset(\Yii::$app->request->get()['BbiiSpider']))
+			$model->load(\Yii::$app->request->get()['BbiiSpider']);
 
 		return $this->render('spider', array('model' => $model));
 	}
@@ -220,17 +220,17 @@ class SettingController extends BbiiController {
 	 * handle Ajax call for sorting categories and forums
 	 */
 	public function actionAjaxsort() {
-		if (isset(Yii::$app->request->post()['cat'])) {
+		if (isset(\Yii::$app->request->post()['cat'])) {
 			$number = 1;
-			foreach(Yii::$app->request->post()['cat'] as $id) {
+			foreach(\Yii::$app->request->post()['cat'] as $id) {
 				$model = BbiiForum::find($id);
 				$model->sort = $number++;
 				$model->save();
 			}
 			$json = array('succes' => 'yes');
-		} elseif (isset(Yii::$app->request->post()['frm'])) {
+		} elseif (isset(\Yii::$app->request->post()['frm'])) {
 			$number = 1;
-			foreach(Yii::$app->request->post()['frm'] as $id) {
+			foreach(\Yii::$app->request->post()['frm'] as $id) {
 				$model = BbiiForum::find($id);
 				$model->sort = $number++;
 				$model->save();
@@ -240,7 +240,7 @@ class SettingController extends BbiiController {
 			$json = array('succes' => 'no');
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -249,7 +249,7 @@ class SettingController extends BbiiController {
 	 * Method names in Yii2 can not have a 2nd capital letter. Only upper case the first letter of the first word after 'action' - DJE : 2015-05-21
 	 */
 	public function actionGetforum($id = null) {
-		$id = ($id == null) ? Yii::$app->request->get('id') : $id;
+		$id = ($id == null) ? \Yii::$app->request->get('id') : $id;
 
 		echo json_encode(
 			(is_numeric($id))
@@ -257,7 +257,7 @@ class SettingController extends BbiiController {
 			: ['error' => 'Unable to retrieve requested information.']
 		);
 
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -265,21 +265,21 @@ class SettingController extends BbiiController {
 	 */
 	public function actionDeleteForum() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
-			$model = BbiiForum::find(Yii::$app->request->post()['id']);
-			if (BbiiForum::find()->exists("cat_id = " . Yii::$app->request->post()['id'])) {
+		if (isset(\Yii::$app->request->post()['id'])) {
+			$model = BbiiForum::find(\Yii::$app->request->post()['id']);
+			if (BbiiForum::find()->exists("cat_id = " . \Yii::$app->request->post()['id'])) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'There are still forums in this category. Remove these before deleting the category.');
-			} elseif (BbiiTopic::find()->exists('forum_id = ' . Yii::$app->request->post()['id'])) {
+			} elseif (BbiiTopic::find()->exists('forum_id = ' . \Yii::$app->request->post()['id'])) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'There are still topics in this forum. Remove these before deleting the forum.');
 			} else {
-				BbiiForum::find(Yii::$app->request->post()['id'])->delete();
+				BbiiForum::find(\Yii::$app->request->post()['id'])->delete();
 				$json['success'] = 'yes';
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -287,9 +287,9 @@ class SettingController extends BbiiController {
 	 */
 	public function actionSaveForum() {
 		$json = array();
-		if (Yii::$app->request->post('BbiiForum')) {
-			$model = BbiiForum::find(Yii::$app->request->post('BbiiForum')['id']);
-			$model->load(Yii::$app->request->post()['BbiiForum']);
+		if (\Yii::$app->request->post('BbiiForum')) {
+			$model = BbiiForum::find(\Yii::$app->request->post('BbiiForum')['id']);
+			$model->load(\Yii::$app->request->post()['BbiiForum']);
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
@@ -297,7 +297,7 @@ class SettingController extends BbiiController {
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -305,8 +305,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetMembergroup() {
 		$json = array();
-		if (isset(Yii::$app->request->get()['id'])) {
-			$model = BbiiMembergroup::find(Yii::$app->request->get()['id']);
+		if (isset(\Yii::$app->request->get()['id'])) {
+			$model = BbiiMembergroup::find(\Yii::$app->request->get()['id']);
 			if ($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -317,7 +317,7 @@ class SettingController extends BbiiController {
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -325,8 +325,8 @@ class SettingController extends BbiiController {
 	 */
 	public function actionGetSpider() {
 		$json = array();
-		if (isset(Yii::$app->request->get()['id'])) {
-			$model = BbiiSpider::find(Yii::$app->request->get()['id']);
+		if (isset(\Yii::$app->request->get()['id'])) {
+			$model = BbiiSpider::find(\Yii::$app->request->get()['id']);
 			if ($model !== null) {
 				$json['id'] = $model->id;
 				$json['name'] = $model->name;
@@ -334,7 +334,7 @@ class SettingController extends BbiiController {
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -342,17 +342,17 @@ class SettingController extends BbiiController {
 	 */
 	public function actionDeleteMembergroup() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
-			if (Yii::$app->request->post()['id'] == 0) {
+		if (isset(\Yii::$app->request->post()['id'])) {
+			if (\Yii::$app->request->post()['id'] == 0) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'The default member group cannot be removed.');
 			} else {
-				BbiiMembergroup::find(Yii::$app->request->post()['id'])->delete();
+				BbiiMembergroup::find(\Yii::$app->request->post()['id'])->delete();
 				$json['success'] = 'yes';
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -360,12 +360,12 @@ class SettingController extends BbiiController {
 	 */
 	public function actionDeleteSpider() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
-			BbiiSpider::find(Yii::$app->request->post()['id'])->delete();
+		if (isset(\Yii::$app->request->post()['id'])) {
+			BbiiSpider::find(\Yii::$app->request->post()['id'])->delete();
 			$json['success'] = 'yes';
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -373,13 +373,13 @@ class SettingController extends BbiiController {
 	 */
 	public function actionSaveMembergroup() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['BbiiMembergroup'])) {
-			if (Yii::$app->request->post()['BbiiMembergroup']['id'] == '') {
+		if (isset(\Yii::$app->request->post()['BbiiMembergroup'])) {
+			if (\Yii::$app->request->post()['BbiiMembergroup']['id'] == '') {
 				$model = new BbiiMembergroup;
 			} else {
-				$model = BbiiMembergroup::find(Yii::$app->request->post()['BbiiMembergroup']['id']);
+				$model = BbiiMembergroup::find(\Yii::$app->request->post()['BbiiMembergroup']['id']);
 			}
-			$model->load(Yii::$app->request->post()['BbiiMembergroup']);
+			$model->load(\Yii::$app->request->post()['BbiiMembergroup']);
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
@@ -387,7 +387,7 @@ class SettingController extends BbiiController {
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -395,13 +395,13 @@ class SettingController extends BbiiController {
 	 */
 	public function actionSaveSpider() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['BbiiSpider'])) {
-			if (Yii::$app->request->post()['BbiiSpider']['id'] == '') {
+		if (isset(\Yii::$app->request->post()['BbiiSpider'])) {
+			if (\Yii::$app->request->post()['BbiiSpider']['id'] == '') {
 				$model = new BbiiSpider;
 			} else {
-				$model = BbiiSpider::find(Yii::$app->request->post()['BbiiSpider']['id']);
+				$model = BbiiSpider::find(\Yii::$app->request->post()['BbiiSpider']['id']);
 			}
-			$model->load(Yii::$app->request->post()['BbiiSpider']);
+			$model->load(\Yii::$app->request->post()['BbiiSpider']);
 			if ($model->save()) {
 				$json['success'] = 'yes';
 			} else {
@@ -409,7 +409,7 @@ class SettingController extends BbiiController {
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	/**
@@ -417,16 +417,16 @@ class SettingController extends BbiiController {
 	 */
 	public function actionChangeModerator() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id']) && isset(Yii::$app->request->post()['moderator'])) {
-			$model = BbiiMember::find(Yii::$app->request->post()['id']);
+		if (isset(\Yii::$app->request->post()['id']) && isset(\Yii::$app->request->post()['moderator'])) {
+			$model = BbiiMember::find(\Yii::$app->request->post()['id']);
 			if ($model !== null) {
-				$model->moderator = Html::encode(Yii::$app->request->post()['moderator']);
+				$model->moderator = Html::encode(\Yii::$app->request->post()['moderator']);
 				$model->save();
 				$json['success'] = true;
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 
 	public function loadModel($id) {
@@ -441,10 +441,10 @@ class SettingController extends BbiiController {
 	 * @param BbiiForum $model the model to be validated
 	 */
 	protected function performAjaxValidation($model) {
-		if (isset(Yii::$app->request->post()['ajax']) && Yii::$app->request->post()['ajax'] === 'bbii-member-form')
+		if (isset(\Yii::$app->request->post()['ajax']) && \Yii::$app->request->post()['ajax'] === 'bbii-member-form')
 		{
 			echo ActiveForm::validate($model);
-			Yii::$app->end();
+			\Yii::$app->end();
 		}
 	}
 
@@ -463,16 +463,16 @@ class SettingController extends BbiiController {
 	 */
     public function actionUpdateforum($id)
     {
-    	$id    = (is_numeric($id) ?: Yii::$app->request->get('id'));
+    	$id    = (is_numeric($id) ?: \Yii::$app->request->get('id'));
         $model = BbiiForum::find()->where(['id' => $id])->one();
 
         // set data
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(\Yii::$app->request->post())) {
 
         	// validate and save
         	if ($model->validate() && $model->save()) {
-				Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
-				return Yii::$app->response->redirect('layout');
+				\Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
+				return \Yii::$app->response->redirect('layout');
 			// error when saving
         	}
             
@@ -492,9 +492,9 @@ class SettingController extends BbiiController {
     {
         $model = new BbiiMembergroup();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
 
-        	return Yii::$app->response->redirect(['forum/setting/group']);
+        	return \Yii::$app->response->redirect(['forum/setting/group']);
         } else {
             return $this->render('update/membergroup', [
                 'model' => $model,
@@ -512,16 +512,16 @@ class SettingController extends BbiiController {
     {
     	echo 'asdf';exit;
 
-    	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
+    	$id    = (is_numeric($id) ? $id : \Yii::$app->request->get('id'));
         $model = BbiiMembergroup::find()->where(['id' => $id])->one();
 
         // set data
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(\Yii::$app->request->post())) {
 
         	// validate and save
         	if ($model->validate() && $model->save()) {
-				Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
-				return Yii::$app->response->redirect('group');
+				\Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
+				return \Yii::$app->response->redirect('group');
 			// error when saving
         	}
             
@@ -540,9 +540,9 @@ class SettingController extends BbiiController {
     {
         $model = new BbiiSpider();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
 
-        	return Yii::$app->response->redirect(['forum/setting/spider']);
+        	return \Yii::$app->response->redirect(['forum/setting/spider']);
         } else {
             return $this->render('update/spider', [
                 'model' => $model,
@@ -552,16 +552,16 @@ class SettingController extends BbiiController {
 
     public function actionUpdatespider($id)
     {
-    	$id    = (is_numeric($id) ? $id : Yii::$app->request->get('id'));
+    	$id    = (is_numeric($id) ? $id : \Yii::$app->request->get('id'));
         $model = BbiiSpider::find()->where(['id' => $id])->one();
 
         // set data
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(\Yii::$app->request->post())) {
 
         	// validate and save
         	if ($model->validate() && $model->save()) {
-				Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
-				return Yii::$app->response->redirect('spider');
+				\Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
+				return \Yii::$app->response->redirect('spider');
 			// error when saving
         	}
             

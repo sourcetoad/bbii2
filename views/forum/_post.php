@@ -21,7 +21,7 @@ $assets = AppAsset::register($this);
                     <?php echo Html::a(Html::encode($model->poster->member_name), array('member/view', 'id' => $model->poster->id)); ?>
                 </div>
                 <div class = "avatar">
-                    <?php echo Html::img((isset($model->poster->avatar) ? Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->poster->avatar : $assets->baseUrl.'/images/empty.jpeg'),
+                    <?php echo Html::img((isset($model->poster->avatar) ? \Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->poster->avatar : $assets->baseUrl.'/images/empty.jpeg'),
                                      array(
                                        'title' => 'avatar',
                                        'class' => 'img-responsive img-circle')
@@ -39,12 +39,12 @@ $assets = AppAsset::register($this);
                 <div class = "memberinfo">
                     <?php echo Yii::t('BbiiModule.bbii', 'Posts') . ': ' . Html::encode($model->poster->posts); ?><br>
                     <span class="hidden-xs">
-                        <?php echo Yii::t('BbiiModule.bbii', 'Joined') . ': ' . Yii::$app->formatter->asDate($model->poster->first_visit); ?>
+                        <?php echo Yii::t('BbiiModule.bbii', 'Joined') . ': ' . \Yii::$app->formatter->asDate($model->poster->first_visit); ?>
                     </span>
                 </div>
                 <div style = "text-align:center;margin-top:10px;">
                 <?php //@todo no rep mod for init release, no extra features either - DJE : 2015-05-29 ?>
-                <?php /* if (!Yii::$app->user->isGuest) { ?>
+                <?php /* if (!\Yii::$app->user->isGuest) { ?>
                     <?php echo Html::img($assets->baseUrl.'/images/warn.png', array('title' => Yii::t('BbiiModule.bbii', 'Report post'), 'style' => 'cursor:pointer;', 'onclick' => 'reportPost(' . $model->id . ')')); ?>
                     <?php echo Html::a( Html::img($assets->baseUrl.'/images/pm.png', array('title' => Yii::t('BbiiModule.bbii', 'Send private message'))), array('message/create', 'id' => $model->user_id) ); ?>
                     <?php echo $this->showUpvote($model->id); ?>
@@ -57,7 +57,7 @@ $assets = AppAsset::register($this);
                 <div class = "post-header">
 
                     <div class="pull-right">
-                        <?php if (!(Yii::$app->user->isGuest || $model->topic->locked) || $this->context->isModerator()) { ?>
+                        <?php if (!(\Yii::$app->user->isGuest || $model->topic->locked) || $this->context->isModerator()) { ?>
                             <?php $form = ActiveForm::begin([
                                 'action'               => array('forum/quote', 'id' => $model->id),
                                 'enableAjaxValidation' => false,
@@ -68,7 +68,7 @@ $assets = AppAsset::register($this);
                             <?php ActiveForm::end(); ?>
                         <?php }; ?>
 
-                        <?php if (!($model->user_id != Yii::$app->user->id || $model->topic->locked) || $this->context->isModerator()) { ?>
+                        <?php if (!($model->user_id != \Yii::$app->user->id || $model->topic->locked) || $this->context->isModerator()) { ?>
                             <?php $form = ActiveForm::begin([
                                 'action'               => array('forum/update', 'id' => $model->id),
                                 'enableAjaxValidation' => false,
@@ -82,7 +82,7 @@ $assets = AppAsset::register($this);
 
                     <div class = "header2<?php echo (isset($postId) && $postId == $model->id)?' target':''; ?>"><?php echo Html::encode($model->subject); ?></div>
                     <?php echo Html::encode($model->poster->member_name); ?>
-                    <?php echo Yii::$app->formatter->asDatetime($model->create_time); ?>
+                    <?php echo \Yii::$app->formatter->asDatetime($model->create_time); ?>
                     <?php echo '<span class = "badge" title = "' . Yii::t('BbiiModule.bbii','Reputation') . '">' . $model->upvoted . '</span>'; ?>
                 </div>
 
@@ -99,11 +99,11 @@ $assets = AppAsset::register($this);
                             'summaryText' => false,
                         ));
                         echo '<div style = "text-align:center;width:99%">';
-                        if ($this->poll->user_id == Yii::$app->user->id || $this->context->isModerator()) {
-                            echo Html::button(Yii::t('BbiiModule.bbii', 'Edit poll'), array('onclick' => 'editPoll(' . $this->poll->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('forum/editPoll') . '");'));
+                        if ($this->poll->user_id == \Yii::$app->user->id || $this->context->isModerator()) {
+                            echo Html::button(Yii::t('BbiiModule.bbii', 'Edit poll'), array('onclick' => 'editPoll(' . $this->poll->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('forum/editPoll') . '");'));
                         }
-                        if (!Yii::$app->user->isGuest && $this->poll->allow_revote && (!isset($this->poll->expire_date) || $this->poll->expire_date > date('Y-m-d'))) {
-                            echo Html::button(Yii::t('BbiiModule.bbii', 'Change vote'), array('onclick' => 'changeVote(' . $this->poll->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('forum/displayVote') . '");'));
+                        if (!\Yii::$app->user->isGuest && $this->poll->allow_revote && (!isset($this->poll->expire_date) || $this->poll->expire_date > date('Y-m-d'))) {
+                            echo Html::button(Yii::t('BbiiModule.bbii', 'Change vote'), array('onclick' => 'changeVote(' . $this->poll->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('forum/displayVote') . '");'));
                         }
                         echo '</div>';
                         ?>
@@ -117,7 +117,7 @@ $assets = AppAsset::register($this);
                             'summaryText' => false,
                         ));
                         echo '<div style = "text-align:right;width:50%">';
-                        echo Html::button(Yii::t('BbiiModule.bbii', 'Vote'), array('onclick' => 'vote("' . Yii::$app->urlManager->createAbsoluteUrl('forum/vote') . '");'));
+                        echo Html::button(Yii::t('BbiiModule.bbii', 'Vote'), array('onclick' => 'vote("' . \Yii::$app->urlManager->createAbsoluteUrl('forum/vote') . '");'));
                         echo '</div>';
                         echo Html::endForm(); ?>
                     <?php endif; ?>
@@ -132,7 +132,7 @@ $assets = AppAsset::register($this);
                 </div>
                 <div class = "post-footer">
                     <?php if ($model->change_reason) { ?>
-                        <?php echo Yii::t('BbiiModule.bbii','Changed'). ': ' . Yii::$app->formatter->asDatetime($model->change_time) . ' ' . Yii::t('BbiiModule.bbii','Reason') . ': ' . Html::encode($model->change_reason); ?>
+                        <?php echo Yii::t('BbiiModule.bbii','Changed'). ': ' . \Yii::$app->formatter->asDatetime($model->change_time) . ' ' . Yii::t('BbiiModule.bbii','Reason') . ': ' . Html::encode($model->change_reason); ?>
                     <?php }; ?>
                 </div>
                 <?php // @todo rep mod disabled for init release - DJE : 2015-05-28 ?>
@@ -140,8 +140,8 @@ $assets = AppAsset::register($this);
                 <div class = "toolbar">
                 <?php if ($this->context->isModerator()): ?>
                     <?php echo Html::a( Html::img($assets->baseUrl.'/images/warn.png', 	array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $model->user_id, 'type' => 1) ); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/delete.png',			array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . Yii::$app->urlManager->createAbsoluteUrl('moderator/delete', array('id' => $model->id)) . '") }')); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/ban.png',			array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $model->id . ', "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/banIp') . '") }')); ?>
+                    <?php echo Html::img($assets->baseUrl.'/images/delete.png',			array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/delete', array('id' => $model->id)) . '") }')); ?>
+                    <?php echo Html::img($assets->baseUrl.'/images/ban.png',			array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $model->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/banIp') . '") }')); ?>
                 <?php endif; ?>
                 </div>
             </div>

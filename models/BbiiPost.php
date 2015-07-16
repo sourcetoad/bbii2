@@ -5,7 +5,7 @@ namespace frontend\modules\bbii\models;
 use frontend\modules\bbii\models\BbiiAR;
 use frontend\modules\bbii\models\_query\BbiiPostQuery;
 
-use yii;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\HtmlPurifier;
 
@@ -50,8 +50,8 @@ class BbiiPost extends BbiiAR
 	public function rules()
 	{
 		$obj = new HtmlPurifier();
-		//$obj->options = Yii::$app->getController()->module->purifierOptions;
-		$obj->options = Yii::$app->controller->module->purifierOptions;
+		//$obj->options = \Yii::$app->getController()->module->purifierOptions;
+		$obj->options = \Yii::$app->controller->module->purifierOptions;
 
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
@@ -69,10 +69,10 @@ class BbiiPost extends BbiiAR
 			['ip', 'default', 'value'                  => $_SERVER['REMOTE_ADDR'], 	'on' => 'insert'],
 
 			// event stuff
-			['change_id', 	'default', 'value' => Yii::$app->user->id, 'on' => 'update'],
+			['change_id', 	'default', 'value' => \Yii::$app->user->id, 'on' => 'update'],
 			['change_time', 'default', 'value' => 'NOW()', 			   'on' => 'update'],
 			['create_time', 'default', 'value' => 'NOW()', 			   'on' => 'insert'],
-			['user_id', 	'default', 'value' => Yii::$app->user->id, 'on' => 'insert'],
+			['user_id', 	'default', 'value' => \Yii::$app->user->id, 'on' => 'insert'],
 
 			// The following rule is used by search(].
 			// Please remove those attributes that should not be searched.
@@ -162,7 +162,7 @@ class BbiiPost extends BbiiAR
 	 * @param  [type] $params [description]
 	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search($params){
+	public function search($params = null) {
 		$query        = BbiiPost::find();
 		$dataProvider = new ActiveDataProvider([
 	        'query' => $query,

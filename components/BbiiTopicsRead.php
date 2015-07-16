@@ -2,7 +2,7 @@
 
 namespace frontend\modules\bbii\components;
 
-use yii;
+use Yii;
 use yii\db\ActiveRecord;
 
 class BbiiTopicsRead {

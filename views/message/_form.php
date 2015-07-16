@@ -29,7 +29,7 @@ use yii\web\JsExpression;
 
 	<div class = "row">
       <div class="col col-md-12">
-           <?php if (Yii::$app->controller->action->id == 'create') {
+           <?php if (\Yii::$app->controller->action->id == 'create') {
             // echo $form->labelEx($model,'sendto');
             // @todo iterate on this - DJE : 2015-05-19
             /*$this->widget('zii.widgets.jui.CJuiAutoComplete',array(

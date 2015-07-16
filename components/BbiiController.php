@@ -39,10 +39,10 @@ class BbiiController extends Controller
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Create new topic');
 					break;
 				case 'forum':
-					$pageTitle .= ' - ' . @BbiiForum::find(Yii::$app->request->get()['id'])->name;
+					$pageTitle .= ' - ' . @BbiiForum::find(\Yii::$app->request->get()['id'])->name;
 					break;
 				case 'topic':
-					$pageTitle .= ' - ' . @BbiiTopic::find(Yii::$app->request->get()['id'])->title;
+					$pageTitle .= ' - ' . @BbiiTopic::find(\Yii::$app->request->get()['id'])->title;
 					break;
 				case 'quote':
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Quote');
@@ -60,7 +60,7 @@ class BbiiController extends Controller
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Members');
 					break;
 				case 'view':
-					$pageTitle .= ' - ' . @BbiiMember::find(Yii::$app->request->get()['id'])->member_name;
+					$pageTitle .= ' - ' . @BbiiMember::find(\Yii::$app->request->get()['id'])->member_name;
 					break;
 				case 'update':
 					$pageTitle .= ' - ' . Yii::t('BbiiModule.bbii','Update');
@@ -90,11 +90,11 @@ class BbiiController extends Controller
 	 */
 	public function isAdmin() {
 
-		if ($this->module->adminId && $this->module->adminId ===  Yii::$app->user->id) {
+		if ($this->module->adminId && $this->module->adminId ===  \Yii::$app->user->id) {
 			return true;	// by module parameter assigned admin
 		}
 
-		if (Yii::$app->authManager && Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)['user']->type  == 3
+		if (\Yii::$app->authManager && \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id)['user']->type  == 3
 		) {
 			return true;	// rbac role "admin"
 		}
@@ -109,10 +109,10 @@ class BbiiController extends Controller
 	public function isModerator() {
 
 		// user not logged into web-app
-		if (!Yii::$app->user->id) { return false; }
+		if (!\Yii::$app->user->id) { return false; }
 		
 		// rbac role "moderator"
-		if (Yii::$app->authManager && Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)['user']->type  == 2 ) {
+		if (\Yii::$app->authManager && \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id)['user']->type  == 2 ) {
 			return true;	
 		}
 

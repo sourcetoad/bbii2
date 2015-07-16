@@ -35,7 +35,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Send mail'), 						'url' => array('moderator/sendmail'), 	'visible' => $this->context->isModerator()),
 );
 
-/*Yii::$app->clientScript->registerScript('setAutocomplete', "
+/*\Yii::$app->clientScript->registerScript('setAutocomplete', "
 function setAutocomplete(id, data) {
     $('#BbiiPost_search').autocomplete({
 		source: '" . $this->createUrl('member/members') . "',

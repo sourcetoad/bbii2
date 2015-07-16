@@ -52,7 +52,7 @@ $item = array(
 			'ip',
 			array(
 				'name' => 'create_time',
-				'value' => 'Yii::$app->formatter->asDatetime($data->create_time)',
+				'value' => '\Yii::$app->formatter->asDatetime($data->create_time)',
 			),
 			array(
 				'class' => 'yii\grid\ActionColumn',
@@ -61,7 +61,7 @@ $item = array(
 					'view' => array(
 						'url' => '$data->id',
 						'imageUrl' => $assets->baseUrl.'view.png',
-						'click' => 'js:function() { viewPost($(this).attr("href"), "' . Yii::$app->urlManager->createAbsoluteUrl('moderator/view') .'");return false; }',
+						'click' => 'js:function() { viewPost($(this).attr("href"), "' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/view') .'");return false; }',
 					),
 					'approve' => array(
 						'url' => 'array("approve", "id" => $data->id)',

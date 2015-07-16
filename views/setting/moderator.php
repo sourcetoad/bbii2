@@ -27,7 +27,7 @@ $this->context->bbii_breadcrumbs = array(
 		'id' => 'bbii-member-grid',
 		'dataProvider' => $model->search(),
 		'filter' => $model,
-		'rowCssClassExpression' => '(Yii::$app->authManager && Yii::$app->authManager->checkAccess("moderator", $data->id))?"moderator":(($row % 2)?"even":"odd")',
+		'rowCssClassExpression' => '(\Yii::$app->authManager && \Yii::$app->authManager->checkAccess("moderator", $data->id))?"moderator":(($row % 2)?"even":"odd")',
 		'columns' => array(
 			'member_name',
 			array(
@@ -37,7 +37,7 @@ $this->context->bbii_breadcrumbs = array(
 			),
 			array(
 				'name' => 'moderator',
-				'value' => 'Html::checkBox("moderator", $data->moderator, array("onclick" => "changeModeration(this,$data->id,\'' . Yii::$app->urlManager->createAbsoluteUrl('setting/changeModerator') . '\')"))',
+				'value' => 'Html::checkBox("moderator", $data->moderator, array("onclick" => "changeModeration(this,$data->id,\'' . \Yii::$app->urlManager->createAbsoluteUrl('setting/changeModerator') . '\')"))',
 				'type' => 'raw',
 				'filter' => array('0' => Yii::t('BbiiModule.bbii', 'No'), '1' => Yii::t('BbiiModule.bbii', 'Yes')),
 				'htmlOptions' => array("style" => "text-align:center"),
@@ -65,7 +65,7 @@ $this->context->bbii_breadcrumbs = array(
 				'filter'    => array('0' => Yii::t('BbiiModule.bbii', 'No'), '1' => Yii::t('BbiiModule.bbii', 'Yes')),
 				'format'    => 'raw',
 				'options'   => array("style" => "text-align:center"),
-				//'value'     => 'Html::checkBox("moderator", $data->moderator, array("onclick" => "changeModeration(this,$data->id,\'' . Yii::$app->urlManager->createAbsoluteUrl('setting/changeModerator') . '\')"))',
+				//'value'     => 'Html::checkBox("moderator", $data->moderator, array("onclick" => "changeModeration(this,$data->id,\'' . \Yii::$app->urlManager->createAbsoluteUrl('setting/changeModerator') . '\')"))',
 			),
 			
 			[

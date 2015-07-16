@@ -14,8 +14,8 @@ $assets = AppAsset::register($this);
 /* @var $breadcrumbs array */
 ?>
 <div id = "bbii-header">
-	<?php if (!Yii::$app->user->isGuest): ?>
-	<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.Yii::$app->user->id); ?>
+	<?php if (!\Yii::$app->user->isGuest): ?>
+	<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.\Yii::$app->user->id); ?>
 		<div class = "btn-group pull-right">
 		<?php 
 			if ($messages) {
@@ -23,7 +23,7 @@ $assets = AppAsset::register($this);
 			} else {
 				echo Html::a(Html::img($assets->baseUrl.'/images/mail.png', array('title' => Yii::t('BbiiModule.bbii', 'no new messages'), 'style' => 'vertical-align:bottom;')), array('message/inbox'),array('class'=>'btn btn-default'));
 			}
-			echo Html::a(Html::img($assets->baseUrl.'/images/settings.png', array('title' => Yii::t('BbiiModule.bbii', 'My settings'), 'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => Yii::$app->user->id),array('class'=>'btn btn-default'));
+			echo Html::a(Html::img($assets->baseUrl.'/images/settings.png', array('title' => Yii::t('BbiiModule.bbii', 'My settings'), 'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => \Yii::$app->user->id),array('class'=>'btn btn-default'));
 		?>
 		</div>
 	<?php endif; ?>
@@ -44,10 +44,10 @@ $assets = AppAsset::register($this);
 <?php endif*/ ?>
 
 <?php
-foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
-Yii::$app->session->removeAllFlashes();
+\Yii::$app->session->removeAllFlashes();
 ?>
 
 <noscript>

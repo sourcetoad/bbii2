@@ -31,7 +31,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Posts'), 'url' => array('moderator/admin'), 'visible' => $this->context->isModerator()),
 );
 
-/*Yii::$app->clientScript->registerScript('presence', "
+/*\Yii::$app->clientScript->registerScript('presence', "
 $('.presence-button').click(function(){
 	$('.presence').toggle();
 	return false;
@@ -121,7 +121,7 @@ $this->registerJs($script, View::POS_READY);
                     // 'htmlOptions' => array(
                     // 	'style' => 'height:20px;'
                     // ),
-                    'language' => substr(Yii::$app->language, 0, 2),
+                    'language' => substr(\Yii::$app->language, 0, 2),
                     'name'     => 'birthdate',
                     'options' => array(
                         'altField' => '#BbiiMember_birthdate',
@@ -129,7 +129,7 @@ $this->registerJs($script, View::POS_READY);
                         'showAnim' => 'fold',
                     ),
                     //'theme'    => $this->module->juiTheme,
-                    'value'    => Yii::$app->formatter->asDate($model->birthdate, 'short', null),
+                    'value'    => \Yii::$app->formatter->asDate($model->birthdate, 'short', null),
                 ));*/ ?>
                 <?php //echo $form->error($model,'birthdate'); ?>
 			</div>
@@ -211,7 +211,7 @@ $this->registerJs($script, View::POS_READY);
 
 			<div>
                 <?php //echo $form->labelEx($model,'avatar'); ?>
-                <?php echo Html::img((isset($model->avatar))?(Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$assets->baseUrl.'/images/empty.jpeg', 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
+                <?php echo Html::img((isset($model->avatar))?(\Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$assets->baseUrl.'/images/empty.jpeg', 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
                 <?php //echo $form->labelEx($model,'remove_avatar'); ?>
                 <?php echo Html::activeCheckbox($model, 'remove_avatar'); ?>
                 <?php //echo $form->labelEx($model, 'image'); ?>

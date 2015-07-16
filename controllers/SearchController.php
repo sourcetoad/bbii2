@@ -38,31 +38,31 @@ class SearchController extends BbiiController {
 		$search = '';
 		$choice = 0;
 		$type = 0;
-		if (isset(Yii::$app->request->post()['search'])) {
-		// $search = trim(Html::encode(Yii::$app->request->post()['search']));
+		if (isset(\Yii::$app->request->post()['search'])) {
+		// $search = trim(Html::encode(\Yii::$app->request->post()['search']));
 			$search = trim(filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING));
-			Yii::$app->session['search'] = $search;
-		} elseif (isset(Yii::$app->session['search'])) {
-			$search = Yii::$app->session['search'];
+			\Yii::$app->session['search'] = $search;
+		} elseif (isset(\Yii::$app->session['search'])) {
+			$search = \Yii::$app->session['search'];
 		}
 		$this->search = $search;
-		if (isset(Yii::$app->request->post()['choice'])) {
-			$choice = Yii::$app->request->post()['choice'];
+		if (isset(\Yii::$app->request->post()['choice'])) {
+			$choice = \Yii::$app->request->post()['choice'];
 			if ($choice != '0' && $choice != '1' && $choice != '2') {
 				$choice = 0;
 			}
-			Yii::$app->session['choice'] = $choice;
-		} elseif (isset(Yii::$app->session['choice'])) {
-			$choice = Yii::$app->session['choice'];
+			\Yii::$app->session['choice'] = $choice;
+		} elseif (isset(\Yii::$app->session['choice'])) {
+			$choice = \Yii::$app->session['choice'];
 		}
-		if (isset(Yii::$app->request->post()['type'])) {
-			$type = Yii::$app->request->post()['type'];
+		if (isset(\Yii::$app->request->post()['type'])) {
+			$type = \Yii::$app->request->post()['type'];
 			if ($type != '0' && $type != '1' && $type != '2') {
 				$type = 0;
 			}
-			Yii::$app->session['type'] = $type;
-		} elseif (isset(Yii::$app->session['type'])) {
-			$type = Yii::$app->session['type'];
+			\Yii::$app->session['type'] = $type;
+		} elseif (isset(\Yii::$app->session['type'])) {
+			$type = \Yii::$app->session['type'];
 		}
 		$this->type = $type;
 		if ($type == 0 && strlen($search) < 2) {

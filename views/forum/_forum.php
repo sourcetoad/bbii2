@@ -58,8 +58,8 @@ if (!$model->public) {
                     echo '<br>';
 
                     // Responive date formate display
-                    $forumDateLong = Yii::$app->formatter->asDatetime($model->lastPost->create_time);
-                    $forumDate = Yii::$app->formatter->asDatetime($model->lastPost->create_time, $format='php:M d, Y');
+                    $forumDateLong = \Yii::$app->formatter->asDatetime($model->lastPost->create_time);
+                    $forumDate = \Yii::$app->formatter->asDatetime($model->lastPost->create_time, $format='php:M d, Y');
                     echo '<span class="hidden-xs">'.$forumDateLong.'</span>';
                     echo '<span class="visible-xs">'.$forumDate.'</span>';
 
@@ -76,7 +76,7 @@ if (!$model->public) {
 	<? // @todo re-enable collapsable feature - DJE : 2015-05-26 ?>
 	<?php /*
 	<?php if ($index > 0) { echo '</div>'; } ?>
-	<div class = "forum-category" onclick = "BBii.toggleForumGroup(<?php echo $model->id; ?>,'<?php echo Yii::$app->urlManager->createAbsoluteUrl($this->context->module->id.'/forum/setCollapsed'); ?>');">
+	<div class = "forum-category" onclick = "BBii.toggleForumGroup(<?php echo $model->id; ?>,'<?php echo \Yii::$app->urlManager->createAbsoluteUrl($this->context->module->id.'/forum/setCollapsed'); ?>');">
 		<div class = "header2">
 			<?php echo Html::encode($model->name); ?>
 		</div>

@@ -46,7 +46,7 @@ $item = array(
 			array(
 				'header' => 'Avatar',
 				'type' => 'image',
-				'value' => '(isset($data->avatar))?"'.Yii::$app->request->baseUrl . $this->module->avatarStorage . '/$data->avatar":"'.$assets->baseUrl.'empty.jpeg').'"',
+				'value' => '(isset($data->avatar))?"'.\Yii::$app->request->baseUrl . $this->module->avatarStorage . '/$data->avatar":"'.$assets->baseUrl.'empty.jpeg').'"',
 				'htmlOptions' => array('class' => 'img30'),
 			),
 			array(

@@ -5,7 +5,7 @@ namespace frontend\modules\bbii\models;
 use frontend\modules\bbii\models\BbiiAR;
 use frontend\modules\bbii\models\_query\BbiiForumQuery;
 
-use yii;
+use Yii;
 
 /**
  * This is the model class for table "bbii_forum".
@@ -144,7 +144,7 @@ class BbiiForum extends BbiiAR
 	 * @param  [type] $params [description]
 	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search($params){
+	public function search($params = null) {
 		$query        = BbiiForum::find();
 		$dataProvider = new ActiveDataProvider([
 	        'query' => $query,
@@ -216,11 +216,11 @@ class BbiiForum extends BbiiAR
 			$forum = BbiiForum::find()->where('type = 1 and cat_id = ' . $group->id)->all(); 
 
 			foreach($forum as $option) {
-				if ($option->public || !Yii::$app->user->isGuest) {
+				if ($option->public || !\Yii::$app->user->isGuest) {
 					if ($option->membergroup_id == 0) {
 						$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
-					} elseif (!Yii::$app->user->isGuest) {
-						$groupId = BbiiMember::find(Yii::$app->user->id)->one()->group_id;
+					} elseif (!\Yii::$app->user->isGuest) {
+						$groupId = BbiiMember::find(\Yii::$app->user->id)->one()->group_id;
 						if ($option->membergroup_id == $groupId) {
 							$return[] = array('id' => $option->id,'name' => $option->name,'group' => $group->name);
 						}

@@ -10,7 +10,7 @@ $this->widget('zii.widgets.CListView', array(
 	'summaryText' => false,
 ));
 echo '<div style = "text-align:right;width:50%">';
-echo Html::button(Yii::t('bbii', 'Vote'), array('onclick' => 'vote("' . Yii::$app->urlManager->createAbsoluteUrl('forum/vote') . '");'));
+echo Html::button(Yii::t('bbii', 'Vote'), array('onclick' => 'vote("' . \Yii::$app->urlManager->createAbsoluteUrl('forum/vote') . '");'));
 echo '</div>';
 echo Html::endForm();
 ?>

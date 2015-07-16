@@ -25,14 +25,14 @@ $assets = AppAsset::register($this);
 						editForum(
 							' . $forumdata->id . ',
 							"' . Yii::t('BbiiModule.bbii','Edit '.$forumdata->name) . '",
-							"' . Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/getforum', 'id' => $forumdata->id]) .'"
+							"' . \Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/getforum', 'id' => $forumdata->id]) .'"
 						)
 					'
 				)
 			);*/
 			echo Html::a(
 				Yii::t('BbiiModule.bbii', 'Edit'),
-				Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/update', 'id' => $forumdata->id])
+				\Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/update', 'id' => $forumdata->id])
 			); ?>
 			<?php if (!$forumdata->public) echo Html::img($assets->baseUrl.'/images/private.png', 'private', array('style' => 'vertical-align:middle;', 'title' => 'Private')); ?>
 			<?php if ($forumdata->locked) echo Html::img($assets->baseUrl.'/images/locked.png', 'locked', array('style' => 'vertical-align:middle;', 'title' => 'Locked')); ?>

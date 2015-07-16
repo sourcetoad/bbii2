@@ -1,7 +1,5 @@
 <?php
 
-use yii;
-
 /* @var $this MessageController */
 /* @var $model BbiiMessage */
 /* @var $count Array */
@@ -11,7 +9,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
-	(Yii::$app->requestedAction->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'Reply'),
+	(\Yii::$app->requestedAction->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'Reply'),
 );
 
 $item = array(
@@ -23,7 +21,7 @@ $item = array(
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item, 'count' => $count)); ?>
 
-	<h1><?php echo (Yii::$app->requestedAction->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'Reply'); ?></h1>
+	<h1><?php echo (\Yii::$app->requestedAction->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'Reply'); ?></h1>
 
     <div class="well clearfix">
 	   <?php echo $this->render('_form', array('model' => $model)); ?>

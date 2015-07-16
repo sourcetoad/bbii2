@@ -32,7 +32,7 @@ class BbiiSettingQuery extends ActiveQuery
 	 * @param  [type] $params [description]
 	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search($params){
+	public function search($params = null) {
 		$query        = BbiiSetting::find();
 		$dataProvider = new ActiveDataProvider([
 	        'query' => $query,

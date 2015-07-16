@@ -45,7 +45,7 @@ $this->context->bbii_breadcrumbs = array(
 		<div class = "even">
 			<?php echo Html::label(Yii::t('BbiiModule.bbii', 'Forum language'), false); ?>
 			<?php echo Html::img($assets->baseUrl.'/images/info.png', array('style' => 'vertical-align:middle;margin-left:10px','title' => Yii::t('BbiiModule.bbii', 'The forum language is set by the application parameter "language".'))); ?>
-			<?php echo Yii::$app->language; ?>
+			<?php echo \Yii::$app->language; ?>
 		</div>
 
 		<div class = "odd">

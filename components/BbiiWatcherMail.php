@@ -17,7 +17,7 @@ class BbiiWatcherMail {
 	 */
 	public function __construct($forum = 'Forum', $component = 'db', $model = 'User', $table = 'user', $id = 'id', $user = 'username', $email = 'email') {
 		$this->forum 	 =  $forum;
-		$this->bbii_db 	 =  Yii::$app->getComponent($component);
+		$this->bbii_db 	 =  \Yii::$app->getComponent($component);
 		$class = new $model;
 		$this->user_db 	 =  $class::find()->getDbConnection();
 		$this->table 	 =  $table;
@@ -29,7 +29,7 @@ class BbiiWatcherMail {
 	public function processWatchers($url = null) {
 		if ($this->email) {
 			if (empty($url)) {
-				$url = Yii::$app->createAbsoluteUrl('/');
+				$url = \Yii::$app->createAbsoluteUrl('/');
 			}
 			// forum settings:
 			$select = 'select * from bbii_setting';
@@ -74,7 +74,7 @@ class BbiiWatcherMail {
 							
 							// recalculate post create timestamp:
 							$timestamp = DateTimeCalculation::convertTimestamp($row_post['create_time'], $row_member['timezone']);
-							$df = Yii::$app->dateFormatter;
+							$df = \Yii::$app->dateFormatter;
 							$timestamp = $df->formatDateTime($timestamp, 'long', 'medium') . ' ';
 							$dateTime = new DateTime(); 
 							$dateTime->setTimeZone(new DateTimeZone($row_member['timezone'])); 

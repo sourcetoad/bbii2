@@ -8,7 +8,7 @@ use frontend\modules\bbii\models\BbiiMessage;
 use frontend\modules\bbii\models\BbiiPost;
 use frontend\modules\bbii\models\MailForm;
 
-use yii;
+use Yii;
 use yii\filters\AccessControl;
 
 class ModeratorController extends BbiiController {
@@ -71,8 +71,8 @@ class ModeratorController extends BbiiController {
 	public function actionApproval() {
 		$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiMessage'])) {
-			$model->load(Yii::$app->request->get()['BbiiPost']);
+		if (isset(\Yii::$app->request->get()['BbiiMessage'])) {
+			$model->load(\Yii::$app->request->get()['BbiiPost']);
 		}
 		// restrict filtering to unapproved posts
 		$model->approved = 0;
@@ -104,14 +104,14 @@ class ModeratorController extends BbiiController {
 		$post->poster->updateCounters(array('posts' => 1));		// method since Yii 1.1.8
 		$this->assignMembergroup($post->user_id);
 		
-		return Yii::$app->response->redirect(array('forum/approval'));
+		return \Yii::$app->response->redirect(array('forum/approval'));
 	}
 	
 	public function actionAdmin() {
 		$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiPost']))
-			$model->load(Yii::$app->request->get()['BbiiPost']);
+		if (isset(\Yii::$app->request->get()['BbiiPost']))
+			$model->load(\Yii::$app->request->get()['BbiiPost']);
 		// limit posts to approved posts
 		$model->approved = 1;
 		
@@ -123,8 +123,8 @@ class ModeratorController extends BbiiController {
 	public function actionIpadmin() {
 		$model = new BbiiIpaddress('search');
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiIpaddress']))
-			$model->load(Yii::$app->request->get()['BbiiIpaddress']);
+		if (isset(\Yii::$app->request->get()['BbiiIpaddress']))
+			$model->load(\Yii::$app->request->get()['BbiiIpaddress']);
 
 		return $this->render('ipadmin',array(
 			'model' => $model,
@@ -135,16 +135,16 @@ class ModeratorController extends BbiiController {
 		BbiiIpaddress::find($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if (!isset(Yii::$app->request->get()['ajax']))
-			$this->redirect(isset(Yii::$app->request->post()['returnUrl']) ? Yii::$app->request->post()['returnUrl'] : array('ipadmin'));
+		if (!isset(\Yii::$app->request->get()['ajax']))
+			$this->redirect(isset(\Yii::$app->request->post()['returnUrl']) ? \Yii::$app->request->post()['returnUrl'] : array('ipadmin'));
 	}
 
 	/**
 	 * Delete a post
 	 */
 	public function actionDelete($id) {
-		if (isset(Yii::$app->request->get()['id']))
-			$id = Yii::$app->request->get()['id'];
+		if (isset(\Yii::$app->request->get()['id']))
+			$id = \Yii::$app->request->get()['id'];
 		$post = BbiiPost::find($id);
 		if ($post === null) {
 			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
@@ -173,8 +173,8 @@ class ModeratorController extends BbiiController {
 		$model = BbiiMessage::find()->deleteAll($criteria);
 		
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if (!isset(Yii::$app->request->get()['ajax']))
-			$this->redirect(isset(Yii::$app->request->post()['returnUrl']) ? Yii::$app->request->post()['returnUrl'] : array('approval'));
+		if (!isset(\Yii::$app->request->get()['ajax']))
+			$this->redirect(isset(\Yii::$app->request->post()['returnUrl']) ? \Yii::$app->request->post()['returnUrl'] : array('approval'));
 		return;
 	}
 	
@@ -253,8 +253,8 @@ class ModeratorController extends BbiiController {
 	public function actionReport() {
 		$model = new BbiiMessage('search');
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiMessage']))
-			$model->load(Yii::$app->request->get()['BbiiMessage']);
+		if (isset(\Yii::$app->request->get()['BbiiMessage']))
+			$model->load(\Yii::$app->request->get()['BbiiMessage']);
 		// limit posts to moderator inbox
 		$model->sendto = 0;
 		
@@ -265,8 +265,8 @@ class ModeratorController extends BbiiController {
 	
 	public function actionView() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
-			$model = BbiiPost::find(Yii::$app->request->post()['id']);
+		if (isset(\Yii::$app->request->post()['id'])) {
+			$model = BbiiPost::find(\Yii::$app->request->post()['id']);
 			if ($model !== null) {
 				$poll = BBiiPoll::find()->findByAttributes(array('post_id' => $model->id));
 				$choices = array();
@@ -287,13 +287,13 @@ class ModeratorController extends BbiiController {
 			$json['message'] = Yii::t('BbiiModule.bbii', 'Post not found.');
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 	
 	public function actionTopic() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
-			$model = BbiiTopic::find(Yii::$app->request->post()['id']);
+		if (isset(\Yii::$app->request->post()['id'])) {
+			$model = BbiiTopic::find(\Yii::$app->request->post()['id']);
 			if ($model === null) {
 				$json['success'] = 'no';
 				$json['message'] = Yii::t('BbiiModule.bbii', 'Topic not found.');
@@ -315,7 +315,7 @@ class ModeratorController extends BbiiController {
 		}
 	
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 	
 	/**
@@ -323,10 +323,10 @@ class ModeratorController extends BbiiController {
 	 */
 	public function actionRefreshTopics() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
+		if (isset(\Yii::$app->request->post()['id'])) {
 			$json['success'] = 'yes';
 			$json['option'] = '<option value = ""></option>';
-			foreach(BbiiTopic::find()->findAll('forum_id = ' . Yii::$app->request->post()['id']) as $topic) {
+			foreach(BbiiTopic::find()->findAll('forum_id = ' . \Yii::$app->request->post()['id']) as $topic) {
 				$json['option'] .= '<option value = "' . $topic->id. '">' . $topic->title . '</option>';
 			}
 		} else {
@@ -335,7 +335,7 @@ class ModeratorController extends BbiiController {
 		}
 	
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 	
 	/**
@@ -343,21 +343,21 @@ class ModeratorController extends BbiiController {
 	 */
 	public function actionChangeTopic() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['BbiiTopic'])) {
-			$model = BbiiTopic::find(Yii::$app->request->post()['BbiiTopic']['id']);
+		if (isset(\Yii::$app->request->post()['BbiiTopic'])) {
+			$model = BbiiTopic::find(\Yii::$app->request->post()['BbiiTopic']['id']);
 			$move = false;
 			$merge = false;
-			$sourceTopicId = Yii::$app->request->post()['BbiiTopic']['id'];
+			$sourceTopicId = \Yii::$app->request->post()['BbiiTopic']['id'];
 			$sourceForumId = $model->forum_id;
-			if ($model->forum_id != Yii::$app->request->post()['BbiiTopic']['forum_id']) {
+			if ($model->forum_id != \Yii::$app->request->post()['BbiiTopic']['forum_id']) {
 				$move = true;
-				$targetForumId = Yii::$app->request->post()['BbiiTopic']['forum_id'];
+				$targetForumId = \Yii::$app->request->post()['BbiiTopic']['forum_id'];
 			}
-			if (!empty(Yii::$app->request->post()['BbiiTopic']['merge']) && Yii::$app->request->post()['BbiiTopic']['id'] != Yii::$app->request->post()['BbiiTopic']['merge']) {
+			if (!empty(\Yii::$app->request->post()['BbiiTopic']['merge']) && \Yii::$app->request->post()['BbiiTopic']['id'] != \Yii::$app->request->post()['BbiiTopic']['merge']) {
 				$merge = true;
-				$targetTopicId = Yii::$app->request->post()['BbiiTopic']['merge'];
+				$targetTopicId = \Yii::$app->request->post()['BbiiTopic']['merge'];
 			}
-			$model->load(Yii::$app->request->post()['BbiiTopic']);
+			$model->load(\Yii::$app->request->post()['BbiiTopic']);
 			if ($model->validate()) {
 				$json['success'] = 'yes';
 				if ($merge || $move) {
@@ -397,7 +397,7 @@ class ModeratorController extends BbiiController {
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 	
 	public function actionBanIp($id) {
@@ -430,8 +430,8 @@ class ModeratorController extends BbiiController {
 	public function actionSendmail() {
 		$model = new MailForm;
 		// $model->unsetAttributes();
-		if (isset(Yii::$app->request->post()['MailForm'])) {
-			$model->load(Yii::$app->request->post()['MailForm']);
+		if (isset(\Yii::$app->request->post()['MailForm'])) {
+			$model->load(\Yii::$app->request->post()['MailForm']);
 			if (empty($model->member_id)) {
 				$model->member_id = -1;	// All members
 			}
@@ -442,7 +442,7 @@ class ModeratorController extends BbiiController {
 					$criteria->params = array(':group' => $model->member_id);
 				}
 				$members = BbiiMember::find()->findAll($criteria);
-				if (isset(Yii::$app->request->post()['email'])) {	// e-mails
+				if (isset(\Yii::$app->request->post()['email'])) {	// e-mails
 					$name = $this->context->module->forumTitle;
 					$name = ' = ?UTF-8?B?'.base64_encode($name).'? = ';
 					$from = BbiiSetting::find()->find()->contact_email;
@@ -465,12 +465,12 @@ class ModeratorController extends BbiiController {
 						$users[] = $member->member_name;
 					}
 					// $model->unsetAttributes();
-					Yii::$app->user->setFlash('success',Yii::t('BbiiModule.bbii','You have sent an e-mail to the following users: ') . implode(', ', $users));
+					\Yii::$app->session->setFlash('success',Yii::t('BbiiModule.bbii','You have sent an e-mail to the following users: ') . implode(', ', $users));
 				} else {						// private messages
 					$users = array();
 					foreach($members as $member) {
 						$message = new BbiiMessage;
-						$message->sendfrom = Yii::$app->user->id;
+						$message->sendfrom = \Yii::$app->user->id;
 						$message->sendto = $member->id;
 						$message->subject = $model->subject;
 						$message->content = $model->body;
@@ -480,7 +480,7 @@ class ModeratorController extends BbiiController {
 						}
 					}
 					// $model->unsetAttributes();
-					Yii::$app->user->setFlash('success',Yii::t('BbiiModule.bbii','You have sent a private message to the following users: ') . implode(', ', $users));
+					\Yii::$app->session->setFlash('success',Yii::t('BbiiModule.bbii','You have sent a private message to the following users: ') . implode(', ', $users));
 				}
 			}
 		}

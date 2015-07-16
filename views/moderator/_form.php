@@ -7,10 +7,10 @@
 <h2><?php echo Yii::t('BbiiModule.bbii','Send mail to multiple forum members'); ?></h2>
 
 <?php
-foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
-Yii::$app->session->removeAllFlashes();
+\Yii::$app->session->removeAllFlashes();
 ?>
 
 <div class = "form">

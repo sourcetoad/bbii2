@@ -11,7 +11,7 @@ $assets = AppAsset::register($this);
 /* @var $item array */
 ?>
 <div id = "bbii-header">
-	<?php if (!Yii::$app->user->isGuest): ?>
+	<?php if (!\Yii::$app->user->isGuest): ?>
 		<div class = "pull-right">
 		<?php echo Html::a(Yii::t('BbiiModule.bbii', 'Forum'), array('forum/index'),array('class'=>'btn btn-warning')); ?>
 		</div>
@@ -33,10 +33,10 @@ $assets = AppAsset::register($this);
 <?php endif?>
 
 <?php
-foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
-Yii::$app->session->removeAllFlashes();
+\Yii::$app->session->removeAllFlashes();
 ?>
 
 <noscript>

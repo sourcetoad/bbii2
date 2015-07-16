@@ -4,7 +4,7 @@ namespace frontend\modules\bbii\models;
 
 use frontend\modules\bbii\models\BbiiAR;
 
-use yii;
+use Yii;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -126,7 +126,7 @@ class BbiiIpaddress extends BbiiAR
 	 * @param  [type] $params [description]
 	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search($params){
+	public function search($params = null) {
 		$query        = BbiiIpaddress::find();
 		$dataProvider = new ActiveDataProvider([
 	        'query' => $query,

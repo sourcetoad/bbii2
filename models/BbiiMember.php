@@ -5,7 +5,7 @@ namespace frontend\modules\bbii\models;
 use frontend\modules\bbii\models\BbiiAR;
 use frontend\modules\bbii\models\_query\BbiiMemberQuery;
 
-use yii;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\HtmlPurifier;
 
@@ -207,7 +207,7 @@ class BbiiMember extends BbiiAR {
 	 * @param  [type] $params [description]
 	 * @return ActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search($params){
+	public function search($params = null) {
 		$query        = BbiiMember::find();
 		$dataProvider = new ActiveDataProvider([
 	        'query' => $query,

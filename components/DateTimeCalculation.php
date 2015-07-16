@@ -4,27 +4,27 @@ namespace frontend\modules\bbii\components;
 
 class DateTimeCalculation {
 	static public function shortDate($timestamp) {
-		$df = Yii::$app->dateFormatter;
+		$df = \Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'short', '');
 	}
 	
 	static public function longDate($timestamp) {
-		$df = Yii::$app->dateFormatter;
+		$df = \Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'long', '');
 	}
 	
 	static public function medium($timestamp) {
-		$df = Yii::$app->dateFormatter;
+		$df = \Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'medium', 'short');
 	}
 	
 	static public function long($timestamp) {
-		$df = Yii::$app->dateFormatter;
+		$df = \Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'long', 'short');
 	}
 	
 	static public function full($timestamp) {
-		$df = Yii::$app->dateFormatter;
+		$df = \Yii::$app->dateFormatter;
 		return $df->formatDateTime(self::userTimestamp($timestamp), 'long', 'medium') . ' ' . self::userTimezoneNotation();
 	}
 	
@@ -34,10 +34,10 @@ class DateTimeCalculation {
 	 * @return string timestamp format 'yyyy-MM-dd hh:mm:ss'
 	 */
 	static public function userTimestamp($timestamp) {
-		if (Yii::$app->user->isGuest) {
+		if (\Yii::$app->user->isGuest) {
 			return $timestamp;
 		}
-		$timezone = BbiiMember::find(Yii::$app->user->id)->timezone;
+		$timezone = BbiiMember::find(\Yii::$app->user->id)->timezone;
 		if (empty($timezone)) {
 			return $timestamp;
 		} else {
@@ -68,10 +68,10 @@ class DateTimeCalculation {
 	 * @return string
 	 */
 	static public function userTimezoneNotation() {
-		if (Yii::$app->user->isGuest) {
+		if (\Yii::$app->user->isGuest) {
 			$timezone = date_default_timezone_get();
 		} else {
-			$timezone = BbiiMember::find(Yii::$app->user->id)->timezone;
+			$timezone = BbiiMember::find(\Yii::$app->user->id)->timezone;
 			if (empty($timezone)) {
 				$timezone = date_default_timezone_get();
 			}

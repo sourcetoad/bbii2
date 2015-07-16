@@ -7,7 +7,7 @@ use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\components\BbiiController;
 
 
-use yii;
+use Yii;
 use yii\web\Session;
 
 class MessageController extends BbiiController {
@@ -49,24 +49,24 @@ class MessageController extends BbiiController {
 	public function actionInbox($id = null) {
 		/*
 		if (!(isset($id) && $this->isModerator())) {
-			$id = Yii::$app->user->id;
+			$id = \Yii::$app->user->id;
 		}
 		$count['inbox'] = BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.$id);
 		$count['outbox'] = BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.$id);
 		$model = new BbiiMessage('search');
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiMessage'])) {
-			$model->load(Yii::$app->request->get()['BbiiMessage']);
+		if (isset(\Yii::$app->request->get()['BbiiMessage'])) {
+			$model->load(\Yii::$app->request->get()['BbiiMessage']);
 		}
 		// restrict filtering to own inbox
 		$model->sendto = $id;
 		$model->inbox  = 1;
 		*/
 
-		$id = ($id != null) ? $id : Yii::$app->user->id;
+		$id = ($id != null) ? $id : \Yii::$app->user->id;
 
 		$model           = new BbiiMessage();
-		$model->setAttributes( (isset(Yii::$app->request->get()['BbiiMessage']) ? Yii::$app->request->get()['BbiiMessage'] : ['inbox' => 1, 'sendto' => $id]) );
+		$model->setAttributes( (isset(\Yii::$app->request->get()['BbiiMessage']) ? \Yii::$app->request->get()['BbiiMessage'] : ['inbox' => 1, 'sendto' => $id]) );
 		$model           = $model->search();
 
 		return $this->render('inbox', array(
@@ -77,13 +77,13 @@ class MessageController extends BbiiController {
 
 	public function actionOutbox($id = null) {
 		if (!(isset($id) && $this->isModerator())) {
-			$id = Yii::$app->user->id;
+			$id = \Yii::$app->user->id;
 		}
 
-		$model = new BbiiMessage('search');
+		$model = new BbiiMessage;
 		// $model->unsetAttributes();  // clear any default values
-		if (isset(Yii::$app->request->get()['BbiiMessage'])) {
-			$model->load(Yii::$app->request->get()['BbiiMessage']);
+		if (isset(\Yii::$app->request->get()['BbiiMessage'])) {
+			$model->load(\Yii::$app->request->get()['BbiiMessage']);
 		}
 		// restrict filtering to own outbox
 		$model->sendfrom = $id;
@@ -105,25 +105,25 @@ class MessageController extends BbiiController {
 	 */
 	/* public function actionCreate($id = null, $type = null) {
 		$model = new BbiiMessage;
-		$count['inbox']  = BbiiMessage::find()->inbox()->count('sendto = '.Yii::$app->user->id);
-		$count['outbox'] = BbiiMessage::find()->outbox()->count('sendfrom = '.Yii::$app->user->id);
+		$count['inbox']  = BbiiMessage::find()->inbox()->count('sendto = '.\Yii::$app->user->id);
+		$count['outbox'] = BbiiMessage::find()->outbox()->count('sendfrom = '.\Yii::$app->user->id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (Yii::$app->request->post('BbiiMessage')) {
-			$model->load(Yii::$app->request->post('BbiiMessage'));
-			//$model->search = Yii::$app->request->post()['BbiiMessage']['search'];
-			//$model->sendfrom = Yii::$app->user->id;
+		if (\Yii::$app->request->post('BbiiMessage')) {
+			$model->load(\Yii::$app->request->post('BbiiMessage'));
+			//$model->search = \Yii::$app->request->post()['BbiiMessage']['search'];
+			//$model->sendfrom = \Yii::$app->user->id;
 
-			if ($model->validate() && empty(Yii::$app->request->post('BbiiMessage')['search'])) {
+			if ($model->validate() && empty(\Yii::$app->request->post('BbiiMessage')['search'])) {
 				unset($model->sendto);
 			} else {
 				// $criteria = new CDbCriteria;
 				// $criteria->condition = 'member_name = :search';
-				// $criteria->params = array(':search' => Yii::$app->request->post()['BbiiMessage']['search']);
+				// $criteria->params = array(':search' => \Yii::$app->request->post()['BbiiMessage']['search']);
 				// $member = BbiiMember::find()->find($criteria);
-				$member = BbiiMember::find()->where(['member_name' => Yii::$app->request->post('BbiiMessage')['search']])->one();
+				$member = BbiiMember::find()->where(['member_name' => \Yii::$app->request->post('BbiiMessage')['search']])->one();
 				if ($member === null) {
 					unset($model->sendto);
 					$model->addError('sendto', Yii::t('BbiiModule.bbii','Member not found'));
@@ -138,7 +138,7 @@ class MessageController extends BbiiController {
 						$model->addError('sendto', Yii::t('BbiiModule.bbii','This user does not want to receive private messages.'));
 					}
 					if ($allowed && $model->save()) {
-						return Yii::$app->response->redirect(array('forum/outbox'));
+						return \Yii::$app->response->redirect(array('forum/outbox'));
 					}
 				}
 			}
@@ -170,24 +170,24 @@ class MessageController extends BbiiController {
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (Yii::$app->request->post('BbiiMessage')) {
+		if (\Yii::$app->request->post('BbiiMessage')) {
 			// automatic attrib set
-			$model->setAttributes(Yii::$app->request->post('BbiiMessage'));
+			$model->setAttributes(\Yii::$app->request->post('BbiiMessage'));
 			
 			// manual sttrib set
-			$model->sendfrom = Yii::$app->user->id;
+			$model->sendfrom = \Yii::$app->user->id;
 			$model->sendto = BbiiMember::find()->select('id')->where([
-				'member_name' => Yii::$app->request->post('BbiiMessage')['sendto']
+				'member_name' => \Yii::$app->request->post('BbiiMessage')['sendto']
 			])->one()->getAttribute('id');
 			$model->type = $type;
 
 			if ($model->validate() && $model->save()) {
-				Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Message sent successfully.'));
-				return Yii::$app->response->redirect(array('forum/message/layout'));
+				\Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Message sent successfully.'));
+				return \Yii::$app->response->redirect(array('forum/message/layout'));
 			} else {
 
-				Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii', 'Could not send message.'));
-				return Yii::$app->response->redirect(array('forum/message/layout'));
+				\Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii', 'Could not send message.'));
+				return \Yii::$app->response->redirect(array('forum/message/layout'));
 			}
 
 		} elseif (isset($id)) {
@@ -212,21 +212,21 @@ class MessageController extends BbiiController {
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function actionReply($id) {
-		if (isset(Yii::$app->request->post()['BbiiMessage'])) {
+	public function actionReply($id = null) {
+		if (isset(\Yii::$app->request->post()['BbiiMessage'])) {
 			$model = new BbiiMessage;
-			$model->load(Yii::$app->request->post()['BbiiMessage']);
-			$model->sendfrom = Yii::$app->user->id;
+			$model->load(\Yii::$app->request->post()['BbiiMessage']);
+			$model->sendfrom = \Yii::$app->user->id;
 			if ($model->save())
-				return Yii::$app->response->redirect(array('forum/outbox'));
+				return \Yii::$app->response->redirect(array('forum/outbox'));
 		} else {
 			$model = BbiiMessage::find($id);
-			if ($model->sendto != Yii::$app->user->id && !$this->isModerator()) {
+			if ($model->sendto != \Yii::$app->user->id && !$this->isModerator()) {
 				throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested message does not exist.'));
 			}
 			$model->sendto = $model->sendfrom;
 			$model->search = $model->receiver->member_name;
-			$quote = $model->receiver->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. Yii::$app->formatter->asDatetime($model->create_time);
+			$quote = $model->receiver->member_name .' '. Yii::t('BbiiModule.bbii', 'wrote') .' '. Yii::t('BbiiModule.bbii', 'on') .' '. \Yii::$app->formatter->asDatetime($model->create_time);
 			$model->content = '<blockquote cite = "'. $quote .'"><p class = "blockquote-header"><strong>'. $quote .'</strong></p>' . $model->content . '</blockquote><p></p>';
 		}
 
@@ -239,11 +239,11 @@ class MessageController extends BbiiController {
 	public function actionDelete($id) {
 		$model = $this->getMessageMDL($id);
 
-		if ($model->sendto == Yii::$app->user->id || $model->sendto == 0) {
+		if ($model->sendto == \Yii::$app->user->id || $model->sendto == 0) {
 			$model->inbox = 0;
 		}
 
-		if ($model->sendfrom == Yii::$app->user->id) {
+		if ($model->sendfrom == \Yii::$app->user->id) {
 			$model->outbox = 0;
 		}
 
@@ -254,11 +254,11 @@ class MessageController extends BbiiController {
 		}
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if (!isset(Yii::$app->request->get()['ajax'])) {
+		if (!isset(\Yii::$app->request->get()['ajax'])) {
 
-			return Yii::$app->response->redirect(
-				isset(Yii::$app->request->post()['returnUrl'])
-				? Yii::$app->request->post()['returnUrl']
+			return \Yii::$app->response->redirect(
+				isset(\Yii::$app->request->post()['returnUrl'])
+				? \Yii::$app->request->post()['returnUrl']
 				: ['forum/message/inbox']
 			);
 		}
@@ -271,12 +271,12 @@ class MessageController extends BbiiController {
 	 */
 	/*public function actionView() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['id'])) {
-			$model = BbiiMessage::find(Yii::$app->request->post()['id']);
-			if ($model !== null && ($this->isModerator() || $model->sendto == Yii::$app->user->id || $model->sendfrom == Yii::$app->user->id)) {
+		if (isset(\Yii::$app->request->post()['id'])) {
+			$model = BbiiMessage::find(\Yii::$app->request->post()['id']);
+			if ($model !== null && ($this->isModerator() || $model->sendto == \Yii::$app->user->id || $model->sendfrom == \Yii::$app->user->id)) {
 				$json['success'] = 'yes';
 				$json['html'] = $this->render('_view', array('model' => $model), true);
-				if ($model->sendto == Yii::$app->user->id) {
+				if ($model->sendto == \Yii::$app->user->id) {
 					$model->read_indicator = 1;
 					$model->update();
 				}
@@ -289,7 +289,7 @@ class MessageController extends BbiiController {
 			$json['message'] = Yii::t('BbiiModule.bbii', 'Message not found.');
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}*/
 	
 	/**
@@ -298,7 +298,7 @@ class MessageController extends BbiiController {
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function actionView($id) {
+	public function actionView($id = null) {
 		$model = $this->getMessageMDL($id);
 
 		// mark message as viewed
@@ -317,12 +317,12 @@ class MessageController extends BbiiController {
 	 */
 	public function actionSendReport() {
 		$json = array();
-		if (isset(Yii::$app->request->post()['BbiiMessage'])) {
+		if (isset(\Yii::$app->request->post()['BbiiMessage'])) {
 			$model = new BbiiMessage;
-			$model->load(Yii::$app->request->post()['BbiiMessage']);
+			$model->load(\Yii::$app->request->post()['BbiiMessage']);
 			$model->subject = Yii::t('BbiiModule.bbii', 'Post reported: ') . BbiiPost::find($model->post_id)->subject;
 			$model->sendto = 0;
-			$model->sendfrom = Yii::$app->user->id;
+			$model->sendfrom = \Yii::$app->user->id;
 			$model->outbox = 0;
 			$model->type = 2;
 			if ($model->save()) {
@@ -334,7 +334,7 @@ class MessageController extends BbiiController {
 			}
 		}
 		echo json_encode($json);
-		Yii::$app->end();
+		\Yii::$app->end();
 	}
 	
 	/**
@@ -343,10 +343,10 @@ class MessageController extends BbiiController {
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if (isset(Yii::$app->request->post()['ajax']) && Yii::$app->request->post()['ajax'] === 'message-form')
+		if (isset(\Yii::$app->request->post()['ajax']) && \Yii::$app->request->post()['ajax'] === 'message-form')
 		{
 			echo ActiveForm::validate($model);
-			Yii::$app->end();
+			\Yii::$app->end();
 		}
 	}
 
@@ -366,8 +366,8 @@ class MessageController extends BbiiController {
 	 */
 	private function getMessageCount($param = null) {
 		return [
-			'inbox'  => BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.Yii::$app->user->id),
-			'outbox' => BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.Yii::$app->user->id)
+			'inbox'  => BbiiMessage::find()->inbox()->count('inbox = 1 and sendto = '.\Yii::$app->user->id),
+			'outbox' => BbiiMessage::find()->outbox()->count('outbox = 1 and sendfrom = '.\Yii::$app->user->id)
 		];
 	}
 
@@ -380,12 +380,12 @@ class MessageController extends BbiiController {
 
 		if (is_numeric($param)) { return $param; }
 
-		$param = Yii::$app->request->post('BbiiMessage')['id'];
+		$param = \Yii::$app->request->post('BbiiMessage')['id'];
 		if (is_numeric($param)) {
 			return $param;
 		}
 
-		$param = Yii::$app->request->get('id');
+		$param = \Yii::$app->request->get('id');
 		if (is_numeric($param)) {
 			return $param;
 		}

@@ -26,14 +26,14 @@ foreach($forum as $forumdata) {
 					echo Html::buttonInput(
 						Yii::t('BbiiModule.bbii', 'Edit'),
 						[
-						'onclick' => 'js:editCategory(' . $data->id . ', "' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/getforum') .'")'
-							//'onclick' => 'function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxsort') . '");}();'
+						'onclick' => 'js:editCategory(' . $data->id . ', "' . Yii::t('BbiiModule.bbii','Edit category') . '", "' . \Yii::$app->urlManager->createAbsoluteUrl('forum/setting/getforum') .'")'
+							//'onclick' => 'function(){Sort(this,"' . \Yii::$app->urlManager->createAbsoluteUrl('forum/setting/ajaxsort') . '");}();'
 						]
 					);
 				*/
 				echo Html::a(
 					Yii::t('BbiiModule.bbii', 'Edit'),
-					Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/updateforum', 'id' => $data->id])
+					\Yii::$app->urlManager->createAbsoluteUrl(['forum/setting/updateforum', 'id' => $data->id])
 				);
 			?>
 		</td>
@@ -54,7 +54,7 @@ foreach($forum as $forumdata) {
 			'theme' => $this->module->juiTheme,
 			'options' => array(
 				'delay' => '100',
-				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
+				'update' => 'js:function(){Sort(this,"' . \Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		));*/
 
@@ -65,7 +65,7 @@ foreach($forum as $forumdata) {
 			'items'         => $forumitems,
 			'options' => array(
 				'delay'  => '100',
-				'update' => 'js:function(){Sort(this,"' . Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
+				'update' => 'js:function(){Sort(this,"' . \Yii::$app->urlManager->createAbsoluteUrl('setting/ajaxSort') . '");}',
 			),
 		]);
 	?>

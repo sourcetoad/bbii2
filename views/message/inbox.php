@@ -41,7 +41,7 @@ $item = array(
 			'subject',
 			array(
 				'name' => 'create_time',
-				'value' => 'Yii::$app->formatter->asDatetime($data->create_time)',
+				'value' => '\Yii::$app->formatter->asDatetime($data->create_time)',
 			),
 			array(
 				'name' => 'type',
@@ -54,7 +54,7 @@ $item = array(
 					'view' => array(
 						'url' => '$data->id',
 						'imageUrl' => $assets->baseUrl.'view.png',
-						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . Yii::$app->urlManager->createAbsoluteUrl('message/view') .'");return false; }',
+						'click' => 'js:function() { viewMessage($(this).attr("href"), "' . \Yii::$app->urlManager->createAbsoluteUrl('message/view') .'");return false; }',
 					),
 					'reply' => array(
 						'url' => 'array("reply", "id" => $data->id)',

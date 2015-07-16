@@ -29,8 +29,8 @@
 	<?php echo $form->hiddenField($poll,'expire_date'); ?>
 	<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 		'name' => 'expiredate',
-		'value' => Yii::$app->dateFormatter->formatDateTime($poll->expire_date, 'short', null),
-		'language' => substr(Yii::$app->language, 0, 2),
+		'value' => \Yii::$app->dateFormatter->formatDateTime($poll->expire_date, 'short', null),
+		'language' => substr(\Yii::$app->language, 0, 2),
 		'theme' => $this->module->juiTheme,
 		'options' => array(
 			'altField' => '#BbiiPoll_expire_date',

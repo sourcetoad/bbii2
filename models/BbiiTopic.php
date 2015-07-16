@@ -5,7 +5,7 @@ namespace frontend\modules\bbii\models;
 use frontend\modules\bbii\models\BbiiAR;
 use frontend\modules\bbii\models\BbiiPost;
 
-use yii;
+use Yii;
 
 /**
  * This is the model class for table "bbii_topic".
@@ -60,7 +60,7 @@ class BbiiTopic extends BbiiAR
 			[['forum_id', 'title', 'first_post_id', 'last_post_id'], 'required'],
 			[['forum_id', 'user_id', 'first_post_id', 'last_post_id', 'num_replies', 'num_views', 'moved', 'approved', 'locked', 'sticky', 'global', 'upvoted'], 'integer'],
 			['title', 'string', 'max' 		=> 255],
-			['user_id', 'default', 'value'  => Yii::$app->user->id, 'on' => 'insert'],
+			['user_id', 'default', 'value'  => \Yii::$app->user->id, 'on' => 'insert'],
 
 			// The following rule is used by search(].
 			// Please remove those attributes that should not be searched.
@@ -179,7 +179,7 @@ class BbiiTopic extends BbiiAR
 	public function hasPostedClass()
 	{
 
-		if (!Yii::$app->user->isGuest && BbiiPost::find()->where("topic_id = ".$this->id." and user_id = ".Yii::$app->user->id)) {
+		if (!\Yii::$app->user->isGuest && BbiiPost::find()->where("topic_id = ".$this->id." and user_id = ".\Yii::$app->user->id)) {
 			return 'posted';
 		}
 		return '';

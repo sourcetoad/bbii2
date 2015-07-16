@@ -2,7 +2,7 @@
 /* @var $this ForumController */
 /* @var $error array */
 
-$this->pageTitle = Yii::$app->name . ' - ' . Yii::t('BbiiModule.bbii', 'Error');
+$this->pageTitle = \Yii::$app->name . ' - ' . Yii::t('BbiiModule.bbii', 'Error');
 
 $this->title = Yii::t('forum', 'Forum');
 $this->params['breadcrumbs'][] = $this->title;

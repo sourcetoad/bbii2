@@ -73,7 +73,7 @@ use yii\helpers\Html;
                         'options' => [
                             'buttonSource'    => true,
                             'convertDivs'     => true,
-                            //'imageUpload'     => Yii::$app->urlManager->createUrl(['/file-storage/upload-imperavi']),
+                            //'imageUpload'     => \Yii::$app->urlManager->createUrl(['/file-storage/upload-imperavi']),
                             //'maxHeight'       => 400,
                             //'minHeight'       => 400,
                             'removeEmptyTags' => true,

@@ -15,13 +15,13 @@ use yii\widgets\ListView;
 
 // @note Old JS client logic inclustion
 /*
-Yii::$app->getClientScript()->registerScriptFile(Yii::$app->getClientScript()->getCoreScriptUrl().'/jui/js/jquery-ui-i18n.min.js',CClientScript::POS_END);
+\Yii::$app->getClientScript()->registerScriptFile(\Yii::$app->getClientScript()->getCoreScriptUrl().'/jui/js/jquery-ui-i18n.min.js',CClientScript::POS_END);
 
-Yii::$app->clientScript->registerScript('language', "
-	var language = \"" . substr(Yii::$app->language, 0, 2) . "\";", 
+\Yii::$app->clientScript->registerScript('language', "
+	var language = \"" . substr(\Yii::$app->language, 0, 2) . "\";", 
 CClientScript::POS_BEGIN);
 
-Yii::$app->clientScript->registerScript('scrollToPost', "
+\Yii::$app->clientScript->registerScript('scrollToPost', "
 	var aTag = $('a[name = \"" . $postId . "\"]');
 	if (aTag.length > 0) {
 		$('html,body').animate({scrollTop: aTag.offset().top},'fast');
@@ -50,10 +50,10 @@ $item = array(
 ?>
 
 <?php
-foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
-Yii::$app->session->removeAllFlashes();
+\Yii::$app->session->removeAllFlashes();
 ?>
 
 <div id = "bbii-wrapper">
@@ -67,18 +67,18 @@ Yii::$app->session->removeAllFlashes();
                         Topic: <?php echo $topic->title; ?>
                     </h3>
 
-                    <?php if (!Yii::$app->user->isGuest && $this->context->module->userMailColumn && $this->context->module->allowTopicSub) { ?>
+                    <?php if (!\Yii::$app->user->isGuest && $this->context->module->userMailColumn && $this->context->module->allowTopicSub) { ?>
                         <?php if ($this->isWatching($topic->id)) { ?>
-                            <?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('class' => 'bbii-watch-button','id' => 'unwatch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/unwatch') . '")')); ?>
-                            <?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('style' => 'display:none','class' => 'bbii-watch-button','id' => 'watch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/watch') . '")')); ?>
+                            <?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('class' => 'bbii-watch-button','id' => 'unwatch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . \Yii::$app->urlManager->createAbsoluteUrl('forum/unwatch') . '")')); ?>
+                            <?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('style' => 'display:none','class' => 'bbii-watch-button','id' => 'watch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . \Yii::$app->urlManager->createAbsoluteUrl('forum/watch') . '")')); ?>
                         <?php } else { ?>
-                            <?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('style' => 'display:none','class' => 'bbii-watch-button','id' => 'unwatch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/unwatch') . '")')); ?>
-                            <?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('class' => 'bbii-watch-button','id' => 'watch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . Yii::$app->urlManager->createAbsoluteUrl('forum/watch') . '")')); ?>
+                            <?php echo Html::button(Yii::t('BbiiModule.bbii', 'Stop watching topic'), array('style' => 'display:none','class' => 'bbii-watch-button','id' => 'unwatch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . \Yii::$app->urlManager->createAbsoluteUrl('forum/unwatch') . '")')); ?>
+                            <?php echo Html::button(Yii::t('BbiiModule.bbii', 'Watch topic'), array('class' => 'bbii-watch-button','id' => 'watch','onclick' => 'BBii.watchTopic(' . $topic->id . ',' . $topic->last_post_id . ',"' . \Yii::$app->urlManager->createAbsoluteUrl('forum/watch') . '")')); ?>
                         <?php }; ?>
                     <?php }; ?>
                 </td>
                 <td align="right">
-                    <?php if (!(Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()) { ?>
+                    <?php if (!(\Yii::$app->user->isGuest || $topic->locked) || $this->context->isModerator()) { ?>
                     <div class = "form">
                         <?php // @deprecated 2.7.5
                         /* $form = $this->beginWidget('ActiveForm', array(

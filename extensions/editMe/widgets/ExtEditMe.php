@@ -260,11 +260,11 @@ class ExtEditMe extends CInputWidget {
 		$this -> _ckeExtensionPath = dirname(dirname(__FILE__)) . '/vendors/CKEditor';
 		// Start the publishing process if it has not been executed on the current page already
 		if (empty(self::$_ckeAssetUrl)) {
-			$excludeFiles = Yii::$app -> assetManager -> excludeFiles;
-			array_push(Yii::$app -> assetManager -> excludeFiles, 'CHANGES.md', 'README.md', 'samples');
-			self::$_ckeAssetUrl = Yii::$app -> assetManager -> publish($this -> _ckeExtensionPath);
-			Yii::$app -> assetManager -> excludeFiles = $excludeFiles;
-			$ckeAssetPath = str_replace(Yii::$app -> assetManager -> baseUrl, Yii::$app -> assetManager -> basePath, self::$_ckeAssetUrl);
+			$excludeFiles = \Yii::$app -> assetManager -> excludeFiles;
+			array_push(\Yii::$app -> assetManager -> excludeFiles, 'CHANGES.md', 'README.md', 'samples');
+			self::$_ckeAssetUrl = \Yii::$app -> assetManager -> publish($this -> _ckeExtensionPath);
+			\Yii::$app -> assetManager -> excludeFiles = $excludeFiles;
+			$ckeAssetPath = str_replace(\Yii::$app -> assetManager -> baseUrl, \Yii::$app -> assetManager -> basePath, self::$_ckeAssetUrl);
 			if (@is_file($ckeAssetPath . '/editMe.' . md5(self::$_ckeAssetUrl) . '.min.js') === false) {
 				$scriptContents[] = 'var CKEDITOR_BASEPATH = ' . CJavaScript::encode(self::$_ckeAssetUrl . '/') . ';';
 				$scriptContents[] = @file_get_contents($ckeAssetPath . '/ckeditor.js');
@@ -318,7 +318,7 @@ class ExtEditMe extends CInputWidget {
 					self::$_languages[] = substr($language, 0, -3);
 				}
 			}
-			$yiiLanguage = str_replace('_', '-', strtolower(Yii::$app -> language));
+			$yiiLanguage = str_replace('_', '-', strtolower(\Yii::$app -> language));
 			if (in_array($yiiLanguage, self::$_languages)) {
 				$ckeConfig['language'] = $yiiLanguage;
 			} elseif (in_array(substr($yiiLanguage, 0, 2), self::$_languages)) {
@@ -378,8 +378,8 @@ class ExtEditMe extends CInputWidget {
 	 */
 	public function run() {
 		// Register JavaScript files
-		Yii::$app -> clientScript -> registerCoreScript('jquery');
-		Yii::$app -> clientScript -> registerScriptFile(self::$_ckeAssetUrl . '/editMe.' . md5(self::$_ckeAssetUrl) . '.min.js');
+		\Yii::$app -> clientScript -> registerCoreScript('jquery');
+		\Yii::$app -> clientScript -> registerScriptFile(self::$_ckeAssetUrl . '/editMe.' . md5(self::$_ckeAssetUrl) . '.min.js');
 		// Generate textarea if not in inline mode
 		if (empty($this -> inlineId)) {
 			$nameId = $this -> resolveNameID();
@@ -394,11 +394,11 @@ class ExtEditMe extends CInputWidget {
 		$ckeConfig = CJavaScript::encode($this -> _ckeGenerateConfig());
 		if (empty($this -> inlineId)) {
 			$jqSelector = CJavaScript::encode('#' . $this -> htmlOptions['id']);
-			Yii::$app -> clientScript -> registerScript('editMe_' . $this -> htmlOptions['id'], 'jQuery(' . $jqSelector . ').ckeditor(' . $ckeConfig . ');', 2);
+			\Yii::$app -> clientScript -> registerScript('editMe_' . $this -> htmlOptions['id'], 'jQuery(' . $jqSelector . ').ckeditor(' . $ckeConfig . ');', 2);
 		} else {
 			$selector = CJavaScript::encode($this -> inlineId);
 			$jqSelector = CJavaScript::encode('#' . $this -> inlineId);
-			Yii::$app -> clientScript -> registerScript('editMe_inline_' . $this -> inlineId, 'jQuery(' . $jqSelector . ').attr("contenteditable",true);CKEDITOR.disableAutoInline = true;CKEDITOR.inline(' . $selector . ',' . $ckeConfig . ');', 2);
+			\Yii::$app -> clientScript -> registerScript('editMe_inline_' . $this -> inlineId, 'jQuery(' . $jqSelector . ').attr("contenteditable",true);CKEDITOR.disableAutoInline = true;CKEDITOR.inline(' . $selector . ',' . $ckeConfig . ');', 2);
 		}
 	}
 
