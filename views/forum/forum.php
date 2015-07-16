@@ -30,7 +30,12 @@ $item = array(
 );
 ?>
 
-<?php echo Yii::$app->session->getFlash(); ?>
+<?php
+foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+    echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
+}
+Yii::$app->session->removeAllFlashes();
+?>
 
 <div id = "bbii-wrapper">
     <div class="row">

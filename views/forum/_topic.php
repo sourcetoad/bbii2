@@ -40,7 +40,7 @@ $assets = AppAsset::register($this);
     <td class="forum-cell last-cell">
         <?php
             // echo Html::encode($model->lastPost->poster->member_name);
-            echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $model->id, 'nav' => 'last'));
+            echo Html::a(Html::img($assets->baseUrl.'/images/next.png', array('alt' => 'next', 'style' => 'margin-left:5px;')), array('topic', 'id' => $model->id, 'nav' => 'last'));
             echo '<br>';
 
             $postDateLong = Yii::$app->formatter->asDatetime($model->lastPost->create_time);

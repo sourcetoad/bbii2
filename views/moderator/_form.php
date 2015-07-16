@@ -5,14 +5,13 @@
 ?>
 
 <h2><?php echo Yii::t('BbiiModule.bbii','Send mail to multiple forum members'); ?></h2>
-<?php // @todo re-enable flash messages
-	/*if (Yii::$app->user->hasFlash('success')): ?>
 
-<div class = "flash-success">
-	<?php echo Yii::$app->user->getFlash('success'); ?>
-</div>
-
-<?php endif;*/ ?>
+<?php
+foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+    echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
+}
+Yii::$app->session->removeAllFlashes();
+?>
 
 <div class = "form">
 

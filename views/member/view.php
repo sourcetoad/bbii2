@@ -43,11 +43,12 @@ $item = array(
 
 ?>
 
-<?php /*if (Yii::$app->user->hasFlash('notice')): ?>
-<div class = "flash-notice">
-	<?php echo Yii::$app->user->getFlash('notice'); ?>
-</div>
-<?php endif;*/ ?>
+<?php
+foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+    echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
+}
+Yii::$app->session->removeAllFlashes();
+?>
 
 <div id = "bbii-wrapper">
 	<?php echo $this->render('_header', array('item' => $item)); ?>

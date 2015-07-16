@@ -44,10 +44,10 @@ class BbiiSession extends BbiiAR
 		];
 	}
 	
-	public function beforeSave() {
+	public function beforeSave($insert) {
 		// @todo not sure why 'NOW()' is not working - DJE : 2015-05-29
-		$this->last_visit = date('Y-m-d H:m:i');
-		return parent::beforeSave();
+		// $this->last_visit = date('Y-m-d H:m:i');
+		return parent::beforeSave($insert);
 	}
 
 	/**

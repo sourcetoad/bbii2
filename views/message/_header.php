@@ -36,7 +36,7 @@ $assets = AppAsset::register($this);
 foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
-Yii::$app->session->removeFlash();
+Yii::$app->session->removeAllFlashes();
 ?>
 
 <noscript>

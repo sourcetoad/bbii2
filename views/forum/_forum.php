@@ -53,7 +53,7 @@ if (!$model->public) {
             <td class = "forum-cell forum-date last-cell">
                 <?php
                 if (is_numeric($model->last_post_id) && !empty($model->lastPost)) {
-                    //echo Html::a(Html::img($assets->baseUrl.'/images/next.png', 'next', array('style' => 'margin-left:5px;')), array('topic', 'id' => $model->lastPost->topic_id, 'nav' => 'last'));
+                    echo Html::a(Html::img($assets->baseUrl.'/images/next.png', array('alt' => 'next', 'style' => 'margin-left:5px;')), array('topic', 'id' => $model->lastPost->topic_id, 'nav' => 'last'));
                     echo Html::encode($model->lastPost->poster->member_name);
                     echo '<br>';
 
