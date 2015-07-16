@@ -129,7 +129,7 @@ class BbiiModule extends \yii\base\Module
 	 * @param  [type] $action     [description]
 	 * @return [type]             [description]
 	 */
-	public function beforeAction($controller, $action)
+	public function beforeAction($controller, $action = null)
 	{
 		if (parent::beforeAction($controller, $action)) {
 
