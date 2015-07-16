@@ -125,7 +125,7 @@ class ForumController extends BbiiController {
 	 *
 	 * @version  2.7.5
 	 */
-	public function actionForum($id) {
+	public function actionForum($id = null) {
 		$id    = is_numeric($id) ?: Yii::$app->request->get('id');
 		$forum = BbiiForum::findOne($id);
 

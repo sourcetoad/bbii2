@@ -128,6 +128,7 @@ class BbiiController extends Controller
 	}
 
     public function behaviors() {
+
     	if ($this->module->adminId == 'AccessControl') {
 
 	        return [
@@ -142,5 +143,7 @@ class BbiiController extends Controller
 	            ],
 	        ];
 	    }
+
+	    return parent::behaviors();
     }
 }
