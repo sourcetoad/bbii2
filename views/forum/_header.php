@@ -21,7 +21,7 @@ echo Html::dropDownList(
 	null,
 	ArrayHelper::map(BbiiForum::getForumOptions(), 'id', 'name'),
 	array(
-		'prompt' => 'Pick a forum',
+		'prompt' => 'Jump to a Forum',
 		'class'    => 'form-control',
 		//'empty'    => Yii::t('BbiiModule.bbii', 'Select forum'),
 		'onchange' => "window.location.href = '" . \Yii::$app->urlManager->createAbsoluteUrl(array('forum')) . "/forum/forum?id='+$(this).val()",

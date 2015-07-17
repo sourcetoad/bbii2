@@ -35,7 +35,7 @@ CClientScript::POS_BEGIN);
 	$topic->title,
 );*/ 
 
-$this->title = Yii::t('forum', 'Forum');
+$this->title = Yii::t('forum', $topic->title);
 $this->params['breadcrumbs'][] = $this->title;
 
 $approvals = BbiiPost::find()->unapproved()->count();

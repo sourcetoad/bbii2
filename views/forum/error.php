@@ -4,7 +4,7 @@
 
 $this->pageTitle = \Yii::$app->name . ' - ' . Yii::t('BbiiModule.bbii', 'Error');
 
-$this->title = Yii::t('forum', 'Forum');
+$this->title = Yii::t('forum', 'Error');
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->context->bbii_breadcrumbs = array(
