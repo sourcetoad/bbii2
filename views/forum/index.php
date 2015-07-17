@@ -9,7 +9,7 @@ use yii\widgets\ListView;
 /* @var $this ForumController */
 /* @var $dataProvider ArrayDataProvider */
 
-$this->title = Yii::t('forum', 'Forum');
+$this->title = Yii::t('forum', $this->context->module->forumTitle);
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->context->bbii_breadcrumbs = array(
