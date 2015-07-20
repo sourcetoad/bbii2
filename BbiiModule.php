@@ -164,11 +164,9 @@ class BbiiModule extends \yii\base\Module
 					$spider->setScenario('visit');
 					$spider->hits++;
 					$spider->last_visit = null;
+
 					if (!$spider->validate() || !$spider->save()) {
-						echo '<pre>';
-						print_r( $spider->getErrors() );
-						echo '</pre>';
-						exit;
+						// todo Some kind of logging when the spider model does not validate or save - DJE : 2015-07-20
 					}
 				// guest visit
 				} else {
@@ -178,10 +176,7 @@ class BbiiModule extends \yii\base\Module
 					$model->id = \Yii::$app->session->getId();
 
 					if (!$model->validate() || !$model->save()) {
-						echo '<pre>';
-						print_r( $model->getErrors() );
-						echo '</pre>';
-						exit;
+						// todo Some kind of logging when the user model does not validate or save - DJE : 2015-07-20
 					}
 				}
 			}
