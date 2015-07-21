@@ -134,21 +134,21 @@ class BbiiModule extends \yii\base\Module
 		if (parent::beforeAction($controller, $action)) {
 
 			// register last visit by member
-			if (\Yii::$app->user->id) {
-				//$model = BbiiMember::find(\Yii::$app->user->id);
-				$model = BbiiMember::find()->where(['id' => \Yii::$app->user->id])->one();
+			if (\Yii::$app->user->identity->id ) {
+				//$model = BbiiMember::find(\Yii::$app->user->identity->id );
+				$model = BbiiMember::find()->where(['id' => \Yii::$app->user->identity->id ])->one();
 
 				if ($model !== null) {
 					$model->setAttribute('last_visit', date('Y-m-d H:i:s'));
 					$model->save();
 				} else {
 					$userClass = new User;
-					$user      = $userClass::find()->where([$this->userIdColumn => \Yii::$app->user->id])->one();
+					$user      = $userClass::find()->where([$this->userIdColumn => \Yii::$app->user->identity->id ])->one();
 					$username  = $user->getAttribute($this->userNameColumn);
 
 					$model              = new BbiiMember;
 					$model->setAttribute('first_visit', date('Y-m-d H:i:s'));
-					$model->setAttribute('id', 			\Yii::$app->user->id);
+					$model->setAttribute('id', 			\Yii::$app->user->identity->id );
 					$model->setAttribute('last_visit', 	date('Y-m-d H:i:s'));
 					$model->setAttribute('member_name', $username);
 					$model->save();

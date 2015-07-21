@@ -56,7 +56,7 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
     <div class="well clearfix">
         <div class = "bbii-box-top">
             <?php
-                if ($this->context->isModerator() || $userData->getAttribute('id') == \Yii::$app->user->id) {
+                if ($this->context->isModerator() || $userData->getAttribute('id') == \Yii::$app->user->identity->id ) {
                     //echo Html::htmlButton(Yii::t('BbiiModule.bbii', 'Edit profile'), array('class' => 'bbii-button-right', 'onclick' => 'js:document.location.href = "' . \Yii::$app->urlManager->createAbsoluteUrl('member/update', array('id' => $userData->getAttribute('id)) .'"'));
                     echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Edit profile'),
                         array(

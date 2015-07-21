@@ -90,11 +90,11 @@ class BbiiController extends Controller
 	 */
 	public function isAdmin() {
 
-		if ($this->module->adminId && $this->module->adminId ===  \Yii::$app->user->id) {
+		if ($this->module->adminId && $this->module->adminId ===  \Yii::$app->user->identity->id ) {
 			return true;	// by module parameter assigned admin
 		}
 
-		if (\Yii::$app->authManager && \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id)['user']->type  == 3
+		if (\Yii::$app->authManager && \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->identity->id )['user']->type  == 3
 		) {
 			return true;	// rbac role "admin"
 		}
@@ -109,10 +109,10 @@ class BbiiController extends Controller
 	public function isModerator() {
 
 		// user not logged into web-app
-		if (!\Yii::$app->user->id) { return false; }
+		if (!\Yii::$app->user->identity->id ) { return false; }
 		
 		// rbac role "moderator"
-		if (\Yii::$app->authManager && \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id)['user']->type  == 2 ) {
+		if (\Yii::$app->authManager && \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->identity->id )['user']->type  == 2 ) {
 			return true;	
 		}
 

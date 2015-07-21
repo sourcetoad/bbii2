@@ -510,8 +510,6 @@ class SettingController extends BbiiController {
      */
     public function actionUpdatemembergroup($id)
     {
-    	echo 'asdf';exit;
-
     	$id    = (is_numeric($id) ? $id : \Yii::$app->request->get('id'));
         $model = BbiiMembergroup::find()->where(['id' => $id])->one();
 

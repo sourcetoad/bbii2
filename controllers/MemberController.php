@@ -51,7 +51,7 @@ class MemberController extends BbiiController {
 		//$model = new BbiiMember('search');
 		// No longer needed in Yii2+
 		// $model->unsetAttributes();  // clear any default values
-		
+
 		$model = new BbiiMember;
 
 		if (isset(\Yii::$app->request->get()['BbiiMember']))
@@ -63,7 +63,7 @@ class MemberController extends BbiiController {
 	public function actionUpdate($id = null) {
 		$model = $this->loadModel($id)->one();
 
-		if ($id != \Yii::$app->user->id && !$this->isModerator()) {
+		if ($id != \Yii::$app->user->identity->id  && !$this->isModerator()) {
 			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
 			return \Yii::$app->response->redirect(array('forum/member/index'));
 		}
@@ -131,7 +131,7 @@ class MemberController extends BbiiController {
 	 * @return [type]     [description]
 	 */
 	/*public function actionView($id) {
-		if (isset(\Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == \Yii::$app->user->id)) {
+		if (isset(\Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == \Yii::$app->user->identity->id )) {
 			$object = new BbiiTopicRead;
 			$read = BbiiTopicRead::find($id);
 			if ($read !== null) {
@@ -153,7 +153,7 @@ class MemberController extends BbiiController {
 			),
 			'pagination' => false,
 		));
-		if ($this->isModerator() || $id == \Yii::$app->user->id) {
+		if ($this->isModerator() || $id == \Yii::$app->user->identity->id ) {
 			$object = new BbiiTopicRead;
 			$read = BbiiTopicRead::find($id);
 			if ($read === null) {
@@ -191,7 +191,7 @@ class MemberController extends BbiiController {
 		$object = new BbiiTopicRead;
 		$read   = BbiiTopicRead::find($id);
 
-		if (isset(\Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == \Yii::$app->user->id)) {
+		if (isset(\Yii::$app->request->get()['unwatch']) && ($this->isModerator() || $id == \Yii::$app->user->identity->id )) {
 
 			if ($read !== null) {
 				$object->unserialize($read->data);
@@ -202,7 +202,7 @@ class MemberController extends BbiiController {
 				$read->save();
 			}
 		}
-		if ( ($this->isModerator() || $id == \Yii::$app->user->id) && isset($read->data) ) {
+		if ( ($this->isModerator() || $id == \Yii::$app->user->identity->id ) && isset($read->data) ) {
 			if ($read === null) {
 
 				$in = array(0);
@@ -231,7 +231,7 @@ class MemberController extends BbiiController {
 		return $this->render('view', array(
 			'dataProvider'  => $dataProvider,
 			'topicProvider' => $topicProvider,
-			'userData'      => BbiiMember::find()->where(['id' => \Yii::$app->user->id])->one(), 
+			'userData'      => BbiiMember::find()->where(['id' => \Yii::$app->user->identity->id ])->one(), 
 		));
 	}
 
@@ -244,14 +244,14 @@ class MemberController extends BbiiController {
 				$class = new $this->module->userClass;
 				$criteria = new CDbCriteria;
 				$criteria->condition = $this->module->userIdColumn . ' = :id';
-				$criteria->params = array(':id' => \Yii::$app->user->id);
+				$criteria->params = array(':id' => \Yii::$app->user->identity->id );
 				$user 	 =  $class::find()->find($criteria);
 				$from 	 =  $user->getAttribute($this->module->userMailColumn);
 				$criteria->params = array(':id' => $model->member_id);
 				$user 	 =  $class::find()->find($criteria);
 				$to 	 =  $user->getAttribute($this->module->userMailColumn);
 				
-				$name = BbiiMember::find(\Yii::$app->user->id)->member_name;
+				$name = BbiiMember::find(\Yii::$app->user->identity->id )->member_name;
 				$name = ' = ?UTF-8?B?'.base64_encode($name).'? = ';
 				$subject = ' = ?UTF-8?B?'.base64_encode($model->subject).'? = ';
 				$sendto = $model->member_name . " <$to>";

@@ -470,7 +470,7 @@ class ModeratorController extends BbiiController {
 					$users = array();
 					foreach($members as $member) {
 						$message = new BbiiMessage;
-						$message->sendfrom = \Yii::$app->user->id;
+						$message->sendfrom = \Yii::$app->user->identity->id ;
 						$message->sendto = $member->id;
 						$message->subject = $model->subject;
 						$message->content = $model->body;

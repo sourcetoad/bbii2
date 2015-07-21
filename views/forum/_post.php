@@ -68,7 +68,7 @@ $assets = AppAsset::register($this);
                             <?php ActiveForm::end(); ?>
                         <?php }; ?>
 
-                        <?php if (!($model->user_id != \Yii::$app->user->id || $model->topic->locked) || $this->context->isModerator()) { ?>
+                        <?php if (!($model->user_id != \Yii::$app->user->identity->id  || $model->topic->locked) || $this->context->isModerator()) { ?>
                             <?php $form = ActiveForm::begin([
                                 'action'               => array('forum/update', 'id' => $model->id),
                                 'enableAjaxValidation' => false,
@@ -99,7 +99,7 @@ $assets = AppAsset::register($this);
                             'summaryText' => false,
                         ));
                         echo '<div style = "text-align:center;width:99%">';
-                        if ($this->poll->user_id == \Yii::$app->user->id || $this->context->isModerator()) {
+                        if ($this->poll->user_id == \Yii::$app->user->identity->id  || $this->context->isModerator()) {
                             echo Html::button(Yii::t('BbiiModule.bbii', 'Edit poll'), array('onclick' => 'editPoll(' . $this->poll->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('forum/editPoll') . '");'));
                         }
                         if (!\Yii::$app->user->isGuest && $this->poll->allow_revote && (!isset($this->poll->expire_date) || $this->poll->expire_date > date('Y-m-d'))) {

@@ -72,7 +72,7 @@ class BbiiMessage extends BbiiAR
 	
 	public function mailboxFull($attr, $params) {
 		$criteria = new CDbCriteria;
-		$criteria->condition = 'outbox = 1 and sendfrom = '. \Yii::$app->user->id;
+		$criteria->condition = 'outbox = 1 and sendfrom = '. \Yii::$app->user->identity->id ;
 		if (BbiiMessage::find()->outbox()->count($criteria) >= 50) {
 			$this->addError('sendto', Yii::t('BbiiModule.bbii', 'Your outbox is full. Please make room before sending new messages.'));
 		}
