@@ -40,7 +40,6 @@ $item = array(
       'url' => array('moderator/admin'), 'visible' => $this->context->isModerator()
     ),
 );
-
 ?>
 
 <?php
@@ -58,11 +57,16 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
             <?php
                 if ($this->context->isModerator() || $userData->getAttribute('id') == \Yii::$app->user->identity->id ) {
                     //echo Html::htmlButton(Yii::t('BbiiModule.bbii', 'Edit profile'), array('class' => 'bbii-button-right', 'onclick' => 'js:document.location.href = "' . \Yii::$app->urlManager->createAbsoluteUrl('member/update', array('id' => $userData->getAttribute('id)) .'"'));
-                    echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Edit profile'),
+                    /* echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Edit profile'),
                         array(
-                            'class' => 'btn btn-success pull-right',
-                            'onclick' => 'js:document.location.href = "' . \Yii::$app->urlManager->createAbsoluteUrl('forum/member/update', array('id' => $userData->getAttribute('id'))) .'"'
+                            'class'     => 'btn btn-success pull-right',
+                            'onclick'   => 'js:document.location.href = "' . \Yii::$app->urlManager->createAbsoluteUrl('forum/member/update', array('id' => $userData->id)) .'"'
                         )
+                    ); */
+                    echo Html::a(
+                        'Edit Profile',
+                        array('./member/update/?id='.$userData->id),
+                        array('class' => 'btn btn-success pull-right')
                     );
                 };
             ?>

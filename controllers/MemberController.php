@@ -59,11 +59,19 @@ class MemberController extends BbiiController {
 
 		return $this->render('index', array('model' => $model));
 	}
-	
-	public function actionUpdate($id = null) {
-		$model = $this->loadModel($id)->one();
 
-		if ($id != \Yii::$app->user->identity->id  && !$this->isModerator()) {
+	/**
+	 * Update forum user profile
+	 * 
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function actionUpdate() {
+
+		//$model = $this->loadModel()->one();
+		$model = BbiiMember::find()->where(['id' => Yii::$app->user->identity->id])->one();
+
+		if (!$model->id  && !$this->isModerator()) {
 			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
 			return \Yii::$app->response->redirect(array('forum/member/index'));
 		}
@@ -117,7 +125,7 @@ class MemberController extends BbiiController {
 				\Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii','Error while saving.'));
 			}
 		}
-
+		
 		return $this->render('update', array(
 			'model' => $model
 		));
