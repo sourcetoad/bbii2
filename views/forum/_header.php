@@ -41,9 +41,12 @@ echo Html::dropDownList(
 				echo Html::a(Html::img($assets->baseUrl.'/images/mail.png', array('title' => Yii::t('BbiiModule.bbii', 'no new messages'), 'style' => 'vertical-align:bottom;')), array('message/inbox'),array('class'=>'btn btn-default'));
 			}
 			echo Html::a(Html::img($assets->baseUrl.'/images/settings.png', array('title' => Yii::t('BbiiModule.bbii', 'My settings'), 'style' => 'vertical-align:bottom;')), array('member/view', 'id'  => \Yii::$app->user->identity->id ),array('class'=>'btn btn-default'));
-			echo Html::a(Html::img($assets->baseUrl.'/images/moderator.png', array('title' => Yii::t('BbiiModule.bbii', 'Moderate'), 'style' => 'vertical-align:bottom;')), array('moderator/approval'),array('class'=>'btn btn-default'));
-			echo Html::a(Html::img($assets->baseUrl.'/images/config.png', array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'), 'style' => 'vertical-align:bottom;')), array('setting/index'),array('class'=>'btn btn-default'));
-		?>
+			
+			if ($this->context->isModerator()) {
+				echo Html::a(Html::img($assets->baseUrl.'/images/moderator.png', array('title' => Yii::t('BbiiModule.bbii', 'Moderate'), 'style' => 'vertical-align:bottom;')), array('moderator/approval'),array('class'=>'btn btn-default'));
+				echo Html::a(Html::img($assets->baseUrl.'/images/config.png', array('title' => Yii::t('BbiiModule.bbii', 'Forum settings'), 'style' => 'vertical-align:bottom;')), array('setting/index'),array('class'=>'btn btn-default'));
+			}
+			?>
 		</div>
 	<?php endif; ?>
 	<h2><?php echo $this->context->module->forumTitle; ?></h2>
