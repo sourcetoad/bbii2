@@ -17,6 +17,7 @@ class BbiiModule extends \yii\base\Module
 	public $adminId        = 1; // must be overridden to assign admin rights to user id
 	public $allowTopicSub  = false;
 	public $accessControl  = false;
+	public $allowAPILogin  = false;
 	public $postsPerPage   = 20;
 	public $topicsPerPage  = 20;
 	public $userClass      = 'common\models\User'; // change this to your user module
@@ -51,12 +52,43 @@ class BbiiModule extends \yii\base\Module
 		'HTML.SafeIframe'          => true,
 		'URI.SafeIframeRegexp'     => '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',
 	);
-	public $version           = '3.0.5';
+	public $version           = '3.1.5';
 
 	private $_assetsUrl;
 	
 	public function init() {
 		$this->registerAssets();
+
+        parent::init();
+
+		// If API log in is allowed AND the auth-token is provided.
+		// todo refactor this, ATM a clug to get it working - DJE : 2015-07-23
+		if ($this->allowAPILogin && 
+			(
+				Yii::$app->request->get('auth-token') != false
+				&& !empty( Yii::$app->request->get('auth-token') )
+			)
+		) {
+			Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+			$headers = Yii::$app->response->headers;
+			$headers->add('Content-Type', 'application/json; charset=utf-8');
+
+			$userMDL  = User::findIdentityByAccessToken( Yii::$app->request->get('auth-token') );
+
+			// if the user was successfully logged in, return a message saying so
+			if ( Yii::$app->user->login($userMDL) ) {
+
+				$returnData = ['status' => 'success'];
+
+			} else {
+
+				$returnData = ['status' => 'failed'];
+			}
+
+			echo json_encode( $returnData );
+			Yii::$app->end();
+		}
+
 
 		// @depricated 2.0.0 Use the parent applications error settings
 		/*
@@ -77,8 +109,6 @@ class BbiiModule extends \yii\base\Module
 			$this->id.'.components.*',
 		));
 		*/
-
-        parent::init();
 	}
 	
     /**
