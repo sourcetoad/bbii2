@@ -17,6 +17,7 @@ class BbiiModule extends \yii\base\Module
 	public $adminId        = 1; // must be overridden to assign admin rights to user id
 	public $allowTopicSub  = false;
 	public $accessControl  = false;
+	public $allowAPILogin  = false;
 	public $postsPerPage   = 20;
 	public $topicsPerPage  = 20;
 	public $userClass      = 'common\models\User'; // change this to your user module
@@ -51,12 +52,24 @@ class BbiiModule extends \yii\base\Module
 		'HTML.SafeIframe'          => true,
 		'URI.SafeIframeRegexp'     => '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',
 	);
-	public $version           = '3.0.5';
+	public $version           = '3.1.5';
 
 	private $_assetsUrl;
 	
 	public function init() {
 		$this->registerAssets();
+
+		// If API log in is allowed AND the auth-token is provided.
+		if ($this->allowAPILogin && 
+			(
+				Yii::$app->request->get('auth-token') != false
+				&& !empty( Yii::$app->request->get('auth-token') )
+			)
+		) {
+
+			echo 'API Login';		
+			die();
+		}
 
 		// @depricated 2.0.0 Use the parent applications error settings
 		/*
