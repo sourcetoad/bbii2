@@ -59,17 +59,36 @@ class BbiiModule extends \yii\base\Module
 	public function init() {
 		$this->registerAssets();
 
+        parent::init();
+
 		// If API log in is allowed AND the auth-token is provided.
+		// todo refactor this, ATM a clug to get it working - DJE : 2015-07-23
 		if ($this->allowAPILogin && 
 			(
 				Yii::$app->request->get('auth-token') != false
 				&& !empty( Yii::$app->request->get('auth-token') )
 			)
 		) {
+			Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+			$headers = Yii::$app->response->headers;
+			$headers->add('Content-Type', 'application/json; charset=utf-8');
 
-			echo 'API Login';		
-			die();
+			$userMDL  = User::findIdentityByAccessToken( Yii::$app->request->get('auth-token') );
+
+			// if the user was successfully logged in, return a message saying so
+			if ( Yii::$app->user->login($userMDL) ) {
+
+				$returnData = ['status' => 'success'];
+
+			} else {
+
+				$returnData = ['status' => 'failed'];
+			}
+
+			echo json_encode( $returnData );
+			Yii::$app->end();
 		}
+
 
 		// @depricated 2.0.0 Use the parent applications error settings
 		/*
@@ -90,8 +109,6 @@ class BbiiModule extends \yii\base\Module
 			$this->id.'.components.*',
 		));
 		*/
-
-        parent::init();
 	}
 	
     /**
