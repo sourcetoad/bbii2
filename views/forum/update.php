@@ -12,7 +12,9 @@
 ); */
 
 $this->title = Yii::t('forum', $topic->title);
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('forum_name', $forum->name), 'url' => array('forum/forum', 'id' => $forum->id)];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('topic_title', $topic->title), 'url' => array('forum/topic', 'id' => $topic->id)];
+$this->params['breadcrumbs'][] = "Change";
 
 $item = array(
 	array('label' => Yii::t('bbii', 'Forum'), 'url' => array('/forum/forum/index')),

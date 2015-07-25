@@ -69,23 +69,27 @@ class BbiiModule extends \yii\base\Module
 				&& !empty( Yii::$app->request->get('auth-token') )
 			)
 		) {
-			Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+			/* Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
 			$headers = Yii::$app->response->headers;
-			$headers->add('Content-Type', 'application/json; charset=utf-8');
+			$headers->add('Content-Type', 'application/json; charset=utf-8'); */
+			// Guest user still needs session to hide header
+			if(Yii::$app->request->get('auth-token') != "guest") {
+				$userMDL  = User::findIdentityByAccessToken( Yii::$app->request->get('auth-token') );
 
-			$userMDL  = User::findIdentityByAccessToken( Yii::$app->request->get('auth-token') );
+				// if the user was successfully logged in, return a message saying so
+				if ( Yii::$app->user->login($userMDL) ) {
 
-			// if the user was successfully logged in, return a message saying so
-			if ( Yii::$app->user->login($userMDL) ) {
+					//$returnData = ['status' => 'success' ];
 
-				$returnData = ['status' => 'success'];
+				} else {
 
-			} else {
+					//$returnData = ['status' => 'failed'];
+				}
 
-				$returnData = ['status' => 'failed'];
-			}
-
-			echo json_encode( $returnData );
+				//echo json_encode( $returnData );
+                        }
+			Yii::$app->session->set('mobile', 'true');
+			Yii::$app->response->redirect(\Yii::$app->urlManager->createAbsoluteUrl('forum'));
 			Yii::$app->end();
 		}
 
