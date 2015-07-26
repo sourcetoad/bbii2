@@ -53,7 +53,10 @@ class MemberController extends BbiiController {
 		// $model->unsetAttributes();  // clear any default values
 
 		$model = new BbiiMember;
-
+		if (!$this->isModerator()) {
+			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
+			return \Yii::$app->response->redirect(array('forum/forum'));
+		}
 		if (isset(\Yii::$app->request->get()['BbiiMember']))
 			$model->load(\Yii::$app->request->get()['BbiiMember']);
 
@@ -73,7 +76,7 @@ class MemberController extends BbiiController {
 
 		if (!$model->id  || !($this->isModerator() || $model->id == \Yii::$app->user->identity->id)) {
 			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
-			return \Yii::$app->response->redirect(array('forum/member/index'));
+			return \Yii::$app->response->redirect(array('forum/forum'));
 		}
 
 		if (isset(\Yii::$app->request->post()['BbiiMember'])) {
