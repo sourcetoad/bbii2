@@ -33,14 +33,14 @@ class MemberController extends BbiiController {
 	public function accessRules()
 	{
 		return array(
-			array('allow',
+		/*	array('allow',
 				'actions' => array('index','mail','members','view','update'),
 				'users' => array('@'),
 			),
 			array('allow',
 				'actions' => array('watch'),
 				'users' => array('*'),
-			),
+			),*/
 			array('deny',  // deny all users
 				'users' => array('*'),
 			),
@@ -69,9 +69,9 @@ class MemberController extends BbiiController {
 	public function actionUpdate() {
 
 		//$model = $this->loadModel()->one();
-		$model = BbiiMember::find()->where(['id' => Yii::$app->user->identity->id])->one();
+		$model = BbiiMember::find()->where(['id' => Yii::$app->request->get('id')])->one();
 
-		if (!$model->id  && !$this->isModerator()) {
+		if (!$model->id  || !($this->isModerator() || $model->id == \Yii::$app->user->identity->id)) {
 			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
 			return \Yii::$app->response->redirect(array('forum/member/index'));
 		}
@@ -239,7 +239,7 @@ class MemberController extends BbiiController {
 		return $this->render('view', array(
 			'dataProvider'  => $dataProvider,
 			'topicProvider' => $topicProvider,
-			'userData'      => BbiiMember::find()->where(['id' => \Yii::$app->user->identity->id ])->one(), 
+			'userData'      => BbiiMember::find()->where(['id' => is_numeric($id) ? $id : \Yii::$app->request->get('id') ])->one(), 
 		));
 	}
 

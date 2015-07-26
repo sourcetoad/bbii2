@@ -29,7 +29,8 @@ $item = array(
     ),
 	array(
       'label' => Yii::t('BbiiModule.bbii', 'Members'),
-      'url'   => array('member/index')
+      'url'   => array('member/index'),
+       'visible' => $this->context->isModerator()
     ),
 	array(
       'label' => Yii::t('BbiiModule.bbii', 'Approval'),
