@@ -60,15 +60,17 @@ $assets = AppAsset::register($this);
 
                         $formType = null;
 
-                        if (!Yii::$app->user->isGuest && !$model->topic->locked && $model->user_id) {
+                        if (
+                            ($model->user_id != Yii::$app->user->identity->id)
+                            && !Yii::$app->user->isGuest && !$model->topic->locked) {
 
-                                $formType = 'Quote';
+                                $formType = 'quote';
                         } elseif (
                             ($model->user_id == Yii::$app->user->identity->id)
                             || $this->context->isModerator() || $this->context->isAdmin()
                         ) {
 
-                            $formType = 'Update';
+                            $formType = 'update';
                         };
 
                         $form = ActiveForm::begin([
