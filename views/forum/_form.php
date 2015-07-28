@@ -77,6 +77,7 @@ use yii\helpers\Html;
                             //'maxHeight'       => 400,
                             //'minHeight'       => 400,
                             'removeEmptyTags' => true,
+                            'name'          => 'subject'
                         ]
                     ]
                 ) ?>

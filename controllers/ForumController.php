@@ -398,60 +398,57 @@ class ForumController extends BbiiController {
 	 * @version  2.7.5
 	 * @param $id integer topic_id
 	 */
-	public function actionReply($id = null) {
-		$id    = is_numeric($id) ?: \Yii::$app->request->get('id');
+	public function actionReply() {
 		$post  = new BbiiPost;
-		$topic = BbiiTopic::findOne($id);
 
-		if ($topic === null) {
-			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested topic does not exist.'));
-		}
-
+		$topic = BbiiTopic::findOne( (Yii::$app->request->get('id') !== null ?:0) );
 		$forum = BbiiForum::findOne($topic->forum_id);
 
-		if (\Yii::$app->request->post('BbiiPost')) {
 
-			$post->load(\Yii::$app->request->post());
-			$post->user_id = \Yii::$app->user->identity->id ;
+
+		if ($topic && $post->load(\Yii::$app->request->post())) {
+
+			$post->approved    = (int)$forum->moderated;
 			$post->create_time = date('Y-m-d H:m:i');
-
-			if ($forum->moderated) {
-				$post->approved = 0;
-			} else {
-				$post->approved = 1;
-			}
+			$post->user_id     = \Yii::$app->user->identity->id ;
 
 			if ($post->validate() && $post->save()) {
+
 				if ($post->approved) {
-					// $post->updateCounters(['view_count' => 1]);
-					$forum->updateCounters(array('num_posts' => 1));
+
+					$forum->updateCounters(array('num_posts'   => 1));
+					$post->updateCounters(['view_count'        => 1]);
 					$topic->updateCounters(array('num_replies' => 1));
 					
-					$topic->last_post_id = $post->id;
 					$forum->last_post_id = $post->id;
-
-					$topic->update();
-					$forum->update();
+					$topic->last_post_id = $post->id;
 
 					$post->poster->updateCounters(array('posts' => 1));
-					$this->assignMembergroup(\Yii::$app->user->identity->id );
-				} else {
+					$this->assignMembergroup(\Yii::$app->user->identity->id);
 
-					\Yii::$app->session->setFlash('success ',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
+					$forum->update();
+					$post->update();
+					$topic->update();
 				}
 
+				\Yii::$app->session->setFlash('success ',
+					Yii::t('BbiiModule.bbii',
+						'Your post has been saved. Thank you for your contribution to the forum. '.
+						(($post->approved) ? 'It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. ' : null)
+					)
+				);
 				return \Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
 			} else {
-				echo '<pre>';
-				print_r( $post->getErrors() );
-				echo '</pre>';
-				exit;
+				\Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii', 'Error occured while validating or saving the submitted reply.'));
+				return \Yii::$app->response->redirect(array('forum/forum/reply', 'id' => $post->topic_id));
 			}
 		} else {
 			$post->subject = $topic->title;
 			$post->forum_id = $forum->id;
 			$post->topic_id = $topic->id;
 		}
+
+
 
 		return $this->render('reply', array(
 			'forum' => $forum,

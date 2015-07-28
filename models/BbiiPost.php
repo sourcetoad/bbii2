@@ -57,7 +57,7 @@ class BbiiPost extends BbiiAR
 		// will receive user inputs.
 		return [
 			[['subject', 'create_time', 'change_time', 'search'], 'safe'],
-			[['subject', 'content'], 'required'],
+			[['subject'], 'required'],
 
 			[['change_id', 'user_id', 'topic_id', 'forum_id', 'approved', 'upvoted'], 'integer'],
 			[['subject', 'change_reason'], 'string', 'max' => 255],
@@ -69,10 +69,10 @@ class BbiiPost extends BbiiAR
 			['ip', 'default', 'value'                  => $_SERVER['REMOTE_ADDR'], 	'on' => 'insert'],
 
 			// event stuff
-			['change_id', 	'default', 'value' => \Yii::$app->user->identity->id , 'on' => 'update'],
-			['change_time', 'default', 'value' => 'NOW()', 			   'on' => 'update'],
-			['create_time', 'default', 'value' => 'NOW()', 			   'on' => 'insert'],
-			['user_id', 	'default', 'value' => \Yii::$app->user->identity->id , 'on' => 'insert'],
+			['change_id', 	'default', 'value' => \Yii::$app->user->identity->id , 	'on' => 'update'],
+			['change_time', 'default', 'value' => 'NOW()', 			   				'on' => 'update'],
+			['create_time', 'default', 'value' => 'NOW()', 			   				'on' => 'insert'],
+			['user_id', 	'default', 'value' => \Yii::$app->user->identity->id , 	'on' => 'insert'],
 
 			// The following rule is used by search(].
 			// Please remove those attributes that should not be searched.
