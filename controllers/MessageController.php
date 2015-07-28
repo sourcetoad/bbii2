@@ -67,7 +67,7 @@ class MessageController extends BbiiController {
 		
 		$model = new ActiveDataProvider([
 			'query' => BbiiMessage::find()
-				->where(['sendto' => \Yii::$app->user->identity->id])
+				->where(['sendto' => \Yii::$app->user->identity->id, 'inbox' => 1])
 				->orderBy('create_time ASC')
 	    ]);
 
@@ -106,7 +106,7 @@ class MessageController extends BbiiController {
 
 		$model = new ActiveDataProvider([
 			'query' => BbiiMessage::find()
-				->where(['sendfrom' => \Yii::$app->user->identity->id])
+				->where(['sendfrom' => \Yii::$app->user->identity->id, 'outbox' => 1])
 				->orderBy('create_time ASC')
 	    ]);
 
@@ -258,32 +258,29 @@ class MessageController extends BbiiController {
 		));
 	}
 	
+	/**
+	 * Remove a message by removing assigned in/outbox
+	 * 
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
 	public function actionDelete($id = null) {
 		$model = $this->getMessageMDL($id);
 
-		if ($model->sendto == \Yii::$app->user->identity->id  || $model->sendto == 0) {
-			$model->inbox = 0;
-		}
+		// remove msg from both boxes
+		$model->inbox = 0;
+		$model->outbox = 0;
 
-		if ($model->sendfrom == \Yii::$app->user->identity->id ) {
-			$model->outbox = 0;
-		}
-
-		if ($model->inbox || $model->outbox) {
-			$model->update();
+		// update MDL
+		if ($model->validate() && $model->update()) {
+		
+			\Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Message removed.'));
 		} else {
-			$model->delete();
+
+			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Message NOT removed.'));
 		}
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if (!isset(\Yii::$app->request->get()['ajax'])) {
-
-			return \Yii::$app->response->redirect(
-				isset(\Yii::$app->request->post()['returnUrl'])
-				? \Yii::$app->request->post()['returnUrl']
-				: ['forum/message/inbox']
-			);
-		}
+		return \Yii::$app->response->redirect(Yii::$app->request->referrer);
 	}
 	
 	/**
