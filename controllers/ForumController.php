@@ -459,15 +459,17 @@ class ForumController extends BbiiController {
 			'topic' => $topic,
 		));
 	}
-	
-	public function actionCreatetopic() {
-		$poll = new BbiiPoll;
-		$post = new BbiiPost;
 
-		if (\Yii::$app->request->post('BbiiForum')) {
-			$post->forum_id = \Yii::$app->request->post('BbiiForum')['id'];
-			$forum = BbiiForum::find($post->forum_id);
-		}
+	/**
+	 * Create a new topic w/i a forum
+	 * @return [type] [description]
+	 */
+	public function actionCreatetopic() {
+		$choiceArr = null;
+		$poll      = new BbiiPoll;
+		$post      = new BbiiPost;
+
+
 
 		if (isset(\Yii::$app->request->post()['choice'])) {
 			$choiceArr = \Yii::$app->request->post()['choice'];
@@ -479,21 +481,28 @@ class ForumController extends BbiiController {
 			$choiceArr = array('', '', '');
 		}
 
+
+
 		if (\Yii::$app->request->post('BbiiPost')) {
 			$forum = BbiiForum::findOne(\Yii::$app->request->post('BbiiPost')['forum_id']);
 
 			$post->setAttributes(\Yii::$app->request->post('BbiiPost'));
-			$post->approved = ($forum->moderated ? 0 : 1);
-			$post->create_time = date('Y-m-d H:m:i');
 
+			$post->approved    = ($forum->moderated ? 0 : 1);
+			$post->create_time = date('Y-m-d H:m:i');
+			$post->forum_id    = \Yii::$app->request->post('BbiiForum')['id'];
+			$post->user_id     = \Yii::$app->user->identity->id;
+
+			// if the post is valid, create the topic
 			if ($post->validate() && $post->save()) {
 				// Topic
 				$topic = new BbiiTopic;
-				$topic->approved      =  $post->approved;
-				$topic->first_post_id =  $post->id;
-				$topic->forum_id      =  $forum->id;
-				$topic->last_post_id  =  $post->id;
-				$topic->title         =  $post->subject;
+				$topic->approved      = $post->approved;
+				$topic->first_post_id = $post->id;
+				$topic->forum_id      = $forum->id;
+				$topic->last_post_id  = $post->id;
+				$topic->title         = $post->subject;
+				$topic->user_id       = \Yii::$app->user->identity->id;
 
 				if (\Yii::$app->request->post('sticky')) { $topic->sticky = 1; }
 				if (\Yii::$app->request->post('global')) { $topic->global = 1; }
@@ -538,8 +547,6 @@ class ForumController extends BbiiController {
 					// update post with topic
 					$post->topic_id = $topic->id;
 					$post->update();
-
-
 
 					if (!$forum->moderated) {
 						$forum->updateCounters(array('num_posts' => 1,'num_topics' => 1));	// method since Yii 2.0
