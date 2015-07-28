@@ -58,7 +58,7 @@ class BbiiMessage extends BbiiAR
 			[['ip'], 'blocked'],
 			[['ip'], 'string', 'max' => 39],
 			[['sendfrom', 'sendto', 'read_indicator', 'type', 'inbox', 'outbox', 'post_id'], 'integer'],
-			[['sendfrom', 'sendto', 'subject', 'content'], 'required'],
+			[['sendfrom', 'sendto', 'subject'], 'required'],
 			[['subject'], 'string', 'max' => 255],
 			[['sendfrom', 'sendto', 'subject', 'content'], 'safe'],
 

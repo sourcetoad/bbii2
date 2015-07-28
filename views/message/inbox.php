@@ -20,13 +20,13 @@ $this->context->bbii_breadcrumbs = array(
 );
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') 	.' ('. $count['inbox'] .')', 	'url' => array('message/inbox')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Outbox') 	.' ('. $count['outbox'] .')', 	'url' => array('message/outbox')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') 	.' ('. $inboxCount .')', 	'url' => array('message/inbox')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Outbox') 	/*(.' ('. $count['outbox'] .')'*/, 	'url' => array('message/outbox')),
 	array('label' => Yii::t('BbiiModule.bbii', 'New message'), 								'url' => array('message/create'))
 );
 ?>
 <div id = "bbii-wrapper">
-	<?php echo $this->render('_header', array('item' => $item, 'count' => $count, 'box' => 'inbox')); ?>
+	<?php echo $this->render('_header', array('item' => $item, 'count' => $inboxCount, 'box' => 'inbox')); ?>
 
 	<?php // @depricated 2.1.5 Kept for referance
 	/*$this->widget('zii.widgets.grid.CGridView', array(
@@ -74,26 +74,26 @@ $item = array(
     <div class="well clearfix">
         <?php echo GridView::widget(array(
             'columns'      => array(
-                array(
+                /* array(
                     'attribute' => 'sendfrom',
                     'value'     => 'sendfrom'
-                ),
+                ), */
                 'subject',
                 array(
                     'attribute' => 'create_time',
                     'value'     => 'create_time',
                 ),
-                array(
+                /* array(
                     'attribute' => 'type',
                     'value'     =>  'type',
-                ),
+                ),*/
 
                 [
                     'class'    => 'yii\grid\ActionColumn',
                     'template' => '{view}{delete}',
                 ]),
             'dataProvider' => $model,
-            'id'           => 'inbox-grid',
+            'summary' => ''
         )); ?>
 	   <div id = "bbii-message"></div>
     </div>

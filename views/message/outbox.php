@@ -20,13 +20,13 @@ $this->context->bbii_breadcrumbs = array(
 );
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') 	.' ('. $count['inbox'] .')', 	'url' => array('message/inbox')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Outbox') 	.' ('. $count['outbox'] .')', 	'url' => array('message/outbox')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') 	/*.' ('. $count['inbox'] .')'*/, 	'url' => array('message/inbox')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Outbox') 	.' ('. $outboxCount .')', 	'url' => array('message/outbox')),
 	array('label' => Yii::t('BbiiModule.bbii', 'New message'), 								'url' => array('message/create'))
 );
 ?>
 <div id = "bbii-wrapper">
-	<?php echo $this->render('_header', array('item' => $item, 'count' => $count, 'box' => 'outbox')); ?>
+	<?php echo $this->render('_header', array('item' => $item, 'count' => $outboxCount, 'box' => 'outbox')); ?>
 
 	<?php // @depricated 2.1.5 Kept for referance
 	/*$this->widget('zii.widgets.grid.CGridView', array(
@@ -67,26 +67,25 @@ $item = array(
 	<div class="well clearix">
         <?php echo GridView::widget(array(
             'columns'      => array(
-                array(
+                /* array(
                     'attribute' => 'sendto',
                     'value'     => 'sendto'
-                ),
+                ), */
                 'subject',
                 array(
                     'attribute' => 'create_time',
                     'value'     => 'create_time',
                 ),
-                array(
+                /* sarray(
                     'attribute' => 'type',
                     'value'     => 'type',
-                ),
+                ), */
 
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{view}{delete}',
                 ]),
-            'dataProvider'          => $model->search(),
-            'id'                    => 'inbox-grid',
+            'dataProvider' => $model,
         )); ?>
 	   <div id = "bbii-message"></div>
     </div>

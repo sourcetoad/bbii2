@@ -9,6 +9,7 @@ use frontend\modules\bbii\components\BbiiController;
 
 use Yii;
 use yii\web\Session;
+use yii\data\ActiveDataProvider;
 
 class MessageController extends BbiiController {
 	/**
@@ -42,6 +43,7 @@ class MessageController extends BbiiController {
 	/**
 	 * [actionInbox description]
 	 *
+	 * @todo  combine w/ actionOutbox()
 	 * @version  2.4.0
 	 * @param  integer $id
 	 * @return array
@@ -62,21 +64,29 @@ class MessageController extends BbiiController {
 		$model->sendto = $id;
 		$model->inbox  = 1;
 		*/
-
-		$id = ($id != null) ? $id : \Yii::$app->user->identity->id ;
-
-		$model           = new BbiiMessage();
-		$model->setAttributes( (isset(\Yii::$app->request->get()['BbiiMessage']) ? \Yii::$app->request->get()['BbiiMessage'] : ['inbox' => 1, 'sendto' => $id]) );
-		$model           = $model->search();
+		
+		$model = new ActiveDataProvider([
+			'query' => BbiiMessage::find()
+				->where(['sendto' => \Yii::$app->user->identity->id])
+				->orderBy('create_time ASC')
+	    ]);
 
 		return $this->render('inbox', array(
+			'inboxCount' => $model->getTotalCount(),
 			'model' => $model, 
-			'count' => $this->getMessageCount(),
 		));
 	}
 
+	/**
+	 * [actionInbox description]
+	 *
+	 * @todo  combine w/ actionInbox()
+	 * @version  2.4.0
+	 * @param  integer $id
+	 * @return array
+	 */
 	public function actionOutbox($id = null) {
-		if (!(isset($id) && $this->isModerator())) {
+		/* if (!(isset($id) && $this->isModerator())) {
 			$id = \Yii::$app->user->identity->id ;
 		}
 
@@ -92,6 +102,17 @@ class MessageController extends BbiiController {
 		return $this->render('outbox', array(
 			'model' => $model,
 			'count' => $this->getMessageCount(),
+		)); */
+
+		$model = new ActiveDataProvider([
+			'query' => BbiiMessage::find()
+				->where(['sendfrom' => \Yii::$app->user->identity->id])
+				->orderBy('create_time ASC')
+	    ]);
+
+		return $this->render('outbox', array(
+			'outboxCount' => $model->getTotalCount(),
+			'model' => $model, 
 		));
 	}
 
@@ -164,11 +185,8 @@ class MessageController extends BbiiController {
 	 * @param  [type] $type [description]
 	 * @return [type]       [description]
 	 */
-	public function actionCreate($id = null, $type = 1) {
+	public function actionCreate($type = 1) {
 		$model = new BbiiMessage;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
 		if (\Yii::$app->request->post('BbiiMessage')) {
 			// automatic attrib set
@@ -176,28 +194,32 @@ class MessageController extends BbiiController {
 			
 			// manual sttrib set
 			$model->sendfrom = \Yii::$app->user->identity->id ;
-			$model->sendto = BbiiMember::find()->select('id')->where([
-				'member_name' => \Yii::$app->request->post('BbiiMessage')['sendto']
-			])->one()->getAttribute('id');
+			$model->sendto = BbiiMember::find()
+				->select('id')
+				->where(['member_name' => \Yii::$app->request->post('BbiiMessage')['sendto']])
+				->one()
+				->id;
+
 			$model->type = $type;
 
 			if ($model->validate() && $model->save()) {
+
 				\Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Message sent successfully.'));
-				return \Yii::$app->response->redirect(array('forum/message/layout'));
 			} else {
 
 				\Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii', 'Could not send message.'));
-				return \Yii::$app->response->redirect(array('forum/message/layout'));
 			}
 
-		} elseif (isset($id)) {
+			return \Yii::$app->response->redirect(array('forum/message/inbox'));
+
+		} /* elseif (isset($id)) {
 			// @todo No idea what this does yet - DJE : 2015-05-20
 			$model->sendto = $id;
 			$model->search = $model->receiver->member_name;
 			if ($this->isModerator() && isset($type)) {
 				$model->type = $type;
 			}
-		}
+		} */
 
 		return $this->render('create',array(
 			'model' => $model,
@@ -236,7 +258,7 @@ class MessageController extends BbiiController {
 		));
 	}
 	
-	public function actionDelete($id) {
+	public function actionDelete($id = null) {
 		$model = $this->getMessageMDL($id);
 
 		if ($model->sendto == \Yii::$app->user->identity->id  || $model->sendto == 0) {
