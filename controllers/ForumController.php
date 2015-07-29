@@ -466,6 +466,10 @@ class ForumController extends BbiiController {
 		$poll      = new BbiiPoll;
 		$post      = new BbiiPost;
 
+		if (\Yii::$app->request->post('BbiiForum')) {
+			$post->forum_id = \Yii::$app->request->post('BbiiForum')['id'];
+			$forum = BbiiForum::find($post->forum_id);
+		}
 
 
 		if (isset(\Yii::$app->request->post()['choice'])) {
