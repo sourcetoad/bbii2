@@ -14,10 +14,12 @@ use common\models\User;
 
 class BbiiModule extends \yii\base\Module
  {
+
 	public $adminId        = 1; // must be overridden to assign admin rights to user id
-	public $allowTopicSub  = false;
 	public $accessControl  = false;
+	public $allowTopicSub  = false;
 	public $allowAPILogin  = false;
+	public $assetsUrl;
 	public $postsPerPage   = 20;
 	public $topicsPerPage  = 20;
 	public $userClass      = 'common\models\User'; // change this to your user module
@@ -26,7 +28,7 @@ class BbiiModule extends \yii\base\Module
 	public $userNameColumn = 'username';
 
 	// 'normal' Class properties set w/i the class
-	public $avatarStorage     = '/avatar'; 	// directory in the webroot must exist and allow read/write access
+	public $avatarStorage     = '../assets/avatars/'; 	// directory in the webroot must exist and allow read/write access
 	public $bbiiTheme         = 'base';
 	public $dbName            = false;
 	public $defaultRoute      = 'forum/index';
@@ -52,9 +54,7 @@ class BbiiModule extends \yii\base\Module
 		'HTML.SafeIframe'          => true,
 		'URI.SafeIframeRegexp'     => '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%',
 	);
-	public $version           = '3.1.5';
-
-	private $_assetsUrl;
+	public $version           = '3.3';
 	
 	public function init() {
 		$this->registerAssets();
@@ -119,13 +119,13 @@ class BbiiModule extends \yii\base\Module
      * @return string base URL that contains all published asset files of this module.
      */
     public function getAssetsUrl() {
-		if ($this->_assetsUrl == null) {
-            $this->_assetsUrl = \Yii::$app->assetManager->publish(Yii::getPathOfAlias($this->id.'.assets')
+		if ($this->assetsUrl == null) {
+            $this->assetsUrl = \Yii::$app->assetManager->publish(Yii::getPathOfAlias($this->id.'.assets')
 				// Comment the line below out in production.
 				,false,-1,true
 			);
 		}
-        return $this->_assetsUrl;
+        return $this->assetsUrl;
     }
 	
 	/**

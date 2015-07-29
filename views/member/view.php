@@ -77,8 +77,21 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
         <div class="col-md-6 col-sm-12 left">
             <table>
               <tr>
-                <td style = "width:90px" rowspan = "4">
-                    <?php echo Html::img((!$userData->getAttribute('avatar')) ? $assets->baseUrl.'/images/empty.jpeg' : (\Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $userData->getAttribute('avatar')), ['alt' => 'avatar']); ?>
+                <td rowspan = "4">
+                    <?php
+                    echo Html::img(
+                        (
+                            !$userData->getAttribute('avatar')
+                            ? $assets->baseUrl.'/images/empty.jpeg'
+                            : $assets->baseUrl.'/avatars/'. $userData->getAttribute('avatar')
+                        ),
+                        [
+                            'alt'   => 'avatar',
+                            'class' => 'img-responsive img-circle',
+                            'title' => 'avatar',
+
+                        ]
+                    ); ?>
                 </td>
                 <td style = "width:200px"><strong><?php echo Yii::t('BbiiModule.bbii', 'Member since'); ?></strong></td>
                 <td><?php echo \Yii::$app->formatter->asDatetime($userData->getAttribute('first_visit'), 'long', 'medium'); ?></td>
@@ -119,7 +132,7 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
                 <td></td>
                 <th><?php echo Yii::t('BbiiModule.bbii', 'Presence on the internet'); ?></th>
                 <td>
-                    <?php if ($userData->getAttribute('contact_email') && $this->module->userMailColumn) 	echo Html::a(Html::img($assets->baseUrl.'/images/User.png', array('alt' => 'e-mail',   'title' => Yii::t('BbiiModule.bbii', 'Contact user by e-mail'))), array('member/mail', 'id' => $userData->getAttribute('id'))); ?>
+                    <?php  //if ($userData->getAttribute('contact_email') && $this->module->userMailColumn) 	echo Html::a(Html::img($assets->baseUrl.'/images/User.png', array('alt' => 'e-mail',   'title' => Yii::t('BbiiModule.bbii', 'Contact user by e-mail'))), array('member/mail', 'id' => $userData->getAttribute('id'))); ?>
                     <?php  $blogger 	= $userData->getAttribute('blogger'); 	if (!empty($blogger)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Blogger.png', 	array('alt' => 'Blogger',  'title' => 'Blogger')), 	$userData->getAttribute('blogger'), 	array('target' => '_blank')); ?>
                     <?php  $facebook 	= $userData->getAttribute('facebook'); 	if (!empty($facebook)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Facebook.png', array('alt' => 'Facebook', 'title' => 'Facebook')), $userData->getAttribute('facebook'), 	array('target' => '_blank')); ?>
                     <?php  $flickr  	= $userData->getAttribute('flickr'); 	if (!empty($flickr)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Flickr.png', 	array('alt' => 'Flickr',   'title' => 'Flickr')), 	$userData->getAttribute('flickr'), 		array('target' => '_blank')); ?>

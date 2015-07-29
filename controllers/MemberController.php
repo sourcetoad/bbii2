@@ -72,61 +72,71 @@ class MemberController extends BbiiController {
 	public function actionUpdate() {
 
 		//$model = $this->loadModel()->one();
-		$model = BbiiMember::find()->where(['id' => Yii::$app->request->get('id')])->one();
+		$model = BbiiMember::find()->where(['id' => \Yii::$app->request->get('id')])->one();
 
-		if (!$model->id  || !($this->isModerator() || $model->id == \Yii::$app->user->identity->id)) {
+		// todo move this auth to the action() authentication check logic - DJE : 2015-07-29
+		if (!$model->id || !($this->isModerator() || $model->id == \Yii::$app->user->identity->id)) {
 			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
-			return \Yii::$app->response->redirect(array('forum/forum'));
+			return \Yii::$app->response->redirect(\Yii::$app->request->referrer);
 		}
 
-		if (isset(\Yii::$app->request->post()['BbiiMember'])) {
-			$model->load(\Yii::$app->request->post()['BbiiMember']);
-			$model->image = UploadedFile::getInstance($model, 'image');
+
+
+		if (\Yii::$app->request->post('BbiiMember') !== null && $model->load(\Yii::$app->request->post())) {
+
+			if ($model->remove_avatar) {
+
+				$model->avatar = '';
+			} else {
+
+				$model->image = UploadedFile::getInstance($model, 'image');
+
+				if ($model->image !== null) {
+
+					$filename = uniqid('img');
+
+					switch( exif_imagetype($model->image->tempName) ) {
+						case IMAGETYPE_GIF:
+							$filename .= '.gif';
+							break;
+						case IMAGETYPE_JPEG:
+							$filename .= '.jpg';
+							break;
+						case IMAGETYPE_PNG:
+							$filename .= '.png';
+							break;
+						default:
+							$model->setFlash(
+								'warning',
+								\Yii::t(
+									'BbiiModule.bbii',
+									'The file {filename} cannot be uploaded. Only files with the image formats gif, jpg or png can be uploaded.',
+									array('{filename}' => $model->image->name)
+								)
+							);
+							return $this->redirect(Yii::$app->referrer);
+					}
+
+					$location = realpath(dirname(__FILE__)).'/'.$this->module->avatarStorage;
+					$model->image->saveAs($location . $filename);
+					$model->avatar = $this->resizeImage($filename, uniqid('img') . '.png', $location);
+					unset($model['image']);
+				}
+			}
+
+
 
 			if ($model->validate() && $model->save()) {
 
-				$valid = true;
-				if ($model->remove_avatar) {
-					$model->avatar = '';
-					$model->save();
-				} else {
-					if ($model->image !== null) {
-						$location = Yii::getPathOfAlias('webroot') . $this->module->avatarStorage . '/';
-						$location = str_replace('/', DIRECTORY_SEPARATOR, $location);
-						$filename = uniqid('img');
-						$model->avatar = uniqid('img') . '.jpg';
-						switch( exif_imagetype($model->image->tempName) ) {
-							case IMAGETYPE_GIF:
-								$filename .= '.gif';
-								$model->image->saveAs($location . $filename);
-								$model->save();
-								$this->resizeImage($filename, $model->avatar, $location);
-								break;
-							case IMAGETYPE_JPEG:
-								$filename .= '.jpg';
-								$model->image->saveAs($location . $filename);
-								$model->save();
-								$this->resizeImage($filename, $model->avatar, $location);
-								break;
-							case IMAGETYPE_PNG:
-								$filename .= '.png';
-								$model->image->saveAs($location . $filename);
-								$model->save();
-								$this->resizeImage($filename, $model->avatar, $location);
-								break;
-							default:
-								$model->addError('images', Yii::t('app', 'The file {filename} cannot be uploaded. Only files with the image formats gif, jpg or png can be uploaded.', array('{filename}' => $model->image->name)));
-								$valid = false;
-								break;
-						}
-					}
-				}
-				if ($valid)
-					return \Yii::$app->response->redirect(array('forum/member/view','id' => $model->id));
+				\Yii::$app->session->setFlash('success', \Yii::t('BbiiModule.bbii', 'Profile updated successful.'));
 			} else {
 
-				\Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii','Error while saving.'));
+				\Yii::$app->session->setFlash('warning', \Yii::t('BbiiModule.bbii', 'Profile update failed.'));
 			}
+
+
+
+			return \Yii::$app->response->redirect(array('forum/member/view','id' => $model->id));
 		}
 		
 		return $this->render('update', array(
@@ -345,6 +355,13 @@ class MemberController extends BbiiController {
 		}
 	}
 	
+	/**
+	 * [resizeImage description]
+	 * @param  [type] $filename   [description]
+	 * @param  [type] $targetname [description]
+	 * @param  [type] $location   [description]
+	 * @return [type]             [description]
+	 */
 	private function resizeImage($filename, $targetname, $location) {
 		$extension = substr($filename, -3);
 		switch($extension) {
@@ -358,10 +375,12 @@ class MemberController extends BbiiController {
 				$image = @imagecreatefrompng($location . $filename);
 				break;
 		}
+
 		if ($image) {
 			$width = imagesx($image);
 			$height = imagesy($image);
-			// medium
+
+			// change size of image to a more expected 90*90 avatar size
 			if ($width > 90 || $height > 90) {
 				$wr = $width/90;
 				$hr = $height/90;
@@ -376,14 +395,17 @@ class MemberController extends BbiiController {
 				$dest_w = $width;
 				$dest_h = $height;
 			}
+
 			$destImage = imagecreatetruecolor ($dest_w, $dest_h);
 			imagecopyresampled($destImage, $image, 0, 0, 0, 0, $dest_w, $dest_h, $width, $height);
 			imagejpeg($destImage, $location . $targetname, 85);
-			if ($filename != $targetname) {
-				unlink($location . $filename);
-			}
-		} else {
+
+			// remove the original image
 			unlink($location . $filename);
+
+			return $targetname;
 		}
+
+		return false;
 	}
 }

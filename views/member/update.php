@@ -242,9 +242,23 @@ $this->registerJs($script, View::POS_READY);
                     <?php //echo $form->labelEx($model,'avatar'); ?>
                     <?php //echo Html::img((isset($model->avatar))?(\Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$assets->baseUrl.'/images/empty.jpeg', 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
                     <?php //echo $form->labelEx($model,'remove_avatar'); ?>
+                    <?php
+                    echo Html::img(
+                        (
+                            !$model->getAttribute('avatar')
+                            ? $assets->baseUrl.'/images/empty.jpeg'
+                            : $assets->baseUrl.'/avatars/'. $model->getAttribute('avatar')
+                        ),
+                        [
+                            'alt'   => 'avatar',
+                            'class' => 'img-responsive img-circle',
+                            'title' => 'avatar',
+
+                        ]
+                    ); ?>
                     <?php echo Html::activeCheckbox($model, 'remove_avatar'); ?>
                     <?php //echo $form->labelEx($model, 'image'); ?>
-                    <?php echo $form->field($model, 'image')->fileInput(array('size' => 90)); ?>
+                    <?php echo $form->field($model, 'image')->fileInput(['class' => 'form-control', 'size' => 90]); ?>
                     <?php echo Yii::t('BbiiModule.bbii', 'Large images will be resized to fit a size of 90 pixels by 90 pixels.'); ?>
                     <?php //echo $form->error($model, 'image'); ?>
                 </div>
@@ -276,7 +290,7 @@ $this->registerJs($script, View::POS_READY);
                     ));*/ ?>
                     <?php //echo $form->error($model,'signature'); ?>
 
-                    <?php echo $form->field($model, 'signature')->textArea(array('class' => 'form-control')); ?>
+                    <?php echo $form->field($model, 'signature')->textArea(['class' => 'form-control']); ?>
                 </div>
 
 
