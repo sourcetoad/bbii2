@@ -1,1 +1,3 @@
 docs/private
+*.DS_*
+assets/avatar

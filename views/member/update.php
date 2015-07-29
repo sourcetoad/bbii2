@@ -69,8 +69,9 @@ $this->registerJs($script, View::POS_READY);
     			'id'                   => 'bbii-member-form',
     			'options'              => array('enctype' => 'multipart/form-data'),
     		]); ?>
+                <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success btn-lg')); ?>
 
-    			<?php echo $form->errorSummary($model); ?>
+    			<?php //echo $form->errorSummary($model); ?>
 
     			<div>
                     <?php //echo $form->labelEx($model,'member_name'); ?>
@@ -111,7 +112,7 @@ $this->registerJs($script, View::POS_READY);
                             '0' => Yii::t('BbiiModule.bbii', 'Male'),
                             '1' => Yii::t('BbiiModule.bbii', 'Female')
                         ),
-                        ['prompt' => 'Gender', 'class' => 'form-control']
+                        ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
     			</div>
                 <br />
@@ -167,7 +168,7 @@ $this->registerJs($script, View::POS_READY);
                             '0' => Yii::t('BbiiModule.bbii', 'No'),
                             '1' => Yii::t('BbiiModule.bbii', 'Yes')
                         ),
-                        ['prompt' => 'Gender', 'class' => 'form-control']
+                        ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
     			</div>
                 <br />
@@ -190,7 +191,7 @@ $this->registerJs($script, View::POS_READY);
                             '0' => Yii::t('BbiiModule.bbii', 'No'),
                             '1' => Yii::t('BbiiModule.bbii', 'Yes')
                         ),
-                        ['prompt' => 'Gender', 'class' => 'form-control']
+                        ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
     			</div>
                 <br />
@@ -213,7 +214,7 @@ $this->registerJs($script, View::POS_READY);
                             '0' => Yii::t('BbiiModule.bbii', 'No'),
                             '1' => Yii::t('BbiiModule.bbii', 'Yes')
                         ),
-                        ['prompt' => 'Gender', 'class' => 'form-control']
+                        ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
     			</div>
                 <br />
@@ -232,7 +233,7 @@ $this->registerJs($script, View::POS_READY);
                     <?php echo $form->field($model, 'timezone')
                         ->dropDownList(
                         array_combine(DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers()),
-                        ['prompt' => 'Gender', 'class' => 'form-control']
+                        ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
     			</div>
                 <br />
@@ -280,98 +281,91 @@ $this->registerJs($script, View::POS_READY);
 
 
 
-                    <div class = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'website'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Globe.png', array('name' => 'Website')); ?>
                         <?php echo $form->field($model,'website')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'website'); ?>
                     </div>
 
-                    <div name = "presence">
-                        <?php //echo $form->labelEx($model,'website'); ?>
-                        <?php echo Html::img($assets->baseUrl.'/images/Globe.png', array('name' => 'Website')); ?>
-                        <?php echo $form->field($model,'website')->textInput(array('size' => 100,'maxlength' => 255)); ?>
-                        <?php //echo $form->error($model,'website'); ?>
-                    </div>
-
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'blogger'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Blogger.png', array('name' => 'Blogger')); ?>
                         <?php echo $form->field($model,'blogger')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'blogger'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'facebook'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Facebook.png', array('name' => 'Facebook')); ?>
                         <?php echo $form->field($model,'facebook')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'facebook'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'flickr'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Flickr.png', array('name' => 'Flickr')); ?>
                         <?php echo $form->field($model,'flickr')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'flickr'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'google'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Google.png', array('name' => 'Google')); ?>
                         <?php echo $form->field($model,'google')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'google'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'linkedin'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Linkedin.png', array('name' => 'Linkedin')); ?>
                         <?php echo $form->field($model,'linkedin')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'linkedin'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'metacafe'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Metacafe.png', array('name' => 'Metacafe')); ?>
                         <?php echo $form->field($model,'metacafe')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'metacafe'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'myspace'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Myspace.png', array('name' => 'Myspace')); ?>
                         <?php echo $form->field($model,'myspace')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'myspace'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'orkut'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Orkut.png', array('name' => 'Orkut')); ?>
                         <?php echo $form->field($model,'orkut')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'orkut'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'tumblr'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Tumblr.png', array('name' => 'Tumblr')); ?>
                         <?php echo $form->field($model,'tumblr')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'tumblr'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'twitter'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Twitter.png', array('name' => 'Twitter')); ?>
                         <?php echo $form->field($model,'twitter')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'twitter'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'wordpress'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Wordpress.png', array('name' => 'Wordpress')); ?>
                         <?php echo $form->field($model,'wordpress')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                         <?php //echo $form->error($model,'wordpress'); ?>
                     </div>
 
-                    <div name = "presence">
+                    <div class="presence">
                         <?php //echo $form->labelEx($model,'youtube'); ?>
                         <?php echo Html::img($assets->baseUrl.'/images/Youtube.png', array('name' => 'Youtube')); ?>
                         <?php echo $form->field($model,'youtube')->textInput(array('size' => 100,'maxlength' => 255)); ?>
