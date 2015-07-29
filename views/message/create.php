@@ -13,8 +13,8 @@ $this->context->bbii_breadcrumbs = array(
 );
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') 	.' ('. $count['inbox'] .')', 	'url' => array('message/inbox')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Outbox') 	.' ('. $count['outbox'] .')', 	'url' => array('message/outbox')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Inbox') 	/*.' ('. $count['inbox'] .')'*/, 	'url' => array('message/inbox')),
+	array('label' => Yii::t('BbiiModule.bbii', 'Outbox') 	/*.' ('. $count['outbox'] .')'*/, 	'url' => array('message/outbox')),
 	array('label' => Yii::t('BbiiModule.bbii', 'New message'), 								'url' => array('message/create'))
 );
 ?>

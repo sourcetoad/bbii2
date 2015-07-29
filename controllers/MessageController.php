@@ -267,9 +267,15 @@ class MessageController extends BbiiController {
 	public function actionDelete($id = null) {
 		$model = $this->getMessageMDL($id);
 
-		// remove msg from both boxes
-		$model->inbox = 0;
-		$model->outbox = 0;
+		//softDelete
+		// toto usea real softDelete behavior like provided by davidjeddy/yii2-utility-classes - DJE : 2015-07-29
+		if ($model->sendto == \Yii::$app->user->identity->id  || $model->sendto == 0) {
+			$model->inbox = 0;
+		}
+
+		if ($model->sendfrom == \Yii::$app->user->identity->id ) {
+			$model->outbox = 0;
+		}
 
 		// update MDL
 		if ($model->validate() && $model->update()) {
