@@ -16,8 +16,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'))
 );
 ?>
-
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 
 	<h2><?php echo Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>

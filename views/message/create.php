@@ -18,7 +18,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'New message'), 								'url' => array('message/create'))
 );
 ?>
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item, 'count' => $count)); ?>
 
 	<h1><?php echo (\Yii::$app->requestedAction->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'Reply'); ?></h1>

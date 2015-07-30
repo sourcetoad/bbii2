@@ -33,7 +33,7 @@ confirmation[0] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to 
 confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this forum?') . "';";
 $this->registerJs($script, View::POS_READY);
 ?>
-<div id="bbii-wrapper">
+<div id = "bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('template/_header'); ?>
 	
 	<div class="bbii-box-top"><?php echo Yii::t('BbiiModule.bbii', 'Add category or forum'); ?></div>

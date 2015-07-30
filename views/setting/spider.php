@@ -20,7 +20,7 @@ $this->context->bbii_breadcrumbs = array(
 var confirmation = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this webspider?') . "'
 ", CClientScript::POS_BEGIN);*/
 ?>
-<div id = "bbii-wrapper">
+<div id = "bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('template/_header'); ?>
 	
     <p>

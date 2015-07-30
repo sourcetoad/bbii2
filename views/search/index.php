@@ -25,7 +25,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Blocked IP'), 'url' => array('moderator/ipadmin'), 'visible' => $this->context->isModerator()),
 );
 ?>
-<div id = "bbii-wrapper">
+<div id = "bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
 	<?php $form = $this->beginWidget('ActiveForm', array(

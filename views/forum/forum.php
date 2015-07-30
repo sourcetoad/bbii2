@@ -37,48 +37,47 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
 \Yii::$app->session->removeAllFlashes();
 ?>
 
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
     <div class="row">
         <div class="col col-md-12">
             <?php echo $this->render('_header', array('item' => $item)); ?>
 
-            <div class="well clearfix">
-                <table width="100%">
-                    <tr>
-                        <td align="left">
-                            <h2>
-                                <?php echo $forum->name; ?>
-                            </h2>
-                        </td>
-                        <td align="right">
-                            <?php if (!(\Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()) { ?>
-                            <div class = "form">
-                                <?php // @depricated Kept for referance
-                                /* $form = $this->beginWidget('ActiveForm', array(
-                                    'id' => 'create-topic-form',
-                                    'action' => array('forum/createTopic'),
+            <table width="100%">
+                <tr>
+                    <td align="left">
+                        <h2>
+                            <?php echo $forum->name; ?>
+                        </h2>
+                    </td>
+                    <td align="right">
+                        <?php if (!(\Yii::$app->user->isGuest || $forum->locked) || $this->context->isModerator()) { ?>
+                        <div class = "form">
+                            <?php // @depricated Kept for referance
+                            /* $form = $this->beginWidget('ActiveForm', array(
+                                'id' => 'create-topic-form',
+                                'action' => array('forum/createTopic'),
+                                'enableAjaxValidation' => false,
+                            )); ?>
+                                <?php echo $form->hiddenField($forum, 'id'); ?>
+                                <?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Create new topic'), array('class' => 'bbii-topic-button')); ?>
+                            <?php $this->endWidget(); ?>
+                            */ ?>
+                            <?php
+                            $form = ActiveForm::begin([
+                                    'action'               => array('createtopic'),
                                     'enableAjaxValidation' => false,
-                                )); ?>
-                                    <?php echo $form->hiddenField($forum, 'id'); ?>
-                                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Create new topic'), array('class' => 'bbii-topic-button')); ?>
-                                <?php $this->endWidget(); ?>
-                                */ ?>
-                                <?php
-                                $form = ActiveForm::begin([
-                                        'action'               => array('createtopic'),
-                                        'enableAjaxValidation' => false,
-                                        'id'                   => 'create-topic-form',
-                                ]);
-                                    echo $form->field($forum, 'id')->hiddenInput()->label(false);
-                                    echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Create new topic'), array('class' => 'btn btn-success btn-lg'));
-                                ActiveForm::end();
-                                ?>
-                            </div><!-- form -->
-                            <?php }; ?>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                                    'id'                   => 'create-topic-form',
+                            ]);
+                                echo $form->field($forum, 'id')->hiddenInput()->label(false);
+                                echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Create new topic'), array('class' => 'btn btn-success btn-lg'));
+                            ActiveForm::end();
+                            ?>
+                        </div><!-- form -->
+                        <?php }; ?>
+                    </td>
+                </tr>
+            </table>
+
 
             <?php // @depricated 2.7.5 Kept for referance
             /* $this->widget('zii.widgets.CListView', array(
@@ -89,19 +88,17 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
                 'pager' => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
             ));*/ ?>
 
-            <div class="well">
-                <div class = "topic">
-                    <table class="table table-striped table-condensed">
-                        <?php echo ListView::widget([
-                                'dataProvider' => $dataProvider,
-                                'id'           => 'bbiiTopic',
-                                'itemView'     => '_topic',
-                                //'pager'        => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
-                                //'template'     => '{pager}{items}{pager}',
-                            ]);
-                        ?>
-                    </table>
-                </div>
+            <div class = "topic">
+                <table class="table table-striped table-condensed">
+                    <?php echo ListView::widget([
+                            'dataProvider' => $dataProvider,
+                            'id'           => 'bbiiTopic',
+                            'itemView'     => '_topic',
+                            //'pager'        => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
+                            //'template'     => '{pager}{items}{pager}',
+                        ]);
+                    ?>
+                </table>
             </div>
             <br />
 

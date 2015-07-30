@@ -25,7 +25,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'New message'), 								'url' => array('message/create'))
 );
 ?>
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item, 'count' => $outboxCount, 'box' => 'outbox')); ?>
 
 	<?php // @depricated 2.1.5 Kept for referance

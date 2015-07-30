@@ -27,7 +27,7 @@ $item = array(
 );
 ?>
 
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
     <div>
         <?php echo $this->render('_header', array('item' => $item)); ?>
 

@@ -21,38 +21,36 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'New message'), 								'url' => array('message/create'))
 );
 ?>
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 
 	<h1><?php echo (\Yii::$app->requestedAction->id == 'create')?Yii::t('BbiiModule.bbii', 'New message'):Yii::t('BbiiModule.bbii', 'View Message'); ?></h1>
 
-    <div class="well clearfix">
-		<table>
-			<thead>
-				<tr>
-					<th style = "width:150px;"><?php echo Html::activeLabel($model, 'sendfrom'); ?></th>
-					<th><?php echo Html::encode($model->sendfrom); ?></th>
-				</tr>
-				<tr>
-					<th><?php echo Html::activeLabel($model, 'sendto'); ?></th>
-					<th><?php echo Html::encode($model->sendto); ?></th>
-				</tr>
-				<tr>
-					<th><?php echo Html::activeLabel($model, 'create_time'); ?></th>
-					<th><?php echo Html::encode($model->create_time); ?></th>
-				</tr>
-				<tr>
-					<th><?php echo Html::activeLabel($model, 'subject'); ?></th>
-					<th><?php echo Html::encode($model->subject); ?></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th><?php echo Html::activeLabel($model, 'content'); ?></th>
-					<th><?php //echo Html::encode($model->content); ?></th>
-					<th><?php echo $model->content; ?></th>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<table>
+		<thead>
+			<tr>
+				<th style = "width:150px;"><?php echo Html::activeLabel($model, 'sendfrom'); ?></th>
+				<th><?php echo Html::encode($model->sendfrom); ?></th>
+			</tr>
+			<tr>
+				<th><?php echo Html::activeLabel($model, 'sendto'); ?></th>
+				<th><?php echo Html::encode($model->sendto); ?></th>
+			</tr>
+			<tr>
+				<th><?php echo Html::activeLabel($model, 'create_time'); ?></th>
+				<th><?php echo Html::encode($model->create_time); ?></th>
+			</tr>
+			<tr>
+				<th><?php echo Html::activeLabel($model, 'subject'); ?></th>
+				<th><?php echo Html::encode($model->subject); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th><?php echo Html::activeLabel($model, 'content'); ?></th>
+				<th><?php //echo Html::encode($model->content); ?></th>
+				<th><?php echo $model->content; ?></th>
+			</tr>
+		</tbody>
+	</table>
 </div>

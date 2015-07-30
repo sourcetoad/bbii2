@@ -32,7 +32,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). 	' (' . $reports . ')', 	'url' => array('moderator/report'), 	'visible' => $this->context->isModerator()),
 	array('label' => Yii::t('BbiiModule.bbii', 'Posts'), 							'url' => array('moderator/admin'), 		'visible' => $this->context->isModerator()),
 	array('label' => Yii::t('BbiiModule.bbii', 'Blocked IP'), 						'url' => array('moderator/ipadmin'), 	'visible' => $this->context->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Send mail'), 						'url' => array('moderator/sendmail'), 	'visible' => $this->context->isModerator()),
+	// array('label' => Yii::t('BbiiModule.bbii', 'Send mail'), 						'url' => array('moderator/sendmail'), 	'visible' => $this->context->isModerator()),
 );
 
 /*\Yii::$app->clientScript->registerScript('setAutocomplete', "
@@ -52,7 +52,7 @@ function setAutocomplete(id, data) {
 */
 ?>
 
-<div id = "bbii-wrapper">
+<div id = "bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 
 	<?php // @depricated 2.1.5 Kept for referance

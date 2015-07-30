@@ -58,7 +58,7 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
 \Yii::$app->session->removeAllFlashes();
 ?>
 
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
     <div class="well">

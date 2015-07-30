@@ -17,7 +17,7 @@ $this->context->bbii_breadcrumbs = array(
 	Yii::t('BbiiModule.bbii', 'Settings'),
 );
 ?>
-<div id = "bbii-wrapper">
+<div id = "bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('template/_header'); ?>
 
 	<div class = "form">

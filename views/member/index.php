@@ -34,7 +34,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Blocked IP'), 'url' => array('moderator/ipadmin'), 'visible' => $this->context->isModerator()),
 );
 ?>
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 
 	<?php // @depricated 2.1.5 Kept for referance
@@ -75,7 +75,6 @@ $item = array(
 		'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
  
-            'avatar',
 			[
 				'attribute' => 'member_name',
 				'value'     => 'member_name',

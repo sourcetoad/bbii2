@@ -48,7 +48,7 @@ $('.presence').hide();
 JS;
 $this->registerJs($script, View::POS_READY);
 ?>
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
     <div class="well clearix">

@@ -16,7 +16,7 @@ $item = array(
 	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'), 'visible' => $this->context->isModerator()),
 );
 ?>
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
 	<div class = "bbii-box-top"><?php echo Yii::t('BbiiModule.bbii', 'Send e-mail to') . ' ' . $model->member_name; ?></div>

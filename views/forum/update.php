@@ -21,7 +21,7 @@ $item = array(
 	array('label' => Yii::t('bbii', 'Members'), 'url' => array('/forum/member/index'))
 );
 ?>
-<div id = "bbii-wrapper">
+<div id="bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('_header', array('item' => $item)); ?>
 	
 	<?php echo $this->render('_form', array('post' => $post)); ?>
