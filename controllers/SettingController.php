@@ -461,7 +461,7 @@ class SettingController extends BbiiController {
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-    public function actionUpdateforum($id)
+    public function actionUpdateforum($id = null)
     {
     	$id    = (is_numeric($id) ?: \Yii::$app->request->get('id'));
         $model = BbiiForum::find()->where(['id' => $id])->one();

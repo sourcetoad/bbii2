@@ -69,7 +69,7 @@ $this->registerJs($script, View::POS_READY);
     			'id'                   => 'bbii-member-form',
     			'options'              => array('enctype' => 'multipart/form-data'),
     		]); ?>
-                <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success btn-lg')); ?>
+                <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Update'), array('class' => 'btn btn-success btn-lg')); ?>
 
     			<?php //echo $form->errorSummary($model); ?>
 
@@ -83,9 +83,7 @@ $this->registerJs($script, View::POS_READY);
     				<div>
                         <?php //echo $form->labelEx($model,'group_id'); ?>
                         <?php //->label('Group Name') ?>
-                        <?php echo Html::dropDownList(
-                            $model,
-                            'group_id',
+                        <?php echo $form->field($model, 'group_id')->dropDownList(
                             ArrayHelper::map(BbiiMembergroup::find()->all(), 'id', 'name'),
                             ['prompt' => 'Group', 'class' => 'form-control']
                         ); ?>
@@ -106,12 +104,8 @@ $this->registerJs($script, View::POS_READY);
                         ['prompt' => 'Gender', 'class' => 'form-control']
                     ); */ ?>
                     <?php //echo $form->error($model,'gender'); ?>
-                    <?php echo $form->field($model, 'gender')
-                        ->dropDownList(
-                        array(
-                            '0' => Yii::t('BbiiModule.bbii', 'Male'),
-                            '1' => Yii::t('BbiiModule.bbii', 'Female')
-                        ),
+                    <?php echo $form->field($model, 'gender')->dropDownList(
+                        ['0' => Yii::t('BbiiModule.bbii', 'Male'), '1' => Yii::t('BbiiModule.bbii', 'Female')],
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
     			</div>
@@ -162,12 +156,8 @@ $this->registerJs($script, View::POS_READY);
                         ['class' => 'form-control']
                     ); */ ?>
                     <?php //echo $form->error($model,'show_online'); ?>
-                    <?php echo $form->field($model, 'show_online')
-                        ->dropDownList(
-                        array(
-                            '0' => Yii::t('BbiiModule.bbii', 'No'),
-                            '1' => Yii::t('BbiiModule.bbii', 'Yes')
-                        ),
+                    <?php echo $form->field($model, 'show_online')->dropDownList(
+                        ['0' => Yii::t('BbiiModule.bbii', 'No'), '1' => Yii::t('BbiiModule.bbii', 'Yes')],
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
     			</div>
@@ -185,12 +175,8 @@ $this->registerJs($script, View::POS_READY);
                         ['class' => 'form-control']
                     ); */ ?>
                     <?php //echo $form->error($model,'contact_email'); ?>
-                    <?php echo $form->field($model, 'contact_email')
-                        ->dropDownList(
-                        array(
-                            '0' => Yii::t('BbiiModule.bbii', 'No'),
-                            '1' => Yii::t('BbiiModule.bbii', 'Yes')
-                        ),
+                    <?php echo $form->field($model, 'contact_email')->dropDownList(
+                        ['0' => Yii::t('BbiiModule.bbii', 'No'), '1' => Yii::t('BbiiModule.bbii', 'Yes')],
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
     			</div>
@@ -208,12 +194,8 @@ $this->registerJs($script, View::POS_READY);
                         ['class' => 'form-control']
                     ); */ ?>
                     <?php //echo $form->error($model,'contact_pm'); ?>
-                    <?php echo $form->field($model, 'contact_pm')
-                        ->dropDownList(
-                        array(
-                            '0' => Yii::t('BbiiModule.bbii', 'No'),
-                            '1' => Yii::t('BbiiModule.bbii', 'Yes')
-                        ),
+                    <?php echo $form->field($model, 'contact_pm')->dropDownList(
+                        ['0' => Yii::t('BbiiModule.bbii', 'No'), '1' => Yii::t('BbiiModule.bbii', 'Yes')],
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
     			</div>
@@ -230,8 +212,7 @@ $this->registerJs($script, View::POS_READY);
                         ['class' => 'form-control']
                     ); */ ?>
                     <?php //echo $form->error($model,'timezone'); ?>
-                    <?php echo $form->field($model, 'timezone')
-                        ->dropDownList(
+                    <?php echo $form->field($model, 'timezone')->dropDownList(
                         array_combine(DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers()),
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
@@ -390,7 +371,7 @@ $this->registerJs($script, View::POS_READY);
 
     			<div class = "buttons">
                     <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Show social media options'), array('class' => 'btn btn-success btn-lg presence-button')); ?>
-                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success btn-lg')); ?>
+                    <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Update'), array('class' => 'btn btn-success btn-lg')); ?>
     			</div>
 
     		<?php ActiveForm::end(); ?>

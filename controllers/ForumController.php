@@ -395,6 +395,8 @@ class ForumController extends BbiiController {
 	/**
 	 * Reply to a topic
 	 *
+	 * @todo  merge with createTopic, much the same logic - DJE : 2015-07-30
+	 * 
 	 * @version  2.7.5
 	 * @param $id integer topic_id
 	 */
@@ -408,7 +410,8 @@ class ForumController extends BbiiController {
 
 		if ($topic && $post->load(\Yii::$app->request->post())) {
 
-			$post->approved    = (int)$forum->moderated;
+			// if the forum is NOT moderated, approval all posts
+			$post->approved    = (!$forum->moderated ? 1 : 0);
 			$post->create_time = date('Y-m-d H:m:i');
 			$post->user_id     = \Yii::$app->user->identity->id ;
 
@@ -416,25 +419,25 @@ class ForumController extends BbiiController {
 
 				if ($post->approved) {
 
-					$forum->updateCounters(array('num_posts'   => 1));
-					$post->updateCounters(['view_count'        => 1]);
-					$topic->updateCounters(array('num_replies' => 1));
-					
-					$forum->last_post_id = $post->id;
-					$topic->last_post_id = $post->id;
-
 					$post->poster->updateCounters(array('posts' => 1));
-					$this->assignMembergroup(\Yii::$app->user->identity->id);
-
-					$forum->update();
 					$post->update();
+
+					$topic->updateCounters(['num_views'        => 1]);
+					$topic->updateCounters(array('num_replies' => 1));
+					$topic->last_post_id = $post->id;
 					$topic->update();
+
+					$forum->updateCounters(array('num_posts'   => 1));
+					$forum->last_post_id = $post->id;
+					$forum->update();
+
+					$this->assignMembergroup(\Yii::$app->user->identity->id);					
 				}
 
 				\Yii::$app->session->setFlash('success ',
 					Yii::t('BbiiModule.bbii',
 						'Your post has been saved. Thank you for your contribution to the forum. '.
-						(($post->approved) ? 'It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. ' : null)
+						($post->approved ? null : 'It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. ')
 					)
 				);
 				return \Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
@@ -489,7 +492,7 @@ class ForumController extends BbiiController {
 
 			$post->load(\Yii::$app->request->post());
 
-			$post->approved    = ($forum->moderated ? 0 : 1);
+			$post->approved    = ($forum->moderated ?: 1);
 			$post->create_time = date('Y-m-d H:m:i');
 			//$post->forum_id    = \Yii::$app->request->post('BbiiForum')['id'];
 			$post->user_id     = \Yii::$app->user->identity->id;

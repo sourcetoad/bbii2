@@ -59,7 +59,7 @@ class ModeratorController extends BbiiController {
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-						'actions'       => array('admin','approval','approve','banIp','changeTopic','delete','ipAdmin','ipDelete','view','refreshTopics','report','topic','sendmail'),
+						'actions'       => array('admin','approval','approve','banIp','changeTopic','delete','ipadmin','ipdelete','view','refreshtopics','report','topic','sendmail'),
 						'allow'         => true,
 						'matchCallback' => function() { return $this->isModerator(); },
                     ],
@@ -69,8 +69,9 @@ class ModeratorController extends BbiiController {
     }
 
 	public function actionApproval() {
-		$model = new BbiiPost('search');
+		//$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
+		$model = new BbiiPost();
 		if (isset(\Yii::$app->request->get()['BbiiMessage'])) {
 			$model->load(\Yii::$app->request->get()['BbiiPost']);
 		}
@@ -108,8 +109,9 @@ class ModeratorController extends BbiiController {
 	}
 	
 	public function actionAdmin() {
-		$model = new BbiiPost('search');
+		//$model = new BbiiPost('search');
 		// $model->unsetAttributes();  // clear any default values
+		$model = new BbiiPost();
 		if (isset(\Yii::$app->request->get()['BbiiPost']))
 			$model->load(\Yii::$app->request->get()['BbiiPost']);
 		// limit posts to approved posts
@@ -121,8 +123,10 @@ class ModeratorController extends BbiiController {
 	}
 	
 	public function actionIpadmin() {
-		$model = new BbiiIpaddress('search');
+		//$model = new BbiiIpaddress('search');
 		// $model->unsetAttributes();  // clear any default values
+		
+		$model = new BbiiIpaddress();
 		if (isset(\Yii::$app->request->get()['BbiiIpaddress']))
 			$model->load(\Yii::$app->request->get()['BbiiIpaddress']);
 
@@ -251,8 +255,10 @@ class ModeratorController extends BbiiController {
 	}
 	
 	public function actionReport() {
-		$model = new BbiiMessage('search');
+		//$model = new BbiiMessage('search');
 		// $model->unsetAttributes();  // clear any default values
+		
+		$model = new BbiiMessage();
 		if (isset(\Yii::$app->request->get()['BbiiMessage']))
 			$model->load(\Yii::$app->request->get()['BbiiMessage']);
 		// limit posts to moderator inbox
