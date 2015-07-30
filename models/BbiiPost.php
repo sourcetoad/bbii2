@@ -56,8 +56,8 @@ class BbiiPost extends BbiiAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return [
-			[['subject', 'create_time', 'change_time', 'search'], 'safe'],
-			[['subject'], 'required'],
+			[['subject', 'content', 'create_time', 'change_time', 'search'], 'safe'],
+			[['subject', 'content'], 'required'],
 
 			[['change_id', 'user_id', 'topic_id', 'forum_id', 'approved', 'upvoted'], 'integer'],
 			[['subject', 'change_reason'], 'string', 'max' => 255],

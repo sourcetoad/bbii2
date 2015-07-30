@@ -126,6 +126,7 @@ if (empty($poll->question) && !$poll->hasErrors()) {
             </div>
             <?php $this->endWidget(); ?>
             */ ?>
+
             <?php $form = ActiveForm::begin([
                 'enableAjaxValidation' => false,
                 'id'                   => 'create-topic-form',
@@ -138,8 +139,25 @@ if (empty($poll->question) && !$poll->hasErrors()) {
                 <?php echo $form->field($post, 'subject')->textInput(array('class' => 'form-control')); ?>
 
                 <?php // @todo re-enable ExtEditMe extention - DJE : 2015-05-26 ?>
-                <?php echo $form->field($post, 'content')->textarea(array('class' => 'form-control')); ?>
-
+                <?php // echo $form->field($post, 'content')->textarea(array('class' => 'form-control')); ?>
+                <div>
+                    <?php //echo $form->field($post, 'content')->textArea(); ?>
+                    <?php echo $form->field($post, 'content')->widget(
+                        \yii\imperavi\Widget::className(),
+                        [
+                            //'plugins' => ['fullscreen', 'fontcolor', 'video'],
+                            'options' => [
+                                'buttonSource'    => true,
+                                'convertDivs'     => true,
+                                //'imageUpload'   => \Yii::$app->urlManager->createUrl(['/file-storage/upload-imperavi']),
+                                //'maxHeight'     => 400,
+                                //'minHeight'     => 400,
+                                'removeEmptyTags' => true,
+                                'name'            => 'content'
+                            ]
+                        ]
+                    ) ?>
+                </div>
                 <?php if ($this->context->isModerator()) { ?>
                     <div>
                         <strong><?php echo Yii::t('BbiiModule.bbii', 'Sticky'); ?>:</strong><?php echo Html::checkbox('sticky'); ?><br />

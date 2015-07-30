@@ -487,11 +487,11 @@ class ForumController extends BbiiController {
 		if (\Yii::$app->request->post('BbiiPost')) {
 			$forum = BbiiForum::findOne(\Yii::$app->request->post('BbiiPost')['forum_id']);
 
-			$post->setAttributes(\Yii::$app->request->post('BbiiPost'));
+			$post->load(\Yii::$app->request->post());
 
 			$post->approved    = ($forum->moderated ? 0 : 1);
 			$post->create_time = date('Y-m-d H:m:i');
-			$post->forum_id    = \Yii::$app->request->post('BbiiForum')['id'];
+			//$post->forum_id    = \Yii::$app->request->post('BbiiForum')['id'];
 			$post->user_id     = \Yii::$app->user->identity->id;
 
 			// if the post is valid, create the topic
