@@ -206,54 +206,55 @@ class ModeratorController extends BbiiController {
 	/**
 	 * Reset the first post id of a topic when a first post is deleted
 	 */
-	private function resetFirstTopicPost($id) {
-		$criteria = new CDbCriteria();
-		$criteria->condition = 'first_post_id = :first_post_id';
-		$criteria->params = array('first_post_id' => $id);
-		$model = BbiiTopic::find()->find($criteria);
-		if ($model !== null) {
-			$criteria->condition = 'topic_id = :topic_id';
-			$criteria->params = array(':topic_id' => $model->id);
-			$criteria->order = 'id DESC';
-			$post = BbiiPost::find()->find($criteria);
+	private function resetFirstTopicPost($id = null) {
+		$model = BbiiTopic::find()
+			->where(['first_post_id' => $id])
+			->one();
+
+		if (!empty($model)) {
+
+			$post = BbiiPost::find()
+				->where([':topic_id' => $model->id])
+				->orderby('id DESC')
+				->all();
+
 			if ($post !== null) {
 				$model->user_id = $post->user_id;
 				$model->first_post_id = $post->id;
-				$model->save();
+				return $model->save();
 			}
 		}
+
+		return false;
 	}
 	
 	/**
 	 * Reset the last post of a topic and a forum when post is deleted
 	 */
-	private function resetLastPost($id) {
-		$criteria = new CDbCriteria;
-		$criteria->condition = "last_post_id = $id";
-		$forum = BbiiForum::find()->find($criteria);
-		$topic = BbiiTopic::find()->find($criteria);
+	private function resetLastPost($id = null) {
+
+		$forum = BbiiForum::find()->where(['last_post_id' => $id])->one();
 		if ($forum !== null) {
-			$criteria->condition = "forum_id = {$forum->id} and approved = 1";
-			$criteria->order = 'id DESC';
-			$criteria->limit = 1;
-			$post = BbiiPost::find()->find($criteria);
-			if ($post === null) {
-				$forum->last_post_id = null;
-			} else {
-				$forum->last_post_id = $post->id;
-			}
+			$post = BbiiPost::find()
+				->where(['forum_id' => $forum->id, 'approved' => 1])
+				->orderBy('id DESC')
+				->limit(1)
+				->all();
+
+			$forum->last_post_id = ($post === null) ? null : $post->id ;
+
 			$forum->update();
 		}
+
+		$topic = BbiiTopic::find()->where(['last_post_id' => $id])->one();
 		if ($topic !== null) {
-			$criteria->condition = "topic_id = $topic->id and approved = 1";
-			$criteria->order = 'id DESC';
-			$criteria->limit = 1;
-			$post = BbiiPost::find()->find($criteria);
-			if ($post === null) {
-				$topic->last_post_id = null;
-			} else {
-				$topic->last_post_id = $post->id;
-			}
+			$post = BbiiPost::find()->where(['topic_id' => $topic->id, 'approved' => 1])
+				->limit(1)
+				->orderBy('id DESC')
+				->one();
+			
+			$topic->last_post_id = ($post === null) ? null : $post->id ;
+			
 			$topic->update();
 		}
 	}
@@ -262,17 +263,17 @@ class ModeratorController extends BbiiController {
 	 * Reset the last post of a forum
 	 */
 	private function resetLastForumPost($id) {
-		$model = BbiiForum::find($id);
-		$criteria = new CDbCriteria;
-		$criteria->condition = "forum_id = $id and approved = 1";
-		$criteria->order = 'id DESC';
-		$post = BbiiPost::find()->find($criteria);
-		if ($post !== null) {
-			$model->last_post_id = $post->id;
-		} else {
-			$model->last_post_id = null;
-		}
-		$model->save();
+		$post = BbiiPost::find()
+			->where(['forum_id' => $id, 'approved' => 1])
+			->orderBy('id DESC');
+
+		$model = BbiiForum::find()
+			->where(['id' => $id])
+			->one();
+
+		$model->last_post_id = ($post !== null) ? $post->id : null;
+
+		return $model->save();
 	}
 	
 	public function actionReport() {
@@ -388,9 +389,7 @@ class ModeratorController extends BbiiController {
 			if ($model->validate()) {
 				$json['success'] = 'yes';
 				if ($merge || $move) {
-					$criteria = new CDbCriteria();
-					$criteria->condition = "topic_id = $sourceTopicId";
-					$numberOfPosts = BbiiPost::find()->approved()->count($criteria);
+					$numberOfPosts = BbiiPost::find()->where(['topic_id' => $sourceTopicId])->approved()->count();
 					if ($move) {
 						BbiiPost::find()->updateAll(array('forum_id' => $targetForumId), $criteria);
 						$forum = BbiiForum::find($sourceForumId);
@@ -444,10 +443,11 @@ class ModeratorController extends BbiiController {
 		if ($group !== null && $group->min_posts < 0) {
 			return;
 		}
-		$criteria = new CDbCriteria;
-		$criteria->condition = "min_posts > 0 and min_posts < =  " . $member->posts;
-		$criteria->order = 'min_posts DESC';
-		$newGroup = BbiiMembergroup::find()->find($criteria);
+
+		$newGroup = BbiiMembergroup::find()
+			->where("min_posts > 0 and min_posts < =  " . $member->posts)
+			->orderBy('min_posts DESC');
+
 		if ($newGroup !== null and $group->id != $newGroup->id) {
 			$member->group_id = $newGroup->id;
 			$member->save();
@@ -457,18 +457,19 @@ class ModeratorController extends BbiiController {
 	public function actionSendmail() {
 		$model = new MailForm;
 		// $model->unsetAttributes();
+
 		if (isset(\Yii::$app->request->post()['MailForm'])) {
 			$model->load(\Yii::$app->request->post()['MailForm']);
 			if (empty($model->member_id)) {
 				$model->member_id = -1;	// All members
 			}
+
 			if ($model->validate()) {
-				$criteria = new CDbCriteria;
-				if ($model->member_id >=  0) {
-					$criteria->condition = 'group_id = :group';
-					$criteria->params = array(':group' => $model->member_id);
-				}
-				$members = BbiiMember::find()->findAll($criteria);
+				
+				$members = ($model->member_id >=  0)
+					? BbiiMember::find()->where(['group_id' => $model->member_id])->all()
+					: BbiiMember::findAll();
+
 				if (isset(\Yii::$app->request->post()['email'])) {	// e-mails
 					$name = $this->context->module->forumTitle;
 					$name = ' = ?UTF-8?B?'.base64_encode($name).'? = ';
@@ -481,16 +482,16 @@ class ModeratorController extends BbiiController {
 
 					$users = array();
 					$class = new $this->module->userClass;
-					$criteria = new CDbCriteria;
-					$criteria->condition = $this->module->userIdColumn . ' = :id';
+
 					foreach($members as $member) {
-						$criteria->params = array(':id' => $member->id);
-						$user 	 =  $class::find()->find($criteria);
-						$to 	 =  $user->getAttribute($this->module->userMailColumn);
 						$sendto = $member->member_name . " <$to>";
+						$to     = $user->getAttribute($this->module->userMailColumn);
+						$user   = $class::find()->where([$this->module->userIdColumn => $member->id])->all();
+						
 						mail($sendto,$subject,$model->body,$headers);
 						$users[] = $member->member_name;
 					}
+
 					// $model->unsetAttributes();
 					\Yii::$app->session->setFlash('success',Yii::t('BbiiModule.bbii','You have sent an e-mail to the following users: ') . implode(', ', $users));
 				} else {						// private messages
