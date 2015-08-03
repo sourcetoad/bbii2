@@ -44,7 +44,11 @@ $assets = AppAsset::register($this);
                             'title'   => Yii::t('BbiiModule.bbii', 'Update topic'),
                         )
                     ),
-                    ['setting/updateforum', 'id' => $model->id],
+                    [
+                        'setting/update',
+                        'id'   => $model->id,
+                        'type' => 'topic',
+                    ],
                     ['topic', 'nav' => 'last']
                 ); ?>
             <?php }; ?>

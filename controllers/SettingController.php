@@ -8,6 +8,7 @@ use frontend\modules\bbii\models\BbiiSetting;
 use frontend\modules\bbii\models\BbiiMembergroup;
 use frontend\modules\bbii\models\BbiiMember;
 use frontend\modules\bbii\models\BbiiSpider;
+use frontend\modules\bbii\models\BbiiTopic;
 
 use Yii;
 use yii\widgets\ActiveForm;
@@ -481,6 +482,43 @@ class SettingController extends BbiiController {
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * [actionUpdate description]
+     *
+     * @todo  We can use this update() for updating just about anything that has a related MDL. Simply pass the ID and
+     * the Name and it will redirect to a setting/update?id=X for the object.
+     * 
+     * @param  [type] $id        [description]
+     * @param  [type] $type      [description]
+     * @return [type]            [description]
+     */
+    public function actionUpdate($id = null, $type = null)
+    {
+		$classMDL = "frontend\modules\bbii\models\\".(is_string($type) ? 'Bbii'.$type : 'Bbii'.ucfirst(\Yii::$app->request->get('type')));
+		$id       = (is_numeric($id) ?: \Yii::$app->request->get('id'));
+		$model    = $classMDL::findOne($id);
+
+
+
+        if ($model->load(\Yii::$app->request->post())) {
+
+        	$success = ($model->validate() && $model->save() ? true : false);
+
+			\Yii::$app->getSession()->setFlash(
+				($success?'success':'warning'),
+				Yii::t('BbiiModule.bbii', 'Change(s) '.(!$success?'NOT':NULL).'saved.')
+			);
+            
+			return \Yii::$app->response->redirect( \Yii::$app->request->referrer );
+        } else {
+            return $this->render('update/'.strtolower(\Yii::$app->request->get('type')), [
+                'model' => $model,
+            ]);
+        }
+
+        return false;
     }
 
     /**
