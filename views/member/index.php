@@ -89,10 +89,15 @@ $item = array(
 			],
             'group_id',
 
-            ['class' => 'yii\grid\ActionColumn']
+            [
+            	'class' => 'yii\grid\ActionColumn',
+            	'template' => '{view} {update}',
+            ],
+
            ],
 		'dataProvider' => $model->search(),
 		'id'           => 'member-grid',
+
 	]); ?>
     </div>
 
