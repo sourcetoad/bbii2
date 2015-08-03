@@ -195,7 +195,6 @@ class MessageController extends BbiiController {
 			// manual sttrib set
 			$model->sendfrom = \Yii::$app->user->identity->id ;
 			$model->sendto = BbiiMember::find()
-				->select('id')
 				->where(['member_name' => \Yii::$app->request->post('BbiiMessage')['sendto']])
 				->one()
 				->id;
@@ -211,15 +210,18 @@ class MessageController extends BbiiController {
 			}
 
 			return \Yii::$app->response->redirect(array('forum/message/inbox'));
+		} elseif (\Yii::$app->request->get('sendto') !== null) {
 
-		} /* elseif (isset($id)) {
-			// @todo No idea what this does yet - DJE : 2015-05-20
-			$model->sendto = $id;
-			$model->search = $model->receiver->member_name;
+			$model->sendto = BbiiMember::find()
+				->where(['id' => \Yii::$app->request->get('sendto')])
+				->one()
+				->member_name;
+
+			//$model->search = $model->receiver->member_name;
 			if ($this->isModerator() && isset($type)) {
 				$model->type = $type;
 			}
-		} */
+		}
 
 		return $this->render('create',array(
 			'model' => $model,

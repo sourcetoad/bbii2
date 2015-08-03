@@ -186,16 +186,21 @@ class ModeratorController extends BbiiController {
 		$this->resetLastPost($id);
 
 		// remove messages related to the post
-		$model = BbiiMessage::find()->delete(['post_id' => $id]);
+		$messageMDL = BbiiMessage::find()->where(['post_id' => $id])->all();
+		if ($messageMDL->id) {
+			$messageMDL->delete();
+		}
 		
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if (!isset(\Yii::$app->request->get()['ajax'])) {
-			$this->redirect(
-				isset(\Yii::$app->request->post()['returnUrl']) ? \Yii::$app->request->post()['returnUrl'] : array('approval')
+
+			\Yii::$app->response->redirect(
+				isset(\Yii::$app->request->post()['returnUrl'])
+					? : \Yii::$app->urlManager->createAbsoluteUrl(['forum/forum', 'id' => $forum->id])
 			);
 		}
 
-		return true;
+		return false;
 	}
 	
 	/**
