@@ -32,7 +32,7 @@ echo Html::dropDownList(
 
 <div id = "bbii-header">
 	<?php if (!\Yii::$app->user->isGuest): ?>
-		<?php $messages = BbiiMessage::find()->inbox()->unread()->count('sendto = '.\Yii::$app->user->identity->id ); ?>
+		<?php $messages = BbiiMessage::find()->where(['sendto' => \Yii::$app->user->identity->id])->inbox()->unread()->count(); ?>
 		<div class = "btn-group pull-right">
 		<?php 
 			if ($messages) {
