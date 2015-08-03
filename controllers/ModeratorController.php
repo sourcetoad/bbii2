@@ -3,9 +3,11 @@
 namespace frontend\modules\bbii\controllers;
 
 use frontend\modules\bbii\components\BbiiController;
+use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiIpaddress;
 use frontend\modules\bbii\models\BbiiMessage;
 use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiTopic;
 use frontend\modules\bbii\models\MailForm;
 
 use Yii;
@@ -146,40 +148,59 @@ class ModeratorController extends BbiiController {
 	/**
 	 * Delete a post
 	 */
-	public function actionDelete($id) {
-		if (isset(\Yii::$app->request->get()['id']))
+	public function actionDelete($id = null) {
+		if (isset(\Yii::$app->request->get()['id'])) {
 			$id = \Yii::$app->request->get()['id'];
-		$post = BbiiPost::find($id);
-		if ($post === null) {
-			throw new HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
 		}
-		$forum = BbiiForum::find($post->forum_id);
-		$topic = BbiiTopic::find($post->topic_id);
-		$post->poster->updateCounters(array('posts' => -1));
+
+		$post = BbiiPost::find()->where(['id' => (int)$id])->one();
+
+		if ($post === null) {
+			throw new \yii\web\HttpException(404, Yii::t('BbiiModule.bbii', 'The requested post does not exist.'));
+		}
+
+		$forum = BbiiForum::find()->where(['id' => $post->forum_id])->one();
+		$topic = BbiiTopic::find()->where(['id' => $post->topic_id])->one();
+
+		// if the posters count is > 0 , reduce it by one
+		($post->poster->posts > 0) ? $post->poster->updateCounters(array('posts' => -1)) : null;
+
 		$post->delete();
+
 		if ($topic->approved == 0) {
+
 			$topic->delete();
 		} else {
-			$forum->updateCounters(array('num_posts' => -1));					// method since Yii 1.1.8
+			$forum->updateCounters(array('num_posts' => -1)); 		// method since Yii 1.1.8
+
 			if ($topic->num_replies > 0) {
-				$topic->updateCounters(array('num_replies' => -1));				// method since Yii 1.1.8
+
+				$topic->updateCounters(array('num_replies' => -1));	// method since Yii 1.1.8
 			} else {
 				$topic->delete();
-				$forum->updateCounters(array('num_topics' => -1));				// method since Yii 1.1.8
+				$forum->updateCounters(array('num_topics' => -1));	// method since Yii 1.1.8
 			}
 		}
+
 		$this->resetFirstTopicPost($id);
 		$this->resetLastPost($id);
-		// Delete reports on the delete post
-		$criteria = new CDbCriteria();
-		$criteria->condition = 'post_id = :post_id';
-		$criteria->params = array(':post_id' => $id);
-		$model = BbiiMessage::find()->deleteAll($criteria);
+
+		// remove messages related to the post
+		$messageMDL = BbiiMessage::find()->where(['post_id' => $id])->all();
+		if ($messageMDL->id) {
+			$messageMDL->delete();
+		}
 		
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if (!isset(\Yii::$app->request->get()['ajax']))
-			$this->redirect(isset(\Yii::$app->request->post()['returnUrl']) ? \Yii::$app->request->post()['returnUrl'] : array('approval'));
-		return;
+		if (!isset(\Yii::$app->request->get()['ajax'])) {
+
+			\Yii::$app->response->redirect(
+				isset(\Yii::$app->request->post()['returnUrl'])
+					? : \Yii::$app->urlManager->createAbsoluteUrl(['forum/forum', 'id' => $forum->id])
+			);
+		}
+
+		return false;
 	}
 	
 	/**
@@ -188,7 +209,7 @@ class ModeratorController extends BbiiController {
 	private function resetFirstTopicPost($id) {
 		$criteria = new CDbCriteria();
 		$criteria->condition = 'first_post_id = :first_post_id';
-		$criteria->params = array(':first_post_id' => $id);
+		$criteria->params = array('first_post_id' => $id);
 		$model = BbiiTopic::find()->find($criteria);
 		if ($model !== null) {
 			$criteria->condition = 'topic_id = :topic_id';
