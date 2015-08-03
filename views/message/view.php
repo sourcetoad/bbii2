@@ -29,13 +29,13 @@ $item = array(
 	<table>
 		<thead>
 			<tr>
-				<th style = "width:150px;"><?php echo Html::activeLabel($model, 'sendfrom'); ?></th>
+				<th><?php echo Html::activeLabel($model, 'sendfrom'); ?></th>
 				<th><?php echo Html::encode($model->sendfrom); ?></th>
 			</tr>
-			<tr>
+			<!--<tr>
 				<th><?php echo Html::activeLabel($model, 'sendto'); ?></th>
 				<th><?php echo Html::encode($model->sendto); ?></th>
-			</tr>
+			</tr>-->
 			<tr>
 				<th><?php echo Html::activeLabel($model, 'create_time'); ?></th>
 				<th><?php echo Html::encode($model->create_time); ?></th>

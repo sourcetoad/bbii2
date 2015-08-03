@@ -326,6 +326,9 @@ class MessageController extends BbiiController {
 	public function actionView($id = null) {
 		$model = $this->getMessageMDL($id);
 
+		// @todo This should be done at the VW level - DJE : 2015-08-03
+		$model->sendfrom = BbiiMember::find()->where(['id' => $model->sendfrom])->one()->member_name;
+
 		// mark message as viewed
 		$model->read_indicator = true;
 		$model->save();
