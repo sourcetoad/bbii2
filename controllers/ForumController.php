@@ -29,8 +29,7 @@ class ForumController extends BbiiController {
 	/**
 	 * @return array action filters
 	 */
-	public function filters()
-	{
+	public function filters() {
 		return array(
 			'accessControl',
 		);
@@ -908,8 +907,7 @@ class ForumController extends BbiiController {
 	/**
 	 * This is the action to handle external exceptions.
 	 */
-	public function actionError()
-	{
+	public function actionError() {
 		if ($error = \Yii::$app->errorHandler->error)
 		{
 			if (\Yii::$app->request->isAjaxRequest)
@@ -951,7 +949,7 @@ class ForumController extends BbiiController {
 		}
 
 		return $returnData;
-	}	
+	}
 
 	/**
 	 * Determine whether a topic has been visited by a user
@@ -964,17 +962,17 @@ class ForumController extends BbiiController {
 
 		if (!empty($model->data)) {
 
-				$object = new BbiiTopicsRead;
-				$object->unserialize($model->data);
+			$object = new BbiiTopicsRead;
+			$object->unserialize($model->data);
 
-				// @todo turn caching back on - DJE : 2015-06-03
-				//$lastPost = BbiiTopic::find()->cache(300)->findByPk($topic_id)->last_post_id;
+			// @todo turn caching back on - DJE : 2015-06-03
+			//$lastPost = BbiiTopic::find()->cache(300)->findByPk($topic_id)->last_post_id;
 			$lastPost = BbiiTopic::find()->where(['id' => $topic_id])->one()->last_post_id;
 
 			if ($object->topicLastRead($topic_id) >= $lastPost) {
-					return true;
-				}
+				return true;
 			}
+		}
 
 		return false;
 	}
