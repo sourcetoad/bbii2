@@ -157,8 +157,8 @@ $assets = AppAsset::register($this);
                 <div class = "toolbar">
                 <?php if ($this->context->isModerator()): ?>
                     <?php echo Html::a( Html::img($assets->baseUrl.'/images/warn.png', 	array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $model->user_id, 'type' => 1) ); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/delete.png',			array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/delete', array('id' => $model->id)) . '") }')); ?>
-                    <?php echo Html::img($assets->baseUrl.'/images/ban.png',			array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $model->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/banIp') . '") }')); ?>
+                    <?php echo Html::img($assets->baseUrl.'/images/delete.png',			array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . \Yii::$app->urlManager->createAbsoluteUrl('forum/moderator/delete/?id='.$model->id) . '") }')); ?>
+                    <?php echo Html::img($assets->baseUrl.'/images/ban.png',			array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $model->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('forum/moderator/banIp') . '") }')); ?>
                 <?php endif; ?>
                 </div>
             </div>
