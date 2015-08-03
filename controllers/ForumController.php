@@ -952,33 +952,31 @@ class ForumController extends BbiiController {
 
 		return $returnData;
 	}	
+
 	/**
-	 * Determine whether a topic is completely read by a user
+	 * Determine whether a topic has been visited by a user
 	 * @param integer forum id
 	 * @return boolean
 	 */
 	public function topicIsRead($topic_id) {
-		if (\Yii::$app->user->isGuest) {
 
-			return false;
-		} else {
-			$model = BbiiTopicRead::find(\Yii::$app->user->identity->id )->select('*')->all();
+		$model = BbiiTopicRead::find()->where(['user_id' => \Yii::$app->user->identity->id])->one();
 
-			if (count($model) > 0) {
-				return false;
-			} else {
+		if (!empty($model->data)) {
+
 				$object = new BbiiTopicsRead;
 				$object->unserialize($model->data);
+
 				// @todo turn caching back on - DJE : 2015-06-03
 				//$lastPost = BbiiTopic::find()->cache(300)->findByPk($topic_id)->last_post_id;
-				$lastPost = BbiiTopic::find()->findByPk($topic_id)->last_post_id;
-				if ($lastPost > $object->topicLastRead($topic_id)) {
-					$result = false;
-				} else {
+			$lastPost = BbiiTopic::find()->where(['id' => $topic_id])->one()->last_post_id;
+
+			if ($object->topicLastRead($topic_id) >= $lastPost) {
 					return true;
 				}
 			}
-		}
+
+		return false;
 	}
 	
 	/**
@@ -987,9 +985,10 @@ class ForumController extends BbiiController {
 	public static function topicIcon($topic) {
 		$img = 'topic';
 
-		if (self::topicIsRead($topic->id)) {
+		if (!\Yii::$app->user->isGuest && self::topicIsRead($topic->id)) {
 			$img .= '2';
 		} else {
+
 			$img .= '1';
 		}
 
