@@ -30,26 +30,26 @@ use yii\web\JsExpression;
 	<div class = "row">
       <div class="col col-md-12">
            <?php if (\Yii::$app->controller->action->id == 'create') {
-            // echo $form->labelEx($model,'sendto');
-            // @todo iterate on this - DJE : 2015-05-19
-            /*$this->widget('zii.widgets.jui.CJuiAutoComplete',array(
-                'attribute' => 'search',
-                'model'     => $model,
-                'sourceUrl' => array('member/members'),
-                'theme'     => $this->module->juiTheme,
-                'options'   => array(
-                    'minLength' => 2,
-                    'delay' => 200,
-                    'select' => 'js:function(event, ui) {
-                        $("#BbiiMessage_search").val(ui.item.label);
-                        $("#BbiiMessage_sendto").val(ui.item.value);
-                        return false;
-                    }',
-                ),
-                'htmlOptions' => array(
-                    'style' => 'height:20px;',
-                ),
-            )); */
+                // echo $form->labelEx($model,'sendto');
+                // @todo iterate on this - DJE : 2015-05-19
+                /*$this->widget('zii.widgets.jui.CJuiAutoComplete',array(
+                    'attribute' => 'search',
+                    'model'     => $model,
+                    'sourceUrl' => array('member/members'),
+                    'theme'     => $this->module->juiTheme,
+                    'options'   => array(
+                        'minLength' => 2,
+                        'delay' => 200,
+                        'select' => 'js:function(event, ui) {
+                            $("#BbiiMessage_search").val(ui.item.label);
+                            $("#BbiiMessage_sendto").val(ui.item.value);
+                            return false;
+                        }',
+                    ),
+                    'htmlOptions' => array(
+                        'style' => 'height:20px;',
+                    ),
+                ));
 
 
                 echo '<label class="control-label" for="bbiimessage-sendto">Send To</label>';
@@ -64,7 +64,8 @@ use yii\web\JsExpression;
                     'id'      => 'bbiimessage-sendto',
                     'name'    => 'BbiiMessage[sendto]',
                     'options' => ['class' => 'form-control']
-                ]);
+                ]); */
+                echo $form->field($model, 'sendto')->textInput();
 
             } else{
                 echo $form->label($model,'sendto');
