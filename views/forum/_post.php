@@ -65,37 +65,47 @@ $assets = AppAsset::register($this);
                 <div class = "post-header">
 
                     <div class="pull-right"><?php
+                        // user is not guest and topic is not locked
+                        if (!Yii::$app->user->isGuest && !$model->topic->locked) {
 
-                        $formType = null;
+                            // user is post owner
+                            if ($model->user_id != Yii::$app->user->identity->id) {
 
-                        if (
-                            ($model->user_id != Yii::$app->user->identity->id)
-                            && !Yii::$app->user->isGuest && !$model->topic->locked) {
+                                $form = ActiveForm::begin([
+                                    'action'               => array('forum/quote', 'id' => $model->id),
+                                    'enableAjaxValidation' => false,
+                                ]);
 
-                                $formType = 'quote';
-                        } elseif (
-                            ($model->user_id == Yii::$app->user->identity->id)
-                            || $this->context->isModerator() || $this->context->isAdmin()
-                        ) {
+                                    echo Html::submitButton(
+                                        Yii::t('BbiiModule.bbii',
+                                        '<span class="glyphicon glyphicon-pencil"></span> quote'),
+                                        array('class' => 'btn btn-primary btn-xs btn-round pull-right')
+                                    );
 
-                            $formType = 'update';
-                        };
+                                ActiveForm::end();
+                            } 
 
-                        $form = ActiveForm::begin([
-                            'action'               => array('forum/'.$formType, 'id' => $model->id),
-                            'enableAjaxValidation' => false,
-                        ]);
+                            // user is post owner OR Mod/Admin
+                            if (
+                                ($model->user_id == Yii::$app->user->identity->id)
+                                || $this->context->isModerator() || $this->context->isAdmin()
+                            ) {
 
-                        if ($formType) {
-                            echo Html::submitButton(
-                                Yii::t('BbiiModule.bbii',
-                                '<span class="glyphicon glyphicon-pencil"></span> '.$formType),
-                                array('class' => 'btn btn-primary btn-xs btn-round pull-right')
-                            );
-                        }
+                                $form = ActiveForm::begin([
+                                    'action'               => array('forum/update', 'id' => $model->id),
+                                    'enableAjaxValidation' => false,
+                                ]);
 
-                        ActiveForm::end();
-                    ?></div>
+                                    echo Html::submitButton(
+                                        Yii::t('BbiiModule.bbii',
+                                        '<span class="glyphicon glyphicon-pencil"></span> update'),
+                                        array('class' => 'btn btn-primary btn-xs btn-round pull-right')
+                                    );
+
+                                ActiveForm::end();
+                            }
+                        }; ?>
+                    </div>
 
                     <div class = "header2<?php echo (isset($postId) && $postId == $model->id)?' target':''; ?>"><?php echo Html::encode($model->subject); ?></div>
                     <?php echo Html::encode($model->poster->member_name); ?>
