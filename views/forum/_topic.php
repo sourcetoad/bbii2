@@ -34,16 +34,7 @@ $assets = AppAsset::register($this);
             <?php if ($this->context->isModerator()) { ?>
                 <?php echo Html::img($assets->baseUrl.'/images/empty.png', ['alt' => 'empty']); ?>
                 <?php
-                echo Html::a(
-                    Html::img(
-                        $assets->baseUrl.'/images/update.png',
-                        array(
-                            'alt'     =>'update',
-                            //'onclick' => 'BBii.updateTopic(' . $model->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/topic') . '")',
-                            'style'   => 'cursor:pointer',
-                            'title'   => Yii::t('BbiiModule.bbii', 'Update topic'),
-                        )
-                    ),
+                echo Html::a('<span class="glyphicon glyphicon-pencil"></span>',
                     [
                         'setting/update',
                         'id'   => $model->id,
