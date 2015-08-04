@@ -66,14 +66,14 @@ class BbiiModule extends \yii\base\Module
 		if ($this->allowAPILogin && 
 			(
 				Yii::$app->request->get('auth-token') != false
-				&& !empty( Yii::$app->request->get('auth-token') )
+				&& Yii::$app->request->get('auth-token') !== null
 			)
 		) {
 			/* Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
 			$headers = Yii::$app->response->headers;
 			$headers->add('Content-Type', 'application/json; charset=utf-8'); */
 			// Guest user still needs session to hide header
-			if(Yii::$app->request->get('auth-token') != "guest") {
+			if (Yii::$app->request->get('auth-token') != "guest") {
 				$userMDL  = User::findIdentityByAccessToken( Yii::$app->request->get('auth-token') );
 
 				// if the user was successfully logged in, return a message saying so
