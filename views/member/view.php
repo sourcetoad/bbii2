@@ -107,11 +107,13 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
                 <td><strong><?php echo Yii::t('BbiiModule.bbii', 'Reputation'); ?></strong></td>
                 <td><?php echo Html::encode($userData->getAttribute('upvoted')); ?></td>
             </tr>
+            <?php if (!empty($group)){ ?>
             <tr>
                 <th style = "text-align:center;"><?php echo Html::encode($userData->getAttribute('member_name')); ?></th>
                 <td><strong><?php echo Yii::t('BbiiModule.bbii', 'Group'); ?></strong></td>
-                <td><?php $group = $userData->getAttribute('group'); if (!empty($group)) echo Html::encode($userData->getAttribute('group')['name']); ?></td>
+                <td><?php $group = $userData->getAttribute('group'); echo Html::encode($userData->getAttribute('group')['name']); ?></td>
             </tr>
+            <?php }; ?>
             <tr>
                 <td></td>
                 <th><?php echo Yii::t('BbiiModule.bbii', 'Location'); ?></th>
@@ -119,14 +121,16 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
             </tr>
             <tr>
                 <td></td>
-                <th><?php echo Yii::t('BbiiModule.bbii', 'Birthdate'); ?></th>
-                <td><?php $birthdate = $userData->getAttribute('birthdate'); echo (!empty($birthdate))?\Yii::$app->formatter->asDatetime($userData->getAttribute('birthdate'), 'long', null):Yii::t('BbiiModule.bbii', 'Unknown'); ?></td>
+                <th><?php //echo Yii::t('BbiiModule.bbii', 'Birthdate'); ?></th>
+                <td><?php //$birthdate = $userData->getAttribute('birthdate'); echo (!empty($birthdate))?\Yii::$app->formatter->asDatetime($userData->getAttribute('birthdate'), 'long', null):Yii::t('BbiiModule.bbii', 'Unknown'); ?></td>
             </tr>
-            <tr>
-                <td></td>
-                <th><?php echo Yii::t('BbiiModule.bbii', 'Gender'); ?></th>
-                <td><?php $gender = $userData->getAttribute('gender'); echo (!empty($gender))?(($userData->getAttribute('gender')) ? Yii::t('BbiiModule.bbii', 'Female'):Yii::t('BbiiModule.bbii', 'Male')) : Yii::t('BbiiModule.bbii', 'Unknown'); ?></td>
-            </tr>
+            <?php if ($userData->getAttribute('gender') !== null) { ?>
+                <tr>
+                    <td></td>
+                    <th><?php echo Yii::t('BbiiModule.bbii', 'Gender'); ?></th>
+                    <td><?php echo $userData->getAttribute('gender') ? Yii::t('BbiiModule.bbii', 'Female') : Yii::t('BbiiModule.bbii', 'Male'); ?></td>
+                </tr>
+            <?php }; ?>
             <tr>
                 <td></td>
                 <th><?php echo Yii::t('BbiiModule.bbii', 'Presence on the internet'); ?></th>
