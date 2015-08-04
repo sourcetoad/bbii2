@@ -76,11 +76,12 @@ echo Html::dropDownList(
 <?php endif */ ?>
 
 <?php
-foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
-    echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
-}
-\Yii::$app->session->removeAllFlashes();
-?>
+foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+	// todo Figure out why this will display a '1' when the session is started.
+	if ($message != 1 ){
+    	echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
+    }
+} ?>
 
 <noscript>
 	<div class = "flash-notice">
