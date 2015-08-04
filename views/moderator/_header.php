@@ -1,6 +1,9 @@
 <?php
 
+use frontend\modules\bbii\models\BbiiForum;
 use frontend\modules\bbii\models\BbiiMessage;
+use frontend\modules\bbii\models\BbiiPost;
+use frontend\modules\bbii\models\BbiiTopic;
 
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -11,6 +14,19 @@ $assets = AppAsset::register($this);
 
 /* @var $this ModeratorController */
 /* @var $item array */
+
+$approvals = BbiiPost::find()->unapproved()->count();
+$reports   = BbiiMessage::find()->report()->count();
+
+$item = array(
+	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 							'url' => array('forum/index')),
+	//array('label' => Yii::t('BbiiModule.bbii', 'Members'), 							'url' => array('member/index')),
+	//array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')','url' => array('moderator/approval'), 	'visible' => $this->context->isModerator()),
+	//array('label' => Yii::t('BbiiModule.bbii', 'Reports'). 	' (' . $reports . ')', 	'url' => array('moderator/report'), 	'visible' => $this->context->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Posts'), 							'url' => array('moderator/admin'), 		'visible' => $this->context->isModerator()),
+	//array('label' => Yii::t('BbiiModule.bbii', 'Blocked IP'), 						'url' => array('moderator/ipadmin'), 	'visible' => $this->context->isModerator()),
+	array('label' => Yii::t('BbiiModule.bbii', 'Send mail'), 						'url' => array('moderator/sendmail'), 	'visible' => $this->context->isModerator()),
+);
 ?>
 <div id = "bbii-header">
 	<?php if (!\Yii::$app->user->isGuest): ?>
