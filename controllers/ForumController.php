@@ -286,7 +286,7 @@ class ForumController extends BbiiController {
 		// Register the last visit of a topic
 		if (!\Yii::$app->user->isGuest) {
 			$object = new BbiiTopicsRead;
-			$model  = BbiiTopicRead::find(\Yii::$app->user->identity->id )->one();
+			$model  = BbiiTopicRead::find()->where(['user_id' => \Yii::$app->user->identity->id])->one();
 
 			if (empty($model->data)) {
 				$model = new BbiiTopicRead;
