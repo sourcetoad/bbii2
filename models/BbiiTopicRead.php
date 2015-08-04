@@ -40,7 +40,8 @@ class BbiiTopicRead extends BbiiAR
         // will receive user inputs.
         return array(
             [['user_id', 'data'], 'required'],
-            ['user_id', 'integer', 'max' => 11],
+            //['user_id', 'integer', 'max' => ],
+            [['user_id'], 'integer', 'min' => 0, 'max' => 99999999999],
 
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.

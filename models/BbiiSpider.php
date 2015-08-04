@@ -44,7 +44,7 @@ class BbiiSpider extends BbiiAR
 			[['name', 'user_agent'], 'required'],
 			['name', 'string', 'max' => 45],
 			['user_agent', 'string', 'max' => 255],
-			[['hits'], 'integer', 'min' => 0],
+			[['hits'], 'integer', 'min' => 0, 'max' => 99999999999],
 			array('hits', 'default',  'value' => 0),
 			array('last_visit', 'default', 'value' => 'NOW()', 'on' => 'visit'),
 			// The following rule is used by search().
