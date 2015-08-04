@@ -402,7 +402,7 @@ class ForumController extends BbiiController {
 	public function actionReply() {
 		$post  = new BbiiPost;
 
-		$topic = BbiiTopic::findOne( (Yii::$app->request->get('id') !== null ?:0) );
+		$topic = BbiiTopic::findOne( (Yii::$app->request->get('id') !== null ? Yii::$app->request->get('id') : 0) );
 		$forum = BbiiForum::findOne($topic->forum_id);
 
 
