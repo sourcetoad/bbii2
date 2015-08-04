@@ -84,13 +84,13 @@ use yii\helpers\Html;
                 ) ?>
             </div>
 
-            <?php if ($this->context->isModerator()) { ?>
+            <?php /* if ($this->context->isModerator()) { ?>
                 <div>
                     <strong><?php echo Yii::t('BbiiModule.bbii', 'Sticky'); ?>:</strong><?php echo Html::checkbox('sticky'); ?><br />
                     <strong><?php echo Yii::t('BbiiModule.bbii', 'Global'); ?>:</strong><?php echo Html::checkbox('global'); ?><br />
                     <strong><?php echo Yii::t('BbiiModule.bbii', 'Locked'); ?>:</strong><?php echo Html::checkbox('locked'); ?><br />
                 </div>
-            <?php }; ?>
+            <?php }; */ ?>
 
             <?php if (!$post->isNewRecord) { ?>
                 <diV>
