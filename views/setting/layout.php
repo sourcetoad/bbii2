@@ -32,6 +32,15 @@ var confirmation = new Array();
 confirmation[0] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this category?') . "';
 confirmation[1] = '" . Yii::t('BbiiModule.bbii', 'Are you sure that you want to delete this forum?') . "';";
 $this->registerJs($script, View::POS_READY);
+
+$this->title = Yii::t('forum', 'Forum');
+$this->params['breadcrumbs'][] = $this->title;
+
+$this->context->bbii_breadcrumbs = array(
+	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
+	Yii::t('BbiiModule.bbii', 'Settings') => array('setting/index'),
+	Yii::t('BbiiModule.bbii', 'Moderators')
+);
 ?>
 <div id = "bbii-wrapper" class="well clearfix">
 	<?php echo $this->render('template/_header'); ?>
