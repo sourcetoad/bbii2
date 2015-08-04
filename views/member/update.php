@@ -65,9 +65,10 @@ $this->registerJs($script, View::POS_READY);
     		));*/ ?>
 
     		<?php $form = ActiveForm::begin([
-    			'enableAjaxValidation' => false,
-    			'id'                   => 'bbii-member-form',
-    			'options'              => array('enctype' => 'multipart/form-data'),
+                'enableAjaxValidation'   => false,
+                'enableClientValidation' => false,
+                'id'                     => 'bbii-member-form',
+                'options'                => array('enctype' => 'multipart/form-data'),
     		]); ?>
                 <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Update'), array('class' => 'btn btn-success btn-lg')); ?>
 

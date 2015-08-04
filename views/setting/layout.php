@@ -47,8 +47,9 @@ $this->registerJs($script, View::POS_READY);
 	));*/ ?>
 
 	<?php $form = ActiveForm::begin([
-		'enableAjaxValidation' => false,
-		'id'                   => 'forum-form',
+		'enableAjaxValidation'   => false,
+		'enableClientValidation' => false,
+		'id'                     => 'forum-form',
 	]); ?>
 	
 		<?php echo $form->errorSummary($model); ?>

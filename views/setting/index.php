@@ -29,8 +29,9 @@ $this->context->bbii_breadcrumbs = array(
 	));*/ ?>
 
 	<?php $form = ActiveForm::begin([
-		'enableAjaxValidation' => false,
-		'id'                   => 'bbii-setting-form',
+		'enableAjaxValidation'   => false,
+		'enableClientValidation' => false,
+		'id'                     => 'bbii-setting-form',
 	]);?>
 		<?php // @todo Iterate on forms - DJE : 2015-05-15 ?>
 

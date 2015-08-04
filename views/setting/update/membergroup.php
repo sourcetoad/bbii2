@@ -14,8 +14,9 @@ use yii\helpers\Html;
 <div class = "form">
 
 	<?php $form = ActiveForm::begin([
-		'enableAjaxValidation' => false,
-		'id'                   => 'edit-membergroup-form',
+		'enableAjaxValidation'   => false,
+		'enableClientValidation' => false,
+		'id'                     => 'edit-membergroup-form',
 	]); ?>
 
 		<div>

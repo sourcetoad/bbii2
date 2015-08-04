@@ -21,8 +21,9 @@ use yii\web\JsExpression;
 	));*/ ?>
 
 	<?php $form = ActiveForm::begin([
-		'enableAjaxValidation' => false,
-		'id'                   => 'message-form',
+        'enableAjaxValidation'   => false,
+        'enableClientValidation' => false,
+        'id'                     => 'message-form',
 	]); ?>
 
 	<?php echo $form->errorSummary($model); ?>

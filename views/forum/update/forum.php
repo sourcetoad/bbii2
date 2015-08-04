@@ -128,8 +128,9 @@ if (empty($poll->question) && !$poll->hasErrors()) {
             */ ?>
 
             <?php $form = ActiveForm::begin([
-                'enableAjaxValidation' => false,
-                'id'                   => 'create-topic-form',
+                'enableAjaxValidation'   => false,
+                'enableClientValidation' => false,
+                'id'                     => 'create-topic-form',
             ]); ?>
 
                 <?php echo $form->errorSummary($post); ?>

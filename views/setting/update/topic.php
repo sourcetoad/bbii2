@@ -19,8 +19,9 @@ use yii\helpers\Html;
 <div class="well clearfix">
 
 	<?php $form = ActiveForm::begin([
-		'enableAjaxValidation' => false,
-		'id'                   => 'edit-topic-form',
+		'enableAjaxValidation'   => false,
+		'enableClientValidation' => false,
+		'id'                     => 'edit-topic-form',
 	]); ?>
 
 		<div>

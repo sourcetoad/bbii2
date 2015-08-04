@@ -54,8 +54,9 @@ use yii\helpers\Html;
         <?php $this->endWidget();*/ ?>
 
         <?php $form = ActiveForm::begin([
-                'enableAjaxValidation' => false,
-                'id'                   => 'create-topic-form',
+                'enableAjaxValidation'   => false,
+                'enableClientValidation' => false,
+                'id'                     => 'create-topic-form',
         ]); ?>
 
             <?php echo $form->errorSummary($post); ?>

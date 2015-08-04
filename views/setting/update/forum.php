@@ -19,8 +19,9 @@ use yii\helpers\Html;
 <div class = "form">
 
 	<?php $form = ActiveForm::begin([
-		'enableAjaxValidation' => false,
-		'id'                   => 'edit-forum-form',
+		'enableAjaxValidation'   => false,
+		'enableClientValidation' => false,
+		'id'                     => 'edit-forum-form',
 	]); ?>
 
 		<?php echo $form->errorSummary($model); ?>
