@@ -7,42 +7,56 @@ use yii\helpers\Html;
 /* @var $this SettingController */
 /* @var $model BbiiMembergroup */
 /* @var $form ActiveForm */
+
+$this->title = Yii::t('forum', 'Forum');
+$this->params['breadcrumbs'][] = $this->title;
+
+$this->context->bbii_breadcrumbs = array(
+	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
+	Yii::t('BbiiModule.bbii', 'Settings') => array('setting/index'),
+	Yii::t('BbiiModule.bbii', 'Moderators')
+);
+
 ?>
 
-<?php echo $this->render('../template/_header'); ?>
+<div id="bbii-wrapper" class="well clearfix">
 
-<br />
+    <?php echo $this->render('../template/_header'); ?>
 
-<div class = "form">
+    <br />
 
-	<?php $form = ActiveForm::begin([
-		'enableAjaxValidation'   => false,
-		'enableClientValidation' => false,
-		'id'                     => 'edit-spider-form',
-	]); ?>
+    <div class = "form">
 
-		<?php echo $form->errorSummary($model); ?>
+        <?php $form = ActiveForm::begin([
+            'enableAjaxValidation'   => false,
+            'enableClientValidation' => false,
+            'id'                     => 'edit-spider-form',
+        ]); ?>
 
-		<div>
-			<?php echo $form->field($model,'name')->textInput(array('size' => 25)); ?>
-		</div>
+            <?php echo $form->errorSummary($model); ?>
 
-		<div>
-			<?php echo $form->field($model,'user_agent')->textInput(array('size' => 70)); ?>
-		</div>
+            <div>
+                <?php echo $form->field($model,'name')->textInput(array('size' => 25)); ?>
+            </div>
 
-		<div>
-			<?php echo $form->field($model,'hits')->textInput(array('size' => 11)); ?>
-		</div>
+            <div>
+                <?php echo $form->field($model,'user_agent')->textInput(array('size' => 70)); ?>
+            </div>
 
-		<div>
-			<?php echo $form->field($model,'id')->hiddenInput()->label(false); ?>
-		</div>
+            <div>
+                <?php echo $form->field($model,'hits')->textInput(array('size' => 11)); ?>
+            </div>
 
-		<div class = "button">
-			<?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success btn-lg')); ?>
-		</div>
+            <div>
+                <?php echo $form->field($model,'id')->hiddenInput()->label(false); ?>
+            </div>
 
-	<?php ActiveForm::end(); ?>
+            <div class = "button">
+                <?php echo Html::submitButton(Yii::t('BbiiModule.bbii','Save'), array('class' => 'btn btn-success btn-lg')); ?>
+            </div>
 
-</div><!-- form -->
+        <?php ActiveForm::end(); ?>
+
+    </div><!-- form -->
+
+</div>
