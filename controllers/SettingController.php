@@ -101,32 +101,37 @@ class SettingController extends BbiiController {
                 'rules' => [
                     [
 						'actions'       => [
-							'ajaxSort',
-							'changeModerator',
+							'ajaxsort',
+							'changemoderator',
 							'createmembergroup',
 							'createspider',
-							'deleteForum',
-							'deleteMembergroup',
-							'deleteSpider',
+							'deleteforum',
+							'deletemembergroup',
+							'deletespider',
 							'getforum',
-							'getMembergroup',
-							'getSpider',
+							'getmembergroup',
+							'getspider',
 							'group',
 							'index',
 							'layout',
 							'moderator',
-							'saveForum',
-							'saveMembergroup',
-							'saveSpider',
+							'saveforum',
+							'savemembergroup',
+							'savespider',
 							'spider',
 							'update',
-							'updateForum',
 							'updateforum',
-							'updateMembergroup',
+							'updatemembergroup',
 							'updatespider',
 						],
 						'allow'         => true,
-						'matchCallback' => function() { return $this->isModerator(); },
+						'matchCallback' => function() {
+							 if ($this->isModerator() || $this->isAdmin()) {
+							 	return true;
+							 }
+
+							 return false;
+						},
                     ],
                 ],
             ],
@@ -264,7 +269,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for deleting forum
 	 */
-	public function actionDeleteForum() {
+	public function actionDeleteforum() {
 		$json = array();
 		if (isset(\Yii::$app->request->post()['id'])) {
 			$model = BbiiForum::find(\Yii::$app->request->post()['id']);
@@ -286,7 +291,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for saving forum
 	 */
-	public function actionSaveForum() {
+	public function actionSaveforum() {
 		$json = array();
 		if (\Yii::$app->request->post('BbiiForum')) {
 			$model = BbiiForum::find(\Yii::$app->request->post('BbiiForum')['id']);
@@ -324,7 +329,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for getting spider
 	 */
-	public function actionGetSpider() {
+	public function actionGetspider() {
 		$json = array();
 		if (isset(\Yii::$app->request->get()['id'])) {
 			$model = BbiiSpider::find(\Yii::$app->request->get()['id']);
@@ -341,7 +346,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for deleting membergroup
 	 */
-	public function actionDeleteMembergroup() {
+	public function actionDeletemembergroup() {
 		$json = array();
 		if (isset(\Yii::$app->request->post()['id'])) {
 			if (\Yii::$app->request->post()['id'] == 0) {
@@ -359,7 +364,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for deleting spider
 	 */
-	public function actionDeleteSpider() {
+	public function actionDeletespider() {
 		$json = array();
 		if (isset(\Yii::$app->request->post()['id'])) {
 			BbiiSpider::find(\Yii::$app->request->post()['id'])->delete();
@@ -372,7 +377,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for saving membergroup
 	 */
-	public function actionSaveMembergroup() {
+	public function actionSavemembergroup() {
 		$json = array();
 		if (isset(\Yii::$app->request->post()['BbiiMembergroup'])) {
 			if (\Yii::$app->request->post()['BbiiMembergroup']['id'] == '') {
@@ -394,7 +399,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for saving spider
 	 */
-	public function actionSaveSpider() {
+	public function actionSavespider() {
 		$json = array();
 		if (isset(\Yii::$app->request->post()['BbiiSpider'])) {
 			if (\Yii::$app->request->post()['BbiiSpider']['id'] == '') {
@@ -416,7 +421,7 @@ class SettingController extends BbiiController {
 	/**
 	 * handle Ajax call for changing moderator
 	 */
-	public function actionChangeModerator() {
+	public function actionChangemoderator() {
 		$json = array();
 		if (isset(\Yii::$app->request->post()['id']) && isset(\Yii::$app->request->post()['moderator'])) {
 			$model = BbiiMember::find(\Yii::$app->request->post()['id']);
@@ -430,7 +435,7 @@ class SettingController extends BbiiController {
 		\Yii::$app->end();
 	}
 
-	public function loadModel($id) {
+	public function loadModel($id = null) {
 		$model = BbiiMember::find($id);
 		if ($model === null)
 			throw new HttpException(404,'The requested page does not exist.');
@@ -441,7 +446,7 @@ class SettingController extends BbiiController {
 	 * Performs the AJAX validation.
 	 * @param BbiiForum $model the model to be validated
 	 */
-	protected function performAjaxValidation($model) {
+	protected function performAjaxvalidation($model) {
 		if (isset(\Yii::$app->request->post()['ajax']) && \Yii::$app->request->post()['ajax'] === 'bbii-member-form')
 		{
 			echo ActiveForm::validate($model);
@@ -462,8 +467,7 @@ class SettingController extends BbiiController {
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-    public function actionUpdateforum($id = null)
-    {
+    public function actionUpdateforum($id = null) {
     	$id    = (is_numeric($id) ?: \Yii::$app->request->get('id'));
         $model = BbiiForum::find()->where(['id' => $id])->one();
 
@@ -494,8 +498,7 @@ class SettingController extends BbiiController {
      * @param  [type] $type      [description]
      * @return [type]            [description]
      */
-    public function actionUpdate($id = null, $type = null)
-    {
+    public function actionUpdate($id = null, $type = null) {
 		$classMDL = "frontend\modules\bbii\models\\".(is_string($type) ? 'Bbii'.$type : 'Bbii'.ucfirst(\Yii::$app->request->get('type')));
 		$id       = (is_numeric($id) ?: \Yii::$app->request->get('id'));
 		$model    = $classMDL::findOne($id);
@@ -526,8 +529,7 @@ class SettingController extends BbiiController {
      * 
      * @return [type] [description]
      */
-    public function actionCreatemembergroup()
-    {
+    public function actionCreatemembergroup() {
         $model = new BbiiMembergroup();
 
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
@@ -546,8 +548,7 @@ class SettingController extends BbiiController {
      * @param  [type] $id [description]
      * @return [type]     [description]
      */
-    public function actionUpdatemembergroup($id)
-    {
+    public function actionUpdatemembergroup($id = null) {
     	$id    = (is_numeric($id) ? $id : \Yii::$app->request->get('id'));
         $model = BbiiMembergroup::find()->where(['id' => $id])->one();
 
@@ -572,8 +573,7 @@ class SettingController extends BbiiController {
      * [actionCreatemembergroup description]
      * @return [type] [description]
      */
-    public function actionCreatespider()
-    {
+    public function actionCreatespider() {
         $model = new BbiiSpider();
 
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
@@ -586,8 +586,7 @@ class SettingController extends BbiiController {
         }
     }
 
-    public function actionUpdatespider($id)
-    {
+    public function actionUpdatespider($id = null) {
     	$id    = (is_numeric($id) ? $id : \Yii::$app->request->get('id'));
         $model = BbiiSpider::find()->where(['id' => $id])->one();
 
