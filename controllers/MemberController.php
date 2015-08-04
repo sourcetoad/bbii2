@@ -240,7 +240,7 @@ class MemberController extends BbiiController {
 		// @todo Need to figure out the Yii2 version of `'with' => 'forum',` for ADP - DJE : 2015-05-15
 		$dataProvider = new ActiveDataProvider([
 			'pagination' => false,
-			'query'      => BbiiPost::find()->where(['approved' => 1, 'user_id' => $id])->orderBy('create_time DESC')->limit(10),
+			'query'      => BbiiPost::find()->where(['approved' => 1, 'user_id' => \Yii::$app->user->identity->id])->orderBy('create_time DESC')->limit(10),
 	    ]);
 
 		// @todo Need to figure out the Yii2 version of `'with' => 'forum',` for ADP - DJE : 2015-05-15

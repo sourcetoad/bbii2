@@ -168,10 +168,10 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
                     'itemView'     => '_post',
                     'summaryText'  => false,
                 ));*/ ?>
-            <?php echo ListView::widget([
+            <?php /* echo ListView::widget([
                     'dataProvider' => $dataProvider,
                     'itemView'     => '_post',
-            ]); ?>
+            ]); */ ?>
             <?php if ($topicProvider->count) { $this->render('_watch', array('topicProvider' => $topicProvider)); } ?>
         </div>
 
