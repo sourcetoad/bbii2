@@ -1,7 +1,7 @@
 <?php
 
-use frontend\modules\bbii\models\BbiiForum;
-use frontend\modules\bbii\models\BbiiMembergroup;
+use sourcetoad\bbii2\models\BbiiForum;
+use sourcetoad\bbii2\models\BbiiMembergroup;
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;

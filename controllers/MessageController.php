@@ -1,10 +1,10 @@
 <?php
 
-namespace frontend\modules\bbii\controllers;
+namespace sourcetoad\bbii2\controllers;
 
-use frontend\modules\bbii\models\BbiiMessage;
-use frontend\modules\bbii\models\BbiiMember;
-use frontend\modules\bbii\components\BbiiController;
+use sourcetoad\bbii2\models\BbiiMessage;
+use sourcetoad\bbii2\models\BbiiMember;
+use sourcetoad\bbii2\components\BbiiController;
 
 
 use Yii;
