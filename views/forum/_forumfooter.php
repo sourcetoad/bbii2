@@ -1,11 +1,11 @@
 <?php
 
-use frontend\modules\bbii\models\BbiiForum;
-use frontend\modules\bbii\models\BbiiMember;
-use frontend\modules\bbii\models\BbiiMessage;
-use frontend\modules\bbii\models\BbiiPost;
-use frontend\modules\bbii\models\BbiiSession;
-use frontend\modules\bbii\models\BbiiTopic;
+use sourcetoad\bbii2\models\BbiiForum;
+use sourcetoad\bbii2\models\BbiiMember;
+use sourcetoad\bbii2\models\BbiiMessage;
+use sourcetoad\bbii2\models\BbiiPost;
+use sourcetoad\bbii2\models\BbiiSession;
+use sourcetoad\bbii2\models\BbiiTopic;
 
 use yii\helpers\Html;
 

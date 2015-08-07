@@ -1,8 +1,8 @@
 <?php
 
-namespace frontend\modules\bbii\components;
+namespace sourcetoad\bbii2\components;
 
-use frontend\modules\bbii\models\BbiiMember;
+use sourcetoad\bbii2\models\BbiiMember;
 
 use Yii;
 use yii\base\Controller;

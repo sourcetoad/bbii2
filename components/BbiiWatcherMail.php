@@ -1,6 +1,6 @@
 <?php 
 
-namespace frontend\modules\bbii\components;
+namespace sourcetoad\bbii2\components;
 
 class BbiiWatcherMail {
 	private $forum, $bbii_db, $user_db, $table, $id, $user, $email;

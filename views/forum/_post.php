@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\i18n\Formatter;
 
-use frontend\modules\bbii\AppAsset;
+use sourcetoad\bbii2\AppAsset;
 $assets = AppAsset::register($this);
 
 /* @var $this ForumController */
