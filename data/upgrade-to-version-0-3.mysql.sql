@@ -1,5 +1,0 @@
-﻿CREATE TABLE `bbii_session` (
-  `id` varchar(128) NOT NULL,
-  `last_visit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
