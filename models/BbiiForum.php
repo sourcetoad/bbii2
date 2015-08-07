@@ -38,7 +38,8 @@ class BbiiForum extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_forum';
+		//return 'bbii_forum';
+		return '{{%bbii2_forum}}';
 	}
 
 	/**

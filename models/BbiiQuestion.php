@@ -31,7 +31,8 @@ class BbiiQuestion extends CActiveRecord
 	 */
 	public static function tableName()
 	{
-		return 'bbii_question';
+		//return 'bbii_question';
+		return '{{%bbii2_question}}';
 	}
 
 	/**

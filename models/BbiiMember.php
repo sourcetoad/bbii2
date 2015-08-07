@@ -61,7 +61,8 @@ class BbiiMember extends BbiiAR {
 	 */
 	public static function tableName()
 	{
-		return 'bbii_member';
+		//return 'bbii_member';
+		return '{{%bbii2_member}}';
 	}
 
 	/**
