@@ -18,7 +18,9 @@
         }
     ],
     "require": {
-        "php": ">=5.5.0"
+        "php": ">=5.5.0",
+        "yiisoft/yii2": "*",
+        "davidjeddy/yii2-utility-classes": "dev-master"
     },
     "autoload": {
         "psr-4": {
