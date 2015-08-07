@@ -41,7 +41,8 @@ class BbiiPost extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_post';
+		//return 'bbii_post';
+		return '{{%bbii2_post}}';
 	}
 
 	/**

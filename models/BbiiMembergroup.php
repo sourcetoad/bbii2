@@ -30,7 +30,8 @@ class BbiiMembergroup extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_membergroup';
+		//return 'bbii_membergroup';
+		return '{{%bbii2_membergroup}}';
 	}
 
 	/**

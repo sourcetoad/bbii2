@@ -34,7 +34,8 @@ class BbiiPoll extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_poll';
+		//return 'bbii_poll';
+		return '{{%bbii2_poll}}';
 	}
 
 	/**

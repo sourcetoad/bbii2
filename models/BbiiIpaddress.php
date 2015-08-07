@@ -36,7 +36,8 @@ class BbiiIpaddress extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_ipaddress';
+		//return 'bbii_ipaddress';
+		return '{{%bbii2_ipaddress}}';
 	}
 
 	/**

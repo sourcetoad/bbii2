@@ -24,7 +24,8 @@ class BbiiSession extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_session';
+		//return 'bbii_session';
+		return '{{%bbii2_session}}';
 	}
 
 	/**
