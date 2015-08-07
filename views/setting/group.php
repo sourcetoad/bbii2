@@ -1,6 +1,6 @@
 <?php
 
-use frontend\modules\bbii\models\BbiiMembergroup;
+use sourcetoad\bbii2\models\BbiiMembergroup;
 
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;

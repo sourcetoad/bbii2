@@ -1,14 +1,14 @@
 <?php
 
-namespace frontend\modules\bbii\controllers;
+namespace sourcetoad\bbii2\controllers;
 
-use frontend\modules\bbii\components\BbiiController;
-use frontend\modules\bbii\models\BbiiForum;
-use frontend\modules\bbii\models\BbiiSetting;
-use frontend\modules\bbii\models\BbiiMembergroup;
-use frontend\modules\bbii\models\BbiiMember;
-use frontend\modules\bbii\models\BbiiSpider;
-use frontend\modules\bbii\models\BbiiTopic;
+use sourcetoad\bbii2\components\BbiiController;
+use sourcetoad\bbii2\models\BbiiForum;
+use sourcetoad\bbii2\models\BbiiSetting;
+use sourcetoad\bbii2\models\BbiiMembergroup;
+use sourcetoad\bbii2\models\BbiiMember;
+use sourcetoad\bbii2\models\BbiiSpider;
+use sourcetoad\bbii2\models\BbiiTopic;
 
 use Yii;
 use yii\widgets\ActiveForm;
@@ -500,7 +500,7 @@ class SettingController extends BbiiController {
      * @return [type]            [description]
      */
     public function actionUpdate($id = null, $type = null) {
-		$classMDL = "frontend\modules\bbii\models\\".(is_string($type) ? 'Bbii'.$type : 'Bbii'.ucfirst(\Yii::$app->request->get('type')));
+		$classMDL = "sourcetoad\bbii2\models\\".(is_string($type) ? 'Bbii'.$type : 'Bbii'.ucfirst(\Yii::$app->request->get('type')));
 		$id       = (is_numeric($id) ?: \Yii::$app->request->get('id'));
 		$model    = $classMDL::findOne($id);
 

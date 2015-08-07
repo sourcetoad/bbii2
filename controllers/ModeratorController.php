@@ -1,14 +1,14 @@
 <?php
 
-namespace frontend\modules\bbii\controllers;
+namespace sourcetoad\bbii2\controllers;
 
-use frontend\modules\bbii\components\BbiiController;
-use frontend\modules\bbii\models\BbiiForum;
-use frontend\modules\bbii\models\BbiiIpaddress;
-use frontend\modules\bbii\models\BbiiMessage;
-use frontend\modules\bbii\models\BbiiPost;
-use frontend\modules\bbii\models\BbiiTopic;
-use frontend\modules\bbii\models\MailForm;
+use sourcetoad\bbii2\components\BbiiController;
+use sourcetoad\bbii2\models\BbiiForum;
+use sourcetoad\bbii2\models\BbiiIpaddress;
+use sourcetoad\bbii2\models\BbiiMessage;
+use sourcetoad\bbii2\models\BbiiPost;
+use sourcetoad\bbii2\models\BbiiTopic;
+use sourcetoad\bbii2\models\MailForm;
 
 use Yii;
 use yii\filters\AccessControl;
