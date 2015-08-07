@@ -462,30 +462,31 @@ class SettingController extends BbiiController {
 
 	/**
 	 * [update description]
-	 * @version 2.7.0
+	 *
+	 * This is the way we should be writing the CRUD methods for V3
+	 * 
+	 * @version 3.0.5
 	 * @since  2.7.0
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
     public function actionUpdateforum($id = null) {
-    	$id    = (is_numeric($id) ?: \Yii::$app->request->get('id'));
-        $model = BbiiForum::find()->where(['id' => $id])->one();
+        $model = BbiiForum::find()
+        	->where(['id' => (int)($id ?: \Yii::$app->request->get('id'))])
+        	->one();
 
-        // set data
-        if ($model->load(\Yii::$app->request->post())) {
+        if (\Yii::$app->request->post('BbiiForum') && $model->load(\Yii::$app->request->post())) {
+        	$success = ($model->validate() && $model->save()) ? true : false;
 
-        	// validate and save
-        	if ($model->validate() && $model->save()) {
-				\Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
-				return \Yii::$app->response->redirect('layout');
-			// error when saving
-        	}
-            
-        } else {
-            return $this->render('update/forum', [
-                'model' => $model,
-            ]);
+			\Yii::$app->getSession()->setFlash(
+				(($success) ? 'success' : 'warning'),
+				Yii::t('BbiiModule.bbii', 'Change '.(($success) ? '' : 'NOT').'saved.')
+			);
         }
+
+        return $this->render('update/forum', [
+            'model' => $model,
+        ]);
     }
 
     /**
