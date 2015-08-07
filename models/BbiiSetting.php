@@ -1,9 +1,9 @@
 <?php
 
-namespace frontend\modules\bbii\models;
+namespace sourcetoad\bbii2\models;
 
-use frontend\modules\bbii\models\BbiiAR;
-use frontend\modules\bbii\models\_query\BbiiSettingQuery;
+use sourcetoad\bbii2\models\BbiiAR;
+use sourcetoad\bbii2\models\_query\BbiiSettingQuery;
 
 use Yii;
 

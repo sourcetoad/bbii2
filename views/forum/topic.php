@@ -1,7 +1,7 @@
 <?php
 
-use frontend\modules\bbii\models\BbiiPost;
-use frontend\modules\bbii\models\BbiiMessage;
+use sourcetoad\bbii2\models\BbiiPost;
+use sourcetoad\bbii2\models\BbiiMessage;
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;

@@ -1,6 +1,6 @@
 <?php
 
-use frontend\modules\bbii\models\BbiiMember;
+use sourcetoad\bbii2\models\BbiiMember;
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
