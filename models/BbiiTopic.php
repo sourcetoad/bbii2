@@ -46,7 +46,8 @@ class BbiiTopic extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_topic';
+		//return 'bbii_topic';
+ 		return '{{%bbii2_topic}}';
 	}
 
 	/**

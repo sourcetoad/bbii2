@@ -28,7 +28,8 @@ class BbiiUpvoted extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_upvoted';
+        //return 'bbii_upvoted';
+        return '{{%bbii2_upvoted}}';
 	}
 
 	/**

@@ -37,8 +37,8 @@ class BbiiSetting extends BbiiAR
 	 */
 	public static function tableName()
 	{
-
-		return 'bbii_setting';
+		//return 'bbii_setting';
+		return '{{%bbii2_setting}}';
 	}
 
 	/**

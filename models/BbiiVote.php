@@ -29,7 +29,8 @@ class BbiiVote extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_vote';
+        //return 'bbii_vote';
+        return '{{%bbii2_vote}}';
 	}
 
 	public function primaryKey() {

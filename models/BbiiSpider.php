@@ -30,7 +30,8 @@ class BbiiSpider extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_spider';
+		//return 'bbii_spider';
+ 		return '{{%bbii2_spider}}';
 	}
 
 	/**
