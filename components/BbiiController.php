@@ -90,7 +90,7 @@ class BbiiController extends Controller
 	 */
 	public function isAdmin() {
 
-		if ($this->module->adminId && $this->module->adminId ===  \Yii::$app->user->identity->id ) {
+		if (in_array(\Yii::$app->user->identity->id, $this->module->adminId)) {
 			return true;	// by module parameter assigned admin
 		}
 
