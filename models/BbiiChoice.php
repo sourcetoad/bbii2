@@ -31,7 +31,8 @@ class BbiiChoice extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_choice';
+		//return 'bbii_choice';
+		return '{{%bbii2_choice}}';
 	}
 
 	/**

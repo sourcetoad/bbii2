@@ -40,7 +40,8 @@ class BbiiMessage extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_message';
+		//return 'bbii_message';
+		return '{{%bbii2_message}}';
 	}
 
 	/**

@@ -28,7 +28,8 @@ class BbiiTopicRead extends BbiiAR
      */
     public static function tableName()
     {
-        return 'bbii_topic_read';
+        //return 'bbii_topic_read';
+        return '{{%bbii2_topic_read}}';
     }
 
     /**
