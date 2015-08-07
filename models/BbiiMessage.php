@@ -1,9 +1,9 @@
 <?php
 
-namespace frontend\modules\bbii\models;
+namespace sourcetoad\bbii2\models;
 
-use frontend\modules\bbii\models\BbiiAR;
-use frontend\modules\bbii\models\_query\BbiiMessageQuery;
+use sourcetoad\bbii2\models\BbiiAR;
+use sourcetoad\bbii2\models\_query\BbiiMessageQuery;
 
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -40,7 +40,8 @@ class BbiiMessage extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_message';
+		//return 'bbii_message';
+		return '{{%bbii2_message}}';
 	}
 
 	/**

@@ -1,8 +1,8 @@
 <?php
 
-namespace frontend\modules\bbii\components;
+namespace sourcetoad\bbii2\components;
 
-use frontend\modules\bbii\models\BbiiMember;
+use sourcetoad\bbii2\models\BbiiMember;
 
 use Yii;
 use yii\base\Controller;
@@ -90,7 +90,7 @@ class BbiiController extends Controller
 	 */
 	public function isAdmin() {
 
-		if ($this->module->adminId && $this->module->adminId ===  \Yii::$app->user->identity->id ) {
+		if (in_array(\Yii::$app->user->identity->id, $this->module->adminId)) {
 			return true;	// by module parameter assigned admin
 		}
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace frontend\modules\bbii\models;
+namespace sourcetoad\bbii2\models;
 
-use frontend\modules\bbii\models\BbiiAR;
-use frontend\modules\bbii\models\_query\BbiiMemberQuery;
+use sourcetoad\bbii2\models\BbiiAR;
+use sourcetoad\bbii2\models\_query\BbiiMemberQuery;
 
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -61,7 +61,8 @@ class BbiiMember extends BbiiAR {
 	 */
 	public static function tableName()
 	{
-		return 'bbii_member';
+		//return 'bbii_member';
+		return '{{%bbii2_member}}';
 	}
 
 	/**

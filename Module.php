@@ -1,10 +1,10 @@
 <?php
 
-namespace frontend\modules\bbii;
+namespace sourcetoad\bbii2;
 
-use frontend\modules\bbii\models\BbiiMember;
-use frontend\modules\bbii\models\BbiiSpider;
-use frontend\modules\bbii\models\BbiiSession;
+use sourcetoad\bbii2\models\BbiiMember;
+use sourcetoad\bbii2\models\BbiiSpider;
+use sourcetoad\bbii2\models\BbiiSession;
 
 use Yii;
 use yii\db\BaseActiveRecord;
@@ -12,10 +12,10 @@ use yii\web\Application;
 use yii\web\Session;
 use common\models\User;
 
-class BbiiModule extends \yii\base\Module
+class Module extends \yii\base\Module
  {
 
-	public $adminId        = 1; // must be overridden to assign admin rights to user id
+	public $adminId        = [1, 2, 3]; // must be overridden to assign admin rights to user id
 	public $accessControl  = false;
 	public $allowTopicSub  = false;
 	public $allowAPILogin  = false;
@@ -32,7 +32,7 @@ class BbiiModule extends \yii\base\Module
 	public $bbiiTheme         = 'base';
 	public $dbName            = false;
 	public $defaultRoute      = 'forum/index';
-	public $editorContentsCss = array();
+	public $editorContentsCss = [];
 	public $editorSkin        = 'moono';
 	public $editorToolbar     = array(
 		array('Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo'),

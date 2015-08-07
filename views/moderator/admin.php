@@ -1,14 +1,14 @@
 ﻿<?php
 
-use frontend\modules\bbii\models\BbiiForum;
-use frontend\modules\bbii\models\BbiiMessage;
-use frontend\modules\bbii\models\BbiiPost;
+use sourcetoad\bbii2\models\BbiiForum;
+use sourcetoad\bbii2\models\BbiiMessage;
+use sourcetoad\bbii2\models\BbiiPost;
 
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-use frontend\modules\bbii\AppAsset;
+use sourcetoad\bbii2\AppAsset;
 $assets = AppAsset::register($this);
 
 /* @var $this ModeratorController */

@@ -1,54 +1,19 @@
-﻿BBii2 2 
-v 3.0.0
-==========
-
-Copyright (c) 2013-2015, BBii2 - Ronald van Belzen. All rights reserved.  
-Copyright (c) 2015, Sourcetoad, LLC. All rights reserved. 
- - See accompanying LICENSE for license information.
-
-BBii2 is an extension to the Yii2 Framework (http://www.yiiframework.com/) 
-in the form of a module. BBii2 adds and integrates a lightweight webforum (a.k.a. 
-bulletin board) to an existing Yii 2.0 application.
+﻿BBii2
+=====
 
 
-##Requirements
 
-Yii 2 or above.
-PHP 5.5 or above.
-The application to which BBii2 is added needs to have a user table.
+##Copyright
+See ./LICENSE
 
 
-##Usage
 
-* Extract the zip file to the application's protected/modules directory
-* Create database tables according to bbii/data/schema.mysql.sql
-* Import sample data from bbii/data/sampledata.mysql.sql
-* Create the subdirectory 'avatar’ in your application webroot directory to which 
-  the application must be given read/write access rights.
-* Edit your configuration to register the module (the default option values may 
-  need to be adjusted):
-~~~
-[php]
-'modules' => array(
-	'forum' => array(
-		'adminId'        => 1,
-		'class'          => 'application.modules.bbii.BbiiModule',
-		'userClass'      => 'User',
-		'userIdColumn'   => 'id',
-		'userNameColumn' => 'username',
-	),
-),
-~~~
+##Description
+BBii2 is a module for the Yii2 Framework (http://www.yiiframework.com/).
+BBii2 adds and integrates a lightweight webforum (a.k.a. bulletin board)
+to an existing Yii 2.0 application.
 
-* BBii2 requires a user database table to be present that at least contains an 
-  integer User ID field and a varchar User name field. BBii2 also expects 
-  Yii::$app->user->id to return the User ID, not the User name. The model for 
-  the user table and the column names for the User ID column and the User name 
-  column are part of the module options.
-* Log in to your application with the user that has the User ID equal to the 
-  value for the option 'adminId’ to acquire administration rights in BBii2.
-* Navigate to http://<your base url>/forum. Click the link 'Forum settings’ and 
-  set up the forum.
+
 
 ##Options
 
@@ -72,26 +37,64 @@ userMailColumn: 	The column name of the User class field that contains the
 					User e-mail address (default value: false).
 dbName:				The name of the db component to use to connect to the forum 
 					database tables (default value: false)
-// @todo Disabled for init release of bbii2 3x - DJE : 2015-01-2015
-allowTopicSub:		Allow subscription to topics (watch) by members of forum 
-					(default: false).
 topicsPerPage:		The number of topics to display on a single page (default value: 20).
 postsPerPage:		The number of posts to display on a single page (default value: 20).
 purifierOptions:	The CHtmlPurifier options.
-editorToolbar:		The toolbar options for the CKEditor.
-editorSkin:			The CKEditor skinName configuration setting (default value: 'moono').
-editorUIColor:		The CKEditor uiColor configuration setting (default value: '').
-editorContentsCss:	The CKEditor contentsCss configuration setting (default value: array()).
 
-##Embedded Extensions
 
-* TODO: Re-add CKEditor - DJE : 2015-01-2015
-* editMe (http://www.yiiframework.com/extension/editme) (Support for editMe has discontinued. BBii2 contains its own version of editMe that uses CKEditor 4.4.0)
+
+##Requirements
+
+Yii 2.0+ with some sort of user account system based on a database table
+PHP 5.5+
+
+* BBii2 requires a user database table to be present that at least contains an 
+  integer User `id` field, a varchar `Username` field, and finally
+  `\Yii::$app->user->identity->id` to return the User ID. The model for 
+  the user table and the column names for the User ID column and the User name 
+  column are part of the module options.
+* Log in to your application with the user that has the User ID equal to the 
+  value(s) for the option 'adminId’ to acquire administration rights in BBii2.
+* Navigate to http://<your base url>/forum. Click the link 'Forum settings’ and 
+  set up the forum.
+
+
+##Usage
+
+* Install:
+ * `php composer.phar require sourcetoad/yii2-bbii2:2.*`
+ * Create the subdirectory 'avatar’ in your application webroot directory to which 
+  the application must be given read/write access rights.
+ * Edit your configuration to register the module (the default option values may 
+  need to be adjusted):
+ * Now configure via the application config, typically ./<app root/frontend/config/web.php
+	'modules' => [
+		...
+		'bbii2' => [
+			'adminId'        => [1],
+			'class'          => 'common\models\User',
+			'userClass'      => 'User',
+			'userIdColumn'   => 'id',
+			'userNameColumn' => 'username',
+			'avatarStorage'  => '../assets/avatars/',
+		],
+		...
+	],
+
+* Update:
+ * `php composer.phar update sourcetoad/yii2-bbii2`
+
+* Sample Data:
+ * Create database tables according to bbii/data/schema.mysql.sql
+ * Import sample data from bbii/data/sampledata.mysql.sql
+
 
 
 ##Versions
-* v3.0.0 (June 1, 2015)
- * Migrated `Bbii 1x` to Yii2 as `Bbii2 3x`
+* v2.0.5 (Aug 2015)
+ * Converted integrated forum into a composer package module
+* v2.0.0 (June 1, 2015)
+ * Migrated `Bbii 1x` to Yii2 as `Bbii 2.x`
 * v1.0.9 (March 18, 2015)
  * Added topic subscription.
  * CKEditor plugin support added to editMe extension.

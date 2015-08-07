@@ -1,8 +1,8 @@
 <?php
 
-namespace frontend\modules\bbii\models;
+namespace sourcetoad\bbii2\models;
 
-use frontend\modules\bbii\models\BbiiAR;
+use sourcetoad\bbii2\models\BbiiAR;
 
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -36,7 +36,8 @@ class BbiiIpaddress extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_ipaddress';
+		//return 'bbii_ipaddress';
+		return '{{%bbii2_ipaddress}}';
 	}
 
 	/**

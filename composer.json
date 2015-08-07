@@ -1,0 +1,28 @@
+{
+    "name": "sourcetoad/yii2-bbii2",
+    "description": "Adaptable Yii2 forum module.",
+    "type": "yii2-module",
+    "keywords": ["yii2", "module"],
+    "minimum-stability": "stable",
+    "license": "BSD-2-Clause",
+    "version": "2.0.0-dev",
+    "authors": [
+        {
+            "name": "David J Eddy",
+            "email": "me@davidjeddy.com",
+            "referance": "https://github.com/sourcetoad/bbii2"
+        },
+        {
+            "name": "Ronald van Belzen",
+            "referance": "https://github.com/rbacui/bbii1"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "sourcetoad\\bbii2\\": ""
+        }
+    }
+}

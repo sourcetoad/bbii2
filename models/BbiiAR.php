@@ -1,6 +1,6 @@
 <?php 
 
-namespace frontend\modules\bbii\models;
+namespace sourcetoad\bbii2\models;
 
 use yii\db\ActiveRecord;
 

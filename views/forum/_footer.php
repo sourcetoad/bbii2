@@ -1,10 +1,10 @@
 <?php
 
-use frontend\modules\bbii\models\BbiiMember;
-use frontend\modules\bbii\models\BbiiPost;
-use frontend\modules\bbii\models\BbiiSession;
-use frontend\modules\bbii\models\BbiiSpider;
-use frontend\modules\bbii\models\BbiiTopic;
+use sourcetoad\bbii2\models\BbiiMember;
+use sourcetoad\bbii2\models\BbiiPost;
+use sourcetoad\bbii2\models\BbiiSession;
+use sourcetoad\bbii2\models\BbiiSpider;
+use sourcetoad\bbii2\models\BbiiTopic;
 
 use yii\helpers\Html;
 

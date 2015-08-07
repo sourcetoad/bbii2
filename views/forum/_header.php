@@ -1,14 +1,14 @@
 <?php
 
-use frontend\modules\bbii\models\BbiiForum;
-use frontend\modules\bbii\models\BbiiMessage;
+use sourcetoad\bbii2\models\BbiiForum;
+use sourcetoad\bbii2\models\BbiiMessage;
 
 use yii\bootstrap\Nav;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
-use frontend\modules\bbii\AppAsset;
+use sourcetoad\bbii2\AppAsset;
 $assets = AppAsset::register($this);
 
 /* @var $this ForumController */

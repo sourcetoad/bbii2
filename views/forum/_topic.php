@@ -1,11 +1,11 @@
 <?php
 
-use frontend\modules\bbii\controllers\ForumController;
+use sourcetoad\bbii2\controllers\ForumController;
 
 use yii\helpers\Html;
 use yii\i18n\Formatter;
 
-use frontend\modules\bbii\AppAsset;
+use sourcetoad\bbii2\AppAsset;
 $assets = AppAsset::register($this);
 
 /* @var $this ForumController */

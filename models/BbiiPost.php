@@ -1,9 +1,9 @@
 <?php
 
-namespace frontend\modules\bbii\models;
+namespace sourcetoad\bbii2\models;
 
-use frontend\modules\bbii\models\BbiiAR;
-use frontend\modules\bbii\models\_query\BbiiPostQuery;
+use sourcetoad\bbii2\models\BbiiAR;
+use sourcetoad\bbii2\models\_query\BbiiPostQuery;
 
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -41,7 +41,8 @@ class BbiiPost extends BbiiAR
 	 */
 	public static function tableName()
 	{
-		return 'bbii_post';
+		//return 'bbii_post';
+		return '{{%bbii2_post}}';
 	}
 
 	/**
