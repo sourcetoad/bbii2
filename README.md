@@ -1,19 +1,63 @@
-﻿BBii2 2 
-v 3.0.0
-==========
+﻿BBii2
+=====
 
-Copyright (c) 2013-2015, BBii2 - Ronald van Belzen. All rights reserved.  
-Copyright (c) 2015, Sourcetoad, LLC. All rights reserved. 
- - See accompanying LICENSE for license information.
 
-BBii2 is a modfule for the Yii2 Framework (http://www.yiiframework.com/).
+
+##Copyright
+See ./LICENSE
+
+
+
+##Description
+BBii2 is a module for the Yii2 Framework (http://www.yiiframework.com/).
 BBii2 adds and integrates a lightweight webforum (a.k.a. bulletin board)
 to an existing Yii 2.0 application.
+
+
+
+##Options
+
+The following configuration options can be used:
+adminId:        	the User ID (integer) for the user to receive the admin 
+					authorization (default value: false). When the application
+					uses rbac and the role 'admin’ exists the users that get 
+					the role 'admin’ assigned will also be admin for BBii2.
+avatarStorage:  	The directory in which uploaded avatar images are stored 
+					relative to the application webroot directory (leading '/’ 
+					required) (default value: '/avatar').
+forumTitle:     	The name for the forum (default value: 'BBii2 Forum').
+userClass:      	The model name of the database table that contains the user 
+					authentication information for User ID and User name 
+					(default value: 'User').
+userIdColumn:   	The column name of the User class field that contains the 
+					User ID (default value: 'id').
+userNameColumn: 	The column name of the User class field that contains the 
+					User name (default value: 'username').
+userMailColumn: 	The column name of the User class field that contains the 
+					User e-mail address (default value: false).
+dbName:				The name of the db component to use to connect to the forum 
+					database tables (default value: false)
+topicsPerPage:		The number of topics to display on a single page (default value: 20).
+postsPerPage:		The number of posts to display on a single page (default value: 20).
+purifierOptions:	The CHtmlPurifier options.
+
+
 
 ##Requirements
 
 Yii 2.0+ with some sort of user account system based on a database table
 PHP 5.5+
+
+* BBii2 requires a user database table to be present that at least contains an 
+  integer User `id` field, a varchar `Username` field, and finally
+  `\Yii::$app->user->identity->id` to return the User ID. The model for 
+  the user table and the column names for the User ID column and the User name 
+  column are part of the module options.
+* Log in to your application with the user that has the User ID equal to the 
+  value(s) for the option 'adminId’ to acquire administration rights in BBii2.
+* Navigate to http://<your base url>/forum. Click the link 'Forum settings’ and 
+  set up the forum.
+
 
 ##Usage
 
@@ -43,47 +87,6 @@ PHP 5.5+
 * Sample Data:
  * Create database tables according to bbii/data/schema.mysql.sql
  * Import sample data from bbii/data/sampledata.mysql.sql
-
-
-~~~
-
-* BBii2 requires a user database table to be present that at least contains an 
-  integer User `id` field, a varchar `Username` field, and finally
-  `\Yii::$app->user->identity->id` to return the User ID. The model for 
-  the user table and the column names for the User ID column and the User name 
-  column are part of the module options.
-* Log in to your application with the user that has the User ID equal to the 
-  value(s) for the option 'adminId’ to acquire administration rights in BBii2.
-* Navigate to http://<your base url>/forum. Click the link 'Forum settings’ and 
-  set up the forum.
-
-##Options
-
-The following configuration options can be used:
-adminId:        	the User ID (integer) for the user to receive the admin 
-					authorization (default value: false). When the application
-					uses rbac and the role 'admin’ exists the users that get 
-					the role 'admin’ assigned will also be admin for BBii2.
-avatarStorage:  	The directory in which uploaded avatar images are stored 
-					relative to the application webroot directory (leading '/’ 
-					required) (default value: '/avatar').
-forumTitle:     	The name for the forum (default value: 'BBii2 Forum').
-userClass:      	The model name of the database table that contains the user 
-					authentication information for User ID and User name 
-					(default value: 'User').
-userIdColumn:   	The column name of the User class field that contains the 
-					User ID (default value: 'id').
-userNameColumn: 	The column name of the User class field that contains the 
-					User name (default value: 'username').
-userMailColumn: 	The column name of the User class field that contains the 
-					User e-mail address (default value: false).
-dbName:				The name of the db component to use to connect to the forum 
-					database tables (default value: false)
-topicsPerPage:		The number of topics to display on a single page (default value: 20).
-postsPerPage:		The number of posts to display on a single page (default value: 20).
-purifierOptions:	The CHtmlPurifier options.
-
-##Embedded Extensions
 
 
 
