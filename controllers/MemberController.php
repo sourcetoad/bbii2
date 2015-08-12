@@ -106,15 +106,14 @@ class MemberController extends BbiiController {
 							$filename .= '.png';
 							break;
 						default:
-							$model->setFlash(
+							\Yii::$app->session->setFlash(
 								'warning',
 								\Yii::t(
 									'BbiiModule.bbii',
-									'The file {filename} cannot be uploaded. Only files with the image formats gif, jpg or png can be uploaded.',
-									array('{filename}' => $model->image->name)
+									'The file '.$model->image->name.' cannot be uploaded. Only files with the image formats gif, jpg or png can be uploaded.'
 								)
 							);
-							return $this->redirect(Yii::$app->referrer);
+							return \Yii::$app->response->redirect(\Yii::$app->request->referrer);
 					}
 
 					$location = realpath(dirname(__FILE__)).'/'.$this->module->avatarStorage;
