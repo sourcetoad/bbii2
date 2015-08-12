@@ -167,7 +167,7 @@ if (empty($poll->question) && !$poll->hasErrors()) {
                     </div>
                 <?php }; ?>
 
-                <?php echo $form->field($post, 'forum_id')->hiddenInput(array('class' => 'form-control'))->label(false); ?>
+                <?php echo $form->field($post, 'forum_id')->hiddenInput(array('class' => 'form-control', 'value' => \Yii::$app->request->post('BbiiForum')['id']))->label(false); ?>
 
                 <div class = "odd buttons">
                     <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Save'), array('class' => 'btn btn-success btn-lg')); ?>
