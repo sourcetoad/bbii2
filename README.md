@@ -18,6 +18,7 @@ to an existing Yii 2.0 application.
 ##Options
 
 The following configuration options can be used:
+```php
 adminId:        	the User ID (integer) for the user to receive the admin 
 					authorization (default value: false). When the application
 					uses rbac and the role 'admin’ exists the users that get 
@@ -40,7 +41,7 @@ dbName:				The name of the db component to use to connect to the forum
 topicsPerPage:		The number of topics to display on a single page (default value: 20).
 postsPerPage:		The number of posts to display on a single page (default value: 20).
 purifierOptions:	The CHtmlPurifier options.
-
+```
 
 
 ##Requirements
@@ -68,6 +69,7 @@ PHP 5.5+
  * Edit your configuration to register the module (the default option values may 
   need to be adjusted):
  * Now configure via the application config, typically ./<app root/frontend/config/web.php
+```php
 	'modules' => [
 		...
 		'bbii2' => [
@@ -80,7 +82,7 @@ PHP 5.5+
 		],
 		...
 	],
-
+```
 * Update:
  * `php composer.phar update sourcetoad/yii2-bbii2`
 
@@ -158,3 +160,6 @@ PHP 5.5+
  * Search functionality added.
 * v0.1 (Jul. 27, 2013): 
  * Initial release.
+
+##TESTs
+* Where are your tests? -_-...about that...
