@@ -52,7 +52,6 @@
 
 #bbii-header .search {
 	height: 16px;
-	white-space: nowrap;
 }
 
 #bbii-header .search .portlet-content {
@@ -892,7 +891,6 @@ button.bbii-button-right {
 	display: table-cell;
 	padding: 4px 5px;
 	vertical-align: top;
-	white-space: nowrap;
 }
 
 #bbii-wrapper .forum-posts,
