@@ -163,7 +163,12 @@ class BbiiMessage extends BbiiAR
 		$dataProvider = new ActiveDataProvider([
 			'pagination' => false,
 			'query'      => $query,
-			'sort'       => array('defaultOrder' => 'id DESC'),
+			'sort' 		 => [
+				'defaultOrder' => [
+					'create_time' => SORT_ASC,
+					'subject'     => SORT_ASC,
+				],
+			],
 	    ]);
 
 	    if (!($this->load($params) && $this->validate())) {
