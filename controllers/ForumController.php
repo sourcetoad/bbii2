@@ -304,10 +304,8 @@ class ForumController extends BbiiController {
 			$model->setAttribute('data', $object->serialize());
 
 			if (!$model->validate() || !$model->save()){
-				echo '<pre>';
-				print_r( $model->getErrors() );
-				echo '</pre>';
-				exit;
+
+				\Yii::$app->session->addFlash('moderation' ,Yii::t('BbiiModule.bbii', 'Error saving data.'));
 			}
 
 		}
@@ -640,10 +638,8 @@ class ForumController extends BbiiController {
 
 				return \Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id));
 			} else {
-				echo '<pre>';
-				print_r( $model->getErrors() );
-				echo '</pre>';
-				exit;
+
+				\Yii::$app->session->addFlash('moderation' ,Yii::t('BbiiModule.bbii', 'Error saving data.'));
 			}
 		}
 		return $this->render('update', array(
