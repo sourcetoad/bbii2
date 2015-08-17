@@ -133,7 +133,7 @@ if (empty($poll->question) && !$poll->hasErrors()) {
                 'id'                     => 'create-topic-form',
             ]); ?>
 
-                <?php echo $form->errorSummary($post); ?>
+                <?php // echo $form->errorSummary($post); ?>
 
                 <?php // @todo Poll feature turned off for init relase - DJE : 2015-05-26 ?>
 

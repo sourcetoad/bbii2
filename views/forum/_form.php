@@ -59,7 +59,7 @@ use yii\helpers\Html;
                 'id'                     => 'create-topic-form',
         ]); ?>
 
-            <?php echo $form->errorSummary($post); ?>
+            <?php // echo $form->errorSummary($post); ?>
 
             <div>
                 <?php echo $form->field($post,'subject')->textInput(); ?>
