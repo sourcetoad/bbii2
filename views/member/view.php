@@ -100,12 +100,12 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
                 <td><?php echo \Yii::$app->formatter->asDatetime($userData->getAttribute('last_visit'), 'long', 'medium'); ?></td>
             </tr>
             <tr>
-                <td><strong><?php echo Yii::t('BbiiModule.bbii', 'Number of posts'); ?></strong></td>
-                <td><?php echo Html::encode($userData->getAttribute('posts')); ?></td>
+                <td><strong><?php //echo Yii::t('BbiiModule.bbii', 'Number of posts'); ?></strong></td>
+                <td><?php //echo Html::encode($userData->getAttribute('posts')); ?></td>
             </tr>
             <tr>
-                <td><strong><?php echo Yii::t('BbiiModule.bbii', 'Reputation'); ?></strong></td>
-                <td><?php echo Html::encode($userData->getAttribute('upvoted')); ?></td>
+                <td><strong><?php //echo Yii::t('BbiiModule.bbii', 'Reputation'); ?></strong></td>
+                <td><?php //echo Html::encode($userData->getAttribute('upvoted')); ?></td>
             </tr>
             <?php if (!empty($group)){ ?>
             <tr>
