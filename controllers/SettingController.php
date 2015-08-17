@@ -152,7 +152,7 @@ class SettingController extends BbiiController {
 			$model->load(\Yii::$app->request->post());
 			if ($model->validate() && $model->save()) {
 
-				\Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
+				\Yii::$app->session->addFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
 			} 
 		}
 
@@ -175,10 +175,10 @@ class SettingController extends BbiiController {
 
 			if ($model->validate() && $model->save()) {
 
-				\Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
+				\Yii::$app->session->addFlash('success', Yii::t('BbiiModule.bbii', 'Change successful.'));
 			} else {
 
-				\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Change failed.'));
+				\Yii::$app->session->addFlash('warning', Yii::t('BbiiModule.bbii', 'Change failed.'));
 			}
 		}
 
@@ -558,7 +558,7 @@ class SettingController extends BbiiController {
 
         	// validate and save
         	if ($model->validate() && $model->save()) {
-				\Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
+				\Yii::$app->getSession()->addFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
 				return \Yii::$app->response->redirect('group');
 			// error when saving
         	}
@@ -596,7 +596,7 @@ class SettingController extends BbiiController {
 
         	// validate and save
         	if ($model->validate() && $model->save()) {
-				\Yii::$app->getSession()->setFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
+				\Yii::$app->getSession()->addFlash('success', Yii::t('BbiiModule.bbii', 'Change saved.'));
 				return \Yii::$app->response->redirect('spider');
 			// error when saving
         	}

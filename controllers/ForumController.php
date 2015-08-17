@@ -275,7 +275,7 @@ class ForumController extends BbiiController {
 				$post = $topic->last_post_id;
 			}
 			if (\Yii::$app->user->hasFlash('moderation')) {
-				\Yii::$app->session->setFlash('moderation', \Yii::$app->user->getFlash('moderation'), true);
+				\Yii::$app->session->addFlash('moderation', \Yii::$app->user->getFlash('moderation'), true);
 			}
 			return \Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $id, 'BbiiPost_page' => $page, 'postId' => $post));;
 		}
@@ -361,7 +361,7 @@ class ForumController extends BbiiController {
 					$post->poster->updateCounters(array('posts' => 1));
 					$this->assignMembergroup(\Yii::$app->user->identity->id );
 				} else {
-					\Yii::$app->session->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
+					\Yii::$app->session->addFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 				}
 				return \Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
 			} else {
@@ -433,7 +433,7 @@ class ForumController extends BbiiController {
 					$this->assignMembergroup(\Yii::$app->user->identity->id);					
 				}
 
-				\Yii::$app->session->setFlash('success ',
+				\Yii::$app->session->addFlash('success ',
 					Yii::t('BbiiModule.bbii',
 						'Your post has been saved. Thank you for your contribution to the forum. '.
 						($post->approved ? null : 'It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. ')
@@ -441,7 +441,7 @@ class ForumController extends BbiiController {
 				);
 				return \Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $post->topic_id, 'nav' => 'last'));
 			} else {
-				\Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii', 'Error occured while validating or saving the submitted reply.'));
+				\Yii::$app->session->addFlash('warning',Yii::t('BbiiModule.bbii', 'Error occured while validating or saving the submitted reply.'));
 				return \Yii::$app->response->redirect(array('forum/forum/reply', 'id' => $post->topic_id));
 			}
 		} else {
@@ -561,7 +561,7 @@ class ForumController extends BbiiController {
 						$this->assignMembergroup(\Yii::$app->user->identity->id );
 					} else {
 
-						\Yii::$app->session->setFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
+						\Yii::$app->session->addFlash('moderation',Yii::t('BbiiModule.bbii', 'Your post has been saved. It has been placed in a queue and is now waiting for approval by a moderator before it will appear on the forum. Thank you for your contribution to the forum.'));
 					}
 
 					// @todo Enable this feature - DJE : 2015-05-26
@@ -586,7 +586,7 @@ class ForumController extends BbiiController {
 
 					return \Yii::$app->response->redirect(array('forum/forum/topic', 'id' => $topic->id));
 				} else {
-					\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Error, unable to save post.'));
+					\Yii::$app->session->addFlash('warning', Yii::t('BbiiModule.bbii', 'Error, unable to save post.'));
 					$post->delete();
 				}
 			}

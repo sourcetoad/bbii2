@@ -493,7 +493,7 @@ class ModeratorController extends BbiiController {
 					}
 
 					// $model->unsetAttributes();
-					\Yii::$app->session->setFlash('success',Yii::t('BbiiModule.bbii','You have sent an e-mail to the following users: ') . implode(', ', $users));
+					\Yii::$app->session->addFlash('success',Yii::t('BbiiModule.bbii','You have sent an e-mail to the following users: ') . implode(', ', $users));
 				} else {						// private messages
 					$users = array();
 					foreach($members as $member) {
@@ -508,7 +508,7 @@ class ModeratorController extends BbiiController {
 						}
 					}
 					// $model->unsetAttributes();
-					\Yii::$app->session->setFlash('success',Yii::t('BbiiModule.bbii','You have sent a private message to the following users: ') . implode(', ', $users));
+					\Yii::$app->session->addFlash('success',Yii::t('BbiiModule.bbii','You have sent a private message to the following users: ') . implode(', ', $users));
 				}
 			}
 		}

@@ -203,10 +203,10 @@ class MessageController extends BbiiController {
 
 			if ($model->validate() && $model->save()) {
 
-				\Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Message sent successfully.'));
+				\Yii::$app->session->addFlash('success', Yii::t('BbiiModule.bbii', 'Message sent successfully.'));
 			} else {
 
-				\Yii::$app->session->setFlash('warning',Yii::t('BbiiModule.bbii', 'Could not send message.'));
+				\Yii::$app->session->addFlash('warning',Yii::t('BbiiModule.bbii', 'Could not send message.'));
 			}
 
 			return \Yii::$app->response->redirect(array('forum/message/inbox'));
@@ -282,10 +282,10 @@ class MessageController extends BbiiController {
 		// update MDL
 		if ($model->validate() && $model->update()) {
 		
-			\Yii::$app->session->setFlash('success', Yii::t('BbiiModule.bbii', 'Message removed.'));
+			\Yii::$app->session->addFlash('success', Yii::t('BbiiModule.bbii', 'Message removed.'));
 		} else {
 
-			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Message NOT removed.'));
+			\Yii::$app->session->addFlash('warning', Yii::t('BbiiModule.bbii', 'Message NOT removed.'));
 		}
 
 		return \Yii::$app->response->redirect(Yii::$app->request->referrer);

@@ -54,7 +54,7 @@ class MemberController extends BbiiController {
 
 		$model = new BbiiMember;
 		if (!$this->isModerator()) {
-			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
+			\Yii::$app->session->addFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
 			return \Yii::$app->response->redirect(array('forum/forum'));
 		}
 		if (isset(\Yii::$app->request->get()['BbiiMember']))
@@ -76,7 +76,7 @@ class MemberController extends BbiiController {
 
 		// todo move this auth to the action() authentication check logic - DJE : 2015-07-29
 		if (!$model->id || !($this->isModerator() || $model->id == \Yii::$app->user->identity->id)) {
-			\Yii::$app->session->setFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
+			\Yii::$app->session->addFlash('warning', Yii::t('BbiiModule.bbii', 'Not Authorized'));
 			return \Yii::$app->response->redirect(\Yii::$app->request->referrer);
 		}
 
@@ -127,10 +127,10 @@ class MemberController extends BbiiController {
 
 			if ($model->validate() && $model->save()) {
 
-				\Yii::$app->session->setFlash('success', \Yii::t('BbiiModule.bbii', 'Profile updated successful.'));
+				\Yii::$app->session->addFlash('success', \Yii::t('BbiiModule.bbii', 'Profile updated successful.'));
 			} else {
 
-				\Yii::$app->session->setFlash('warning', \Yii::t('BbiiModule.bbii', 'Profile update failed.'));
+				\Yii::$app->session->addFlash('warning', \Yii::t('BbiiModule.bbii', 'Profile update failed.'));
 			}
 
 
@@ -284,7 +284,7 @@ class MemberController extends BbiiController {
 					"Content-type: text/html; charset = UTF-8";
 
 				mail($sendto,$subject,$model->body,$headers);
-				\Yii::$app->session->setFlash('notice',Yii::t('BbiiModule.bbii','You have sent an e-mail to {member_name}.', array('{member_name}' => $model->member_name)));
+				\Yii::$app->session->addFlash('notice',Yii::t('BbiiModule.bbii','You have sent an e-mail to {member_name}.', array('{member_name}' => $model->member_name)));
 				
 				return \Yii::$app->response->redirect(array('forum/view','id' => $model->member_id));
 			}
