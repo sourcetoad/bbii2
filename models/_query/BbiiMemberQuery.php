@@ -11,24 +11,24 @@ use yii\db\ActiveQuery;
  */
 class BbiiMemberQuery extends ActiveQuery
 {
-	public function find()
-	{
+    public function find()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function findAll()
-	{
+    public function findAll()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
-	// custom query methods
+    // custom query methods
 
     public function present()
     {
         return $this->andWhere(
-        	'last_visit > \''.date('Y-m-d H:i:s', time() - 900).'\''
+            'last_visit > \''.date('Y-m-d H:i:s', time() - 900).'\''
         )->orderBy('last_visit DESC');
     }
 

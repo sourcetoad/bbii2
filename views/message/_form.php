@@ -14,21 +14,21 @@ use yii\web\JsExpression;
 ?>
 <div class = "form">
 
-	<?php // @depricated 2.5.0 Kept for referance
-	/*$form = $this->beginWidget('ActiveForm', array(
-		'id' => 'message-form',
-		'enableAjaxValidation' => false,
-	));*/ ?>
+    <?php // @depricated 2.5.0 Kept for referance
+    /*$form = $this->beginWidget('ActiveForm', array(
+        'id' => 'message-form',
+        'enableAjaxValidation' => false,
+    ));*/ ?>
 
-	<?php $form = ActiveForm::begin([
+    <?php $form = ActiveForm::begin([
         'enableAjaxValidation'   => false,
         'enableClientValidation' => false,
         'id'                     => 'message-form',
-	]); ?>
+    ]); ?>
 
-	<?php echo $form->errorSummary($model); ?>
+    <?php echo $form->errorSummary($model); ?>
 
-	<div class = "row">
+    <div class = "row">
       <div class="col col-md-12">
            <?php if (\Yii::$app->controller->action->id == 'create') {
                 // echo $form->labelEx($model,'sendto');
@@ -74,17 +74,17 @@ use yii\web\JsExpression;
             } ?>
             <?php // echo $form->error($model,'sendto'); ?>
         </div>
-	</div>
-	
-	<div class = "row">
+    </div>
+    
+    <div class = "row">
         <div class="col col-md-12">
             <?php // echo $form->labelEx($model,'subject'); ?>
             <?php echo $form->field($model,'subject')->textInput(array('size' => 100,'maxlength' => 255)); ?>
             <?php // echo $form->error($model,'subject'); ?>
         </div>
-	</div>
-	
-	<div class = "row">
+    </div>
+    
+    <div class = "row">
         <div class="col col-md-12">
             <?php // @todo iterate on this - DJE : 2015-05-19
             /* $this->widget($this->module->id.'.extensions.editMe.widgets.ExtEditMe', array(
@@ -126,15 +126,15 @@ use yii\web\JsExpression;
                 ]
             ) ?>
         </div>
-	</div>
-	
-	<div class = "row buttons">
+    </div>
+    
+    <div class = "row buttons">
         <div class="col col-md-12">
             <?php echo $form->field($model, 'type')->input('hidden')->label(false);  ?>
             <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Send'), array('class' => 'btn btn-success btn-lg')); ?>
         </div>
-	</div>
+    </div>
 
-	<?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 
 </div><!-- form -->

@@ -11,20 +11,20 @@ use yii\helpers\Html;
 /* @var $choices array */
 
 /* $this->context->bbii_breadcrumbs = array(
-	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
-	$forum->name => array('forum/forum', 'id' => $forum->id),
-	Yii::t('BbiiModule.bbii', 'New topic'),
+    Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
+    $forum->name => array('forum/forum', 'id' => $forum->id),
+    Yii::t('BbiiModule.bbii', 'New topic'),
 );*/
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'))
+    array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
+    array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'))
 );
 
 if (empty($poll->question) && !$poll->hasErrors()) {
-	$show = false;
+    $show = false;
 } else {
-	$show = true;
+    $show = true;
 }
 ?>
 <div id = "bbii-wrapper">

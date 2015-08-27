@@ -12,8 +12,8 @@ use yii\widgets\ListView;
 /* @var $dataProvider ArrayDataProvider */
 
 /* $this->context->bbii_breadcrumbs = array(
-	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
-	$forum->name,
+    Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
+    $forum->name,
 ); */
 
 $this->title = Yii::t('forum', $forum->name);
@@ -23,10 +23,10 @@ $approvals = BbiiPost::find()->unapproved()->count();
 $reports   = BbiiMessage::find()->report()->count();
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 							'url' => array('forum/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 							'url' => array('member/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')','url' => array('moderator/approval'), 	'visible' => $this->context->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). 	' (' . $reports . ')', 	'url' => array('moderator/report'), 	'visible' => $this->context->isModerator()),
+    array('label' => Yii::t('BbiiModule.bbii', 'Forum'),                             'url' => array('forum/index')),
+    array('label' => Yii::t('BbiiModule.bbii', 'Members'),                             'url' => array('member/index')),
+    array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')','url' => array('moderator/approval'),     'visible' => $this->context->isModerator()),
+    array('label' => Yii::t('BbiiModule.bbii', 'Reports').     ' (' . $reports . ')',     'url' => array('moderator/report'),     'visible' => $this->context->isModerator()),
 );
 ?>
 
@@ -120,28 +120,28 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
 /*
 <div style = "display:none;">
 
-	if ($this->context->isModerator()) {
-		$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
-			'id' => 'dlgTopicForm',
-			'theme' => $this->module->juiTheme,
-			'options' => array(
-				'title' => Yii::t('BbiiModule.bbii', 'Update topic'),
-				'autoOpen' => false,
-				'modal' => true,
-				'width' => 800,
-				'show' => 'fade',
-				'buttons' => array(
-					Yii::t('BbiiModule.bbii','Change') => 'js:function(){ BBii.changeTopic("' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/changeTopic') . '"); }',
-					Yii::t('BbiiModule.bbii','Cancel') => 'js:function(){ $(this).dialog("close"); }',
-				),
-			),
-		));
+    if ($this->context->isModerator()) {
+        $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+            'id' => 'dlgTopicForm',
+            'theme' => $this->module->juiTheme,
+            'options' => array(
+                'title' => Yii::t('BbiiModule.bbii', 'Update topic'),
+                'autoOpen' => false,
+                'modal' => true,
+                'width' => 800,
+                'show' => 'fade',
+                'buttons' => array(
+                    Yii::t('BbiiModule.bbii','Change') => 'js:function(){ BBii.changeTopic("' . \Yii::$app->urlManager->createAbsoluteUrl('moderator/changeTopic') . '"); }',
+                    Yii::t('BbiiModule.bbii','Cancel') => 'js:function(){ $(this).dialog("close"); }',
+                ),
+            ),
+        ));
 
-			echo $this->render('_topicForm', array('model' => new BbiiTopic));
+            echo $this->render('_topicForm', array('model' => new BbiiTopic));
 
-		$this->endWidget('zii.widgets.jui.CJuiDialog');
-	};
-	?>
+        $this->endWidget('zii.widgets.jui.CJuiDialog');
+    };
+    ?>
 </div>
 */
 ?>

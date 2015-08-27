@@ -12,39 +12,39 @@ use yii\db\ActiveQuery;
  */
 class BbiiSettingQuery extends ActiveQuery
 {
-	public function find()
-	{
+    public function find()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function findAll()
-	{
+    public function findAll()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
-	// custom query methods
+    // custom query methods
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * 
-	 * @param  [type] $params [description]
-	 * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search($params = null) {
-		$query        = BbiiSetting::find();
-		$dataProvider = new ActiveDataProvider([
-	        'query' => $query,
-	    ]);
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * 
+     * @param  [type] $params [description]
+     * @return ActiveDataProvider The data provider that can return the models based on the search/filter conditions.
+     */
+    public function search($params = null) {
+        $query        = BbiiSetting::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
-	    if (!($this->load($params) && $this->validate())) {
-	        return $dataProvider;
-	    }
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
 
-		$this->addCondition('id',				$this->id,				true);
-		$this->addCondition('contact_email',	$this->contact_email,	true);
+        $this->addCondition('id',                $this->id,                true);
+        $this->addCondition('contact_email',    $this->contact_email,    true);
 
-	    return $dataProvider;
-	}
+        return $dataProvider;
+    }
 }

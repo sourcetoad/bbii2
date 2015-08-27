@@ -17,26 +17,26 @@ $this->title = Yii::t('forum', 'Forum');
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->context->bbii_breadcrumbs = array(
-	Yii::t('BbiiModule.bbii', 'Forum')   => array('forum/index'),
-	Yii::t('BbiiModule.bbii', 'Members') => array('member/index'),
-	$userData->getAttribute('member_name') . Yii::t('BbiiModule.bbii', '\'s profile'),
+    Yii::t('BbiiModule.bbii', 'Forum')   => array('forum/index'),
+    Yii::t('BbiiModule.bbii', 'Members') => array('member/index'),
+    $userData->getAttribute('member_name') . Yii::t('BbiiModule.bbii', '\'s profile'),
 );
 
 $item = array(
-	array(
+    array(
       'label'   => Yii::t('BbiiModule.bbii', 'Forum'),
       'url'     => array('forum/index')
     ),
-	array(
+    array(
       'label' => Yii::t('BbiiModule.bbii', 'Members'),
       'url'   => array('member/index'),
        'visible' => $this->context->isModerator()
     ),
-	array(
+    array(
       'label' => Yii::t('BbiiModule.bbii', 'Approval'),
       'url'   => array('moderator/approval'), 'visible' => $this->context->isModerator()
     ),
-	array(
+    array(
       'label' => Yii::t('BbiiModule.bbii', 'Posts'),
       'url' => array('moderator/admin'), 'visible' => $this->context->isModerator()
     ),
@@ -50,7 +50,7 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
 \Yii::$app->session->removeAllFlashes();
 ?>
 <div id="bbii-wrapper" class="well clearfix">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
+    <?php echo $this->render('_header', array('item' => $item)); ?>
 
     <div class="well clearfix">
         <div class = "bbii-box-top">
@@ -135,21 +135,21 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
                 <td></td>
                 <th><?php echo Yii::t('BbiiModule.bbii', 'Presence on the internet'); ?></th>
                 <td>
-                    <?php  //if ($userData->getAttribute('contact_email') && $this->module->userMailColumn) 	echo Html::a(Html::img($assets->baseUrl.'/images/User.png', array('alt' => 'e-mail',   'title' => Yii::t('BbiiModule.bbii', 'Contact user by e-mail'))), array('member/mail', 'id' => $userData->getAttribute('id'))); ?>
-                    <?php  $blogger 	= $userData->getAttribute('blogger'); 	if (!empty($blogger)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Blogger.png', 	array('alt' => 'Blogger',  'title' => 'Blogger')), 	$userData->getAttribute('blogger'), 	array('target' => '_blank')); ?>
-                    <?php  $facebook 	= $userData->getAttribute('facebook'); 	if (!empty($facebook)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Facebook.png', array('alt' => 'Facebook', 'title' => 'Facebook')), $userData->getAttribute('facebook'), 	array('target' => '_blank')); ?>
-                    <?php  $flickr  	= $userData->getAttribute('flickr'); 	if (!empty($flickr)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Flickr.png', 	array('alt' => 'Flickr',   'title' => 'Flickr')), 	$userData->getAttribute('flickr'), 		array('target' => '_blank')); ?>
-                    <?php  $google  	= $userData->getAttribute('google'); 	if (!empty($google)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Google.png', 	array('alt' => 'Google',   'title' => 'Google')), 	$userData->getAttribute('google'), 		array('target' => '_blank')); ?>
-                    <?php  $linkedin 	= $userData->getAttribute('linkedin'); 	if (!empty($linkedin)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Linkedin.png', array('alt' => 'Linkedin', 'title' => 'Linkedin')), $userData->getAttribute('linkedin'), 	array('target' => '_blank')); ?>
-                    <?php  $metacafe 	= $userData->getAttribute('metacafe'); 	if (!empty($metacafe)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Metacafe.png', array('alt' => 'Metacafe', 'title' => 'Metacafe')), $userData->getAttribute('metacafe'), 	array('target' => '_blank')); ?>
-                    <?php  $myspace 	= $userData->getAttribute('myspace'); 	if (!empty($myspace)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Myspace.png', 	array('alt' => 'Myspace',  'title' => 'Myspace')), 	$userData->getAttribute('myspace'), 	array('target' => '_blank')); ?>
-                    <?php  $orkut 	 	= $userData->getAttribute('orkut'); 	if (!empty($orkut))		echo Html::a(Html::img($assets->baseUrl.'/images/Orkut.png', 	array('alt' => 'Orkut',    'title' => 'Orkut')), 	$userData->getAttribute('orkut'), 		array('target' => '_blank')); ?>
-                    <?php  $tumblr 		= $userData->getAttribute('tumblr'); 	if (!empty($tumblr)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Tumblr.png', 	array('alt' => 'Tumblr',   'title' => 'Tumblr')), 	$userData->getAttribute('tumblr'), 		array('target' => '_blank')); ?>
-                    <?php  $twitter 	= $userData->getAttribute('twitter'); 	if (!empty($twitter)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Twitter.png', 	array('alt' => 'Twitter',  'title' => 'Twitter')), 	$userData->getAttribute('twitter'), 	array('target' => '_blank')); ?>
-                    <?php  $website 	= $userData->getAttribute('website'); 	if (!empty($website)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Globe.png', 	array('alt' => 'Website',  'title' => 'Website')), 	$userData->getAttribute('website'), 	array('target' => '_blank')); ?>
-                    <?php  $wordpress 	= $userData->getAttribute('wordpress'); if (!empty($wordpress))	echo Html::a(Html::img($assets->baseUrl.'/images/Wordpress.png',array('alt' => 'Wordpress','title' => 'Wordpress')),$userData->getAttribute('wordpress'), 	array('target' => '_blank')); ?>
-                    <?php  $yahoo 	 	= $userData->getAttribute('yahoo'); 	if (!empty($yahoo))		echo Html::a(Html::img($assets->baseUrl.'/images/Yahoo.png', 	array('alt' => 'Yahoo',    'title' => 'Yahoo')), 	$userData->getAttribute('yahoo'), 		array('target' => '_blank')); ?>
-                    <?php  $youtube 	= $userData->getAttribute('youtube'); 	if (!empty($youtube)) 	echo Html::a(Html::img($assets->baseUrl.'/images/Youtube.png', 	array('alt' => 'Youtube',  'title' => 'Youtube')), 	$userData->getAttribute('youtube'), 	array('target' => '_blank')); ?>
+                    <?php  //if ($userData->getAttribute('contact_email') && $this->module->userMailColumn)     echo Html::a(Html::img($assets->baseUrl.'/images/User.png', array('alt' => 'e-mail',   'title' => Yii::t('BbiiModule.bbii', 'Contact user by e-mail'))), array('member/mail', 'id' => $userData->getAttribute('id'))); ?>
+                    <?php  $blogger     = $userData->getAttribute('blogger');     if (!empty($blogger))     echo Html::a(Html::img($assets->baseUrl.'/images/Blogger.png',     array('alt' => 'Blogger',  'title' => 'Blogger')),     $userData->getAttribute('blogger'),     array('target' => '_blank')); ?>
+                    <?php  $facebook     = $userData->getAttribute('facebook');     if (!empty($facebook))     echo Html::a(Html::img($assets->baseUrl.'/images/Facebook.png', array('alt' => 'Facebook', 'title' => 'Facebook')), $userData->getAttribute('facebook'),     array('target' => '_blank')); ?>
+                    <?php  $flickr      = $userData->getAttribute('flickr');     if (!empty($flickr))     echo Html::a(Html::img($assets->baseUrl.'/images/Flickr.png',     array('alt' => 'Flickr',   'title' => 'Flickr')),     $userData->getAttribute('flickr'),         array('target' => '_blank')); ?>
+                    <?php  $google      = $userData->getAttribute('google');     if (!empty($google))     echo Html::a(Html::img($assets->baseUrl.'/images/Google.png',     array('alt' => 'Google',   'title' => 'Google')),     $userData->getAttribute('google'),         array('target' => '_blank')); ?>
+                    <?php  $linkedin     = $userData->getAttribute('linkedin');     if (!empty($linkedin))     echo Html::a(Html::img($assets->baseUrl.'/images/Linkedin.png', array('alt' => 'Linkedin', 'title' => 'Linkedin')), $userData->getAttribute('linkedin'),     array('target' => '_blank')); ?>
+                    <?php  $metacafe     = $userData->getAttribute('metacafe');     if (!empty($metacafe))     echo Html::a(Html::img($assets->baseUrl.'/images/Metacafe.png', array('alt' => 'Metacafe', 'title' => 'Metacafe')), $userData->getAttribute('metacafe'),     array('target' => '_blank')); ?>
+                    <?php  $myspace     = $userData->getAttribute('myspace');     if (!empty($myspace))     echo Html::a(Html::img($assets->baseUrl.'/images/Myspace.png',     array('alt' => 'Myspace',  'title' => 'Myspace')),     $userData->getAttribute('myspace'),     array('target' => '_blank')); ?>
+                    <?php  $orkut          = $userData->getAttribute('orkut');     if (!empty($orkut))        echo Html::a(Html::img($assets->baseUrl.'/images/Orkut.png',     array('alt' => 'Orkut',    'title' => 'Orkut')),     $userData->getAttribute('orkut'),         array('target' => '_blank')); ?>
+                    <?php  $tumblr         = $userData->getAttribute('tumblr');     if (!empty($tumblr))     echo Html::a(Html::img($assets->baseUrl.'/images/Tumblr.png',     array('alt' => 'Tumblr',   'title' => 'Tumblr')),     $userData->getAttribute('tumblr'),         array('target' => '_blank')); ?>
+                    <?php  $twitter     = $userData->getAttribute('twitter');     if (!empty($twitter))     echo Html::a(Html::img($assets->baseUrl.'/images/Twitter.png',     array('alt' => 'Twitter',  'title' => 'Twitter')),     $userData->getAttribute('twitter'),     array('target' => '_blank')); ?>
+                    <?php  $website     = $userData->getAttribute('website');     if (!empty($website))     echo Html::a(Html::img($assets->baseUrl.'/images/Globe.png',     array('alt' => 'Website',  'title' => 'Website')),     $userData->getAttribute('website'),     array('target' => '_blank')); ?>
+                    <?php  $wordpress     = $userData->getAttribute('wordpress'); if (!empty($wordpress))    echo Html::a(Html::img($assets->baseUrl.'/images/Wordpress.png',array('alt' => 'Wordpress','title' => 'Wordpress')),$userData->getAttribute('wordpress'),     array('target' => '_blank')); ?>
+                    <?php  $yahoo          = $userData->getAttribute('yahoo');     if (!empty($yahoo))        echo Html::a(Html::img($assets->baseUrl.'/images/Yahoo.png',     array('alt' => 'Yahoo',    'title' => 'Yahoo')),     $userData->getAttribute('yahoo'),         array('target' => '_blank')); ?>
+                    <?php  $youtube     = $userData->getAttribute('youtube');     if (!empty($youtube))     echo Html::a(Html::img($assets->baseUrl.'/images/Youtube.png',     array('alt' => 'Youtube',  'title' => 'Youtube')),     $userData->getAttribute('youtube'),     array('target' => '_blank')); ?>
                 </td>
             </tr>
             <tr>

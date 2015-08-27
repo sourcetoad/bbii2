@@ -166,9 +166,9 @@ $assets = AppAsset::register($this);
                 <?php // echo $this->render('_upvotedBy', array('post_id' => $model->id)); ?>
                 <div class = "toolbar">
                 <?php if ($this->context->isModerator()) {
-                    //echo Html::a( Html::img($assets->baseUrl.'/images/warn.png', 	array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $model->user_id, 'type' => 1) );
-                    //echo Html::img($assets->baseUrl.'/images/delete.png',			array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . \Yii::$app->urlManager->createAbsoluteUrl('forum/moderator/delete/?id='.$model->id) . '") }'));
-                    //echo Html::img($assets->baseUrl.'/images/ban.png',			array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $model->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('forum/moderator/banIp') . '") }'));
+                    //echo Html::a( Html::img($assets->baseUrl.'/images/warn.png',     array('title' => Yii::t('BbiiModule.bbii', 'Warn user'))), array('message/create', 'id' => $model->user_id, 'type' => 1) );
+                    //echo Html::img($assets->baseUrl.'/images/delete.png',            array('title' => Yii::t('BbiiModule.bbii', 'Delete post'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to delete this post?') . '")) { deletePost("' . \Yii::$app->urlManager->createAbsoluteUrl('forum/moderator/delete/?id='.$model->id) . '") }'));
+                    //echo Html::img($assets->baseUrl.'/images/ban.png',            array('title' => Yii::t('BbiiModule.bbii', 'Ban IP address'), 'style' => 'cursor:pointer;', 'onclick' => 'if (confirm("' . Yii::t('BbiiModule.bbii','Do you really want to ban this IP address?') . '")) { banIp(' . $model->id . ', "' . \Yii::$app->urlManager->createAbsoluteUrl('forum/moderator/banIp') . '") }'));
                     
                     echo Html::a(
                         Html::img(

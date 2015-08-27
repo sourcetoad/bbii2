@@ -18,30 +18,30 @@ $this->title = Yii::t('forum', 'Forum');
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->context->bbii_breadcrumbs = array(
-	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
-	Yii::t('BbiiModule.bbii', 'Members') => array('member/index'),
-	$model->member_name . Yii::t('BbiiModule.bbii', '\'s profile'),
-	Yii::t('BbiiModule.bbii', 'Update')
+    Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
+    Yii::t('BbiiModule.bbii', 'Members') => array('member/index'),
+    $model->member_name . Yii::t('BbiiModule.bbii', '\'s profile'),
+    Yii::t('BbiiModule.bbii', 'Update')
 );
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum'),   'url' => array('forum/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'), 'visible' => $this->context->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Approval'),'url' => array('moderator/approval'),   'visible' => $this->context->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Posts'),   'url' => array('moderator/admin'),      'visible' => $this->context->isModerator()),
+    array('label' => Yii::t('BbiiModule.bbii', 'Forum'),   'url' => array('forum/index')),
+    array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'), 'visible' => $this->context->isModerator()),
+    array('label' => Yii::t('BbiiModule.bbii', 'Approval'),'url' => array('moderator/approval'),   'visible' => $this->context->isModerator()),
+    array('label' => Yii::t('BbiiModule.bbii', 'Posts'),   'url' => array('moderator/admin'),      'visible' => $this->context->isModerator()),
 );
 
 /*\Yii::$app->clientScript->registerScript('presence', "
 $('.presence-button').click(function(){
-	$('.presence').toggle();
-	return false;
+    $('.presence').toggle();
+    return false;
 });
 $('.presence').hide();
 ", CClientScript::POS_READY);*/
 $script = <<< JS
 $('.presence-button').click(function(){
-	$('.presence').toggle();
-	return false;
+    $('.presence').toggle();
+    return false;
 });
 
 $('.presence').hide();
@@ -49,39 +49,39 @@ JS;
 $this->registerJs($script, View::POS_READY);
 ?>
 <div id="bbii-wrapper" class="well clearfix">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
-	
+    <?php echo $this->render('_header', array('item' => $item)); ?>
+    
     <div class="well clearix">
 
-    	<div class = "bbii-box-top"><?php echo $model->member_name . Yii::t('BbiiModule.bbii', '\'s profile'); ?></div>
+        <div class = "bbii-box-top"><?php echo $model->member_name . Yii::t('BbiiModule.bbii', '\'s profile'); ?></div>
 
-    	<div class = "form">
+        <div class = "form">
 
-    		<?php // @depricated 2.4 Kept for referance
-    		/*$form = $this->beginWidget('ActiveForm', array(
-    			'enableAjaxValidation' => false,
-    			'htmlOptions'          => array('enctype' => 'multipart/form-data'),
-    			'id'                   => 'bbii-member-form',
-    		));*/ ?>
+            <?php // @depricated 2.4 Kept for referance
+            /*$form = $this->beginWidget('ActiveForm', array(
+                'enableAjaxValidation' => false,
+                'htmlOptions'          => array('enctype' => 'multipart/form-data'),
+                'id'                   => 'bbii-member-form',
+            ));*/ ?>
 
-    		<?php $form = ActiveForm::begin([
+            <?php $form = ActiveForm::begin([
                 'enableAjaxValidation'   => false,
                 'enableClientValidation' => false,
                 'id'                     => 'bbii-member-form',
                 'options'                => array('enctype' => 'multipart/form-data'),
-    		]); ?>
+            ]); ?>
                 <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Update'), array('class' => 'btn btn-success btn-lg')); ?>
 
-    			<?php //echo $form->errorSummary($model); ?>
+                <?php //echo $form->errorSummary($model); ?>
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'member_name'); ?>
                     <?php echo $form->field($model,'member_name')->textInput(array('size' => 45,'maxlength' => 45)); ?>
                     <?php //echo $form->error($model,'member_name'); ?>
-    			</div>
+                </div>
 
-    			<?php if ($this->context->isModerator()) { ?>
-    				<div>
+                <?php if ($this->context->isModerator()) { ?>
+                    <div>
                         <?php //echo $form->labelEx($model,'group_id'); ?>
                         <?php //->label('Group Name') ?>
                         <?php echo $form->field($model, 'group_id')->dropDownList(
@@ -89,11 +89,11 @@ $this->registerJs($script, View::POS_READY);
                             ['prompt' => 'Group', 'class' => 'form-control']
                         ); ?>
                         <?php //echo $form->error($model,'group_id'); ?>
-    				</div>
+                    </div>
                     <br />
-    			<?php } ?>
+                <?php } ?>
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'gender'); ?>
                     <?php /* echo Html::dropDownList(
                         $model,
@@ -109,16 +109,16 @@ $this->registerJs($script, View::POS_READY);
                         ['0' => Yii::t('BbiiModule.bbii', 'Male'), '1' => Yii::t('BbiiModule.bbii', 'Female')],
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
-    			</div>
+                </div>
                 <br />
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'birthdate'); ?>
                     <?php //echo $form->field($model,'birthdate'); ?>
                     <?php // @todo iterate on this custom text field - DJE : 2015-05-19
                     /* echo DatePicker::widget(array(
                         // 'htmlOptions' => array(
-                        // 	'style' => 'height:20px;'
+                        //     'style' => 'height:20px;'
                         // ),
                         'language' => substr(\Yii::$app->language, 0, 2),
                         'name'     => 'birthdate',
@@ -131,21 +131,21 @@ $this->registerJs($script, View::POS_READY);
                         'value'    => \Yii::$app->formatter->asDate($model->birthdate, 'short', null),
                     ));*/ ?>
                     <?php //echo $form->error($model,'birthdate'); ?>
-    			</div>
+                </div>
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'location'); ?>
                     <?php echo $form->field($model,'location')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                     <?php //echo $form->error($model,'location'); ?>
-    			</div>
+                </div>
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'personal_text'); ?>
                     <?php echo $form->field($model,'personal_text')->textInput(array('size' => 100,'maxlength' => 255)); ?>
                     <?php //echo $form->error($model,'personal_text'); ?>
-    			</div>
+                </div>
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'show_online'); ?>
                     <?php /* echo Html::dropDownList(
                         $model,
@@ -161,10 +161,10 @@ $this->registerJs($script, View::POS_READY);
                         ['0' => Yii::t('BbiiModule.bbii', 'No'), '1' => Yii::t('BbiiModule.bbii', 'Yes')],
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
-    			</div>
+                </div>
                 <br />
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'contact_email'); ?>
                     <?php /* echo Html::dropDownList(
                         $model,
@@ -180,10 +180,10 @@ $this->registerJs($script, View::POS_READY);
                         ['0' => Yii::t('BbiiModule.bbii', 'No'), '1' => Yii::t('BbiiModule.bbii', 'Yes')],
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
-    			</div>
+                </div>
                 <br />
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'contact_pm'); ?>
                     <?php /* echo Html::dropDownList(
                         $model,
@@ -199,10 +199,10 @@ $this->registerJs($script, View::POS_READY);
                         ['0' => Yii::t('BbiiModule.bbii', 'No'), '1' => Yii::t('BbiiModule.bbii', 'Yes')],
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
-    			</div>
+                </div>
                 <br />
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'timezone'); ?>
                     <?php /* echo Html::dropDownList(
                         $model,
@@ -217,10 +217,10 @@ $this->registerJs($script, View::POS_READY);
                         array_combine(DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers()),
                         ['prompt' => 'Choose', 'class' => 'form-control']
                     ); ?>
-    			</div>
+                </div>
                 <br />
 
-    			<div>
+                <div>
                     <?php //echo $form->labelEx($model,'avatar'); ?>
                     <?php //echo Html::img((isset($model->avatar))?(\Yii::$app->request->baseUrl . $this->module->avatarStorage . '/'. $model->avatar):$assets->baseUrl.'/images/empty.jpeg', 'avatar', array('align' => 'left','style' => 'margin:0 10px 10px 0;')); ?>
                     <?php //echo $form->labelEx($model,'remove_avatar'); ?>
@@ -370,13 +370,13 @@ $this->registerJs($script, View::POS_READY);
 
 
 
-    			<div class = "buttons">
+                <div class = "buttons">
                     <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Show social media options'), array('class' => 'btn btn-success btn-lg presence-button')); ?>
                     <?php echo Html::submitButton(Yii::t('BbiiModule.bbii', 'Update'), array('class' => 'btn btn-success btn-lg')); ?>
-    			</div>
+                </div>
 
-    		<?php ActiveForm::end(); ?>
+            <?php ActiveForm::end(); ?>
 
-    	</div><!-- form -->
+        </div><!-- form -->
     </div>
 </div>

@@ -11,19 +11,19 @@ use yii\db\ActiveQuery;
  */
 class BbiiForumQuery extends ActiveQuery
 {
-	public function find()
-	{
+    public function find()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function findAll()
-	{
+    public function findAll()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
-	// custom query methods
+    // custom query methods
 
     public function categories()
     {

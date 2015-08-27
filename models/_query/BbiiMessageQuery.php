@@ -11,37 +11,41 @@ use yii\db\ActiveQuery;
  */
 class BbiiMessageQuery extends ActiveQuery
 {
-	public function find()
-	{
+    public function find()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function findAll()
-	{
+    public function findAll()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
-	// custom query methods
+    // custom query methods
 
     public function inbox()
     {
+
         return $this->andWhere(['inbox' => 1]);
     }
 
     public function outbox()
     {
+
         return $this->andWhere(['outbox' => 1]);
     }
 
     public function unread()
     {
+
         return $this->andWhere(['read_indicator' => 0]);
     }
 
     public function report()
     {
+
         return $this->andWhere(['sendto' => 0]);
     }
 }

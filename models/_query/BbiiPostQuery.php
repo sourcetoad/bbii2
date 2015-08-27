@@ -11,17 +11,17 @@ use yii\db\ActiveQuery;
  */
 class BbiiPostQuery extends ActiveQuery
 {
-	public function find()
-	{
+    public function find()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function findAll()
-	{
+    public function findAll()
+    {
 
-		return $this;
-	}
+        return $this;
+    }
 
     public function approved()
     {

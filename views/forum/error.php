@@ -8,20 +8,20 @@ $this->title = Yii::t('forum', 'Error');
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->context->bbii_breadcrumbs = array(
-	Yii::t('BbiiModule.bbii', 'Error'),
+    Yii::t('BbiiModule.bbii', 'Error'),
 );
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'))
+    array('label' => Yii::t('BbiiModule.bbii', 'Forum'), 'url' => array('forum/index')),
+    array('label' => Yii::t('BbiiModule.bbii', 'Members'), 'url' => array('member/index'))
 );
 ?>
 <div id="bbii-wrapper" class="well clearfix">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
+    <?php echo $this->render('_header', array('item' => $item)); ?>
 
-	<h2><?php echo Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>
+    <h2><?php echo Yii::t('BbiiModule.bbii', 'Error') . ' ' . $code; ?></h2>
 
-	<div class = "error">
-		<h4><?php echo Html::encode($message); ?></h4>
-	</div>
+    <div class = "error">
+        <h4><?php echo Html::encode($message); ?></h4>
+    </div>
 </div>

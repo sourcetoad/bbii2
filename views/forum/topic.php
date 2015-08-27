@@ -18,21 +18,21 @@ use yii\widgets\ListView;
 \Yii::$app->getClientScript()->registerScriptFile(\Yii::$app->getClientScript()->getCoreScriptUrl().'/jui/js/jquery-ui-i18n.min.js',CClientScript::POS_END);
 
 \Yii::$app->clientScript->registerScript('language', "
-	var language = \"" . substr(\Yii::$app->language, 0, 2) . "\";", 
+    var language = \"" . substr(\Yii::$app->language, 0, 2) . "\";", 
 CClientScript::POS_BEGIN);
 
 \Yii::$app->clientScript->registerScript('scrollToPost', "
-	var aTag = $('a[name = \"" . $postId . "\"]');
-	if (aTag.length > 0) {
-		$('html,body').animate({scrollTop: aTag.offset().top},'fast');
-	}
+    var aTag = $('a[name = \"" . $postId . "\"]');
+    if (aTag.length > 0) {
+        $('html,body').animate({scrollTop: aTag.offset().top},'fast');
+    }
 ", CClientScript::POS_READY);
 */
 
 /* $this->context->bbii_breadcrumbs = array(
-	Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
-	$forum->name => array('forum/forum', 'id' => $forum->id),
-	$topic->title,
+    Yii::t('BbiiModule.bbii', 'Forum') => array('forum/index'),
+    $forum->name => array('forum/forum', 'id' => $forum->id),
+    $topic->title,
 );*/ 
 
 $this->title = Yii::t('forum', $topic->title);
@@ -44,10 +44,10 @@ $approvals = BbiiPost::find()->unapproved()->count();
 $reports   = BbiiMessage::find()->report()->count();
 
 $item = array(
-	array('label' => Yii::t('BbiiModule.bbii', 'Forum'),							'url' => array('forum/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Members'), 							'url' => array('member/index')),
-	array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')','url' => array('moderator/approval'), 	'visible' => $this->context->isModerator()),
-	array('label' => Yii::t('BbiiModule.bbii', 'Reports'). 	' (' . $reports . ')', 	'url' => array('moderator/report'), 	'visible' => $this->context->isModerator()),
+    array('label' => Yii::t('BbiiModule.bbii', 'Forum'),                            'url' => array('forum/index')),
+    array('label' => Yii::t('BbiiModule.bbii', 'Members'),                             'url' => array('member/index')),
+    array('label' => Yii::t('BbiiModule.bbii', 'Approval'). ' (' . $approvals . ')','url' => array('moderator/approval'),     'visible' => $this->context->isModerator()),
+    array('label' => Yii::t('BbiiModule.bbii', 'Reports').     ' (' . $reports . ')',     'url' => array('moderator/report'),     'visible' => $this->context->isModerator()),
 );
 ?>
 
@@ -59,8 +59,8 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
 ?>
 
 <div id="bbii-wrapper" class="well clearfix">
-	<?php echo $this->render('_header', array('item' => $item)); ?>
-	
+    <?php echo $this->render('_header', array('item' => $item)); ?>
+    
     <div class="well">
         <table width="100%">
             <tr>
@@ -105,39 +105,39 @@ foreach (\Yii::$app->session->getAllFlashes() as $key => $message) {
                 </td>
             </tr>
         </table>
-	</div>
+    </div>
 
-	<?php // @deprecated 2.7.5
-	/* $this->widget('zii.widgets.CListView', array(
-		'afterAjaxUpdate' => 'function(){$(window).scrollTop(0);}',
-		'dataProvider'    => $dataProvider,
-		'id'              => 'bbiiPost',
-		'itemView'        => '_post',
-		'pager'           => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
-		'template'        => '{pager}{items}{pager}',
-		'viewData'        => array('postId' => $postId),
-	));*/ ?>
+    <?php // @deprecated 2.7.5
+    /* $this->widget('zii.widgets.CListView', array(
+        'afterAjaxUpdate' => 'function(){$(window).scrollTop(0);}',
+        'dataProvider'    => $dataProvider,
+        'id'              => 'bbiiPost',
+        'itemView'        => '_post',
+        'pager'           => array('firstPageCssClass' => 'previous', 'lastPageCssClass' => 'next', 'firstPageLabel' => '<<', 'lastPageLabel' => '>>'),
+        'template'        => '{pager}{items}{pager}',
+        'viewData'        => array('postId' => $postId),
+    ));*/ ?>
 
-	<?php echo ListView::widget([
-		'dataProvider' => $dataProvider,
-		'id'           => 'bbiiTopic',
-		'itemView'     => '_post',
-	]) ?>
+    <?php echo ListView::widget([
+        'dataProvider' => $dataProvider,
+        'id'           => 'bbiiTopic',
+        'itemView'     => '_post',
+    ]) ?>
 </div>
 <div style = "display:none;">
 <?php // @deprecated 2.7.5
 /*$this->beginWidget('zii.widgets.jui.CJuiDialog',array(
-	'id'      => 'dlgReportForm',
-	'options' => array(
-		'modal'    => true,
-		'show'     => 'fade',
-		'title'    => Yii::t('BbiiModule.bbii', 'Report post'),
-		'width'    => 800,
-	),
-	'theme'   => $this->module->juiTheme,
+    'id'      => 'dlgReportForm',
+    'options' => array(
+        'modal'    => true,
+        'show'     => 'fade',
+        'title'    => Yii::t('BbiiModule.bbii', 'Report post'),
+        'width'    => 800,
+    ),
+    'theme'   => $this->module->juiTheme,
 ));
 
-	echo $this->render('_reportForm', array('model' => new BbiiMessage));
+    echo $this->render('_reportForm', array('model' => new BbiiMessage));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 */
