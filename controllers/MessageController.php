@@ -68,7 +68,8 @@ class MessageController extends BbiiController {
         $model = new ActiveDataProvider([
             'query' => BbiiMessage::find()
                 ->where(['sendto' => \Yii::$app->user->identity->id, 'inbox' => 1])
-                ->orderBy('create_time ASC')
+                ->orderBy('create_time DESC'),
+            'sort' => false
         ]);
 
         return $this->render('inbox', array(
@@ -106,8 +107,9 @@ class MessageController extends BbiiController {
 
         $model = new ActiveDataProvider([
             'query' => BbiiMessage::find()
-                ->where(['sendfrom' => \Yii::$app->user->identity->id, 'outbox' => 1])
-                ->orderBy('create_time ASC')
+                ->where(['sendto' => \Yii::$app->user->identity->id, 'outbox' => 1])
+                ->orderBy('create_time DESC'),
+            'sort' => false
         ]);
 
         return $this->render('outbox', array(
