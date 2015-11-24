@@ -168,7 +168,7 @@ class Module extends \yii\base\Module
         if (parent::beforeAction($controller, $action)) {
 
             // register last visit by member
-            if (\Yii::$app->user->identity->id ) {
+            if (isset(\Yii::$app->user->identity->id)) {
                 //$model = BbiiMember::find(\Yii::$app->user->identity->id );
                 $model = BbiiMember::find()->where(['id' => \Yii::$app->user->identity->id ])->one();
 

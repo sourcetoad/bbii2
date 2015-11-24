@@ -23,8 +23,8 @@ The application to which BBii2 is added needs to have a user table.
 
 ##Usage
 
-* install via composer
-* run database migration script
+* `composer required sourcetoad/bbii2`
+* `yii migrate/up --migrationPath=./vendor/sourcetoad/bbii2/migrations`
 * Optional: import sample data from bbii/data/sampledata.mysql.sql
 * Create the subdirectory to storage avatars in; the application must have read/write privlages
 * Edit your configuration to register the module in your applications configuration
@@ -34,7 +34,7 @@ The application to which BBii2 is added needs to have a user table.
 'modules' => array(
 	'forum' => array(
 		'adminId'        => 1,
-		'class'          => 'application.modules.bbii.Module',
+		'class'          => 'application\modules\bbii2\Module',
 		'userClass'      => 'User',
 		'userIdColumn'   => 'id',
 		'userNameColumn' => 'username',
