@@ -12,7 +12,7 @@ use yii\web\Application;
 use yii\web\Session;
 use common\models\User;
 
-class BbiiModule extends \yii\base\Module
+class Module extends \yii\base\Module
  {
 
     public $adminId        = 1; // must be overridden to assign admin rights to user id
