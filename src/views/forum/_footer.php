@@ -28,11 +28,15 @@ $present = BbiiSession::find()->present()->count();
                 </h5>
                 <?php $members = BbiiMember::find()->present()->show()->findAll();
                     foreach($members as $member) {
-                        echo Html::a($member->member_name, array('member/view', 'id' => $member->id), array('style' => 'color:#'.$member->group->color)) . '&nbsp;';
+                        if (isset($member->member_name)) {
+                            echo Html::a($member->member_name, array('member/view', 'id' => $member->id), array('style' => 'color:#'.$member->group->color)) . '&nbsp;';
+                        }
                     }
                     $spiders = BbiiSpider::find()->present()->findAll();
                     foreach($spiders as $spider) {
-                        echo Html::a($spider->name, $spider->url, array('class' => 'spider','target' => '_new')) . '&nbsp;';
+                        if (isset($spider->name)) {
+                            echo Html::a($spider->name, $spider->url, array('class' => 'spider','target' => '_new')) . '&nbsp;';
+                        }
                     }
                 ?>
                 <br />
@@ -61,7 +65,7 @@ $present = BbiiSession::find()->present()->count();
                         <?php echo Yii::t('BbiiModule.bbii','Newest member'); ?>
                         <div class="pull-right">
                           <?php
-                            if ($newest->member_name != NULL)
+                            if (isset($newest->member_name) && $newest->member_name != NULL)
                                 echo Html::a($newest->member_name, array('member/view', 'id' => $newest->id));
                           ?>
                         </div>

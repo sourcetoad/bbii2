@@ -60,7 +60,7 @@ $present = BbiiSession::find()->present()->count();
                         <?php echo Yii::t('BbiiModule.bbii','Newest member'); ?>
                         <div class="pull-right">
                           <?php
-                            if ($newest->member_name != NULL)
+                            if (isset($newest->member_name) && $newest->member_name != NULL)
                                 echo Html::a($newest->member_name, array('member/view', 'id' => $newest->id));
                           ?>
                         </div>

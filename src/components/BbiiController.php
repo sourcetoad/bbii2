@@ -109,7 +109,7 @@ class BbiiController extends Controller
     public function isModerator() {
 
         // user not logged into web-app
-        if (!\Yii::$app->user->identity->id ) { return false; }
+        if (!isset(\Yii::$app->user->identity->id) ) { return false; }
         
         // rbac role "moderator"
         if (\Yii::$app->authManager && \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->identity->id )['user']->type  == 2 ) {
