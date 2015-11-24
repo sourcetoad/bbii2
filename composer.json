@@ -1,0 +1,24 @@
+{
+    "name": "sourcetoad/bbii2",
+    "description": "Bbii2 is an iteration of the bbii forum module, but migrated to Yii2",
+    "keywords": ["forum", "module", "sourcetoad", "yii2"],
+    "type": "module",
+    "authors": [
+        {
+            "name": "Sourcetoad",
+            "website": "http://www.sourcetoad.com/"
+        }
+        {
+            "name": "David J Eddy",
+            "email": "me@davidjdeddy.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "^2",
+    },
+    "autoload": {
+        "psr-4": {
+            "sourcetoad\\bbii2\\": "/src"
+        }
+    }
+}
