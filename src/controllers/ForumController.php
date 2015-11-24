@@ -979,7 +979,7 @@ class ForumController extends BbiiController {
     public static function topicIcon($topic) {
         $img = 'topic';
 
-        if (!\Yii::$app->user->isGuest && self::topicIsRead($topic->id)) {
+        if (!\Yii::$app->user->isGuest && $this->topicIsRead($topic->id)) {
             $img .= '2';
         } else {
 
