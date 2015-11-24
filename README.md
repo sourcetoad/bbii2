@@ -4,7 +4,9 @@
 
 ##Copyright
 Copyright (c) 2013-2015, Ronald van Belzen. All rights reserved. https://github.com/rbacui
+
 Copyright (c) 2015, Sourcetoad, LLC. All rights reserved. http://www.sourcetoad.com
+
 Copyright (c) 2015, David J Eddy, All rights reserved. https://github.com/davidjeddy
 
  - See accompanying LICENSE for license information.
@@ -56,25 +58,45 @@ The application to which BBii2 is added needs to have a user table.
 ##Options
 
 The following configuration options can be used:
+
 adminId:        	the User ID (integer) for the user to receive the admin 
+
 					authorization (default value: false). When the application
+
 					uses rbac and the role 'admin’ exists the users that get 
+
 					the role 'admin’ assigned will also be admin for BBii2.
+
 avatarStorage:  	The directory in which uploaded avatar images are stored 
+
 					relative to the application webroot directory (leading '/’ 
+
 					required) (default value: '/avatar').
+
 forumTitle:     	The name for the forum (default value: 'BBii2 Forum').
+
 userClass:      	The model name of the database table that contains the user 
+
 					authentication information for User ID and User name 
+
 					(default value: 'User').
+
 userIdColumn:   	The column name of the User class field that contains the 
+
 					User ID (default value: 'id').
+
 userNameColumn: 	The column name of the User class field that contains the 
+
 					User name (default value: 'username').
+
 userMailColumn: 	The column name of the User class field that contains the 
+
 					User e-mail address (default value: false).
+
 dbName:				The name of the db component to use to connect to the forum 
+
 					database tables (default value: false)
+
 
 
 ##TODO
