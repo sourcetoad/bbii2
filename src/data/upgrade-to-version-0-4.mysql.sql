@@ -1,0 +1,1 @@
+﻿ALTER TABLE `bbii_member` ADD COLUMN `moderator` TINYINT NOT NULL DEFAULT 0  AFTER `youtube` ;
