@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\widgets\Breadcrumbs;
 
-use frontend\modules\bbii\AppAsset;
+use sourcetoad\bbii2\AppAsset;
 $assets = AppAsset::register($this);
 
 /* @var $this MessageController */

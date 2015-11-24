@@ -1,10 +1,10 @@
 <?php
 
-namespace frontend\modules\bbii;
+namespace sourcetoad\bbii2;
 
-use frontend\modules\bbii\models\BbiiMember;
-use frontend\modules\bbii\models\BbiiSpider;
-use frontend\modules\bbii\models\BbiiSession;
+use sourcetoad\bbii2\models\BbiiMember;
+use sourcetoad\bbii2\models\BbiiSpider;
+use sourcetoad\bbii2\models\BbiiSession;
 
 use Yii;
 use yii\db\BaseActiveRecord;

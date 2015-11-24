@@ -1,8 +1,8 @@
 <?php
 
-namespace frontend\modules\bbii\models;
+namespace sourcetoad\bbii2\models;
 
-use frontend\modules\bbii\models\BbiiAR;
+use sourcetoad\bbii2\models\BbiiAR;
 use yii\base\Model;
 
 /**

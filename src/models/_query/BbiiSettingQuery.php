@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\bbii\models\_query;
+namespace sourcetoad\bbii2\models\_query;
 
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;

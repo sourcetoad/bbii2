@@ -1,18 +1,18 @@
 <?php
 
-namespace frontend\modules\bbii\controllers;
+namespace sourcetoad\bbii2\controllers;
 
-use frontend\modules\bbii\components\BbiiController;
-use frontend\modules\bbii\models\BbiiForum;
-use frontend\modules\bbii\models\BbiiMember;
-use frontend\modules\bbii\models\BbiiMembergroup;
-use frontend\modules\bbii\models\BbiiMessage;
-use frontend\modules\bbii\models\BbiiPoll;
-use frontend\modules\bbii\models\BbiiPost;
-use frontend\modules\bbii\models\BbiiTopic;
-use frontend\modules\bbii\models\BbiiTopicRead;
+use sourcetoad\bbii2\components\BbiiController;
+use sourcetoad\bbii2\models\BbiiForum;
+use sourcetoad\bbii2\models\BbiiMember;
+use sourcetoad\bbii2\models\BbiiMembergroup;
+use sourcetoad\bbii2\models\BbiiMessage;
+use sourcetoad\bbii2\models\BbiiPoll;
+use sourcetoad\bbii2\models\BbiiPost;
+use sourcetoad\bbii2\models\BbiiTopic;
+use sourcetoad\bbii2\models\BbiiTopicRead;
 
-use frontend\modules\bbii\components\BbiiTopicsRead;
+use sourcetoad\bbii2\components\BbiiTopicsRead;
 
 use Yii;
 use yii\data\ActiveDataProvider;

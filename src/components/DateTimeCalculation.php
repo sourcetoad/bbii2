@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\bbii\components;
+namespace sourcetoad\bbii2\components;
 
 class DateTimeCalculation {
     static public function shortDate($timestamp) {

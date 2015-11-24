@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\bbii;
+namespace sourcetoad\bbii2;
 
 use yii\web\AssetBundle;
 

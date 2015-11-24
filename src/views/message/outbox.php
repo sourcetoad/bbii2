@@ -4,7 +4,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\web\UrlManager;
 
-use frontend\modules\bbii\AppAsset;
+use sourcetoad\bbii2\AppAsset;
 $assets = AppAsset::register($this);
 
 /* @var $this MessageController */

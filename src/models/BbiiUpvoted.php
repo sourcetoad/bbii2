@@ -1,8 +1,8 @@
 <?php
 
-namespace frontend\modules\bbii\models;
+namespace sourcetoad\bbii2\models;
 
-use frontend\modules\bbii\models\BbiiAR;
+use sourcetoad\bbii2\models\BbiiAR;
 
 /**
  * This is the model class for table "bbii_upvoted".

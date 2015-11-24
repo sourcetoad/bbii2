@@ -1,9 +1,9 @@
 <?php
 
-namespace frontend\modules\bbii\models;
+namespace sourcetoad\bbii2\models;
 
-use frontend\modules\bbii\models\BbiiAR;
-use frontend\modules\bbii\models\_query\BbiiSessionQuery;
+use sourcetoad\bbii2\models\BbiiAR;
+use sourcetoad\bbii2\models\_query\BbiiSessionQuery;
 
 /**
  * This is the model class for table "bbii_session".

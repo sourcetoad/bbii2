@@ -1,8 +1,8 @@
 <?php
 
-namespace frontend\modules\bbii\controllers;
+namespace sourcetoad\bbii2\controllers;
 
-use frontend\modules\bbii\components\BbiiController;
+use sourcetoad\bbii2\components\BbiiController;
 
 class SearchController extends BbiiController {
     public $search;

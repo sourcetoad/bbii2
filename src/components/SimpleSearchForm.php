@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\bbii\components;
+namespace sourcetoad\bbii2\components;
 
 Yii::import('zii.widgets.CPortlet');
  

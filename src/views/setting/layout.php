@@ -1,6 +1,6 @@
 <?php
 
-use frontend\modules\bbii\models\BbiiForum;
+use sourcetoad\bbii2\models\BbiiForum;
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
