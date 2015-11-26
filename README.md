@@ -30,7 +30,6 @@ The application to which BBii2 is added needs to have a user table.
 * Edit your configuration to register the module in your applications configuration
 
 ~~~
-[php]
 'modules' => array(
 	'forum' => array(
 		'adminId'        => 1,
@@ -70,9 +69,5 @@ The following configuration options can be used:
 
 ##TODO
 
-Re-add CKEditor - DJE : 2015-01-2015
-
-
-##Versions
-
-0.5.0 : 2015-11-24 migrated BBii2 to composer package management system
+* Re-add CKEditor - DJE : 2015-01-2015
+* Move sample SQL data into the install migration - DJE : 2015-11-25
