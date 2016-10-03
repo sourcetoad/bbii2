@@ -1,0 +1,1 @@
+﻿ALTER TABLE `bbii_forum` ADD COLUMN `membergroup_id` INT UNSIGNED NULL DEFAULT '0' AFTER `poll`;
